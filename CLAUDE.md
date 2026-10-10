@@ -19,11 +19,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Unity **6000.6.4f1** (`ProjectSettings/ProjectVersion.txt`), установлен в `C:\Program Files\Unity\Hub\Editor\6000.6.4f1`.
 - URP 17 с двумя наборами ассетов в `Assets/Settings/`: `PC_RPAsset`/`PC_Renderer` и `Mobile_RPAsset`/`Mobile_Renderer`. Не удалять как «мусор шаблона».
 - Пакет **Unity Test Framework не подключён** — тестов и тестовых сборок пока нет.
-- Собственного C#-кода пока нет; в `Assets/` — содержимое шаблона URP (`SampleScene`, `TutorialInfo`, `Readme.asset`). `*.csproj`/`SectorLab.slnx` генерируются Unity и не коммитятся.
+- Собственного C#-кода пока нет. Свои ассеты — в `Assets/_Project/`; единственная сцена — `Assets/_Project/Scenes/Main.unity` (она же единственная в Build Settings). Шаблонные `SampleScene`/`TutorialInfo` удалены. `*.csproj`/`SectorLab.slnx` генерируются Unity и не коммитятся.
+- Активная платформа — Android через Build Profile `Assets/Settings/Build Profiles/Android.asset` (ничего не переопределяет). Активная платформа хранится в `Library/`, поэтому свежий клон откроется под Windows, пока профиль не активирован.
+- `Assets/Settings/SampleSceneProfile.asset` не удалять, несмотря на имя: на него ссылаются `PC_RPAsset` и `Mobile_RPAsset`.
 
 ## Команды
 
-Сцену и настройки меняет пользователь в Unity Editor. Из терминала — **Unity CLI** `unity` (1.0.0-beta, в PATH: `%LOCALAPPDATA%\Unity\bin\unity.exe`; справка — `unity <команда> --help`). Команды ниже взяты из `--help` и с этим проектом ещё не прогонялись.
+Сцену и настройки меняет пользователь в Unity Editor. Из терминала — **Unity CLI** `unity` (1.0.0-beta, в PATH: `%LOCALAPPDATA%\Unity\bin\unity.exe`; справка — `unity <команда> --help`). `doctor`/`open`/`run`/`test`/`build` взяты из `--help` и с этим проектом ещё не прогонялись; `list`/`command` проверены.
 
 ```powershell
 unity doctor                                   # диагностика окружения CLI/Hub/редакторов
@@ -41,6 +43,16 @@ git diff --stat
 ```
 
 Граница учебного режима: чтение/диагностика (`doctor`, `list`, логи) и проверки (`test`, компиляция) — допустимы. Изменение сцены или ассетов через `unity command` — **только по явной просьбе** пользователя, иначе это обходит ручную работу.
+
+### `unity command` на практике (проверено с открытым редактором)
+
+- Параметры команды: `unity command --query <имя> --detail full`. Вызов: `unity command --no-banner <имя> --param value`.
+- Полезное: `editor_status`, `list_open_scenes`, `get_scene_hierarchy`, `console_status` (счётчики ошибок + флаг сбоя компиляции), `console --level error`, `recompile` + `recompile_status`, `move_asset`/`rename_asset` (сохраняют GUID), `add_scene_to_build`/`remove_scene_from_build`, `list_build_profiles`, `editor_play`/`editor_stop`, `capture_game_view`.
+- **Git Bash переписывает аргументы, начинающиеся с `/`** (`/Ground` → `C:/Program Files/Git/Ground`). Для путей иерархии сцены задавать `MSYS_NO_PATHCONV=1`.
+- Пути ассетов считаются от authoring root (`Assets`); `..` и пути вне проекта отклоняются. `capture_game_view --save_path X` пишет в `Assets/X` — временный файл потом убрать из `Assets/` вместе с `.meta`.
+- Изменения настроек проекта (например, список сцен сборки) остаются в памяти редактора, пока не выполнить `menu --path "File/Save Project"`. Сцену сохранять `save_scene`.
+- Каждый отклонённый вызов CLI логируется в консоль Unity как ошибка — перед выводом «0 ошибок» проверять текст (`console --level error`), при необходимости `clear_console`.
+- `delete_asset` разрешён правилом в `.claude/settings.local.json` только при прямом вызове `unity command [--no-banner] delete_asset …` (не через обёртки и `&&`).
 
 ## Git-специфика
 
