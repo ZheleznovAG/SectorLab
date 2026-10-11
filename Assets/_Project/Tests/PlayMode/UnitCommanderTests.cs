@@ -260,6 +260,7 @@ namespace SectorLab.Tests
 
             BeginTouch(1, ScreenPoint(unit.transform.position), queueEventOnly: true, screen: touchscreen);
             yield return null;
+            Assert.That(commander.Selected, Is.Null, "A press may become a drag; select only on release.");
             EndTouch(1, ScreenPoint(unit.transform.position), queueEventOnly: true, screen: touchscreen);
             yield return null;
 
@@ -267,8 +268,114 @@ namespace SectorLab.Tests
 
             BeginTouch(2, ScreenPoint(new Vector3(-2f, 0f, -2f)), queueEventOnly: true, screen: touchscreen);
             yield return null;
-
+            Assert.That(unit.Movement.IsMoving, Is.False);
+            EndTouch(2, ScreenPoint(new Vector3(-2f, 0f, -2f)), queueEventOnly: true, screen: touchscreen);
+            yield return null;
             Assert.That(unit.Movement.IsMoving, Is.True);
+        }
+
+        [UnityTest]
+        public IEnumerator DragReturningToItsStartDoesNotBecomeATap()
+        {
+            var screen = InputSystem.AddDevice<Touchscreen>();
+            Vector2 start = ScreenPoint(unit.transform.position);
+            int pans = 0;
+            commander.PanRequested += (_, _) => pans++;
+            BeginTouch(1, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            MoveTouch(1, start + Vector2.right * 180, queueEventOnly: true, screen: screen);
+            yield return null;
+            MoveTouch(1, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(1, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(pans, Is.GreaterThan(0));
+            Assert.That(commander.Selected, Is.Null);
+            Assert.That(unit.Movement.IsMoving, Is.False);
+        }
+
+        [UnityTest]
+        public IEnumerator PinchAndLiftingSecondFingerDoNotIssueSelectionOrOrders()
+        {
+            var screen = InputSystem.AddDevice<Touchscreen>();
+            Vector2 start = ScreenPoint(unit.transform.position);
+            int zooms = 0;
+            commander.ZoomRequested += _ => zooms++;
+            BeginTouch(1, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            BeginTouch(2, start + Vector2.right * 100, queueEventOnly: true, screen: screen);
+            yield return null;
+            MoveTouch(2, start + Vector2.right * 200, queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(2, start + Vector2.right * 200, queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(1, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(zooms, Is.GreaterThan(0));
+            Assert.That(commander.Selected, Is.Null);
+            Assert.That(unit.Movement.IsMoving, Is.False);
+        }
+
+        [UnityTest]
+        public IEnumerator CancelledTouchDoesNotSelectTheUnit()
+        {
+            var screen = InputSystem.AddDevice<Touchscreen>();
+            Vector2 position = ScreenPoint(unit.transform.position);
+            BeginTouch(1, position, queueEventOnly: true, screen: screen);
+            yield return null;
+            InputSystem.QueueStateEvent(screen, new UnityEngine.InputSystem.LowLevel.TouchState {
+                touchId = 1, phase = UnityEngine.InputSystem.TouchPhase.Canceled, position = position
+            });
+            yield return null;
+            Assert.That(commander.Selected, Is.Null);
+        }
+
+        [UnityTest]
+        public IEnumerator UiCoverBlocksDirectTapAndTouchRelease()
+        {
+            var events = new GameObject("UiEvents", typeof(UnityEngine.EventSystems.EventSystem),
+                typeof(UnityEngine.InputSystem.UI.InputSystemUIInputModule));
+            events.transform.SetParent(root.transform);
+            var canvasObject = new GameObject("UiCover", typeof(RectTransform), typeof(Canvas), typeof(UnityEngine.UI.GraphicRaycaster));
+            canvasObject.transform.SetParent(root.transform);
+            canvasObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            var cover = new GameObject("BlockingPanel", typeof(RectTransform), typeof(UnityEngine.UI.Image));
+            cover.transform.SetParent(canvasObject.transform, false);
+            var rect = cover.GetComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = rect.offsetMax = Vector2.zero;
+            UnityEngine.EventSystems.EventSystem.current = events.GetComponent<UnityEngine.EventSystems.EventSystem>();
+            yield return null; // Canvas/Graphic registration and layout settle before the UI raycast.
+            Canvas.ForceUpdateCanvases();
+            Vector2 position = ScreenPoint(unit.transform.position);
+            Assert.That(commander.IsOverUi(position), Is.True, $"UI setup: screen={position}, rect={rect.rect}, active={cover.activeInHierarchy}");
+            commander.HandleTap(position);
+            Assert.That(commander.Selected, Is.Null);
+            var screen = InputSystem.AddDevice<Touchscreen>();
+            int pans = 0;
+            commander.PanRequested += (_, _) => pans++;
+            BeginTouch(1, position, queueEventOnly: true, screen: screen);
+            yield return null;
+            MoveTouch(1, new Vector2(Screen.width + 100, position.y), queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(1, position, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(commander.Selected, Is.Null);
+            Assert.That(pans, Is.Zero, "A gesture started over UI cannot pan the world after leaving UI.");
+        }
+
+        [UnityTest]
+        public IEnumerator MouseClickSelectsOnlyOnRelease()
+        {
+            var mouse = InputSystem.AddDevice<Mouse>();
+            Set(mouse.position, ScreenPoint(unit.transform.position), queueEventOnly: true);
+            Press(mouse.leftButton, queueEventOnly: true);
+            yield return null;
+            Assert.That(commander.Selected, Is.Null);
+            Release(mouse.leftButton, queueEventOnly: true);
+            yield return null;
+            Assert.That(commander.Selected, Is.SameAs(unit));
         }
     }
 }
