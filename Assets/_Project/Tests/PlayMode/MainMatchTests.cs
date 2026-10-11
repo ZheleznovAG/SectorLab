@@ -19,6 +19,12 @@ namespace SectorLab.Tests
         {
             string report = "utc,plan,game_seconds,player_score,enemy_score,outcome,ai_decisions,ai_move_orders\n";
             string[] plans = { "passive", "split", "focus-A", "hold-A-then-flank-B" };
+            MatchState previousState = null;
+#if UNITY_EDITOR
+            string task = System.Environment.GetEnvironmentVariable("SECTORLAB_VERIFICATION_TASK");
+            if (string.IsNullOrEmpty(task)) task = "manual-" + System.DateTime.UtcNow.ToString("yyyyMMdd-HHmmss");
+            string reportPath = System.IO.Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/" + task + "-main-matches.csv");
+#endif
             for (int run = 0; run < plans.Length; run++)
             {
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
@@ -27,6 +33,11 @@ namespace SectorLab.Tests
                 var ai = Object.FindFirstObjectByType<EnemyTacticsController>();
                 Assert.That(battle, Is.Not.Null);
                 Assert.That(ai, Is.Not.Null);
+                var scope = Object.FindFirstObjectByType<GameLifetimeScope>();
+                Assert.That(scope, Is.Not.Null);
+                Assert.That(battle.State, Is.Not.SameAs(previousState));
+                if (previousState != null) Assert.That(battle.State.Clock, Is.Not.SameAs(previousState.Clock));
+                previousState = battle.State;
                 Assert.That(Unit.All.Count, Is.EqualTo(6), "A new Main must have one unit of each role/team.");
                 Assert.That(battle.State.PlayerScore, Is.Zero);
                 Assert.That(battle.State.EnemyScore, Is.Zero);
@@ -83,7 +94,7 @@ namespace SectorLab.Tests
                     + battle.State.EnemyScore.ToString("0.0", CultureInfo.InvariantCulture) + ","
                     + battle.Outcome + "," + ai.DecisionCount + "," + ai.MoveOrdersIssued + "\n";
 #if UNITY_EDITOR
-                System.IO.File.WriteAllText(System.IO.Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/W3-main-matches.csv"), report);
+                System.IO.File.WriteAllText(reportPath, report);
 #endif
                 Debug.Log("Main plan " + plans[run] + " finished " + battle.Outcome);
             }

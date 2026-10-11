@@ -76,5 +76,25 @@ namespace SectorLab.Tests
             Assert.Throws<VContainerException>(() => container.Inject(battle));
             Assert.That(battle.State, Is.Null);
         }
+
+        [UnityTest]
+        public IEnumerator UnwiredBattleReportsMissingInjectionAndDoesNotCreateFallbackState()
+        {
+            root = new GameObject("UnwiredBattle");
+            var battle = root.AddComponent<BattleController>();
+            LogAssert.Expect(LogType.Exception, new System.Text.RegularExpressions.Regex("MatchState was not injected"));
+            yield return null;
+            Assert.That(battle.State, Is.Null);
+        }
+
+        [UnityTest]
+        public IEnumerator UnwiredEnemyReportsMissingInjection()
+        {
+            root = new GameObject("UnwiredAI");
+            var ai = root.AddComponent<EnemyTacticsController>();
+            LogAssert.Expect(LogType.Exception, new System.Text.RegularExpressions.Regex("Enemy tactics requires injected BattleController"));
+            yield return null;
+            Assert.That(ai.DecisionCount, Is.Zero);
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace SectorLab.Tests
             a = CreateRelay(new Vector3(-3, 0, 0));
             b = CreateRelay(new Vector3(3, 0, 0));
             battle = root.AddComponent<BattleController>();
+            battle.Initialize(new MatchState(new MatchClock()));
             battle.InitializeRelays(new[] { a, b });
             battle.enabled = false;
             ai = root.AddComponent<EnemyTacticsController>();

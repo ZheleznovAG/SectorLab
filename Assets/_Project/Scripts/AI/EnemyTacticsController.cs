@@ -10,7 +10,7 @@ namespace SectorLab.AI
     // One decision per game second. Orders use the same movement/attack components as the player.
     public sealed class EnemyTacticsController : MonoBehaviour
     {
-        [SerializeField] private BattleController battle;
+        private BattleController battle;
         private readonly List<Unit> actors = new List<Unit>(3);
         private readonly Dictionary<Unit, RelayPoint> assignments = new Dictionary<Unit, RelayPoint>(3);
         private readonly List<Unit> staleAssignments = new List<Unit>(3);
@@ -27,7 +27,7 @@ namespace SectorLab.AI
 
         private void Start()
         {
-            if (!initialized) Initialize(battle);
+            if (!initialized) throw new InvalidOperationException("Enemy tactics requires injected BattleController.");
         }
 
         [VContainer.Inject]
