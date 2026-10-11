@@ -115,6 +115,34 @@ namespace SectorLab.Tests
             Assert.That(marker.gameObject.activeSelf, Is.True);
         }
 
+        // Sets the tolerance so that a tap 'worldDistance' metres from the unit is just inside it.
+        private void SetToleranceForWorldDistance(float worldDistance)
+        {
+            float pixels = Vector2.Distance(ScreenPoint(unit.transform.position), ScreenPoint(unit.transform.position + Vector3.right * worldDistance));
+            float dpi = Screen.dpi > 0f ? Screen.dpi : 160f;
+            SetField(commander, "tapToleranceMm", pixels * 1.1f / dpi * 25.4f);
+        }
+
+        [Test]
+        public void NearMissTap_SelectsClosestUnit()
+        {
+            SetToleranceForWorldDistance(1.5f);
+
+            commander.HandleTap(ScreenPoint(unit.transform.position + new Vector3(1.2f, 0f, 0f)));
+
+            Assert.That(commander.Selected, Is.SameAs(unit));
+        }
+
+        [Test]
+        public void TapOutsideTolerance_DoesNotSelect()
+        {
+            SetToleranceForWorldDistance(1.5f);
+
+            commander.HandleTap(ScreenPoint(unit.transform.position + new Vector3(0f, 0f, -3f)));
+
+            Assert.That(commander.Selected, Is.Null);
+        }
+
         [Test]
         public void TapOnEnemy_WithoutSelection_DoesNotSelectIt()
         {

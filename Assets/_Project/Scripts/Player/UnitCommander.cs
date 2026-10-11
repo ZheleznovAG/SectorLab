@@ -14,6 +14,11 @@ namespace SectorLab.Player
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Transform destinationMarker;
         [SerializeField, Min(0f)] private float maxTapDistance = 100f;
+        [Tooltip("A tap this close (on screen) to a unit counts as a tap on it. A fingertip covers roughly 7 mm.")]
+        [SerializeField, Min(0f)] private float tapToleranceMm = 7f;
+
+        // The editor and some devices report dpi 0; 160 is Android's baseline density.
+        private const float FallbackDpi = 160f;
 
         public Unit Selected { get; private set; }
 
@@ -38,10 +43,13 @@ namespace SectorLab.Player
         public void HandleTap(Vector2 screenPosition)
         {
             Ray ray = viewCamera.ScreenPointToRay(screenPosition);
-            if (!Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask))
-                return;
+            bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask);
 
-            Unit unit = hit.collider.GetComponentInParent<Unit>();
+            // Small units are hard to hit with a finger, so a near miss still counts.
+            Unit unit = hasHit ? hit.collider.GetComponentInParent<Unit>() : null;
+            if (unit == null)
+                unit = FindUnitNear(screenPosition);
+
             if (unit != null)
             {
                 if (unit.Team == Team.Player)
@@ -51,9 +59,38 @@ namespace SectorLab.Player
                 return;
             }
 
+            if (!hasHit)
+                return;
+
             bool hitGround = (groundMask.value & (1 << hit.collider.gameObject.layer)) != 0;
             if (hitGround && Selected != null)
                 MoveSelected(hit.point);
+        }
+
+        private Unit FindUnitNear(Vector2 screenPosition)
+        {
+            float dpi = Screen.dpi > 0f ? Screen.dpi : FallbackDpi;
+            float tolerancePixels = tapToleranceMm / 25.4f * dpi;
+
+            Unit nearest = null;
+            float nearestSqr = tolerancePixels * tolerancePixels;
+            foreach (Unit candidate in Unit.All)
+            {
+                if (!candidate.IsAlive)
+                    continue;
+
+                Vector3 onScreen = viewCamera.WorldToScreenPoint(candidate.transform.position);
+                if (onScreen.z <= 0f)
+                    continue;
+
+                float sqr = ((Vector2)onScreen - screenPosition).sqrMagnitude;
+                if (sqr <= nearestSqr)
+                {
+                    nearestSqr = sqr;
+                    nearest = candidate;
+                }
+            }
+            return nearest;
         }
 
         private void Select(Unit unit)
