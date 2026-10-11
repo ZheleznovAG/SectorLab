@@ -1,0 +1,6 @@
+2026-10-11T15:55:41.3474079Z timeScale=4 elapsed=28,2000000000001 score=2:31,8999999999999 outcome=InProgress decisions=28 moveOrders=10
+A owner=Enemy progress=-1 contested=False
+B owner=Enemy progress=-1 contested=False
+C owner=Enemy progress=-1 contested=False
+Ranger HP=80 moving=False relay=A
+Tank HP=88 moving=True relay=B

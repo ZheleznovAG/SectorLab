@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W3.1**, следующий этап — **W3.2**.
+Последняя завершённая задача — **W3.2**, следующий этап — **W3.3**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -107,7 +107,7 @@ diff; другие настройки проекта не затронуты.
 | FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
 | FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
 | FR-013 | TODO | Смерть уничтожает юнита, respawn нет / W5 |
-| FR-014 | PARTIAL | EnemyDecisionRules проверены: defend/capture/repair/attack и stable ties; runtime интеграция — W3.2 |
+| FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
 | FR-015 | PARTIAL | Есть силы/HP/result, нет очков/времени/узлов/respawn / W6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
 | FR-017 | TODO | Перезагрузка сцены есть; 10 restart и async ownership не проверены / W5 |
@@ -295,3 +295,23 @@ defend → capture scoring → repair при HP≤35% → attack interference.
 Семь новых EditMode случаев, **53/53 PASS** ([лог](evidence/tests-W3.1-editmode.json)).
 Правила не изменяют скорость/HP/урон юнитов. Подключение к тикам и проверка
 боёв — следующая задача; G3 открыт.
+
+W3.1 зафиксирован в `359778b`. W3.2 / FR-014/016: `EnemyTacticsController`
+подписан на Ticked, работает раз в игровую секунду, использует существующие
+UnitMovement/UnitAttack и реальные UnitStats. Порядок — скорость/имя роли/регистрация;
+назначения разделены стоимостью, прежний полный путь не повторяется без причины.
+При отключении контроллера подписка и ссылки очищаются. Pause/finish не дают тиков AI.
+Unity 6000.6 удалил GetInstanceID: первоначальная compile error исправлена
+использованием порядка регистрации; новый глобальный ID-сервис не вводился.
+
+PlayMode **65/65 PASS** ([лог](evidence/tests-W3.2-playmode.json)).
+Main с timeScale=4: на 28,2 игровой с AI выполнил 28 решений и 10 move orders,
+захватил A/B/C, счёт 2:31,9 ([лог](evidence/W3-main-ai.txt)). К моменту
+следующего [скриншота](evidence/W3-main-ai.png) обычный матч завершился Defeat 2:45.
+Роботы действительно двигались/сражались, Warp/test score в этом сценарии не применялся.
+Это ускоренная техническая партия без приказов игрока, не человеческий плейтест.
+
+Unity при сохранении возвращает пробел после пустых YAML-полей. Для `unity-yaml`
+в `.gitattributes` отключена только проверка blank-at-eol; C#/docs сохраняют
+обычную whitespace-проверку. Это устраняет повторное ручное форматирование сцены
+и вызванное им модальное Reload; сериализация/старые GUID сохранены. Следующий шаг — серия партий с разными игровыми планами; G3 пока открыт.

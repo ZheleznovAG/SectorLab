@@ -10,6 +10,21 @@ namespace SectorLab.Editor
     // One-time, idempotent migration of the existing Main scene, never called by the player.
     public static class RelaySceneSetup
     {
+        [MenuItem("SectorLab/Attach enemy tactics to Main")]
+        public static void AttachEnemyAI()
+        {
+            if (EditorApplication.isPlaying) throw new System.InvalidOperationException("Stop Play Mode first.");
+            var battle = Object.FindFirstObjectByType<BattleController>();
+            if (battle == null || battle.gameObject.scene.path != "Assets/_Project/Scenes/Main.unity")
+                throw new System.InvalidOperationException("Open Main first.");
+            var ai = battle.GetComponent<SectorLab.AI.EnemyTacticsController>() ?? battle.gameObject.AddComponent<SectorLab.AI.EnemyTacticsController>();
+            var serialized = new SerializedObject(ai);
+            serialized.FindProperty("battle").objectReferenceValue = battle;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+            EditorSceneManager.MarkSceneDirty(battle.gameObject.scene);
+            EditorSceneManager.SaveScene(battle.gameObject.scene);
+        }
+
         [MenuItem("SectorLab/Setup relay points in Main")]
         public static void ConfigureMain()
         {
