@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W4.3**, следующий этап — **W5.1**.
+Последняя завершённая задача — **W5.1** (package), следующий этап — **W5.2**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -82,7 +82,7 @@ diff; другие настройки проекта не затронуты.
 | W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
 | W3 / G3 | PASS | AI и четыре настоящие партии Main; 53 EditMode + 67 PlayMode, проигрыш и выигрыш зафиксированы |
 | W4 / G4 | PASS | VContainer 1.19.0, настоящий scope Clock/State/Battle/AI; 72/72 PlayMode, missing injection и reload |
-| W5 / G5 | TODO | Addressables + UniTask, ownership, отмена/ошибка, respawn 10 с, 10 рестартов |
+| W5 / G5 | IN_PROGRESS | Addressables установлен; далее UniTask, local content, ownership, respawn/отмена/ошибки |
 | W6 / G6 | TODO | Tap/drag/UI blocking, pan/pinch, HUD и safe area |
 | W7 / G7 | TODO | Звук/mute, обратная связь и плейтесты |
 | W8 / G8 | TODO | Финальная регрессия, локальный content+APK, Android/профилирование |
@@ -118,7 +118,7 @@ diff; другие настройки проекта не затронуты.
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
 | FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
 | FR-022 | TODO | UniTask не установлен / W5 |
-| FR-023 | TODO | Addressables не установлен / W5 |
+| FR-023 | PARTIAL | Addressables 2.11.2 закреплён и компилируется; local content и реальный spawn / W5.3–W5.6 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
 | FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
 | FR-026 | TODO | Метрики баланса не реализованы; SHOULD / W7 |
@@ -391,3 +391,12 @@ identity State/Clock при каждой смене сцены. Runner пере�
 последняя дала Victory 45:42,5 ([CSV](evidence/W4.3-main-matches.csv)).
 В предыдущем W4.2 прогоне все четыре плана проиграли; результаты сохранены,
 баланс ещё не принят. G4 закрыт; factory/async ownership внедряются в W5.
+
+W4.3 зафиксирован в `f1bf936`. W5.1 / FR-023, NFR-011: Addressables 2.11.2
+из официального Unity registry; Scriptable Build Pipeline 3.0.3 и встроенные
+AssetBundle/UnityWebRequest — разрешённые транзитивные зависимости. Версии
+Editor/URP/Input System/Test Framework не менялись. License notice скопирован
+из установленного пакета. [Метаданные/lock](evidence/package-W5.1.json),
+[53/53 EditMode PASS](evidence/tests-W5.1-editmode.json). Это отдельный package
+commit; local content build выполняется в W5.3 после создания entries и
+повторяется для финального APK в W8. G5 ещё открыт.
