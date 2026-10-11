@@ -1,4 +1,5 @@
 using SectorLab.Units;
+using SectorLab.Objectives;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -64,6 +65,13 @@ namespace SectorLab.Player
             if (!hasHit)
                 return;
 
+            RelayPoint relay = hit.collider.GetComponentInParent<RelayPoint>();
+            if (relay != null)
+            {
+                OrderSelectedToRelay(relay);
+                return;
+            }
+
             bool hitGround = (groundMask.value & (1 << hit.collider.gameObject.layer)) != 0;
             if (hitGround && Selected != null)
                 MoveSelected(hit.point);
@@ -114,6 +122,18 @@ namespace SectorLab.Player
             SetMarkerVisible(false);
         }
 
+        public bool OrderSelectedToRelay(RelayPoint relay)
+        {
+            if (!isActiveAndEnabled || Selected == null || !Selected.IsAlive || relay == null)
+                return false;
+            if (!relay.TryGetApproachPoint(Selected, out Vector3 point))
+            {
+                SetMarkerVisible(false);
+                return false;
+            }
+            return MoveSelected(point);
+        }
+
         private void Select(Unit unit)
         {
             if (Selected == unit)
@@ -133,7 +153,7 @@ namespace SectorLab.Player
             SetMarkerVisible(false);
         }
 
-        private void MoveSelected(Vector3 point)
+        private bool MoveSelected(Vector3 point)
         {
             bool accepted = Selected.Movement.MoveTo(point);
             // Only an accepted move replaces the previous attack order.
@@ -145,6 +165,7 @@ namespace SectorLab.Player
                 destinationMarker.position = point;
                 SetMarkerVisible(accepted);
             }
+            return accepted;
         }
 
         private void SetMarkerVisible(bool visible)
