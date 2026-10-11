@@ -31,7 +31,9 @@
       { "name": "Main scoped services, reload and missing registrations", "status": "PASS", "evidence": "evidence/tests-W4.3-playmode.json" },
       { "name": "Real Main matches after dependency migration", "status": "PASS", "evidence": "evidence/W4.3-main-matches.csv" }
     ] },
-    { "id": "G5", "status": "TODO", "checks": [] },
+    { "id": "G5", "status": "IN_PROGRESS", "checks": [
+      { "name": "Addressables package compile", "status": "PASS", "evidence": "evidence/tests-W5.1-editmode.json" }
+    ] },
     { "id": "G6", "status": "TODO", "checks": [] },
     { "id": "G7", "status": "TODO", "checks": [] },
     { "id": "G8", "status": "TODO", "checks": [] },
