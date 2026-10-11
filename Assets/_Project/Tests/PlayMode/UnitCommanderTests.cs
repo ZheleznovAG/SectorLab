@@ -94,6 +94,48 @@ namespace SectorLab.Tests
             Assert.That(unit.IsSelected, Is.True);
         }
 
+        [UnityTest]
+        public IEnumerator TapOnRelay_MovesSelectedUnitIntoCaptureRadius()
+        {
+            var node = new GameObject("Relay");
+            node.transform.SetParent(root.transform);
+            node.transform.position = new Vector3(0, 0, -2);
+            var config = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
+            var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
+            relay.Configure(config);
+            var collider = node.AddComponent<SphereCollider>();
+            collider.radius = config.radius;
+            collider.isTrigger = true;
+            Physics.SyncTransforms();
+            commander.HandleTap(ScreenPoint(unit.transform.position));
+            commander.HandleTap(ScreenPoint(node.transform.position));
+            Assert.That(unit.Movement.IsMoving, Is.True);
+            Assert.That(marker.gameObject.activeSelf, Is.True);
+            float deadline = Time.time + 5;
+            while (unit.Movement.IsMoving && Time.time < deadline) yield return null;
+            Assert.That(relay.Contains(unit), Is.True);
+            relay.Simulate(5);
+            Assert.That(relay.State.Owner, Is.EqualTo(SectorLab.Objectives.RelayOwner.Player));
+            Object.DestroyImmediate(config);
+        }
+
+        [Test]
+        public void UnreachableRelay_PreservesAttackAndRejectsOrder()
+        {
+            var node = new GameObject("UnreachableRelay");
+            node.transform.SetParent(root.transform);
+            node.transform.position = new Vector3(100, 0, 0);
+            var config = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
+            var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
+            relay.Configure(config);
+            commander.HandleTap(ScreenPoint(unit.transform.position));
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+            Assert.That(commander.OrderSelectedToRelay(relay), Is.False);
+            Assert.That(unit.Attack.Target, Is.SameAs(enemy));
+            Assert.That(marker.gameObject.activeSelf, Is.False);
+            Object.DestroyImmediate(config);
+        }
+
         [Test]
         public void RejectedMoveOrder_PreservesAttackAndHidesMarker()
         {
