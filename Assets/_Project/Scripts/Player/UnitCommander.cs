@@ -86,13 +86,22 @@ namespace SectorLab.Player
                     continue;
 
                 float sqr = ((Vector2)onScreen - screenPosition).sqrMagnitude;
-                if (sqr <= nearestSqr)
+                if (sqr <= nearestSqr && IsVisible(candidate, onScreen))
                 {
                     nearestSqr = sqr;
                     nearest = candidate;
                 }
             }
             return nearest;
+        }
+
+        private bool IsVisible(Unit candidate, Vector3 screenPosition)
+        {
+            // Check the candidate's own screen position, not the nearby tap.
+            // The first solid collider must belong to this unit.
+            Ray ray = viewCamera.ScreenPointToRay(screenPosition);
+            return Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask, QueryTriggerInteraction.Ignore)
+                && hit.collider.GetComponentInParent<Unit>() == candidate;
         }
 
         private void Select(Unit unit)
@@ -116,15 +125,15 @@ namespace SectorLab.Player
 
         private void MoveSelected(Vector3 point)
         {
-            // A move order cancels the attack, otherwise the unit would keep chasing its target.
-            if (Selected.Attack != null)
+            bool accepted = Selected.Movement.MoveTo(point);
+            // Only an accepted move replaces the previous attack order.
+            if (accepted && Selected.Attack != null)
                 Selected.Attack.ClearTarget();
-            Selected.Movement.MoveTo(point);
 
             if (destinationMarker != null)
             {
                 destinationMarker.position = point;
-                SetMarkerVisible(true);
+                SetMarkerVisible(accepted);
             }
         }
 
