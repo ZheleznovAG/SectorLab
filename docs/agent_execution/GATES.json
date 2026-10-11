@@ -1,0 +1,19 @@
+{
+  "gates": [
+    { "id": "G0", "status": "PASS", "commit": "7becd8a", "checks": [
+      { "name": "Original history and dirty files preserved", "status": "PASS", "evidence": "EVIDENCE_REPORT.md" },
+      { "name": "Baseline EditMode", "status": "PASS", "evidence": "evidence/tests-editmode-1c8754d-dirty-20261011.json" },
+      { "name": "Baseline PlayMode", "status": "PASS", "evidence": "evidence/tests-playmode-1c8754d-dirty-20261011.json" },
+      { "name": "Baseline Android build", "status": "PASS", "evidence": "evidence/android-build-1c8754d-dirty-20261011.json" }
+    ] },
+    { "id": "G1", "status": "TODO", "checks": [] },
+    { "id": "G2", "status": "TODO", "checks": [] },
+    { "id": "G3", "status": "TODO", "checks": [] },
+    { "id": "G4", "status": "TODO", "checks": [] },
+    { "id": "G5", "status": "TODO", "checks": [] },
+    { "id": "G6", "status": "TODO", "checks": [] },
+    { "id": "G7", "status": "TODO", "checks": [] },
+    { "id": "G8", "status": "TODO", "checks": [] },
+    { "id": "G9", "status": "TODO", "checks": [] }
+  ]
+}

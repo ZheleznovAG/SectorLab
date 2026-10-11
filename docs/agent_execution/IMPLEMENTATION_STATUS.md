@@ -164,7 +164,7 @@ diff; другие настройки проекта не затронуты.
 | W0.2 / FR-005 | `9853006` | UnitAttack + UnitAttackTests: LOS Default, retry ≤1/0,5 с, восстановление после открытия пути | Сохранённая полная PlayMode-регрессия 38/38; source SHA совпадает |
 | W0.3 / FR-004 | `970827a` | UnitMovement + UnitMovementTests: bool MoveTo, disabled/off-mesh/invalid stop, фактический проход partial path | Сохранённая полная PlayMode-регрессия 38/38; source SHA совпадает |
 | W0.4 / FR-004/005 | `ec1a944` | UnitCommander + UnitCommanderTests: видимость near-miss, сохранение attack при отказе move, скрытый marker | Сохранённая полная PlayMode-регрессия 38/38, включая virtual touch; source SHA совпадает |
-| W0.5 / FR-024/025 | текущий docs-коммит | Исторические docs согласованы с контрактом, реестр/ADR/evidence актуализированы | Проверены ссылки/JSON/CSV; все 20 C# совпадают с тестированным входом; diff/check и staged review |
+| W0.5 / FR-024/025 | `7becd8a` | Исторические docs согласованы с контрактом, реестр/ADR/evidence актуализированы | Проверены ссылки/JSON/CSV; все 20 C# совпадают с тестированным входом; diff/check и staged review |
 
 Решение W0.2: сохранить существующее маскирование препятствий и bounded retry,
 не вводить отдельную систему укрытий. Цена — задержка обновления преследования
@@ -182,3 +182,11 @@ diff; другие настройки проекта не затронуты.
 Для изучения W0: чем отличаются принятие NavMesh-запроса и достижимость точки;
 почему проходящие тесты уничтожения команды не подтверждают матч за узлы;
 почему timestamp APK при incremental build может предшествовать BuildReport.
+
+## Продолжение автономной реализации
+
+Входной HEAD новой сессии — `7becd8a`; дерево было чистым. G0 подтверждён,
+остальные gates остаются открытыми. Добавлены `Tools/check-repository.ps1`,
+`Tools/verify-unity.ps1`, `Tools/check-gates.ps1` и [AUTOMATION.md](AUTOMATION.md).
+Проверка repository прошла; gate validator показывает G0 PASS и G1–G9 TODO.
+Проверки не заменяют ручной плейтест и не публикуют изменения.
