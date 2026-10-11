@@ -14,12 +14,16 @@ namespace SectorLab.Units
         [SerializeField, Min(0f)] private float autoAcquireRange;
         [SerializeField] private LineRenderer shotLine;
         [SerializeField, Min(0f)] private float shotLineDuration = 0.1f;
+        [Tooltip("Solid arena geometry that blocks attacks. Default contains the current walls and blocks.")]
+        [SerializeField] private LayerMask obstructionMask = 1;
 
         private const float RepathDistance = 0.5f;
+        private const float RepathInterval = 0.5f;
 
         private Unit self;
         private float nextAttackTime;
         private float hideShotLineTime;
+        private float nextRepathTime;
 
         public Unit Target { get; private set; }
         public float Range => range;
@@ -44,11 +48,13 @@ namespace SectorLab.Units
                 return;
 
             Target = target;
+            nextRepathTime = 0f;
         }
 
         public void ClearTarget()
         {
             Target = null;
+            nextRepathTime = 0f;
         }
 
         public bool IsInRange(Unit target)
@@ -114,14 +120,18 @@ namespace SectorLab.Units
                 Target = FindNearestHostile(alert);
                 if (Target == null)
                     return;
+                nextRepathTime = 0f;
             }
 
-            if (!IsInRange(Target))
+            if (!IsInRange(Target) || Physics.Linecast(transform.position, Target.transform.position, obstructionMask, QueryTriggerInteraction.Ignore))
             {
-                // Re-path only when the target has noticeably moved, not every frame.
+                // Bound retries for failed/partial paths, and re-path for a moving target.
                 Vector3 targetPosition = Target.transform.position;
-                if (!self.Movement.IsMoving || (self.Movement.Destination - targetPosition).sqrMagnitude > RepathDistance * RepathDistance)
+                if (Time.time >= nextRepathTime && (!self.Movement.IsMoving || (self.Movement.Destination - targetPosition).sqrMagnitude > RepathDistance * RepathDistance))
+                {
+                    nextRepathTime = Time.time + RepathInterval;
                     self.Movement.MoveTo(targetPosition);
+                }
                 return;
             }
 

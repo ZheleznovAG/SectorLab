@@ -167,6 +167,100 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator UnreachableTarget_DoesNotRestartMovementEveryFrame()
+        {
+            TestArena.CreateBlock(root.transform, new Vector3(0f, 1f, 0f), new Vector3(1f, 2f, 20f));
+            root.GetComponent<Unity.AI.Navigation.NavMeshSurface>().BuildNavMesh();
+            Unit attacker = CreateUnit(Team.Player, new Vector3(-3f, 0f, 0f));
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(3f, 0f, 0f));
+            attacker.Attack.SetTarget(enemy);
+            yield return null;
+            var agent = attacker.GetComponent<UnityEngine.AI.NavMeshAgent>();
+            for (int frame = 0; frame < 60 && agent.pathPending; frame++)
+                yield return null;
+            Assert.That(agent.pathStatus, Is.EqualTo(UnityEngine.AI.NavMeshPathStatus.PathPartial));
+
+            // Force the stopped state, as at the end of a partial path. Observe actual
+            // new movement attempts without exposing private retry timers to the test.
+            int restarts = 0;
+            float until = Time.time + 0.3f;
+            while (Time.time < until)
+            {
+                attacker.Movement.Stop();
+                yield return null;
+                if (attacker.Movement.IsMoving)
+                    restarts++;
+            }
+
+            Assert.That(restarts, Is.LessThanOrEqualTo(1), "A stationary unreachable target must not cause a request every frame");
+            Assert.That(attacker.Attack.Target, Is.SameAs(enemy));
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max));
+        }
+
+        [UnityTest]
+        public IEnumerator UnreachableTarget_AfterOpeningPathIsAttacked()
+        {
+            GameObject wall = TestArena.CreateBlock(root.transform, new Vector3(0f, 1f, 0f), new Vector3(1f, 2f, 20f));
+            var surface = root.GetComponent<Unity.AI.Navigation.NavMeshSurface>();
+            surface.BuildNavMesh();
+            Unit attacker = CreateUnit(Team.Player, new Vector3(-3f, 0f, 0f));
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(3f, 0f, 0f));
+            attacker.Attack.SetTarget(enemy);
+            yield return new WaitForSeconds(1.2f);
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max));
+            Assert.That(attacker.transform.position.x, Is.LessThan(0f));
+
+            Object.DestroyImmediate(wall);
+            Physics.SyncTransforms();
+            surface.BuildNavMesh();
+            for (int frame = 0; frame < 600 && enemy.Health.Current == enemy.Health.Max; frame++)
+                yield return null;
+
+            Assert.That(enemy.Health.Current, Is.LessThan(enemy.Health.Max), "Retrying must resume pursuit when the path opens");
+        }
+
+        [UnityTest]
+        public IEnumerator TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved()
+        {
+            Unit ranger = CreateUnit(Team.Player, Vector3.zero, stats: Stats(70, 0f, 20, 4f, 1f));
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(3f, 0f, 0f));
+            GameObject block = TestArena.CreateBlock(root.transform, new Vector3(1.5f, 1f, 0f), new Vector3(0.5f, 4f, 2f));
+            Physics.SyncTransforms();
+
+            ranger.Attack.SetTarget(enemy);
+            yield return null;
+            yield return null;
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max), "An obstacle must block damage, not just the shot visual");
+
+            Object.DestroyImmediate(block);
+            Physics.SyncTransforms();
+            yield return null;
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max - 20));
+        }
+
+        [UnityTest]
+        public IEnumerator TargetBehindObstacle_AttackerWalksAroundAndHits()
+        {
+            GameObject block = TestArena.CreateBlock(root.transform, new Vector3(1.5f, 1f, 0f), new Vector3(0.5f, 2f, 2f));
+            root.GetComponent<Unity.AI.Navigation.NavMeshSurface>().BuildNavMesh();
+            Unit ranger = CreateUnit(Team.Player, Vector3.zero, stats: Stats(70, 3f, 20, 4f, 1f));
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(3f, 0f, 0f));
+            Physics.SyncTransforms();
+
+            ranger.Attack.SetTarget(enemy);
+            yield return null;
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max));
+            Assert.That(ranger.Movement.IsMoving, Is.True);
+
+            for (int frame = 0; frame < 600 && enemy.Health.Current == enemy.Health.Max; frame++)
+                yield return null;
+
+            Assert.That(block, Is.Not.Null);
+            Assert.That(enemy.Health.Current, Is.LessThan(enemy.Health.Max));
+            Assert.That(Physics.Linecast(ranger.transform.position, enemy.transform.position, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore), Is.False);
+        }
+
+        [UnityTest]
         public IEnumerator RangedUnit_HitsFromDistanceWithoutMoving()
         {
             Unit ranger = CreateUnit(Team.Player, Vector3.zero, stats: Stats(70, 3f, 20, 4f, 1f));
