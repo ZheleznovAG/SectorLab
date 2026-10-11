@@ -1,0 +1,22 @@
+{
+  "recordedAtUtc": "2026-10-11T21:14:52.6923122Z",
+  "sourceHead": "404469a5653e0cbd6d2c5df676fa6b323c70aed3",
+  "buildEvidence": "android-build-W6-G6-insets-retry.json",
+  "apkSha256": "71C87D0EDE75057098440C712F4E2AF0721B697643F70E66FB0B983DEA556C55",
+  "model": "[DEVICE_MODEL]",
+  "android": "11 / API 30",
+  "install": "adb install -r: Success",
+  "status": "PASS",
+  "checks": [
+    "Main HUD margins and all role/relay/pause buttons visible: W6-G6-insets-device.png",
+    "Home then am start: navigation bars hidden again, result visible: W6-G6-insets-focus-return.png",
+    "Player log: screen 2340x1080; safe area x=76 y=0 width=2264 height=1080"
+  ],
+  "gesturesReference": "W6-G6-device.json: user confirmed swipe and pinch",
+  "limits": [
+    "Focus return screenshot proves system bars hidden; it does not prove preservation of paused state.",
+    "W6-G6-insets-result.png shows Defeat after attempted taps while result overlay was open; it is not proof of a unit order.",
+    "Native AssetPackManager optional class probe and unused URP shader notices remain for W8.",
+    "SFX, balance, offline and performance are not verified by this check."
+  ]
+}

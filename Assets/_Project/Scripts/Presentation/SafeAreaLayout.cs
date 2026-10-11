@@ -30,6 +30,9 @@ namespace SectorLab.Presentation
             NormalizedArea = Rect.MinMaxRect(min.x, min.y, max.x, max.y);
             rect.anchorMin = min; rect.anchorMax = max;
             rect.offsetMin = rect.offsetMax = Vector2.zero;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            Debug.Log($"SectorLab layout: screen={screenSize}, safe={area}, anchors={NormalizedArea}");
+#endif
         }
     }
 }

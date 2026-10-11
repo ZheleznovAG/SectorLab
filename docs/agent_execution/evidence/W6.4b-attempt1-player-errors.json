@@ -1,0 +1,65 @@
+﻿[
+    {
+        "seq":  660,
+        "timestampUtc":  "2026-10-11T21:02:03.8847154Z",
+        "level":  "error",
+        "logType":  "Error",
+        "message":  "Assets\\_Project\\Scripts\\Presentation\\AndroidSystemBars.cs(14,26): error CS1069: The type name \u0027AndroidApplication\u0027 could not be found in the namespace \u0027UnityEngine.Android\u0027. This type has been forwarded to assembly \u0027UnityEngine.AndroidJNIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\u0027 Enable the built in package \u0027Android JNI\u0027 in the Package Manager window to fix this error.",
+        "stackTrace":  "",
+        "seeded":  false
+    },
+    {
+        "seq":  661,
+        "timestampUtc":  "2026-10-11T21:02:03.8847154Z",
+        "level":  "error",
+        "logType":  "Error",
+        "message":  "Assets\\_Project\\Scripts\\Presentation\\AndroidSystemBars.cs(16,42): error CS1069: The type name \u0027AndroidWindowInsets\u0027 could not be found in the namespace \u0027UnityEngine.Android\u0027. This type has been forwarded to assembly \u0027UnityEngine.AndroidJNIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\u0027 Enable the built in package \u0027Android JNI\u0027 in the Package Manager window to fix this error.",
+        "stackTrace":  "",
+        "seeded":  false
+    },
+    {
+        "seq":  662,
+        "timestampUtc":  "2026-10-11T21:02:03.8847154Z",
+        "level":  "error",
+        "logType":  "Error",
+        "message":  "Assets\\_Project\\Scripts\\Presentation\\AndroidSystemBars.cs(17,25): error CS1069: The type name \u0027AndroidWindowInsets\u0027 could not be found in the namespace \u0027UnityEngine.Android\u0027. This type has been forwarded to assembly \u0027UnityEngine.AndroidJNIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\u0027 Enable the built in package \u0027Android JNI\u0027 in the Package Manager window to fix this error.",
+        "stackTrace":  "",
+        "seeded":  false
+    },
+    {
+        "seq":  663,
+        "timestampUtc":  "2026-10-11T21:02:03.8857174Z",
+        "level":  "error",
+        "logType":  "Error",
+        "message":  "Assets\\_Project\\Scripts\\Presentation\\AndroidSystemBars.cs(17,83): error CS1069: The type name \u0027AndroidWindowInsets\u0027 could not be found in the namespace \u0027UnityEngine.Android\u0027. This type has been forwarded to assembly \u0027UnityEngine.AndroidJNIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\u0027 Enable the built in package \u0027Android JNI\u0027 in the Package Manager window to fix this error.",
+        "stackTrace":  "",
+        "seeded":  false
+    },
+    {
+        "seq":  664,
+        "timestampUtc":  "2026-10-11T21:02:03.8979704Z",
+        "level":  "error",
+        "logType":  "Error",
+        "message":  "Failed to compile player scripts",
+        "stackTrace":  "UnityEditor.AddressableAssets.GUI.AddressableAssetsSettingsGroupEditor:BuildAddressablesWithResult (UnityEditor.AddressableAssets.GUI.AddressableAssetsSettingsGroupEditor/BuildMenuContext,UnityEditor.AddressableAssets.Build.AddressablesDataBuilderInput)\nAddressablesPlayerBuildProcessor:DefaultBuild (UnityEditor.AddressableAssets.Settings.AddressableAssetSettings,UnityEditor.Build.BuildPlayerContext) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:147)\nAddressablesPlayerBuildProcessor:PrepareForPlayerbuild (UnityEditor.AddressableAssets.Settings.AddressableAssetSettings,UnityEditor.Build.BuildPlayerContext,bool) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:100)\nAddressablesPlayerBuildProcessor:PrepareForBuild (UnityEditor.Build.BuildPlayerContext) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:79)\nUnityEditor.BuildPipeline:BuildPlayer (UnityEditor.BuildPlayerOptions)\nUnity.Pipeline.Editor.Commands.Build.BuildCommand:RunBuild (string,UnityEditor.BuildTarget,string,UnityEditor.BuildOptions,string[],string) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Editor/Commands/Build/BuildCommand.cs:335)\nUnity.Pipeline.Editor.Commands.Build.BuildCommand:OnUpdate () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Editor/Commands/Build/BuildCommand.cs:287)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+        "seeded":  false
+    },
+    {
+        "seq":  666,
+        "timestampUtc":  "2026-10-11T21:02:04.2703191Z",
+        "level":  "error",
+        "logType":  "Error",
+        "message":  "Addressable content build failure (duration : 0:00:03,063)",
+        "stackTrace":  "UnityEditor.AddressableAssets.GUI.AddressableAssetsSettingsGroupEditor:BuildAddressablesWithResult (UnityEditor.AddressableAssets.GUI.AddressableAssetsSettingsGroupEditor/BuildMenuContext,UnityEditor.AddressableAssets.Build.AddressablesDataBuilderInput)\nAddressablesPlayerBuildProcessor:DefaultBuild (UnityEditor.AddressableAssets.Settings.AddressableAssetSettings,UnityEditor.Build.BuildPlayerContext) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:147)\nAddressablesPlayerBuildProcessor:PrepareForPlayerbuild (UnityEditor.AddressableAssets.Settings.AddressableAssetSettings,UnityEditor.Build.BuildPlayerContext,bool) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:100)\nAddressablesPlayerBuildProcessor:PrepareForBuild (UnityEditor.Build.BuildPlayerContext) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:79)\nUnityEditor.BuildPipeline:BuildPlayer (UnityEditor.BuildPlayerOptions)\nUnity.Pipeline.Editor.Commands.Build.BuildCommand:RunBuild (string,UnityEditor.BuildTarget,string,UnityEditor.BuildOptions,string[],string) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Editor/Commands/Build/BuildCommand.cs:335)\nUnity.Pipeline.Editor.Commands.Build.BuildCommand:OnUpdate () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Editor/Commands/Build/BuildCommand.cs:287)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+        "seeded":  false
+    },
+    {
+        "seq":  667,
+        "timestampUtc":  "2026-10-11T21:02:04.3032176Z",
+        "level":  "error",
+        "logType":  "Exception",
+        "message":  "BuildFailedException: Failed to build Addressables content, content not included in Player Build. \"SBP ErrorError\"",
+        "stackTrace":  "AddressablesPlayerBuildProcessor.PrepareForPlayerbuild (UnityEditor.AddressableAssets.Settings.AddressableAssetSettings settings, UnityEditor.Build.BuildPlayerContext buildPlayerContext, System.Boolean buildAddressables) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:104)\nAddressablesPlayerBuildProcessor.PrepareForBuild (UnityEditor.Build.BuildPlayerContext buildPlayerContext) (at ./Library/PackageCache/com.unity.addressables@42676f2a154e/Editor/Build/AddressablesPlayerBuildProcessor.cs:79)\nUnityEditor.Build.BuildPipelineInterfaces.PreparePlayerBuild (UnityEditor.Build.BuildPlayerContext context) (at \u003cb5e1ac9fdc894216a0eeb18353904190\u003e:0)\nUnityEditor.BuildPipeline.PreparePlayerBuild (System.IntPtr buildPlayerOptionsPtr) (at \u003cb5e1ac9fdc894216a0eeb18353904190\u003e:0)\nUnityEditor.BuildPipeline:BuildPlayer(BuildPlayerOptions)\nUnity.Pipeline.Editor.Commands.Build.BuildCommand:RunBuild(String, BuildTarget, String, BuildOptions, String[], String) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Editor/Commands/Build/BuildCommand.cs:335)\nUnity.Pipeline.Editor.Commands.Build.BuildCommand:OnUpdate() (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Editor/Commands/Build/BuildCommand.cs:287)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions()\n",
+        "seeded":  false
+    }
+]

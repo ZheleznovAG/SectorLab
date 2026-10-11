@@ -39,6 +39,7 @@ namespace SectorLab.Editor
             var safe = canvas.transform.Find("SafeArea") as RectTransform;
             if (safe == null) safe = Rect("SafeArea", canvas.transform, Vector2.zero, Vector2.one);
             if (safe.GetComponent<SafeAreaLayout>() == null) safe.gameObject.AddComponent<SafeAreaLayout>();
+            if (safe.GetComponent<AndroidSystemBars>() == null) safe.gameObject.AddComponent<AndroidSystemBars>();
             var existing = safe.Find("MatchHUD") ?? canvas.transform.Find("MatchHUD");
             if (existing != null) Object.DestroyImmediate(existing.gameObject); // Only this generated UI subtree.
             var root = Rect("MatchHUD", safe, Vector2.zero, Vector2.one);

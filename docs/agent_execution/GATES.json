@@ -39,12 +39,13 @@
       { "name": "Android APK with embedded local bundles and catalog", "status": "PASS", "evidence": "evidence/android-build-W5-G5.json" },
       { "name": "Actual Android install and unit gameplay observation", "status": "PASS", "evidence": "evidence/W5-G5-device.json" }
     ] },
-    { "id": "G6", "status": "IN_PROGRESS", "checks": [
+    { "id": "G6", "status": "PASS", "checks": [
       { "name": "Virtual gestures, HUD, safe insets, tutorial and regression", "status": "PASS", "evidence": "evidence/tests-W6.5-playmode.json" },
       { "name": "True render sizes and HUD/result button bounds", "status": "PASS", "evidence": "evidence/W6.4-layout-observations.txt" },
       { "name": "First-launch tutorial visual check", "status": "PASS", "evidence": "evidence/W6.5-tutorial-1.png" },
       { "name": "Updated APK mobile gestures confirmed by user", "status": "PASS", "evidence": "evidence/W6-G6-device.json" },
-      { "name": "Android navigation insets do not cover HUD", "status": "TODO", "evidence": "" }
+      { "name": "Android navigation insets do not cover HUD", "status": "PASS", "evidence": "evidence/W6-G6-insets-device.json" },
+      { "name": "Android Insets API player build", "status": "PASS", "evidence": "evidence/android-build-W6-G6-insets-retry.json" }
     ] },
     { "id": "G7", "status": "TODO", "checks": [] },
     { "id": "G8", "status": "TODO", "checks": [] },
