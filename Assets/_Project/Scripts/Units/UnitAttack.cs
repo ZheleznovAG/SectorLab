@@ -78,8 +78,10 @@ namespace SectorLab.Units
 
             Unit nearest = null;
             float nearestSqr = maxDistance * maxDistance;
-            foreach (Unit other in Unit.All)
+            // Index loop: foreach over an IReadOnlyList boxes its enumerator and allocates every frame.
+            for (int i = 0; i < Unit.All.Count; i++)
             {
+                Unit other = Unit.All[i];
                 if (!self.IsHostileTo(other) || !other.IsAlive)
                     continue;
 
