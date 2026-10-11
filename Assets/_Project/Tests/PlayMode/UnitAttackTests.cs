@@ -23,7 +23,7 @@ namespace SectorLab.Tests
             Object.DestroyImmediate(root);
         }
 
-        private Unit CreateUnit(Team team, Vector3 position, int maxHealth = 100)
+        private Unit CreateUnit(Team team, Vector3 position, int maxHealth = 100, float autoAcquireRange = 0f)
         {
             var go = new GameObject(team + "Unit");
             go.SetActive(false);
@@ -33,7 +33,8 @@ namespace SectorLab.Tests
             Unit unit = go.AddComponent<Unit>();
             SetField(unit, "team", team);
             SetField(unit, "maxHealth", maxHealth);
-            go.AddComponent<UnitAttack>();
+            UnitAttack attack = go.AddComponent<UnitAttack>();
+            SetField(attack, "autoAcquireRange", autoAcquireRange);
             go.SetActive(true);
             return unit;
         }
@@ -99,6 +100,44 @@ namespace SectorLab.Tests
             yield return null;
 
             Assert.That(enemy.Health.Current, Is.EqualTo(afterFirstHit));
+        }
+
+        [UnityTest]
+        public IEnumerator IdleUnit_AcquiresNearestHostileInRange()
+        {
+            Unit guard = CreateUnit(Team.Enemy, Vector3.zero, autoAcquireRange: 4f);
+            Unit far = CreateUnit(Team.Player, new Vector3(3.5f, 0f, 0f));
+            Unit near = CreateUnit(Team.Player, new Vector3(0f, 0f, 2.5f));
+            CreateUnit(Team.Enemy, new Vector3(1f, 0f, 0f));
+
+            yield return null;
+
+            Assert.That(guard.Attack.Target, Is.SameAs(near));
+            Assert.That(far.Health.Current, Is.EqualTo(far.Health.Max));
+        }
+
+        [UnityTest]
+        public IEnumerator IdleUnit_IgnoresHostilesOutsideRange()
+        {
+            Unit guard = CreateUnit(Team.Enemy, Vector3.zero, autoAcquireRange: 4f);
+            CreateUnit(Team.Player, new Vector3(5f, 0f, 0f));
+
+            yield return null;
+
+            Assert.That(guard.Attack.Target, Is.Null);
+        }
+
+        [UnityTest]
+        public IEnumerator MovingUnit_DoesNotAcquireTargets()
+        {
+            Unit runner = CreateUnit(Team.Player, Vector3.zero, autoAcquireRange: 4f);
+            CreateUnit(Team.Enemy, new Vector3(2f, 0f, 0f));
+
+            runner.Movement.MoveTo(new Vector3(0f, 0f, -10f));
+            yield return null;
+
+            Assert.That(runner.Attack.Target, Is.Null);
+            Assert.That(runner.Movement.IsMoving, Is.True);
         }
 
         [UnityTest]
