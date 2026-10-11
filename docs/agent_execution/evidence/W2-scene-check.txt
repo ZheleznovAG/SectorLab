@@ -1,0 +1,7 @@
+2026-10-11T15:19:31.6174843Z Main relays=3 units=6
+A reachable=6/6 progress=0,2
+B reachable=6/6 progress=-0,2
+C reachable=6/6 progress=0
+A finalOwner=Player progress=1
+B finalOwner=Player progress=1
+C finalOwner=Player progress=1

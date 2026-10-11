@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff10db422f964f2eb05a180e6fac2c99, type: 3}
+  m_Name: B
+  m_EditorClassIdentifier: SectorLab::SectorLab.Objectives.RelayConfig
+  label: B
+  kind: 0
+  radius: 1.5
+  captureSeconds: 5
+  scorePerSecond: 1
+  healingPerSecond: 6

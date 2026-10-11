@@ -31,12 +31,19 @@ $inputHashes = @(rg --files Assets/_Project Packages ProjectSettings | Sort-Obje
 })
 $null = Invoke-Editor @('eval', '--code', 'UnityEditor.AssetDatabase.Refresh();')
 $timer = [Diagnostics.Stopwatch]::StartNew()
+$stableSamples = 0
 do {
     $console = Invoke-Editor @('console_status')
-    if ($console.data.result.groundTruth.compilationFailed) { throw 'Unity compilation failed; inspect console.' }
+    $truth = $console.data.result.groundTruth
+    # Refresh schedules compilation; its first status can still describe the previous assembly.
+    if ($truth.compilationFailed -and -not $truth.compiling -and $timer.Elapsed.TotalSeconds -gt 5) {
+        throw 'Unity compilation failed; inspect console.'
+    }
     if ($timer.Elapsed.TotalSeconds -gt 120) { throw 'Timed out waiting for compilation.' }
-    if ($console.data.result.groundTruth.compiling) { Start-Sleep -Milliseconds 500 }
-} while ($console.data.result.groundTruth.compiling)
+    if ($truth.compiling -or $truth.compilationFailed) { $stableSamples = 0 }
+    else { $stableSamples++ }
+    Start-Sleep -Milliseconds 500
+} while ($stableSamples -lt 3 -or $timer.Elapsed.TotalSeconds -lt 3)
 
 $assembly = 'SectorLab.Tests.' + $Mode
 $null = Invoke-Editor @('run_tests', '--mode', $Mode, '--filter_type', 'assembly', '--filter', $assembly, '--async_tests', 'true')
