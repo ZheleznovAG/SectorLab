@@ -25,8 +25,10 @@ namespace SectorLab.Battle
 
             int players = 0;
             int enemies = 0;
-            foreach (Unit unit in Unit.All)
+            // Index loop: foreach over an IReadOnlyList boxes its enumerator and allocates every frame.
+            for (int i = 0; i < Unit.All.Count; i++)
             {
+                Unit unit = Unit.All[i];
                 if (!unit.IsAlive)
                     continue;
                 if (unit.Team == Team.Player)

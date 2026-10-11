@@ -74,8 +74,10 @@ namespace SectorLab.Player
 
             Unit nearest = null;
             float nearestSqr = tolerancePixels * tolerancePixels;
-            foreach (Unit candidate in Unit.All)
+            // Index loop: foreach over an IReadOnlyList boxes its enumerator and allocates every frame.
+            for (int i = 0; i < Unit.All.Count; i++)
             {
+                Unit candidate = Unit.All[i];
                 if (!candidate.IsAlive)
                     continue;
 
