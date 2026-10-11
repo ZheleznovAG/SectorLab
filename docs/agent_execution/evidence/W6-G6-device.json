@@ -1,0 +1,25 @@
+{
+  "observedAtUtc": "2026-10-11T20:58:34.9971720Z",
+  "sourceHead": "7e24327be46eba518e2274fafd676e17e8cb66c5",
+  "apkSha256": "B33571E23C0F01DA602E70B71036B94ED7FC0D176FBA43EDA56D9E31AB945134",
+  "model": "[DEVICE_MODEL]",
+  "android": "11",
+  "install": "adb install -r: Success",
+  "observed": "Main score/relay/HP/respawn HUD; real Defeat and Restart; Help popup",
+  "gestures": {
+    "source": "User reply in this conversation after installing W6-G6 APK",
+    "swipe": "PASS",
+    "pinch": "PASS",
+    "accidentalOrders": "User confirmed absent"
+  },
+  "status": "PARTIAL",
+  "issues": [
+    "Navigation bar remains visible and covers right UI margins; G6 stays IN_PROGRESS until Android insets fix.",
+    "Native AssetPackManager class probe reports ClassNotFoundException, gameplay continues; investigate W8.",
+    "Unused URP post-processing shader notices; investigate W8."
+  ],
+  "limits": [
+    "Not final v1.0 APK; no SFX/balance/performance yet.",
+    "No claim of human full-match playtest or offline launch."
+  ]
+}

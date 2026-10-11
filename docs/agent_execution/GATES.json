@@ -43,7 +43,8 @@
       { "name": "Virtual gestures, HUD, safe insets, tutorial and regression", "status": "PASS", "evidence": "evidence/tests-W6.5-playmode.json" },
       { "name": "True render sizes and HUD/result button bounds", "status": "PASS", "evidence": "evidence/W6.4-layout-observations.txt" },
       { "name": "First-launch tutorial visual check", "status": "PASS", "evidence": "evidence/W6.5-tutorial-1.png" },
-      { "name": "Updated APK mobile input check", "status": "TODO", "evidence": "" }
+      { "name": "Updated APK mobile gestures confirmed by user", "status": "PASS", "evidence": "evidence/W6-G6-device.json" },
+      { "name": "Android navigation insets do not cover HUD", "status": "TODO", "evidence": "" }
     ] },
     { "id": "G7", "status": "TODO", "checks": [] },
     { "id": "G8", "status": "TODO", "checks": [] },

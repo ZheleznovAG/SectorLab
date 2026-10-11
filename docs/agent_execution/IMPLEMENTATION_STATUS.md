@@ -600,3 +600,17 @@ modal input blocking; прежние сценарии и 10 restart также P
 просмотрены; [наблюдение](evidence/W6.5-tutorial-observation.txt): 1280×720,
 showing=True, paused=True. После ручного просмотра preference также восстановлен.
 G6 ещё IN_PROGRESS до обновлённого APK на устройстве; это не финальная v1.0 сборка.
+
+W6.5 зафиксирован в `7e24327`. Обновлённый [APK W6-G6](evidence/android-build-W6-G6.json):
+Succeeded, 121,093 с, 0 errors, 1 Pipeline-config warning; 32 533 149 байт,
+SHA-256 B33571E23C0F01DA602E70B71036B94ED7FC0D176FBA43EDA56D9E31AB945134.
+Установка -r Success; просмотрены [Main](evidence/W6-G6-device-main-first.png),
+[Defeat](evidence/W6-G6-device-result.png), [Help](evidence/W6-G6-device-help.png).
+Пользователь подтвердил swipe/pinch на этом APK без случайных приказов
+([наблюдение](evidence/W6-G6-device.json)). Полный человеческий playtest G7 не заявляется.
+Временный Input System preload после build снова возвращён к исходному [].
+
+G6 остаётся IN_PROGRESS: системная Android navigation bar видна и закрывает
+правые поля HUD. Три Editor aspect проходят, но native insets требуют отдельного
+исправления W6.4b до PASS. Нативный AssetPackManager probe и URP shader notices
+по-прежнему присутствуют в [raw log](evidence/W6-G6-device-log.txt); gameplay/Restart работают.
