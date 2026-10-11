@@ -39,6 +39,8 @@ namespace SectorLab.Tests
             battle = Object.FindFirstObjectByType<BattleController>();
             lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
             battle.enabled = false; // Drive the production fixed ticks explicitly, without frame timing drift.
+            var hud = Object.FindFirstObjectByType<SectorLab.Presentation.BattleHud>();
+            if (hud != null) hud.enabled = false;
             battle.InitializeRelays(System.Array.Empty<SectorLab.Objectives.RelayPoint>());
             // Isolate countdowns from relay scoring; full MainMatchTests keep actual objectives/combat.
             Object.FindFirstObjectByType<EnemyTacticsController>().enabled = false;

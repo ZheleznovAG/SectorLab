@@ -1,4 +1,4 @@
-﻿id,milestone,task,dependencies,verification,gate,initial_status,current_status,evidence_reference
+id,milestone,task,dependencies,verification,gate,initial_status,current_status,evidence_reference
 W0.1,W0,Audit Git/Unity/LFS baseline,,Audit log; backup; HEAD; status,G0,TODO,PASS,d15a009
 W0.2,W0,Review and commit combat/LOS fixes,W0.1,Focused tests; honest staged diff,G0,TODO,PASS,9853006
 W0.3,W0,Review and commit navigation fixes,W0.2,Movement tests + compile,G0,TODO,PASS,970827a
@@ -26,7 +26,7 @@ W5.5,W5,Implement 10s unit respawn both teams,W5.4,PlayMode death/respawn/pause,
 W5.6,W5,"Failure, cleanup and 10 restarts",W5.5,Failure/cancellation/leak tests,G5,TODO,PASS,evidence/tests-W5.6-playmode.json; evidence/W5.6-main-restarts.csv
 W6.1,W6,Input gesture handling tap/drag/UI,W5.6,Virtual Touchscreen tests,G6,TODO,PASS,evidence/tests-W6.1-playmode.json
 W6.2,W6,Camera pan/zoom bounds,W6.1,Editor/mobile gesture check,G6,TODO,PASS,evidence/tests-W6.2-playmode.json; evidence/W6.2-camera-observation.txt
-W6.3,W6,Complete HUD time score relays respawn,W6.2,PlayMode HUD + screenshots,G6,TODO,TODO,
+W6.3,W6,Complete HUD time score relays respawn,W6.2,PlayMode HUD + screenshots,G6,TODO,PASS,evidence/tests-W6.3-playmode.json; evidence/W6.3-hud.png
 W6.4,W6,Safe area and layout checks,W6.3,16:9 20:9 4:3 screenshots,G6,TODO,TODO,
 W6.5,W6,Minimal tutorial and pause controls,W6.4,Manual test,G6,TODO,TODO,
 W7.1,W7,Improve feedback and simple SFX,W6.5,Manual feedback check,G7,TODO,TODO,

@@ -143,7 +143,7 @@ namespace SectorLab.Player
 
         public void HandleTap(Vector2 screenPosition)
         {
-            if (!isActiveAndEnabled || IsOverUi(screenPosition))
+            if (!isActiveAndEnabled || IsOverUi(screenPosition) || !viewCamera.pixelRect.Contains(screenPosition))
                 return;
             Ray ray = viewCamera.ScreenPointToRay(screenPosition);
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask);
@@ -217,10 +217,23 @@ namespace SectorLab.Player
         public void ClearSelection()
         {
             if (Selected != null)
+            {
+                Selected.Died -= OnSelectedDied;
                 Selected.SetSelected(false);
+            }
             Selected = null;
             SetMarkerVisible(false);
         }
+
+        public bool SelectFriendly(Unit unit)
+        {
+            if (!isActiveAndEnabled || unit == null || !unit.IsAlive || unit.Team != Team.Player) return false;
+            Select(unit);
+            return true;
+        }
+
+        private void OnSelectedDied(Unit unit) => ClearSelection();
+        private void OnDestroy() => ClearSelection();
 
         public bool OrderSelectedToRelay(RelayPoint relay)
         {
@@ -240,9 +253,13 @@ namespace SectorLab.Player
                 return;
 
             if (Selected != null)
+            {
+                Selected.Died -= OnSelectedDied;
                 Selected.SetSelected(false);
+            }
 
             Selected = unit;
+            Selected.Died += OnSelectedDied;
             Selected.SetSelected(true);
             SetMarkerVisible(false);
         }

@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W6.2**, следующий этап — **W6.3**.
+Последняя завершённая задача — **W6.3**, следующий этап — **W6.4**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -110,7 +110,7 @@ diff; другие настройки проекта не затронуты.
 | FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
 | FR-013 | PASS | Main: все роли обеих команд, 10 игровых с, full HP, без дублей; pause и blocked base / W5.5 |
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
-| FR-015 | PARTIAL | Есть силы/HP/result, нет очков/времени/узлов/respawn / W6 |
+| FR-015 | PASS | HUD очков/времени/узлов/HP/respawn/выбора и pause: W6.3, 103 PlayMode; Player и форматы проверяются G6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
 | FR-018 | TODO | Звук/mute отсутствуют / W7 |
@@ -574,3 +574,21 @@ zoom и invalid factors. Прежние [партии](evidence/W6.2-main-matche
 [вид сцены](evidence/W6.2-camera.png): Ready, focus -2,41 по X, distance 14,4,
 угол 55°. Это Editor API observation; физический pinch обновлённого APK ещё
 проверяется после W6.3–W6.5. HUD/safe area — следующий шаг.
+
+W6.2 зафиксирован в `c623e8c`. W6.3 / FR-015: HUD читает тот же MatchState,
+RelayPoint и реальные slots, показывает счёт, время, прогресс/contest A/B/C,
+HP/respawn трёх ролей и характеристики выбранного бойца. Кнопки ролей и узлов
+вызывают настоящий commander; Pause/Resume управляет игровыми часами. Смерть
+выбранного бойца немедленно снимает selection и marker. Камера оставляет место
+для верхней/нижней панели; тап вне её viewport не отдаёт приказ.
+
+**103/103 PlayMode PASS** ([JSON](evidence/tests-W6.3-playmode.json)), включая
+реальные кнопки, HP/respawn, score/time/pause, UI blocking и смерть selection;
+Main партии и 10 restart также прошли. Первоначальный прогон дал 91/103:
+Hud.Awake читал Relay.State до Relay.Awake. Первое обновление перенесено в Start;
+[ошибочный прогон](evidence/tests-W6.3-attempt1-playmode.json) сохранён.
+Отдельный Main Play Mode: [HUD](evidence/W6.3-hud.png), [наблюдение](evidence/W6.3-hud-observation.json),
+Ready, pause=True, выбран Tank. PNG 1280×720 — масштабированный кадр Game View
+861×471; это ещё не доказательство трёх форматов FR-028. Safe area/форматы — W6.4.
+ADB снова видит Redmi Note 8 Pro; пользователь разрешил запуск/перезапуск игры
+для тестов. Новые мобильные проверки будут использовать обновлённый APK.

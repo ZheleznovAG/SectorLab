@@ -86,6 +86,17 @@ namespace SectorLab.Tests
         }
 
         [Test]
+        public void SelectedUnitDeathClearsSelectionAndDestinationMarkerImmediately()
+        {
+            Assert.That(commander.SelectFriendly(unit), Is.True);
+            commander.HandleTap(ScreenPoint(new Vector3(2, 0, -2)));
+            Assert.That(marker.gameObject.activeSelf, Is.True);
+            unit.Health.TakeDamage(unit.Health.Max);
+            Assert.That(commander.Selected, Is.Null);
+            Assert.That(marker.gameObject.activeSelf, Is.False);
+        }
+
+        [Test]
         public void TapOnUnit_SelectsIt()
         {
             commander.HandleTap(ScreenPoint(unit.transform.position));
