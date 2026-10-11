@@ -8,7 +8,10 @@
         "Unity.AI.Navigation",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "VContainer"
+        "VContainer",
+        "UniTask",
+        "Unity.Addressables",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

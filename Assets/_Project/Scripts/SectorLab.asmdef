@@ -4,7 +4,11 @@
     "references": [
         "Unity.InputSystem",
         "UnityEngine.UI",
-        "VContainer"
+        "VContainer",
+        "UniTask",
+        "UniTask.Addressables",
+        "Unity.Addressables",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

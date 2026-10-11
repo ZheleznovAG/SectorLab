@@ -20,7 +20,7 @@ W4.2,W4,Add GameLifetimeScope service wiring,W4.1,PlayMode scope test,G4,TODO,PA
 W4.3,W4,Migrate selected real match services,W4.2,Existing tests; no Service Locator,G4,TODO,PASS,evidence/tests-W4.3-playmode.json
 W5.1,W5,Install and pin Addressables,W4.3,"Compile, local content build",G5,TODO,PASS,evidence/package-W5.1.json; content build follows W5.3
 W5.2,W5,Install and pin UniTask,W5.1,Compile; unit async test,G5,TODO,PASS,evidence/package-W5.2.json; unit async follows W5.3
-W5.3,W5,Create addressable unit prefab provider,W5.2,Editor spawn/release,G5,TODO,TODO,
+W5.3,W5,Create addressable unit prefab provider,W5.2,Editor spawn/release,G5,TODO,PASS,evidence/tests-W5.3-playmode.json; evidence/W5-local-content-manifest.json
 W5.4,W5,Add async lifecycle and cancellation,W5.3,Restart during load,G5,TODO,TODO,
 W5.5,W5,Implement 10s unit respawn both teams,W5.4,PlayMode death/respawn/pause,G5,TODO,TODO,
 W5.6,W5,"Failure, cleanup and 10 restarts",W5.5,Failure/cancellation/leak tests,G5,TODO,TODO,

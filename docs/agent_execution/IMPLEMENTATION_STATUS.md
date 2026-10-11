@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.2** (package), следующий этап — **W5.3**.
+Последняя завершённая задача — **W5.3**, следующий этап — **W5.4**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -407,3 +407,25 @@ MIT сохранён в notices. [Метаданные/lock](evidence/package-W5
 [53/53 EditMode PASS](evidence/tests-W5.2-editmode.json). Начальный Refresh
 не прошёл из-за domain reload; тестовый прогон выполнен после ready. Игровой
 async не выдаётся за проверенный на установочном шаге: это следующая W5.3/W5.4.
+
+W5.2 зафиксирован в `97445f2`. W5.3 / FR-021/022/023, NFR-006: локальная
+группа Local Units с шестью существующими prefab variants. Content построен
+для Android: **Succeeded**, 44,441 с; localunits bundle 139 077 байт,
+monoscripts bundle 1 849 байт, catalog/settings + SHA-256 в
+[manifest](evidence/W5-local-content-manifest.json). Это content, ещё не APK.
+Первый RPC Configure timeout фактически завершил настройку. Content задержан
+первым модальным Build Report preference; диалог проверен и локальный report
+включён. Ожидание/дополнительный RPC получили timeout, они не выдаются за PASS;
+успех подтверждён отдельным фактическим результатом и файлами Unity.
+
+IUnitPrefabProvider → UnitFactory зарегистрированы Scoped. Provider ожидает
+Addressables через UniTask, передаёт lease; UnitPrefabOwnership освобождает его
+в OnDestroy, не раньше deferred Destroy. Factory удерживает экземпляры и
+отменяет свой lifetime при dispose. [ADR 005](../adr/005-async-prefab-ownership.md).
+**74/74 PlayMode PASS** ([лог](evidence/tests-W5.3-playmode.json)): настоящий
+Tank загрузился по ключу, создан на NavMesh и умер с единственным release;
+невозможная NavMesh позиция освободила prefab без юнита. Прежние Main партии
+продолжены ([CSV](evidence/W5.3-main-matches.csv)); пока они используют статические
+стартовые экземпляры, миграция всех шести — W5.5. Отмена/missing key — W5.4.
+Content evidence теперь получает task/UTC-имя, не переписывает прошлые отчёты;
+после правки имени повторно проверена компиляция и [53/53 EditMode](evidence/tests-W5.3-editmode.json).
