@@ -42,6 +42,8 @@ namespace SectorLab.Player
 
         public void HandleTap(Vector2 screenPosition)
         {
+            if (!isActiveAndEnabled)
+                return;
             Ray ray = viewCamera.ScreenPointToRay(screenPosition);
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask);
 
@@ -102,6 +104,14 @@ namespace SectorLab.Player
             Ray ray = viewCamera.ScreenPointToRay(screenPosition);
             return Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask, QueryTriggerInteraction.Ignore)
                 && hit.collider.GetComponentInParent<Unit>() == candidate;
+        }
+
+        public void ClearSelection()
+        {
+            if (Selected != null)
+                Selected.SetSelected(false);
+            Selected = null;
+            SetMarkerVisible(false);
         }
 
         private void Select(Unit unit)

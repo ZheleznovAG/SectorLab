@@ -6,7 +6,12 @@
       { "name": "Baseline PlayMode", "status": "PASS", "evidence": "evidence/tests-playmode-1c8754d-dirty-20261011.json" },
       { "name": "Baseline Android build", "status": "PASS", "evidence": "evidence/android-build-1c8754d-dirty-20261011.json" }
     ] },
-    { "id": "G1", "status": "TODO", "checks": [] },
+    { "id": "G1", "status": "PASS", "checks": [
+      { "name": "Score/time/clock EditMode", "status": "PASS", "evidence": "evidence/tests-W1.3-editmode.json" },
+      { "name": "Pause/outcome/world PlayMode", "status": "PASS", "evidence": "evidence/tests-W1.3-playmode.json" },
+      { "name": "Main pause/result/restart observation", "status": "PASS", "evidence": "evidence/W1-main-observations.txt" },
+      { "name": "Main visible result and score", "status": "PASS", "evidence": "evidence/W1-main-victory.png" }
+    ] },
     { "id": "G2", "status": "TODO", "checks": [] },
     { "id": "G3", "status": "TODO", "checks": [] },
     { "id": "G4", "status": "TODO", "checks": [] },

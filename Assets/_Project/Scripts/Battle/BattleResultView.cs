@@ -13,12 +13,16 @@ namespace SectorLab.Battle
 
         private void Awake()
         {
+            title.resizeTextForBestFit = true;
+            title.resizeTextMinSize = 24;
+            title.resizeTextMaxSize = title.fontSize;
             panel.SetActive(false);
         }
 
-        public void Show(BattleOutcome outcome, UnityAction onRestart)
+        public void Show(BattleOutcome outcome, UnityAction onRestart, double playerScore = 0, double enemyScore = 0)
         {
-            title.text = outcome == BattleOutcome.Victory ? "Victory" : "Defeat";
+            string result = outcome == BattleOutcome.Victory ? "Victory" : outcome == BattleOutcome.Defeat ? "Defeat" : "Draw";
+            title.text = $"{result}\n{playerScore:0} : {enemyScore:0}";
             restartButton.onClick.RemoveAllListeners();
             restartButton.onClick.AddListener(onRestart);
             panel.SetActive(true);
