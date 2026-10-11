@@ -17,6 +17,21 @@ namespace SectorLab.Infrastructure
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentException("Unit prefab key is empty.", nameof(key));
+            // Missing configuration is a normal recoverable failure. Resolve first to avoid Unity's
+            // InvalidKeyException logger, which can produce delayed errors while formatting a stack trace.
+            var locations = Addressables.LoadResourceLocationsAsync(key, typeof(GameObject));
+            OutstandingHandles++;
+            try
+            {
+                await locations.ToUniTask();
+                cancellationToken.ThrowIfCancellationRequested();
+                if (locations.Result.Count == 0)
+                    throw new InvalidOperationException("Unit prefab not found: " + key);
+            }
+            finally
+            {
+                Release(locations);
+            }
             AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(key);
             OutstandingHandles++;
             bool transferred = false;
@@ -35,7 +50,7 @@ namespace SectorLab.Infrastructure
             }
         }
 
-        private void Release(AsyncOperationHandle<GameObject> handle)
+        private void Release<T>(AsyncOperationHandle<T> handle)
         {
             if (!handle.IsValid()) throw new InvalidOperationException("Unit prefab handle lost its owner before release.");
             Addressables.Release(handle);

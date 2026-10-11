@@ -1,0 +1,566 @@
+{
+  "status": "completed",
+  "duration": 64.43,
+  "summary": {
+    "total": 79,
+    "passed": 77,
+    "failed": 2,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.CountsLivingUnitsPerSide",
+      "Status": "Passed",
+      "Duration": 0.199628,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.LastEnemyDies_DoesNotFinishRelayMatch",
+      "Status": "Passed",
+      "Duration": 0.0813361,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.LastPlayerUnitDies_DoesNotFinishRelayMatch",
+      "Status": "Passed",
+      "Duration": 0.05021,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.PauseFreezesWorldClockAndInputAndResumeRestoresThem",
+      "Status": "Passed",
+      "Duration": 0.3822382,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(45,0,Victory)",
+      "Status": "Passed",
+      "Duration": 0.019483,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(0,45,Defeat)",
+      "Status": "Passed",
+      "Duration": 0.0043116,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(45,45,Draw)",
+      "Status": "Passed",
+      "Duration": 0.0031395,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.BattleControllerTests.TimeoutDrawAndSceneCleanupRestoreTimeScale",
+      "Status": "Passed",
+      "Duration": 0.0046414,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.EnemyTacticsTests.DecisionsUseGameSecondsAndUnchangedPathsAreNotSpam",
+      "Status": "Passed",
+      "Duration": 0.0249137,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.EnemyTacticsTests.EnemyAttacksAPlayerBlockingItsRelay",
+      "Status": "Passed",
+      "Duration": 0.0730142,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.EnemyTacticsTests.EnemyWalksAndCapturesUsingExistingNavMeshMovement",
+      "Status": "Passed",
+      "Duration": 7.1375555,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.EnemyTacticsTests.StableAssignmentsSpreadTwoUnitsAcrossScoringRelays",
+      "Status": "Passed",
+      "Duration": 0.012047,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.MainMatchTests.FourMainMatchesUseDifferentPlansAndResetTheirState",
+      "Status": "Passed",
+      "Duration": 43.0790701,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.MatchScopeTests.MatchUsesOneScopedStateAndClockAndANewSceneGetsNewInstances",
+      "Status": "Passed",
+      "Duration": 0.0186543,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.MatchScopeTests.MissingClockRegistrationFailsInsteadOfConstructingAHiddenClock",
+      "Status": "Passed",
+      "Duration": 0.0033444,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.MatchScopeTests.MissingStateRegistrationFailsComponentInjection",
+      "Status": "Passed",
+      "Duration": 0.000952,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.MatchScopeTests.UnwiredBattleReportsMissingInjectionAndDoesNotCreateFallbackState",
+      "Status": "Passed",
+      "Duration": 0.0352433,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.MatchScopeTests.UnwiredEnemyReportsMissingInjection",
+      "Status": "Passed",
+      "Duration": 0.0332906,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.ApproachRequiresReachablePointInsideRadius",
+      "Status": "Passed",
+      "Duration": 0.0034799,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.CaptureRadiusIsHorizontalAndBothSidesContest",
+      "Status": "Passed",
+      "Duration": 0.002969,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.DyingUnitLeavesOccupancyWithoutStaleTriggerState",
+      "Status": "Passed",
+      "Duration": 0.0437798,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.FullHealthDoesNotBankFutureHealingAndDeadUnitIsNotRepaired",
+      "Status": "Passed",
+      "Duration": 0.0036283,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.PauseAndFinishPreventCapture",
+      "Status": "Passed",
+      "Duration": 0.0053961,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(15,Player)",
+      "Status": "Passed",
+      "Duration": 0.0039281,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(30,Enemy)",
+      "Status": "Passed",
+      "Duration": 0.0030612,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(60,Player)",
+      "Status": "Passed",
+      "Duration": 0.0043157,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(144,Enemy)",
+      "Status": "Passed",
+      "Duration": 0.0049835,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayPointTests.RepairRequiresPresenceAndStopsDuringContestPauseAndFinish",
+      "Status": "Passed",
+      "Duration": 0.0083839,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayScoringTests.AlliedGroupStopsInsideRelayAndCanAutoDefend",
+      "Status": "Passed",
+      "Duration": 2.2041683,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayScoringTests.BothOwnedEmptyRelaysScoreTwoPointsPerGameSecond",
+      "Status": "Passed",
+      "Duration": 0.0029011,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayScoringTests.ContestAndNeutralizationImmediatelyStopScoring",
+      "Status": "Passed",
+      "Duration": 0.0038952,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayScoringTests.LargeFrameStopsAtWinningTickAndDoesNotOverchargeTime",
+      "Status": "Passed",
+      "Duration": 0.0051759,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayScoringTests.OppositeRelaysReachThresholdInSameTickAsDraw",
+      "Status": "Passed",
+      "Duration": 0.0067778,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.RelayScoringTests.RepairRelayDoesNotScore",
+      "Status": "Passed",
+      "Duration": 0.0036914,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.Cooldown_LimitsHitsPerSecond",
+      "Status": "Passed",
+      "Duration": 0.0427149,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.Damage_FlashesBodyBriefly",
+      "Status": "Passed",
+      "Duration": 0.2348298,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.HealingDoesNotShowDamageFlash",
+      "Status": "Passed",
+      "Duration": 0.2393975,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.IdleRangedUnit_AcquiresAnythingWithinWeaponRange",
+      "Status": "Passed",
+      "Duration": 0.0323381,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.IdleUnit_AcquiresNearestHostileInRange",
+      "Status": "Passed",
+      "Duration": 0.0223317,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.IdleUnit_IgnoresHostilesOutsideRange",
+      "Status": "Passed",
+      "Duration": 0.0279871,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.KilledTarget_IsDestroyedAndCleared",
+      "Status": "Passed",
+      "Duration": 0.0355208,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.MovingUnit_DoesNotAcquireTargets",
+      "Status": "Passed",
+      "Duration": 0.0231918,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.RangedUnit_HitsFromDistanceWithoutMoving",
+      "Status": "Passed",
+      "Duration": 0.0235828,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.SetTarget_IgnoresAllies",
+      "Status": "Passed",
+      "Duration": 0.0021835,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.Stats_AreAppliedToHealthMovementAndAttack",
+      "Status": "Passed",
+      "Duration": 0.0028969,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_AttackerWalksAroundAndHits",
+      "Status": "Passed",
+      "Duration": 0.8540051,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved",
+      "Status": "Passed",
+      "Duration": 0.0352663,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.TargetInRange_TakesDamageRightAway",
+      "Status": "Passed",
+      "Duration": 0.0264676,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.TargetOutOfRange_AttackerWalksUpToIt",
+      "Status": "Passed",
+      "Duration": 1.2414656,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.UnreachableTarget_AfterOpeningPathIsAttacked",
+      "Status": "Passed",
+      "Duration": 2.751865,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitAttackTests.UnreachableTarget_DoesNotRestartMovementEveryFrame",
+      "Status": "Passed",
+      "Duration": 0.3487372,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.NearMissTap_DoesNotSelectOccludedUnit",
+      "Status": "Passed",
+      "Duration": 0.0374715,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.NearMissTap_SelectsClosestUnit",
+      "Status": "Passed",
+      "Duration": 0.0101988,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.RejectedMoveOrder_PreservesAttackAndHidesMarker",
+      "Status": "Passed",
+      "Duration": 0.010977,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnEnemy_OrdersSelectedUnitToAttack",
+      "Status": "Passed",
+      "Duration": 0.0111905,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnEnemy_WithoutSelection_DoesNotSelectIt",
+      "Status": "Passed",
+      "Duration": 0.0155805,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnGround_CancelsAttack",
+      "Status": "Passed",
+      "Duration": 0.0162866,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnGround_SendsSelectedUnitAndShowsMarker",
+      "Status": "Passed",
+      "Duration": 0.0314315,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnGround_WithoutSelection_DoesNothing",
+      "Status": "Passed",
+      "Duration": 0.0101586,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnObstacle_IsIgnored",
+      "Status": "Passed",
+      "Duration": 0.0102841,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnRelay_MovesSelectedUnitIntoCaptureRadius",
+      "Status": "Passed",
+      "Duration": 1.8089321,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnUnit_SelectsIt",
+      "Status": "Passed",
+      "Duration": 0.0105317,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.TapOutsideTolerance_DoesNotSelect",
+      "Status": "Passed",
+      "Duration": 0.0109254,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.Touch_SelectsAndMovesUnit",
+      "Status": "Passed",
+      "Duration": 0.1172794,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitCommanderTests.UnreachableRelay_PreservesAttackAndRejectsOrder",
+      "Status": "Passed",
+      "Duration": 0.010713,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.AddressableTankSpawnsOnNavMeshAndDeathReleasesItsReferenceOnce",
+      "Status": "Passed",
+      "Duration": 0.2040985,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.AlreadyCancelledRequestDoesNotStartAnAddressableOperation",
+      "Status": "Passed",
+      "Duration": 0.0511877,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.CancelDuringLoadDisposesLateResultWithoutCreatingAGhost",
+      "Status": "Passed",
+      "Duration": 0.0565038,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.DisposeDuringLoadCancelsTheScopeAndReleasesLateResultOnce",
+      "Status": "Passed",
+      "Duration": 0.0607611,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.DisposingFactoryDestroysLiveCloneAndReleasesActualHandle",
+      "Status": "Passed",
+      "Duration": 0.1647342,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.InvalidNavMeshSpawnReleasesLoadedPrefabWithoutCreatingUnit",
+      "Status": "Passed",
+      "Duration": 0.155629,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitFactoryTests.MissingAddressableKeyFailsAndReleasesFailedHandle",
+      "Status": "Failed",
+      "Duration": 0.0567942,
+      "Message": "Unhandled log message: '[Error] UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=units/Missing-W5-asset'. Use UnityEngine.TestTools.LogAssert.Expect",
+      "StackTrace": "UnityEngine.AddressableAssets.Addressables:LoadAssetAsync<UnityEngine.GameObject> (object)\r\nSectorLab.Infrastructure.AddressableUnitPrefabProvider/<LoadAsync>d__8:MoveNext () (at Assets/_Project/Scripts/Infrastructure/AddressableUnitPrefabProvider.cs:20)\r\nCysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder`1<SectorLab.Infrastructure.UnitPrefabLease>:Start<SectorLab.Infrastructure.AddressableUnitPrefabProvider/<LoadAsync>d__8> (SectorLab.Infrastructure.AddressableUnitPrefabProvider/<LoadAsync>d__8&) (at ./Library/PackageCache/com.cysharp.unitask@d648f5692cf2/Runtime/CompilerServices/AsyncUniTaskMethodBuilder.cs:242)\r\nSectorLab.Infrastructure.AddressableUnitPrefabProvider:LoadAsync (string,System.Threading.CancellationToken)\r\nSectorLab.Infrastructure.UnitFactory/<SpawnAsync>d__7:MoveNext () (at Assets/_Project/Scripts/Infrastructure/UnitFactory.cs:25)\r\nCysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder`1<SectorLab.Units.Unit>:Start<SectorLab.Infrastructure.UnitFactory/<SpawnAsync>d__7> (SectorLab.Infrastructure.UnitFactory/<SpawnAsync>d__7&) (at ./Library/PackageCache/com.cysharp.unitask@d648f5692cf2/Runtime/CompilerServices/AsyncUniTaskMethodBuilder.cs:242)\r\nSectorLab.Infrastructure.UnitFactory:SpawnAsync (string,UnityEngine.Vector3,UnityEngine.Transform,System.Threading.CancellationToken)\r\nSectorLab.Tests.UnitFactoryTests/<MissingAddressableKeyFailsAndReleasesFailedHandle>d__11:MoveNext () (at Assets/_Project/Tests/PlayMode/UnitFactoryTests.cs:162)\r\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\r\n\r\n"
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.DisabledAgent_MoveToClearsMovingState",
+      "Status": "Passed",
+      "Duration": 0.0346025,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.DisabledAgent_WithoutNewOrderClearsMovingState",
+      "Status": "Passed",
+      "Duration": 0.0379673,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.MoveTo_GetsCloserEachFrame",
+      "Status": "Passed",
+      "Duration": 0.046539,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.MoveTo_PlansPathAroundObstacle",
+      "Status": "Passed",
+      "Duration": 0.0348541,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.MoveTo_StopsAtDestination",
+      "Status": "Passed",
+      "Duration": 1.0340664,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.Stop_HaltsMovement",
+      "Status": "Passed",
+      "Duration": 0.04353,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "SectorLab.Tests.UnitMovementTests.UnreachableDestination_StopsAtEndOfPartialPath",
+      "Status": "Failed",
+      "Duration": 0.5455838,
+      "Message": "Unhandled log message: '[Error] Couldn't extract exception string from exception of type InvalidKeyException (another exception of class 'UnityException' was thrown while processing the stack trace)'. Use UnityEngine.TestTools.LogAssert.Expect",
+      "StackTrace": "\r\n"
+    }
+  ]
+}

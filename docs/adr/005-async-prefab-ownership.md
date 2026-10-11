@@ -21,6 +21,13 @@ Factory получает provider от GameLifetimeScope и владеет вр�
 запрос физически завершился позднее, его lease освобождается без создания юнита.
 Ошибка ключа освобождает failed handle; UI сообщает ошибку и даёт Retry/Exit.
 
+Provider сначала выполняет LoadResourceLocationsAsync и освобождает lookup
+handle. Пустой список даёт понятную собственную ошибку без вызова LoadAssetAsync
+с неверным ключом. Счётчики adapter учитывают lookup и prefab references.
+Это появилось после первого W5.4 FAIL: штатный InvalidKeyException выдавал Error
+и отложенную ошибку форматирования stack trace. Native crash Editor после прогона
+зафиксирован отдельно; его причина не объявляется установленной.
+
 Отмена не обещает физического прекращения AssetBundle IO. Provider ожидает
 финальный handle без автоматического release от UniTask, затем передаёт или
 освобождает его. Отмена до запроса не создаёт operation. Scene lifetime и

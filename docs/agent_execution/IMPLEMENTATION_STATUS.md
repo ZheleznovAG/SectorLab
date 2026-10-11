@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.3**, следующий этап — **W5.4**.
+Последняя завершённая задача — **W5.4**, следующий этап — **W5.5**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -415,3 +415,25 @@ Tank загрузился по ключу, создан на NavMesh и умер
 стартовые экземпляры, миграция всех шести — W5.5. Отмена/missing key — W5.4.
 Content evidence теперь получает task/UTC-имя, не переписывает прошлые отчёты;
 после правки имени повторно проверена компиляция и [53/53 EditMode](evidence/tests-W5.3-editmode.json).
+
+W5.3 зафиксирован в `4c9ef8f`. W5.4 / FR-022/027, NFR-006: **79/79
+PlayMode PASS** ([лог](evidence/tests-W5.4-playmode.json)). Проверены
+caller cancellation до запроса/во время задержанной загрузки, dispose factory
+во время загрузки, late lease без ghost unit/повторного release, уничтожение
+реального EnemyRanger при dispose, отсутствующий ключ без зависания/остатка.
+Runner теперь хеширует все неигнорируемые Assets, включая Addressables settings.
+Реальный Main restart во время загрузки проверяется после миграции стартов в W5.6.
+
+Первый прогон дал **77/79**, сохранены [XML](evidence/tests-W5.4-attempt1-playmode.xml),
+[Pipeline JSON](evidence/tests-W5.4-attempt1-pipeline.json) и [партии](evidence/W5.4-attempt1-main-matches.csv).
+InvalidKeyException записывается Addressables как Error, ожидался Exception;
+затем возникла отложенная ошибка форматирования stack trace. После прогона
+Unity аварийно завершился: Windows Event 1000, ntdll.dll, 0xc0000374
+([запись](evidence/W5.4-editor-fault.json)). Причина native crash не установлена;
+нельзя объявлять её исправленной по одному успешному повтору.
+Editor перезапущен; recovery scene сохранена также вне проектного Temp,
+SHA-256 `825B969638F0ADB10A70BEFBE1AE1CCD8194A14BC838BB7C335BA465413E6617`.
+Provider теперь сначала выполняет LoadResourceLocationsAsync: пустой список
+даёт обычную понятную ошибку без InvalidKeyException logger, lookup handle
+освобождается в finally. Счётчики учитывают оба вида operations. Повторный
+прогон без неожиданных логов прошёл; стабильность Editor проверяется далее.
