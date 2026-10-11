@@ -7,7 +7,7 @@ namespace SectorLab.Battle
     {
         public const double ScoreLimit = 45;
         public const double DurationSeconds = 180;
-        private const double Epsilon = 0.000001;
+        internal const double Epsilon = 0.000001;
 
         public static BattleOutcome Evaluate(double playerScore, double enemyScore, double elapsedSeconds)
         {
