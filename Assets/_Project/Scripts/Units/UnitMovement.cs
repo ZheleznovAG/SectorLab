@@ -12,6 +12,12 @@ namespace SectorLab.Units
 
         public bool IsMoving { get; private set; }
         public Vector3 Destination => destination;
+        public float Speed => speed;
+
+        public void Configure(float newSpeed)
+        {
+            speed = Mathf.Max(0f, newSpeed);
+        }
 
         public void MoveTo(Vector3 point)
         {
