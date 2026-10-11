@@ -85,8 +85,8 @@ namespace SectorLab.Tests
             Assert.That(point.State.Progress, Is.Zero);
             battle.SetPaused(false);
             battle.AdvanceSimulation(2);
-            Assert.That(point.State.Progress, Is.EqualTo(0.4));
-            battle.AdvanceSimulation(1, 45, 0);
+            Assert.That(point.State.Progress, Is.EqualTo(0.4).Within(1e-6));
+            battle.AdvanceSimulation(180);
             double progress = point.State.Progress;
             battle.AdvanceSimulation(10);
             Assert.That(point.State.Progress, Is.EqualTo(progress));
