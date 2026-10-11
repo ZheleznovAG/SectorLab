@@ -7,7 +7,8 @@
         "Unity.InputSystem.TestFramework",
         "Unity.AI.Navigation",
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "VContainer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

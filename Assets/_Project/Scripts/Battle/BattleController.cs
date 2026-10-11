@@ -35,6 +35,7 @@ namespace SectorLab.Battle
         }
 
         // The composition root supplies the same state/clock to consumers before the first tick.
+        [VContainer.Inject]
         public void Initialize(MatchState state)
         {
             if (State != null && State.Clock.ElapsedSeconds > 0)
