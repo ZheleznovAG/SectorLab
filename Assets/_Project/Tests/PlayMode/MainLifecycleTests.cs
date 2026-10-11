@@ -16,7 +16,7 @@ namespace SectorLab.Tests
         private UnitLifecycle lifecycle;
         private GameObject blocker;
 
-        public static IEnumerator WaitForReady()
+        public static IEnumerator WaitForReady(bool dismissTutorial = true)
         {
             float deadline = Time.realtimeSinceStartup + 15;
             UnitLifecycle current;
@@ -28,6 +28,16 @@ namespace SectorLab.Tests
                 Assert.That(current.Phase, Is.Not.EqualTo(UnitLifecyclePhase.Failed), current.Failure);
             } while (!current.IsReady && Time.realtimeSinceStartup < deadline);
             Assert.That(current.IsReady, Is.True, "Main must finish its real local prefab loads.");
+            if (dismissTutorial)
+            {
+                // Close via the production action while preserving the human's first-launch preference.
+                var tutorial = Object.FindFirstObjectByType<SectorLab.Presentation.TutorialView>();
+                string key = SectorLab.Presentation.TutorialView.SeenPreference;
+                bool existed = PlayerPrefs.HasKey(key); int previous = PlayerPrefs.GetInt(key);
+                if (tutorial != null && tutorial.IsShowing) tutorial.Dismiss();
+                if (existed) PlayerPrefs.SetInt(key, previous); else PlayerPrefs.DeleteKey(key);
+                PlayerPrefs.Save();
+            }
         }
 
         [UnitySetUp]

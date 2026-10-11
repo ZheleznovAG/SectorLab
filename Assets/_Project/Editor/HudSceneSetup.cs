@@ -51,6 +51,7 @@ namespace SectorLab.Editor
             red.color = new Color(1, 0.46f, 0.40f);
             var time = Label("Timer", top, new Vector2(0.34f, 0), new Vector2(0.66f, 0.35f), "03:00 • до 45 очков", 26, TextAnchor.MiddleCenter);
             var pause = Button("Pause", top, new Vector2(0.80f, 0.22f), new Vector2(0.985f, 0.85f), "Пауза", 30);
+            var help = Button("Help", top, new Vector2(0.015f, 0.04f), new Vector2(0.15f, 0.43f), "Как играть", 22);
             var objectives = Panel("Relays", root, new Vector2(0, 1), Vector2.one, 85, true);
             objectives.anchoredPosition = new Vector2(0, -140);
             var relays = new Button[3]; var relayLabels = new Text[3];
@@ -76,6 +77,19 @@ namespace SectorLab.Editor
             SetArray(data, "relayButtons", relays); SetArray(data, "relayLabels", relayLabels);
             SetArray(data, "unitButtons", units); SetArray(data, "unitLabels", unitLabels);
             data.ApplyModifiedPropertiesWithoutUndo();
+            var tutorial = root.gameObject.AddComponent<TutorialView>();
+            var tutorialPanel = Rect("Tutorial", root, Vector2.zero, Vector2.one);
+            tutorialPanel.gameObject.AddComponent<Image>().color = new Color(0.03f, 0.04f, 0.06f, 0.98f);
+            var tutorialTitle = Label("Title", tutorialPanel, new Vector2(0.1f, 0.76f), new Vector2(0.9f, 0.91f), "", 48, TextAnchor.MiddleCenter);
+            var tutorialBody = Label("Body", tutorialPanel, new Vector2(0.15f, 0.27f), new Vector2(0.85f, 0.72f), "", 38, TextAnchor.MiddleCenter);
+            var next = Button("Next", tutorialPanel, new Vector2(0.55f, 0.08f), new Vector2(0.9f, 0.22f), "Дальше", 32);
+            var skip = Button("Skip", tutorialPanel, new Vector2(0.1f, 0.08f), new Vector2(0.45f, 0.22f), "Пропустить", 32);
+            var tutorialData = new SerializedObject(tutorial);
+            Set(tutorialData, "battle", battle); Set(tutorialData, "lifecycle", battle.GetComponent<UnitLifecycle>());
+            Set(tutorialData, "panel", tutorialPanel.gameObject); Set(tutorialData, "title", tutorialTitle); Set(tutorialData, "body", tutorialBody);
+            Set(tutorialData, "nextButton", next); Set(tutorialData, "nextLabel", next.GetComponentInChildren<Text>());
+            Set(tutorialData, "skipButton", skip); Set(tutorialData, "helpButton", help);
+            tutorialData.ApplyModifiedPropertiesWithoutUndo();
             var resultData = new SerializedObject(result);
             var panel = (GameObject)resultData.FindProperty("panel").objectReferenceValue;
             panel.transform.SetParent(safe, false);

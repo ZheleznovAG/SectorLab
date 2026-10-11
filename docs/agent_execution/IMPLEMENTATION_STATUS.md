@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W6.4**, следующий этап — **W6.5**.
+Последняя завершённая задача — **W6.5**, следующий этап — проверка G6 APK и **W7.1**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -112,7 +112,7 @@ diff; другие настройки проекта не затронуты.
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
 | FR-018 | TODO | Звук/mute отсутствуют / W7 |
-| FR-019 | TODO | Обучения нет / W6 |
+| FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
 | FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
 | FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
@@ -583,3 +583,20 @@ viewport оставлял старые UI/world pixels в полях. BackdropCa
 Повторные снимки проверены после исправления, артефакт устранён. Это маленькая
 дополнительная камера очистки, без AudioListener/DI/async; AR/другие рендереры
 не вводились. Native Android safe insets проверяются обновлённым APK после W6.5.
+
+W6.4 зафиксирован в `e3510d8`. W6.5 / FR-019, FR-012: TutorialView подписан на
+реальный Lifecycle.Ready; на первом запуске показывает три коротких подсказки
+после создания юнитов и ставит матч на паузу. Next/Skip сохраняет preference,
+закрытие возвращает предыдущее состояние паузы. Help позволяет повторить;
+Pause button во время modal недоступна, world input отключён. Ready/Finished
+подписки снимаются OnDisable; отдельного async/tutorial state service нет.
+
+**107/107 PlayMode PASS** ([JSON](evidence/tests-W6.5-playmode.json)): first launch,
+все три Next, Skip → настоящий Restart, сохранение existing pause при Help,
+modal input blocking; прежние сценарии и 10 restart также PASS. Main fixtures
+закрывают tutorial production action и сохраняют/восстанавливают Editor preference,
+чтобы тесты не отменяли обучение человеку. [Первый](evidence/W6.5-tutorial-1.png),
+[второй](evidence/W6.5-tutorial-2.png), [третий](evidence/W6.5-tutorial-3.png) экраны
+просмотрены; [наблюдение](evidence/W6.5-tutorial-observation.txt): 1280×720,
+showing=True, paused=True. После ручного просмотра preference также восстановлен.
+G6 ещё IN_PROGRESS до обновлённого APK на устройстве; это не финальная v1.0 сборка.
