@@ -16,6 +16,8 @@ namespace SectorLab.Tests
         public void SetUp()
         {
             root = new GameObject("TestRoot");
+            TestArena.CreateGround(root.transform);
+            TestArena.Bake(root);
         }
 
         [TearDown]

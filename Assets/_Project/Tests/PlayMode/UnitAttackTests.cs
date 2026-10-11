@@ -15,6 +15,8 @@ namespace SectorLab.Tests
         public void SetUp()
         {
             root = new GameObject("TestRoot");
+            TestArena.CreateGround(root.transform);
+            TestArena.Bake(root);
         }
 
         [TearDown]
@@ -145,7 +147,7 @@ namespace SectorLab.Tests
             Unit runner = CreateUnit(Team.Player, Vector3.zero, autoAcquireRange: 4f);
             CreateUnit(Team.Enemy, new Vector3(2f, 0f, 0f));
 
-            runner.Movement.MoveTo(new Vector3(0f, 0f, -10f));
+            runner.Movement.MoveTo(new Vector3(0f, 0f, -8f));
             yield return null;
 
             Assert.That(runner.Attack.Target, Is.Null);
@@ -174,7 +176,10 @@ namespace SectorLab.Tests
             yield return null;
 
             Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max - 20));
-            Assert.That(ranger.transform.position, Is.EqualTo(Vector3.zero));
+            // Only horizontal position matters: the agent snaps the unit onto the NavMesh height.
+            Vector3 flat = ranger.transform.position;
+            flat.y = 0f;
+            Assert.That(flat.magnitude, Is.LessThan(0.01f));
         }
 
         [UnityTest]
