@@ -1,0 +1,26 @@
+{
+  "task": "W5-G5",
+  "checkedAtUtc": "2026-10-11T20:04:12.9797158Z",
+  "sourceHead": "b64f080347df1589f3e8a298f949019c786938d5",
+  "device": "[DEVICE_MODEL]",
+  "android": "11",
+  "package": "com.zheleznovag.sectorlab",
+  "installation": "adb install -r: Success",
+  "activity": "com.unity3d.player.UnityPlayerGameActivity",
+  "observation": "Game in foreground, real units and relay combat visible in two device screenshots",
+  "evidence": [
+    "W5-G5-device-main.png",
+    "W5-G5-device-observation2.png",
+    "W5-G5-device-log.txt"
+  ],
+  "knownIssues": [
+    "Non-fatal startup Java ClassNotFoundException for optional AssetPackManager; investigate before G8 acceptance",
+    "URP stripped/unsupported unused post-processing shader warnings",
+    "HUD and camera still baseline; W6 follows"
+  ],
+  "limitations": [
+    "No offline test or performance acceptance in this pilot",
+    "No native Exit test yet",
+    "Not final v1.0 APK"
+  ]
+}

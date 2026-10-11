@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.6**, следующий этап — **G5 APK / W6.1**.
+Последняя завершённая задача — **W5.6 / G5**, следующий этап — **W6.1**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -116,7 +116,7 @@ diff; другие настройки проекта не затронуты.
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
 | FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
 | FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
-| FR-023 | PARTIAL | Addressables 2.11.2 закреплён и компилируется; local content и реальный spawn / W5.3–W5.6 |
+| FR-023 | PASS | Шесть локальных prefabs, реальные loads/releases; bundles/catalog внутри Android APK, бой на телефоне / G5 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
 | FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
 | FR-026 | TODO | Метрики баланса не реализованы; SHOULD / W7 |
@@ -494,3 +494,22 @@ type; VContainer справедливо отклонил конфликт. Те�
 другим implementation, сохраняя настоящую проверку missing Addressables key.
 Начальный [restart CSV](evidence/W5.6-attempt1-main-restarts.csv) и
 [партии](evidence/W5.6-attempt1-main-matches.csv) не заменены.
+
+W5.6 зафиксирован в `b64f080`. G5: промежуточный [Android build](evidence/android-build-W5-G5.json)
+**Succeeded**, 373,580 с, 0 build errors, 1 warning (Pipeline отключён в Player,
+RuntimePipelineConfig отсутствует). APK 32 513 517 байт, SHA-256
+`CBDDB4225780D0E6D406DD7A78EFCA227A8DF62FA3EC94C77946C7B327BFF57D`.
+ZIP manifest подтверждает localunits/monoscripts bundles, catalog/settings
+внутри APK; hashes bundles совпадают с content build. Tools/build-android.ps1
+сохраняет входные hashes, фактический BuildReport и APK content hashes и
+не заменяет уже существующий APK. Полный BuildReport остаётся в игнорируемом Temp.
+
+Unity автоматически добавил существующий InputSystem_Actions.inputactions
+GUID `052faaac586de48259a63d0c4782560b` в preloadedAssets при Player build. Это сохранено как явная настройка project-wide input; иных изменений PlayerSettings нет. APK успешно установлен через `adb install -r`, активен на Android:
+[наблюдение](evidence/W5-G5-device.json), [сцена](evidence/W5-G5-device-main.png),
+[второй кадр](evidence/W5-G5-device-observation2.png), [лог](evidence/W5-G5-device-log.txt). G5 PASS подтверждает цепочку DI → UniTask → локальные Addressables в Editor/Player.
+
+Стартовый лог Player **не чистый**: Java ClassNotFoundException для
+com.google.android.play.core.assetpacks.AssetPackManager, затем бой продолжился;
+URP сообщает об unsupported/stripped неиспользуемых post-processing shaders. Причины и исправление проверяются в Android regression W8; NFR-003 ещё PARTIAL. Это pilot APK с версией baseline 0.1.0, не финальный v1.0. Offline и performance
+не приняты. Следующий milestone — input/camera/HUD W6.

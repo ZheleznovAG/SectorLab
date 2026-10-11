@@ -1,0 +1,226 @@
+--------- beginning of main
+10-12 03:00:30.917 18050 18050 E novag.sectorla: Not starting debugger since process cannot load the jdwp agent.
+10-12 03:00:30.976 18050 18050 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-12 03:00:30.976 18050 18050 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+10-12 03:00:31.026 18050 18050 W linker  : Warning: "/data/app/~~pSuovivWF1YK4QKcmLmxsQ==/com.zheleznovag.sectorlab-hJ5ixfAEA_MkyLWNbvgF6A==/lib/arm64/libc++_shared.so" unused DT entry: unknown processor-specific (type 0x70000001 arg 0x0) (ignoring)
+10-12 03:00:31.035 18050 18050 D GameActivity: GameActivity_register
+10-12 03:00:31.040 18050 18050 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+10-12 03:00:31.057 18050 18050 D View    : com.zheleznovag.sectorlab initForcedUseForceDark: 1
+10-12 03:00:31.061 18050 18050 I SurfaceFactory: [static] sSurfaceFactory = com.mediatek.view.impl.SurfaceFactoryImpl@e06b6c4
+10-12 03:00:31.065 18050 18050 D gti.InputConnection: InputConnection created
+10-12 03:00:31.066 18050 18050 D gti.InputConnection: setEditorInfo
+10-12 03:00:31.071 18050 18050 D DecorView[]: getWindowModeFromSystem  windowmode is 1
+10-12 03:00:31.071 18050 18050 D DecorView: createDecorCaptionView windowingMode:1 mWindowMode 1 isFullscreen: true
+10-12 03:00:31.075 18050 18050 E libc    : Access denied finding property "ro.vendor.pref_scale_resolution"
+10-12 03:00:31.227 18050 18050 I IL2CPP  : JNI_OnLoad
+10-12 03:00:31.228 18050 18050 V Unity   : Context Type: GameActivity
+10-12 03:00:31.245 18050 18050 I GameActivity: Looking for library libgame.so
+10-12 03:00:31.245 18050 18050 I GameActivity: Found library libgame.so. Loading...
+10-12 03:00:31.256 18050 18050 D GameActivity: SDK version: 30
+10-12 03:00:31.257 18050 18132 I Unity   : UnityApplication::CreateInstance
+10-12 03:00:31.257 18050 18132 I Unity   : GameActivity Package Version '4.4.0'
+10-12 03:00:31.257 18050 18132 I Unity   : Starting Game Loop
+10-12 03:00:31.275 18050 18132 I Unity   : Handle cmd APP_CMD_START(11)
+10-12 03:00:31.277 18050 18132 I Unity   : Handle cmd APP_CMD_RESUME(12)
+10-12 03:00:31.288 18050 18050 D libMEOW : meow reload base cfg path: na
+10-12 03:00:31.288 18050 18050 D libMEOW : meow reload overlay cfg path: /vendor/etc/meow.cfg
+10-12 03:00:31.289 18050 18050 D libMEOW : applied 1 plugins for [com.zheleznovag.sectorlab]:
+10-12 03:00:31.289 18050 18050 D libMEOW :   plugin 1: [libMEOW_gift.so]:
+10-12 03:00:31.289 18050 18050 I InputTransport: Create ARC handle: 0xb400007c250e5b00
+10-12 03:00:31.290 18050 18050 V PhoneWindow: DecorView setVisiblity: visibility = 0, Parent = android.view.ViewRootImpl@87b533e, this = DecorView@fd3859f[UnityPlayerGameActivity]
+--------- beginning of system
+10-12 03:00:31.291 18050 18050 W Looper  : PerfMonitor looperActivity : package=com.zheleznovag.sectorlab/com.unity3d.player.UnityPlayerGameActivity time=0ms latency=354ms running=0ms  procState=2 ClientTransaction{ callbacks=[android.app.servertransaction.TopResumedActivityChangeItem] } historyMsgCount=3 (msgIndex=2 wall=55ms seq=2 running=31ms runnable=6ms late=4ms h=android.app.ActivityThread$H w=110) (msgIndex=3 wall=297ms seq=3 running=111ms runnable=6ms io=122ms late=57ms h=android.app.ActivityThread$H w=159)
+10-12 03:00:31.299 18050 18050 V GameActivity: onImeInsetsChanged from Text Listener
+10-12 03:00:31.300 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+10-12 03:00:31.311 18050 18050 V GameActivity: onImeInsetsChanged from Text Listener
+10-12 03:00:31.311 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+10-12 03:00:31.312 18050 18132 I Unity   : Handle cmd APP_CMD_CONTENT_RECT_CHANGED(5)
+10-12 03:00:31.313 18050 18050 D SurfaceView: UPDATE null, mIsCastMode = false
+10-12 03:00:31.317 18050 18132 I Unity   : Handle cmd APP_CMD_INIT_WINDOW(1)
+10-12 03:00:31.319 18050 18050 D Surface : lockCanvas
+10-12 03:00:31.331 18050 18132 I Unity   : MemoryManager: Using 'Dynamic Heap' Allocator.
+10-12 03:00:31.331 18050 18132 I Unity   : Mimalloc is enabled and will override the Dynamic Heap and Dual Thread (Main and MainThread) allocators.
+10-12 03:00:31.333 18050 18050 E ion     : ioctl c0044901 failed with code -1: Invalid argument
+10-12 03:00:31.368 18050 18132 E Unity   : java.lang.ClassNotFoundException: Didn't find class "com.google.android.play.core.assetpacks.AssetPackManager" on path: DexPathList[[zip file "/data/app/~~pSuovivWF1YK4QKcmLmxsQ==/com.zheleznovag.sectorlab-hJ5ixfAEA_MkyLWNbvgF6A==/base.apk"],nativeLibraryDirectories=[/data/app/~~pSuovivWF1YK4QKcmLmxsQ==/com.zheleznovag.sectorlab-hJ5ixfAEA_MkyLWNbvgF6A==/lib/arm64, /data/app/~~pSuovivWF1YK4QKcmLmxsQ==/com.zheleznovag.sectorlab-hJ5ixfAEA_MkyLWNbvgF6A==/base.apk!/lib/arm64-v8a, /system/lib64, /system/system_ext/lib64]]
+10-12 03:00:31.370 18050 18050 D Surface : lockCanvas
+10-12 03:00:31.387 18050 18132 I Unity   : SystemInfo CPU = ARM64 FP ASIMD AES, Cores = 8, Memory = 5635mb
+10-12 03:00:31.387 18050 18132 I Unity   : SystemInfo ARM big.LITTLE configuration: 2 big (mask: 0xc0), 6 little (mask: 0x3f)
+10-12 03:00:31.389 18050 18132 I Unity   : ApplicationInfo 'com.zheleznovag.sectorlab', Version '0.1.0', Min API Level '26', Target API Level '36'
+10-12 03:00:31.389 18050 18132 I Unity   : Built from '6000.6/staging' branch, Version '6000.6.4f1 (12bfff696524)', Build type 'Release', Scripting Backend 'il2cpp', CPU 'arm64-v8a', Stripping 'Enabled'
+10-12 03:00:31.389 18050 18132 I Unity   : Device Model '[DEVICE_MODEL]', OS 'Android OS 11 (API 30)'
+10-12 03:00:31.421 18050 18050 D Surface : lockCanvas
+10-12 03:00:31.447 18050 18050 V GameActivity: onImeInsetsChanged from Text Listener
+10-12 03:00:31.643 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.644 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.645 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.646 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.646 18050 18132 I chatty  : uid=10260(com.zheleznovag.sectorlab) Unity Main Thre identical 1 line
+10-12 03:00:31.647 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.652 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.658 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.659 18050 18132 I chatty  : uid=10260(com.zheleznovag.sectorlab) Unity Main Thre identical 2 lines
+10-12 03:00:31.659 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.661 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.662 18050 18132 I chatty  : uid=10260(com.zheleznovag.sectorlab) Unity Main Thre identical 1 line
+10-12 03:00:31.663 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.666 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.666 18050 18132 E libprocessgroup: set_timerslack_ns write failed: Operation not permitted
+10-12 03:00:31.684 18050 18132 I Unity   : Company Name: ZheleznovAG
+10-12 03:00:31.684 18050 18132 I Unity   : Product Name: SectorLab
+10-12 03:00:31.698 18050 18050 V GameActivity: onImeInsetsChanged from Text Listener
+10-12 03:00:31.711 18050 18132 D vulkan  : searching for layers in '/data/app/~~pSuovivWF1YK4QKcmLmxsQ==/com.zheleznovag.sectorlab-hJ5ixfAEA_MkyLWNbvgF6A==/lib/arm64'
+10-12 03:00:31.711 18050 18132 D vulkan  : searching for layers in '/data/app/~~pSuovivWF1YK4QKcmLmxsQ==/com.zheleznovag.sectorlab-hJ5ixfAEA_MkyLWNbvgF6A==/base.apk!/lib/arm64-v8a'
+10-12 03:00:31.939 18050 18132 V MediaRouter: Selecting route: RouteInfo{ name=Телефон, description=null, status=null, category=RouteCategory{ name=Система types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-12 03:00:31.953 18050 18132 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
+10-12 03:00:31.953 18050 18132 I AudioStreamBuilder: rate   =  24000, channels  = 2, format   = 5, sharing = SH, dir = OUTPUT
+10-12 03:00:31.953 18050 18132 I AudioStreamBuilder: device =      0, sessionId = 0, perfMode = 12, callback: ON with frames = 512
+10-12 03:00:31.953 18050 18132 I AudioStreamBuilder: usage  =      0, contentType = 0, inputPreset = 0, allowedCapturePolicy = 0
+10-12 03:00:31.953 18050 18132 I AudioStreamBuilder: privacy sensitive = false
+10-12 03:00:31.953 18050 18132 D AudioStreamBuilder: build() MMAP not used because sessionId specified.
+10-12 03:00:31.953 18050 18132 D novag.sectorla: PlayerBase::PlayerBase()
+10-12 03:00:31.955 18050 18132 D AudioStreamTrack: open(), request notificationFrames = 512, frameCount = 8192
+10-12 03:00:31.957 18050 18132 D AudioTrack: INSP: type=audio,case=1,set=0xb400007bb7206b00,stream_type=-1,sample_rate=24000,format=0x5,channel_mask=0x3,frame_count=8192,flags=0x4,notification_frames=512,session_id=0,transfer_type=1,uid=-1,pid=-1
+10-12 03:00:31.957 18050 18132 D AudioTrack: INSP: type=audio,case=1,attributes=1,content_type=2,usage=1,source=0,flags=0x0
+10-12 03:00:31.957 18050 18132 D AudioTrack: set(sessionID=0)
+10-12 03:00:31.957 18050 18132 D AudioTrack: set(): Building AudioTrack with attributes: usage = 1, content = 2, flags = 0x0, tags = []
+10-12 03:00:31.957 18050 18132 D AudioTrack: set(): 0xb400007bb7206b00, Create AudioTrackThread, tid = 18261
+10-12 03:00:31.961 18050 18132 D AudioTrack: createTrack_l(0): AUDIO_OUTPUT_FLAG_FAST denied by server; frameCount 8192 -> 8192
+10-12 03:00:31.962 18050 18132 D AudioTrack: checkWhiteListPackage() Uid 10260, package name com.zheleznovag.sectorlab
+10-12 03:00:31.962 18050 18132 D AudioTrack: createTrack_l(78): 0xb400007bb7206b00, mCblk = 0x7a3c400000, mLatency = 383, mAfLatency = 42, frameCount = 8192, mSampleRate = 24000, mFlags = 0, mReqFrameCount = 8192, mNotificationFramesAct = 480
+10-12 03:00:31.962 18050 18132 D AudioTrack: createTrack_l() isReduceVolume 0
+10-12 03:00:31.963 18050 18132 D AudioTrack: setVolume(78): 0xb400007bb7206b00, left = 1.000000, right = 1.000000
+10-12 03:00:31.963 18050 18132 D AudioTrack: setVolume() isReduceVolume, 0
+10-12 03:00:31.963 18050 18132 D AAudioStream: setState(s#1) from 0 to 2
+10-12 03:00:31.963 18050 18132 W AudioStreamTrack: open() flags changed from 0x00000004 to 0x00000000
+10-12 03:00:31.963 18050 18132 W AudioStreamTrack: open() perfMode changed from 12 to 10
+10-12 03:00:31.964 18050 18132 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+10-12 03:00:31.965 18050 18132 D AAudio  : AAudioStream_requestStart(s#1) called --------------
+10-12 03:00:31.965 18050 18132 D AAudioStream: setState(s#1) from 2 to 3
+10-12 03:00:31.965 18050 18132 D AudioTrack: start(78): 0xb400007bb7206b00, prior state:STATE_STOPPED
+10-12 03:00:31.977 18050 18132 D novag.sectorla: PlayerBase::start() from IPlayer
+10-12 03:00:31.977 18050 18132 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
+10-12 03:00:31.977 18050 18262 D AudioTrack: onAudioDeviceUpdate() isReduceVolume 0
+10-12 03:00:31.977 18050 18262 D AudioStreamLegacy: onAudioDeviceUpdate() devId 3 => 3
+10-12 03:00:31.978 18050 18050 V MediaRouter: Selecting route: RouteInfo{ name=Телефон, description=null, status=null, category=RouteCategory{ name=Система types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-12 03:00:32.066 18050 18261 D AAudioStream: setState(s#1) from 3 to 4
+10-12 03:00:32.386 18050 18132 I IL2CPP  : Locale ru-RU
+10-12 03:00:32.425 18050 18132 E libc    : Access denied finding property "vendor.displayfeature_hidl"
+10-12 03:00:32.426 18050 18132 E libc    : Access denied finding property "ro.vendor.df.effect.conflict"
+10-12 03:00:32.426 18050 18132 E libc    : Access denied finding property "ro.vendor.knock.type"
+10-12 03:00:32.422 18050 18050 W com.zheleznovag.sectorlab: type=1400 audit(0.0:159186): avc: denied { read } for comm=556E697479204D61696E2054687265 name="u:object_r:vendor_displayfeature_prop:s0" dev="tmpfs" ino=15768 scontext=u:r:untrusted_app:s0:c4,c257,c512,c768 tcontext=u:object_r:vendor_displayfeature_prop:s0 tclass=file permissive=0 app=com.zheleznovag.sectorlab
+10-12 03:00:32.449 18050 18132 I Unity   :     HasWindow = 1, HasFocus = 0
+10-12 03:00:32.449 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_RESIZED(3)
+10-12 03:00:32.450 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_REDRAW_NEEDED(4)
+10-12 03:00:32.450 18050 18132 I Unity   : Handle cmd APP_CMD_GAINED_FOCUS(7)
+10-12 03:00:32.450 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+10-12 03:00:32.450 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+10-12 03:00:32.665 18050 18090 I novag.sectorla: ProcessProfilingInfo new_methods=1062 is saved saved_to_disk=1 resolve_classes_delay=8000
+10-12 03:00:32.666 18050 18050 D Surface : lockCanvas
+10-12 03:00:32.989 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 1 Seconds
+10-12 03:00:33.994 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 2 Seconds
+10-12 03:00:34.568 18050 18050 D GameActivity: ************** mainWorkCallback *********
+10-12 03:00:34.568 18050 18050 D gti.InputConnection: setSoftKeyboardActive, active: false
+10-12 03:00:34.684 18050 18132 D CompatibilityChangeReporter: Compat change id reported: 147600208; UID 10260; state: ENABLED
+10-12 03:00:34.950 18050 18132 I Unity   : Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'DepthOfFieldGaussianPostProcessPass'). PostProcessing render passes will not execute.
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader(Shader, String, LogType)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.DepthOfFieldGaussianPostProcessPass:.ctor(Shader)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcess:.ctor(PostProcessData)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderer:.ctor(UniversalRendererData)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRendererData:Create()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline(RenderPipelineAsset)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal(RenderPipelineAsset, IntPtr, Object)
+10-12 03:00:34.950 18050 18132 I Unity   : 
+10-12 03:00:34.950 18050 18132 I Unity   : Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'DepthOfFieldGaussianPostProcessPass'). PostProcessing render passes will not execute.
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader(Shader, String, LogType)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.DepthOfFieldGaussianPostProcessPass:.ctor(Shader)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcess:.ctor(PostProcessData)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderer:.ctor(UniversalRendererData)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRendererData:Create()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline()
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline(RenderPipelineAsset)
+10-12 03:00:34.950 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal(RenderPipelineAsset, IntPtr, Object)
+10-12 03:00:34.950 18050 18132 I Unity   : 
+10-12 03:00:34.951 18050 18132 I Unity   : Shader 'Hidden/Universal Render Pipeline/BokehDepthOfField' is not supported or has been stripped from the build (in 'DepthOfFieldBokehPostProcessPass'). PostProcessing render passes will not execute.
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader(Shader, String, LogType)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.DepthOfFieldBokehPostProcessPass:.ctor(Shader)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcess:.ctor(PostProcessData)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderer:.ctor(UniversalRendererData)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRendererData:Create()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline(RenderPipelineAsset)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal(RenderPipelineAsset, IntPtr, Object)
+10-12 03:00:34.951 18050 18132 I Unity   : 
+10-12 03:00:34.951 18050 18132 I Unity   : Shader 'Hidden/Universal Render Pipeline/PaniniProjection' is not supported or has been stripped from the build (in 'PaniniProjectionPostProcessPass'). PostProcessing render passes will not execute.
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader(Shader, String, LogType)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PaniniProjectionPostProcessPass:.ctor(Shader)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.PostProcess:.ctor(PostProcessData)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderer:.ctor(UniversalRendererData)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRendererData:Create()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline()
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline(RenderPipelineAsset)
+10-12 03:00:34.951 18050 18132 I Unity   : UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal(RenderPipelineAsset, IntPtr, Object)
+10-12 03:00:34.951 18050 18132 I Unity   : 
+10-12 03:00:34.990 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 3 Seconds
+10-12 03:00:35.993 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 4 Seconds
+10-12 03:00:36.997 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 5 Seconds
+10-12 03:00:37.899 18050 18050 V GameActivity: onImeInsetsChanged from Text Listener
+10-12 03:00:37.900 18050 18050 D Surface : lockCanvas
+10-12 03:00:37.901 18050 18132 I Unity   : Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+10-12 03:00:37.916 18050 18050 D Surface : lockCanvas
+10-12 03:00:37.932 18050 18050 D Surface : lockCanvas
+10-12 03:00:37.949 18050 18050 D Surface : lockCanvas
+10-12 03:00:37.965 18050 18050 D Surface : lockCanvas
+10-12 03:00:37.982 18050 18050 D Surface : lockCanvas
+10-12 03:00:37.993 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 6 Seconds
+10-12 03:00:37.999 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.016 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.033 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.050 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.066 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.082 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.099 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.116 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.132 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.149 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.166 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.182 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.199 18050 18050 D Surface : lockCanvas
+10-12 03:00:38.997 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 7 Seconds
+10-12 03:00:40.005 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 8 Seconds
+10-12 03:00:41.013 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 9 Seconds
+10-12 03:00:42.014 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 10 Seconds
+10-12 03:00:43.015 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 11 Seconds
+10-12 03:00:44.017 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 12 Seconds
+10-12 03:00:45.016 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 13 Seconds
+10-12 03:00:46.023 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 14 Seconds
+10-12 03:00:47.016 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 15 Seconds
+10-12 03:00:48.024 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 16 Seconds
+10-12 03:00:49.036 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 17 Seconds
+10-12 03:00:50.032 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 18 Seconds
+10-12 03:00:51.036 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 19 Seconds
+10-12 03:00:52.040 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 20 Seconds
+10-12 03:00:53.036 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 21 Seconds
+10-12 03:00:54.040 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 22 Seconds
+10-12 03:00:55.048 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 23 Seconds
+10-12 03:00:56.056 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 24 Seconds
+10-12 03:00:57.056 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 25 Seconds
+10-12 03:00:58.056 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 26 Seconds
+10-12 03:00:59.056 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 27 Seconds
+10-12 03:01:00.055 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 28 Seconds
+10-12 03:01:01.063 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 29 Seconds
+10-12 03:01:02.056 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 30 Seconds
+10-12 03:01:03.064 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 31 Seconds
+10-12 03:01:04.075 18050 18261 I AudioTrack: isLongTimeZeroData zero date time 32 Seconds

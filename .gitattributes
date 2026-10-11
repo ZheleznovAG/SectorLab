@@ -170,3 +170,5 @@ Packages/packages-lock.json linguist-generated
 
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
+# Tool-generated evidence logs retain their original end-of-line whitespace.
+docs/agent_execution/evidence/*-log.txt whitespace=-blank-at-eol
