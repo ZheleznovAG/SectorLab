@@ -20,7 +20,7 @@
       { "name": "Main repair/contest/pause", "status": "PASS", "evidence": "evidence/W2-heal-check.txt" },
       { "name": "Main contested repair visual", "status": "PASS", "evidence": "evidence/W2-heal-contested.png" }
     ] },
-    { "id": "G3", "status": "TODO", "checks": [] },
+    { "id": "G3", "status": "IN_PROGRESS", "checks": [] },
     { "id": "G4", "status": "TODO", "checks": [] },
     { "id": "G5", "status": "TODO", "checks": [] },
     { "id": "G6", "status": "TODO", "checks": [] },

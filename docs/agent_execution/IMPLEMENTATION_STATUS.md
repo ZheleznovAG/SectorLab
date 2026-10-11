@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W2.5**, следующий этап — **W3.1**.
+Последняя завершённая задача — **W3.1**, следующий этап — **W3.2**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -80,7 +80,7 @@ diff; другие настройки проекта не затронуты.
 | W0 / G0 | PASS: аудит/backup/регрессия/build и сохранение исходных правок выполнены | Следующий пакет W1; ручной плейтест и проверка APK на устройстве ещё впереди |
 | W1 / G1 | PASS | 45 очков/180 с/Draw, часы, pause/resume, остановка боя, result/restart; 29 EditMode + 43 PlayMode и Main Game View |
 | W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
-| W3 / G3 | TODO | Детерминированный AI за узлы, реальные полные партии |
+| W3 / G3 | IN_PROGRESS | Чистые приоритеты AI проверены; далее движение/атака и реальные партии |
 | W4 / G4 | TODO | Проверенный пакет VContainer, composition root служб матча |
 | W5 / G5 | TODO | Addressables + UniTask, ownership, отмена/ошибка, respawn 10 с, 10 рестартов |
 | W6 / G6 | TODO | Tap/drag/UI blocking, pan/pinch, HUD и safe area |
@@ -109,7 +109,7 @@ diff; другие настройки проекта не затронуты.
 | FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
 | FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
 | FR-013 | TODO | Смерть уничтожает юнита, respawn нет / W5 |
-| FR-014 | PARTIAL | Есть автоатака, тактического AI за узлы нет / W3 |
+| FR-014 | PARTIAL | EnemyDecisionRules проверены: defend/capture/repair/attack и stable ties; runtime интеграция — W3.2 |
 | FR-015 | PARTIAL | Есть силы/HP/result, нет очков/времени/узлов/respawn / W6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
 | FR-017 | TODO | Перезагрузка сцены есть; 10 restart и async ownership не проверены / W5 |
@@ -298,3 +298,12 @@ Main: HP после damage/capture **190**, после 3 с ремонта **208
 [жёлтый спорный C](evidence/W2-heal-contested.png) осмотрен. Сценарий использовал
 техническое размещение юнитов и обычную симуляцию, не человеческий плейтест.
 G2 закрыт. AI, respawn, мобильный HUD и итоговый APK ещё впереди.
+
+W2.5 зафиксирован в `b1f63f5`. W3.1 / FR-014: `EnemyDecisionRules` выбирает
+defend → capture scoring → repair при HP≤35% → attack interference.
+При безопасных очковых узлах и отсутствии помех можно захватить C или
+удерживать очковый узел. Стоимость назначения позволяет разделить роли;
+недостижимые цели исключены, равенство разрешается порядком A/B/C.
+Семь новых EditMode случаев, **53/53 PASS** ([лог](evidence/tests-W3.1-editmode.json)).
+Правила не изменяют скорость/HP/урон юнитов. Подключение к тикам и проверка
+боёв — следующая задача; G3 открыт.
