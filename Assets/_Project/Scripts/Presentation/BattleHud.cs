@@ -26,6 +26,8 @@ namespace SectorLab.Presentation
         private float nextRefresh;
         private RectTransform layoutRoot;
         private float shownHeight = -1;
+        private SafeAreaLayout safeLayout;
+        private Rect shownArea;
         private static readonly Color Blue = new Color(0.20f, 0.58f, 0.92f);
         private static readonly Color Red = new Color(0.92f, 0.34f, 0.29f);
         private static readonly Color Neutral = new Color(0.16f, 0.20f, 0.26f);
@@ -33,6 +35,7 @@ namespace SectorLab.Presentation
         private void Awake()
         {
             layoutRoot = GetComponent<RectTransform>();
+            safeLayout = GetComponentInParent<SafeAreaLayout>();
             for (int i = 0; i < 3; i++)
             {
                 int role = i;
@@ -47,11 +50,17 @@ namespace SectorLab.Presentation
         private void LateUpdate()
         {
             float height = layoutRoot.rect.height;
-            if (height <= 0 || Mathf.Approximately(height, shownHeight)) return;
+            Rect area = safeLayout != null ? safeLayout.NormalizedArea : new Rect(0, 0, 1, 1);
+            if (height <= 0 || (Mathf.Approximately(height, shownHeight) && area == shownArea)) return;
             shownHeight = height;
+            shownArea = area;
             // Keep the arena between the 225-unit header and the 175-unit squad panel.
-            worldCamera.rect = new Rect(0, 191 / height, 1, Mathf.Max(0.1f, 1 - 432 / height));
+            worldCamera.rect = ArenaViewport(area, height);
         }
+
+        public static Rect ArenaViewport(Rect safeArea, float layoutHeight) =>
+            new Rect(safeArea.x, safeArea.y + safeArea.height * 191 / layoutHeight,
+                safeArea.width, safeArea.height * Mathf.Max(0.1f, 1 - 432 / layoutHeight));
 
         private UnitSlotState PlayerSlot(int role)
         {

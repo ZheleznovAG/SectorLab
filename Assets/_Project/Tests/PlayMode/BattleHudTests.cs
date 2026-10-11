@@ -97,6 +97,37 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator SafeAreaKeepsHudResultButtonsAndArenaInsideSimulatedNotchInsets()
+        {
+            var safe = hud.GetComponentInParent<SafeAreaLayout>();
+            Assert.That(safe, Is.Not.Null);
+            safe.enabled = false; // Simulate device insets without the next Screen.safeArea overwriting them.
+            Rect area = new Rect(80, 24, Screen.width - 140, Screen.height - 40);
+            safe.Apply(area, new Vector2(Screen.width, Screen.height));
+            Canvas.ForceUpdateCanvases();
+            yield return null;
+            var result = Object.FindFirstObjectByType<BattleResultView>();
+            result.ShowLoadError(() => { }, () => { });
+            Canvas.ForceUpdateCanvases();
+            Vector3[] corners = new Vector3[4];
+            foreach (Button button in safe.GetComponentsInChildren<Button>(true))
+            {
+                button.GetComponent<RectTransform>().GetWorldCorners(corners);
+                foreach (Vector3 corner in corners)
+                {
+                    Vector2 screen = RectTransformUtility.WorldToScreenPoint(null, corner);
+                    Assert.That(screen.x, Is.InRange(area.xMin - 1, area.xMax + 1), button.name);
+                    Assert.That(screen.y, Is.InRange(area.yMin - 1, area.yMax + 1), button.name);
+                }
+            }
+            Rect viewport = Camera.main.pixelRect;
+            Assert.That(viewport.xMin, Is.EqualTo(area.xMin).Within(1));
+            Assert.That(viewport.xMax, Is.EqualTo(area.xMax).Within(1));
+            Assert.That(viewport.yMin, Is.GreaterThan(area.yMin));
+            Assert.That(viewport.yMax, Is.LessThan(area.yMax));
+        }
+
+        [UnityTest]
         public IEnumerator HudBlocksWorldTapAndArenaViewportStaysBetweenPanels()
         {
             Canvas.ForceUpdateCanvases();

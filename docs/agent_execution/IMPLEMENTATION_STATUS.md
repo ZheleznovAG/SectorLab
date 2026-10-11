@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W6.3**, следующий этап — **W6.4**.
+Последняя завершённая задача — **W6.4**, следующий этап — **W6.5**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -121,7 +121,7 @@ diff; другие настройки проекта не затронуты.
 | FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
 | FR-026 | TODO | Метрики баланса не реализованы; SHOULD / W7 |
 | FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
-| FR-028 | NOT_RUN | Три формата будущего HUD не проверены / W6 |
+| FR-028 | PASS | Настоящий Game View 1280×720 / 1600×720 / 1024×768, снимки W6.4 и simulated safe insets, 104 PlayMode |
 | NFR-001 | BASELINE_PASS | Unity Editor соответствует 6000.6.4f1 |
 | NFR-002 | NOT_RUN | Чистый checkout не запускался / W8 |
 | NFR-003 | PARTIAL | Компиляция и текущие тесты проходят; полная v1.0 ещё отсутствует |
@@ -566,3 +566,20 @@ Hud.Awake читал Relay.State до Relay.Awake. Первое обновлен
 Ready, pause=True, выбран Tank. PNG 1280×720 — масштабированный кадр Game View
 861×471; это ещё не доказательство трёх форматов FR-028. Safe area/форматы — W6.4. ADB снова видит Android; пользователь разрешил запуск/перезапуск игры
 для тестов. Новые мобильные проверки будут использовать обновлённый APK.
+
+W6.3 зафиксирован в `cabf1ee`. W6.4 / FR-028: один SafeAreaLayout применяет
+Screen.safeArea к родителю HUD/result; камера использует тот же нормализованный
+прямоугольник и исключает панели. Editor-only GameViewVerification выбирает
+настоящий fixed render size, затем размер проверяется через Screen.
+[16:9](evidence/W6.4-16x9.png), [20:9](evidence/W6.4-20x9.png), [4:3](evidence/W6.4-4x3.png)
+просмотрены; [наблюдения](evidence/W6.4-layout-observations.txt) подтверждают
+1280×720, 1600×720 и 1024×768. Проверка углов всех HUD/result buttons прошла.
+**104/104 PlayMode PASS** ([JSON](evidence/tests-W6.4-playmode.json)): simulated
+notch/system insets также удерживают HUD, Retry/Exit и camera внутри safe area.
+
+Первоначальные снимки сохранены с attempt1: при смене aspect частичный camera
+viewport оставлял старые UI/world pixels в полях. BackdropCamera без геометрии
+(cullingMask=0, depth=-100, full viewport) очищает весь кадр до world camera.
+Повторные снимки проверены после исправления, артефакт устранён. Это маленькая
+дополнительная камера очистки, без AudioListener/DI/async; AR/другие рендереры
+не вводились. Native Android safe insets проверяются обновлённым APK после W6.5.
