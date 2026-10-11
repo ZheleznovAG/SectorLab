@@ -1787,6 +1787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 565683275}
   - component: {fileID: 565683276}
+  - component: {fileID: 565683277}
   m_Layer: 0
   m_Name: SafeArea
   m_TagString: Untagged
@@ -1827,6 +1828,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140b0295498169b44b49aeeb305aa5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SectorLab::SectorLab.Presentation.SafeAreaLayout
+--- !u!114 &565683277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565683274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d50e6a696614049a9275b219955180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SectorLab::SectorLab.Presentation.AndroidSystemBars
 --- !u!1 &566043749
 GameObject:
   m_ObjectHideFlags: 0

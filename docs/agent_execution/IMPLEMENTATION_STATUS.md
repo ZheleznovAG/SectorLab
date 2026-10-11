@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W6.5**, следующий этап — проверка G6 APK и **W7.1**.
+Последняя завершённая задача — **W6.4b / G6 PASS**, следующий этап — **W7.1**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -82,8 +82,8 @@ diff; другие настройки проекта не затронуты.
 | W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
 | W3 / G3 | PASS | AI и четыре настоящие партии Main; 53 EditMode + 67 PlayMode, проигрыш и выигрыш зафиксированы |
 | W4 / G4 | PASS | VContainer 1.19.0, настоящий scope Clock/State/Battle/AI; 72/72 PlayMode, missing injection и reload |
-| W5 / G5 | IN_PROGRESS | Addressables установлен; далее UniTask, local content, ownership, respawn/отмена/ошибки |
-| W6 / G6 | TODO | Tap/drag/UI blocking, pan/pinch, HUD и safe area |
+| W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
+| W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
 | W7 / G7 | TODO | Звук/mute, обратная связь и плейтесты |
 | W8 / G8 | TODO | Финальная регрессия, локальный content+APK, Android/профилирование |
 | W9 / G9 | TODO | Финальный README, ADR, лицензии, evidence и учебная карта |
@@ -101,7 +101,7 @@ diff; другие настройки проекта не затронуты.
 | FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
 | FR-004 | BASELINE_PASS | Click и virtual Touchscreen выбирают/двигают юнита / W6 |
 | FR-005 | BASELINE_PASS | Атака/дальность/LOS/погоня проверены текущей регрессией |
-| FR-006 | TODO | Камера неподвижна, tap обрабатывается на press, UI blocking нет / W6 |
+| FR-006 | PASS | Release tap/drag/pinch/cancel/UI tests, bounded camera; пользователь подтвердил swipe/pinch на телефоне W6-G6 |
 | FR-007 | PASS | A/B Score и C Repair с отдельными RelayConfig в Main; 18/18 NavMesh approaches доступны |
 | FR-008 | PASS | RelayState и RelayPoint: 5/10 с, contest, пустой прогресс, смерть, пауза/finish, цвет/проценты проверены |
 | FR-009 | PASS | A/B дают 1 очко/с каждый; пустое владение, contest/neutralize/pause, порог в одном тике проверены |
@@ -123,7 +123,7 @@ diff; другие настройки проекта не затронуты.
 | FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
 | FR-026 | TODO | Метрики баланса не реализованы; SHOULD / W7 |
 | FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
-| FR-028 | PASS | Настоящий Game View 1280×720 / 1600×720 / 1024×768, снимки W6.4 и simulated safe insets, 104 PlayMode |
+| FR-028 | PASS | Настоящий Game View 3 форматов; simulated safe insets и Android Insets API: HUD целиком виден на телефоне, включая возврат фокуса |
 | NFR-001 | BASELINE_PASS | Unity Editor соответствует 6000.6.4f1 |
 | NFR-002 | NOT_RUN | Чистый checkout не запускался / W8 |
 | NFR-003 | PARTIAL | Компиляция и текущие тесты проходят; полная v1.0 ещё отсутствует |
@@ -640,3 +640,26 @@ G6 остаётся IN_PROGRESS: системная Android navigation bar ви�
 правые поля HUD. Три Editor aspect проходят, но native insets требуют отдельного
 исправления W6.4b до PASS. Нативный AssetPackManager probe и URP shader notices
 по-прежнему присутствуют в [raw log](evidence/W6-G6-device-log.txt); gameplay/Restart работают.
+
+W6.4b / G6: AndroidSystemBars использует существующий Unity AndroidWindowInsets API
+на старте и при возврате фокуса; системные панели можно временно показать свайпом.
+HUD продолжает применять настоящий Screen.safeArea. Main изменён на 13 YAML-строк,
+добавлен только компонент к прежнему SafeArea; арена и существующие GUID сохранены.
+Первый Player build остановлен CS1069: встроенный Android JNI module отсутствовал.
+[Ошибки](evidence/W6.4b-attempt1-player-errors.json) и [FAIL build](evidence/android-build-W6-G6-insets.json)
+сохранены. Через Package Manager установлен com.unity.modules.androidjni 1.0.0.
+
+**107/107 PlayMode PASS** ([JSON](evidence/tests-W6.4b-playmode.json)),
+**63/63 EditMode PASS после подключения JNI** ([JSON](evidence/tests-W6.4b-final-editmode.json)).
+[Повторный APK](evidence/android-build-W6-G6-insets-retry.json): Succeeded,
+99,815 с, 0 errors, 1 Pipeline-config warning; 32 542 757 байт,
+SHA-256 71C87D0EDE75057098440C712F4E2AF0721B697643F70E66FB0B983DEA556C55.
+Input System build preload возвращён к исходному [] и в Editor API, и на диске.
+
+[На телефоне](evidence/W6-G6-insets-device.png) HUD виден полностью; после Home и
+возврата [result](evidence/W6-G6-insets-focus-return.png) также без перекрывающей панели.
+[Player log](evidence/W6-G6-insets-device-log.txt) содержит реальные Screen/safeArea.
+[Наблюдение](evidence/W6-G6-insets-device.json) отделяет эти проверки от неподтверждённых:
+последующие тапы сделаны уже на Defeat overlay, поэтому не засчитываются как приказ.
+**G6 PASS**, FR-006/028 PASS. G7–G9 ещё впереди; native probe и URP notices остаются
+открытыми в W8, полная приёмка v1.0 не заявляется.

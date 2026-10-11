@@ -29,6 +29,7 @@ W6.2,W6,Camera pan/zoom bounds,W6.1,Editor/mobile gesture check,G6,TODO,PASS,evi
 W6.3,W6,Complete HUD time score relays respawn,W6.2,PlayMode HUD + screenshots,G6,TODO,PASS,evidence/tests-W6.3-playmode.json; evidence/W6.3-hud.png
 W6.4,W6,Safe area and layout checks,W6.3,16:9 20:9 4:3 screenshots,G6,TODO,PASS,evidence/tests-W6.4-playmode.json; evidence/W6.4-layout-observations.txt
 W6.5,W6,Minimal tutorial and pause controls,W6.4,Manual test,G6,TODO,PASS,evidence/tests-W6.5-playmode.json; evidence/W6.5-tutorial-1.png
+W6.4b,W6,Fix Android GameActivity navigation insets,W6.5,Actual APK HUD bounds and focus return,G6,TODO,PASS,evidence/W6-G6-insets-device.json
 W7.1,W7,Improve feedback and simple SFX,W6.5,Manual feedback check,G7,TODO,TODO,
 W7.2,W7,Run manual gameplay plans and balance,W7.1,Game observations and results,G7,TODO,TODO,
 W8.1,W8,Run full regression + build content APK,W7.2,Logs tied to final SHA,G8,TODO,TODO,
