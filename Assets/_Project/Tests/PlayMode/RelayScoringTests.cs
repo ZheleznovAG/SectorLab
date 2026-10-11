@@ -1,9 +1,11 @@
 using System.Reflection;
+using System.Collections;
 using NUnit.Framework;
 using SectorLab.Battle;
 using SectorLab.Objectives;
 using SectorLab.Units;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace SectorLab.Tests
 {
@@ -117,6 +119,35 @@ namespace SectorLab.Tests
             CreateUnit(Team.Player, a.transform.position);
             battle.AdvanceSimulation(20);
             Assert.That(battle.State.PlayerScore, Is.Zero);
+        }
+
+        [UnityTest]
+        public IEnumerator AlliedGroupStopsInsideRelayAndCanAutoDefend()
+        {
+            var allies = new[]
+            {
+                CreateUnit(Team.Player, new Vector3(0, 0, 2)),
+                CreateUnit(Team.Player, new Vector3(0, 0, 0)),
+                CreateUnit(Team.Player, new Vector3(0, 0, -2))
+            };
+            foreach (Unit unit in allies)
+            {
+                var attack = unit.gameObject.AddComponent<UnitAttack>();
+                typeof(UnitAttack).GetField("autoAcquireRange", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(attack, 2.5f);
+                Assert.That(a.TryGetApproachPoint(unit, out Vector3 point), Is.True);
+                Assert.That(unit.Movement.MoveTo(point, a.GetArrivalDistance(point)), Is.True);
+            }
+            float deadline = Time.realtimeSinceStartup + 6;
+            while ((allies[0].Movement.IsMoving || allies[1].Movement.IsMoving || allies[2].Movement.IsMoving) && Time.realtimeSinceStartup < deadline)
+                yield return null;
+            foreach (Unit unit in allies)
+            {
+                Assert.That(unit.Movement.IsMoving, Is.False);
+                Assert.That(a.Contains(unit), Is.True);
+            }
+            Unit enemy = CreateUnit(Team.Enemy, a.transform.position);
+            yield return new WaitForSecondsRealtime(1);
+            Assert.That(enemy == null || enemy.Health.Current < enemy.Health.Max, Is.True);
         }
     }
 }

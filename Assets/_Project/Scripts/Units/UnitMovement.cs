@@ -32,7 +32,7 @@ namespace SectorLab.Units
             Agent.speed = speed;
         }
 
-        public bool MoveTo(Vector3 point)
+        public bool MoveTo(Vector3 point, float stoppingDistance = 0f)
         {
             if (!Agent.isActiveAndEnabled || !Agent.isOnNavMesh)
             {
@@ -40,6 +40,7 @@ namespace SectorLab.Units
                 return false;
             }
 
+            Agent.stoppingDistance = Mathf.Max(arriveDistance, stoppingDistance);
             if (!Agent.SetDestination(point))
             {
                 Stop();
@@ -76,7 +77,7 @@ namespace SectorLab.Units
 
             // A partial path may end short of Destination; IsMoving describes the agent,
             // not a promise that the requested point is reachable.
-            if (!Agent.hasPath || Agent.pathStatus == NavMeshPathStatus.PathInvalid || Agent.remainingDistance <= arriveDistance)
+            if (!Agent.hasPath || Agent.pathStatus == NavMeshPathStatus.PathInvalid || Agent.remainingDistance <= Mathf.Max(arriveDistance, Agent.stoppingDistance))
                 Stop();
         }
     }

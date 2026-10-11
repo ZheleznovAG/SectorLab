@@ -142,7 +142,7 @@ namespace SectorLab.AI
                 // Keep an accepted unchanged path; do not send SetDestination every decision/frame.
                 unit.Attack?.ClearTarget();
                 if (unit.Movement.IsMoving && (unit.Movement.Destination - approaches[index]).sqrMagnitude < 0.01f) continue;
-                if (unit.Movement.MoveTo(approaches[index])) MoveOrdersIssued++;
+                if (unit.Movement.MoveTo(approaches[index], target.GetArrivalDistance(approaches[index]))) MoveOrdersIssued++;
             }
         }
 

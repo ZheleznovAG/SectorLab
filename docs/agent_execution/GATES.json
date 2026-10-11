@@ -20,7 +20,12 @@
       { "name": "Main repair/contest/pause", "status": "PASS", "evidence": "evidence/W2-heal-check.txt" },
       { "name": "Main contested repair visual", "status": "PASS", "evidence": "evidence/W2-heal-contested.png" }
     ] },
-    { "id": "G3", "status": "IN_PROGRESS", "checks": [] },
+    { "id": "G3", "status": "PASS", "checks": [
+      { "name": "Stable AI priorities", "status": "PASS", "evidence": "evidence/tests-W3.1-editmode.json" },
+      { "name": "Main matches, movement/combat and cleanup", "status": "PASS", "evidence": "evidence/tests-W3.3-playmode.json" },
+      { "name": "Four tactical plans and observed outcomes", "status": "PASS", "evidence": "evidence/W3-main-matches.csv" },
+      { "name": "Main actual AI match screenshot", "status": "PASS", "evidence": "evidence/W3-main-ai.png" }
+    ] },
     { "id": "G4", "status": "TODO", "checks": [] },
     { "id": "G5", "status": "TODO", "checks": [] },
     { "id": "G6", "status": "TODO", "checks": [] },
