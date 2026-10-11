@@ -194,6 +194,23 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator Damage_FlashesBodyBriefly()
+        {
+            Unit attacker = CreateUnit(Team.Player, Vector3.zero);
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(1f, 0f, 0f));
+            enemy.gameObject.AddComponent<MeshRenderer>();
+            var flash = enemy.gameObject.AddComponent<DamageFlash>();
+            yield return null;
+
+            attacker.Attack.SetTarget(enemy);
+            yield return null;
+            Assert.That(flash.IsFlashing, Is.True);
+
+            yield return new WaitForSeconds(0.2f);
+            Assert.That(flash.IsFlashing, Is.False);
+        }
+
+        [UnityTest]
         public IEnumerator KilledTarget_IsDestroyedAndCleared()
         {
             Unit attacker = CreateUnit(Team.Player, Vector3.zero);
