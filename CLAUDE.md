@@ -21,8 +21,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - URP 17 с двумя наборами ассетов в `Assets/Settings/`: `PC_RPAsset`/`PC_Renderer` и `Mobile_RPAsset`/`Mobile_Renderer`. Целевая платформа — Android, 3D top-down.
 - Input System (`com.unity.inputsystem`), действия по умолчанию — `Assets/InputSystem_Actions.inputactions`.
 - `com.unity.pipeline` (экспериментальный) — мост между Unity CLI и открытым редактором (`unity list` / `unity command`). Не удалять как «мусор шаблона».
-- Пакет **Unity Test Framework не подключён** — тестов и тестовых сборок пока нет.
-- Собственного C#-кода пока нет. Свои ассеты — в `Assets/_Project/` (`Scenes/`, `Materials/`); единственная сцена — `Assets/_Project/Scenes/Main.unity` (она же единственная в Build Settings). В сцене: камера, свет, `Arena` → `Ground`/`Walls`/`Obstacles`. Фактический статус этапов — `docs/00_CONTEXT_STATUS.md`. Шаблонные `SampleScene`/`TutorialInfo` удалены. `*.csproj`/`SectorLab.slnx` генерируются Unity и не коммитятся.
+- Unity Test Framework 1.8.0. Тесты: `Assets/_Project/Tests/EditMode` (чистые правила: `Health`, `BattleRules`) и `Tests/PlayMode` (движение, атака, команды касанием, исход партии). PlayMode-тесты ввода используют `InputTestFixture`, поэтому в `manifest.json` есть `"testables": ["com.unity.inputsystem"]`.
+- Код — одна сборка `SectorLab` (`Assets/_Project/Scripts/SectorLab.asmdef`): `Units/` (`Unit` — точка входа юнита: команда, `Health`, выделение, реестр `Unit.All`; `UnitMovement` — прямолинейный `MoveTowards`; `UnitAttack` — сближение, удар по кулдауну, автоцель для стоящих юнитов; `HealthBar`), `Player/UnitCommander` (луч от `Pointer` — мышь и касание одним кодом: свой юнит → выбрать, враг → атаковать, слой `Ground` → идти), `Battle/` (`BattleRules` — чистая функция исхода, `BattleController`, `BattleResultView` на legacy `UI.Text`). Слои: 8 `Ground`, 9 `Units`.
+- Ассеты — в `Assets/_Project/` (`Scenes/`, `Materials/`, `Prefabs/` — `Unit` и вариант `Enemy`); единственная сцена — `Assets/_Project/Scenes/Main.unity` (она же единственная в Build Settings). В сцене: камера, свет, `Arena`, `Units` (3 на 3), `UnitCommander`, `DestinationMarker`, `Battle`, `HUD`, `EventSystem`. Фактический статус этапов — `docs/00_CONTEXT_STATUS.md`. Шаблонные `SampleScene`/`TutorialInfo` удалены. `*.csproj`/`SectorLab.slnx` генерируются Unity и не коммитятся.
 - Активная платформа — Android через Build Profile `Assets/Settings/Build Profiles/Android.asset` (ничего не переопределяет). Активная платформа хранится в `Library/`, поэтому свежий клон откроется под Windows, пока профиль не активирован.
 - `Assets/Settings/SampleSceneProfile.asset` не удалять, несмотря на имя: на него ссылаются `PC_RPAsset` и `Mobile_RPAsset`.
 
@@ -34,8 +35,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 unity doctor                                   # диагностика окружения CLI/Hub/редакторов
 unity open                                     # открыть проект нужной версией редактора
 unity run                                      # batch mode (редактор с проектом должен быть закрыт) — проверка компиляции
-unity test --mode EditMode                     # тесты (после подключения Unity Test Framework)
-unity test --mode EditMode --filter <Имя>      # один тест / подмножество
+unity test --mode EditMode                     # тесты (не прогонялось: редактор обычно открыт — см. run_tests ниже)
 unity build --profile <Имя> -o Builds/<путь>   # сборка по Build Profile из Assets/Settings/Build Profiles
 unity list                                     # команды открытого редактора (через com.unity.pipeline)
 
@@ -59,6 +59,9 @@ git diff --stat
 - Изменения `PlayerSettings` через `eval` не попадают на диск даже после «Save Project»: пометить `EditorUtility.SetDirty` на `Resources.FindObjectsOfTypeAll<PlayerSettings>()`, затем `AssetDatabase.SaveAssets()`.
 - Скриншот, удалённый из `Assets/` до импорта, даёт в консоли предупреждение `Build asset version error` — безвредно, `clear_console`.
 - Сборка (`build` + опрос `build_status`) дописывает в `Mobile_RPAsset`, `UniversalRenderPipelineGlobalSettings`, `GraphicsSettings` служебные данные — это нормально, их коммитят.
+- Тесты при открытом редакторе: `run_tests --mode editmode|playmode --async_tests true --filter_type assembly --filter SectorLab.Tests.EditMode|SectorLab.Tests.PlayMode`, затем опрашивать `test_status` до `"status":"completed"`. Синхронный PlayMode-запуск обрывается доменной перезагрузкой.
+- `eval`/`eval_file` игнорируют `using` (писать полные имена типов), и в конце кода не должно быть своего `return` ("Unreachable code"). Play-режим проверять так: `editor_play` → `eval` с `UnitCommander.HandleTap(Camera.main.WorldToScreenPoint(...))` → `capture_game_view` → `editor_stop`.
+- После Android-сборки Input System оставляет в `ProjectSettings.asset` запись `preloadedAssets` (GUID `052faaac…`, `InputSystem_Actions`) — это артефакт сборки, не коммитить: `git restore ProjectSettings/ProjectSettings.asset`.
 - `delete_asset` разрешён правилом в `.claude/settings.local.json` только при прямом вызове `unity command [--no-banner] delete_asset …` (не через обёртки и `&&`).
 
 ## Git-специфика
