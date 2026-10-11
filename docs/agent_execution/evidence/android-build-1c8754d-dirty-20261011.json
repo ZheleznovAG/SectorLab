@@ -1,0 +1,24 @@
+{
+  "sourceHead": "1c8754d8cca20bb342c6770c0985b4f14be27fa3",
+  "sourceState": "HEAD plus six existing dirty C# files; see EVIDENCE_REPORT.md",
+  "command": "unity command --json --no-banner build --target Android --outputPath Builds/Android/SectorLab-baseline-1c8754d-20261011.apk --confirm true",
+  "statusCommand": "unity command --json --no-banner build_status",
+  "status": "completed",
+  "result": "Succeeded",
+  "buildId": "build_83152310176c",
+  "buildStartedAt": "2026-10-11T14:19:24.5374072Z",
+  "buildEndedAt": "2026-10-11T14:19:55.8649787Z",
+  "buildTimeMs": 31327,
+  "totalErrors": 0,
+  "totalWarnings": 1,
+  "warnings": [
+    "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds."
+  ],
+  "apkPath": "Builds/Android/SectorLab-baseline-1c8754d-20261011.apk",
+  "apkBytes": 29253015,
+  "apkSha256": "2CD754E692E3840E698FC390946EACC48E3729C8837637B3FFC17D73923ED011",
+  "apkFileLastWriteTime": "2026-10-11T16:39:35.6839922+07:00",
+  "incrementalBuild": true,
+  "note": "The incremental build copied the unchanged prior output and retained its file timestamp. BuildReport timestamps identify the current execution. This is a baseline build, not v1.0. No installation or device playtest was performed.",
+  "fullBuildReportLocalPath": "[LOCAL_USER_HOME]/AppData/Local/Temp/SectorLab-baseline-20261011-211433/build-status.json"
+}

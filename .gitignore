@@ -115,3 +115,7 @@ InitTestScene*.unity*
 
 # Claude Code personal settings
 .claude/settings.local.json
+
+# Local project handoff snapshots (may include .git and machine-local configuration)
+/SectorLab-for-ai-*.zip
+/SectorLab-with-git-*.zip

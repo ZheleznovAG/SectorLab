@@ -1,0 +1,295 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 8.38,
+      "summary": {
+        "total": 38,
+        "passed": 38,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "SectorLab.Tests.BattleControllerTests.CountsLivingUnitsPerSide",
+          "Status": "Passed",
+          "Duration": 0.0606789,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.BattleControllerTests.LastEnemyDies_Victory",
+          "Status": "Passed",
+          "Duration": 0.0464372,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.BattleControllerTests.LastPlayerUnitDies_Defeat",
+          "Status": "Passed",
+          "Duration": 0.0371713,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.Cooldown_LimitsHitsPerSecond",
+          "Status": "Passed",
+          "Duration": 0.0488925,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.Damage_FlashesBodyBriefly",
+          "Status": "Passed",
+          "Duration": 0.2537108,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.IdleRangedUnit_AcquiresAnythingWithinWeaponRange",
+          "Status": "Passed",
+          "Duration": 0.0310918,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.IdleUnit_AcquiresNearestHostileInRange",
+          "Status": "Passed",
+          "Duration": 0.0234096,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.IdleUnit_IgnoresHostilesOutsideRange",
+          "Status": "Passed",
+          "Duration": 0.0236125,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.KilledTarget_IsDestroyedAndCleared",
+          "Status": "Passed",
+          "Duration": 0.0308756,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.MovingUnit_DoesNotAcquireTargets",
+          "Status": "Passed",
+          "Duration": 0.022663,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.RangedUnit_HitsFromDistanceWithoutMoving",
+          "Status": "Passed",
+          "Duration": 0.0225869,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.SetTarget_IgnoresAllies",
+          "Status": "Passed",
+          "Duration": 0.0025262,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.Stats_AreAppliedToHealthMovementAndAttack",
+          "Status": "Passed",
+          "Duration": 0.0023298,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_AttackerWalksAroundAndHits",
+          "Status": "Passed",
+          "Duration": 0.8533252,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved",
+          "Status": "Passed",
+          "Duration": 0.0325907,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.TargetInRange_TakesDamageRightAway",
+          "Status": "Passed",
+          "Duration": 0.0224101,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.TargetOutOfRange_AttackerWalksUpToIt",
+          "Status": "Passed",
+          "Duration": 1.2400823,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.UnreachableTarget_AfterOpeningPathIsAttacked",
+          "Status": "Passed",
+          "Duration": 2.7579704,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitAttackTests.UnreachableTarget_DoesNotRestartMovementEveryFrame",
+          "Status": "Passed",
+          "Duration": 0.3561778,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.NearMissTap_DoesNotSelectOccludedUnit",
+          "Status": "Passed",
+          "Duration": 0.0102471,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.NearMissTap_SelectsClosestUnit",
+          "Status": "Passed",
+          "Duration": 0.0095453,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.RejectedMoveOrder_PreservesAttackAndHidesMarker",
+          "Status": "Passed",
+          "Duration": 0.0100227,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnEnemy_OrdersSelectedUnitToAttack",
+          "Status": "Passed",
+          "Duration": 0.0094439,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnEnemy_WithoutSelection_DoesNotSelectIt",
+          "Status": "Passed",
+          "Duration": 0.009607,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnGround_CancelsAttack",
+          "Status": "Passed",
+          "Duration": 0.0096671,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnGround_SendsSelectedUnitAndShowsMarker",
+          "Status": "Passed",
+          "Duration": 0.0099433,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnGround_WithoutSelection_DoesNothing",
+          "Status": "Passed",
+          "Duration": 0.0094837,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnObstacle_IsIgnored",
+          "Status": "Passed",
+          "Duration": 0.0095899,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOnUnit_SelectsIt",
+          "Status": "Passed",
+          "Duration": 0.0096906,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.TapOutsideTolerance_DoesNotSelect",
+          "Status": "Passed",
+          "Duration": 0.0096795,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitCommanderTests.Touch_SelectsAndMovesUnit",
+          "Status": "Passed",
+          "Duration": 0.448184,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.DisabledAgent_MoveToClearsMovingState",
+          "Status": "Passed",
+          "Duration": 0.0313757,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.DisabledAgent_WithoutNewOrderClearsMovingState",
+          "Status": "Passed",
+          "Duration": 0.0303133,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.MoveTo_GetsCloserEachFrame",
+          "Status": "Passed",
+          "Duration": 0.0331893,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.MoveTo_PlansPathAroundObstacle",
+          "Status": "Passed",
+          "Duration": 0.020613,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.MoveTo_StopsAtDestination",
+          "Status": "Passed",
+          "Duration": 1.0307264,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.Stop_HaltsMovement",
+          "Status": "Passed",
+          "Duration": 0.0328163,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.UnitMovementTests.UnreachableDestination_StopsAtEndOfPartialPath",
+          "Status": "Passed",
+          "Duration": 0.6961135,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "[LOCAL_USER_HOME]\\Projects\\SectorLab"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}
