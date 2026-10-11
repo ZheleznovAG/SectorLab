@@ -1,0 +1,92 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 0.34,
+      "summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "SectorLab.Tests.BattleRulesTests.Evaluate(3,2,InProgress)",
+          "Status": "Passed",
+          "Duration": 0.0003077,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.BattleRulesTests.Evaluate(1,0,Victory)",
+          "Status": "Passed",
+          "Duration": 0.0002567,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.BattleRulesTests.Evaluate(0,2,Defeat)",
+          "Status": "Passed",
+          "Duration": 0.0002902,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.BattleRulesTests.Evaluate(0,0,Defeat)",
+          "Status": "Passed",
+          "Duration": 0.0002402,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.HealthTests.NewHealth_IsFull",
+          "Status": "Passed",
+          "Duration": 0.0001764,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.HealthTests.NonPositiveMax_Throws",
+          "Status": "Passed",
+          "Duration": 0.000204,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.HealthTests.Overkill_ClampsToZeroAndDiesOnce",
+          "Status": "Passed",
+          "Duration": 0.0001755,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.HealthTests.TakeDamage_IgnoresZeroAndNegative",
+          "Status": "Passed",
+          "Duration": 0.0001796,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "SectorLab.Tests.HealthTests.TakeDamage_ReducesCurrentAndNotifies",
+          "Status": "Passed",
+          "Duration": 0.0001962,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "[LOCAL_USER_HOME]\\Projects\\SectorLab"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}
