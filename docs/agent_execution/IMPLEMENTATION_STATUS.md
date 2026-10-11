@@ -108,7 +108,7 @@ diff; другие настройки проекта не затронуты.
 | FR-010 | PASS | Health.Heal и C: 6 HP/с обеим сторонам, Max, fractional buffer, смерть/уход/contest/pause/finish проверены |
 | FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
 | FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
-| FR-013 | TODO | Смерть уничтожает юнита, respawn нет / W5 |
+| FR-013 | PARTIAL | RespawnTimer 10 игровых с и UnitRoster проверены; жизненный цикл Main подключается в W5.5 |
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
 | FR-015 | PARTIAL | Есть силы/HP/result, нет очков/времени/узлов/respawn / W6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
@@ -451,3 +451,11 @@ Provider теперь сначала выполняет LoadResourceLocationsAsy
 даёт обычную понятную ошибку без InvalidKeyException logger, lookup handle
 освобождается в finally. Счётчики учитывают оба вида operations. Повторный
 прогон без неожиданных логов прошёл; стабильность Editor проверяется далее.
+
+W5.4 зафиксирован в `1395333`. W5.5a / FR-003/013: чистый RespawnTimer
+получает только принятый MatchClock delta, хранит 10 с и не сбрасывается от
+повторного death notification. UnitRoster проверяет ровно по одному Tank/Scout/Ranger
+каждой команды; данные asset не хранят runtime countdown/unit references.
+**63/63 EditMode PASS** ([лог](evidence/tests-W5.5a-editmode.json)): countdown,
+pause/finish, 15/30/60/144 FPS, invalid delta и неверный roster.
+Это первый небольшой коммит W5.5; старт/возрождение Main ещё не подключены.
