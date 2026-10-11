@@ -7,8 +7,18 @@ $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
 
 function Invoke-Editor([string[]] $Arguments) {
-    $raw = & unity command --json --no-banner @Arguments
-    if ($LASTEXITCODE -ne 0) { throw ('Unity CLI failed: ' + ($Arguments -join ' ')) }
+    $connectionTimer = [Diagnostics.Stopwatch]::StartNew()
+    do {
+        $raw = & unity command --json --no-banner --timeout 15 @Arguments
+        $commandExit = $LASTEXITCODE
+        if ($commandExit -eq 0) { break }
+        # A domain reload temporarily removes the Pipeline endpoint. Retry only read-only polling.
+        if ($Arguments[0] -notin @('console_status', 'test_status') -or $connectionTimer.Elapsed.TotalSeconds -gt 60) {
+            throw ('Unity CLI failed: ' + ($Arguments -join ' ') + "`n" + ($raw -join "`n"))
+        }
+        Write-Output ('Waiting for Unity polling endpoint after domain reload: ' + $Arguments[0]) | Out-Host
+        Start-Sleep -Seconds 2
+    } while ($true)
     $response = ($raw -join "`n") | ConvertFrom-Json
     if (-not $response.success -or -not $response.data.success) { throw ($raw -join "`n") }
     return $response
