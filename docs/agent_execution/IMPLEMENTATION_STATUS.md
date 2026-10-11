@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.6 / G5**, следующий этап — **W6.1**.
+Последняя завершённая задача — **W6.1**, следующий этап — **W6.2**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -521,9 +521,13 @@ ZIP manifest подтверждает localunits/monoscripts bundles, catalog/se
 сохраняет входные hashes, фактический BuildReport и APK content hashes и
 не заменяет уже существующий APK. Полный BuildReport остаётся в игнорируемом Temp.
 
-Unity автоматически добавил существующий InputSystem_Actions.inputactions
+Unity временно добавил существующий InputSystem_Actions.inputactions
 GUID `052faaac586de48259a63d0c4782560b` в preloadedAssets при Player build.
-Это сохранено как явная настройка project-wide input; иных изменений PlayerSettings нет.
+После Editor/test reload пакет вернул список к исходному пустому состоянию.
+Исходник установленного Input System (ProjectWideActionsBuildProvider /
+BuildProviderHelpers.PostProcessSinglePreloadedAsset) подтверждает временную
+preload/cleanup модель. Временная запись попала в d6532d7; теперь возвращена
+к штатному исходному значению. Иных изменений PlayerSettings нет.
 APK успешно установлен через `adb install -r`, активен на Redmi Note 8 Pro:
 [наблюдение](evidence/W5-G5-device.json), [сцена](evidence/W5-G5-device-main.png),
 [второй кадр](evidence/W5-G5-device-observation2.png), [лог](evidence/W5-G5-device-log.txt).
@@ -536,3 +540,21 @@ URP сообщает об unsupported/stripped неиспользуемых post
 Это pilot APK с версией baseline 0.1.0, не финальный v1.0. Offline и performance
 не приняты. Пользователь подключил телефон; прежний BLOCKED_DEVICE снят для
 дальнейших доступных проверок. Следующий milestone — input/camera/HUD W6.
+
+G5 зафиксирован в `d6532d7`. W6.1 / FR-006: UnitCommander обрабатывает release,
+drag с порогом 3 мм, pinch и cancel. Drag не превращается в tap после возврата
+к началу; после второго пальца тап подавлен до полного release. Gesture,
+начатый над UI, не даёт world orders/pan/zoom. EventSystem.RaycastAll использует
+свежую позицию, не результат предыдущего UI Update. Mouse wheel/UI raycast
+обрабатываются только при реальном wheel input; idle mouse не вызывает raycast.
+PanRequested/ZoomRequested пока ждут потребителя камеры W6.2.
+
+**93/93 PlayMode PASS** ([лог](evidence/tests-W6.1-playmode.json)): virtual
+touch/mouse release, drag, pinch, cancel, UI; прежние Main/respawn/restart
+regressions также прошли ([партии](evidence/W6.1-main-matches.csv),
+[restarts](evidence/W6.1-main-restarts.csv)). Первый прогон — 92/93:
+UI fixture проверял GraphicRaycaster до Canvas registration/layout первого
+кадра. Добавлен реальный кадр перед проверкой; [FAIL](evidence/tests-W6.1-attempt1-playmode.json)
+и [предыдущие партии](evidence/W6.1-attempt1-main-matches.csv)/
+[restarts](evidence/W6.1-attempt1-main-restarts.csv) сохранены.
+FR-006 остаётся PARTIAL до камеры и проверки обновлённого Player на телефоне.

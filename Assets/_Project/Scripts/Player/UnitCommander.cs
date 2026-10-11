@@ -2,6 +2,8 @@ using SectorLab.Units;
 using SectorLab.Objectives;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace SectorLab.Player
 {
@@ -22,6 +24,15 @@ namespace SectorLab.Player
         private const float FallbackDpi = 160f;
 
         public Unit Selected { get; private set; }
+        public event System.Action<Vector2, Vector2> PanRequested;
+        public event System.Action<float> ZoomRequested;
+        private Vector2 pressPosition, previousPosition;
+        private bool tracking, dragging, beganOverUi, suppressUntilReleased;
+        private float pinchDistance;
+        private bool pinchBeganOverUi;
+        private PointerEventData uiPointer;
+        private EventSystem uiEvents;
+        private readonly List<RaycastResult> uiHits = new List<RaycastResult>(8);
 
         private void Awake()
         {
@@ -32,18 +43,107 @@ namespace SectorLab.Player
 
         private void Update()
         {
-            Pointer pointer = Pointer.current;
-            if (pointer != null && pointer.press.wasPressedThisFrame)
-                HandleTap(pointer.position.ReadValue());
+            ReadGestures();
 
             // The marker only makes sense while the selected unit is still on its way.
             if (Selected == null || !Selected.Movement.IsMoving)
                 SetMarkerVisible(false);
         }
 
+        private void ReadGestures()
+        {
+            Touchscreen screen = Touchscreen.current;
+            int fingers = 0;
+            Vector2 first = default, second = default;
+            if (screen != null)
+            {
+                foreach (var touch in screen.touches)
+                {
+                    if (!touch.press.isPressed) continue;
+                    if (fingers == 0) first = touch.position.ReadValue();
+                    if (fingers == 1) second = touch.position.ReadValue();
+                    fingers++;
+                }
+            }
+            if (fingers >= 2)
+            {
+                if (!suppressUntilReleased) pinchBeganOverUi = beganOverUi || IsOverUi(first) || IsOverUi(second);
+                tracking = false;
+                suppressUntilReleased = true;
+                float distance = Vector2.Distance(first, second);
+                if (!pinchBeganOverUi && pinchDistance > 1 && distance > 1 && !IsOverUi(first) && !IsOverUi(second))
+                    ZoomRequested?.Invoke(pinchDistance / distance);
+                pinchDistance = distance;
+                return;
+            }
+            if (suppressUntilReleased)
+            {
+                if (fingers == 0) { suppressUntilReleased = false; pinchDistance = 0; }
+                return; // Lifting the second finger must not turn the first finger into a tap.
+            }
+            Pointer pointer = Pointer.current;
+            if (pointer == null) return;
+            if (pointer == screen && screen.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Canceled)
+            {
+                tracking = false;
+                return;
+            }
+            Vector2 position = pointer.position.ReadValue();
+            if (pointer.press.wasPressedThisFrame)
+            {
+                tracking = true;
+                dragging = false;
+                beganOverUi = IsOverUi(position);
+                pressPosition = previousPosition = position;
+            }
+            if (tracking)
+            {
+                float dpi = Screen.dpi > 0 ? Screen.dpi : FallbackDpi;
+                float threshold = 3f / 25.4f * dpi;
+                if ((position - pressPosition).sqrMagnitude > threshold * threshold) dragging = true;
+                if (dragging && !beganOverUi && !IsOverUi(position) && position != previousPosition)
+                    PanRequested?.Invoke(previousPosition, position);
+                previousPosition = position;
+                if (pointer.press.wasReleasedThisFrame)
+                {
+                    tracking = false;
+                    if (!dragging && !beganOverUi) HandleTap(position);
+                }
+            }
+            Mouse mouse = Mouse.current;
+            if (mouse != null)
+            {
+                float scroll = mouse.scroll.ReadValue().y;
+                if (scroll != 0 && !IsOverUi(mouse.position.ReadValue()))
+                    ZoomRequested?.Invoke(Mathf.Exp(Mathf.Clamp(-scroll * 0.0015f, -1, 1)));
+            }
+        }
+
+        private void OnDisable()
+        {
+            tracking = dragging = beganOverUi = suppressUntilReleased = pinchBeganOverUi = false;
+            pinchDistance = 0;
+        }
+
+        public bool IsOverUi(Vector2 position)
+        {
+            EventSystem events = EventSystem.current;
+            if (events == null) return false;
+            if (uiPointer == null || uiEvents != events)
+            {
+                uiEvents = events;
+                uiPointer = new PointerEventData(events);
+            }
+            uiPointer.Reset();
+            uiPointer.position = position;
+            uiHits.Clear();
+            events.RaycastAll(uiPointer, uiHits);
+            return uiHits.Count > 0;
+        }
+
         public void HandleTap(Vector2 screenPosition)
         {
-            if (!isActiveAndEnabled)
+            if (!isActiveAndEnabled || IsOverUi(screenPosition))
                 return;
             Ray ray = viewCamera.ScreenPointToRay(screenPosition);
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask);
