@@ -102,6 +102,9 @@ InitTestScene*.unity*
 /[Aa]ssets/AddressableAssetsData/*/*.bin*
 # The generated target directory contains only ignored content-state files.
 /[Aa]ssets/AddressableAssetsData/Android.meta
+# Preserved Editor crash backups, separate from the authoritative saved scenes.
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta
 
 # Visual Scripting auto-generated files
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db

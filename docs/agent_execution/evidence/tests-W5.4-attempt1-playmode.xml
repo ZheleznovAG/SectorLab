@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="79" result="Failed(Child)" total="79" passed="77" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-11 19:12:44Z" end-time="2026-10-11 19:13:49Z" duration="64,4337992">
+  <test-suite type="TestSuite" id="1105" name="SectorLab" fullname="SectorLab" runstate="Runnable" testcasecount="83" result="Failed" site="Child" start-time="2026-10-11 19:12:44Z" end-time="2026-10-11 19:13:49Z" duration="64.433799" total="79" passed="77" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1197" name="SectorLab.Tests.PlayMode.dll" fullname="[LOCAL_USER_HOME]/Projects/SectorLab/Library/ScriptAssemblies/SectorLab.Tests.PlayMode.dll" runstate="Runnable" testcasecount="79" result="Failed" site="Child" start-time="2026-10-11 19:12:44Z" end-time="2026-10-11 19:13:49Z" duration="64.386483" total="79" passed="77" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="38268" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1198" name="SectorLab" fullname="SectorLab" runstate="Runnable" testcasecount="79" result="Failed" site="Child" start-time="2026-10-11 19:12:44Z" end-time="2026-10-11 19:13:49Z" duration="64.371374" total="79" passed="77" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1199" name="Tests" fullname="SectorLab.Tests" runstate="Runnable" testcasecount="79" result="Failed" site="Child" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:13:49Z" duration="64.358055" total="79" passed="77" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1106" name="BattleControllerTests" fullname="SectorLab.Tests.BattleControllerTests" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.839515" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1108" name="CountsLivingUnitsPerSide" fullname="SectorLab.Tests.BattleControllerTests.CountsLivingUnitsPerSide" methodname="CountsLivingUnitsPerSide" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="351191838" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.199628" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1107" name="LastEnemyDies_DoesNotFinishRelayMatch" fullname="SectorLab.Tests.BattleControllerTests.LastEnemyDies_DoesNotFinishRelayMatch" methodname="LastEnemyDies_DoesNotFinishRelayMatch" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="2025683451" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.081336" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1109" name="LastPlayerUnitDies_DoesNotFinishRelayMatch" fullname="SectorLab.Tests.BattleControllerTests.LastPlayerUnitDies_DoesNotFinishRelayMatch" methodname="LastPlayerUnitDies_DoesNotFinishRelayMatch" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="1280997418" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.050210" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1114" name="PauseFreezesWorldClockAndInputAndResumeRestoresThem" fullname="SectorLab.Tests.BattleControllerTests.PauseFreezesWorldClockAndInputAndResumeRestoresThem" methodname="PauseFreezesWorldClockAndInputAndResumeRestoresThem" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="1742329221" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.382238" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1113" name="ScoreOutcomeFinishesOnceAndStopsCombat" fullname="SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.049979" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1110" name="ScoreOutcomeFinishesOnceAndStopsCombat(45,0,Victory)" fullname="SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(45,0,Victory)" methodname="ScoreOutcomeFinishesOnceAndStopsCombat" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="342977717" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.019483" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1111" name="ScoreOutcomeFinishesOnceAndStopsCombat(0,45,Defeat)" fullname="SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(0,45,Defeat)" methodname="ScoreOutcomeFinishesOnceAndStopsCombat" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="887360807" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.004312" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1112" name="ScoreOutcomeFinishesOnceAndStopsCombat(45,45,Draw)" fullname="SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(45,45,Draw)" methodname="ScoreOutcomeFinishesOnceAndStopsCombat" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="586558075" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.003140" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1115" name="TimeoutDrawAndSceneCleanupRestoreTimeScale" fullname="SectorLab.Tests.BattleControllerTests.TimeoutDrawAndSceneCleanupRestoreTimeScale" methodname="TimeoutDrawAndSceneCleanupRestoreTimeScale" classname="SectorLab.Tests.BattleControllerTests" runstate="Runnable" seed="295034656" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.004641" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1116" name="EnemyTacticsTests" fullname="SectorLab.Tests.EnemyTacticsTests" classname="SectorLab.Tests.EnemyTacticsTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:53Z" duration="7.264344" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1117" name="DecisionsUseGameSecondsAndUnchangedPathsAreNotSpam" fullname="SectorLab.Tests.EnemyTacticsTests.DecisionsUseGameSecondsAndUnchangedPathsAreNotSpam" methodname="DecisionsUseGameSecondsAndUnchangedPathsAreNotSpam" classname="SectorLab.Tests.EnemyTacticsTests" runstate="Runnable" seed="1271109874" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.024914" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1120" name="EnemyAttacksAPlayerBlockingItsRelay" fullname="SectorLab.Tests.EnemyTacticsTests.EnemyAttacksAPlayerBlockingItsRelay" methodname="EnemyAttacksAPlayerBlockingItsRelay" classname="SectorLab.Tests.EnemyTacticsTests" runstate="Runnable" seed="322705169" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:45Z" duration="0.073014" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1119" name="EnemyWalksAndCapturesUsingExistingNavMeshMovement" fullname="SectorLab.Tests.EnemyTacticsTests.EnemyWalksAndCapturesUsingExistingNavMeshMovement" methodname="EnemyWalksAndCapturesUsingExistingNavMeshMovement" classname="SectorLab.Tests.EnemyTacticsTests" runstate="Runnable" seed="1632414208" result="Passed" start-time="2026-10-11 19:12:45Z" end-time="2026-10-11 19:12:53Z" duration="7.137556" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1118" name="StableAssignmentsSpreadTwoUnitsAcrossScoringRelays" fullname="SectorLab.Tests.EnemyTacticsTests.StableAssignmentsSpreadTwoUnitsAcrossScoringRelays" methodname="StableAssignmentsSpreadTwoUnitsAcrossScoringRelays" classname="SectorLab.Tests.EnemyTacticsTests" runstate="Runnable" seed="203938679" result="Passed" start-time="2026-10-11 19:12:53Z" end-time="2026-10-11 19:12:53Z" duration="0.012047" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1121" name="MainMatchTests" fullname="SectorLab.Tests.MainMatchTests" classname="SectorLab.Tests.MainMatchTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-11 19:12:53Z" end-time="2026-10-11 19:13:36Z" duration="43.091977" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1122" name="FourMainMatchesUseDifferentPlansAndResetTheirState" fullname="SectorLab.Tests.MainMatchTests.FourMainMatchesUseDifferentPlansAndResetTheirState" methodname="FourMainMatchesUseDifferentPlansAndResetTheirState" classname="SectorLab.Tests.MainMatchTests" runstate="Runnable" seed="498733284" result="Passed" start-time="2026-10-11 19:12:53Z" end-time="2026-10-11 19:13:36Z" duration="43.079070" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Main plan passive finished Defeat
+Main plan split finished Defeat
+Main plan focus-A finished Defeat
+Main plan hold-A-then-flank-B finished Defeat
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1123" name="MatchScopeTests" fullname="SectorLab.Tests.MatchScopeTests" classname="SectorLab.Tests.MatchScopeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.106365" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1124" name="MatchUsesOneScopedStateAndClockAndANewSceneGetsNewInstances" fullname="SectorLab.Tests.MatchScopeTests.MatchUsesOneScopedStateAndClockAndANewSceneGetsNewInstances" methodname="MatchUsesOneScopedStateAndClockAndANewSceneGetsNewInstances" classname="SectorLab.Tests.MatchScopeTests" runstate="Runnable" seed="308383699" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.018654" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1125" name="MissingClockRegistrationFailsInsteadOfConstructingAHiddenClock" fullname="SectorLab.Tests.MatchScopeTests.MissingClockRegistrationFailsInsteadOfConstructingAHiddenClock" methodname="MissingClockRegistrationFailsInsteadOfConstructingAHiddenClock" classname="SectorLab.Tests.MatchScopeTests" runstate="Runnable" seed="1953660029" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.003344" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1126" name="MissingStateRegistrationFailsComponentInjection" fullname="SectorLab.Tests.MatchScopeTests.MissingStateRegistrationFailsComponentInjection" methodname="MissingStateRegistrationFailsComponentInjection" classname="SectorLab.Tests.MatchScopeTests" runstate="Runnable" seed="564602302" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.000952" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1127" name="UnwiredBattleReportsMissingInjectionAndDoesNotCreateFallbackState" fullname="SectorLab.Tests.MatchScopeTests.UnwiredBattleReportsMissingInjectionAndDoesNotCreateFallbackState" methodname="UnwiredBattleReportsMissingInjectionAndDoesNotCreateFallbackState" classname="SectorLab.Tests.MatchScopeTests" runstate="Runnable" seed="1398451383" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.035243" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[InvalidOperationException: MatchState was not injected. Main requires GameLifetimeScope.
+SectorLab.Battle.BattleController.Start () (at Assets/_Project/Scripts/Battle/BattleController.cs:38)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)
+
+]]></output>
+            </test-case>
+            <test-case id="1128" name="UnwiredEnemyReportsMissingInjection" fullname="SectorLab.Tests.MatchScopeTests.UnwiredEnemyReportsMissingInjection" methodname="UnwiredEnemyReportsMissingInjection" classname="SectorLab.Tests.MatchScopeTests" runstate="Runnable" seed="1164461595" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.033291" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[InvalidOperationException: Enemy tactics requires injected BattleController.
+SectorLab.AI.EnemyTacticsController.Start () (at Assets/_Project/Scripts/AI/EnemyTacticsController.cs:30)
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)
+
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1129" name="RelayPointTests" fullname="SectorLab.Tests.RelayPointTests" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.137744" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1133" name="ApproachRequiresReachablePointInsideRadius" fullname="SectorLab.Tests.RelayPointTests.ApproachRequiresReachablePointInsideRadius" methodname="ApproachRequiresReachablePointInsideRadius" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="1927953103" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.003480" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1130" name="CaptureRadiusIsHorizontalAndBothSidesContest" fullname="SectorLab.Tests.RelayPointTests.CaptureRadiusIsHorizontalAndBothSidesContest" methodname="CaptureRadiusIsHorizontalAndBothSidesContest" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="332137929" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.002969" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1131" name="DyingUnitLeavesOccupancyWithoutStaleTriggerState" fullname="SectorLab.Tests.RelayPointTests.DyingUnitLeavesOccupancyWithoutStaleTriggerState" methodname="DyingUnitLeavesOccupancyWithoutStaleTriggerState" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="180482147" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.043780" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1140" name="FullHealthDoesNotBankFutureHealingAndDeadUnitIsNotRepaired" fullname="SectorLab.Tests.RelayPointTests.FullHealthDoesNotBankFutureHealingAndDeadUnitIsNotRepaired" methodname="FullHealthDoesNotBankFutureHealingAndDeadUnitIsNotRepaired" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="837873945" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.003628" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1132" name="PauseAndFinishPreventCapture" fullname="SectorLab.Tests.RelayPointTests.PauseAndFinishPreventCapture" methodname="PauseAndFinishPreventCapture" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="2135830802" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.005396" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1138" name="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates" fullname="SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.046323" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1134" name="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(15,Player)" fullname="SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(15,Player)" methodname="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="703409777" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.003928" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1135" name="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(30,Enemy)" fullname="SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(30,Enemy)" methodname="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="740058691" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.003061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1136" name="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(60,Player)" fullname="SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(60,Player)" methodname="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="396122436" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.004316" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1137" name="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(144,Enemy)" fullname="SectorLab.Tests.RelayPointTests.RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(144,Enemy)" methodname="RepairAccumulatesSixHpPerSecondAtDifferentFrameRates" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="373734182" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.004984" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1139" name="RepairRequiresPresenceAndStopsDuringContestPauseAndFinish" fullname="SectorLab.Tests.RelayPointTests.RepairRequiresPresenceAndStopsDuringContestPauseAndFinish" methodname="RepairRequiresPresenceAndStopsDuringContestPauseAndFinish" classname="SectorLab.Tests.RelayPointTests" runstate="Runnable" seed="252844743" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:36Z" duration="0.008384" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1141" name="RelayScoringTests" fullname="SectorLab.Tests.RelayScoringTests" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:38Z" duration="2.243037" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1147" name="AlliedGroupStopsInsideRelayAndCanAutoDefend" fullname="SectorLab.Tests.RelayScoringTests.AlliedGroupStopsInsideRelayAndCanAutoDefend" methodname="AlliedGroupStopsInsideRelayAndCanAutoDefend" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" seed="941230627" result="Passed" start-time="2026-10-11 19:13:36Z" end-time="2026-10-11 19:13:38Z" duration="2.204168" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1142" name="BothOwnedEmptyRelaysScoreTwoPointsPerGameSecond" fullname="SectorLab.Tests.RelayScoringTests.BothOwnedEmptyRelaysScoreTwoPointsPerGameSecond" methodname="BothOwnedEmptyRelaysScoreTwoPointsPerGameSecond" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" seed="194961705" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.002901" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1143" name="ContestAndNeutralizationImmediatelyStopScoring" fullname="SectorLab.Tests.RelayScoringTests.ContestAndNeutralizationImmediatelyStopScoring" methodname="ContestAndNeutralizationImmediatelyStopScoring" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" seed="683405060" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.003895" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1144" name="LargeFrameStopsAtWinningTickAndDoesNotOverchargeTime" fullname="SectorLab.Tests.RelayScoringTests.LargeFrameStopsAtWinningTickAndDoesNotOverchargeTime" methodname="LargeFrameStopsAtWinningTickAndDoesNotOverchargeTime" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" seed="1193060011" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.005176" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1145" name="OppositeRelaysReachThresholdInSameTickAsDraw" fullname="SectorLab.Tests.RelayScoringTests.OppositeRelaysReachThresholdInSameTickAsDraw" methodname="OppositeRelaysReachThresholdInSameTickAsDraw" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" seed="60797456" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.006778" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1146" name="RepairRelayDoesNotScore" fullname="SectorLab.Tests.RelayScoringTests.RepairRelayDoesNotScore" methodname="RepairRelayDoesNotScore" classname="SectorLab.Tests.RelayScoringTests" runstate="Runnable" seed="713846897" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.003691" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1148" name="UnitAttackTests" fullname="SectorLab.Tests.UnitAttackTests" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:44Z" duration="5.962493" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1152" name="Cooldown_LimitsHitsPerSecond" fullname="SectorLab.Tests.UnitAttackTests.Cooldown_LimitsHitsPerSecond" methodname="Cooldown_LimitsHitsPerSecond" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="1592432598" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.042715" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1163" name="Damage_FlashesBodyBriefly" fullname="SectorLab.Tests.UnitAttackTests.Damage_FlashesBodyBriefly" methodname="Damage_FlashesBodyBriefly" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="538248063" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:38Z" duration="0.234830" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1165" name="HealingDoesNotShowDamageFlash" fullname="SectorLab.Tests.UnitAttackTests.HealingDoesNotShowDamageFlash" methodname="HealingDoesNotShowDamageFlash" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="1280481811" result="Passed" start-time="2026-10-11 19:13:38Z" end-time="2026-10-11 19:13:39Z" duration="0.239398" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1162" name="IdleRangedUnit_AcquiresAnythingWithinWeaponRange" fullname="SectorLab.Tests.UnitAttackTests.IdleRangedUnit_AcquiresAnythingWithinWeaponRange" methodname="IdleRangedUnit_AcquiresAnythingWithinWeaponRange" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="1215158765" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.032338" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1153" name="IdleUnit_AcquiresNearestHostileInRange" fullname="SectorLab.Tests.UnitAttackTests.IdleUnit_AcquiresNearestHostileInRange" methodname="IdleUnit_AcquiresNearestHostileInRange" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="993351054" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.022332" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1154" name="IdleUnit_IgnoresHostilesOutsideRange" fullname="SectorLab.Tests.UnitAttackTests.IdleUnit_IgnoresHostilesOutsideRange" methodname="IdleUnit_IgnoresHostilesOutsideRange" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="1478663680" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.027987" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1164" name="KilledTarget_IsDestroyedAndCleared" fullname="SectorLab.Tests.UnitAttackTests.KilledTarget_IsDestroyedAndCleared" methodname="KilledTarget_IsDestroyedAndCleared" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="233668096" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.035521" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1155" name="MovingUnit_DoesNotAcquireTargets" fullname="SectorLab.Tests.UnitAttackTests.MovingUnit_DoesNotAcquireTargets" methodname="MovingUnit_DoesNotAcquireTargets" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="733062995" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.023192" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1161" name="RangedUnit_HitsFromDistanceWithoutMoving" fullname="SectorLab.Tests.UnitAttackTests.RangedUnit_HitsFromDistanceWithoutMoving" methodname="RangedUnit_HitsFromDistanceWithoutMoving" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="746060923" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.023583" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1149" name="SetTarget_IgnoresAllies" fullname="SectorLab.Tests.UnitAttackTests.SetTarget_IgnoresAllies" methodname="SetTarget_IgnoresAllies" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="602978736" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.002184" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1156" name="Stats_AreAppliedToHealthMovementAndAttack" fullname="SectorLab.Tests.UnitAttackTests.Stats_AreAppliedToHealthMovementAndAttack" methodname="Stats_AreAppliedToHealthMovementAndAttack" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="842011538" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:39Z" duration="0.002897" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1160" name="TargetBehindObstacle_AttackerWalksAroundAndHits" fullname="SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_AttackerWalksAroundAndHits" methodname="TargetBehindObstacle_AttackerWalksAroundAndHits" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="1251743202" result="Passed" start-time="2026-10-11 19:13:39Z" end-time="2026-10-11 19:13:40Z" duration="0.854005" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1159" name="TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved" fullname="SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved" methodname="TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="769154082" result="Passed" start-time="2026-10-11 19:13:40Z" end-time="2026-10-11 19:13:40Z" duration="0.035266" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1150" name="TargetInRange_TakesDamageRightAway" fullname="SectorLab.Tests.UnitAttackTests.TargetInRange_TakesDamageRightAway" methodname="TargetInRange_TakesDamageRightAway" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="1659905080" result="Passed" start-time="2026-10-11 19:13:40Z" end-time="2026-10-11 19:13:40Z" duration="0.026468" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1151" name="TargetOutOfRange_AttackerWalksUpToIt" fullname="SectorLab.Tests.UnitAttackTests.TargetOutOfRange_AttackerWalksUpToIt" methodname="TargetOutOfRange_AttackerWalksUpToIt" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="794680249" result="Passed" start-time="2026-10-11 19:13:40Z" end-time="2026-10-11 19:13:41Z" duration="1.241466" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1158" name="UnreachableTarget_AfterOpeningPathIsAttacked" fullname="SectorLab.Tests.UnitAttackTests.UnreachableTarget_AfterOpeningPathIsAttacked" methodname="UnreachableTarget_AfterOpeningPathIsAttacked" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="573200979" result="Passed" start-time="2026-10-11 19:13:41Z" end-time="2026-10-11 19:13:44Z" duration="2.751865" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1157" name="UnreachableTarget_DoesNotRestartMovementEveryFrame" fullname="SectorLab.Tests.UnitAttackTests.UnreachableTarget_DoesNotRestartMovementEveryFrame" methodname="UnreachableTarget_DoesNotRestartMovementEveryFrame" classname="SectorLab.Tests.UnitAttackTests" runstate="Runnable" seed="2119512415" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.348737" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1166" name="UnitCommanderTests" fullname="SectorLab.Tests.UnitCommanderTests" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:46Z" duration="2.130375" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1174" name="NearMissTap_DoesNotSelectOccludedUnit" fullname="SectorLab.Tests.UnitCommanderTests.NearMissTap_DoesNotSelectOccludedUnit" methodname="NearMissTap_DoesNotSelectOccludedUnit" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="1914149777" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.037472" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1173" name="NearMissTap_SelectsClosestUnit" fullname="SectorLab.Tests.UnitCommanderTests.NearMissTap_SelectsClosestUnit" methodname="NearMissTap_SelectsClosestUnit" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="1027190398" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.010199" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1170" name="RejectedMoveOrder_PreservesAttackAndHidesMarker" fullname="SectorLab.Tests.UnitCommanderTests.RejectedMoveOrder_PreservesAttackAndHidesMarker" methodname="RejectedMoveOrder_PreservesAttackAndHidesMarker" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="970069360" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.010977" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1177" name="TapOnEnemy_OrdersSelectedUnitToAttack" fullname="SectorLab.Tests.UnitCommanderTests.TapOnEnemy_OrdersSelectedUnitToAttack" methodname="TapOnEnemy_OrdersSelectedUnitToAttack" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="437181568" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.011191" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1176" name="TapOnEnemy_WithoutSelection_DoesNotSelectIt" fullname="SectorLab.Tests.UnitCommanderTests.TapOnEnemy_WithoutSelection_DoesNotSelectIt" methodname="TapOnEnemy_WithoutSelection_DoesNotSelectIt" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="211835902" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.015581" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1178" name="TapOnGround_CancelsAttack" fullname="SectorLab.Tests.UnitCommanderTests.TapOnGround_CancelsAttack" methodname="TapOnGround_CancelsAttack" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="1173989997" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.016287" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1172" name="TapOnGround_SendsSelectedUnitAndShowsMarker" fullname="SectorLab.Tests.UnitCommanderTests.TapOnGround_SendsSelectedUnitAndShowsMarker" methodname="TapOnGround_SendsSelectedUnitAndShowsMarker" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="1940205381" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.031432" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1171" name="TapOnGround_WithoutSelection_DoesNothing" fullname="SectorLab.Tests.UnitCommanderTests.TapOnGround_WithoutSelection_DoesNothing" methodname="TapOnGround_WithoutSelection_DoesNothing" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="638400201" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.010159" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1179" name="TapOnObstacle_IsIgnored" fullname="SectorLab.Tests.UnitCommanderTests.TapOnObstacle_IsIgnored" methodname="TapOnObstacle_IsIgnored" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="1303906190" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:44Z" duration="0.010284" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1168" name="TapOnRelay_MovesSelectedUnitIntoCaptureRadius" fullname="SectorLab.Tests.UnitCommanderTests.TapOnRelay_MovesSelectedUnitIntoCaptureRadius" methodname="TapOnRelay_MovesSelectedUnitIntoCaptureRadius" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="35064656" result="Passed" start-time="2026-10-11 19:13:44Z" end-time="2026-10-11 19:13:46Z" duration="1.808932" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1167" name="TapOnUnit_SelectsIt" fullname="SectorLab.Tests.UnitCommanderTests.TapOnUnit_SelectsIt" methodname="TapOnUnit_SelectsIt" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="222227820" result="Passed" start-time="2026-10-11 19:13:46Z" end-time="2026-10-11 19:13:46Z" duration="0.010532" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1175" name="TapOutsideTolerance_DoesNotSelect" fullname="SectorLab.Tests.UnitCommanderTests.TapOutsideTolerance_DoesNotSelect" methodname="TapOutsideTolerance_DoesNotSelect" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="603404494" result="Passed" start-time="2026-10-11 19:13:46Z" end-time="2026-10-11 19:13:46Z" duration="0.010925" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1180" name="Touch_SelectsAndMovesUnit" fullname="SectorLab.Tests.UnitCommanderTests.Touch_SelectsAndMovesUnit" methodname="Touch_SelectsAndMovesUnit" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="95215285" result="Passed" start-time="2026-10-11 19:13:46Z" end-time="2026-10-11 19:13:46Z" duration="0.117279" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1169" name="UnreachableRelay_PreservesAttackAndRejectsOrder" fullname="SectorLab.Tests.UnitCommanderTests.UnreachableRelay_PreservesAttackAndRejectsOrder" methodname="UnreachableRelay_PreservesAttackAndRejectsOrder" classname="SectorLab.Tests.UnitCommanderTests" runstate="Runnable" seed="1675879227" result="Passed" start-time="2026-10-11 19:13:46Z" end-time="2026-10-11 19:13:46Z" duration="0.010713" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1181" name="UnitFactoryTests" fullname="SectorLab.Tests.UnitFactoryTests" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-11 19:13:46Z" end-time="2026-10-11 19:13:47Z" duration="0.762542" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1182" name="AddressableTankSpawnsOnNavMeshAndDeathReleasesItsReferenceOnce" fullname="SectorLab.Tests.UnitFactoryTests.AddressableTankSpawnsOnNavMeshAndDeathReleasesItsReferenceOnce" methodname="AddressableTankSpawnsOnNavMeshAndDeathReleasesItsReferenceOnce" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="405517142" result="Passed" start-time="2026-10-11 19:13:46Z" end-time="2026-10-11 19:13:47Z" duration="0.204099" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1186" name="AlreadyCancelledRequestDoesNotStartAnAddressableOperation" fullname="SectorLab.Tests.UnitFactoryTests.AlreadyCancelledRequestDoesNotStartAnAddressableOperation" methodname="AlreadyCancelledRequestDoesNotStartAnAddressableOperation" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="886394962" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.051188" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1184" name="CancelDuringLoadDisposesLateResultWithoutCreatingAGhost" fullname="SectorLab.Tests.UnitFactoryTests.CancelDuringLoadDisposesLateResultWithoutCreatingAGhost" methodname="CancelDuringLoadDisposesLateResultWithoutCreatingAGhost" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="646383205" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.056504" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1185" name="DisposeDuringLoadCancelsTheScopeAndReleasesLateResultOnce" fullname="SectorLab.Tests.UnitFactoryTests.DisposeDuringLoadCancelsTheScopeAndReleasesLateResultOnce" methodname="DisposeDuringLoadCancelsTheScopeAndReleasesLateResultOnce" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="249845317" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.060761" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1188" name="DisposingFactoryDestroysLiveCloneAndReleasesActualHandle" fullname="SectorLab.Tests.UnitFactoryTests.DisposingFactoryDestroysLiveCloneAndReleasesActualHandle" methodname="DisposingFactoryDestroysLiveCloneAndReleasesActualHandle" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="1058174553" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.164734" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1183" name="InvalidNavMeshSpawnReleasesLoadedPrefabWithoutCreatingUnit" fullname="SectorLab.Tests.UnitFactoryTests.InvalidNavMeshSpawnReleasesLoadedPrefabWithoutCreatingUnit" methodname="InvalidNavMeshSpawnReleasesLoadedPrefabWithoutCreatingUnit" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="1744931809" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.155629" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1187" name="MissingAddressableKeyFailsAndReleasesFailedHandle" fullname="SectorLab.Tests.UnitFactoryTests.MissingAddressableKeyFailsAndReleasesFailedHandle" methodname="MissingAddressableKeyFailsAndReleasesFailedHandle" classname="SectorLab.Tests.UnitFactoryTests" runstate="Runnable" seed="492288642" result="Failed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.056794" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[Unhandled log message: '[Error] UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=units/Missing-W5-asset'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[UnityEngine.AddressableAssets.Addressables:LoadAssetAsync<UnityEngine.GameObject> (object)
+SectorLab.Infrastructure.AddressableUnitPrefabProvider/<LoadAsync>d__8:MoveNext () (at Assets/_Project/Scripts/Infrastructure/AddressableUnitPrefabProvider.cs:20)
+Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder`1<SectorLab.Infrastructure.UnitPrefabLease>:Start<SectorLab.Infrastructure.AddressableUnitPrefabProvider/<LoadAsync>d__8> (SectorLab.Infrastructure.AddressableUnitPrefabProvider/<LoadAsync>d__8&) (at ./Library/PackageCache/com.cysharp.unitask@d648f5692cf2/Runtime/CompilerServices/AsyncUniTaskMethodBuilder.cs:242)
+SectorLab.Infrastructure.AddressableUnitPrefabProvider:LoadAsync (string,System.Threading.CancellationToken)
+SectorLab.Infrastructure.UnitFactory/<SpawnAsync>d__7:MoveNext () (at Assets/_Project/Scripts/Infrastructure/UnitFactory.cs:25)
+Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder`1<SectorLab.Units.Unit>:Start<SectorLab.Infrastructure.UnitFactory/<SpawnAsync>d__7> (SectorLab.Infrastructure.UnitFactory/<SpawnAsync>d__7&) (at ./Library/PackageCache/com.cysharp.unitask@d648f5692cf2/Runtime/CompilerServices/AsyncUniTaskMethodBuilder.cs:242)
+SectorLab.Infrastructure.UnitFactory:SpawnAsync (string,UnityEngine.Vector3,UnityEngine.Transform,System.Threading.CancellationToken)
+SectorLab.Tests.UnitFactoryTests/<MissingAddressableKeyFailsAndReleasesFailedHandle>d__11:MoveNext () (at Assets/_Project/Tests/PlayMode/UnitFactoryTests.cs:162)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)
+
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[UnityEngine.AddressableAssets.InvalidKeyException: Exception of type 'UnityEngine.AddressableAssets.InvalidKeyException' was thrown. No Location found for Key=units/Missing-W5-asset
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1189" name="UnitMovementTests" fullname="SectorLab.Tests.UnitMovementTests" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:49Z" duration="1.799802" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1193" name="DisabledAgent_MoveToClearsMovingState" fullname="SectorLab.Tests.UnitMovementTests.DisabledAgent_MoveToClearsMovingState" methodname="DisabledAgent_MoveToClearsMovingState" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="1900915377" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.034603" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1194" name="DisabledAgent_WithoutNewOrderClearsMovingState" fullname="SectorLab.Tests.UnitMovementTests.DisabledAgent_WithoutNewOrderClearsMovingState" methodname="DisabledAgent_WithoutNewOrderClearsMovingState" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="404132124" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.037967" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1190" name="MoveTo_GetsCloserEachFrame" fullname="SectorLab.Tests.UnitMovementTests.MoveTo_GetsCloserEachFrame" methodname="MoveTo_GetsCloserEachFrame" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="1074532446" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.046539" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1192" name="MoveTo_PlansPathAroundObstacle" fullname="SectorLab.Tests.UnitMovementTests.MoveTo_PlansPathAroundObstacle" methodname="MoveTo_PlansPathAroundObstacle" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="515161375" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:47Z" duration="0.034854" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1191" name="MoveTo_StopsAtDestination" fullname="SectorLab.Tests.UnitMovementTests.MoveTo_StopsAtDestination" methodname="MoveTo_StopsAtDestination" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="1879591368" result="Passed" start-time="2026-10-11 19:13:47Z" end-time="2026-10-11 19:13:48Z" duration="1.034066" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1196" name="Stop_HaltsMovement" fullname="SectorLab.Tests.UnitMovementTests.Stop_HaltsMovement" methodname="Stop_HaltsMovement" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="1538157837" result="Passed" start-time="2026-10-11 19:13:48Z" end-time="2026-10-11 19:13:48Z" duration="0.043530" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1195" name="UnreachableDestination_StopsAtEndOfPartialPath" fullname="SectorLab.Tests.UnitMovementTests.UnreachableDestination_StopsAtEndOfPartialPath" methodname="UnreachableDestination_StopsAtEndOfPartialPath" classname="SectorLab.Tests.UnitMovementTests" runstate="Runnable" seed="685514717" result="Failed" start-time="2026-10-11 19:13:48Z" end-time="2026-10-11 19:13:49Z" duration="0.545584" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[Unhandled log message: '[Error] Couldn't extract exception string from exception of type InvalidKeyException (another exception of class 'UnityException' was thrown while processing the stack trace)'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                <stack-trace><![CDATA[
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: [LOCAL_USER_HOME]/AppData/LocalLow/ZheleznovAG/SectorLab\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

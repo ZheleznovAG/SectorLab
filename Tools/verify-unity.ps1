@@ -26,7 +26,7 @@ function Invoke-Editor([string[]] $Arguments) {
 
 $sourceHead = (& git rev-parse HEAD).Trim()
 $started = [DateTime]::UtcNow.ToString('o')
-$inputHashes = @(rg --files Assets/_Project Packages ProjectSettings | Sort-Object | ForEach-Object {
+$inputHashes = @(rg --files Assets Packages ProjectSettings | Sort-Object | ForEach-Object {
     [PSCustomObject]@{ path = $_.Replace('\', '/'); sha256 = (Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash }
 })
 $null = Invoke-Editor @('eval', '--code', 'UnityEditor.AssetDatabase.Refresh();')
