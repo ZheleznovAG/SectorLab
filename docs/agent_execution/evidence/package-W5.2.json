@@ -1,0 +1,42 @@
+﻿{
+    "task":  "W5.2",
+    "checkedAtUtc":  "2026-10-11T16:31:19.0994605Z",
+    "sourceHead":  "3c7475b2fd9f13f2d3bf00de3a38f7aa80b59acc",
+    "unityVersion":  "6000.6.4f1",
+    "package":  {
+                    "name":  "com.cysharp.unitask",
+                    "displayName":  "UniTask",
+                    "author":  {
+                                   "name":  "Cysharp, Inc.",
+                                   "url":  "https://cysharp.co.jp/en/"
+                               },
+                    "version":  "2.5.11",
+                    "unity":  "2018.4",
+                    "description":  "Provides an efficient async/await integration to Unity.",
+                    "keywords":  [
+                                     "async/await",
+                                     "async",
+                                     "Task",
+                                     "UniTask"
+                                 ],
+                    "license":  "MIT",
+                    "category":  "Task",
+                    "dependencies":  {
+
+                                     },
+                    "_fingerprint":  "d648f5692cf2d47ff113c43ee198ca3dbf773cd6"
+                },
+    "resolved":  {
+                     "version":  "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
+                     "depth":  0,
+                     "source":  "git",
+                     "dependencies":  {
+
+                                      },
+                     "hash":  "2e993ff18f28c931602a07292df0b0804eebef99"
+                 },
+    "manifestSha256":  "ABD98D35AB1ED36762A1AC217CD671AB38F2D452BFA7C1EFA9AC444F617FABA3",
+    "lockSha256":  "50F9C5D79AE3FB821843469B96F8E23230371DA2017BE2E0C16FEBF02C92A8DE",
+    "initialCheck":  "Refresh endpoint disconnected during package-triggered domain reload; not a passing test run.",
+    "unitAsyncTest":  "W5.3/W5.4 tests will use UniTask with real provider and delayed cancellation."
+}

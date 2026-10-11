@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.1** (package), следующий этап — **W5.2**.
+Последняя завершённая задача — **W5.2** (package), следующий этап — **W5.3**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -117,7 +117,7 @@ diff; другие настройки проекта не затронуты.
 | FR-019 | TODO | Обучения нет / W6 |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
 | FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
-| FR-022 | TODO | UniTask не установлен / W5 |
+| FR-022 | PARTIAL | UniTask 2.5.11 закреплён и компилируется; настоящий async lifecycle / W5.3–W5.6 |
 | FR-023 | PARTIAL | Addressables 2.11.2 закреплён и компилируется; local content и реальный spawn / W5.3–W5.6 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
 | FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
@@ -400,3 +400,10 @@ Editor/URP/Input System/Test Framework не менялись. License notice с�
 [53/53 EditMode PASS](evidence/tests-W5.1-editmode.json). Это отдельный package
 commit; local content build выполняется в W5.3 после создания entries и
 повторяется для финального APK в W8. G5 ещё открыт.
+
+W5.1 зафиксирован в `3c7475b`. W5.2 / FR-022, NFR-011: UniTask 2.5.11
+из официального Git UPM URL, commit `2e993ff18f28c931602a07292df0b0804eebef99`.
+MIT сохранён в notices. [Метаданные/lock](evidence/package-W5.2.json),
+[53/53 EditMode PASS](evidence/tests-W5.2-editmode.json). Начальный Refresh
+не прошёл из-за domain reload; тестовый прогон выполнен после ready. Игровой
+async не выдаётся за проверенный на установочном шаге: это следующая W5.3/W5.4.
