@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W3.3**, следующий этап — **W4.1**.
+Последняя завершённая задача — **W4.1**, следующий этап — **W4.2**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -79,7 +79,7 @@ diff; другие настройки проекта не затронуты.
 | W1 / G1 | PASS | 45 очков/180 с/Draw, часы, pause/resume, остановка боя, result/restart; 29 EditMode + 43 PlayMode и Main Game View |
 | W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
 | W3 / G3 | PASS | AI и четыре настоящие партии Main; 53 EditMode + 67 PlayMode, проигрыш и выигрыш зафиксированы |
-| W4 / G4 | TODO | Проверенный пакет VContainer, composition root служб матча |
+| W4 / G4 | IN_PROGRESS | VContainer 1.19.0 установлен/проверен; далее composition root служб матча |
 | W5 / G5 | TODO | Addressables + UniTask, ownership, отмена/ошибка, respawn 10 с, 10 рестартов |
 | W6 / G6 | TODO | Tap/drag/UI blocking, pan/pinch, HUD и safe area |
 | W7 / G7 | TODO | Звук/mute, обратная связь и плейтесты |
@@ -347,3 +347,12 @@ W3.2 зафиксирован в `116bb28`. W3.3 / FR-011/014/016: новый Ma
 После respawn и доработки карты баланс повторяется в W7. Геометрия baseline пока
 асимметрична; выравнивание арены/стартов и повторная NavMesh-проверка остаются в W5/W7.
 G3 закрыт. Следующее — пакет VContainer с pinned version, затем настоящий scope.
+
+W3.3 зафиксирован в `78e3e8b`. W4.1 / NFR-004: VContainer 1.19.0 установлен
+из официального Git UPM URL; lock содержит commit
+`5401e5a7ebc4980a2b82141ffc26391a6547edd7`.
+[Запись пакета](evidence/package-W4.1.json), [53/53 EditMode PASS](evidence/tests-W4.1-editmode.json).
+Первая попытка Refresh получила timeout во время UPM resolve (41,53 с);
+тесты запущены после возвращения Editor в ready. Этот timeout не считается PASS.
+Manifest/lock, лицензия MIT и notices включены в отдельный установочный коммит.
+Main/игровые службы на этом шаге не менялись; G4 остаётся открытым до проверки scope.

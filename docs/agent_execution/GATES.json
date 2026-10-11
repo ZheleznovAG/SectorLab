@@ -26,7 +26,9 @@
       { "name": "Four tactical plans and observed outcomes", "status": "PASS", "evidence": "evidence/W3-main-matches.csv" },
       { "name": "Main actual AI match screenshot", "status": "PASS", "evidence": "evidence/W3-main-ai.png" }
     ] },
-    { "id": "G4", "status": "TODO", "checks": [] },
+    { "id": "G4", "status": "IN_PROGRESS", "checks": [
+      { "name": "Pinned VContainer resolves and compiles", "status": "PASS", "evidence": "evidence/tests-W4.1-editmode.json" }
+    ] },
     { "id": "G5", "status": "TODO", "checks": [] },
     { "id": "G6", "status": "TODO", "checks": [] },
     { "id": "G7", "status": "TODO", "checks": [] },

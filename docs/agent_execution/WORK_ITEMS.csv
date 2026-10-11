@@ -15,7 +15,7 @@ W2.5,W2,Implement healing C and Health.Heal,W2.2,EditMode heal + PlayMode,G2,TOD
 W3.1,W3,Implement AI decision rules,W2.4,EditMode priority,G3,TODO,PASS,evidence/tests-W3.1-editmode.json
 W3.2,W3,Integrate AI movement and attack,W3.1,PlayMode AI interaction,G3,TODO,PASS,evidence/tests-W3.2-playmode.json
 W3.3,W3,Verify full match outcomes,W3.2;W2.5;W1.3,End-to-end PlayMode,G3,TODO,PASS,evidence/tests-W3.3-playmode.json
-W4.1,W4,Install and pin VContainer,W3.3,Package resolve + compile,G4,TODO,TODO,
+W4.1,W4,Install and pin VContainer,W3.3,Package resolve + compile,G4,TODO,PASS,evidence/package-W4.1.json
 W4.2,W4,Add GameLifetimeScope service wiring,W4.1,PlayMode scope test,G4,TODO,TODO,
 W4.3,W4,Migrate selected real match services,W4.2,Existing tests; no Service Locator,G4,TODO,TODO,
 W5.1,W5,Install and pin Addressables,W4.3,"Compile, local content build",G5,TODO,TODO,
