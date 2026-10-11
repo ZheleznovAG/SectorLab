@@ -46,6 +46,11 @@ do {
 } while ($stableSamples -lt 3 -or $timer.Elapsed.TotalSeconds -lt 3)
 
 $assembly = 'SectorLab.Tests.' + $Mode
+$taskContextPath = 'Temp/verification-task.cs'
+# Editor runs in another process; pass the evidence task explicitly before starting its tests.
+('System.Environment.SetEnvironmentVariable("SECTORLAB_VERIFICATION_TASK", "' + $Task + '");') |
+    Set-Content -LiteralPath $taskContextPath -Encoding UTF8
+$null = Invoke-Editor @('eval_file', '--file', $taskContextPath)
 $null = Invoke-Editor @('run_tests', '--mode', $Mode, '--filter_type', 'assembly', '--filter', $assembly, '--async_tests', 'true')
 $timer.Restart()
 do {

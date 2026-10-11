@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W4.2**, следующий этап — **W4.3**.
+Последняя завершённая задача — **W4.3**, следующий этап — **W5.1**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -79,7 +79,7 @@ diff; другие настройки проекта не затронуты.
 | W1 / G1 | PASS | 45 очков/180 с/Draw, часы, pause/resume, остановка боя, result/restart; 29 EditMode + 43 PlayMode и Main Game View |
 | W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
 | W3 / G3 | PASS | AI и четыре настоящие партии Main; 53 EditMode + 67 PlayMode, проигрыш и выигрыш зафиксированы |
-| W4 / G4 | IN_PROGRESS | VContainer 1.19.0 установлен/проверен; далее composition root служб матча |
+| W4 / G4 | PASS | VContainer 1.19.0, настоящий scope Clock/State/Battle/AI; 72/72 PlayMode, missing injection и reload |
 | W5 / G5 | TODO | Addressables + UniTask, ownership, отмена/ошибка, respawn 10 с, 10 рестартов |
 | W6 / G6 | TODO | Tap/drag/UI blocking, pan/pinch, HUD и safe area |
 | W7 / G7 | TODO | Звук/mute, обратная связь и плейтесты |
@@ -114,7 +114,7 @@ diff; другие настройки проекта не затронуты.
 | FR-018 | TODO | Звук/mute отсутствуют / W7 |
 | FR-019 | TODO | Обучения нет / W6 |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
-| FR-021 | PARTIAL | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection проверена; удалить старый fallback / W4.3 |
+| FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
 | FR-022 | TODO | UniTask не установлен / W5 |
 | FR-023 | TODO | Addressables не установлен / W5 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
@@ -367,3 +367,14 @@ Clock/State Scoped; Battle и AI — зарегистрированные ком
 G3 CSV восстановлен из его коммита после обнаружения перезаписи тестом.
 В W4.3 тестовый runner получит отдельное имя evidence на каждый task.
 Старый Awake fallback пока сохранён для прежних fixtures; его удаление — W4.3.
+
+W4.2 зафиксирован в `0badd72`. W4.3 / FR-021: fallback Battle.Awake и
+serialized battle у AI удалены. Без injection Start сообщает конкретную ошибку;
+изолированные fixtures создают модель явно. MainMatchTests проверяет новую
+identity State/Clock при каждой смене сцены. Runner передаёт task в Editor,
+каждая серия пишет отдельный CSV и больше не заменяет исторический evidence.
+**72/72 PlayMode PASS** ([лог](evidence/tests-W4.3-playmode.json)), включая
+две ожидаемые ошибки неправильной сборки. Четыре партии снова завершились,
+последняя дала Victory 45:42,5 ([CSV](evidence/W4.3-main-matches.csv)).
+В предыдущем W4.2 прогоне все четыре плана проиграли; результаты сохранены,
+баланс ещё не принят. G4 закрыт; factory/async ownership внедряются в W5.

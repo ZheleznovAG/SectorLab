@@ -34,9 +34,6 @@ namespace SectorLab.Editor
             if (battle == null || battle.gameObject.scene.path != "Assets/_Project/Scenes/Main.unity")
                 throw new System.InvalidOperationException("Open Main first.");
             var ai = battle.GetComponent<SectorLab.AI.EnemyTacticsController>() ?? battle.gameObject.AddComponent<SectorLab.AI.EnemyTacticsController>();
-            var serialized = new SerializedObject(ai);
-            serialized.FindProperty("battle").objectReferenceValue = battle;
-            serialized.ApplyModifiedPropertiesWithoutUndo();
             EditorSceneManager.MarkSceneDirty(battle.gameObject.scene);
             EditorSceneManager.SaveScene(battle.gameObject.scene);
         }

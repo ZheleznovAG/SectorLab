@@ -26,8 +26,10 @@
       { "name": "Four tactical plans and observed outcomes", "status": "PASS", "evidence": "evidence/W3-main-matches.csv" },
       { "name": "Main actual AI match screenshot", "status": "PASS", "evidence": "evidence/W3-main-ai.png" }
     ] },
-    { "id": "G4", "status": "IN_PROGRESS", "checks": [
-      { "name": "Pinned VContainer resolves and compiles", "status": "PASS", "evidence": "evidence/tests-W4.1-editmode.json" }
+    { "id": "G4", "status": "PASS", "checks": [
+      { "name": "Pinned VContainer resolves and compiles", "status": "PASS", "evidence": "evidence/tests-W4.1-editmode.json" },
+      { "name": "Main scoped services, reload and missing registrations", "status": "PASS", "evidence": "evidence/tests-W4.3-playmode.json" },
+      { "name": "Real Main matches after dependency migration", "status": "PASS", "evidence": "evidence/W4.3-main-matches.csv" }
     ] },
     { "id": "G5", "status": "TODO", "checks": [] },
     { "id": "G6", "status": "TODO", "checks": [] },

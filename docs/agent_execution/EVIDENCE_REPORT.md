@@ -100,3 +100,14 @@ AI и respawn ещё отсутствуют; это не полный плейт
 исправления группового прибытия сохранена отдельно; её результаты не скрываются.
 Это автоматические игровые сценарии, не Playtest verified. После respawn/карты
 баланс нужно повторить; конечный Android build и человеческая проверка впереди.
+
+## W4 — службы настоящего матча
+
+Пакет/лицензия: `b5c1db7`; root/сцена: `0badd72`; удаление fallback —
+`git log -1 -- Assets/_Project/Scripts/Battle/BattleController.cs`.
+[53/53 EditMode после установки](evidence/tests-W4.1-editmode.json),
+[72/72 PlayMode](evidence/tests-W4.3-playmode.json). GameLifetimeScope регистрирует
+Clock/State Scoped и существующие Battle/AI; injection реально участвует в Main.
+Проверены ошибки отсутствия Clock/State, отсутствие скрытого fallback и новые
+instances после dispose/reload. [Четыре партии](evidence/W4.3-main-matches.csv).
+G4 PASS. UnitFactory добавляется в W5, без sample-заглушки.

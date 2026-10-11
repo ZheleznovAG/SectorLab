@@ -30,8 +30,12 @@ namespace SectorLab.Battle
         private void Awake()
         {
             runningTimeScale = Time.timeScale > 0 ? Time.timeScale : 1;
+        }
+
+        private void Start()
+        {
             if (State == null)
-                State = new MatchState(new MatchClock());
+                throw new InvalidOperationException("MatchState was not injected. Main requires GameLifetimeScope.");
         }
 
         // The composition root supplies the same state/clock to consumers before the first tick.
@@ -48,7 +52,7 @@ namespace SectorLab.Battle
         private void Update()
         {
             CountLivingUnits();
-            if (!State.IsRunning)
+            if (State == null || !State.IsRunning)
                 return;
             accumulatedSeconds += Time.deltaTime;
             while (accumulatedSeconds >= TickSeconds && State.IsRunning)

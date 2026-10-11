@@ -462,7 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b1fc0b7d4344d1abdcfab54d97c673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SectorLab::SectorLab.AI.EnemyTacticsController
-  battle: {fileID: 101675099}
 --- !u!114 &101675102
 MonoBehaviour:
   m_ObjectHideFlags: 0

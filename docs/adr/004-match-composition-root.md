@@ -25,7 +25,8 @@ Resolve разрешён в composition root и проверочных сцен�
 W4.2 проверяет реальные регистрации и текущую Main. W4.3 удаляет исторический
 fallback `new MatchState(new MatchClock())` из Awake: пропущенная регистрация
 должна обнаруживаться. Изолированные fixture явно передают состояние, не создавая
-вторую игровую точку сборки. UnitFactory добавляется сюда в W5, после установки
+вторую игровую точку сборки. Battle/AI сообщают об отсутствии injection в Start.
+До Start Battle.Update при отсутствии State не симулирует. UnitFactory добавляется сюда в W5, после установки
 Addressables/UniTask и проверки модели владения; декоративный factory сейчас не вводится.
 
 Проверки: MatchScopeTests — общая identity state/clock, новый экземпляр после

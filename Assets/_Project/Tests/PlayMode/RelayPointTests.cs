@@ -79,6 +79,7 @@ namespace SectorLab.Tests
         {
             CreateUnit(Team.Player, Vector3.zero);
             var battle = root.AddComponent<BattleController>();
+            battle.Initialize(new MatchState(new MatchClock()));
             battle.InitializeRelays(new[] { point });
             battle.SetPaused(true);
             battle.AdvanceSimulation(10);
@@ -126,6 +127,7 @@ namespace SectorLab.Tests
             Unit player = CreateUnit(Team.Player, Vector3.zero);
             player.Health.TakeDamage(40);
             var battle = root.AddComponent<BattleController>();
+            battle.Initialize(new MatchState(new MatchClock()));
             battle.InitializeRelays(new[] { point });
             battle.AdvanceSimulation(5);
             battle.AdvanceSimulation(1);
