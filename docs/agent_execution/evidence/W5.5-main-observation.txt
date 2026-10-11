@@ -1,0 +1,8 @@
+2026-10-11T19:44:40.6376144Z
+Manual Editor observation: phase=Ready; units=3; ownedHandles=3; clock=13,1
+Player/Tank: dead/waiting
+Player/Scout: dead/waiting
+Player/Ranger: (3.00, 0.80, -3.40); HP=80; NavMesh=True
+Enemy/Tank: (-1.83, 0.80, -1.93); HP=188; NavMesh=True
+Enemy/Scout: dead/waiting
+Enemy/Ranger: (-3.17, 0.80, -0.64); HP=80; NavMesh=True

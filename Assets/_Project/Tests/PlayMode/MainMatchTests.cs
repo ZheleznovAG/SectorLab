@@ -28,7 +28,7 @@ namespace SectorLab.Tests
             for (int run = 0; run < plans.Length; run++)
             {
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
-                yield return null;
+                yield return MainLifecycleTests.WaitForReady();
                 var battle = Object.FindFirstObjectByType<BattleController>();
                 var ai = Object.FindFirstObjectByType<EnemyTacticsController>();
                 Assert.That(battle, Is.Not.Null);
@@ -113,6 +113,7 @@ namespace SectorLab.Tests
             }
             yield return null;
             Assert.That(Unit.All.Count, Is.Zero);
+            Assert.That(SectorLab.Infrastructure.AddressableUnitPrefabProvider.OutstandingHandles, Is.Zero);
             Assert.That(Time.timeScale, Is.EqualTo(1));
         }
     }

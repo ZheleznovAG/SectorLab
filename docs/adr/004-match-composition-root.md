@@ -12,9 +12,12 @@
 | Зависимость | Lifetime / владелец | Получатели |
 | --- | --- | --- |
 | MatchClock | Scoped, текущая сцена | MatchState |
-| MatchState | Scoped, текущая сцена | BattleController, через него AI |
-| BattleController | Уже существующий компонент сцены | AI, последующие lifecycle/HUD |
+| MatchState | Scoped, текущая сцена | BattleController, UnitFactory; через controller AI |
+| BattleController | Уже существующий компонент сцены | AI, UnitLifecycle, последующий HUD |
 | EnemyTacticsController | Уже существующий компонент сцены | Подписан на Ticked только пока enabled |
+| IUnitPrefabProvider / UnitFactory | Scoped, dispose контейнером | UnitLifecycle |
+| UnitLifecycle | Компонент Battle | Шесть slots, death subscriptions, respawn countdown |
+| UnitRoster | Unity asset, неизменяемый в матче | UnitLifecycle |
 | UnitStats / RelayConfig | Unity assets, неизменяемые в матче | Существующие юниты/узлы |
 
 Здесь Scoped выбран даже при одном root без детей: смысл — один матч, а не
@@ -26,8 +29,9 @@ W4.2 проверяет реальные регистрации и текущу�
 fallback `new MatchState(new MatchClock())` из Awake: пропущенная регистрация
 должна обнаруживаться. Изолированные fixture явно передают состояние, не создавая
 вторую игровую точку сборки. Battle/AI сообщают об отсутствии injection в Start.
-До Start Battle.Update при отсутствии State не симулирует. UnitFactory добавляется сюда в W5, после установки
-Addressables/UniTask и проверки модели владения; декоративный factory сейчас не вводится.
+До Start Battle.Update при отсутствии State не симулирует. В W5 UnitFactory
+добавлен после установки Addressables/UniTask и проверки модели владения.
+Старт и respawn Main используют один factory; runtime ссылки не записываются в roster asset.
 
 Проверки: MatchScopeTests — общая identity state/clock, новый экземпляр после
 dispose, ошибки при отсутствии Clock/State; MainMatchTests — настоящие перезагрузки.

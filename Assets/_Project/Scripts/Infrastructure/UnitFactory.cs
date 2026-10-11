@@ -2,23 +2,32 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using SectorLab.Battle;
 using SectorLab.Units;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace SectorLab.Infrastructure
 {
+    public enum UnitSpawnReason { Initial, Respawn }
+
     public sealed class UnitFactory : IDisposable
     {
         private readonly IUnitPrefabProvider provider;
+        private readonly MatchState state;
         private readonly CancellationTokenSource lifetime = new CancellationTokenSource();
         private readonly Dictionary<Unit, UnitPrefabOwnership> instances = new Dictionary<Unit, UnitPrefabOwnership>(6);
         private bool disposed;
         public int ActiveInstances => instances.Count;
 
-        public UnitFactory(IUnitPrefabProvider provider) => this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
+        public UnitFactory(IUnitPrefabProvider provider, MatchState state)
+        {
+            this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
+            this.state = state ?? throw new ArgumentNullException(nameof(state));
+        }
 
-        public async UniTask<Unit> SpawnAsync(string key, Vector3 position, Transform parent, CancellationToken cancellationToken)
+        public async UniTask<Unit> SpawnAsync(string key, Vector3 position, Transform parent, CancellationToken cancellationToken,
+            UnitSpawnReason reason = UnitSpawnReason.Initial)
         {
             if (disposed) throw new ObjectDisposedException(nameof(UnitFactory));
             using var linked = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token, cancellationToken);
@@ -28,12 +37,16 @@ namespace SectorLab.Infrastructure
             try
             {
                 linked.Token.ThrowIfCancellationRequested();
+                if (reason == UnitSpawnReason.Respawn)
+                    await UniTask.WaitUntil(() => state.IsRunning, cancellationToken: linked.Token);
+                linked.Token.ThrowIfCancellationRequested();
+                if (state.Outcome != BattleOutcome.InProgress) throw new OperationCanceledException(linked.Token);
                 if (lease.Prefab.GetComponent<Unit>() == null || lease.Prefab.GetComponent<NavMeshAgent>() == null)
                     throw new InvalidOperationException("Unit prefab requires Unit and NavMeshAgent.");
-                if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 0.75f, NavMesh.AllAreas))
-                    throw new InvalidOperationException("Unit spawn is outside the NavMesh.");
-                float baseOffset = lease.Prefab.GetComponent<NavMeshAgent>().baseOffset;
-                instance = UnityEngine.Object.Instantiate(lease.Prefab, hit.position + Vector3.up * baseOffset, Quaternion.identity, parent);
+                var prefabAgent = lease.Prefab.GetComponent<NavMeshAgent>();
+                float radius = prefabAgent.radius * Mathf.Max(lease.Prefab.transform.localScale.x, lease.Prefab.transform.localScale.z);
+                if (!UnitSpawnPositions.TryFind(position, radius, out Vector3 spawn)) throw new UnitSpawnBlockedException();
+                instance = UnityEngine.Object.Instantiate(lease.Prefab, spawn + Vector3.up * prefabAgent.baseOffset, Quaternion.identity, parent);
                 var unit = instance.GetComponent<Unit>();
                 var ownership = instance.AddComponent<UnitPrefabOwnership>();
                 ownership.Initialize(unit, lease, OnDestroyed);
@@ -52,6 +65,8 @@ namespace SectorLab.Infrastructure
         }
 
         private void OnDestroyed(Unit unit) => instances.Remove(unit);
+
+        public void CancelPendingOperations() { if (!disposed) lifetime.Cancel(); }
 
         public void Dispose()
         {

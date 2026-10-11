@@ -10,6 +10,8 @@ namespace SectorLab.Battle
         [SerializeField] private GameObject panel;
         [SerializeField] private Text title;
         [SerializeField] private Button restartButton;
+        private Button exitButton;
+        public bool IsShowingLoadError { get; private set; }
 
         private void Awake()
         {
@@ -21,10 +23,46 @@ namespace SectorLab.Battle
 
         public void Show(BattleOutcome outcome, UnityAction onRestart, double playerScore = 0, double enemyScore = 0)
         {
+            IsShowingLoadError = false;
+            restartButton.gameObject.SetActive(true);
+            restartButton.GetComponentInChildren<Text>().text = "Ещё бой";
+            if (exitButton != null) exitButton.gameObject.SetActive(false);
             string result = outcome == BattleOutcome.Victory ? "Victory" : outcome == BattleOutcome.Defeat ? "Defeat" : "Draw";
             title.text = $"{result}\n{playerScore:0} : {enemyScore:0}";
             restartButton.onClick.RemoveAllListeners();
             restartButton.onClick.AddListener(onRestart);
+            panel.SetActive(true);
+        }
+
+        public void ShowLoading()
+        {
+            title.text = "Подготовка матча…";
+            restartButton.gameObject.SetActive(false);
+            if (exitButton != null) exitButton.gameObject.SetActive(false);
+            panel.SetActive(true);
+        }
+
+        public void Hide() => panel.SetActive(false);
+
+        public void ShowLoadError(UnityAction retry, UnityAction exit)
+        {
+            IsShowingLoadError = true;
+            title.text = "Не удалось подготовить матч.\nПовторите запуск.";
+            restartButton.gameObject.SetActive(true);
+            restartButton.GetComponentInChildren<Text>().text = "Повторить";
+            restartButton.onClick.RemoveAllListeners();
+            restartButton.onClick.AddListener(retry);
+            if (exitButton == null)
+            {
+                exitButton = Instantiate(restartButton, restartButton.transform.parent);
+                exitButton.name = "ExitAfterLoadError";
+                var rect = exitButton.GetComponent<RectTransform>();
+                rect.anchoredPosition -= Vector2.up * (rect.rect.height + 25);
+            }
+            exitButton.GetComponentInChildren<Text>().text = "Выйти";
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(exit);
+            exitButton.gameObject.SetActive(true);
             panel.SetActive(true);
         }
     }

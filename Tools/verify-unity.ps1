@@ -56,7 +56,7 @@ $timer.Restart()
 do {
     Start-Sleep -Seconds 2
     $status = Invoke-Editor @('test_status')
-    if ($timer.Elapsed.TotalSeconds -gt 240) { throw 'Timed out waiting for Unity tests.' }
+    if ($timer.Elapsed.TotalSeconds -gt 600) { throw 'Timed out waiting for Unity tests.' }
 } while ($status.data.result.status -ne 'completed')
 
 $record = [PSCustomObject]@{

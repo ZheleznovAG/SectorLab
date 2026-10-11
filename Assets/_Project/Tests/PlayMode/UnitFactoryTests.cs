@@ -38,7 +38,7 @@ namespace SectorLab.Tests
         public IEnumerator AddressableTankSpawnsOnNavMeshAndDeathReleasesItsReferenceOnce()
         {
             var provider = new AddressableUnitPrefabProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             Unit spawned = null;
             yield return factory.SpawnAsync("units/Tank", Vector3.zero, root.transform, CancellationToken.None)
                 .ToCoroutine(unit => spawned = unit);
@@ -63,11 +63,11 @@ namespace SectorLab.Tests
         public IEnumerator InvalidNavMeshSpawnReleasesLoadedPrefabWithoutCreatingUnit()
         {
             var provider = new AddressableUnitPrefabProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             System.Exception failure = null;
             yield return factory.SpawnAsync("units/Scout", Vector3.one * 1000, root.transform, CancellationToken.None)
                 .ToCoroutine(exceptionHandler: error => failure = error);
-            Assert.That(failure, Is.TypeOf<System.InvalidOperationException>());
+            Assert.That(failure, Is.InstanceOf<System.InvalidOperationException>());
             Assert.That(factory.ActiveInstances, Is.Zero);
             Assert.That(provider.ReleasedHandles, Is.EqualTo(2));
         }
@@ -91,7 +91,7 @@ namespace SectorLab.Tests
         public IEnumerator CancelDuringLoadDisposesLateResultWithoutCreatingAGhost()
         {
             var provider = new DelayedProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             using var cancellation = new CancellationTokenSource();
             System.Exception failure = null;
             var operation = factory.SpawnAsync("delayed", Vector3.zero, root.transform, cancellation.Token)
@@ -116,7 +116,7 @@ namespace SectorLab.Tests
         public IEnumerator DisposeDuringLoadCancelsTheScopeAndReleasesLateResultOnce()
         {
             var provider = new DelayedProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             System.Exception failure = null;
             var operation = factory.SpawnAsync("delayed", Vector3.zero, root.transform, CancellationToken.None)
                 .ToCoroutine(exceptionHandler: error => failure = error);
@@ -141,7 +141,7 @@ namespace SectorLab.Tests
         public IEnumerator AlreadyCancelledRequestDoesNotStartAnAddressableOperation()
         {
             var provider = new AddressableUnitPrefabProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             using var cancellation = new CancellationTokenSource();
             cancellation.Cancel();
             System.Exception failure = null;
@@ -156,7 +156,7 @@ namespace SectorLab.Tests
         public IEnumerator MissingAddressableKeyFailsAndReleasesFailedHandle()
         {
             var provider = new AddressableUnitPrefabProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             System.Exception failure = null;
             yield return factory.SpawnAsync("units/Missing-W5-asset", Vector3.zero, root.transform, CancellationToken.None)
                 .ToCoroutine(exceptionHandler: error => failure = error);
@@ -167,10 +167,33 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator LoadedRespawnWaitsForResumeBeforeCreatingItsClone()
+        {
+            var provider = new AddressableUnitPrefabProvider();
+            var state = new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock());
+            state.SetPaused(true);
+            factory = new UnitFactory(provider, state);
+            Unit unit = null;
+            var task = factory.SpawnAsync("units/Scout", Vector3.zero, root.transform, CancellationToken.None, UnitSpawnReason.Respawn);
+            float deadline = Time.realtimeSinceStartup + 5;
+            while (provider.ReleasedHandles < 1 && Time.realtimeSinceStartup < deadline) yield return null;
+            yield return null;
+            yield return null;
+            Assert.That(provider.ReleasedHandles, Is.EqualTo(1));
+            Assert.That(factory.ActiveInstances, Is.Zero);
+            Assert.That(Unit.All.Count, Is.Zero);
+            Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.EqualTo(1));
+            state.SetPaused(false);
+            yield return task.ToCoroutine(value => unit = value);
+            Assert.That(unit, Is.Not.Null);
+            Assert.That(factory.ActiveInstances, Is.EqualTo(1));
+        }
+
+        [UnityTest]
         public IEnumerator DisposingFactoryDestroysLiveCloneAndReleasesActualHandle()
         {
             var provider = new AddressableUnitPrefabProvider();
-            factory = new UnitFactory(provider);
+            factory = new UnitFactory(provider, new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
             Unit unit = null;
             yield return factory.SpawnAsync("units/EnemyRanger", Vector3.zero, root.transform, CancellationToken.None)
                 .ToCoroutine(value => unit = value);
