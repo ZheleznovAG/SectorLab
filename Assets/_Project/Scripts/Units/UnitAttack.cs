@@ -9,6 +9,8 @@ namespace SectorLab.Units
         [SerializeField, Min(0)] private int damage = 20;
         [SerializeField, Min(0f)] private float range = 1.5f;
         [SerializeField, Min(0.01f)] private float cooldown = 1f;
+        [Tooltip("An idle unit attacks the nearest hostile within this distance. 0 = only on order.")]
+        [SerializeField, Min(0f)] private float autoAcquireRange;
 
         private Unit self;
         private float nextAttackTime;
@@ -41,13 +43,42 @@ namespace SectorLab.Units
             return offset.sqrMagnitude <= range * range;
         }
 
+        private Unit FindNearestHostile(float maxDistance)
+        {
+            if (maxDistance <= 0f)
+                return null;
+
+            Unit nearest = null;
+            float nearestSqr = maxDistance * maxDistance;
+            foreach (Unit other in Unit.All)
+            {
+                if (!self.IsHostileTo(other) || !other.IsAlive)
+                    continue;
+
+                Vector3 offset = other.transform.position - transform.position;
+                offset.y = 0f;
+                if (offset.sqrMagnitude <= nearestSqr)
+                {
+                    nearestSqr = offset.sqrMagnitude;
+                    nearest = other;
+                }
+            }
+            return nearest;
+        }
+
         private void Update()
         {
             // A destroyed target compares equal to null in Unity.
             if (Target == null || !Target.IsAlive)
             {
                 Target = null;
-                return;
+
+                // Only idle units pick fights, so a move order isn't hijacked on the way.
+                if (self.Movement.IsMoving)
+                    return;
+                Target = FindNearestHostile(autoAcquireRange);
+                if (Target == null)
+                    return;
             }
 
             if (!IsInRange(Target))

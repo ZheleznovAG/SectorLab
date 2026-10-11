@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1572474740357795940, guid: a9297c54306460b4cb6cd9d42a1866fe, type: 3}
+      propertyPath: autoAcquireRange
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3075806903691072832, guid: a9297c54306460b4cb6cd9d42a1866fe, type: 3}
       propertyPath: team
       value: 1

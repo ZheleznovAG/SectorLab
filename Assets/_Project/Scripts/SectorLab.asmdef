@@ -2,7 +2,8 @@
     "name": "SectorLab",
     "rootNamespace": "SectorLab",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

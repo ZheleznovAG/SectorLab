@@ -252,6 +252,7 @@ MonoBehaviour:
   damage: 20
   range: 1.5
   cooldown: 1
+  autoAcquireRange: 2.5
 --- !u!1 &2326024267109900034
 GameObject:
   m_ObjectHideFlags: 0

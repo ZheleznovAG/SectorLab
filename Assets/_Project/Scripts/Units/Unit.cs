@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SectorLab.Units
@@ -22,6 +23,20 @@ namespace SectorLab.Units
         public bool IsSelected { get; private set; }
 
         public event Action<Unit> Died;
+
+        // Units currently enabled in the scene; small enough battles to just loop over.
+        private static readonly List<Unit> all = new List<Unit>();
+        public static IReadOnlyList<Unit> All => all;
+
+        private void OnEnable()
+        {
+            all.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            all.Remove(this);
+        }
 
         private void Awake()
         {
