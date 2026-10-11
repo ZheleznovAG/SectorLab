@@ -1,0 +1,108 @@
+using System.Collections;
+using System.Globalization;
+using NUnit.Framework;
+using SectorLab.AI;
+using SectorLab.Battle;
+using SectorLab.Objectives;
+using SectorLab.Units;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+namespace SectorLab.Tests
+{
+    // Scripted plans exercise the real Main/NavMesh/combat. These are not human playtests.
+    public class MainMatchTests
+    {
+        [UnityTest]
+        public IEnumerator FourMainMatchesUseDifferentPlansAndResetTheirState()
+        {
+            string report = "utc,plan,game_seconds,player_score,enemy_score,outcome,ai_decisions,ai_move_orders\n";
+            string[] plans = { "passive", "split", "focus-A", "hold-A-then-flank-B" };
+            for (int run = 0; run < plans.Length; run++)
+            {
+                yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
+                yield return null;
+                var battle = Object.FindFirstObjectByType<BattleController>();
+                var ai = Object.FindFirstObjectByType<EnemyTacticsController>();
+                Assert.That(battle, Is.Not.Null);
+                Assert.That(ai, Is.Not.Null);
+                Assert.That(Unit.All.Count, Is.EqualTo(6), "A new Main must have one unit of each role/team.");
+                Assert.That(battle.State.PlayerScore, Is.Zero);
+                Assert.That(battle.State.EnemyScore, Is.Zero);
+                Assert.That(battle.State.Clock.ElapsedSeconds, Is.LessThan(1));
+                Assert.That(battle.Relays.Count, Is.EqualTo(3));
+                Time.timeScale = 4;
+                if (plans[run] != "passive")
+                {
+                    for (int i = 0; i < Unit.All.Count; i++)
+                    {
+                        Unit unit = Unit.All[i];
+                        if (unit.Team != Team.Player) continue;
+                        int relayIndex = plans[run] != "split" ? 0 : unit.Stats.name == "Tank" ? 0 : unit.Stats.name == "Scout" ? 1 : 2;
+                        RelayPoint relay = battle.Relays[relayIndex];
+                        Assert.That(relay.TryGetApproachPoint(unit, out Vector3 point), Is.True);
+                        Assert.That(unit.Movement.MoveTo(point, relay.GetArrivalDistance(point)), Is.True);
+                        unit.Attack.ClearTarget();
+                    }
+                }
+                float deadline = Time.realtimeSinceStartup + 60;
+                bool flanked = false;
+                while (battle.Outcome == BattleOutcome.InProgress && Time.realtimeSinceStartup < deadline)
+                {
+                    if (plans[run] == "hold-A-then-flank-B" && !flanked && battle.State.Clock.ElapsedSeconds >= 12)
+                    {
+                        for (int i = 0; i < Unit.All.Count; i++)
+                        {
+                            Unit unit = Unit.All[i];
+                            if (unit.Team != Team.Player || unit.Stats.name != "Scout") continue;
+                            RelayPoint relay = battle.Relays[1];
+                            if (relay.TryGetApproachPoint(unit, out Vector3 point) && unit.Movement.MoveTo(point, relay.GetArrivalDistance(point)))
+                            {
+                                unit.Attack.ClearTarget();
+                                flanked = true;
+                            }
+                        }
+                    }
+                    yield return null;
+                }
+                Assert.That(battle.Outcome, Is.Not.EqualTo(BattleOutcome.InProgress), plans[run] + " did not finish.");
+                Assert.That(battle.State.Clock.ElapsedSeconds, Is.LessThanOrEqualTo(180));
+                Assert.That(ai.DecisionCount, Is.GreaterThan(0));
+                Assert.That(ai.MoveOrdersIssued, Is.GreaterThan(0));
+                Assert.That(battle.State.PlayerScore > 0 || battle.State.EnemyScore > 0, Is.True);
+                Assert.That(Time.timeScale, Is.Zero);
+                for (int i = 0; i < Unit.All.Count; i++)
+                {
+                    Assert.That(Unit.All[i].Movement.IsMoving, Is.False);
+                    Assert.That(Unit.All[i].Attack.enabled, Is.False);
+                }
+                report += System.DateTime.UtcNow.ToString("o") + "," + plans[run] + ","
+                    + battle.State.Clock.ElapsedSeconds.ToString("0.0", CultureInfo.InvariantCulture) + ","
+                    + battle.State.PlayerScore.ToString("0.0", CultureInfo.InvariantCulture) + ","
+                    + battle.State.EnemyScore.ToString("0.0", CultureInfo.InvariantCulture) + ","
+                    + battle.Outcome + "," + ai.DecisionCount + "," + ai.MoveOrdersIssued + "\n";
+#if UNITY_EDITOR
+                System.IO.File.WriteAllText(System.IO.Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/W3-main-matches.csv"), report);
+#endif
+                Debug.Log("Main plan " + plans[run] + " finished " + battle.Outcome);
+            }
+        }
+
+        [UnityTearDown]
+        public IEnumerator UnloadMainAndRemoveItsUnitsAndSubscriptions()
+        {
+            Time.timeScale = 1;
+            Scene main = SceneManager.GetSceneByName("Main");
+            if (main.IsValid() && main.isLoaded)
+            {
+                Scene empty = SceneManager.CreateScene("TestsAfterMain");
+                SceneManager.SetActiveScene(empty);
+                yield return SceneManager.UnloadSceneAsync(main);
+            }
+            yield return null;
+            Assert.That(Unit.All.Count, Is.Zero);
+            Assert.That(Time.timeScale, Is.EqualTo(1));
+        }
+    }
+}

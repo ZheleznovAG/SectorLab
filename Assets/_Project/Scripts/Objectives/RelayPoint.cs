@@ -113,6 +113,14 @@ namespace SectorLab.Objectives
             return true;
         }
 
+        public float GetArrivalDistance(Vector3 approach)
+        {
+            Vector3 offset = approach - transform.position;
+            offset.y = 0;
+            // Leave margin inside the capture circle; several agents need room to stop and defend.
+            return Mathf.Max(0.1f, config.radius - offset.magnitude - 0.15f);
+        }
+
         private void LateUpdate()
         {
             if (statusLabel != null && viewCamera != null)

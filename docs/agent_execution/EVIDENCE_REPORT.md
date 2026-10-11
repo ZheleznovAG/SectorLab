@@ -48,7 +48,7 @@ SHA-256 файлов на диске во время запуска тестов
 | G0 | PASS | Аудит, backup, тесты, APK выполнены; исходные fixes сохранены в `9853006`, `970827a`, `ec1a944`; контракт/аудит — `d15a009`, завершение учёта — текущий docs-коммит |
 | G1 | PASS | MatchState/Clock, 29 EditMode + 43 PlayMode, Main pause/result/restart и осмотренный экран Victory 45:0 |
 | G2 | PASS | A/B/C capture+score+heal; 46 EditMode + 61 PlayMode; 18/18 NavMesh, Main Victory 45:0 и repair/contest |
-| G3 | TODO | Нет AI за узлы и новой полной партии |
+| G3 | PASS | AI 53/53 EditMode, 67/67 PlayMode, четыре полные партии Main и наблюдаемый выигрыш/проигрыш |
 | G4 | TODO | VContainer отсутствует |
 | G5 | TODO | Addressables/UniTask/respawn/async cleanup отсутствуют |
 | G6 | TODO | Нет жестов камеры, UI blocking и нового HUD |
@@ -86,3 +86,17 @@ APK built v1.0, а автоматический PlayMode-прогон к Playtes
 
 Компиляция прошла, groundTruth consoleErrors=0 после финальной проверки.
 AI и respawn ещё отсутствуют; это не полный плейтест и не финальная Android-сборка.
+
+## W3 — соперник и полный игровой цикл
+
+Правила: `359778b`; runtime/сцена: `116bb28`; сценарии/прибытие группы —
+`git log -1 -- Assets/_Project/Tests/PlayMode/MainMatchTests.cs`.
+Проверки: [53/53 EditMode](evidence/tests-W3.1-editmode.json),
+[67/67 PlayMode](evidence/tests-W3.3-playmode.json),
+[реальный AI в Main](evidence/W3-main-ai.txt), [Game View](evidence/W3-main-ai.png).
+Четыре партии Main с обычными move/attack и ускорением timeScale=4 завершились:
+[CSV](evidence/W3-main-matches.csv). При удержании A и обходе Scout на B
+получена Victory 45:8,2. Остальные три плана дали Defeat. Начальная серия до
+исправления группового прибытия сохранена отдельно; её результаты не скрываются.
+Это автоматические игровые сценарии, не Playtest verified. После respawn/карты
+баланс нужно повторить; конечный Android build и человеческая проверка впереди.

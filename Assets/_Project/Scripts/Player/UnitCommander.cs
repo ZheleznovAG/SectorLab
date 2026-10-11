@@ -131,7 +131,7 @@ namespace SectorLab.Player
                 SetMarkerVisible(false);
                 return false;
             }
-            return MoveSelected(point);
+            return MoveSelected(point, relay.GetArrivalDistance(point));
         }
 
         private void Select(Unit unit)
@@ -153,9 +153,9 @@ namespace SectorLab.Player
             SetMarkerVisible(false);
         }
 
-        private bool MoveSelected(Vector3 point)
+        private bool MoveSelected(Vector3 point, float stoppingDistance = 0f)
         {
-            bool accepted = Selected.Movement.MoveTo(point);
+            bool accepted = Selected.Movement.MoveTo(point, stoppingDistance);
             // Only an accepted move replaces the previous attack order.
             if (accepted && Selected.Attack != null)
                 Selected.Attack.ClearTarget();
