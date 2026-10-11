@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee9aa3fd3854ffab6c516338f05149d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: SectorLab::SectorLab.Objectives.RelayPoint
   config: {fileID: 11400000, guid: 312d168334ac846498b208681d058066, type: 2}
   areaRenderer: {fileID: 566043752}
@@ -408,6 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101675100}
   - component: {fileID: 101675099}
+  - component: {fileID: 101675101}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -448,6 +449,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &101675101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101675098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b1fc0b7d4344d1abdcfab54d97c673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SectorLab::SectorLab.AI.EnemyTacticsController
+  battle: {fileID: 101675099}
 --- !u!1 &171265655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1116,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
   m_SerializedVersion: 0
   m_OverrideArea: 0
@@ -1214,7 +1228,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee9aa3fd3854ffab6c516338f05149d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: SectorLab::SectorLab.Objectives.RelayPoint
   config: {fileID: 11400000, guid: 459b88516e02b5f408ab39d6e6209372, type: 2}
   areaRenderer: {fileID: 1843766637}
@@ -2873,7 +2887,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
   m_SerializedVersion: 0
   m_OverrideArea: 0
@@ -3270,7 +3284,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
   m_SerializedVersion: 0
   m_OverrideArea: 0
@@ -3584,7 +3598,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee9aa3fd3854ffab6c516338f05149d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: SectorLab::SectorLab.Objectives.RelayPoint
   config: {fileID: 11400000, guid: a71f4aa5b4df51c4d8bc33dbde74e7f5, type: 2}
   areaRenderer: {fileID: 1582250677}
