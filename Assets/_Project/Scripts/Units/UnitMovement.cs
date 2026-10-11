@@ -32,20 +32,28 @@ namespace SectorLab.Units
             Agent.speed = speed;
         }
 
-        public void MoveTo(Vector3 point)
+        public bool MoveTo(Vector3 point)
         {
-            Destination = point;
-            if (!Agent.isOnNavMesh)
-                return;
+            if (!Agent.isActiveAndEnabled || !Agent.isOnNavMesh)
+            {
+                Stop();
+                return false;
+            }
 
-            Agent.SetDestination(point);
+            if (!Agent.SetDestination(point))
+            {
+                Stop();
+                return false;
+            }
+            Destination = point;
             IsMoving = true;
+            return true;
         }
 
         public void Stop()
         {
             IsMoving = false;
-            if (Agent.isOnNavMesh)
+            if (Agent.isActiveAndEnabled && Agent.isOnNavMesh)
             {
                 Agent.ResetPath();
                 // Otherwise the agent would coast to a stop instead of halting on the spot.
@@ -55,10 +63,20 @@ namespace SectorLab.Units
 
         private void Update()
         {
-            if (!IsMoving || Agent.pathPending)
+            if (!IsMoving)
                 return;
 
-            if (Agent.remainingDistance <= arriveDistance)
+            if (!Agent.isActiveAndEnabled || !Agent.isOnNavMesh)
+            {
+                Stop();
+                return;
+            }
+            if (Agent.pathPending)
+                return;
+
+            // A partial path may end short of Destination; IsMoving describes the agent,
+            // not a promise that the requested point is reachable.
+            if (!Agent.hasPath || Agent.pathStatus == NavMeshPathStatus.PathInvalid || Agent.remainingDistance <= arriveDistance)
                 Stop();
         }
     }
