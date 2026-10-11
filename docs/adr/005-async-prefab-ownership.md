@@ -48,3 +48,17 @@ API проверяется по установленным пакетам, не 
 после cancel/dispose; missing key; отсутствие двойного respawn; freeze в pause;
 safe NavMesh spawn; 10 Main restarts с нулевыми остатками handles/юнитов.
 Content build/Player проверяются отдельно: Editor AssetDatabase не доказывает APK.
+
+W5.5: UnitLifecycle создаёт шесть слотов последовательно под loading panel,
+пока игровые часы стоят. После успешного старта подписывается на смерти и
+использует MatchClock delta для RespawnTimer. На паузе завершившаяся загрузка
+respawn удерживает lease, ожидает state.IsRunning и только затем создаёт копию.
+Завершение матча отменяет pending requests/countdowns; оставшиеся видимые юниты
+заморожены и сохраняют свои prefab references до unload/restart.
+
+Безопасный spawn — ограниченный поиск около базы по существующему NavMesh,
+проверка Default-layer препятствий и расстояния до живых юнитов. Если место
+занято, slot остаётся waiting с нулевым countdown и повторяется на следующем
+game tick. Радиус берётся из фактически созданного NavMeshAgent данной роли;
+повторная проверка после await защищает от изменения места во время загрузки.
+Никакой телепортации существующих units или создания копии внутри стены.

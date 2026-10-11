@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.4**, следующий этап — **W5.5**.
+Последняя завершённая задача — **W5.5**, следующий этап — **W5.6**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -96,7 +96,7 @@ diff; другие настройки проекта не затронуты.
 | --- | --- | --- |
 | FR-001 | PARTIAL | Сетевой службы нет; запуск APK офлайн не проверен / W8 |
 | FR-002 | PARTIAL | Main с ареной сверху существует; новая партия ещё не реализована / W2–W3 |
-| FR-003 | BASELINE_PASS | Роли/UnitStats/prefab присутствуют, stats-тест прошёл / повторить W5 |
+| FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
 | FR-004 | BASELINE_PASS | Click и virtual Touchscreen выбирают/двигают юнита / W6 |
 | FR-005 | BASELINE_PASS | Атака/дальность/LOS/погоня проверены текущей регрессией |
 | FR-006 | TODO | Камера неподвижна, tap обрабатывается на press, UI blocking нет / W6 |
@@ -106,7 +106,7 @@ diff; другие настройки проекта не затронуты.
 | FR-010 | PASS | Health.Heal и C: 6 HP/с обеим сторонам, Max, fractional buffer, смерть/уход/contest/pause/finish проверены |
 | FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
 | FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
-| FR-013 | PARTIAL | RespawnTimer 10 игровых с и UnitRoster проверены; жизненный цикл Main подключается в W5.5 |
+| FR-013 | PASS | Main: все роли обеих команд, 10 игровых с, full HP, без дублей; pause и blocked base / W5.5 |
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
 | FR-015 | PARTIAL | Есть силы/HP/result, нет очков/времени/узлов/respawn / W6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
@@ -445,3 +445,30 @@ W5.4 зафиксирован в `1395333`. W5.5a / FR-003/013: чистый Res
 **63/63 EditMode PASS** ([лог](evidence/tests-W5.5a-editmode.json)): countdown,
 pause/finish, 15/30/60/144 FPS, invalid delta и неверный roster.
 Это первый небольшой коммит W5.5; старт/возрождение Main ещё не подключены.
+
+W5.5a зафиксирован в `ca8ff08`. W5.5b / FR-003/013/022/023: шесть прежних
+scene prefab instances заменены UnitRoster + UnitLifecycle через один scoped
+UnitFactory. Исходные prefab assets/UnitStats и NavMesh не заменены. Countdown
+обновляется принятым игровым delta; late respawn load на pause ожидает resume.
+Безопасный spawn проверяется до и после загрузки. Занятая база откладывает
+возрождение, завершение матча отменяет countdown/pending requests.
+
+**84/84 PlayMode PASS** ([лог](evidence/tests-W5.5b-playmode.json)):
+все шесть roles/team respawn через 10 с, full HP/NavMesh, повторный lethal damage,
+pause, wipe команды без окончания, blocked base/defer и cancel при finish;
+loaded prefab на pause не создаёт clone. Четыре полных Main партии завершились,
+в этом прогоне все Defeat ([CSV](evidence/W5.5b-main-matches.csv)); баланс W7 открыт.
+После unload тесты проверяют ноль Unit.All и owned handles.
+
+Первый и второй прогоны дали 83/84, сохранены отдельно
+([1](evidence/tests-W5.5b-attempt1-playmode.json), [2](evidence/tests-W5.5b-attempt2-playmode.json)).
+Ранняя гипотеза о причине — общий precheck radius — не подтвердилась как причина
+FAIL. Радиус всё же приведён к фактическому NavMeshAgent роли. Диагностика второго
+прогона показала нормальное завершение матча по очкам раньше пятого respawn:
+isolated lifecycle fixture теперь исключает relay scoring, полные Main партии
+сохраняют настоящие цели/бой. Runner timeout увеличен до 600 с для расширенной
+регрессии; текущий прогон завершился за штатное время без timeout.
+
+В отдельном обычном Play Mode просмотрены [сцена](evidence/W5.5-main.png) и
+[текущее состояние](evidence/W5.5-main-observation.txt): Ready, 13,1 игровых с,
+три оставшихся юнита на NavMesh, три owned handles; погибшие slots waiting. Это наблюдение реального боя, не доказательство человеческого playtest. HUD ещё baseline alive counter, score/time/respawn UI — W6.

@@ -3,6 +3,7 @@ using System.Reflection;
 using NUnit.Framework;
 using SectorLab.AI;
 using SectorLab.Battle;
+using SectorLab.Units;
 using UnityEngine;
 using UnityEngine.TestTools;
 using VContainer;
@@ -12,11 +13,14 @@ namespace SectorLab.Tests
     public sealed class MatchScopeTests
     {
         private GameObject root;
+        private readonly System.Collections.Generic.List<UnitRoster> rosters = new System.Collections.Generic.List<UnitRoster>();
 
         [TearDown]
         public void Cleanup()
         {
             if (root != null) Object.DestroyImmediate(root);
+            foreach (UnitRoster roster in rosters) Object.DestroyImmediate(roster);
+            rosters.Clear();
             Time.timeScale = 1;
         }
 
@@ -26,9 +30,19 @@ namespace SectorLab.Tests
             root.SetActive(false);
             var battle = root.AddComponent<BattleController>();
             var ai = root.AddComponent<EnemyTacticsController>();
+            var lifecycle = root.AddComponent<UnitLifecycle>();
+            lifecycle.enabled = false; // This fixture tests DI; Main tests exercise actual asynchronous startup.
+            var roster = ScriptableObject.CreateInstance<UnitRoster>();
+            roster.slots = new UnitSpawnSlot[6];
+            for (int i = 0; i < 6; i++) roster.slots[i] = new UnitSpawnSlot {
+                team = i < 3 ? Team.Player : Team.Enemy, role = (UnitRole)(i % 3), prefabKey = "fixture"
+            };
+            rosters.Add(roster);
             var scope = root.AddComponent<GameLifetimeScope>();
             typeof(GameLifetimeScope).GetField("battle", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(scope, battle);
             typeof(GameLifetimeScope).GetField("enemyTactics", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(scope, ai);
+            typeof(GameLifetimeScope).GetField("roster", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(scope, roster);
+            typeof(GameLifetimeScope).GetField("unitLifecycle", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(scope, lifecycle);
             root.SetActive(true);
             return scope;
         }
