@@ -12,7 +12,7 @@
       { "name": "Main pause/result/restart observation", "status": "PASS", "evidence": "evidence/W1-main-observations.txt" },
       { "name": "Main visible result and score", "status": "PASS", "evidence": "evidence/W1-main-victory.png" }
     ] },
-    { "id": "G2", "status": "TODO", "checks": [] },
+    { "id": "G2", "status": "IN_PROGRESS", "checks": [] },
     { "id": "G3", "status": "TODO", "checks": [] },
     { "id": "G4", "status": "TODO", "checks": [] },
     { "id": "G5", "status": "TODO", "checks": [] },

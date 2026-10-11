@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W1.3**, следующий этап — **W2.1**.
+Последняя завершённая задача — **W2.1**, следующий этап — **W2.2**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -77,7 +77,7 @@ diff; другие настройки проекта не затронуты.
 | --- | --- | --- |
 | W0 / G0 | PASS: аудит/backup/регрессия/build и сохранение исходных правок выполнены ||
 | W1 / G1 | PASS | 45 очков/180 с/Draw, часы, pause/resume, остановка боя, result/restart; 29 EditMode + 43 PlayMode и Main Game View |
-| W2 / G2 | TODO | A/B/C, захват/нейтрализация/contest, очки и Heal |
+| W2 / G2 | IN_PROGRESS | RelayConfig и чистые capture/neutralize/contest/empty rules проверены; далее сцена, команды, очки и Heal |
 | W3 / G3 | TODO | Детерминированный AI за узлы, реальные полные партии |
 | W4 / G4 | TODO | Проверенный пакет VContainer, composition root служб матча |
 | W5 / G5 | TODO | Addressables + UniTask, ownership, отмена/ошибка, respawn 10 с, 10 рестартов |
@@ -101,7 +101,7 @@ diff; другие настройки проекта не затронуты.
 | FR-005 | BASELINE_PASS | Атака/дальность/LOS/погоня проверены текущей регрессией |
 | FR-006 | TODO | Камера неподвижна, tap обрабатывается на press, UI blocking нет / W6 |
 | FR-007 | TODO | Узлов A/B/C нет / W2 |
-| FR-008 | TODO | Захват/нейтрализация/contest отсутствуют / W2 |
+| FR-008 | PARTIAL | RelayState проверен: 5/10 с, contest, сохранение пустого прогресса, эффект после capture; подключение сцены — W2.2 |
 | FR-009 | TODO | Очков нет / W1–W2 |
 | FR-010 | TODO | Health.Heal и ремонт отсутствуют / W2 |
 | FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
@@ -214,3 +214,15 @@ Restart перезагружает Main, уничтожение контролл
 Компиляция PASS, EditMode **29/29**, PlayMode **43/43**, без failed/skipped/inconclusive. Логи: [EditMode](evidence/tests-W1.3-editmode.json), [PlayMode](evidence/tests-W1.3-playmode.json). Main: pause сохраняла 1,5 с между наблюдениями; result Victory 45:0 остановил
 время; Restart вернул 0:0/InProgress и 6 юнитов ([наблюдения](evidence/W1-main-observations.txt)). Первая проверка экрана обнаружила обрезанный счёт; BestFit исправлен,
 PlayMode повторно прошёл 43/43, [Game View](evidence/W1-main-victory.png) осмотрен. Исход в Main вызван техническим тестовым вводом скорости очков: A/B пока отсутствуют. Это проверка интеграции через CLI, не человеческий плейтест. Решение: [ADR-002](../adr/002-match-time-and-outcomes.md). G1 закрыт; G2–G9 открыты. Android baseline не выдаётся за APK с новым кодом.
+
+W1.3 зафиксирован в `e5cbf53`. W2.1 / FR-007/008: `RelayConfig` хранит
+kind/radius/capture/score/heal, `RelayState` моделирует [-1,+1]. Эффект считается
+только для части тика после полного захвата, не за потраченное на capture время.
+Число союзников не ускоряет захват; contest блокирует эффект; пустой захваченный
+узел работает, частичный прогресс сохраняется. Добавлены 13 EditMode случаев,
+итог **42/42 PASS** ([лог](evidence/tests-W2.1-editmode.json)).
+Первый тестовый прогон **38/42 PASS, 4 FAIL**: точное сравнение дробного времени
+с нулём вместо допуска; исправлен тестовый tolerance 1e-6, исходный
+[FAIL-лог](evidence/tests-W2.1-attempt1-editmode.json) сохранён. Начальная ошибка
+доступа к private Epsilon исправлена до запуска тестов; константа теперь internal.
+G2 остаётся открытым: объектов A/B/C, начисления и ремонта в Main ещё нет.

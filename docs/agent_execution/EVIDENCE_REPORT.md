@@ -47,7 +47,7 @@ SHA-256 файлов на диске во время запуска тестов
 | --- | --- | --- |
 | G0 | PASS | Аудит, backup, тесты, APK выполнены; исходные fixes сохранены в `9853006`, `970827a`, `ec1a944`; контракт/аудит — `d15a009`, завершение учёта — текущий docs-коммит |
 | G1 | PASS | MatchState/Clock, 29 EditMode + 43 PlayMode, Main pause/result/restart и осмотренный экран Victory 45:0 |
-| G2 | TODO | Нет A/B/C и capture/score/heal |
+| G2 | IN_PROGRESS | Чистые capture rules 42/42 EditMode; сцена/очки/ремонт ещё впереди |
 | G3 | TODO | Нет AI за узлы и новой полной партии |
 | G4 | TODO | VContainer отсутствует |
 | G5 | TODO | Addressables/UniTask/respawn/async cleanup отсутствуют |
