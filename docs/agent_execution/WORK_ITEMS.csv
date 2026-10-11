@@ -4,7 +4,7 @@ W0.2,W0,Review and commit combat/LOS fixes,W0.1,Focused tests; honest staged dif
 W0.3,W0,Review and commit navigation fixes,W0.2,Movement tests + compile,G0,TODO,PASS,970827a
 W0.4,W0,Review and commit selection fixes,W0.3,Selection tests + UI tap,G0,TODO,PASS,ec1a944
 W0.5,W0,Sync docs and autonomous instructions,W0.4,No lost changes; baseline snapshot,G0,TODO,PASS,IMPLEMENTATION_STATUS.md
-W1.1,W1,Define match score/outcome model,W0.5,EditMode score/outcome,G1,TODO,TODO,
+W1.1,W1,Define match score/outcome model,W0.5,EditMode score/outcome,G1,TODO,PASS,evidence/tests-W1.1-editmode.json
 W1.2,W1,Implement game clock and pause,W1.1,EditMode clock + PlayMode pause,G1,TODO,TODO,
 W1.3,W1,Integrate match result and restart,W1.2,PlayMode score/time/draw,G1,TODO,TODO,
 W2.1,W2,Implement relay capture rules,W1.2,EditMode contested/neutralize,G2,TODO,TODO,
