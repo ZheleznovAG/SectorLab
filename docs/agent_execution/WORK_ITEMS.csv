@@ -25,7 +25,7 @@ W5.4,W5,Add async lifecycle and cancellation,W5.3,Restart during load,G5,TODO,PA
 W5.5,W5,Implement 10s unit respawn both teams,W5.4,PlayMode death/respawn/pause,G5,TODO,PASS,evidence/tests-W5.5a-editmode.json; evidence/tests-W5.5b-playmode.json
 W5.6,W5,"Failure, cleanup and 10 restarts",W5.5,Failure/cancellation/leak tests,G5,TODO,PASS,evidence/tests-W5.6-playmode.json; evidence/W5.6-main-restarts.csv
 W6.1,W6,Input gesture handling tap/drag/UI,W5.6,Virtual Touchscreen tests,G6,TODO,PASS,evidence/tests-W6.1-playmode.json
-W6.2,W6,Camera pan/zoom bounds,W6.1,Editor/mobile gesture check,G6,TODO,TODO,
+W6.2,W6,Camera pan/zoom bounds,W6.1,Editor/mobile gesture check,G6,TODO,PASS,evidence/tests-W6.2-playmode.json; evidence/W6.2-camera-observation.txt
 W6.3,W6,Complete HUD time score relays respawn,W6.2,PlayMode HUD + screenshots,G6,TODO,TODO,
 W6.4,W6,Safe area and layout checks,W6.3,16:9 20:9 4:3 screenshots,G6,TODO,TODO,
 W6.5,W6,Minimal tutorial and pause controls,W6.4,Manual test,G6,TODO,TODO,

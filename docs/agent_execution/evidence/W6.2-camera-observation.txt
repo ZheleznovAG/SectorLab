@@ -1,0 +1,3 @@
+2026-10-11T20:20:14.9891389Z
+Editor observation through production Pan/Zoom API; match paused.
+Lifecycle=Ready; initialPosition=(0.00, 14.74, -10.32); initialDistance=18; focus=(-2.41, 0.00, 0.00); distance=14,4; position=(-2.41, 11.80, -8.26); angle=(55.00, 0.00, 0.00)

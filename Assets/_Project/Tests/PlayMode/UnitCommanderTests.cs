@@ -366,6 +366,38 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator DragAndPinchMoveTheSubscribedCameraWithoutIssuingOrders()
+        {
+            camera.gameObject.SetActive(false);
+            var tactical = camera.gameObject.AddComponent<SectorLab.Presentation.TacticalCamera>();
+            SetField(tactical, "commander", commander);
+            camera.gameObject.SetActive(true);
+            var screen = InputSystem.AddDevice<Touchscreen>();
+            Vector2 start = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            BeginTouch(1, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            MoveTouch(1, start + Vector2.right * 100, queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(1, start + Vector2.right * 100, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(tactical.Focus.sqrMagnitude, Is.GreaterThan(0));
+            float distance = tactical.Distance;
+            BeginTouch(2, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            BeginTouch(3, start + Vector2.right * 100, queueEventOnly: true, screen: screen);
+            yield return null;
+            MoveTouch(3, start + Vector2.right * 200, queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(3, start + Vector2.right * 200, queueEventOnly: true, screen: screen);
+            yield return null;
+            EndTouch(2, start, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(tactical.Distance, Is.LessThan(distance));
+            Assert.That(commander.Selected, Is.Null);
+            Assert.That(unit.Movement.IsMoving, Is.False);
+        }
+
+        [UnityTest]
         public IEnumerator MouseClickSelectsOnlyOnRelease()
         {
             var mouse = InputSystem.AddDevice<Mouse>();
