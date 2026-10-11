@@ -23,7 +23,18 @@ namespace SectorLab.Tests
             Object.DestroyImmediate(root);
         }
 
-        private Unit CreateUnit(Team team, Vector3 position, int maxHealth = 100, float autoAcquireRange = 0f)
+        private static UnitStats Stats(int maxHealth, float speed, int damage, float range, float cooldown)
+        {
+            var stats = ScriptableObject.CreateInstance<UnitStats>();
+            stats.maxHealth = maxHealth;
+            stats.speed = speed;
+            stats.damage = damage;
+            stats.attackRange = range;
+            stats.attackCooldown = cooldown;
+            return stats;
+        }
+
+        private Unit CreateUnit(Team team, Vector3 position, int maxHealth = 100, float autoAcquireRange = 0f, UnitStats stats = null)
         {
             var go = new GameObject(team + "Unit");
             go.SetActive(false);
@@ -33,6 +44,7 @@ namespace SectorLab.Tests
             Unit unit = go.AddComponent<Unit>();
             SetField(unit, "team", team);
             SetField(unit, "maxHealth", maxHealth);
+            SetField(unit, "stats", stats);
             UnitAttack attack = go.AddComponent<UnitAttack>();
             SetField(attack, "autoAcquireRange", autoAcquireRange);
             go.SetActive(true);
@@ -138,6 +150,42 @@ namespace SectorLab.Tests
 
             Assert.That(runner.Attack.Target, Is.Null);
             Assert.That(runner.Movement.IsMoving, Is.True);
+        }
+
+        [Test]
+        public void Stats_AreAppliedToHealthMovementAndAttack()
+        {
+            Unit tank = CreateUnit(Team.Player, Vector3.zero, stats: Stats(250, 2f, 12, 1.5f, 1.2f));
+
+            Assert.That(tank.Health.Max, Is.EqualTo(250));
+            Assert.That(tank.Movement.Speed, Is.EqualTo(2f));
+            Assert.That(tank.Attack.Damage, Is.EqualTo(12));
+            Assert.That(tank.Attack.Range, Is.EqualTo(1.5f));
+            Assert.That(tank.Attack.Cooldown, Is.EqualTo(1.2f));
+        }
+
+        [UnityTest]
+        public IEnumerator RangedUnit_HitsFromDistanceWithoutMoving()
+        {
+            Unit ranger = CreateUnit(Team.Player, Vector3.zero, stats: Stats(70, 3f, 20, 4f, 1f));
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(3.5f, 0f, 0f));
+
+            ranger.Attack.SetTarget(enemy);
+            yield return null;
+
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max - 20));
+            Assert.That(ranger.transform.position, Is.EqualTo(Vector3.zero));
+        }
+
+        [UnityTest]
+        public IEnumerator IdleRangedUnit_AcquiresAnythingWithinWeaponRange()
+        {
+            Unit ranger = CreateUnit(Team.Player, Vector3.zero, autoAcquireRange: 2.5f, stats: Stats(70, 3f, 20, 4f, 1f));
+            Unit enemy = CreateUnit(Team.Enemy, new Vector3(3.5f, 0f, 0f));
+
+            yield return null;
+
+            Assert.That(ranger.Attack.Target, Is.SameAs(enemy));
         }
 
         [UnityTest]

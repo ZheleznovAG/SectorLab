@@ -9,12 +9,15 @@ namespace SectorLab.Units
     public class Unit : MonoBehaviour
     {
         [SerializeField] private Team team = Team.Player;
+        [Tooltip("Role numbers. When set, they override maxHealth here and the movement/attack fields.")]
+        [SerializeField] private UnitStats stats;
         [SerializeField, Min(1)] private int maxHealth = 100;
         [SerializeField] private GameObject selectionIndicator;
 
         private UnitAttack attack;
 
         public Team Team => team;
+        public UnitStats Stats => stats;
         public Health Health { get; private set; }
         public bool IsAlive => !Health.IsDead;
         public UnitMovement Movement { get; private set; }
@@ -41,6 +44,13 @@ namespace SectorLab.Units
         private void Awake()
         {
             Movement = GetComponent<UnitMovement>();
+            if (stats != null)
+            {
+                maxHealth = stats.maxHealth;
+                Movement.Configure(stats.speed);
+                if (Attack != null)
+                    Attack.Configure(stats);
+            }
             Health = new Health(maxHealth);
             Health.Died += OnDied;
             SetSelected(false);

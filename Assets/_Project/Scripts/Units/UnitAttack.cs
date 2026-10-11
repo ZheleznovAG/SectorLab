@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace SectorLab.Units
 {
-    // Simple melee-range attack: walk up to the target, then hit it every cooldown until it dies.
+    // Walk until the target is within range, then hit it every cooldown until it dies.
+    // Range decides melee vs ranged; an optional line flashes on each hit so ranged shots are readable.
     [RequireComponent(typeof(Unit))]
     public class UnitAttack : MonoBehaviour
     {
@@ -11,16 +12,28 @@ namespace SectorLab.Units
         [SerializeField, Min(0.01f)] private float cooldown = 1f;
         [Tooltip("An idle unit attacks the nearest hostile within this distance. 0 = only on order.")]
         [SerializeField, Min(0f)] private float autoAcquireRange;
+        [SerializeField] private LineRenderer shotLine;
+        [SerializeField, Min(0f)] private float shotLineDuration = 0.1f;
 
         private Unit self;
         private float nextAttackTime;
+        private float hideShotLineTime;
 
         public Unit Target { get; private set; }
         public float Range => range;
+        public int Damage => damage;
+        public float Cooldown => cooldown;
 
         private void Awake()
         {
             self = GetComponent<Unit>();
+        }
+
+        public void Configure(UnitStats stats)
+        {
+            damage = stats.damage;
+            range = stats.attackRange;
+            cooldown = stats.attackCooldown;
         }
 
         public void SetTarget(Unit target)
@@ -41,6 +54,19 @@ namespace SectorLab.Units
             Vector3 offset = target.transform.position - transform.position;
             offset.y = 0f;
             return offset.sqrMagnitude <= range * range;
+        }
+
+        private void ShowShotLine(Vector3 targetPosition)
+        {
+            if (shotLine == null)
+                return;
+
+            shotLine.useWorldSpace = true;
+            shotLine.positionCount = 2;
+            shotLine.SetPosition(0, transform.position);
+            shotLine.SetPosition(1, targetPosition);
+            shotLine.enabled = true;
+            hideShotLineTime = Time.time + shotLineDuration;
         }
 
         private Unit FindNearestHostile(float maxDistance)
@@ -68,6 +94,9 @@ namespace SectorLab.Units
 
         private void Update()
         {
+            if (shotLine != null && shotLine.enabled && Time.time >= hideShotLineTime)
+                shotLine.enabled = false;
+
             // A destroyed target compares equal to null in Unity.
             if (Target == null || !Target.IsAlive)
             {
@@ -76,7 +105,9 @@ namespace SectorLab.Units
                 // Only idle units pick fights, so a move order isn't hijacked on the way.
                 if (self.Movement.IsMoving)
                     return;
-                Target = FindNearestHostile(autoAcquireRange);
+                // Anything already within weapon reach is fair game, even past the usual alert distance.
+                float alert = autoAcquireRange > 0f ? Mathf.Max(autoAcquireRange, range) : 0f;
+                Target = FindNearestHostile(alert);
                 if (Target == null)
                     return;
             }
@@ -92,6 +123,7 @@ namespace SectorLab.Units
             if (Time.time >= nextAttackTime)
             {
                 nextAttackTime = Time.time + cooldown;
+                ShowShotLine(Target.transform.position);
                 Target.Health.TakeDamage(damage);
             }
         }
