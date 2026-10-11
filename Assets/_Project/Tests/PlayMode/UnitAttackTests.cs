@@ -320,5 +320,20 @@ namespace SectorLab.Tests
             Assert.That(enemy == null, Is.True, "Dead unit should be destroyed");
             Assert.That(attacker.Attack.Target == null, Is.True);
         }
+
+        [UnityTest]
+        public IEnumerator HealingDoesNotShowDamageFlash()
+        {
+            Unit unit = CreateUnit(Team.Player, Vector3.zero);
+            unit.gameObject.AddComponent<MeshRenderer>();
+            var flash = unit.gameObject.AddComponent<DamageFlash>();
+            yield return null;
+            unit.Health.TakeDamage(10);
+            Assert.That(flash.IsFlashing, Is.True);
+            yield return new WaitForSeconds(0.2f);
+            Assert.That(flash.IsFlashing, Is.False);
+            unit.Health.Heal(6);
+            Assert.That(flash.IsFlashing, Is.False);
+        }
     }
 }

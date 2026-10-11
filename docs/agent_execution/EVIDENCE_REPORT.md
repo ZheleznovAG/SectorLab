@@ -47,7 +47,7 @@ SHA-256 файлов на диске во время запуска тестов
 | --- | --- | --- |
 | G0 | PASS | Аудит, backup, тесты, APK выполнены; исходные fixes сохранены в `9853006`, `970827a`, `ec1a944`; контракт/аудит — `d15a009`, завершение учёта — текущий docs-коммит |
 | G1 | PASS | MatchState/Clock, 29 EditMode + 43 PlayMode, Main pause/result/restart и осмотренный экран Victory 45:0 |
-| G2 | IN_PROGRESS | Чистые capture rules 42/42 EditMode; сцена/очки/ремонт ещё впереди |
+| G2 | PASS | A/B/C capture+score+heal; 46 EditMode + 61 PlayMode; 18/18 NavMesh, Main Victory 45:0 и repair/contest |
 | G3 | TODO | Нет AI за узлы и новой полной партии |
 | G4 | TODO | VContainer отсутствует |
 | G5 | TODO | Addressables/UniTask/respawn/async cleanup отсутствуют |
@@ -69,3 +69,20 @@ APK built v1.0, а автоматический PlayMode-прогон к Playtes
 [Main observations](evidence/W1-main-observations.txt) получены из живой сцены
 через CLI: pause, технический score outcome, Restart. [Game View](evidence/W1-main-victory.png)
 проверен визуально после исправления обрезанного счёта и повторной регрессии. Обычные очки от узлов ещё не подключены. APK W0 содержит baseline, не W1.
+
+## W2 — реальные узлы, команды и эффект
+
+Правила: `3a2a9c7`; сцена: `3d2ab70`; команды: `a578f6f`; счёт: `b8e5cd7`;
+ремонт — `git log -1 -- Assets/_Project/Scripts/Units/Health.cs`.
+Итоговые [46/46 EditMode](evidence/tests-W2.5-editmode.json) и
+[61/61 PlayMode](evidence/tests-W2.5-playmode.json) с UTC/хешами входов.
+Ранние FAIL-логи W2.1/W2.4 сохранены, сравнение дробных величин исправлено на
+допуск 1e-6. Main проверялась через CLI; техническое Warp использовалось только
+в проверочном сценарии, игровые команды по tap идут обычным NavMesh-путём.
+
+- [18/18 подходов и захват](evidence/W2-scene-check.txt), [Game View](evidence/W2-owned.png).
+- [45:0 от A/B](evidence/W2-score-check.txt), [результат](evidence/W2-score.png).
+- [C: +18 HP за 3 с, без лечения на pause/contest](evidence/W2-heal-check.txt), [спорный C](evidence/W2-heal-contested.png).
+
+Компиляция прошла, groundTruth consoleErrors=0 после финальной проверки.
+AI и respawn ещё отсутствуют; это не полный плейтест и не финальная Android-сборка.

@@ -11,7 +11,7 @@ W2.1,W2,Implement relay capture rules,W1.2,EditMode contested/neutralize,G2,TODO
 W2.2,W2,Add A B C relay objects in Main,W2.1,Scene + NavMesh play check,G2,TODO,PASS,evidence/W2-scene-check.txt
 W2.3,W2,Implement player orders to relays,W2.2,PlayMode order/no-path,G2,TODO,PASS,evidence/tests-W2.3-playmode.json
 W2.4,W2,Implement scoring A/B,W2.2;W1.1,EditMode score + scenario,G2,TODO,PASS,evidence/tests-W2.4-playmode.json
-W2.5,W2,Implement healing C and Health.Heal,W2.2,EditMode heal + PlayMode,G2,TODO,TODO,
+W2.5,W2,Implement healing C and Health.Heal,W2.2,EditMode heal + PlayMode,G2,TODO,PASS,evidence/tests-W2.5-playmode.json
 W3.1,W3,Implement AI decision rules,W2.4,EditMode priority,G3,TODO,TODO,
 W3.2,W3,Integrate AI movement and attack,W3.1,PlayMode AI interaction,G3,TODO,TODO,
 W3.3,W3,Verify full match outcomes,W3.2;W2.5;W1.3,End-to-end PlayMode,G3,TODO,TODO,

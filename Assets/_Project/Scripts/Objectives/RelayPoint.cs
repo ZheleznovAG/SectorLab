@@ -12,6 +12,8 @@ namespace SectorLab.Objectives
         [SerializeField] private TextMesh statusLabel;
         private MaterialPropertyBlock colors;
         private Camera viewCamera;
+        private readonly System.Collections.Generic.Dictionary<Unit, double> healingFractions = new System.Collections.Generic.Dictionary<Unit, double>(6);
+        private readonly System.Collections.Generic.List<Unit> staleHealing = new System.Collections.Generic.List<Unit>(6);
 
         public RelayConfig Config => config;
         public RelayState State { get; private set; }
@@ -33,6 +35,7 @@ namespace SectorLab.Objectives
             areaRenderer = area;
             statusLabel = label;
             State = new RelayState(data.captureSeconds);
+            healingFractions.Clear();
         }
 
         public bool Contains(Unit unit)
@@ -56,7 +59,37 @@ namespace SectorLab.Objectives
                 else EnemiesPresent++;
             }
             State.Step(seconds, PlayersPresent, EnemiesPresent);
+            HealOccupants();
             UpdateVisual();
+        }
+
+        private bool Owns(Unit unit) => State.Owner == RelayOwner.Player && unit.Team == Team.Player
+            || State.Owner == RelayOwner.Enemy && unit.Team == Team.Enemy;
+
+        private void HealOccupants()
+        {
+            if (config.kind != RelayKind.Repair)
+            {
+                healingFractions.Clear();
+                return;
+            }
+            staleHealing.Clear();
+            foreach (var entry in healingFractions)
+                if (!Contains(entry.Key) || !Owns(entry.Key) || entry.Key.Health.Current == entry.Key.Health.Max)
+                    staleHealing.Add(entry.Key);
+            for (int i = 0; i < staleHealing.Count; i++) healingFractions.Remove(staleHealing[i]);
+            if (State.EffectiveSeconds <= 0) return;
+            for (int i = 0; i < Unit.All.Count; i++)
+            {
+                Unit unit = Unit.All[i];
+                if (!Contains(unit) || !Owns(unit) || unit.Health.Current == unit.Health.Max) continue;
+                healingFractions.TryGetValue(unit, out double fraction);
+                fraction += State.EffectiveSeconds * config.healingPerSecond;
+                int whole = (int)System.Math.Min(unit.Health.Max - unit.Health.Current, System.Math.Floor(fraction + 1e-6));
+                unit.Health.Heal(whole);
+                if (unit.Health.Current == unit.Health.Max) healingFractions.Remove(unit);
+                else healingFractions[unit] = System.Math.Max(0, fraction - whole);
+            }
         }
 
         public bool TryGetApproachPoint(Unit unit, out Vector3 destination)

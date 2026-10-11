@@ -16,6 +16,7 @@ namespace SectorLab.Units
         private Unit unit;
         private MaterialPropertyBlock block;
         private float endTime;
+        private int previousHealth;
 
         public bool IsFlashing { get; private set; }
 
@@ -29,13 +30,20 @@ namespace SectorLab.Units
 
         private void Start()
         {
-            unit.Health.Changed += Flash;
+            previousHealth = unit.Health.Current;
+            unit.Health.Changed += OnHealthChanged;
         }
 
         private void OnDestroy()
         {
             if (unit != null && unit.Health != null)
-                unit.Health.Changed -= Flash;
+                unit.Health.Changed -= OnHealthChanged;
+        }
+
+        private void OnHealthChanged()
+        {
+            if (unit.Health.Current < previousHealth) Flash();
+            previousHealth = unit.Health.Current;
         }
 
         private void Flash()

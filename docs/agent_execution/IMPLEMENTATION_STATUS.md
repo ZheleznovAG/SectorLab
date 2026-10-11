@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W2.4**, следующий этап — **W2.5**.
+Последняя завершённая задача — **W2.5**, следующий этап — **W3.1**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -77,7 +77,7 @@ diff; другие настройки проекта не затронуты.
 | --- | --- | --- |
 | W0 / G0 | PASS: аудит/backup/регрессия/build и сохранение исходных правок выполнены ||
 | W1 / G1 | PASS | 45 очков/180 с/Draw, часы, pause/resume, остановка боя, result/restart; 29 EditMode + 43 PlayMode и Main Game View |
-| W2 / G2 | IN_PROGRESS | RelayConfig и чистые capture/neutralize/contest/empty rules проверены; далее сцена, команды, очки и Heal |
+| W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
 | W3 / G3 | TODO | Детерминированный AI за узлы, реальные полные партии |
 | W4 / G4 | TODO | Проверенный пакет VContainer, composition root служб матча |
 | W5 / G5 | TODO | Addressables + UniTask, ownership, отмена/ошибка, respawn 10 с, 10 рестартов |
@@ -103,7 +103,7 @@ diff; другие настройки проекта не затронуты.
 | FR-007 | PASS | A/B Score и C Repair с отдельными RelayConfig в Main; 18/18 NavMesh approaches доступны |
 | FR-008 | PASS | RelayState и RelayPoint: 5/10 с, contest, пустой прогресс, смерть, пауза/finish, цвет/проценты проверены |
 | FR-009 | PASS | A/B дают 1 очко/с каждый; пустое владение, contest/neutralize/pause, порог в одном тике проверены |
-| FR-010 | TODO | Health.Heal и ремонт отсутствуют / W2 |
+| FR-010 | PASS | Health.Heal и C: 6 HP/с обеим сторонам, Max, fractional buffer, смерть/уход/contest/pause/finish проверены |
 | FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
 | FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
 | FR-013 | TODO | Смерть уничтожает юнита, respawn нет / W5 |
@@ -145,9 +145,9 @@ diff; другие настройки проекта не затронуты.
   соседствует с явным правилом начисления после ухода команды. Для W2 действует
   последнее конкретное правило: полный узел без врага продолжает давать очки
   пустым; contest/нейтрализация останавливают эффект. Закрепить это тестом.
-- Сохранность W0 и модель/интеграция W1 проверены. Следующая задача — **W2.1**:
-  чистая модель захвата, затем A/B/C в Main, команды, очки и ремонт.
-- Применять `09_ACCEPTANCE.md`: G2–G9 не пройдены. Наличие плана не означает
+- W0–W2 проверены. Следующая задача — **W3.1**: детерминированный AI за узлы,
+  затем реальные полные партии; далее composition root и асинхронный respawn.
+- Применять `09_ACCEPTANCE.md`: G3–G9 не пройдены. Наличие плана не означает
   Implementation complete, Device verified, Playtest verified или Release ready.
 
 ## Локальные коммиты этой сессии
@@ -272,3 +272,17 @@ W2.3 зафиксирован в `a578f6f`. W2.4 / FR-009/011: `BattleController
 ([наблюдения](evidence/W2-score-check.txt), [экран](evidence/W2-score.png)).
 Скрипт не подавал искусственные скорости очков. Это проверка интеграции,
 не человеческая тактика/плейтест; HUD и визуальный фон результата дорабатываются в W6.
+
+W2.4 зафиксирован в `b8e5cd7`. W2.5 / FR-010: `Health.Heal` возвращает
+фактическое лечение, ограничивает Max без переполнения int и не воскрешает.
+C хранит дробный остаток отдельно для каждого живого бойца; не копит лечение
+при полном HP, очищает остаток при уходе/смерти/утрате владельца, не лечит в contest.
+Остатки во время паузы не продвигаются. `DamageFlash` реагирует только на уменьшение
+HP; лечение продолжает обновлять существующую HealthBar через Changed.
+
+Итог: compile PASS/0 console errors, **46/46 EditMode**, **61/61 PlayMode**,
+failed/skipped/inconclusive=0 ([EditMode](evidence/tests-W2.5-editmode.json),
+[PlayMode](evidence/tests-W2.5-playmode.json)). Проверены Player/Enemy и 15/30/60/144 FPS. Main: HP после damage/capture **190**, после 3 с ремонта **208**, на паузе и
+при споре остаётся **208** ([лог](evidence/W2-heal-check.txt));
+[жёлтый спорный C](evidence/W2-heal-contested.png) осмотрен. Сценарий использовал
+техническое размещение юнитов и обычную симуляцию, не человеческий плейтест. G2 закрыт. AI, respawn, мобильный HUD и итоговый APK ещё впереди.

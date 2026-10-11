@@ -101,5 +101,68 @@ namespace SectorLab.Tests
             point.transform.position = new Vector3(50, 0, 0);
             Assert.That(point.TryGetApproachPoint(unit, out _), Is.False);
         }
+
+        [TestCase(15, Team.Player)]
+        [TestCase(30, Team.Enemy)]
+        [TestCase(60, Team.Player)]
+        [TestCase(144, Team.Enemy)]
+        public void RepairAccumulatesSixHpPerSecondAtDifferentFrameRates(int fps, Team team)
+        {
+            config.kind = RelayKind.Repair;
+            Unit unit = CreateUnit(team, Vector3.zero);
+            unit.Health.TakeDamage(50);
+            point.Simulate(5);
+            Assert.That(unit.Health.Current, Is.EqualTo(50));
+            for (int i = 0; i < fps * 3; i++) point.Simulate(1.0 / fps);
+            Assert.That(unit.Health.Current, Is.EqualTo(68));
+            point.Simulate(100);
+            Assert.That(unit.Health.Current, Is.EqualTo(100));
+        }
+
+        [Test]
+        public void RepairRequiresPresenceAndStopsDuringContestPauseAndFinish()
+        {
+            config.kind = RelayKind.Repair;
+            Unit player = CreateUnit(Team.Player, Vector3.zero);
+            player.Health.TakeDamage(40);
+            var battle = root.AddComponent<BattleController>();
+            battle.InitializeRelays(new[] { point });
+            battle.AdvanceSimulation(5);
+            battle.AdvanceSimulation(1);
+            Assert.That(player.Health.Current, Is.EqualTo(66));
+            battle.SetPaused(true);
+            battle.AdvanceSimulation(10);
+            Assert.That(player.Health.Current, Is.EqualTo(66));
+            battle.SetPaused(false);
+            var enemy = CreateUnit(Team.Enemy, Vector3.zero);
+            battle.AdvanceSimulation(5);
+            Assert.That(player.Health.Current, Is.EqualTo(66));
+            player.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(new Vector3(3, 0, 0));
+            battle.AdvanceSimulation(5);
+            Assert.That(player.Health.Current, Is.EqualTo(66));
+            enemy.gameObject.SetActive(false);
+            battle.AdvanceSimulation(180);
+            player.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(Vector3.zero);
+            point.State.Step(5, 1, 0);
+            battle.AdvanceSimulation(10);
+            Assert.That(player.Health.Current, Is.EqualTo(66));
+        }
+
+        [Test]
+        public void FullHealthDoesNotBankFutureHealingAndDeadUnitIsNotRepaired()
+        {
+            config.kind = RelayKind.Repair;
+            Unit player = CreateUnit(Team.Player, Vector3.zero);
+            point.Simulate(50);
+            player.Health.TakeDamage(10);
+            point.Simulate(0.05);
+            Assert.That(player.Health.Current, Is.EqualTo(90));
+            point.Simulate(0.05);
+            Assert.That(player.Health.Current, Is.EqualTo(90));
+            player.Health.TakeDamage(100);
+            point.Simulate(20);
+            Assert.That(player.Health.Current, Is.Zero);
+            Assert.That(point.PlayersPresent, Is.Zero);
+        }
     }
 }
