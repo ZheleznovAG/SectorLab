@@ -14,8 +14,8 @@
 ## Подтверждено по репозиторию
 
 - Проект: `[LOCAL_USER_HOME]\Projects\SectorLab`, Git-репозиторий, remote `origin` — GitHub `ZheleznovAG/SectorLab`, ветка `main`.
-- Unity **6000.6.4f1**; URP **17.6.0** (ассеты Mobile/PC в `Assets/Settings/`); Input System **1.20.1** (`activeInputHandler` — новая система). Unity Test Framework не подключён.
-- Сцена `Assets/_Project/Scenes/Main.unity` — единственная, она же в списке сборки. Содержит камеру, направленный свет и арену 10×10 м. Собственного C#-кода нет.
+- Unity **6000.6.4f1**; URP **17.6.0** (ассеты Mobile/PC в `Assets/Settings/`); Input System **1.20.1** (`activeInputHandler` — новая система); Unity Test Framework **1.8.0**.
+- Сцена `Assets/_Project/Scenes/Main.unity` — единственная, она же в списке сборки: камера, свет, арена 10×10 м, 3 юнита игрока и 3 врага, интерфейс результата. Код — сборка `SectorLab` в `Assets/_Project/Scripts/`.
 - Активная платформа — Android (Build Profile `Assets/Settings/Build Profiles/Android.asset`). Android SDK/NDK установлены вместе с Unity.
 - APK собирается без ошибок (`Builds/Android/SectorLab.apk`, ~29 МБ).
 
@@ -31,7 +31,21 @@
 | R0.5 | готово: `Arena` → `Ground`, `Walls` (4), `Obstacles` (3) | `a85bb1b` |
 | R0.6 | готово: только горизонтальная ориентация, материалы пола/стен/препятствий; кадр проверен при 20:9 и 4:3 | `29b593f` |
 | R0.7 || `1557080` |
-| R0.8 | готово: `README.md` | `docs: document R0 baseline` |
+| R0.8 | готово: `README.md` | `36d2748` |
+
+## Статус R1–R3
+
+| Этап | Статус | Коммит(ы) |
+| --- | --- | --- |
+| R1.0 | готово: синяя капсула-юнит | `31b86a1` |
+| R1.1–R1.3 | готово: `UnitMovement` (MoveTowards, остановка ровно в точке), PlayMode-тесты | `6370f9a` |
+| R1.4–R1.8 | готово: `UnitCommander` — луч от `Pointer` (мышь/касание), выбор, приказ, кольцо выделения и маркер; касание проверено виртуальным Touchscreen в тесте | `038ab27` |
+| R1.9 | готово: префаб `Unit` | `1e75b0c` |
+| R2 | готово: `Health` (EditMode-тесты), `UnitAttack`, гибель → `Died` + уничтожение, враг — вариант префаба `Enemy`, полоски здоровья | `6a90611`, `4edb5c5` |
+| R3 | готово: 3 на 3, автоатака стоящих юнитов, победа/поражение, панель результата и перезапуск; партия сыграна в Play-режиме (победа с 1 выжившим), перезапуск проверен | `3a4e081` |
+| R4 | **не начат**: нужен выбор механики (DEC-007) | — |
+
+Тесты: 9 EditMode + 22 PlayMode, все проходят. APK с R3 собирается без ошибок.
 
 ## Что НЕ подтверждено
 
