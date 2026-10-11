@@ -22,7 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Input System (`com.unity.inputsystem`), действия по умолчанию — `Assets/InputSystem_Actions.inputactions`.
 - `com.unity.pipeline` (экспериментальный) — мост между Unity CLI и открытым редактором (`unity list` / `unity command`). Не удалять как «мусор шаблона».
 - Пакет **Unity Test Framework не подключён** — тестов и тестовых сборок пока нет.
-- Собственного C#-кода пока нет. Свои ассеты — в `Assets/_Project/`; единственная сцена — `Assets/_Project/Scenes/Main.unity` (она же единственная в Build Settings). Шаблонные `SampleScene`/`TutorialInfo` удалены. `*.csproj`/`SectorLab.slnx` генерируются Unity и не коммитятся.
+- Собственного C#-кода пока нет. Свои ассеты — в `Assets/_Project/` (`Scenes/`, `Materials/`); единственная сцена — `Assets/_Project/Scenes/Main.unity` (она же единственная в Build Settings). В сцене: камера, свет, `Arena` → `Ground`/`Walls`/`Obstacles`. Фактический статус этапов — `docs/00_CONTEXT_STATUS.md`. Шаблонные `SampleScene`/`TutorialInfo` удалены. `*.csproj`/`SectorLab.slnx` генерируются Unity и не коммитятся.
 - Активная платформа — Android через Build Profile `Assets/Settings/Build Profiles/Android.asset` (ничего не переопределяет). Активная платформа хранится в `Library/`, поэтому свежий клон откроется под Windows, пока профиль не активирован.
 - `Assets/Settings/SampleSceneProfile.asset` не удалять, несмотря на имя: на него ссылаются `PC_RPAsset` и `Mobile_RPAsset`.
 
@@ -55,6 +55,10 @@ git diff --stat
 - Пути ассетов считаются от authoring root (`Assets`); `..` и пути вне проекта отклоняются. `capture_game_view --save_path X` пишет в `Assets/X` — временный файл потом убрать из `Assets/` вместе с `.meta`.
 - Изменения настроек проекта (например, список сцен сборки) остаются в памяти редактора, пока не выполнить `menu --path "File/Save Project"`. Сцену сохранять `save_scene`.
 - Каждый отклонённый вызов CLI логируется в консоль Unity как ошибка — перед выводом «0 ошибок» проверять текст (`console --level error`), при необходимости `clear_console`.
+- `eval` (C# в редакторе): первый вызов в сессии может упасть по таймауту 5 с, пока прогревается компилятор, — повторить. Нужен для PlayerSettings, которых нет в `set_player_settings` (ориентация, id пакета).
+- Изменения `PlayerSettings` через `eval` не попадают на диск даже после «Save Project»: пометить `EditorUtility.SetDirty` на `Resources.FindObjectsOfTypeAll<PlayerSettings>()`, затем `AssetDatabase.SaveAssets()`.
+- Скриншот, удалённый из `Assets/` до импорта, даёт в консоли предупреждение `Build asset version error` — безвредно, `clear_console`.
+- Сборка (`build` + опрос `build_status`) дописывает в `Mobile_RPAsset`, `UniversalRenderPipelineGlobalSettings`, `GraphicsSettings` служебные данные — это нормально, их коммитят.
 - `delete_asset` разрешён правилом в `.claude/settings.local.json` только при прямом вызове `unity command [--no-banner] delete_asset …` (не через обёртки и `&&`).
 
 ## Git-специфика
