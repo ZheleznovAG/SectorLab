@@ -28,6 +28,7 @@ namespace SectorLab.Presentation
         private float shownHeight = -1;
         private SafeAreaLayout safeLayout;
         private Rect shownArea;
+        private TutorialView tutorial;
         private static readonly Color Blue = new Color(0.20f, 0.58f, 0.92f);
         private static readonly Color Red = new Color(0.92f, 0.34f, 0.29f);
         private static readonly Color Neutral = new Color(0.16f, 0.20f, 0.26f);
@@ -36,6 +37,7 @@ namespace SectorLab.Presentation
         {
             layoutRoot = GetComponent<RectTransform>();
             safeLayout = GetComponentInParent<SafeAreaLayout>();
+            tutorial = GetComponent<TutorialView>();
             for (int i = 0; i < 3; i++)
             {
                 int role = i;
@@ -100,7 +102,7 @@ namespace SectorLab.Presentation
                 timer.text = $"{seconds / 60:00}:{seconds % 60:00}  •  до 45 очков";
             }
             bool running = lifecycle.IsReady && battle.State.IsRunning;
-            pauseButton.interactable = lifecycle.IsReady;
+            pauseButton.interactable = lifecycle.IsReady && (tutorial == null || !tutorial.IsShowing);
             string pause = battle.State.Clock.IsPaused ? "Продолжить" : "Пауза";
             if (pauseLabel.text != pause) pauseLabel.text = pause;
             for (int i = 0; i < 3; i++)

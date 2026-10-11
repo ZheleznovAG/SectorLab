@@ -1,0 +1,1 @@
+2026-10-11T20:49:36.6265377Z Screen=1280x720, showing=True, paused=True
