@@ -95,6 +95,21 @@ namespace SectorLab.Tests
         }
 
         [Test]
+        public void RejectedMoveOrder_PreservesAttackAndHidesMarker()
+        {
+            commander.HandleTap(ScreenPoint(unit.transform.position));
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+            Assert.That(unit.Attack.Target, Is.SameAs(enemy));
+            unit.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+
+            commander.HandleTap(ScreenPoint(new Vector3(-2f, 0f, -2f)));
+
+            Assert.That(unit.Movement.IsMoving, Is.False);
+            Assert.That(marker.gameObject.activeSelf, Is.False);
+            Assert.That(unit.Attack.Target, Is.SameAs(enemy), "A rejected move order must preserve the previous attack order");
+        }
+
+        [Test]
         public void TapOnGround_WithoutSelection_DoesNothing()
         {
             commander.HandleTap(ScreenPoint(new Vector3(-2f, 0f, -2f)));
@@ -131,6 +146,21 @@ namespace SectorLab.Tests
             commander.HandleTap(ScreenPoint(unit.transform.position + new Vector3(1.2f, 0f, 0f)));
 
             Assert.That(commander.Selected, Is.SameAs(unit));
+        }
+
+        [Test]
+        public void NearMissTap_DoesNotSelectOccludedUnit()
+        {
+            SetToleranceForWorldDistance(1.5f);
+            GameObject cover = TestArena.CreateBlock(root.transform, Vector3.Lerp(camera.transform.position, unit.transform.position, 0.5f), Vector3.one * 0.5f);
+            Physics.SyncTransforms();
+            Ray ray = camera.ScreenPointToRay(ScreenPoint(unit.transform.position));
+            Assert.That(Physics.Raycast(ray, out RaycastHit hit, 100f), Is.True);
+            Assert.That(hit.collider.gameObject, Is.SameAs(cover), "The test must actually hide the unit from the perspective camera");
+
+            commander.HandleTap(ScreenPoint(unit.transform.position + Vector3.right * 1.2f));
+
+            Assert.That(commander.Selected, Is.Null);
         }
 
         [Test]
