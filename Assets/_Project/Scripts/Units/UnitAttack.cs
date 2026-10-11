@@ -15,6 +15,8 @@ namespace SectorLab.Units
         [SerializeField] private LineRenderer shotLine;
         [SerializeField, Min(0f)] private float shotLineDuration = 0.1f;
 
+        private const float RepathDistance = 0.5f;
+
         private Unit self;
         private float nextAttackTime;
         private float hideShotLineTime;
@@ -114,7 +116,10 @@ namespace SectorLab.Units
 
             if (!IsInRange(Target))
             {
-                self.Movement.MoveTo(Target.transform.position);
+                // Re-path only when the target has noticeably moved, not every frame.
+                Vector3 targetPosition = Target.transform.position;
+                if (!self.Movement.IsMoving || (self.Movement.Destination - targetPosition).sqrMagnitude > RepathDistance * RepathDistance)
+                    self.Movement.MoveTo(targetPosition);
                 return;
             }
 

@@ -29,14 +29,9 @@ namespace SectorLab.Tests
             cameraObject.transform.SetPositionAndRotation(new Vector3(0f, 15f, 0f), Quaternion.Euler(90f, 0f, 0f));
             camera = cameraObject.AddComponent<Camera>();
 
-            GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            ground.transform.SetParent(root.transform);
-            ground.layer = LayerMask.NameToLayer("Ground");
-
-            GameObject block = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            block.name = "Block";
-            block.transform.SetParent(root.transform);
-            block.transform.position = new Vector3(-3f, 0.5f, 0f);
+            TestArena.CreateGround(root.transform, 10f);
+            TestArena.CreateBlock(root.transform, new Vector3(-3f, 0.5f, 0f), Vector3.one);
+            TestArena.Bake(root);
 
             GameObject unitObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             unitObject.transform.SetParent(root.transform);
