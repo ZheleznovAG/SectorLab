@@ -4,7 +4,8 @@ namespace SectorLab.Battle
     {
         InProgress,
         Victory,
-        Defeat
+        Defeat,
+        Draw
     }
 
     // Win/lose rule of the placeholder match: wipe out the enemy, lose when your own side is gone.
