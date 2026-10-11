@@ -1,0 +1,8 @@
+2026-10-11T15:32:28.3537481Z Main relays=3 units=6
+A reachable=6/6 progress=0,24
+B reachable=6/6 progress=-0,24
+C reachable=6/6 progress=0
+A finalOwner=Player progress=1
+B finalOwner=Player progress=1
+C finalOwner=Player progress=1
+2026-10-11T15:32:31.4869988Z relayScore=45:0 outcome=Victory clock=28,7000000000001

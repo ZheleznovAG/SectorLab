@@ -78,15 +78,34 @@ namespace SectorLab.Battle
 
         }
 
-        // Rates are a temporary test seam until relay contributions are connected in W2.
-        public void AdvanceSimulation(double seconds, double playerRate = 0, double enemyRate = 0)
+        // Editor scenarios and Update use the same bounded ticks, including long frames.
+        public void AdvanceSimulation(double seconds)
         {
             if (!State.IsRunning)
                 return;
-            double tick = Math.Min(seconds, State.Clock.RemainingSeconds);
+            if (!MatchRules.IsValid(seconds)) throw new ArgumentOutOfRangeException(nameof(seconds));
+            while (seconds > MatchRules.Epsilon && State.IsRunning)
+            {
+                double tick = Math.Min(TickSeconds, Math.Min(seconds, State.Clock.RemainingSeconds));
+                SimulateTick(tick);
+                seconds -= tick;
+            }
+        }
+
+        private void SimulateTick(double tick)
+        {
+            double playerPoints = 0;
+            double enemyPoints = 0;
             for (int i = 0; i < relays.Length; i++)
+            {
                 relays[i].Simulate(tick);
-            double advanced = State.Tick(tick, playerRate, enemyRate);
+                RelayPoint relay = relays[i];
+                if (relay.Config.kind != RelayKind.Score) continue;
+                double points = relay.State.EffectiveSeconds * relay.Config.scorePerSecond;
+                if (relay.State.Owner == RelayOwner.Player) playerPoints += points;
+                if (relay.State.Owner == RelayOwner.Enemy) enemyPoints += points;
+            }
+            double advanced = State.Tick(tick, tick > 0 ? playerPoints / tick : 0, tick > 0 ? enemyPoints / tick : 0);
             if (State.IsRunning)
             {
                 Ticked?.Invoke(advanced);
