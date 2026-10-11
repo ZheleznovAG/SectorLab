@@ -48,7 +48,7 @@ SHA-256 файлов на диске во время запуска тестов
 | Gate | Статус | Что подтверждено / что остаётся |
 | --- | --- | --- |
 | G0 | PASS | Аудит, backup, тесты, APK выполнены; исходные fixes сохранены в `9853006`, `970827a`, `ec1a944`; контракт/аудит — `d15a009`, завершение учёта — текущий docs-коммит |
-| G1 | TODO | Нет нового матча по очкам/таймауту/паузе/Draw |
+| G1 | PASS | MatchState/Clock, 29 EditMode + 43 PlayMode, Main pause/result/restart и осмотренный экран Victory 45:0 |
 | G2 | TODO | Нет A/B/C и capture/score/heal |
 | G3 | TODO | Нет AI за узлы и новой полной партии |
 | G4 | TODO | VContainer отсутствует |
@@ -60,3 +60,17 @@ SHA-256 файлов на диске во время запуска тестов
 
 Не приравнивать обнаружение устройства к Device verified, сборку baseline к
 APK built v1.0, а автоматический PlayMode-прогон к Playtest verified.
+
+## W1 — модель и интеграция
+
+Правила/clock: `f74d44c`, `99da84a`; интеграцию смотреть через
+`git log -1 -- Assets/_Project/Scripts/Battle/BattleController.cs`.
+Полные входные хеши и реальные UTC запуска — в JSON W1.3:
+[EditMode 29/29](evidence/tests-W1.3-editmode.json),
+[PlayMode 43/43](evidence/tests-W1.3-playmode.json).
+Старые четыре death-outcome случая удалены как противоречащие v1.0,
+пять новых PlayMode случаев проверяют отсутствие death-outcome, pause и finish.
+[Main observations](evidence/W1-main-observations.txt) получены из живой сцены
+через CLI: pause, технический score outcome, Restart. [Game View](evidence/W1-main-victory.png)
+проверен визуально после исправления обрезанного счёта и повторной регрессии.
+Обычные очки от узлов ещё не подключены. APK W0 содержит baseline, не W1.

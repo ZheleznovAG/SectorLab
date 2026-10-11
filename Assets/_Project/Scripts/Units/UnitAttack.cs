@@ -35,6 +35,12 @@ namespace SectorLab.Units
             self = GetComponent<Unit>();
         }
 
+        private void OnDisable()
+        {
+            if (shotLine != null)
+                shotLine.enabled = false;
+        }
+
         public void Configure(UnitStats stats)
         {
             damage = stats.damage;
