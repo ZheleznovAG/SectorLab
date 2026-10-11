@@ -1,0 +1,1014 @@
+﻿{
+    "task":  "W2.2",
+    "mode":  "PlayMode",
+    "sourceHead":  "3a2a9c7a431d4d09273ed5c6fb8bec1567bc7d31",
+    "startedAtUtc":  "2026-10-11T15:18:36.0688857Z",
+    "completedAtUtc":  "2026-10-11T15:19:04.0100554Z",
+    "command":  "unity command run_tests --mode PlayMode --filter_type assembly --filter SectorLab.Tests.PlayMode --async_tests true",
+    "inputHashes":  [
+                        {
+                            "path":  "Assets/_Project/Data.meta",
+                            "sha256":  "34FFE23DB3D71C82AAA84293559D213C3E42FDD0581FAE4600AD6738FAF1D591"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays.meta",
+                            "sha256":  "B41CB393458AF6CCA813114C7262C6CE80CAA5577F7AC85DC157BB9CDA6C98E7"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays/A.asset",
+                            "sha256":  "EC5CE761AE1DBA792EA902FD5EECCA29FEFC69393CC037181EF3159F40B2899B"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays/A.asset.meta",
+                            "sha256":  "4D1D04CC911B36DEE3EC578A62FC29869C61F448FB6897B85D9D18389790D513"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays/B.asset",
+                            "sha256":  "7C267A80B8AFA88DB9DB3C6C7C88E456AE7F64ABD1C1B5C1E200164B5EFB2CF3"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays/B.asset.meta",
+                            "sha256":  "E7FA1BFA2B8B9D5AAFEA5B54FEEF4330EB1E541429E9E3B37C6FF32ECC95D4E4"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays/C.asset",
+                            "sha256":  "AC7EF62034F73CD2C9EEAB469B8F6C83002C39C975072ECDE5EE18B7C35E5AF5"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Relays/C.asset.meta",
+                            "sha256":  "DAAE6BCDC99FBCC542BE550C331E9D1940B00C02E7AA0ED9C06689AA456DFFF2"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units.meta",
+                            "sha256":  "77B23DFA4DB00B48EDDF9117EF4C8DC40618C8651374895100E6A279AF78F489"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units/Ranger.asset",
+                            "sha256":  "632C98507573CB815B149FDDB53C2A81A882699235E257FC1A71EFC8A4179074"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units/Ranger.asset.meta",
+                            "sha256":  "8791E02C36FD1F8D3D7B63E7BCCCF0EB5738578FCA76FA7487C52AD8211CF48E"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units/Scout.asset",
+                            "sha256":  "384C5E293ADF24729A6B9E3C08E6D448DA44436BB14BFA40EF6F12061CDD711D"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units/Scout.asset.meta",
+                            "sha256":  "B370C5E7A12C83C5B0BB172775EFB7987EA1FC8C9DDD5AB2EC79CDBE38F5BD1F"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units/Tank.asset",
+                            "sha256":  "21FC52A5786A794E18C1AC45A8FD0D20BB5BF3DF41F95CAE4C97404B02CE7085"
+                        },
+                        {
+                            "path":  "Assets/_Project/Data/Units/Tank.asset.meta",
+                            "sha256":  "89BF3A94B47B4615BEB801F8F1F6D179242C042022D94E4666CC36294BDFF4B2"
+                        },
+                        {
+                            "path":  "Assets/_Project/Editor.meta",
+                            "sha256":  "96BBBF4F31A5318FDD4D823EDC5F885F0C6894B684C1523379CE3836C8A3C32A"
+                        },
+                        {
+                            "path":  "Assets/_Project/Editor/RelaySceneSetup.cs",
+                            "sha256":  "920047E0ADF2B6E9C14334A6FD47F91E8603704FA1C90C589C3A70E48E6CA27C"
+                        },
+                        {
+                            "path":  "Assets/_Project/Editor/RelaySceneSetup.cs.meta",
+                            "sha256":  "2626C0462AD0EEE9A98ED355D4ACA3614FA419EEBDCCDCD305171FF007740325"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials.meta",
+                            "sha256":  "9310CF510F2B8C77C53EAD714BC53B51AEC9442545F5E7930B94553AC5EF0B2F"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Ground.mat",
+                            "sha256":  "B0222AC0FD2EED80DB5A80FE00485BC28AA076EAD7C258858BA83EC4DAEABF2A"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Ground.mat.meta",
+                            "sha256":  "626518F7C5F1B4F0AD97E0A15907995401D970DB343FEC4FD552E489F7493D90"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_HealthBack.mat",
+                            "sha256":  "5EF6936DE4087810EE4C2BA828CA119AFDC7764FDF39C8E7FD4E3512776A0DCC"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_HealthBack.mat.meta",
+                            "sha256":  "146CE786C7588DEA1224840C61CCB50E1FAEAAB274FA482F6E5E63E9B037FD96"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_HealthFill.mat",
+                            "sha256":  "EA83A7522F3C3BE4A6A3C5980061ABF06143121303043B830FC87C877647B0CF"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_HealthFill.mat.meta",
+                            "sha256":  "58A954DB48346F8F710E5E7784F31EE431FCD184AE294B5C998E95ED61744059"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Marker.mat",
+                            "sha256":  "F9A7C7B511DD356FD7C3D9508451FC2F22ED0537773D2A7CB6CE0E04047D63C3"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Marker.mat.meta",
+                            "sha256":  "537C756F8366A395B96C7C7463FC11DA078F03C171F2E6879CEFDAB28B7D5F2A"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Obstacle.mat",
+                            "sha256":  "500E3CBAC7D2273BE9FB526C7C5A5A053235328308E9A7F3054D566450A0E47A"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Obstacle.mat.meta",
+                            "sha256":  "521FDF2C3ADCD2A865112366252736A6F7D4111958B5B4E1ECE9B82F6DAB9AF2"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_UnitEnemy.mat",
+                            "sha256":  "5902B8B42328D0757E6AE17DB55CBD4A2CD3EB865A7C5C18D6191F7433B98F16"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_UnitEnemy.mat.meta",
+                            "sha256":  "920B3E290B095EAF52CC55915F537FE04F3E92888CFC85A90B81FA1180186B27"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_UnitPlayer.mat",
+                            "sha256":  "622B9C23E0EA5F4D1A04D7EF630CFB0284083D545C9ED33A6E0523179EFB5A35"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_UnitPlayer.mat.meta",
+                            "sha256":  "D4409CA7FD3979D031A46B849049AB783254D46433EC93F03C4074B8BF3C7D30"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Wall.mat",
+                            "sha256":  "CACA0E60462B674F8EE064C952E4245DD264281FAAE415A397E27F0385C5F5D7"
+                        },
+                        {
+                            "path":  "Assets/_Project/Materials/M_Wall.mat.meta",
+                            "sha256":  "D6E9710EFF03C33D7DAB9F2EB9272EEE9220CA6F6035E21CD246E817C50D5948"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs.meta",
+                            "sha256":  "BBE4E85361B7FF56B5341E6E305A85E115F4BCBF612F91B0E5DD8152D9C6B369"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Enemy.prefab",
+                            "sha256":  "A7795283CBFE70FC812AD9A767620599F28C582430697286E61EF50BA756BE6E"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Enemy.prefab.meta",
+                            "sha256":  "B9DD7E5D65BD8F0AD380890548491DD8193C639E5778637F93A55C5BCF5F0ABE"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/EnemyRanger.prefab",
+                            "sha256":  "157C1F68CBD52708EEC779DB9C5943A8A36DD2011DAF7F4F100F270CDF39D2B7"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/EnemyRanger.prefab.meta",
+                            "sha256":  "6ADBAD072C18E939FE0EC7B1C116082D32DA37B10FACAA739E8F81107CBA7E37"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/EnemyScout.prefab",
+                            "sha256":  "610024305E0811E7F45AB9FB71F0E86C34E1EE665829035FB4E9B3D32036BE5F"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/EnemyScout.prefab.meta",
+                            "sha256":  "536BFFE61CD64C9F4253DDD762E66C70F7EB1C6AB3BC35F04253C336DE18F57F"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/EnemyTank.prefab",
+                            "sha256":  "7FF40AB6A129FD554E0A9BC039F66B420A3D26342C9D364918FABE4F43020D04"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/EnemyTank.prefab.meta",
+                            "sha256":  "1745DA90D300C7515DF5EA55561B395336BB08CB8B8032EAC9B820CD350EB5B5"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Ranger.prefab",
+                            "sha256":  "8C93CAF9946051817CC841767388DDBB07D25F4822D2C0EDD1E08E6B9779C1CF"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Ranger.prefab.meta",
+                            "sha256":  "09986E8EB12B979382E60BDA9CA54A17772BBEA81690041C33370BA9500FEDE1"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Scout.prefab",
+                            "sha256":  "9DF7B978C8C18884D865913CCB90032893FC7C8831CD6BC4067D00F3AC5F4F29"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Scout.prefab.meta",
+                            "sha256":  "1F866EC84156BD80E0CB16F24EA031A3BB2E09433E24CF0248CDDF3F96D8F541"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Tank.prefab",
+                            "sha256":  "8F72CFA339BE702CDCE5ED8C0EEEBBD6EC32B35E1973EBA257D2D401545D88EB"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Tank.prefab.meta",
+                            "sha256":  "40FC9B14A11627B19FDD76C22EFFB7CE1715B1613F843AA7E86A81DBB546A32F"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Unit.prefab",
+                            "sha256":  "BD8F3E4F6C14811AD2838DC22C69C30C056B9C0ACF266E6716581E25575D8B85"
+                        },
+                        {
+                            "path":  "Assets/_Project/Prefabs/Unit.prefab.meta",
+                            "sha256":  "C0CEDC98BE85F0119C56A5262A960C830A798E7357A68D68E1B9740D5705B067"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scenes.meta",
+                            "sha256":  "1B69414FD6D7D7A5DB7F0DAC76F2D47D1C880C7DEB20E167B4C9671CD32FEAA0"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scenes/Main.meta",
+                            "sha256":  "4AF600EAF166EF42150D8FEC360E2BBF7AE3AA1DDBD3BEF9EA6E78FD4DAFBAB5"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scenes/Main.unity",
+                            "sha256":  "13EE288E3176E48C33D90356B4C614FEACDAEDF0E3FA974DE182ACB296D1CC57"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scenes/Main.unity.meta",
+                            "sha256":  "384E21A54F20477DDFD95E95F3A8961C68A433B52514C17F07E322C5EB1FF6B5"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scenes/Main/NavMesh-Arena.asset",
+                            "sha256":  "89E0F10CEF565793E77EEEBDF680948B766E456551C6E58C232E682AE5364B30"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scenes/Main/NavMesh-Arena.asset.meta",
+                            "sha256":  "4E47F91B9DDB578182A2B027A862150C884D0955DE7A2543726AEBAA462EE398"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts.meta",
+                            "sha256":  "3FEF609BE4E6DD54F390F6CFF3830F2F694B472F548638523F26EFE2807F5C9E"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle.meta",
+                            "sha256":  "007CEFBC0CD8EE3CEA817534D36DF4F4BEB751DF0D888F751F4CE4ADF193C46C"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/BattleController.cs",
+                            "sha256":  "8F7FBE240B830AF8E0783226BE0749778D330439CE952E677930415CE8E82595"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/BattleController.cs.meta",
+                            "sha256":  "E2BF823EC1C7F9DA19A63FCCBCFCA275FA73B2B1472630454F835E207C4E95A3"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/BattleResultView.cs",
+                            "sha256":  "FC2328F9B7CAD8F68D7BB6F531E0524E150660A73E95DA8FF910854319A0BD38"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/BattleResultView.cs.meta",
+                            "sha256":  "C46D030AD4647C2F65F1A4ABF9FC72B18F49970383B0AE8EB63BFA3AC1947836"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/BattleRules.cs",
+                            "sha256":  "2A2862F6FE7BF2F0DB5EF99A325D0C3DD618977C9C195F85BF53897D3F73B370"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/BattleRules.cs.meta",
+                            "sha256":  "154F210311866A04C33895F3790675D6264C793263C4548EC274E0B2C3928070"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/ForceCounterView.cs",
+                            "sha256":  "88A585A79921DAE6E47809181AF18660F674D2403FA95D1C29B63A15B8232675"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/ForceCounterView.cs.meta",
+                            "sha256":  "B41BD2118B3CC88C3E4AB1DB9D83538EF7C1CE750BEDFBF37A0BF37795A13021"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/MatchClock.cs",
+                            "sha256":  "14F2AD6E468AA12599AA623DB2118241AB7F435733CAD7C0EADD413B48C23083"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/MatchClock.cs.meta",
+                            "sha256":  "1474B0C2D3D476CA52368F1DB90E4FD2615481D5560E54F570F0DCB4E3DD940A"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/MatchRules.cs",
+                            "sha256":  "19E89861F742B11324DCA72B03EF59DB995CB4DEEE5FC58DD0D9D3A30BB7B45C"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/MatchRules.cs.meta",
+                            "sha256":  "34AEF11C20EAA8CA2B660F03E0D56993F0979581C8B8F2CB97631E04B14FFEDB"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/MatchState.cs",
+                            "sha256":  "7D5AAC3F65464EA28839B72B8EB19883E67A7598FCC2044E705E531E7FD7BB11"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Battle/MatchState.cs.meta",
+                            "sha256":  "4C9E164526CB236FBB9231DB55645EB164025928201B2E147884C7BBE5BE701C"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives.meta",
+                            "sha256":  "41E50313E06B0274D1BC7F1105DDC08A9FEF70EB76D8B053A459A8280D767F15"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives/RelayConfig.cs",
+                            "sha256":  "B690A1C115934C6480B83E5762B17C83CEC723FEC3F2D1BAA339064CE198273C"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives/RelayConfig.cs.meta",
+                            "sha256":  "CA12B1857689F8886E10DE463A7CA00AF55DB701E11197D07A15856DACDC0E16"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives/RelayPoint.cs",
+                            "sha256":  "B29633F2FFBF3B4B7F27B64C53674D263F803AF1700F1C5198DE80B00FA99789"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives/RelayPoint.cs.meta",
+                            "sha256":  "D373B2DD478E905941A61EC88C53F25CDDBC0525AD47F8345D04A781B5A37D38"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives/RelayState.cs",
+                            "sha256":  "114943AA0C3BDB4DAED3A1101D9B9CB31E22FBC0D8906FEC61E6CEBEB42A94CB"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Objectives/RelayState.cs.meta",
+                            "sha256":  "40E0478010C9BCF09CBDB02B3655AC593D9881D70DCA3148AADE318B9F559DBA"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Player.meta",
+                            "sha256":  "0B80BDBA06B341D49466360CC4EFA337493EB49C4D72B9F4308070BFCA5D6A43"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Player/UnitCommander.cs",
+                            "sha256":  "B5E8C00D6FFE28708AE8DDF0E1EE92DF4F76A613DEC38B83A273B5D8DB01ED0E"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Player/UnitCommander.cs.meta",
+                            "sha256":  "DD905D34F0353B8AF7D9033BAA78CF98174587F13573A8C66F92D0A627BC0760"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/SectorLab.asmdef",
+                            "sha256":  "E9C2D3406F1F38F38E41CF184EFABB6B6A79FBDD8B523059441513247F6D6C73"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/SectorLab.asmdef.meta",
+                            "sha256":  "A6A23F2E355A4BF14598A2177F991815205EB9BE11B10B9B1650813139B4ECD9"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units.meta",
+                            "sha256":  "4509496A7AD3660B6A5467F1899E0AB6B48D83CADE9A093714D3B4AE8ACF4768"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/DamageFlash.cs",
+                            "sha256":  "A29A03FD09E295D6FAC342D139F9FE51A9A635EB9FA0FC63CAFE3A8857DF1890"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/DamageFlash.cs.meta",
+                            "sha256":  "6F17EBC162C72FD7E79530DA1241F2B830937DB5EEBDE431116A8D82ABC21893"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/Health.cs",
+                            "sha256":  "3DB0A0DF7852948B876ABD4665AF9389ACAE54C5307FB3F551A31C31800B682F"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/Health.cs.meta",
+                            "sha256":  "9CD2C533655BC93A0EBE028C1EAFAA4676A156B44E9B9B8AEDA50F013133CC2A"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/HealthBar.cs",
+                            "sha256":  "56E9B5FE4DA1660BEBE29C25E4AE5D1C68512207EAC3D0D39EAD4AEAB2C37E42"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/HealthBar.cs.meta",
+                            "sha256":  "C5E291E1FFD472B23B2ED12AF8DB154B975759BF25ADA8B6564B1461645782AA"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/Team.cs",
+                            "sha256":  "D2208AED99A676248D746D4E81959F92BDCD1EC4CAAE1B20F285E506189FA56D"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/Team.cs.meta",
+                            "sha256":  "EA421A1D388484908C7C6E3EDBF70E8064B982ADBB5DB26CC1C62BABE3C444A7"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/Unit.cs",
+                            "sha256":  "614A2C818FB420DFEBF9CB809D4AF8B3F709323C2E73B86A7E680F7FDC36D3AD"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/Unit.cs.meta",
+                            "sha256":  "5304BA46BFE135AF8D8D6CAB704E3E8AEB8BE7746F1308A54F51A1E91139BB03"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/UnitAttack.cs",
+                            "sha256":  "6A9BC762531E3104B8442FEA1B801FE37DD8DFB5CB0688FA50FF479CD622FB41"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/UnitAttack.cs.meta",
+                            "sha256":  "06D18F08DC6D94A783B99A7DF04334F678839FCEEFCBA9D32528C337C990A721"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/UnitMovement.cs",
+                            "sha256":  "74FE45073482518F7FA381BFA9FF61BFABB3F9C5048D4CE709C870A6DA3333AB"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/UnitMovement.cs.meta",
+                            "sha256":  "35378CD84C8E080EAD2E0FB1ED13A4BD934B1DDEC1359A4E5593DAE06371E825"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/UnitStats.cs",
+                            "sha256":  "8067DE73B893AFD94C8B4F70422C6185A9C2DC1799A0841EF513120866C66EEF"
+                        },
+                        {
+                            "path":  "Assets/_Project/Scripts/Units/UnitStats.cs.meta",
+                            "sha256":  "64522FDB63BA94C8C90EAEFEBDBB68721024F7AA26E907B5B63003ABE0193C60"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests.meta",
+                            "sha256":  "98D6A0B561A0AB752D0760CDB428325DBF53781CD19DC5B5A1FF9FAD4A93A84D"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode.meta",
+                            "sha256":  "F0C18BB46235502F82B5D8D1FAFE4FD4CC9D3FD53F6F717282055E89F8A64754"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/HealthTests.cs",
+                            "sha256":  "21894EE38D425C048B2EEC25B8A2EA1C0A89294BA3B46031A47DA6212728BA33"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/HealthTests.cs.meta",
+                            "sha256":  "4506644C02AA4E4588D9C0E980B53F776062CB6A0B7F176B4BF4D7FDF76181F6"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/MatchRulesTests.cs",
+                            "sha256":  "299178989F3C539676BFFCC4FEAA29F4B0309F64E83BF61D78C43096E764825B"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/MatchRulesTests.cs.meta",
+                            "sha256":  "99FE2092055790306056FAB64269D71FAE1866BD5C9E2F5A459889CC0F822938"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/MatchStateTests.cs",
+                            "sha256":  "DA9D22B9A91252852AD23BD18F50D77DE6C9DFF1E525A9DA9C72E63C927B9184"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/MatchStateTests.cs.meta",
+                            "sha256":  "A692F3EB49D1937FFF106FAD66846D1B681339CD078151BA4124453853753A18"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/RelayStateTests.cs",
+                            "sha256":  "50EE8C32E7C4508628B16A2B48DD48D0A44A3AB38134E9104E627D4D2A30D95C"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/RelayStateTests.cs.meta",
+                            "sha256":  "45EA6763F20BF2788ADB88AC4FA116E04376501F259A610F2700556D2CF373A4"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/SectorLab.Tests.EditMode.asmdef",
+                            "sha256":  "2FA3FB2426A5BC6AC7C66C2770CB58EB205312783FB03345C2714C9C8EFC24B6"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/EditMode/SectorLab.Tests.EditMode.asmdef.meta",
+                            "sha256":  "90C9C7A712CD52DEF27ABC780E7954F774F9A9405F2911397E27C60344C3740D"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode.meta",
+                            "sha256":  "C9E67118A274E25EE023FF362E254802CB1F64286F6B9A9227B6123DABA75E0B"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/BattleControllerTests.cs",
+                            "sha256":  "F6FCE7A9B178E052BD971D05030C77D8BC6CBE66A45175CD3E384194063D2D45"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/BattleControllerTests.cs.meta",
+                            "sha256":  "682315762F7F97A9DDAB1632C6C35C001F05C66C122C229E71AF4A2ECAB3FFEE"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/RelayPointTests.cs",
+                            "sha256":  "8647CA279932982C27856559054D42DB6FB8901F52879C77443A5D630C9C9C04"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/RelayPointTests.cs.meta",
+                            "sha256":  "00AD45F24F0589E3DAD8913F2B7C7E6D2097D3700A63562F250960FEFFAAB1AC"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/SectorLab.Tests.PlayMode.asmdef",
+                            "sha256":  "F125C4B08E9082F5ABF3CF3A3A7F18CA30A4B2E90E69D1BBE8609B3E1A288577"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/SectorLab.Tests.PlayMode.asmdef.meta",
+                            "sha256":  "6D8B3D332D9B3A65F5AE35D3BB44141CA544391404E807CE55714E1E0B89ACF4"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/TestArena.cs",
+                            "sha256":  "5B7887A004B516F25555FB9A6B218879C0957B204FA0CBA6A54DD2C59594E44E"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/TestArena.cs.meta",
+                            "sha256":  "40F7AD7975C64411EC8B090E48D1D5F5ECF776B353ACB509C0672322227D31CE"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/UnitAttackTests.cs",
+                            "sha256":  "3B60AB7680D5B1C2E38744A11AD06522078ADC96D6727CD0F54F5CB4FD4928D6"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/UnitAttackTests.cs.meta",
+                            "sha256":  "D8D4303A6624E30D27EE06BC427BE964FBE51F77A604A5CA92FEBE9DAA96FD01"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/UnitCommanderTests.cs",
+                            "sha256":  "0583E7B5EB98135DEF45625DF6AFB2D80FA8F981641323CD319F3BA1BD7B2631"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/UnitCommanderTests.cs.meta",
+                            "sha256":  "35BB7065D767223C474BAEFA59B1AA92DF560CE5EF73DEE629C483E6A098D731"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/UnitMovementTests.cs",
+                            "sha256":  "508EC295EF0FC0B022C01AA072ED8830930C607489C9F4D8BF2B6D2A5020925D"
+                        },
+                        {
+                            "path":  "Assets/_Project/Tests/PlayMode/UnitMovementTests.cs.meta",
+                            "sha256":  "887F665CB8C32344623F386F546D179A49AFD7F27C72FF16F88A2AF13B1EEF54"
+                        },
+                        {
+                            "path":  "Packages/manifest.json",
+                            "sha256":  "47C4D4C51B5CD1AABD078159872A2A6E7CA1731992F163C080C8A5A075F65B13"
+                        },
+                        {
+                            "path":  "Packages/packages-lock.json",
+                            "sha256":  "C63CFD3B645983A71F69DF50BA263A68B9A4CF4B3B62638075B8C81B55824027"
+                        },
+                        {
+                            "path":  "ProjectSettings/AudioManager.asset",
+                            "sha256":  "AEEDEB3243F07B61DBBE854AA08B5EF6F0B5274DD9852AD9F6129DDE3E105A31"
+                        },
+                        {
+                            "path":  "ProjectSettings/ClusterInputManager.asset",
+                            "sha256":  "40E65DD214BF254955D2C8829CA8CE2130FD3510485560CE012E9A1DDD93E623"
+                        },
+                        {
+                            "path":  "ProjectSettings/DynamicsManager.asset",
+                            "sha256":  "BF017B547BB77CE3443DD5287DDF2516A74FD167F4F2EE5D798340694F51776D"
+                        },
+                        {
+                            "path":  "ProjectSettings/EditorBuildSettings.asset",
+                            "sha256":  "2145E401CFCD1D71F470C593C75FB755AC346CAF654A839024AEB234878BC250"
+                        },
+                        {
+                            "path":  "ProjectSettings/EditorSettings.asset",
+                            "sha256":  "183B4AEE63306B05EC64EE1A066E6AFD467004C0D755E4E37B693718EB838D51"
+                        },
+                        {
+                            "path":  "ProjectSettings/GraphicsSettings.asset",
+                            "sha256":  "D1288ED712C51A6803DE0B43556CA13A1B418835DE68E806846A8FC0C608E03A"
+                        },
+                        {
+                            "path":  "ProjectSettings/InputManager.asset",
+                            "sha256":  "7A1BB836A1008D26D0860D143E9D9DF7CA41731D30A72901B518063819C62DF2"
+                        },
+                        {
+                            "path":  "ProjectSettings/MemorySettings.asset",
+                            "sha256":  "1E8379A461B10AE09F3F696911088C16875D63E87ED5F2D95DF9E1892703F9FD"
+                        },
+                        {
+                            "path":  "ProjectSettings/MultiplayerManager.asset",
+                            "sha256":  "ABA89FD1A1DDAD182727AD82727E536D27372E90328A8196DA2A4560398983DD"
+                        },
+                        {
+                            "path":  "ProjectSettings/NavMeshAreas.asset",
+                            "sha256":  "80106CFA7E6181A1928B142C075F3E510D527441E3D79BC83590E4AC91E7CD66"
+                        },
+                        {
+                            "path":  "ProjectSettings/PackageManagerSettings.asset",
+                            "sha256":  "F281D96E785DF430D30CE0A515F4FE5C625EF44467125879F4B9F4CB087E1578"
+                        },
+                        {
+                            "path":  "ProjectSettings/Physics2DSettings.asset",
+                            "sha256":  "D57A0FE55659C33879E8B70BC01C5EA9CDF082069DAB649905C6C5138531E6EB"
+                        },
+                        {
+                            "path":  "ProjectSettings/PhysicsCoreProjectSettings2D.asset",
+                            "sha256":  "BEDC5339A832C60DC3F11B84ABC4F4384DBFA20B0CD9AD6C444B907E751FC35E"
+                        },
+                        {
+                            "path":  "ProjectSettings/PresetManager.asset",
+                            "sha256":  "29C125923FE6E29F90190D4FCE1C82D660E7051546E2C9D02908D18C9CF2436C"
+                        },
+                        {
+                            "path":  "ProjectSettings/ProjectAuditorSettings.asset",
+                            "sha256":  "9E68444B9BDA981E2927A98DF9EDF69EA88362F0C6B7F3C81B39B9D515D2A416"
+                        },
+                        {
+                            "path":  "ProjectSettings/ProjectSettings.asset",
+                            "sha256":  "54C03C2B4E0FE4446E1C0CFB051921DB73D1E9BB9ECD32BC20FA4434674AF414"
+                        },
+                        {
+                            "path":  "ProjectSettings/ProjectVersion.txt",
+                            "sha256":  "338824F489D7EF647583E723283307AE92B3BB241D2FE874AC759DBF2F091701"
+                        },
+                        {
+                            "path":  "ProjectSettings/QualitySettings.asset",
+                            "sha256":  "3F6B02B9C47143EF4D27CC3C8D7604C4AA4CE14765BFA2CECB4AB0810926DDAD"
+                        },
+                        {
+                            "path":  "ProjectSettings/SceneTemplateSettings.json",
+                            "sha256":  "BB9098B3BFCDE78D93E264B96F7B77B5430E64E8C57A7AAD7F5A5D9C3945E16A"
+                        },
+                        {
+                            "path":  "ProjectSettings/ShaderGraphSettings.asset",
+                            "sha256":  "CDBA1E5D65BCF6E3269D76ED3E60B6C21F98322002996642C9D74F1EB89F6B91"
+                        },
+                        {
+                            "path":  "ProjectSettings/Switch2PlayerSettings.asset",
+                            "sha256":  "61BE6F69426706B633A8F8340A11405ED8F9F8EC1D88B240540D6FD30AB7C26A"
+                        },
+                        {
+                            "path":  "ProjectSettings/TagManager.asset",
+                            "sha256":  "8CDC6F24A9F70382CF1F2D6AABB0BA80B0A2CD2179D9D7B4B1EFE22AB9DC364D"
+                        },
+                        {
+                            "path":  "ProjectSettings/TimeManager.asset",
+                            "sha256":  "1A83E54ADBBDA7C9F4851103A0C6AB7F6448A3343D4EA5B7620452FA08416ECD"
+                        },
+                        {
+                            "path":  "ProjectSettings/UnityConnectSettings.asset",
+                            "sha256":  "7F2112B8C6EA0885DCC72B312C9726FFCD909F2E89D1EEAD61889274A4E5D1C0"
+                        },
+                        {
+                            "path":  "ProjectSettings/URPProjectSettings.asset",
+                            "sha256":  "C317FE22B9488785C0611F0642429922E5D324430D929BFFB41648130F30C218"
+                        },
+                        {
+                            "path":  "ProjectSettings/VersionControlSettings.asset",
+                            "sha256":  "E7BDA45BF7A394745FEE1316E6C71FA676004D591AD1F3AA247FD3E4CEB86071"
+                        },
+                        {
+                            "path":  "ProjectSettings/VFXManager.asset",
+                            "sha256":  "F066C6483919961332415EE64204F74FE52F38C02E82892EB02B7A5B2E381F0E"
+                        },
+                        {
+                            "path":  "ProjectSettings/XRSettings.asset",
+                            "sha256":  "EDD2BEB4A2E388312B4B7DA241AA51070434005D82C59363F1237DD2E567585F"
+                        }
+                    ],
+    "response":  {
+                     "success":  true,
+                     "command":  "command test_status",
+                     "data":  {
+                                  "command":  "test_status",
+                                  "parameters":  {
+
+                                                 },
+                                  "result":  {
+                                                 "status":  "completed",
+                                                 "duration":  9.03,
+                                                 "summary":  {
+                                                                 "total":  47,
+                                                                 "passed":  47,
+                                                                 "failed":  0,
+                                                                 "skipped":  0,
+                                                                 "inconclusive":  0
+                                                             },
+                                                 "results":  [
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.CountsLivingUnitsPerSide",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0854036,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.LastEnemyDies_DoesNotFinishRelayMatch",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0428758,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.LastPlayerUnitDies_DoesNotFinishRelayMatch",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0316558,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.PauseFreezesWorldClockAndInputAndResumeRestoresThem",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.3360286,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(45,0,Victory)",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.007448,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(0,45,Defeat)",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0024495,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.ScoreOutcomeFinishesOnceAndStopsCombat(45,45,Draw)",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0025754,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.BattleControllerTests.TimeoutDrawAndSceneCleanupRestoreTimeScale",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0029415,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.RelayPointTests.ApproachRequiresReachablePointInsideRadius",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0063915,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.RelayPointTests.CaptureRadiusIsHorizontalAndBothSidesContest",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0039534,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.RelayPointTests.DyingUnitLeavesOccupancyWithoutStaleTriggerState",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0313392,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.RelayPointTests.PauseAndFinishPreventCapture",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0033161,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.Cooldown_LimitsHitsPerSecond",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0872235,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.Damage_FlashesBodyBriefly",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.2487075,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.IdleRangedUnit_AcquiresAnythingWithinWeaponRange",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0345531,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.IdleUnit_AcquiresNearestHostileInRange",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0243539,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.IdleUnit_IgnoresHostilesOutsideRange",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0241438,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.KilledTarget_IsDestroyedAndCleared",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0333641,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.MovingUnit_DoesNotAcquireTargets",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0236157,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.RangedUnit_HitsFromDistanceWithoutMoving",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.025045,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.SetTarget_IgnoresAllies",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0026034,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.Stats_AreAppliedToHealthMovementAndAttack",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0027893,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_AttackerWalksAroundAndHits",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.85942,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.TargetBehindObstacle_TakesNoDamageUntilObstacleIsRemoved",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0343283,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.TargetInRange_TakesDamageRightAway",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0222607,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.TargetOutOfRange_AttackerWalksUpToIt",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  1.2336686,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.UnreachableTarget_AfterOpeningPathIsAttacked",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  2.7600858,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitAttackTests.UnreachableTarget_DoesNotRestartMovementEveryFrame",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.3496313,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.NearMissTap_DoesNotSelectOccludedUnit",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.036832,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.NearMissTap_SelectsClosestUnit",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.010307,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.RejectedMoveOrder_PreservesAttackAndHidesMarker",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0103306,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnEnemy_OrdersSelectedUnitToAttack",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0103612,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnEnemy_WithoutSelection_DoesNotSelectIt",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0101397,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnGround_CancelsAttack",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0098799,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnGround_SendsSelectedUnitAndShowsMarker",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0107191,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnGround_WithoutSelection_DoesNothing",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0097441,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnObstacle_IsIgnored",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0095994,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOnUnit_SelectsIt",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0099106,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.TapOutsideTolerance_DoesNotSelect",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0101997,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitCommanderTests.Touch_SelectsAndMovesUnit",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.5330997,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.DisabledAgent_MoveToClearsMovingState",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0333072,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.DisabledAgent_WithoutNewOrderClearsMovingState",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0299287,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.MoveTo_GetsCloserEachFrame",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0357625,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.MoveTo_PlansPathAroundObstacle",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0229626,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.MoveTo_StopsAtDestination",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  1.027114,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.Stop_HaltsMovement",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.0402303,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 },
+                                                                 {
+                                                                     "FullName":  "SectorLab.Tests.UnitMovementTests.UnreachableDestination_StopsAtEndOfPartialPath",
+                                                                     "Status":  "Passed",
+                                                                     "Duration":  0.6922943,
+                                                                     "Message":  null,
+                                                                     "StackTrace":  null
+                                                                 }
+                                                             ]
+                                             },
+                                  "target":  {
+                                                 "host":  "127.0.0.1",
+                                                 "port":  7800,
+                                                 "projectPath":  "[LOCAL_USER_HOME]\\Projects\\SectorLab"
+                                             },
+                                  "success":  true
+                              },
+                     "errors":  [
+
+                                ],
+                     "warnings":  [
+
+                                  ]
+                 }
+}

@@ -1,5 +1,6 @@
 using System;
 using SectorLab.Player;
+using SectorLab.Objectives;
 using SectorLab.Units;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,12 +12,14 @@ namespace SectorLab.Battle
     {
         [SerializeField] private UnitCommander commander;
         [SerializeField] private BattleResultView resultView;
+        [SerializeField] private RelayPoint[] relays = Array.Empty<RelayPoint>();
 
         public const double TickSeconds = 0.1;
         public MatchState State { get; private set; }
         public BattleOutcome Outcome => State.Outcome;
         public int PlayerUnitsAlive { get; private set; }
         public int EnemyUnitsAlive { get; private set; }
+        public System.Collections.Generic.IReadOnlyList<RelayPoint> Relays => relays;
 
         public event Action<BattleOutcome> Finished;
         public event Action<double> Ticked;
@@ -38,6 +41,8 @@ namespace SectorLab.Battle
                 throw new InvalidOperationException("Cannot replace a running match.");
             State = state ?? throw new ArgumentNullException(nameof(state));
         }
+
+        public void InitializeRelays(RelayPoint[] points) => relays = points ?? throw new ArgumentNullException(nameof(points));
 
         private void Update()
         {
@@ -78,7 +83,10 @@ namespace SectorLab.Battle
         {
             if (!State.IsRunning)
                 return;
-            double advanced = State.Tick(seconds, playerRate, enemyRate);
+            double tick = Math.Min(seconds, State.Clock.RemainingSeconds);
+            for (int i = 0; i < relays.Length; i++)
+                relays[i].Simulate(tick);
+            double advanced = State.Tick(tick, playerRate, enemyRate);
             if (State.IsRunning)
             {
                 Ticked?.Invoke(advanced);
