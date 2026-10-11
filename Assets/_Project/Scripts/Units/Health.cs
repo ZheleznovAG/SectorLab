@@ -33,5 +33,16 @@ namespace SectorLab.Units
             if (IsDead)
                 Died?.Invoke();
         }
+
+        // Returns actual healing. Adding only the missing amount also avoids integer overflow.
+        public int Heal(int amount)
+        {
+            if (amount <= 0 || IsDead) return 0;
+            int healed = Math.Min(amount, Max - Current);
+            if (healed == 0) return 0;
+            Current += healed;
+            Changed?.Invoke();
+            return healed;
+        }
     }
 }

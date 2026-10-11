@@ -1,0 +1,1 @@
+2026-10-11T15:39:48.2873514Z Main C owner=Player contested=True before=190 captured=190 after3s=208 pause=208 contestedHp=208
