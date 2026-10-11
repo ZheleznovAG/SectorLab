@@ -1,5 +1,9 @@
 # 01. Базовый аудит проекта на 2026-10-11
 
+> Этот документ сохраняет выводы по исходному архиву. Повторный аудит настоящего
+> рабочего каталога, текущие проверки Unity и доступность телефона —
+> [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) и [EVIDENCE_REPORT.md](EVIDENCE_REPORT.md).
+
 ## Подтверждено по переданному ZIP
 
 Источник — `SectorLab-for-ai-20261011-191247.zip`, дата снимка 2026-10-11 19:12:48 +07:00. ZIP содержит `SectorLab/` (Assets, Packages, ProjectSettings, `.git`, документы), `review/working-tree.patch`, `review/git-log.txt`, `review/git-status.txt`, `START_HERE.md`. В **настоящем рабочем каталоге** агент обязан повторить инвентаризацию: снимок может устареть.
