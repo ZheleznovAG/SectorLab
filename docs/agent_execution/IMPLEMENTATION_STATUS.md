@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W6.1**, следующий этап — **W6.2**.
+Последняя завершённая задача — **W6.2**, следующий этап — **W6.3**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -534,3 +534,19 @@ UI fixture проверял GraphicRaycaster до Canvas registration/layout п�
 и [предыдущие партии](evidence/W6.1-attempt1-main-matches.csv)/
 [restarts](evidence/W6.1-attempt1-main-restarts.csv) сохранены.
 FR-006 остаётся PARTIAL до камеры и проверки обновлённого Player на телефоне.
+
+W6.1 зафиксирован в `119cd44`. W6.2 / FR-006: TacticalCamera на прежней Main
+Camera слушает PanRequested/ZoomRequested. Ray → ground plane сохраняет точку
+под пальцем; focus ограничен ±2,5 м, distance 9–22 м, угол 55° фиксирован.
+Никаких контейнерных Resolve или async в камере. **99/99 PlayMode PASS**
+([лог](evidence/tests-W6.2-playmode.json)): virtual drag/pinch меняют реально
+подписанную камеру без selection/orders; проверены bounds, anchor under finger,
+zoom и invalid factors. Прежние [партии](evidence/W6.2-main-matches.csv) и
+[10 restarts](evidence/W6.2-main-restarts.csv) тоже прошли.
+
+Начальный Refresh RPC попал в domain reload и не запустил тесты; повтор сделан
+после фактического ready/успешной компиляции. В отдельном Main Play Mode
+проверены [Pan/Zoom](evidence/W6.2-camera-observation.txt) и
+[вид сцены](evidence/W6.2-camera.png): Ready, focus -2,41 по X, distance 14,4,
+угол 55°. Это Editor API observation; физический pinch обновлённого APK ещё
+проверяется после W6.3–W6.5. HUD/safe area — следующий шаг.
