@@ -13,6 +13,8 @@ namespace SectorLab.Battle
         [SerializeField] private BattleResultView resultView;
 
         public BattleOutcome Outcome { get; private set; } = BattleOutcome.InProgress;
+        public int PlayerUnitsAlive { get; private set; }
+        public int EnemyUnitsAlive { get; private set; }
 
         public event Action<BattleOutcome> Finished;
 
@@ -32,6 +34,9 @@ namespace SectorLab.Battle
                 else
                     enemies++;
             }
+
+            PlayerUnitsAlive = players;
+            EnemyUnitsAlive = enemies;
 
             BattleOutcome outcome = BattleRules.Evaluate(players, enemies);
             if (outcome == BattleOutcome.InProgress)
