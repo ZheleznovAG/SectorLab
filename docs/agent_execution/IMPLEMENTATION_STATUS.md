@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W4.1**, следующий этап — **W4.2**.
+Последняя завершённая задача — **W4.2**, следующий этап — **W4.3**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -116,7 +116,7 @@ diff; другие настройки проекта не затронуты.
 | FR-018 | TODO | Звук/mute отсутствуют / W7 |
 | FR-019 | TODO | Обучения нет / W6 |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
-| FR-021 | TODO | VContainer не установлен / W4 |
+| FR-021 | PARTIAL | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection проверена; удалить старый fallback / W4.3 |
 | FR-022 | TODO | UniTask не установлен / W5 |
 | FR-023 | TODO | Addressables не установлен / W5 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
@@ -134,7 +134,7 @@ diff; другие настройки проекта не затронуты.
 | NFR-008 | NOT_RUN | Телефон подключён; APK на нём не запускался / W8 |
 | NFR-009 | NOT_RUN | FPS/память на Android не измерены; SHOULD / W8 |
 | NFR-010 | PARTIAL | ZIP/кеши/build исключены; финальный аудит истории впереди / W9 |
-| NFR-011 | TODO | THIRD_PARTY_NOTICES.md ещё нет / W4–W5, W9 |
+| NFR-011 | PARTIAL | THIRD_PARTY_NOTICES.md и MIT VContainer добавлены; последующие пакеты / W5, W9 |
 | NFR-012 | PARTIAL | Сохраняется существующая структура; реальные интеграции ещё впереди |
 | NFR-013 | PARTIAL | Русский README baseline есть; его v1.0 разделы ещё впереди / W9 |
 | NFR-014 | BASELINE_PASS | История и файлы сохранены; destructive commands/push не применялись |
@@ -361,7 +361,7 @@ W3.2 зафиксирован в `116bb28`. W3.3 / FR-011/014/016: новый Ma
 асимметрична; выравнивание арены/стартов и повторная NavMesh-проверка остаются в W5/W7.
 G3 закрыт. Следующее — пакет VContainer с pinned version, затем настоящий scope.
 
-W3.3 зафиксирован в `78e3e8b`. W4.1 / NFR-004: VContainer 1.19.0 установлен
+W3.3 зафиксирован в `78e3e8b`. W4.1 / FR-021, NFR-011: VContainer 1.19.0 установлен
 из официального Git UPM URL; lock содержит commit
 `5401e5a7ebc4980a2b82141ffc26391a6547edd7`.
 [Запись пакета](evidence/package-W4.1.json), [53/53 EditMode PASS](evidence/tests-W4.1-editmode.json).
@@ -369,3 +369,14 @@ W3.3 зафиксирован в `78e3e8b`. W4.1 / NFR-004: VContainer 1.19.0 у
 тесты запущены после возвращения Editor в ready. Этот timeout не считается PASS.
 Manifest/lock, лицензия MIT и notices включены в отдельный установочный коммит.
 Main/игровые службы на этом шаге не менялись; G4 остаётся открытым до проверки scope.
+
+W4.1 зафиксирован в `b5c1db7`. W4.2 / FR-021: GameLifetimeScope добавлен
+к существующему Battle в Main через Editor API, без переписывания сцены.
+Clock/State Scoped; Battle и AI — зарегистрированные компоненты с Inject.
+[ADR 004](../adr/004-match-composition-root.md). **70/70 PlayMode PASS**
+([лог](evidence/tests-W4.2-playmode.json)): общие state/clock, новые экземпляры
+после dispose, ошибки недостающей регистрации и четыре реальные партии Main.
+[Метрики этого прогона](evidence/W4-scope-main-matches.csv) сохранены отдельно;
+G3 CSV восстановлен из его коммита после обнаружения перезаписи тестом.
+В W4.3 тестовый runner получит отдельное имя evidence на каждый task.
+Старый Awake fallback пока сохранён для прежних fixtures; его удаление — W4.3.

@@ -30,6 +30,7 @@ namespace SectorLab.AI
             if (!initialized) Initialize(battle);
         }
 
+        [VContainer.Inject]
         public void Initialize(BattleController controller)
         {
             Unsubscribe();
