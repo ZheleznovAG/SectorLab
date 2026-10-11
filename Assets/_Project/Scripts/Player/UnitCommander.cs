@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace SectorLab.Player
 {
-    // Turns taps and clicks into orders: tap a unit to select it, tap the ground to send the selected unit there.
+    // Turns taps and clicks into orders: tap your unit to select it, an enemy to attack it, the ground to move there.
     // Pointer covers both mouse and touchscreen, so the same code works in the editor and on a phone.
     public class UnitCommander : MonoBehaviour
     {
@@ -44,7 +44,10 @@ namespace SectorLab.Player
             Unit unit = hit.collider.GetComponentInParent<Unit>();
             if (unit != null)
             {
-                Select(unit);
+                if (unit.Team == Team.Player)
+                    Select(unit);
+                else if (Selected != null && Selected.Attack != null)
+                    AttackWithSelected(unit);
                 return;
             }
 
@@ -66,8 +69,17 @@ namespace SectorLab.Player
             SetMarkerVisible(false);
         }
 
+        private void AttackWithSelected(Unit enemy)
+        {
+            Selected.Attack.SetTarget(enemy);
+            SetMarkerVisible(false);
+        }
+
         private void MoveSelected(Vector3 point)
         {
+            // A move order cancels the attack, otherwise the unit would keep chasing its target.
+            if (Selected.Attack != null)
+                Selected.Attack.ClearTarget();
             Selected.Movement.MoveTo(point);
 
             if (destinationMarker != null)
