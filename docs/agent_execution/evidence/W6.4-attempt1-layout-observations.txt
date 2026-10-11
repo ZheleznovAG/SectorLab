@@ -1,0 +1,3 @@
+2026-10-11T20:40:27.0302566Z Screen=1280x720; SafeArea=(x:0.00, y:0.00, width:1280.00, height:720.00); camera=(x:0.00, y:127.33, width:1280.00, height:432.00); all HUD/result buttons inside screen
+2026-10-11T20:40:50.3875023Z Screen=1600x720; SafeArea=(x:0.00, y:0.00, width:1600.00, height:720.00); camera=(x:0.00, y:142.36, width:1600.00, height:398.01); all HUD/result buttons inside screen
+2026-10-11T20:40:55.0374624Z Screen=1024x768; SafeArea=(x:0.00, y:0.00, width:1024.00, height:768.00); camera=(x:0.00, y:117.63, width:1024.00, height:501.96); all HUD/result buttons inside screen

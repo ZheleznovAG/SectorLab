@@ -22,6 +22,13 @@ namespace SectorLab.Editor
             var battle = Object.FindFirstObjectByType<BattleController>();
             var result = Object.FindFirstObjectByType<BattleResultView>();
             var canvas = result.GetComponentInParent<Canvas>();
+            var backdrop = GameObject.Find("BackdropCamera");
+            if (backdrop == null) backdrop = new GameObject("BackdropCamera", typeof(Camera));
+            var clearCamera = backdrop.GetComponent<Camera>();
+            clearCamera.depth = -100; clearCamera.cullingMask = 0;
+            clearCamera.clearFlags = CameraClearFlags.SolidColor;
+            clearCamera.backgroundColor = Ink;
+            clearCamera.allowHDR = false; clearCamera.allowMSAA = false;
             font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             var scaler = canvas.GetComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -29,9 +36,12 @@ namespace SectorLab.Editor
             scaler.matchWidthOrHeight = 0.5f;
             var oldCounter = Object.FindFirstObjectByType<ForceCounterView>();
             if (oldCounter != null) oldCounter.gameObject.SetActive(false);
-            var existing = canvas.transform.Find("MatchHUD");
+            var safe = canvas.transform.Find("SafeArea") as RectTransform;
+            if (safe == null) safe = Rect("SafeArea", canvas.transform, Vector2.zero, Vector2.one);
+            if (safe.GetComponent<SafeAreaLayout>() == null) safe.gameObject.AddComponent<SafeAreaLayout>();
+            var existing = safe.Find("MatchHUD") ?? canvas.transform.Find("MatchHUD");
             if (existing != null) Object.DestroyImmediate(existing.gameObject); // Only this generated UI subtree.
-            var root = Rect("MatchHUD", canvas.transform, Vector2.zero, Vector2.one);
+            var root = Rect("MatchHUD", safe, Vector2.zero, Vector2.one);
             var hud = root.gameObject.AddComponent<BattleHud>();
             var top = Panel("TopBar", root, new Vector2(0, 1), Vector2.one, 140, true);
             Label("Brand", top, new Vector2(0.015f, 0.52f), new Vector2(0.25f, 0.97f), "SECTORLAB / RELAY SKIRMISH", 24, TextAnchor.MiddleLeft);
@@ -68,6 +78,7 @@ namespace SectorLab.Editor
             data.ApplyModifiedPropertiesWithoutUndo();
             var resultData = new SerializedObject(result);
             var panel = (GameObject)resultData.FindProperty("panel").objectReferenceValue;
+            panel.transform.SetParent(safe, false);
             panel.GetComponent<Image>().color = new Color(0.03f, 0.04f, 0.06f, 0.97f);
             var title = (Text)resultData.FindProperty("title").objectReferenceValue;
             title.fontSize = 64;
