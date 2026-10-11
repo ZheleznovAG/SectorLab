@@ -23,7 +23,7 @@ W5.2,W5,Install and pin UniTask,W5.1,Compile; unit async test,G5,TODO,PASS,evide
 W5.3,W5,Create addressable unit prefab provider,W5.2,Editor spawn/release,G5,TODO,PASS,evidence/tests-W5.3-playmode.json; evidence/W5-local-content-manifest.json
 W5.4,W5,Add async lifecycle and cancellation,W5.3,Restart during load,G5,TODO,PASS,evidence/tests-W5.4-playmode.json; Main restart proof follows W5.6
 W5.5,W5,Implement 10s unit respawn both teams,W5.4,PlayMode death/respawn/pause,G5,TODO,PASS,evidence/tests-W5.5a-editmode.json; evidence/tests-W5.5b-playmode.json
-W5.6,W5,"Failure, cleanup and 10 restarts",W5.5,Failure/cancellation/leak tests,G5,TODO,TODO,
+W5.6,W5,"Failure, cleanup and 10 restarts",W5.5,Failure/cancellation/leak tests,G5,TODO,PASS,evidence/tests-W5.6-playmode.json; evidence/W5.6-main-restarts.csv
 W6.1,W6,Input gesture handling tap/drag/UI,W5.6,Virtual Touchscreen tests,G6,TODO,TODO,
 W6.2,W6,Camera pan/zoom bounds,W6.1,Editor/mobile gesture check,G6,TODO,TODO,
 W6.3,W6,Complete HUD time score relays respawn,W6.2,PlayMode HUD + screenshots,G6,TODO,TODO,

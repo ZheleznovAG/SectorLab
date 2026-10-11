@@ -153,6 +153,11 @@ namespace SectorLab.Units
             Phase = UnitLifecyclePhase.Failed;
             lifetime.Cancel();
             UnsubscribeUnits();
+            for (int i = 0; i < slots.Length; i++)
+            {
+                slots[i].IsSpawning = false;
+                slots[i].Respawn.Complete();
+            }
             factory.Dispose();
             battle.SetPaused(true);
             resultView?.ShowLoadError(battle.Restart, ExitGame);

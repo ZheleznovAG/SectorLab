@@ -8,7 +8,7 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W5.5**, следующий этап — **W5.6**.
+Последняя завершённая задача — **W5.6**, следующий этап — **G5 APK / W6.1**.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -112,17 +112,17 @@ diff; другие настройки проекта не затронуты.
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
 | FR-015 | PARTIAL | Есть силы/HP/result, нет очков/времени/узлов/respawn / W6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
-| FR-017 | TODO | Перезагрузка сцены есть; 10 restart и async ownership не проверены / W5 |
+| FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
 | FR-018 | TODO | Звук/mute отсутствуют / W7 |
 | FR-019 | TODO | Обучения нет / W6 |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
 | FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
-| FR-022 | PARTIAL | UniTask 2.5.11 закреплён и компилируется; настоящий async lifecycle / W5.3–W5.6 |
+| FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
 | FR-023 | PARTIAL | Addressables 2.11.2 закреплён и компилируется; local content и реальный spawn / W5.3–W5.6 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
 | FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
 | FR-026 | TODO | Метрики баланса не реализованы; SHOULD / W7 |
-| FR-027 | TODO | Асинхронной загрузки/ошибки/Retry пока нет / W5 |
+| FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
 | FR-028 | NOT_RUN | Три формата будущего HUD не проверены / W6 |
 | NFR-001 | BASELINE_PASS | Unity Editor соответствует 6000.6.4f1 |
 | NFR-002 | NOT_RUN | Чистый checkout не запускался / W8 |
@@ -489,3 +489,25 @@ isolated lifecycle fixture теперь исключает relay scoring, пол
 Это наблюдение реального боя, не доказательство человеческого playtest.
 HUD ещё baseline alive counter, score/time/respawn UI — W6. Android v1.0 content
 в APK ещё не подтверждён, G5 остаётся IN_PROGRESS до отдельной проверки Player.
+
+W5.5b зафиксирован в `89968e1`. W5.6 / FR-017/022/027, NFR-006:
+**88/88 PlayMode PASS** ([лог](evidence/tests-W5.6-playmode.json)).
+[10 настоящих Restart](evidence/W5.6-main-restarts.csv) сбросили state/clock,
+scores/partial relay progress/countdowns; каждый новый матч — 6 units/6 owned
+handles, у каждой старой factory — 0 instances. После unload — ноль handles/units.
+Реальный Main restarted из Loading с задержанной доставкой actual prefab lease;
+старый token cancelled, поздний lease освобождён без ghost unit.
+
+MissingKeyProvider в тесте направляет третий load на несуществующий ключ
+настоящего AddressableUnitPrefabProvider. Две успешные загрузки очищаются;
+Failed panel активен, Retry/Exit доступны, часы остановлены. Нажатие настоящего
+Retry button запускает свежий Main; отдельно проверены обе UI actions и
+отсутствие повторных listeners. Exit native Application.Quit на телефоне — W8.
+Failure очищает IsSpawning/countdowns. Партии сохранены [отдельно](evidence/W5.6-main-matches.csv).
+
+Первый прогон — 87/88 ([лог](evidence/tests-W5.6-attempt1-playmode.json)):
+test double пытался RegisterInstance второго UnitRoster того же implementation
+type; VContainer справедливо отклонил конфликт. Тест заменяет IUnitPrefabProvider
+другим implementation, сохраняя настоящую проверку missing Addressables key.
+Начальный [restart CSV](evidence/W5.6-attempt1-main-restarts.csv) и
+[партии](evidence/W5.6-attempt1-main-matches.csv) не заменены.
