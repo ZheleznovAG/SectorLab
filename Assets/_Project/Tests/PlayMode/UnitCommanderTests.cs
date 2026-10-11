@@ -15,6 +15,7 @@ namespace SectorLab.Tests
         private GameObject root;
         private Camera camera;
         private Unit unit;
+        private Unit enemy;
         private UnitCommander commander;
         private Transform marker;
 
@@ -43,6 +44,18 @@ namespace SectorLab.Tests
             unitObject.layer = LayerMask.NameToLayer("Units");
             unitObject.AddComponent<UnitMovement>();
             unit = unitObject.AddComponent<Unit>();
+            unitObject.AddComponent<UnitAttack>();
+
+            GameObject enemyObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            enemyObject.name = "Enemy";
+            enemyObject.SetActive(false);
+            enemyObject.transform.SetParent(root.transform);
+            enemyObject.transform.position = new Vector3(-2f, 1f, 3f);
+            enemyObject.layer = LayerMask.NameToLayer("Units");
+            enemyObject.AddComponent<UnitMovement>();
+            enemy = enemyObject.AddComponent<Unit>();
+            SetField(enemy, "team", Team.Enemy);
+            enemyObject.SetActive(true);
 
             marker = new GameObject("Marker").transform;
             marker.SetParent(root.transform);
@@ -105,6 +118,35 @@ namespace SectorLab.Tests
             Assert.That(unit.Movement.Destination.x, Is.EqualTo(-2f).Within(0.05f));
             Assert.That(unit.Movement.Destination.z, Is.EqualTo(-2f).Within(0.05f));
             Assert.That(marker.gameObject.activeSelf, Is.True);
+        }
+
+        [Test]
+        public void TapOnEnemy_WithoutSelection_DoesNotSelectIt()
+        {
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+
+            Assert.That(commander.Selected, Is.Null);
+        }
+
+        [Test]
+        public void TapOnEnemy_OrdersSelectedUnitToAttack()
+        {
+            commander.HandleTap(ScreenPoint(unit.transform.position));
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+
+            Assert.That(commander.Selected, Is.SameAs(unit));
+            Assert.That(unit.Attack.Target, Is.SameAs(enemy));
+        }
+
+        [Test]
+        public void TapOnGround_CancelsAttack()
+        {
+            commander.HandleTap(ScreenPoint(unit.transform.position));
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+            commander.HandleTap(ScreenPoint(new Vector3(2f, 0f, -2f)));
+
+            Assert.That(unit.Attack.Target, Is.Null);
+            Assert.That(unit.Movement.IsMoving, Is.True);
         }
 
         [Test]
