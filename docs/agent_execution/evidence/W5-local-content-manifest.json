@@ -1,0 +1,177 @@
+﻿{
+    "task":  "W5.3",
+    "sourceHead":  "97445f292b30306d6b0a1cd1f7774bb6619c192e",
+    "checkedAtUtc":  "2026-10-11T19:08:29.1458234Z",
+    "build":  {
+                  "checkedAtUtc":  "2026-10-11T19:07:58.9845914Z",
+                  "target":  "Android",
+                  "error":  "",
+                  "outputPath":  "Library/com.unity.addressables/aa/Android/settings.json",
+                  "durationSeconds":  3.7997107999999997,
+                  "succeeded":  true
+              },
+    "files":  [
+                  {
+                      "path":  "Library/com.unity.addressables/aa/Android/catalog.bin",
+                      "length":  2940,
+                      "sha256":  "89E604ECF63C36132957C60485BDBECF055F745307A834673C9C983F7A79425A"
+                  },
+                  {
+                      "path":  "Library/com.unity.addressables/aa/Android/catalog.hash",
+                      "length":  32,
+                      "sha256":  "7EBE5AE06749D4E3D214D9EB69F229E679A2781E2634CBCE4221B1639CD62F33"
+                  },
+                  {
+                      "path":  "Library/com.unity.addressables/aa/Android/settings.json",
+                      "length":  852,
+                      "sha256":  "2B2D8675CB1E050D24666DF0EB75553D2AC78212EC76D0847AFB9C9024D8A93B"
+                  },
+                  {
+                      "path":  "Library/com.unity.addressables/aa/Android/AddressablesLink/link.xml",
+                      "length":  2445,
+                      "sha256":  "8F494F39C9EA68E6571E55A11F6B0A2C30CA41C1BD0F82EFA8A144F48611E94A"
+                  },
+                  {
+                      "path":  "Library/com.unity.addressables/aa/Android/Android/0c4162be82264d6cddfd16e267eacd4f_monoscripts_9f6629076060dda104e717da02699aad.bundle",
+                      "length":  1849,
+                      "sha256":  "07778DACEBB890D38813BF1E12AFB483481486FAD4658CD139C3006B6D3E008D"
+                  },
+                  {
+                      "path":  "Library/com.unity.addressables/aa/Android/Android/localunits_assets_all_3f4e2b40c80adc7af49e27711b452721.bundle",
+                      "length":  139077,
+                      "sha256":  "938865BEC57199887535F7301E93A81D19B73FAF7D1D57467F564164DADA6705"
+                  }
+              ],
+    "remoteCatalog":  false,
+    "keys":  [
+                 "units/Tank",
+                 "units/Scout",
+                 "units/Ranger",
+                 "units/EnemyTank",
+                 "units/EnemyScout",
+                 "units/EnemyRanger"
+             ],
+    "limitation":  "Local Android content only. Editor fast-mode integration and final APK/device are separate checks.",
+    "settingsInputHashes":  [
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AddressableAssetSettings.asset",
+                                    "sha256":  "740D540B4EB84CBAC97D2006032BB31DFEF581627F79868265A452E53C0A6730"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AddressableAssetSettings.asset.meta",
+                                    "sha256":  "46461449495A63D80300818361A85EA8E88C586CBE07C03916FC5CD602CE1FE4"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups.meta",
+                                    "sha256":  "8DD6DFB899F6B987E5C58083AA73394353CFA3BC19E51311BB7E1C80CB86B82E"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset",
+                                    "sha256":  "B3703E15194C8426A3993447330CEFF2EEEAA4C109E1ADEB9615D0EF92C5D0DE"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset.meta",
+                                    "sha256":  "A25AFD1527C03680EA89B073BD62E800BB453DD3579FAB95403985D6EA47F690"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Local Units.asset",
+                                    "sha256":  "E2F75B93C17C756B23FFF0323CB4AB67021E5313540EDEFE1AB22EA869F2782E"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Local Units.asset.meta",
+                                    "sha256":  "537CC178DFC88B06F49BD0DDCB9152B6488833AC538ACAF6CC0F389A51816B9F"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas.meta",
+                                    "sha256":  "DDA79FFF7040E8BCBF15A9927F7A023579CDB4769A00FA6A60CD9B9C2522880B"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset",
+                                    "sha256":  "157133F648DC49CAF93E60ECE2FE7F9BDF0623744565915936B9F665B3C2A0C6"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset.meta",
+                                    "sha256":  "28B35691B5DD3413AB978F59992B454536DF220C09425DEE3EC61EBF1DEE1E1F"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_ContentUpdateGroupSchema.asset",
+                                    "sha256":  "A4F98C2634A092473946AFFEBB1A549F6616CDB5F445F9A54D77D5FE4994E336"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_ContentUpdateGroupSchema.asset.meta",
+                                    "sha256":  "98246A9190EB05DD112DC0B8D6302B3C31C6AF9F809BFCC4A82910EC44DBF032"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_BundledAssetGroupSchema.asset",
+                                    "sha256":  "EDCA47E0B302A49F145FA614A57F37268AEE6A57CF031A69ABF2F3CF4647F041"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_BundledAssetGroupSchema.asset.meta",
+                                    "sha256":  "D0243C8D67D0D95C23C568BF29E90693385851A7EA440D41E9A2138C0647EE44"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_ContentUpdateGroupSchema.asset",
+                                    "sha256":  "32CEFF77087A90E858DF622F7B0C650F4CA78D8CFA079D4A534CD6AE88308391"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_ContentUpdateGroupSchema.asset.meta",
+                                    "sha256":  "530E7465A4AEA01FD6071FD44CFD41DF4A5F4F53A27AF50E3391AED8A3C9956B"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroupTemplates.meta",
+                                    "sha256":  "6E5FDF6B807F16A53367342F6E024FC264BEA2044E927C0C43D45C1DC683F57A"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroupTemplates/Packed Assets.asset",
+                                    "sha256":  "0DD6305FB0B3396B73311CE7840C94255C28BBC106B6BC2798F833413BBB4FFA"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/AssetGroupTemplates/Packed Assets.asset.meta",
+                                    "sha256":  "7373511617C2404DE8356A2ABDE50159A71D3A9FAC2181B2284D4FF9B5B0CCB2"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders.meta",
+                                    "sha256":  "1F88776B685005EA5CDC3B97D200D0E95E1FD5755FEB7B0FFB77CDE5FC379053"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders/BuildScriptFastMode.asset",
+                                    "sha256":  "EC8FA6F7F04687B1EA742863CA9312CC48C78708D3BD04F5A80EE1C4289FA550"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders/BuildScriptFastMode.asset.meta",
+                                    "sha256":  "92373C001973410D9F50573B219444AE394B4FFAFCF97E2FF93C760AED5755DE"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset",
+                                    "sha256":  "CA98B03B4BD46044981893AF422AAD5EC947F6B4923D5E7D732074AC0CF2D58C"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset.meta",
+                                    "sha256":  "6739B0E17CD839A105B615A2CA757AB01733349CCC2E6F0FE4B0A38D215C5799"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedPlayMode.asset",
+                                    "sha256":  "40AEC021CFEF83513030F6622569C31B4DC2EED74B6024C9EA8762EE981FD3BD"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedPlayMode.asset.meta",
+                                    "sha256":  "97A74A8F351C3D5B33D8718743DCD6A60F5727F27FAEC2AD6FBD3C31C068B60C"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DefaultObject.asset",
+                                    "sha256":  "A217605E7AECADD93A4D9086CC5FEB559CAF3D591D6A5E50E473F63991301249"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/DefaultObject.asset.meta",
+                                    "sha256":  "1A2B2388548BA875739B9D30F8351519BFD0FED6227DE8075BDFEE4C59EEF2CF"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/ProfileDataSourceSettings.asset",
+                                    "sha256":  "F8DE3D32F69BDD89CD640986E03089048C2254D92B7067F6D649E084D360FDFB"
+                                },
+                                {
+                                    "path":  "Assets/AddressableAssetsData/ProfileDataSourceSettings.asset.meta",
+                                    "sha256":  "5AE6BA0250E2F5ECA95AD02C790FBFA60CE3EC3AA2C52DE260349D1F9FB339CF"
+                                }
+                            ]
+}

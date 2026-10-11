@@ -20,6 +20,9 @@ namespace SectorLab.Battle
             builder.Register<MatchState>(Lifetime.Scoped);
             builder.RegisterComponent(battle);
             builder.RegisterComponent(enemyTactics);
+            builder.Register<SectorLab.Infrastructure.AddressableUnitPrefabProvider>(Lifetime.Scoped)
+                .As<SectorLab.Infrastructure.IUnitPrefabProvider>().AsSelf();
+            builder.Register<SectorLab.Infrastructure.UnitFactory>(Lifetime.Scoped);
         }
     }
 }
