@@ -87,6 +87,60 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator DisabledAgent_MoveToClearsMovingState()
+        {
+            TestArena.Bake(root);
+            UnitMovement movement = CreateUnit(Vector3.zero);
+            movement.MoveTo(new Vector3(5f, 0f, 0f));
+            yield return null;
+            movement.GetComponent<NavMeshAgent>().enabled = false;
+
+            bool accepted = movement.MoveTo(Vector3.right);
+
+            Assert.That(accepted, Is.False);
+            Assert.That(movement.IsMoving, Is.False);
+        }
+
+        [UnityTest]
+        public IEnumerator DisabledAgent_WithoutNewOrderClearsMovingState()
+        {
+            TestArena.Bake(root);
+            UnitMovement movement = CreateUnit(Vector3.zero);
+            Assert.That(movement.MoveTo(new Vector3(5f, 0f, 0f)), Is.True);
+            yield return null;
+            movement.GetComponent<NavMeshAgent>().enabled = false;
+            yield return null;
+
+            Assert.That(movement.IsMoving, Is.False);
+        }
+
+        [UnityTest]
+        public IEnumerator UnreachableDestination_StopsAtEndOfPartialPath()
+        {
+            TestArena.CreateBlock(root.transform, new Vector3(0f, 1f, 0f), new Vector3(1f, 2f, 20f));
+            TestArena.Bake(root);
+            var start = new Vector3(-2f, 0f, 0f);
+            var destination = new Vector3(2f, 0f, 0f);
+            UnitMovement movement = CreateUnit(start);
+            NavMeshAgent agent = movement.GetComponent<NavMeshAgent>();
+            Assert.That(movement.MoveTo(destination), Is.True, "The request must be accepted before testing a partial path");
+            for (int frame = 0; frame < 60 && agent.pathPending; frame++)
+                yield return null;
+
+            Assert.That(agent.pathPending, Is.False);
+            Assert.That(agent.hasPath, Is.True);
+            Assert.That(agent.pathStatus, Is.EqualTo(NavMeshPathStatus.PathPartial));
+            Assert.That(agent.remainingDistance, Is.GreaterThan(0.3f), "The partial path must have a segment to walk");
+            for (int frame = 0; frame < 600 && movement.IsMoving; frame++)
+                yield return null;
+
+            Assert.That(movement.IsMoving, Is.False);
+            Assert.That(FlatDistance(start, movement.transform.position), Is.GreaterThan(0.5f), "An immediate refusal must not pass this test");
+            Assert.That(FlatDistance(destination, movement.transform.position), Is.GreaterThan(0.5f));
+            Assert.That(movement.transform.position.x, Is.LessThan(0f), "The agent must not cross the disconnected wall");
+        }
+
+        [UnityTest]
         public IEnumerator Stop_HaltsMovement()
         {
             TestArena.Bake(root);
