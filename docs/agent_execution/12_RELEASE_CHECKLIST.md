@@ -32,6 +32,8 @@
 - [x] Addressables создаёт prefab в настоящей игре и освобождает ресурсы
 - [x] Тесты захвата, счёта, времени, смерти/respawn, restart/load/cancel прошли
 - [x] `0ae98c8`: 63/63 EditMode и 112/112 PlayMode, все failed/skipped/inconclusive=0
+- [x] После прерывания: повторные 63/63 EditMode, 112/112 PlayMode и обычный Editor Main smoke PASS; доказательства сохранены
+- [ ] Полная игра v1.0 в Android Emulator: launch FAIL, native SEVL/SIGILL; это не замена проверки телефона
 - [x] APK `654CB514…1237DA` собран с локальным контентом; финальный device test честно BLOCKED_DEVICE
 - [x] Две ограниченные реальные серии Android приложены; Mono GC/GPU time недоступны
 - [ ] 600 с активных повторных партий на финальном APK; текущая foreground серия измеряла преимущественно результат

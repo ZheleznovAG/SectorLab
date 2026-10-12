@@ -1,0 +1,97 @@
+﻿{
+    "task":  "W8-emulator-resume",
+    "recordedAtUtc":  "2026-10-12T11:14:21.6966322Z",
+    "auditStartedHead":  "53620996b6a780009aeb7f52f767440ee3a69391",
+    "sourceHead":  "bb6b521d0628611c37e7af83df355f31a8a5d055",
+    "deviceKind":  "emulator",
+    "adbSerial":  "emulator-5554",
+    "avd":  "SectorLab_API34",
+    "androidVersion":  "14",
+    "model":  "sdk_gphone64_x86_64",
+    "architecture":  "x86_64 guest with ARM64 native translation",
+    "physicalDeviceConnected":  false,
+    "initialInstalledApk":  {
+                                "initialRender":  "PASS",
+                                "bytes":  29253015,
+                                "versionName":  "0.1.0",
+                                "sha256":  "2CD754E692E3840E698FC390946EACC48E3729C8837637B3FFC17D73923ED011",
+                                "matchesLocalBaseline":  true,
+                                "screenshot":  "W8-emulator-baseline-initial.png"
+                            },
+    "attempts":  [
+                     {
+                         "nativeLibrary":  "libunity.so",
+                         "apkSha256":  "02ABBB740A12F5C35012F2EDACC011984773DAC220CDEC6790485C7FABF5F68F",
+                         "undefinedInstruction":  "0xd50320bf",
+                         "failedThread":  "Loading.Preload",
+                         "nativePc":  "0x586c10",
+                         "signal":  "SIGILL",
+                         "result":  "FAIL",
+                         "activity":  "UnityPlayerActivity",
+                         "arguments":  "none",
+                         "versionName":  "1.0.0",
+                         "apkPath":  "Builds/Android/SectorLab-W8-emulator-activity.apk"
+                     },
+                     {
+                         "nativeLibrary":  "libunity.so",
+                         "apkSha256":  "654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA",
+                         "undefinedInstruction":  "0xd50320bf",
+                         "failedThread":  "Loading.Preload",
+                         "nativePc":  "0x586c10",
+                         "jobWorkerCountZeroConfirmedByLog":  true,
+                         "signal":  "SIGILL",
+                         "result":  "FAIL",
+                         "activity":  "UnityPlayerGameActivity",
+                         "arguments":  "-force-gles -force-gfx-st -job-worker-count 0 -background-job-worker-count 0",
+                         "versionName":  "1.0.0",
+                         "apkPath":  "Builds/Android/SectorLab-W8-selection.apk"
+                     },
+                     {
+                         "nativeLibrary":  "libunity.so",
+                         "apkSha256":  "2CD754E692E3840E698FC390946EACC48E3729C8837637B3FFC17D73923ED011",
+                         "undefinedInstruction":  "0xd50320bf",
+                         "failedThread":  "Unity Main Thre",
+                         "nativePc":  "0x50e058",
+                         "signal":  "SIGILL",
+                         "result":  "FAIL",
+                         "activity":  "UnityPlayerGameActivity",
+                         "arguments":  "-force-gles",
+                         "versionName":  "0.1.0",
+                         "apkPath":  "Builds/Android/SectorLab-baseline-1c8754d-20261011.apk"
+                     }
+                 ],
+    "diagnosis":  {
+                      "engineBinaryModified":  false,
+                      "conclusion":  "The emulator translator rejects a native Unity instruction. This does not establish a gameplay C# defect or an Addressables-specific failure; baseline retry also fails.",
+                      "nativeInstruction":  "SEVL",
+                      "instructionConfirmedWith":  "Unity NDK llvm-objdump at libunity.so + 0x586c10"
+                  },
+    "checks":  {
+                   "playMode":  "PASS 112/112, failed/skipped/inconclusive=0",
+                   "emulatorPerformance":  "BLOCKED_EMULATOR",
+                   "editMode":  "PASS 63/63, failed/skipped/inconclusive=0",
+                   "powershellParser":  "PASS for measure-android.ps1 and fit-android-emulator-window.ps1",
+                   "performanceTool":  "Foreground precondition rejected after app crash; no completed measurement",
+                   "emulatorGameplay":  "FAIL",
+                   "windowFit":  {
+                                     "workingArea":  [
+                                                         0,
+                                                         0,
+                                                         1920,
+                                                         1020
+                                                     ],
+                                     "result":  "PASS",
+                                     "observedBounds":  [
+                                                            786,
+                                                            130,
+                                                            1133,
+                                                            890
+                                                        ]
+                                 },
+                   "physicalDeviceAcceptance":  "BLOCKED_DEVICE",
+                   "editorSmoke":  "PASS; see W8-emulator-resume-editor.json",
+                   "humanFullMatch":  "NOT_VERIFIED"
+               },
+    "finalEmulatorInstallation":  "Baseline 0.1.0 restored without uninstall or data wipe; repeated launch failed. No reliable emulator game session remains.",
+    "limitation":  "APK install success is recorded, but only initial baseline installation was independently pulled and hash-verified. Emulator FPS cannot verify physical-phone performance. Raw logs, APKs and SDK/AVD stay outside Git."
+}

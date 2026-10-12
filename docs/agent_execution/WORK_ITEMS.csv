@@ -39,3 +39,4 @@ W8.3,W8,Profile CPU GC memory and resolve defects,W8.2,Metrics or BLOCKED report
 W9.1,W9,Update README ADR licenses tests,W8.3,"Doc review, no invented PASS",G9,TODO,PASS,../../README.md; ../THIRD_PARTY_NOTICES.md; ../adr/008-game-time-in-navigation-tests.md
 W9.2,W9,Produce evidence and study walkthrough,W9.1,Links to real commits and files,G9,TODO,PASS,EVIDENCE_REPORT.md; STUDY_WALKTHROUGH.md; evidence/privacy-commit-map.txt
 W9.3,W9,Final Git and acceptance audit,W9.2,"Status, logs, acceptance report",G9,TODO,PASS,evidence/final-audit-W9.json; G7 and G8 remain open
+W8.2e,W8,Verify final APK in Android emulator,W8.1,Installed APK hash; native crash; Editor regression,G8,TODO,FAIL,ANDROID_EMULATOR.md; evidence/W8-emulator-resume.json; evidence/tests-W8-emulator-resume-playmode.json

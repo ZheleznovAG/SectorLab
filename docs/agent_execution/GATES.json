@@ -61,6 +61,10 @@
       { "name": "Final Android APK and embedded local content", "status": "PASS", "evidence": "evidence/android-build-W8-selection.json" },
       { "name": "Baseline optional native startup probe comparison", "status": "PASS", "evidence": "evidence/W8-baseline-native-probe.json" },
       { "name": "Ordinary final Editor Main smoke has no runtime errors", "status": "PASS", "evidence": "evidence/W9-editor-smoke.json" },
+      { "name": "Resumed current-code EditMode 63/63", "status": "PASS", "evidence": "evidence/tests-W8-emulator-resume-editmode.json" },
+      { "name": "Resumed current-code PlayMode 112/112", "status": "PASS", "evidence": "evidence/tests-W8-emulator-resume-playmode.json" },
+      { "name": "Resumed ordinary Main natural result and zero console errors", "status": "PASS", "evidence": "evidence/W8-emulator-resume-editor.json" },
+      { "name": "Final v1 APK emulator launch: native SEVL SIGILL", "status": "FAIL", "evidence": "evidence/W8-emulator-resume.json" },
       { "name": "Final APK offline launch and native log", "status": "BLOCKED", "evidence": "evidence/W8-device-acceptance-pending.json" },
       { "name": "Active ten-minute device workload; GC/GPU limits documented", "status": "BLOCKED", "evidence": "evidence/W8-android-performance-foreground.json" }
     ] },

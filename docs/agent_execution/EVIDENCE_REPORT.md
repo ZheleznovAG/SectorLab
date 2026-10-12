@@ -20,6 +20,20 @@ APK установлен на Redmi Note 8 Pro / Android 11. Повторный 
 и итог человеческой партии ещё открыты. **Release ready не заявляется**.
 [Фактический disconnected-device статус и следующие проверки](evidence/W8-device-acceptance-pending.json).
 
+Возобновление после прерванной сессии: **63/63 EditMode, 112/112 PlayMode PASS**
+на неизменных Unity-входах стартового `5362099`;
+[EditMode](evidence/tests-W8-emulator-resume-editmode.json),
+[PlayMode](evidence/tests-W8-emulator-resume-playmode.json).
+[Новый обычный Editor smoke](evidence/W8-emulator-resume-editor.json): естественный
+Defeat 0:45, consoleErrors=0, [снимок](evidence/W8-emulator-resume-editor.png).
+
+**Android Emulator API34: v1.0 launch FAIL**, ARM native bridge отвергает SEVL
+в libunity.so. Первоначально запущенная игра оказалась baseline 0.1.0, что
+подтверждено хешем выгруженного APK. Повторный baseline также падает. Activity/
+GLES и ограничение потоков не обеспечили рабочую v1; performance/offline и
+полная партия в эмуляторе не выполнены. [Отчёт](ANDROID_EMULATOR.md),
+[JSON](evidence/W8-emulator-resume.json). G7/G8 остаются открыты.
+
 Старые прогоны выполнены до privacy rewrite; соответствие коммитов и неизменность
 кода подтверждены [операцией очистки](evidence/privacy-history-published.json)
 и [картой SHA](evidence/privacy-commit-map.txt). Исторические SHA ниже и sourceHead
