@@ -39,8 +39,13 @@ function Own-GameForeground {
     $activities = Read-Device 'dumpsys activity activities'
     # Newer Android exposes the focused activity through topResumedActivity.
     $top = [regex]::Match($activities, 'topResumedActivity=([^\r\n]+)')
-    if ($top.Success) { return $top.Groups[1].Value.Contains($package + '/') }
-    return $activities -match ('mResumedActivity:[^\r\n]*' + [regex]::Escape($package))
+    $resumed = if ($top.Success) { $top.Groups[1].Value.Contains($package + '/') }
+        else { $activities -match ('(?:m)?ResumedActivity:[^\r\n]*' + [regex]::Escape($package) + '/') }
+    if (-not $resumed) { return $false }
+    # A resumed game can still be behind keyguard or the notification shade.
+    $windows = Read-Device 'dumpsys window'
+    $focus = [regex]::Match($windows, 'mCurrentFocus=([^\r\n]+)')
+    return $focus.Success -and $focus.Groups[1].Value.Contains($package + '/')
 }
 if (-not (Own-GameForeground)) { throw 'Open SectorLab on the selected Android device before measuring.' }
 $model = (Read-Device 'getprop ro.product.model').Trim()
@@ -58,6 +63,7 @@ $presented = New-Object 'System.Collections.Generic.HashSet[long]'
 $rows = New-Object 'System.Collections.Generic.List[object]'
 $memory = New-Object 'System.Collections.Generic.List[object]'
 $restarts = New-Object 'System.Collections.Generic.List[object]'
+$workloadViews = New-Object 'System.Collections.Generic.List[object]'
 $lastCpuPid = ''; $lastCpuTicks = 0L; $lastCpuTime = 0.0
 $lastMemoryTime = -100.0; $lastCaptureTime = -100.0
 $lastProgressTime = -60.0
@@ -91,8 +97,12 @@ while ($timer.Elapsed.TotalSeconds -lt $DurationSeconds) {
         }
         if ($AutoRestart -and $sampleTime - $lastCaptureTime -ge 20) {
             $null = Read-Device 'screencap -p /sdcard/sectorlab-metrics.png'
+            $previousErrorAction = $ErrorActionPreference
+            $ErrorActionPreference = 'Continue' # adb pull reports successful transfers on native stderr.
             & $AdbPath @adbSelector pull /sdcard/sectorlab-metrics.png $capturePath *> $null
-            if ($LASTEXITCODE -eq 0 -and (Own-GameForeground)) {
+            $pullExit = $LASTEXITCODE
+            $ErrorActionPreference = $previousErrorAction
+            if ($pullExit -eq 0 -and (Own-GameForeground)) {
                 $bitmap = [Drawing.Bitmap]::FromFile($capturePath)
                 try {
                     # The existing result button spans this band; three separated yellow
@@ -102,7 +112,8 @@ while ($timer.Elapsed.TotalSeconds -lt $DurationSeconds) {
                         $pixel = $bitmap.GetPixel([int]($bitmap.Width * $fraction), [int]($bitmap.Height * 0.65))
                         $isResultButton = $isResultButton -and $pixel.R -gt 220 -and $pixel.G -gt 170 -and $pixel.B -lt 110
                     }
-                    if ($isResultButton) {
+                    $workloadViews.Add([PSCustomObject]@{ elapsedSeconds = $sampleTime; resultButtonVisible = $isResultButton })
+                    if ($isResultButton -and (Own-GameForeground)) {
                         Copy-Item -LiteralPath $capturePath -Destination (Join-Path $captureRoot ('result-' + $restarts.Count + '.png'))
                         $tapX = [int]($bitmap.Width * 0.5); $tapY = [int]($bitmap.Height * 0.65)
                         $null = Read-Device ('input tap ' + $tapX + ' ' + $tapY)
@@ -135,10 +146,11 @@ $record = [ordered]@{
     gapsOverOneSecond = @($intervals | Where-Object { $_ -gt 1000 }).Count
     cpuOneCorePercentMean = ($rows | Where-Object { $null -ne $_.cpuOneCorePercent } | Measure-Object cpuOneCorePercent -Average).Average
     memory = $memory.ToArray(); detectedResultRestarts = $restarts.ToArray(); adbFailures = $adbFailures
+    autoRestartEnabled = [bool]$AutoRestart; workloadViews = $workloadViews.ToArray()
     scriptSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash
     measurement = 'Actual-present timestamps of Unity SurfaceView; own /proc/PID/stat; dumpsys meminfo. Raw presentation timestamps included.'
     gcAllocations = 'NOT_AVAILABLE: no attached Unity Profiler in release APK; ART is not Mono GC.'
-    limitation = 'Referenced APK hash does not independently verify installation. Restarts count detected result-button taps; screenshots retained outside Git. This automated workload is not a human playtest. GPU time unavailable. Emulator performance does not verify physical-phone FPS.'
+    limitation = 'Referenced APK hash does not independently verify installation. Restarts count detected result-button taps; screenshots retained outside Git. Non-result snapshots do not independently exclude pause/loading. Elapsed duration includes result screens. This automated workload is not a human playtest. GPU time unavailable. Emulator performance does not verify physical-phone FPS.'
 }
 Protect-EvidenceText ($record | ConvertTo-Json -Depth 7) | Set-Content -Encoding UTF8 -LiteralPath ($prefix + '.json')
 $rows | Export-Csv -NoTypeInformation -Encoding UTF8 -LiteralPath ($prefix + '.csv')
