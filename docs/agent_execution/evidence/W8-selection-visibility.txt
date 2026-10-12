@@ -1,0 +1,6 @@
+utc=2026-10-12T03:02:14.3233354Z
+purpose=visual fixture: real prefab roles placed on relays; not a gameplay/capture result
+screen=1280x720
+Tank: unit=(-2.50, 0.80, -2.00); ringBottom=0,232; relayTop=0,065; gap=0,167
+Scout: unit=(2.50, 0.60, 2.00); ringBottom=0,174; relayTop=0,065; gap=0,109
+Ranger: unit=(0.00, 0.80, 0.00); ringBottom=0,232; relayTop=0,065; gap=0,167

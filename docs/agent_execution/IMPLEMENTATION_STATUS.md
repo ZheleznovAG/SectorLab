@@ -138,7 +138,7 @@ diff; другие настройки проекта не затронуты.
 | FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
 | FR-028 | PASS | Настоящий Game View 3 форматов; simulated safe insets и Android Insets API: HUD целиком виден на телефоне, включая возврат фокуса |
 | NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
-| NFR-002 | IN_PROGRESS | Публичный clone без Library/Temp/Builds, clean status и LFS fsck PASS; первое открытие и обе регрессии выполняются |
+| NFR-002 | PASS | Публичный clone без Library/Temp/Builds: import и 63/63 EditMode; после исправления frame waits 112/112 headless PlayMode, реальные Main/AA loads/cleanup |
 | NFR-003 | PARTIAL | Editor компиляция без ошибок; final regression/Android candidate ещё проверяются, native probe не назван устранённым |
 | NFR-004 | PASS | W8: 63/63 EditMode и 112/112 PlayMode после группового исправления, failed/skipped/inconclusive=0; source inputHashes сохранены |
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
@@ -751,4 +751,17 @@ Headless PlayMode дал **107/112**, пять старых movement/attack test
 и XML сохранены. Ожидания заменены на 10 игровых секунд без изменения assertions
 или runtime; [focused retry 25/25 PASS](evidence/clean-clone-W8-focused-retry.json).
 [ADR-008](../adr/008-game-time-in-navigation-tests.md) объясняет LF/CRLF,
-generated URP settings и границы проверки. Полная регрессия повторяется.
+generated URP settings и границы проверки. Исправление tests зафиксировано
+в `acbd9bf`; [полная регрессия clone 112/112 PASS](evidence/clean-clone-W8-full-retry.json),
+failed/skipped/inconclusive=0. Production code/geometry не менялись этим исправлением.
+
+W8 / FR-004/015: пользователь слышит звук («чето слышно») и сообщил, что
+выделение юнита оказывается под зоной. Подтверждён геометрический дефект:
+SelectionRing общего prefab был ниже поверхности CaptureArea. Local Y поднят
+с -0,98 до -0,7; `.meta`, масштабы, collider/NavMesh/боевые правила неизменны.
+[Реальные bounds всех трёх ролей](evidence/W8-selection-visibility.txt): минимальный
+зазор над зоной 0,109 м. [Game View](evidence/W8-selection-visible.png) просмотрен:
+обычный selected Scout имеет видимый жёлтый маркер поверх зоны. Это visual fixture
+с техническим размещением prefab на узлах, не демонстрация захвата/победы.
+Существующий MainArena routes **1/1 PASS**
+([JSON](evidence/tests-W8-selection-playmode.json)); далее APK и подтверждение Android.
