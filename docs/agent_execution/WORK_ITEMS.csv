@@ -33,9 +33,9 @@ W6.4b,W6,Fix Android GameActivity navigation insets,W6.5,Actual APK HUD bounds a
 W0.6,W0,Audit privacy and prevent new private metadata,W6.4b,History secret scan; current and staged privacy gate,G0,TODO,PASS,PRIVACY_AUDIT.md
 W7.1,W7,Improve feedback and simple SFX,W6.5,Manual feedback check,G7,TODO,PASS,evidence/tests-W7.1-playmode.json; evidence/W7.1-feedback.png
 W7.2,W7,Run manual gameplay plans and balance,W7.1,Game observations and results,G7,TODO,PASS,evidence/tests-W7.2-final-playmode.json; evidence/W7.2-tactics-sustained-plans.csv; human G7 pending
-W8.1,W8,Run full regression + build content APK,W7.2,Logs tied to final SHA,G8,TODO,TODO,
-W8.2,W8,Android device verification if available,W8.1,Device logs or BLOCKED_DEVICE,G8,TODO,TODO,
-W8.3,W8,Profile CPU GC memory and resolve defects,W8.2,Metrics or BLOCKED report,G8,TODO,TODO,
-W9.1,W9,Update README ADR licenses tests,W8.3,"Doc review, no invented PASS",G9,TODO,TODO,
-W9.2,W9,Produce evidence and study walkthrough,W9.1,Links to real commits and files,G9,TODO,TODO,
-W9.3,W9,Final Git and acceptance audit,W9.2,"Status, logs, acceptance report",G9,TODO,TODO,
+W8.1,W8,Run full regression + build content APK,W7.2,Logs tied to final SHA,G8,TODO,PASS,evidence/tests-W8-selection-final-editmode.json; evidence/tests-W8-selection-final-playmode.json; evidence/android-build-W8-selection.json; evidence/clean-clone-W8-full-retry.json
+W8.2,W8,Android device verification if available,W8.1,Device logs or BLOCKED_DEVICE,G8,TODO,BLOCKED_DEVICE,EVIDENCE_REPORT.md; final offline/native log pending USB device
+W8.3,W8,Profile CPU GC memory and resolve defects,W8.2,Metrics or BLOCKED report,G8,TODO,BLOCKED_DEVICE,evidence/W8-android-performance-partial.json; evidence/W8-android-performance-foreground.json; active final APK workload pending
+W9.1,W9,Update README ADR licenses tests,W8.3,"Doc review, no invented PASS",G9,TODO,PASS,../../README.md; ../THIRD_PARTY_NOTICES.md; ../adr/008-game-time-in-navigation-tests.md
+W9.2,W9,Produce evidence and study walkthrough,W9.1,Links to real commits and files,G9,TODO,PASS,EVIDENCE_REPORT.md; STUDY_WALKTHROUGH.md; evidence/privacy-commit-map.txt
+W9.3,W9,Final Git and acceptance audit,W9.2,"Status, logs, acceptance report",G9,TODO,PASS,evidence/final-audit-W9.json; G7 and G8 remain open

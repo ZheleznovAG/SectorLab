@@ -75,7 +75,7 @@ SHA-256 файлов на диске во время запуска тестов
 | G6 | PASS | Touch/camera/UI blocking/HUD/safe area/tutorial; пользователь подтвердил жесты и Insets API проверен на телефоне — W6 |
 | G7 | IN_PROGRESS ||
 | G8 | BLOCKED ||
-| G9 | IN_PROGRESS | README/ADR/notices/11 упражнений/очистка Git готовы; итоговое evidence обновляется после W8 |
+| G9 | PASS | README/8 ADR/notices/11 упражнений; links/JSON/reachable SHA/Unity inputs проверены; ограничения G7/G8 явно перечислены |
 
 Не приравнивать обнаружение устройства к Device verified, сборку baseline к
 APK built v1.0, а автоматический PlayMode-прогон к Playtest verified.
@@ -279,3 +279,27 @@ Primitives/SFX собственные, third-party licenses скопирован
 Чужие clones/forks/внешние кеши операция не стирает. Дальнейшие push/APK/release
 требуют отдельного разрешения. Последние evidence/docs-коммиты остаются локальными.
 
+[Обычный Main smoke](evidence/W9-editor-smoke.json) после полной регрессии:
+load Ready, реальные Commander API orders, естественный Defeat 18:45,
+consoleErrors=0 и compilationFailed=false. [Game View](evidence/W9-editor-smoke.png)
+осмотрен; он снят раньше окончания, на 18:32 / 02:24, и не выдаётся за тот же
+момент telemetry. Score/HP/AI/позиции не подменялись. Два ожидаемых сообщения
+`MatchState was not injected` / `Enemy tactics requires injected BattleController`
+соответствуют явным LogAssert.Expect в MatchScopeTests; они были просмотрены
+перед очисткой консоли для этого отдельного положительного запуска.
+
+`2f1bfd6` сохранил полные тесты/APK/ограниченные Android измерения и baseline native
+probe. [Финальный audit](evidence/final-audit-W9.json) проверяет локальные ссылки
+в Markdown, JSON, реальные учебные SHA и неизменность всех входов последних
+EditMode/PlayMode/build reports. `check-repository`, privacy scan и LFS fsck PASS;
+`check-gates -RequireComplete` намеренно отклоняет приёмку из-за G7/G8.
+Audit содержит реальный pre-commit status, не предсказывает SHA собственного
+коммита. После документационного коммита требуется проверить чистое рабочее дерево.
+
+Пользователь поручил продолжать без телефона. Доступная реализация и Editor
+проверки завершены, APK собран; прежние device observations сохранены, **финальные
+Device verified / Playtest verified / Release ready не объявлены**. Следующее
+подключение: вернуть настройку сна экрана, выполнить offline/native log, 600 с
+активных партий, подтвердить выделение/mute и результат человеческой партии.
+Локальный таймер возобновления сегодня 13:19:48 +07:00 проверен в Task Scheduler;
+пока не запускался. Если все gates уже PASS, он пропускает повторную работу.

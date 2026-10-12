@@ -1,0 +1,114 @@
+﻿{
+    "checkedAtUtc":  "2026-10-12T04:27:31.066901+00:00",
+    "sourceHead":  "2f1bfd6bdb0d8227b1b9f8c28fc8f6297b34159e",
+    "remoteTrackingMain":  "0b2badbf4e54d5f099dd990378b27ccb493f0303",
+    "remotePublishedMainObserved":  "0b2badbf4e54d5f099dd990378b27ccb493f0303",
+    "localCommitsAheadOfRemote":  4,
+    "markdownFiles":  55,
+    "localLinksChecked":  307,
+    "brokenLocalLinks":  [
+
+                         ],
+    "jsonFilesParsed":  99,
+    "workItemsParsed":  40,
+    "studyCommitsReachableFromHead":  [
+                                          "101791b",
+                                          "1204612",
+                                          "2cd9ecb",
+                                          "43a68d3",
+                                          "5cc9211",
+                                          "6271c1b",
+                                          "82a98be",
+                                          "a2b266d",
+                                          "b27bb11",
+                                          "b7dcb46",
+                                          "d170cb7",
+                                          "e35a350",
+                                          "e411962",
+                                          "ef3f402"
+                                      ],
+    "verifiedUnityInputs":  [
+                                {
+                                    "evidence":  "tests-W8-selection-final-editmode.json",
+                                    "sourceHead":  "0ae98c8920b052135606364524398852a4b72f12",
+                                    "inputFilesUnchanged":  296
+                                },
+                                {
+                                    "evidence":  "tests-W8-selection-final-playmode.json",
+                                    "sourceHead":  "0ae98c8920b052135606364524398852a4b72f12",
+                                    "inputFilesUnchanged":  296
+                                },
+                                {
+                                    "evidence":  "android-build-W8-selection.json",
+                                    "sourceHead":  "0ae98c8920b052135606364524398852a4b72f12",
+                                    "inputFilesUnchanged":  296
+                                }
+                            ],
+    "workingStatusAtAudit":  [
+                                 " M README.md",
+                                 " M docs/agent_execution/12_RELEASE_CHECKLIST.md",
+                                 " M docs/agent_execution/AUTOMATION.md",
+                                 " M docs/agent_execution/EVIDENCE_REPORT.md",
+                                 " M docs/agent_execution/GATES.json",
+                                 " M docs/agent_execution/IMPLEMENTATION_STATUS.md",
+                                 " M docs/agent_execution/WORK_ITEMS.csv",
+                                 "?? docs/agent_execution/evidence/W9-editor-smoke.json",
+                                 "?? docs/agent_execution/evidence/W9-editor-smoke.png",
+                                 "?? docs/agent_execution/evidence/final-audit-W9.json"
+                             ],
+    "gates":  [
+                  {
+                      "id":  "G0",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G1",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G2",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G3",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G4",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G5",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G6",
+                      "status":  "PASS"
+                  },
+                  {
+                      "id":  "G7",
+                      "status":  "IN_PROGRESS"
+                  },
+                  {
+                      "id":  "G8",
+                      "status":  "BLOCKED"
+                  },
+                  {
+                      "id":  "G9",
+                      "status":  "PASS"
+                  }
+              ],
+    "releaseReady":  false,
+    "limitation":  "This audit records its real pre-commit state. Final documentation commit SHA and a clean working tree must be checked after committing; no final SHA is predicted.",
+    "repositoryChecks":  {
+                             "currentPrivacy":  "PASS",
+                             "reachableHistoryPrivacy":  "PASS",
+                             "gitleaksFindings":  0,
+                             "gitLfsObjectsAndPointers":  "PASS",
+                             "packageJsonAndAssetMetadata":  "PASS",
+                             "whitespace":  "PASS",
+                             "localLinks":  307,
+                             "editorOrdinarySmoke":  "PASS",
+                             "releaseGateEnforcement":  "REJECTED_AS_EXPECTED: G7 IN_PROGRESS and G8 BLOCKED"
+                         }
+}
