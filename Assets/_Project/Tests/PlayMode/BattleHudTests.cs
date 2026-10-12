@@ -65,6 +65,10 @@ namespace SectorLab.Tests
             tank.Health.TakeDamage(23);
             hud.Refresh();
             Assert.That(Field<Text>(hud, "selection").text, Does.Contain("Tank").And.Contain(tank.Health.Current.ToString()));
+            Assert.That(Field<Text>(hud, "selection").text, Does.Contain("удерживайте узел"));
+            Assert.That(Field<Text[]>(hud, "unitLabels")[0].text, Does.Contain("защита"));
+            Assert.That(Field<Text[]>(hud, "unitLabels")[1].text, Does.Contain("манёвр"));
+            Assert.That(Field<Text[]>(hud, "unitLabels")[2].text, Does.Contain("дальний бой"));
             tank.Health.TakeDamage(tank.Health.Max);
             hud.Refresh();
             Assert.That(commander.Selected, Is.Null);
@@ -130,6 +134,7 @@ namespace SectorLab.Tests
             hud.Refresh();
             Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+0 очк/с"));
             Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("эффект остановлен"));
+            Assert.That(battle.Relays[0].GetComponentInChildren<TextMesh>().text, Does.Contain("СПОР").And.Contain("эффект остановлен"));
             battle.SetPaused(true);
             hud.Refresh();
             Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("ПАУЗА"));
@@ -147,6 +152,7 @@ namespace SectorLab.Tests
             hud.Refresh();
             Assert.That(tank.Health.Current, Is.GreaterThan(damaged));
             Assert.That(Field<Text[]>(hud, "relayLabels")[2].text, Does.Contain("+6 HP/с").And.Contain("ремонтирует"));
+            Assert.That(battle.Relays[2].GetComponentInChildren<TextMesh>().text, Does.Contain("+6 HP/с").And.Contain("ремонт"));
             Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+0 очк/с"));
             yield return null;
         }
