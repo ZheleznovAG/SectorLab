@@ -1,0 +1,14 @@
+﻿[
+    {
+        "timestampUtc":  "2026-10-12T02:14:34.5878368Z",
+        "message":  "units/EnemyTank to B: position=(2.86, 0.80, 3.30), radius=0,5, scale=(1.15, 0.80, 1.15), moving=False, path=PathComplete, remaining=0, stop=1,35"
+    },
+    {
+        "timestampUtc":  "2026-10-12T02:14:34.5893401Z",
+        "message":  "units/EnemyScout to B: position=(1.67, 0.60, 3.05), radius=0,5, scale=(0.60, 0.60, 0.60), moving=False, path=PathComplete, remaining=0, stop=1,35"
+    },
+    {
+        "timestampUtc":  "2026-10-12T02:14:34.5898472Z",
+        "message":  "units/EnemyRanger to B: position=(1.14, 0.80, 3.53), radius=0,5, scale=(0.80, 0.80, 0.80), moving=True, path=PathComplete, remaining=2,049626, stop=1,35"
+    }
+]

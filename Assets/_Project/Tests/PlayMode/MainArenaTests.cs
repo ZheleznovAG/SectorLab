@@ -13,7 +13,7 @@ namespace SectorLab.Tests
     public class MainArenaTests
     {
         [UnityTest]
-        public IEnumerator BothTeamsStartOutsideScoreCirclesAndReachEveryRelayWithoutGeometryOverlap()
+        public IEnumerator BothTeamsStartFairlyAndEachSquadReachesEveryRelayWithoutGeometryOverlap()
         {
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return MainLifecycleTests.WaitForReady();
@@ -55,20 +55,41 @@ namespace SectorLab.Tests
             }
             foreach (var relay in battle.Relays)
             {
-                foreach (var slot in lifecycle.Slots)
+                foreach (Team team in new[] { Team.Player, Team.Enemy })
                 {
-                    Assert.That(relay.TryGetApproachPoint(slot.Unit, out Vector3 point), Is.True, slot.Config.prefabKey + " path to " + relay.Config.label);
-                    Assert.That(slot.Unit.Movement.MoveTo(point, relay.GetArrivalDistance(point)), Is.True);
-                }
-                float deadline = Time.realtimeSinceStartup + 12;
-                bool arrived;
-                do
-                {
+                    // Test each three-unit squad from its own bases, independently of a six-agent
+                    // standstill with combat disabled. Both teams use their real movement paths.
+                    foreach (var slot in lifecycle.Slots)
+                    {
+                        slot.Unit.Movement.Stop();
+                        Assert.That(slot.Unit.GetComponent<NavMeshAgent>().Warp(slot.Config.position), Is.True);
+                    }
                     yield return null;
-                    arrived = true;
-                    foreach (var slot in lifecycle.Slots) arrived &= relay.Contains(slot.Unit);
-                } while (!arrived && Time.realtimeSinceStartup < deadline);
-                Assert.That(arrived, Is.True, "All six units must actually reach " + relay.Config.label + " through the baked arena.");
+                    foreach (var slot in lifecycle.Slots)
+                    {
+                        if (slot.Config.team != team) continue;
+                        Assert.That(relay.TryGetApproachPoint(slot.Unit, out Vector3 point), Is.True, slot.Config.prefabKey + " path to " + relay.Config.label);
+                        Assert.That(slot.Unit.Movement.MoveTo(point, relay.GetArrivalDistance(point)), Is.True);
+                    }
+                    float deadline = Time.realtimeSinceStartup + 12;
+                    bool arrived;
+                    do
+                    {
+                        yield return null;
+                        arrived = true;
+                        foreach (var slot in lifecycle.Slots) if (slot.Config.team == team) arrived &= relay.Contains(slot.Unit);
+                    } while (!arrived && Time.realtimeSinceStartup < deadline);
+                    if (!arrived)
+                        foreach (var slot in lifecycle.Slots)
+                        {
+                            if (slot.Config.team != team) continue;
+                            var agent = slot.Unit.GetComponent<NavMeshAgent>();
+                            Debug.Log(slot.Config.prefabKey + " to " + relay.Config.label + ": position=" + slot.Unit.transform.position
+                                + ", radius=" + agent.radius + ", scale=" + agent.transform.localScale + ", moving=" + slot.Unit.Movement.IsMoving
+                                + ", path=" + agent.pathStatus + ", remaining=" + agent.remainingDistance + ", stop=" + agent.stoppingDistance);
+                        }
+                    Assert.That(arrived, Is.True, team + " squad must actually reach " + relay.Config.label + " through the baked arena.");
+                }
             }
         }
 

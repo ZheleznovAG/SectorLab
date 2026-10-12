@@ -117,8 +117,9 @@ namespace SectorLab.Objectives
         {
             Vector3 offset = approach - transform.position;
             offset.y = 0;
-            // Leave margin inside the capture circle; several agents need room to stop and defend.
-            return Mathf.Max(0.1f, config.radius - offset.magnitude - 0.15f);
+            // The largest existing agent has a 0.575 m world radius. Stopping too close
+            // to the circle's edge lets the first arrivals block the following squadmate.
+            return Mathf.Max(0.1f, config.radius - offset.magnitude - 0.6f);
         }
 
         private void LateUpdate()
