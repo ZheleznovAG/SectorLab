@@ -1,0 +1,15 @@
+﻿{
+    "task":  "W8-emulator-resume-local-audit",
+    "checkedAtUtc":  "2026-10-12T11:18:53.0034650Z",
+    "sourceHead":  "bb6b521d0628611c37e7af83df355f31a8a5d055",
+    "result":  "PASS",
+    "verifiedTestInputHashes":  592,
+    "parsedEvidenceJson":  101,
+    "localMarkdownLinksChecked":  256,
+    "unitySourceDiffFiles":  0,
+    "privacy":  "PASS Tools/check-repository.ps1",
+    "whitespace":  "PASS git diff --check",
+    "lfs":  "PASS git lfs fsck --objects --pointers before staging new screenshots",
+    "gates":  "G0-G6/G9 PASS; G7 IN_PROGRESS; G8 BLOCKED; emulator launch FAIL",
+    "limitation":  "Audit covers repository integrity and unchanged verified inputs; it does not close device, performance or human acceptance."
+}

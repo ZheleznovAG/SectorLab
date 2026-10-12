@@ -1,0 +1,30 @@
+﻿{
+    "task":  "W8-emulator-resume-editor",
+    "sourceHead":  "bb6b521d0628611c37e7af83df355f31a8a5d055",
+    "observed":  {
+                     "checkedAtUtc":  "2026-10-12T11:01:22.0513407Z",
+                     "scene":  "Assets/_Project/Scenes/Main.unity",
+                     "phase":  "Closed",
+                     "units":  4,
+                     "paused":  false,
+                     "elapsed":  33.1000000000002,
+                     "playerScore":  0,
+                     "enemyScore":  45,
+                     "outcome":  "Defeat",
+                     "screenWidth":  1280,
+                     "screenHeight":  720
+                 },
+    "consoleGroundTruth":  {
+                               "sampledUtc":  "2026-10-12T11:01:23.347173Z",
+                               "ageMs":  161,
+                               "compilationFailed":  false,
+                               "compiling":  false,
+                               "consoleErrors":  0,
+                               "consoleWarnings":  0,
+                               "consoleLogs":  0,
+                               "seeded":  true
+                           },
+    "screenshot":  "W8-emulator-resume-editor.png",
+    "result":  "PASS",
+    "limitation":  "Ordinary saved Main, default game time and no player commands: natural unattended loss. This is Editor smoke, not Android or human playtest. Prior test and tool errors remain documented separately; console was cleared before this run."
+}

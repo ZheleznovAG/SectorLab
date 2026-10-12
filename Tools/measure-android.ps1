@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory = $true)] [ValidatePattern('^[A-Za-z0-9._-]+$')] [string] $Task,
     [ValidateRange(30, 3600)] [int] $DurationSeconds = 600,
     [string] $AdbPath = 'C:\Program Files\Unity\Hub\Editor\6000.6.4f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools\adb.exe',
+    [string] $DeviceSerial = '',
     [string] $ApkPath = '',
     [switch] $AutoRestart
 )
@@ -9,6 +10,16 @@ $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
 . "$PSScriptRoot/evidence-privacy.ps1"
 if (-not (Test-Path -LiteralPath $AdbPath)) { throw 'Supply the installed Android SDK adb with -AdbPath.' }
+if (-not $DeviceSerial) {
+    $connected = @(& $AdbPath devices | ForEach-Object {
+        if ($_ -match '^(\S+)\s+device$') { $Matches[1] }
+    })
+    if ($LASTEXITCODE -ne 0 -or $connected.Count -ne 1) {
+        throw 'Connect exactly one authorized Android device or select it with -DeviceSerial.'
+    }
+    $DeviceSerial = $connected[0]
+}
+$adbSelector = @('-s', $DeviceSerial)
 $package = 'com.zheleznovag.sectorlab'
 $prefix = 'docs/agent_execution/evidence/' + $Task
 if (Test-Path -LiteralPath ($prefix + '.json')) { throw 'Use a new task name to retain earlier measurements.' }
@@ -20,16 +31,21 @@ $adbFailures = 0
 function Read-Device([string] $Command) {
     # Native stderr must not bypass the checked exit code in Windows PowerShell 5.1.
     $ErrorActionPreference = 'Continue'
-    $value = & $AdbPath shell $Command 2>$null
+    $value = & $AdbPath @adbSelector shell $Command 2>$null
     if ($LASTEXITCODE -ne 0) { $script:adbFailures++; return '' }
     return ($value -join "`n")
 }
 function Own-GameForeground {
-    return (Read-Device 'dumpsys activity activities') -match ('mResumedActivity:[^\r\n]*' + [regex]::Escape($package))
+    $activities = Read-Device 'dumpsys activity activities'
+    # Newer Android exposes the focused activity through topResumedActivity.
+    $top = [regex]::Match($activities, 'topResumedActivity=([^\r\n]+)')
+    if ($top.Success) { return $top.Groups[1].Value.Contains($package + '/') }
+    return $activities -match ('mResumedActivity:[^\r\n]*' + [regex]::Escape($package))
 }
-if (-not (Own-GameForeground)) { throw 'Connect the USB debugging device and open SectorLab before measuring.' }
+if (-not (Own-GameForeground)) { throw 'Open SectorLab on the selected Android device before measuring.' }
 $model = (Read-Device 'getprop ro.product.model').Trim()
 $android = (Read-Device 'getprop ro.build.version.release').Trim()
+$deviceKind = if ((Read-Device 'getprop ro.kernel.qemu').Trim() -eq '1') { 'emulator' } else { 'physical-device' }
 $clockTicks = [int](Read-Device 'getconf CLK_TCK')
 $layer = ((Read-Device 'dumpsys SurfaceFlinger --list') -split "`n" | Where-Object { $_.StartsWith('SurfaceView - ' + $package + '/') } | Select-Object -First 1)
 if (-not $layer -or $clockTicks -le 0) { throw 'Running Unity surface/process metrics unavailable.' }
@@ -75,7 +91,7 @@ while ($timer.Elapsed.TotalSeconds -lt $DurationSeconds) {
         }
         if ($AutoRestart -and $sampleTime - $lastCaptureTime -ge 20) {
             $null = Read-Device 'screencap -p /sdcard/sectorlab-metrics.png'
-            & $AdbPath pull /sdcard/sectorlab-metrics.png $capturePath *> $null
+            & $AdbPath @adbSelector pull /sdcard/sectorlab-metrics.png $capturePath *> $null
             if ($LASTEXITCODE -eq 0 -and (Own-GameForeground)) {
                 $bitmap = [Drawing.Bitmap]::FromFile($capturePath)
                 try {
@@ -111,7 +127,7 @@ $orderedIntervals = @($intervals | Sort-Object)
 $record = [ordered]@{
     task = $Task; sourceHead = $sourceHead; startedAtUtc = $startedUtc; completedAtUtc = [DateTime]::UtcNow.ToString('o')
     referencedApkSha256 = $referencedApkSha256
-    durationSeconds = $timer.Elapsed.TotalSeconds; model = $model; androidVersion = $android; package = $package
+    durationSeconds = $timer.Elapsed.TotalSeconds; model = $model; androidVersion = $android; deviceKind = $deviceKind; package = $package
     samples = $rows.Count; foregroundSamples = @($rows | Where-Object foreground).Count; uniquePresentedFrames = $timestamps.Count
     fpsMean = if ($intervals.Count) { 1000.0 / ($intervals | Measure-Object -Average).Average } else { $null }
     frameIntervalMsMedian = if ($intervals.Count) { $orderedIntervals[[int][Math]::Floor($intervals.Count * 0.5)] } else { $null }
@@ -122,7 +138,7 @@ $record = [ordered]@{
     scriptSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash
     measurement = 'Actual-present timestamps of Unity SurfaceView; own /proc/PID/stat; dumpsys meminfo. Raw presentation timestamps included.'
     gcAllocations = 'NOT_AVAILABLE: no attached Unity Profiler in release APK; ART is not Mono GC.'
-    limitation = 'Referenced APK hash does not independently verify installation. Restarts count detected result-button taps; screenshots retained outside Git. This automated workload is not a human playtest. GPU time unavailable.'
+    limitation = 'Referenced APK hash does not independently verify installation. Restarts count detected result-button taps; screenshots retained outside Git. This automated workload is not a human playtest. GPU time unavailable. Emulator performance does not verify physical-phone FPS.'
 }
 Protect-EvidenceText ($record | ConvertTo-Json -Depth 7) | Set-Content -Encoding UTF8 -LiteralPath ($prefix + '.json')
 $rows | Export-Csv -NoTypeInformation -Encoding UTF8 -LiteralPath ($prefix + '.csv')

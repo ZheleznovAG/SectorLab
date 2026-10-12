@@ -14,6 +14,17 @@ SHA-256 `654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA`.
 [Сборка](evidence/android-build-W8-selection.json): Succeeded, 0 errors,
 1 Pipeline warning, 40,752 с; локальные AA bundles/catalog включены в APK. APK установлен на Android / Android 11.
 
+Возобновление после прерванной сессии: **63/63 EditMode, 112/112 PlayMode PASS**
+на неизменных Unity-входах стартового `5362099`;
+[EditMode](evidence/tests-W8-emulator-resume-editmode.json),
+[PlayMode](evidence/tests-W8-emulator-resume-playmode.json).
+[Новый обычный Editor smoke](evidence/W8-emulator-resume-editor.json): естественный
+Defeat 0:45, consoleErrors=0, [снимок](evidence/W8-emulator-resume-editor.png).
+
+**Android Emulator API34: v1.0 launch FAIL**, ARM native bridge отвергает SEVL
+в libunity.so. Первоначально запущенная игра оказалась baseline 0.1.0, что
+подтверждено хешем выгруженного APK. Повторный baseline также падает. G7/G8 остаются открыты.
+
 Старые прогоны выполнены до privacy rewrite; соответствие коммитов и неизменность
 кода подтверждены [операцией очистки](evidence/privacy-history-published.json)
 и [картой SHA](evidence/privacy-commit-map.txt). Исторические SHA ниже и sourceHead
