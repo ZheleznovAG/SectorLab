@@ -137,7 +137,7 @@ diff; другие настройки проекта не затронуты.
 | NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
 | NFR-002 | NOT_RUN | Чистый checkout не запускался / W8 |
 | NFR-003 | PARTIAL | Editor компиляция без ошибок; final regression/Android candidate ещё проверяются, native probe не назван устранённым |
-| NFR-004 | PARTIAL | 63 EditMode PASS и W7.2 112 PlayMode PASS; W8 выявил групповой затор, исправление проходит final regression |
+| NFR-004 | PASS | W8: 63/63 EditMode и 112/112 PlayMode после группового исправления, failed/skipped/inconclusive=0; source inputHashes сохранены |
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
 | NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
 | NFR-007 | PASS | Repository gate: 150 уникальных GUID, .meta и связи; настоящий Main/prefab loads проходят |
@@ -747,3 +747,21 @@ NavMesh перепечена с прежним GUID. [ADR-006](../adr/006-fair-a
 1280×720; [Main на паузе](evidence/W7.2-arena-observation.txt): Ready, 6 units/handles,
 elapsed 0,3 с. Optional TestFilter wrapper проверен настоящим focused запуском.
 W7.2 implementation PASS; G7 остаётся IN_PROGRESS до человека. Следующий пакет W8.
+
+W8 / FR-004/007/014, NFR-003/004: full regression выявил реальный затор входа
+в узел: прибывшие бойцы перекрывали третьему вход (complete path, moving=true).
+Воспроизведён и для шести без боя, и для обычной тройки от баз. Диагностики/FAIL
+сохранены; [ADR-007](../adr/007-relay-entry-and-unused-renderer-resources.md).
+Общий arrival margin увеличен с 0,15 до 0,6 м; тот же механизм для AI/player.
+**1/1 focused PASS**, затем **112/112 full PlayMode PASS**
+([JSON](evidence/tests-W8-retry-playmode.json)), включая 18 маршрутов каждой
+тройки от баз и десять restarts. Одновременное размещение шести неподвижных
+агентов не заявляется проверенным. В [пяти партиях](evidence/W8-retry-sustained-plans.csv)
+фланг дал Victory 45:15,5 за 58,5 с; split-pressure проиграл 43,1:45.
+
+URP Mobile/PC больше не инициализируют выключенные post-processing ресурсы;
+сохранены остальные shader/material/renderer settings. [Game View](evidence/W8-renderer.png)
+просмотрен, 1280×720; **63/63 EditMode PASS** ([JSON](evidence/tests-W8-final-editmode.json)).
+bundleVersion кандидата 1.0.0, исходная Unity/debug signing сохранены.
+Устранение Android shader notices требует настоящего нового APK/device log,
+не выводится из изменения settings. Сейчас далее APK и clean checkout.
