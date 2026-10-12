@@ -15,7 +15,8 @@ Assertions прибытия, фактического движения вдол�
 
 [Первый настоящий FAIL](../agent_execution/evidence/clean-clone-W8-attempt1-playmode.xml)
 сохранён. [Focused retry](../agent_execution/evidence/clean-clone-W8-focused-retry.json):
-25/25 PASS в том же headless clone. Полный повторный прогон нужен перед G8.
+25/25 PASS в том же headless clone. [Полный повторный прогон](../agent_execution/evidence/clean-clone-W8-full-retry.json)
+из `acbd9bf`: 112/112 PASS, failed/skipped/inconclusive=0.
 Сборка APK не требует повторения из-за изменения только тестовых ожиданий.
 
 Clone отличается от рабочей копии только LF/CRLF в исходных текстах; canonical

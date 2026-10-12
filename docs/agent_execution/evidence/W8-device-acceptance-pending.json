@@ -1,0 +1,25 @@
+{
+  "checkedAtUtc": "2026-10-12T04:13:58.6887732Z",
+  "sourceHead": "0ae98c8920b052135606364524398852a4b72f12",
+  "status": "BLOCKED_DEVICE",
+  "adbConnectedDeviceCount": 0,
+  "apkEvidence": "android-build-W8-selection.json",
+  "apkSha256": "654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA",
+  "priorInstall": "adb install -r returned Success during interrupted offline attempt; installed package hash has not been independently checked afterward",
+  "previousOfflineAttempt": {
+    "completed": false,
+    "evidenceWritten": false,
+    "failure": "Screen dimensions were not obtained; helper aborted before final evidence",
+    "networkRestore": "Original WiFi/mobile data restoration ran in finally; current settings cannot be queried while disconnected"
+  },
+  "pendingChecks": "[REDACTED_PERSONAL_NOTE]",
+  "humanFeedback": "[REDACTED_PERSONAL_NOTE]",
+  "phoneSettings": "[REDACTED_PERSONAL_NOTE]",
+  "measurementTool": {
+    "script": "Tools/measure-android.ps1",
+    "sha256": "E40EDA5FAD023F729F96A896389132EA2A0A4E89C11237D8450849B0B1C61F26",
+    "syntax": "PASS",
+    "noDeviceGuard": "PASS",
+    "fullDeviceRun": "BLOCKED_DEVICE"
+  }
+}

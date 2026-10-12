@@ -1,0 +1,128 @@
+{
+  "startedAtUtc": "2026-10-12T02:38:26.971279+00:00",
+  "completedAtUtc": "2026-10-12T02:48:27.305861+00:00",
+  "durationSeconds": 600.335,
+  "model": "[DEVICE_MODEL]",
+  "androidVersion": "11",
+  "package": "com.zheleznovag.sectorlab",
+  "samples": 395,
+  "foregroundSamples": 132,
+  "uniquePresentedFrames": 6018,
+  "measurement": "SurfaceFlinger actual-present timestamps, own /proc/PID/stat, dumpsys meminfo",
+  "gcAllocations": "NOT_AVAILABLE: release APK has no attached Unity Profiler; ART data is not Mono GC",
+  "humanInteraction": "[REDACTED_PERSONAL_NOTE]",
+  "fpsMean": 29.978378666103705,
+  "frameIntervalMsMedian": 33.338462,
+  "frameIntervalMsP95": 49.994231,
+  "gapsOverOneSecond": 0,
+  "cpuOneCorePercentMean": 34.17717557251908,
+  "memory": [
+    {
+      "elapsedSeconds": 0.001,
+      "pssKiB": 282205,
+      "rssKiB": 398227
+    },
+    {
+      "elapsedSeconds": 10.503,
+      "pssKiB": 283257,
+      "rssKiB": 399279
+    },
+    {
+      "elapsedSeconds": 21.006,
+      "pssKiB": 281779,
+      "rssKiB": 397801
+    },
+    {
+      "elapsedSeconds": 31.51,
+      "pssKiB": 283926,
+      "rssKiB": 400055
+    },
+    {
+      "elapsedSeconds": 42.014,
+      "pssKiB": 282283,
+      "rssKiB": 398199
+    },
+    {
+      "elapsedSeconds": 52.516,
+      "pssKiB": 282283,
+      "rssKiB": 398199
+    },
+    {
+      "elapsedSeconds": 63.02,
+      "pssKiB": 281539,
+      "rssKiB": 397369
+    },
+    {
+      "elapsedSeconds": 73.523,
+      "pssKiB": 282365,
+      "rssKiB": 398195
+    },
+    {
+      "elapsedSeconds": 84.026,
+      "pssKiB": 281519,
+      "rssKiB": 397349
+    },
+    {
+      "elapsedSeconds": 94.528,
+      "pssKiB": 281519,
+      "rssKiB": 397349
+    },
+    {
+      "elapsedSeconds": 105.029,
+      "pssKiB": 281939,
+      "rssKiB": 397769
+    },
+    {
+      "elapsedSeconds": 115.534,
+      "pssKiB": 281519,
+      "rssKiB": 397349
+    },
+    {
+      "elapsedSeconds": 126.044,
+      "pssKiB": 281531,
+      "rssKiB": 397361
+    },
+    {
+      "elapsedSeconds": 136.552,
+      "pssKiB": 282365,
+      "rssKiB": 398195
+    },
+    {
+      "elapsedSeconds": 147.068,
+      "pssKiB": 282365,
+      "rssKiB": 398195
+    },
+    {
+      "elapsedSeconds": 157.576,
+      "pssKiB": 282365,
+      "rssKiB": 398195
+    },
+    {
+      "elapsedSeconds": 168.083,
+      "pssKiB": 283837,
+      "rssKiB": 399667
+    },
+    {
+      "elapsedSeconds": 178.586,
+      "pssKiB": 282365,
+      "rssKiB": 398195
+    },
+    {
+      "elapsedSeconds": 189.088,
+      "pssKiB": 281519,
+      "rssKiB": 397349
+    }
+  ],
+  "pssStartKiB": 282205,
+  "pssEndKiB": 281519,
+  "pssMaxKiB": 283926,
+  "status": "PARTIAL",
+  "apkEvidence": "android-build-W8-v1-candidate.json",
+  "apkSha256": "6091B57B09BB4242CF48C9FDD518FE491E51CD878469466EDCD2C17BE1F6376F",
+  "limits": [
+    "Only 132/395 foreground samples; phone went asleep/locked.",
+    "Result overlay was visible at start; a sustained 10-minute gameplay workload was not verified.",
+    "Mean FPS describes collected presentation timestamps, not ten minutes of gameplay.",
+    "Mono GC/GPU time unavailable without Unity Profiler."
+  ]
+}
