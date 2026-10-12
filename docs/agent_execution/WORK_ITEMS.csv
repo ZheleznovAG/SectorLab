@@ -32,7 +32,7 @@ W6.5,W6,Minimal tutorial and pause controls,W6.4,Manual test,G6,TODO,PASS,eviden
 W6.4b,W6,Fix Android GameActivity navigation insets,W6.5,Actual APK HUD bounds and focus return,G6,TODO,PASS,evidence/W6-G6-insets-device.json
 W0.6,W0,Audit privacy and prevent new private metadata,W6.4b,History secret scan; current and staged privacy gate,G0,TODO,PASS,PRIVACY_AUDIT.md
 W7.1,W7,Improve feedback and simple SFX,W6.5,Manual feedback check,G7,TODO,PASS,evidence/tests-W7.1-playmode.json; evidence/W7.1-feedback.png
-W7.2,W7,Run manual gameplay plans and balance,W7.1,Game observations and results,G7,TODO,TODO,
+W7.2,W7,Run manual gameplay plans and balance,W7.1,Game observations and results,G7,TODO,PASS,evidence/tests-W7.2-final-playmode.json; evidence/W7.2-tactics-sustained-plans.csv; human G7 pending
 W8.1,W8,Run full regression + build content APK,W7.2,Logs tied to final SHA,G8,TODO,TODO,
 W8.2,W8,Android device verification if available,W8.1,Device logs or BLOCKED_DEVICE,G8,TODO,TODO,
 W8.3,W8,Profile CPU GC memory and resolve defects,W8.2,Metrics or BLOCKED report,G8,TODO,TODO,

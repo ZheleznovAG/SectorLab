@@ -40,6 +40,19 @@ namespace SectorLab.Tests
             }
         }
 
+        public static IEnumerator WaitForReleasedLoads()
+        {
+            // Cancellation retains each reference until its physical Addressables operation ends.
+            // A real match may finish on the same frame that a respawn load starts.
+            float deadline = Time.realtimeSinceStartup + 5;
+            do
+            {
+                yield return null;
+                Assert.That(Unit.All.Count, Is.Zero, "Cancelled loads must never create a unit in the next scene.");
+            } while (AddressableUnitPrefabProvider.OutstandingHandles != 0 && Time.realtimeSinceStartup < deadline);
+            Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.Zero, "All physical loads must release within the bounded cleanup wait.");
+        }
+
         [UnitySetUp]
         public IEnumerator LoadRealMain()
         {

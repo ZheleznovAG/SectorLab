@@ -111,7 +111,7 @@ namespace SectorLab.Tests
                 SceneManager.SetActiveScene(empty);
                 yield return SceneManager.UnloadSceneAsync(main);
             }
-            yield return null;
+            yield return MainLifecycleTests.WaitForReleasedLoads();
             Assert.That(Unit.All.Count, Is.Zero);
             Assert.That(SectorLab.Infrastructure.AddressableUnitPrefabProvider.OutstandingHandles, Is.Zero);
             Assert.That(Time.timeScale, Is.EqualTo(1));

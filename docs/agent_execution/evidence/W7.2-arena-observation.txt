@@ -1,0 +1,10 @@
+utc=2026-10-12T02:01:27.5960658Z
+screen=1280x720
+phase=Ready;units=6;handles=6
+paused=True;outcome=InProgress;elapsed=0,3
+Player/Tank base=(-3.00, 0.00, -3.80) actual=(-3.00, 0.80, -3.80)
+Player/Scout base=(0.00, 0.00, -3.80) actual=(-0.01, 0.60, -3.83)
+Player/Ranger base=(3.00, 0.00, -3.80) actual=(3.00, 0.80, -3.80)
+Enemy/Tank base=(3.00, 0.00, 3.80) actual=(3.00, 0.80, 3.80)
+Enemy/Scout base=(0.00, 0.00, 3.80) actual=(-0.01, 0.60, 3.83)
+Enemy/Ranger base=(-3.00, 0.00, 3.80) actual=(-3.00, 0.80, 3.80)
