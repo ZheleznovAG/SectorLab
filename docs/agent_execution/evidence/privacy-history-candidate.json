@@ -1,0 +1,16 @@
+﻿{
+    "recordedAtUtc":  "2026-10-12T01:26:22.8324261Z",
+    "originalHead":  "a992dfc7b13b71d829cb0942b1e19b6409e61ef0",
+    "candidateHead":  "762c1e33af79dcfacc85d12f86fdd724cf89d480",
+    "commitsBefore":  71,
+    "commitsAfter":  71,
+    "currentTreeIdentical":  true,
+    "treeSha":  "00f9a79ef221092f2e2131e597c4af5ee1cb709f",
+    "candidateGitleaksFindings":  1,
+    "authorIdentities":  "Public repository nickname and GitHub noreply",
+    "originalBundleVerified":  true,
+    "originalWorkingRepositoryChanged":  false,
+    "published":  false,
+    "localCommitMap":  "Saved in isolated candidate filter-repo/commit-map",
+    "limits":  "Prepared candidate predates subsequent work; regenerate/check against latest source HEAD before any authorized publication."
+}

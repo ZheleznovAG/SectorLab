@@ -84,3 +84,14 @@ AGENTS.md прямо запрещает самостоятельный force pus
 отдельный шаг требует явного изменения разрешения пользователем. Обновление
 remote не стирает чужие clones/forks и кеши. Эти ограничения описаны в
 [официальной инструкции GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository).
+
+Очищенный кандидат подготовлен в отдельном локальном bare clone, исходный репозиторий
+не переписан. [Проверка](evidence/privacy-history-candidate.json): 71/71 коммит сохранён,
+HEAD кандидата 762c1e33af79dcfacc85d12f86fdd724cf89d480; текущее дерево побайтно совпадает
+с a992dfc7b13b71d829cb0942b1e19b6409e61ef0 (tree 00f9a79ef221092f2e2131e597c4af5ee1cb709f).
+Gitleaks с новыми privacy rules: 0 findings; все author/committer используют публичный
+ник/noreply. Полный исходный Git bundle проверен, карта SHA находится вне Git.
+Первый callback не запустился из-за UTF-8 BOM; исходная копия оставалась неизменной,
+BOM удалён и последующий rewrite/scan успешен. Ничего не опубликовано.
+При разрешении пользователя кандидат нужно обновить до последнего HEAD,
+сверить remote непосредственно перед force-with-lease и документировать переход SHA.
