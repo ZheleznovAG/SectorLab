@@ -114,13 +114,70 @@ namespace SectorLab.Tests
                 Assert.That(slot.Unit, Is.Not.Null, $"{slot.Config.team}/{slot.Config.role}: waiting={slot.Respawn.RemainingSeconds}, spawning={slot.IsSpawning}, phase={lifecycle.Phase}, safe={UnitSpawnPositions.TryFind(slot.Config.position, slot.SpawnRadius, out _)}");
                 Assert.That(slot.Unit, Is.Not.SameAs(old));
                 Assert.That(slot.Unit.Team, Is.EqualTo(slot.Config.team));
-                Assert.That(slot.Unit.Stats.name, Is.EqualTo(slot.Config.role.ToString()));
+                Assert.That(slot.Unit.Stats.role, Is.EqualTo(slot.Config.role));
                 Assert.That(slot.Unit.Health.Current, Is.EqualTo(slot.Unit.Health.Max));
                 Assert.That(slot.Unit.GetComponent<UnityEngine.AI.NavMeshAgent>().isOnNavMesh, Is.True);
                 Assert.That(slot.Respawn.IsWaiting, Is.False);
                 Assert.That(Unit.All.Count, Is.EqualTo(6));
                 Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.EqualTo(6));
             }
+        }
+
+        [UnityTest]
+        public IEnumerator RenamedRoleAssetsStillRespawnEveryRosterSlot()
+        {
+            var names = new System.Collections.Generic.Dictionary<UnitStats, string>();
+            foreach (UnitSlotState slot in lifecycle.Slots)
+            {
+                UnitStats stats = slot.Unit.Stats;
+                if (names.ContainsKey(stats)) continue;
+                names.Add(stats, stats.name);
+                stats.name = "Renamed profile " + names.Count;
+            }
+            try
+            {
+                foreach (UnitSlotState slot in lifecycle.Slots)
+                {
+                    slot.Unit.Health.TakeDamage(slot.Unit.Health.Max);
+                    yield return null;
+                    battle.AdvanceSimulation(10);
+                    float deadline = Time.realtimeSinceStartup + 5;
+                    while (slot.Unit == null && lifecycle.IsReady && Time.realtimeSinceStartup < deadline)
+                        yield return null;
+                    Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Ready), lifecycle.Failure);
+                    Assert.That(slot.Unit, Is.Not.Null, slot.Config.team + "/" + slot.Config.role);
+                    Assert.That(slot.Unit.Stats.role, Is.EqualTo(slot.Config.role));
+                    Assert.That(slot.Unit.Health.Current, Is.EqualTo(slot.Unit.Health.Max));
+                    Assert.That(Unit.All.Count, Is.EqualTo(6));
+                    Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.EqualTo(6));
+                }
+            }
+            finally
+            {
+                foreach (var entry in names) if (entry.Key != null) entry.Key.name = entry.Value;
+            }
+        }
+
+        [UnityTest]
+        public IEnumerator WrongRoleDataStillFailsRespawnAndReleasesAllInstances()
+        {
+            UnitSlotState slot = lifecycle.Slots[0];
+            UnitStats stats = slot.Unit.Stats;
+            UnitRole previous = stats.role;
+            try
+            {
+                stats.role = previous == UnitRole.Scout ? UnitRole.Tank : UnitRole.Scout;
+                slot.Unit.Health.TakeDamage(slot.Unit.Health.Max);
+                yield return null;
+                battle.AdvanceSimulation(10);
+                float deadline = Time.realtimeSinceStartup + 5;
+                while (lifecycle.IsReady && Time.realtimeSinceStartup < deadline) yield return null;
+                Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Failed));
+                Assert.That(lifecycle.Failure, Does.Contain("team/role"));
+                Assert.That(battle.State.Clock.IsPaused, Is.True);
+                yield return WaitForReleasedLoads();
+            }
+            finally { if (stats != null) stats.role = previous; }
         }
 
         [UnityTest]

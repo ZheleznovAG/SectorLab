@@ -145,7 +145,7 @@ namespace SectorLab.Presentation
                 shownSelection = selected;
                 selectedHp = currentHp;
                 selection.text = selected == null ? "Выберите бойца на поле или снизу. Тап по узлу — занять, по врагу — атаковать."
-                    : $"{selected.Stats.name} • {currentHp}/{selected.Health.Max} HP • урон {selected.Stats.damage} • дальность {selected.Stats.attackRange:0.#} • скорость {selected.Stats.speed:0.#}";
+                    : $"{selected.Stats.role} • {currentHp}/{selected.Health.Max} HP • урон {selected.Stats.damage} • дальность {selected.Stats.attackRange:0.#} • скорость {selected.Stats.speed:0.#}";
             }
         }
     }

@@ -43,7 +43,7 @@ namespace SectorLab.Tests
             yield return factory.SpawnAsync("units/Tank", Vector3.zero, root.transform, CancellationToken.None)
                 .ToCoroutine(unit => spawned = unit);
             Assert.That(spawned, Is.Not.Null);
-            Assert.That(spawned.Stats.name, Is.EqualTo("Tank"));
+            Assert.That(spawned.Stats.role, Is.EqualTo(UnitRole.Tank));
             Assert.That(spawned.Team, Is.EqualTo(Team.Player));
             Assert.That(spawned.GetComponent<UnityEngine.AI.NavMeshAgent>().isOnNavMesh, Is.True);
             Assert.That(factory.ActiveInstances, Is.EqualTo(1));

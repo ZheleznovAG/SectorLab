@@ -80,7 +80,7 @@ namespace SectorLab.AI
             if (a == b) return 0;
             int speed = b.Movement.Speed.CompareTo(a.Movement.Speed);
             if (speed != 0) return speed;
-            int role = string.CompareOrdinal(a.Stats != null ? a.Stats.name : "", b.Stats != null ? b.Stats.name : "");
+            int role = string.CompareOrdinal(a.Stats != null ? a.Stats.role.ToString() : "", b.Stats != null ? b.Stats.role.ToString() : "");
             if (role != 0) return role;
             // Registration order is reproducible for equal roles and does not depend on Unity entity IDs.
             for (int i = 0; i < Unit.All.Count; i++)

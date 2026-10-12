@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580eb38a267f12942b979ae3da02882b, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: SectorLab::SectorLab.Units.UnitStats
+  role: 0
   maxHealth: 240
   speed: 2
   damage: 12

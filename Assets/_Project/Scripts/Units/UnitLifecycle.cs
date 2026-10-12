@@ -95,7 +95,7 @@ namespace SectorLab.Units
 
         private void Attach(UnitSlotState slot, Unit unit)
         {
-            if (unit.Team != slot.Config.team || unit.Stats == null || unit.Stats.name != slot.Config.role.ToString())
+            if (unit.Team != slot.Config.team || unit.Stats == null || unit.Stats.role != slot.Config.role)
                 throw new InvalidOperationException("Prefab team/role does not match its roster slot.");
             slot.Unit = unit;
             var agent = unit.GetComponent<UnityEngine.AI.NavMeshAgent>();

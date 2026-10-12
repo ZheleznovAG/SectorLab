@@ -1,0 +1,28 @@
+﻿{
+    "task":  "A1-role-editor-smoke",
+    "sourceHead":  "8cb198a15005c94b33981316b4490117459deb0c",
+    "observed":  {
+                     "checkedAtUtc":  "2026-10-12T16:09:41.9039704Z",
+                     "scene":  "Assets/_Project/Scenes/Main.unity",
+                     "phase":  "Ready",
+                     "units":  4,
+                     "paused":  false,
+                     "elapsed":  15.79999999999996,
+                     "playerScore":  0,
+                     "enemyScore":  13.299999999999983,
+                     "outcome":  "InProgress",
+                     "screenWidth":  1280,
+                     "screenHeight":  720
+                 },
+    "console":  {
+                    "sampledUtc":  "2026-10-12T16:09:43.1814444Z",
+                    "ageMs":  132,
+                    "compilationFailed":  false,
+                    "compiling":  false,
+                    "consoleErrors":  0,
+                    "consoleWarnings":  0,
+                    "consoleLogs":  0,
+                    "seeded":  true
+                },
+    "expectedDiExceptions":  "Both Unwired MatchScope tests passed using LogAssert.Expect; ordinary scene console cleared and checked independently."
+}
