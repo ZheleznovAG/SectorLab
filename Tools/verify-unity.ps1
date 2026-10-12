@@ -31,6 +31,15 @@ $started = [DateTime]::UtcNow.ToString('o')
 $inputHashes = @(rg --files Assets Packages ProjectSettings | Sort-Object | ForEach-Object {
     [PSCustomObject]@{ path = $_.Replace('\', '/'); sha256 = (Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash }
 })
+# Compilation reloads runtime-only state; the test runner must start outside Play Mode.
+$null = Invoke-Editor @('editor_stop')
+$stopTimer = [Diagnostics.Stopwatch]::StartNew()
+do {
+    $editorState = Invoke-Editor @('eval', '--code', 'return UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode;')
+    if (-not $editorState.data.result.result) { break }
+    if ($stopTimer.Elapsed.TotalSeconds -gt 60) { throw 'Timed out leaving Play Mode before tests.' }
+    Start-Sleep -Milliseconds 500
+} while ($true)
 $null = Invoke-Editor @('eval', '--code', 'UnityEditor.AssetDatabase.Refresh();')
 $timer = [Diagnostics.Stopwatch]::StartNew()
 $stableSamples = 0

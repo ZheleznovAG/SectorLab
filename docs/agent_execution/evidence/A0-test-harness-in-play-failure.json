@@ -1,0 +1,133 @@
+﻿{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "level": "error",
+      "tail": "10"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 786,
+          "timestampUtc": "2026-10-12T15:55:59.3129423Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.Unit.get_IsAlive () (at Assets/_Project/Scripts/Units/Unit.cs:22)\nSectorLab.Battle.BattleController.CountLivingUnits () (at Assets/_Project/Scripts/Battle/BattleController.cs:73)\nSectorLab.Battle.BattleController.Update () (at Assets/_Project/Scripts/Battle/BattleController.cs:54)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        },
+        {
+          "seq": 787,
+          "timestampUtc": "2026-10-12T15:55:59.3273305Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.Unit.get_IsAlive () (at Assets/_Project/Scripts/Units/Unit.cs:22)\nSectorLab.Battle.BattleController.CountLivingUnits () (at Assets/_Project/Scripts/Battle/BattleController.cs:73)\nSectorLab.Battle.BattleController.Update () (at Assets/_Project/Scripts/Battle/BattleController.cs:54)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        },
+        {
+          "seq": 788,
+          "timestampUtc": "2026-10-12T15:55:59.3389844Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "InvalidOperationException: This cannot be used during play mode.",
+          "stackTrace": "UnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo (System.String message) (at <b5e1ac9fdc894216a0eeb18353904190>:0)\nUnityEditor.SceneManagement.EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo () (at <b5e1ac9fdc894216a0eeb18353904190>:0)\nUnityEditor.TestTools.TestRunner.TestRun.Tasks.Scene.SaveModifiedSceneTask+<Execute>d__1.MoveNext () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/Tasks/Scene/SaveModifiedSceneTask.cs:13)\nUnityEditor.TestTools.TestRunner.TestRun.TestJobRunner.ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@80f691d4262b/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions()\n",
+          "seeded": false
+        },
+        {
+          "seq": 789,
+          "timestampUtc": "2026-10-12T15:55:59.3400049Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "An unexpected error happened while running tests.",
+          "stackTrace": "UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 790,
+          "timestampUtc": "2026-10-12T15:55:59.3661995Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "Too many instant steps in test execution mode: Error. Current task ExitPlayModeTask.",
+          "stackTrace": "UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 791,
+          "timestampUtc": "2026-10-12T15:55:59.3682428Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.Unit.get_IsAlive () (at Assets/_Project/Scripts/Units/Unit.cs:22)\nSectorLab.Battle.BattleController.CountLivingUnits () (at Assets/_Project/Scripts/Battle/BattleController.cs:73)\nSectorLab.Battle.BattleController.Update () (at Assets/_Project/Scripts/Battle/BattleController.cs:54)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        },
+        {
+          "seq": 792,
+          "timestampUtc": "2026-10-12T15:55:59.4677487Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.HealthBar.OnDestroy () (at Assets/_Project/Scripts/Units/HealthBar.cs:24)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        },
+        {
+          "seq": 793,
+          "timestampUtc": "2026-10-12T15:55:59.468276Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.HealthBar.OnDestroy () (at Assets/_Project/Scripts/Units/HealthBar.cs:24)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        },
+        {
+          "seq": 794,
+          "timestampUtc": "2026-10-12T15:55:59.468276Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.HealthBar.OnDestroy () (at Assets/_Project/Scripts/Units/HealthBar.cs:24)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        },
+        {
+          "seq": 795,
+          "timestampUtc": "2026-10-12T15:55:59.468276Z",
+          "level": "error",
+          "logType": "Exception",
+          "message": "NullReferenceException: Object reference not set to an instance of an object",
+          "stackTrace": "SectorLab.Units.HealthBar.OnDestroy () (at Assets/_Project/Scripts/Units/HealthBar.cs:24)\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\n",
+          "seeded": false
+        }
+      ],
+      "cursor": 797,
+      "session": "4651f9fb8dee4ef2b6fb525a655daa91",
+      "returned": 10,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 699,
+        "warn": 50,
+        "log": 3
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-12T15:58:05.9758732Z",
+        "ageMs": 120,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 699,
+        "consoleWarnings": 50,
+        "consoleLogs": 2,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "[LOCAL_USER_HOME]\\Projects\\SectorLab"
+    },
+    "success": true
+  },
+  "errors": [],
+  "warnings": []
+}
