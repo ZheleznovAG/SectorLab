@@ -4,17 +4,37 @@
 
 ## Где остановились
 
-12.10.2026: W7.1/W7.2 реализованы. W8 исправил вход тройки в узел и отключил
-неиспользуемые post effects; кодовый checkpoint `c0a13b3` (до очистки `06cc168`).
-Регрессия: 63/63 EditMode и 112/112 PlayMode. APK кандидата 1.0.0 собран из этого
-checkpoint: 32 302 473 bytes, SHA-256
-`6091B57B09BB4242CF48C9FDD518FE491E51CD878469466EDCD2C17BE1F6376F`,
-0 ошибок, 1 предупреждение Pipeline. [Build report](evidence/android-build-W8-v1-candidate.json).
-Временный Input System preloadedAssets после сборки восстановлен через PlayerSettings API;
-ProjectSettings совпадает с проверенным checkpoint. APK установлен на подключённый
-Android, версия подтверждена `dumpsys package`; G7 ожидает человеческую партию.
-README, 11 практических упражнений и notices обновлены. Следующее: чистый clone,
-10-минутное измерение Android, offline/перезапуск и финальный evidence report.
+12.10.2026: игровой checkpoint `0ae98c8`. По отзыву пользователя поднят
+SelectionRing над поверхностью узла; проверены bounds трёх ролей и настоящий
+Game View. Исправление входит в APK `Builds/Android/SectorLab-W8-selection.apk`:
+**1.0.0, 32 302 469 bytes**, SHA-256
+`654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA`.
+[Build report](evidence/android-build-W8-selection.json): 0 ошибок,
+1 предупреждение Pipeline. Input System preloadedAssets после сборки восстановлен
+через PlayerSettings API; дополнительных изменений ProjectSettings нет.
+APK установлен на Android; окончательная проверка исправления на устройстве открыта.
+Полный повторный прогон именно `0ae98c8`: **63/63 EditMode и 112/112 PlayMode PASS**,
+[JSON](evidence/tests-W8-selection-final-playmode.json), failed/skipped/inconclusive=0.
+
+Публичный clone без project Library/Temp/Builds импортирован: **63/63 EditMode
+и 112/112 headless PlayMode PASS**. Найденные пять тестов с ожиданием 600 кадров
+переведены на игровое время в `acbd9bf`; первая неудача и повторные прогоны
+сохранены, см. [ADR-008](../adr/008-game-time-in-navigation-tests.md).
+Две реальные серии Android приложены: первая частичная из-за выключения экрана,
+вторая — 601 с, 398/398 foreground samples, в среднем 29,86 FPS, преимущественно
+на экране результата. Это ограниченные измерения, **не PASS 10 минут активных партий**.
+Native AssetPackManager probe воспроизводится также в исходном baseline APK
+без Addressables; он не назван устранённым. Пользователь слышит звук и сообщил
+о перекрытии выделения; подтверждение исправления/mute и итог ручной партии открыты.
+
+ADB сейчас не видит устройство. Повторный offline test и активная performance
+series — **BLOCKED_DEVICE** до подключения. Предыдущий offline helper прервался
+при чтении размеров экрана; готового offline evidence нет, PASS не выставлен.
+WiFi/mobile data были восстановлены в finally. При следующем подключении нужно
+также вернуть `stay_on_while_plugged_in=0` после замера: временное значение 3
+сохраняет экран включённым при зарядке; исходное значение записано вне Git.
+README, ADR, notices и 11 упражнений подготовлены. Следующее: повторный offline
+test, 600 с повторных партий на новом APK, подтверждение пользователя и итоговый audit.
 Точный HEAD — `git rev-parse HEAD`. [Аудит приватности](PRIVACY_AUDIT.md)
 очистил опубликованную main по явному разовому разрешению пользователя:
 `0b2badb`, 79/79 коммитов, код/ассеты/даты/сообщения сохранены, Gitleaks всех refs
@@ -105,7 +125,7 @@ diff; другие настройки проекта не затронуты.
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
 | W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик; остаётся человеческий плейтест |
-| W8 / G8 | IN_PROGRESS | 63/112 регрессия и APK 1.0.0 PASS; Android установлен, чистый public clone и 10 минут performance выполняются |
+| W8 / G8 | BLOCKED_DEVICE | Чистый clone и APK 0ae98c8 проверены; актуальные offline/активная performance series ожидают подключения Android |
 | W9 / G9 | IN_PROGRESS | README, ADR, лицензии и 11 упражнений подготовлены; финальный evidence/audit после W8 |
 
 ## Реестр требований (baseline и текущие изменения)
@@ -116,7 +136,7 @@ diff; другие настройки проекта не затронуты.
 
 | ID | Статус | Фактическая граница / пакет завершения |
 | --- | --- | --- |
-| FR-001 | PARTIAL | Сетевой службы нет; запуск APK офлайн не проверен / W8 |
+| FR-001 | BLOCKED_DEVICE | Контент локальный; offline helper прервался при сборе evidence, повторный запуск ожидает USB-устройство / W8 |
 | FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
 | FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
 | FR-004 | PASS | Mouse/virtual touch и HUD выбирают/двигают реальные units; UI/drag/pinch не выдают случайный приказ / W6 |
@@ -133,26 +153,26 @@ diff; другие настройки проекта не затронуты.
 | FR-015 | PASS | HUD очков/времени/узлов/HP/respawn/выбора и pause: W6.3, 103 PlayMode; Player и форматы проверяются G6 |
 | FR-016 | PASS | Result/Restart останавливают ввод/бой/AI, отменяют pending respawn, не создают поздних units / W3–W7 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
-| FR-018 | PARTIAL | Реальные shot/capture/result SFX, mute/сохранение/cleanup, 110 PlayMode и Main; прослушивание Android после W7.2 |
+| FR-018 | PASS | Четыре SFX и mute persistence прошли PlayMode; пользователь сообщил «чето слышно». Слуховая проверка mute на финальном Android отдельно открыта в G7 |
 | FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
-| FR-020 | PASS | APK 1.0.0 из c0a13b3/исходного 06cc168 собран с локальными bundles/catalog; Tools/build-android.ps1 воспроизводит процедуру |
+| FR-020 | PASS | APK 1.0.0 из 0ae98c8, SHA-256 654CB514…1237DA, локальные bundles/catalog; Tools/build-android.ps1 воспроизводит процедуру |
 | FR-021 | PASS | VContainer 1.19.0: scene scope Clock/State/Battle/AI/factory/provider/lifecycle, missing registrations обнаруживаются / W4–W5 |
 | FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
 | FR-023 | PASS | Шесть локальных prefabs, реальные loads/releases; bundles/catalog внутри Android APK, бой на телефоне / G5 |
-| FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
+| FR-024 | PASS | Фактические SHA/UTC/inputHashes и неудачные прогоны сохранены; ограничения performance и BLOCKED_DEVICE явно отражены в evidence/gates |
 | FR-025 | PASS | 79 реальных атомарных коммитов сохранены; разовый privacy rewrite с разрешения меняет только личные paths/author metadata, см. карту SHA |
 | FR-026 | PASS | CSV настоящих Main: время, счёт, outcome, приказы, смерти и захваты обеих команд; без сервера / W7.2 |
 | FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
 | FR-028 | PASS | Настоящий Game View 3 форматов; simulated safe insets и Android Insets API: HUD целиком виден на телефоне, включая возврат фокуса |
 | NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
 | NFR-002 | PASS | Публичный clone без Library/Temp/Builds: import и 63/63 EditMode; после исправления frame waits 112/112 headless PlayMode, реальные Main/AA loads/cleanup |
-| NFR-003 | PARTIAL | Editor компиляция без ошибок; final regression/Android candidate ещё проверяются, native probe не назван устранённым |
+| NFR-003 | PARTIAL | Editor compilation/регрессия PASS; baseline native probe подтверждён, отсутствие новых ошибок на финальном Android требует завершённого device log |
 | NFR-004 | PASS | W8: 63/63 EditMode и 112/112 PlayMode после группового исправления, failed/skipped/inconclusive=0; source inputHashes сохранены |
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
 | NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
 | NFR-007 | PASS | Repository gate: 150 уникальных GUID, .meta и связи; настоящий Main/prefab loads проходят |
-| NFR-008 | IN_PROGRESS | APK 1.0.0 установлен/запущен на Redmi Note 8 Pro / Android 11; human playtest и device regression выполняются |
-| NFR-009 | IN_PROGRESS | 10-минутный сбор SurfaceFlinger FPS, own process CPU и PSS/RSS на Android; Mono GC недоступен без подключённого Unity Profiler |
+| NFR-008 | BLOCKED_DEVICE | APK 0ae98c8 установлен; текущий ADB не видит телефон, финальная offline/device regression открыта. Ранние APK реально проверялись |
+| NFR-009 | BLOCKED_DEVICE | Две ограниченные реальные серии: foreground 601 с ~29,86 FPS; активные повторные партии на новом APK не измерены. Mono GC/GPU time недоступны |
 | NFR-010 | PASS | Опубликованные refs/main очищены; Gitleaks всей доступной истории 0 findings, metadata noreply, privacy gate активен; частный backup исключён из Git |
 | NFR-011 | PASS | Происхождение primitives/SFX и реальные licenses/notices пакетов сохранены; лицензию основного проекта агент не назначал |
 | NFR-012 | PASS | Один composition root, реальные async/ownership; прежние Unit/Movement/Attack/Commander сохранены, без лишней инфраструктуры |
@@ -167,9 +187,9 @@ diff; другие настройки проекта не затронуты.
   соседствует с явным правилом начисления после ухода команды. Для W2 действует
   последнее конкретное правило: полный узел без врага продолжает давать очки
   пустым; contest/нейтрализация останавливают эффект. Закрепить это тестом.
-- W0–W2 проверены. Следующая задача — **W3.1**: детерминированный AI за узлы,
-  затем реальные полные партии; далее composition root и асинхронный respawn.
-- Применять `09_ACCEPTANCE.md`: G3–G9 не пройдены. Наличие плана не означает
+- W0–W6 проверены. Следующее — подтверждение G7 пользователем и повторные
+  offline/активные Android проверки G8; финальная сверка документации/Git — G9.
+- Применять `09_ACCEPTANCE.md`: G7/G8 остаются открытыми. Наличие плана не означает
   Implementation complete, Device verified, Playtest verified или Release ready.
 
 ## Локальные коммиты этой сессии

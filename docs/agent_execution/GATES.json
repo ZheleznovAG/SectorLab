@@ -51,9 +51,24 @@
       { "name": "Actual shot capture result audio and persistent mute", "status": "PASS", "evidence": "evidence/tests-W7.1-playmode.json" },
       { "name": "Mirrored physical spawns and eighteen real relay routes", "status": "PASS", "evidence": "evidence/tests-W7.2-final-playmode.json" },
       { "name": "Five sustained plans including a natural repair-rotation victory", "status": "PASS", "evidence": "evidence/W7.2-tactics-sustained-plans.csv" },
-      { "name": "Human understandable full match playtest", "status": "TODO", "evidence": "" }
+      { "name": "Selection marker stays above all relay surfaces", "status": "PASS", "evidence": "evidence/W8-selection-visibility.txt" },
+      { "name": "Human full match and final Android marker/mute feedback", "status": "IN_PROGRESS", "evidence": "evidence/W8-device-acceptance-pending.json" }
     ] },
-    { "id": "G8", "status": "TODO", "checks": [] },
-    { "id": "G9", "status": "TODO", "checks": [] }
+    { "id": "G8", "status": "BLOCKED", "checks": [
+      { "name": "Final selection checkpoint EditMode 63/63", "status": "PASS", "evidence": "evidence/tests-W8-selection-final-editmode.json" },
+      { "name": "Final selection checkpoint PlayMode 112/112", "status": "PASS", "evidence": "evidence/tests-W8-selection-final-playmode.json" },
+      { "name": "Public clean clone headless full regression", "status": "PASS", "evidence": "evidence/clean-clone-W8-full-retry.json" },
+      { "name": "Final Android APK and embedded local content", "status": "PASS", "evidence": "evidence/android-build-W8-selection.json" },
+      { "name": "Baseline optional native startup probe comparison", "status": "PASS", "evidence": "evidence/W8-baseline-native-probe.json" },
+      { "name": "Final APK offline launch and native log", "status": "BLOCKED", "evidence": "evidence/W8-device-acceptance-pending.json" },
+      { "name": "Active ten-minute device workload; GC/GPU limits documented", "status": "BLOCKED", "evidence": "evidence/W8-android-performance-foreground.json" }
+    ] },
+    { "id": "G9", "status": "IN_PROGRESS", "checks": [
+      { "name": "Russian README and actual architecture/limits", "status": "PASS", "evidence": "../../README.md" },
+      { "name": "Package licenses and original asset provenance", "status": "PASS", "evidence": "../THIRD_PARTY_NOTICES.md" },
+      { "name": "Study exercises point to reachable rewritten commits", "status": "PASS", "evidence": "STUDY_WALKTHROUGH.md" },
+      { "name": "Verified authorized privacy history replacement", "status": "PASS", "evidence": "evidence/privacy-history-published.json" },
+      { "name": "Final documentation links and Git audit", "status": "IN_PROGRESS", "evidence": "EVIDENCE_REPORT.md" }
+    ] }
   ]
 }

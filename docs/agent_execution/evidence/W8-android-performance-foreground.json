@@ -1,0 +1,316 @@
+{
+  "startedAtUtc": "2026-10-12T02:55:18.560327+00:00",
+  "completedAtUtc": "2026-10-12T03:05:19.594545+00:00",
+  "durationSeconds": 601.034,
+  "model": "Redmi Note 8 Pro",
+  "androidVersion": "11",
+  "package": "com.zheleznovag.sectorlab",
+  "samples": 398,
+  "foregroundSamples": 398,
+  "uniquePresentedFrames": 18029,
+  "measurement": "SurfaceFlinger actual-present timestamps, own /proc/PID/stat, dumpsys meminfo",
+  "gcAllocations": "NOT_AVAILABLE: release APK has no attached Unity Profiler; ART data is not Mono GC",
+  "humanInteraction": "No automated commands; user reported audible sound and occluded selection marker during this session",
+  "fpsMean": 29.86080118584557,
+  "frameIntervalMsMedian": 33.338154,
+  "frameIntervalMsP95": 49.994769,
+  "gapsOverOneSecond": 1,
+  "cpuOneCorePercentMean": 34.93536523929471,
+  "memory": [
+    {
+      "elapsedSeconds": 0.001,
+      "pssKiB": 237130,
+      "rssKiB": 354169
+    },
+    {
+      "elapsedSeconds": 10.502,
+      "pssKiB": 216940,
+      "rssKiB": 333039
+    },
+    {
+      "elapsedSeconds": 21.005,
+      "pssKiB": 218153,
+      "rssKiB": 334253
+    },
+    {
+      "elapsedSeconds": 31.506,
+      "pssKiB": 217614,
+      "rssKiB": 333675
+    },
+    {
+      "elapsedSeconds": 42.009,
+      "pssKiB": 218460,
+      "rssKiB": 334521
+    },
+    {
+      "elapsedSeconds": 52.512,
+      "pssKiB": 218460,
+      "rssKiB": 334521
+    },
+    {
+      "elapsedSeconds": 63.015,
+      "pssKiB": 217656,
+      "rssKiB": 333719
+    },
+    {
+      "elapsedSeconds": 73.518,
+      "pssKiB": 217710,
+      "rssKiB": 333775
+    },
+    {
+      "elapsedSeconds": 86.393,
+      "pssKiB": 217706,
+      "rssKiB": 333771
+    },
+    {
+      "elapsedSeconds": 96.896,
+      "pssKiB": 218544,
+      "rssKiB": 334609
+    },
+    {
+      "elapsedSeconds": 107.4,
+      "pssKiB": 218544,
+      "rssKiB": 334609
+    },
+    {
+      "elapsedSeconds": 117.903,
+      "pssKiB": 217698,
+      "rssKiB": 333763
+    },
+    {
+      "elapsedSeconds": 128.408,
+      "pssKiB": 217788,
+      "rssKiB": 333763
+    },
+    {
+      "elapsedSeconds": 138.915,
+      "pssKiB": 218454,
+      "rssKiB": 334609
+    },
+    {
+      "elapsedSeconds": 149.418,
+      "pssKiB": 217608,
+      "rssKiB": 333763
+    },
+    {
+      "elapsedSeconds": 159.921,
+      "pssKiB": 217604,
+      "rssKiB": 333759
+    },
+    {
+      "elapsedSeconds": 170.425,
+      "pssKiB": 218450,
+      "rssKiB": 334605
+    },
+    {
+      "elapsedSeconds": 180.929,
+      "pssKiB": 217604,
+      "rssKiB": 333759
+    },
+    {
+      "elapsedSeconds": 191.431,
+      "pssKiB": 218297,
+      "rssKiB": 334605
+    },
+    {
+      "elapsedSeconds": 201.935,
+      "pssKiB": 218288,
+      "rssKiB": 334605
+    },
+    {
+      "elapsedSeconds": 212.439,
+      "pssKiB": 218288,
+      "rssKiB": 334605
+    },
+    {
+      "elapsedSeconds": 222.941,
+      "pssKiB": 217442,
+      "rssKiB": 333759
+    },
+    {
+      "elapsedSeconds": 233.444,
+      "pssKiB": 218254,
+      "rssKiB": 334605
+    },
+    {
+      "elapsedSeconds": 243.946,
+      "pssKiB": 216413,
+      "rssKiB": 333199
+    },
+    {
+      "elapsedSeconds": 254.448,
+      "pssKiB": 216401,
+      "rssKiB": 333187
+    },
+    {
+      "elapsedSeconds": 264.95,
+      "pssKiB": 217247,
+      "rssKiB": 334033
+    },
+    {
+      "elapsedSeconds": 275.453,
+      "pssKiB": 217247,
+      "rssKiB": 334033
+    },
+    {
+      "elapsedSeconds": 285.955,
+      "pssKiB": 217247,
+      "rssKiB": 334033
+    },
+    {
+      "elapsedSeconds": 296.457,
+      "pssKiB": 217287,
+      "rssKiB": 334073
+    },
+    {
+      "elapsedSeconds": 306.959,
+      "pssKiB": 217275,
+      "rssKiB": 334061
+    },
+    {
+      "elapsedSeconds": 317.461,
+      "pssKiB": 217275,
+      "rssKiB": 334061
+    },
+    {
+      "elapsedSeconds": 327.964,
+      "pssKiB": 217279,
+      "rssKiB": 334065
+    },
+    {
+      "elapsedSeconds": 338.466,
+      "pssKiB": 217314,
+      "rssKiB": 334085
+    },
+    {
+      "elapsedSeconds": 348.969,
+      "pssKiB": 217256,
+      "rssKiB": 334069
+    },
+    {
+      "elapsedSeconds": 359.471,
+      "pssKiB": 217256,
+      "rssKiB": 334069
+    },
+    {
+      "elapsedSeconds": 369.974,
+      "pssKiB": 216414,
+      "rssKiB": 333227
+    },
+    {
+      "elapsedSeconds": 380.476,
+      "pssKiB": 216468,
+      "rssKiB": 333223
+    },
+    {
+      "elapsedSeconds": 390.979,
+      "pssKiB": 216339,
+      "rssKiB": 333223
+    },
+    {
+      "elapsedSeconds": 401.481,
+      "pssKiB": 217185,
+      "rssKiB": 334069
+    },
+    {
+      "elapsedSeconds": 411.984,
+      "pssKiB": 217229,
+      "rssKiB": 334113
+    },
+    {
+      "elapsedSeconds": 422.486,
+      "pssKiB": 217217,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 432.988,
+      "pssKiB": 216581,
+      "rssKiB": 333255
+    },
+    {
+      "elapsedSeconds": 443.49,
+      "pssKiB": 217427,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 453.993,
+      "pssKiB": 217499,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 464.495,
+      "pssKiB": 216653,
+      "rssKiB": 333255
+    },
+    {
+      "elapsedSeconds": 474.997,
+      "pssKiB": 217499,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 485.5,
+      "pssKiB": 217510,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 496.003,
+      "pssKiB": 217600,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 506.505,
+      "pssKiB": 217600,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 517.007,
+      "pssKiB": 216753,
+      "rssKiB": 333255
+    },
+    {
+      "elapsedSeconds": 527.51,
+      "pssKiB": 216753,
+      "rssKiB": 333255
+    },
+    {
+      "elapsedSeconds": 538.012,
+      "pssKiB": 217599,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 548.514,
+      "pssKiB": 217599,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 559.017,
+      "pssKiB": 216753,
+      "rssKiB": 333255
+    },
+    {
+      "elapsedSeconds": 569.519,
+      "pssKiB": 217599,
+      "rssKiB": 334101
+    },
+    {
+      "elapsedSeconds": 580.022,
+      "pssKiB": 216745,
+      "rssKiB": 333247
+    },
+    {
+      "elapsedSeconds": 590.524,
+      "pssKiB": 217591,
+      "rssKiB": 334093
+    }
+  ],
+  "pssStartKiB": 237130,
+  "pssEndKiB": 217591,
+  "pssMaxKiB": 237130,
+  "status": "LIMITED_PASS",
+  "apkEvidence": "android-build-W8-v1-candidate.json",
+  "limits": [
+    "398/398 foreground samples for 601.034 s, but most time was result overlay.",
+    "This is not a sustained ten-minute active-match/respawn/restart workload.",
+    "Mono GC/GPU time unavailable without Unity Profiler."
+  ]
+}

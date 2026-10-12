@@ -1,4 +1,31 @@
-# Доказательства — аудит baseline 2026-10-11
+# Доказательства SectorLab v1.0
+
+Текущее проверенное игровое состояние: **`0ae98c8`**, включая исправление
+SelectionRing. Повторная полная регрессия: **63/63 EditMode, 112/112 PlayMode**,
+failed/skipped/inconclusive = 0. [EditMode](evidence/tests-W8-selection-final-editmode.json),
+[PlayMode](evidence/tests-W8-selection-final-playmode.json): sourceHead `0ae98c8`,
+реальные UTC и SHA-256 входов сохранены. Чистый public clone без project Library:
+[63/63 EditMode](evidence/clean-clone-W8-editmode.xml),
+[112/112 headless PlayMode](evidence/clean-clone-W8-full-retry.json) после
+исправления ожиданий тестов в `acbd9bf`.
+
+APK `Builds/Android/SectorLab-W8-selection.apk`: **1.0.0**, 32 302 469 bytes,
+SHA-256 `654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA`.
+[Сборка](evidence/android-build-W8-selection.json): Succeeded, 0 errors,
+1 Pipeline warning, 40,752 с; локальные AA bundles/catalog включены в APK.
+APK установлен на Redmi Note 8 Pro / Android 11. Повторный offline test
+прервался до сохранения evidence; актуальные device/performance проверки —
+**BLOCKED_DEVICE**, ADB не видит телефон. Пользователь подтвердил слышимый звук
+и сообщил о скрытом выделении на предыдущем APK; подтверждение исправления/mute
+и итог человеческой партии ещё открыты. **Release ready не заявляется**.
+[Фактический disconnected-device статус и следующие проверки](evidence/W8-device-acceptance-pending.json).
+
+Старые прогоны выполнены до privacy rewrite; соответствие коммитов и неизменность
+кода подтверждены [операцией очистки](evidence/privacy-history-published.json)
+и [картой SHA](evidence/privacy-commit-map.txt). Исторические SHA ниже и sourceHead
+старых JSON оставлены как provenance; это не вымышленные повторные запуски.
+
+## Исторический аудит baseline 2026-10-11
 
 Это результаты текущего прототипа R4/R5 и исходных исправлений; gates новой
 v1.0 ими не закрываются. Среда: Windows, Unity Editor 6000.6.4f1, Android target,
@@ -51,12 +78,12 @@ SHA-256 файлов на диске во время запуска тестов
 | G1 | PASS | MatchState/Clock, 29 EditMode + 43 PlayMode, Main pause/result/restart и осмотренный экран Victory 45:0 |
 | G2 | PASS | A/B/C capture+score+heal; 46 EditMode + 61 PlayMode; 18/18 NavMesh, Main Victory 45:0 и repair/contest |
 | G3 | PASS | AI 53/53 EditMode, 67/67 PlayMode, четыре полные партии Main и наблюдаемый выигрыш/проигрыш |
-| G4 | TODO | VContainer отсутствует |
-| G5 | TODO | Addressables/UniTask/respawn/async cleanup отсутствуют |
-| G6 | TODO | Нет жестов камеры, UI blocking и нового HUD |
-| G7 | TODO | Звук/понятность новой игры/живой плейтест ещё не проверены |
-| G8 | TODO | Есть APK baseline; финальный content+APK и Android performance впереди |
-| G9 | TODO | Итоговых v1.0 документов/лицензий/учебной карты пока нет |
+| G4 | PASS | VContainer scene scope, настоящая injection, missing registration/reload tests — W4 |
+| G5 | PASS | UnitFactory/UniTask/Addressables, late cancel/error/respawn/10 restarts и локальный контент APK — W5 |
+| G6 | PASS | Touch/camera/UI blocking/HUD/safe area/tutorial; пользователь подтвердил жесты и Insets API проверен на телефоне — W6 |
+| G7 | IN_PROGRESS | SFX/mute/зеркальная карта/5 тактик проверены; человеческая полная партия и отзыв ожидаются |
+| G8 | BLOCKED | Полная регрессия 0ae98c8, clean clone и APK PASS; offline и активный Android workload ожидают USB-устройство |
+| G9 | IN_PROGRESS | README/ADR/notices/11 упражнений/очистка Git готовы; итоговое evidence обновляется после W8 |
 
 Не приравнивать обнаружение устройства к Device verified, сборку baseline к
 APK built v1.0, а автоматический PlayMode-прогон к Playtest verified.
@@ -116,3 +143,161 @@ Clock/State Scoped и существующие Battle/AI; injection реальн
 Проверены ошибки отсутствия Clock/State, отсутствие скрытого fallback и новые
 instances после dispose/reload. [Четыре партии](evidence/W4.3-main-matches.csv).
 G4 PASS. UnitFactory добавляется в W5, без sample-заглушки.
+
+## W5 — загрузка, возрождение и владение ресурсами
+
+Environment: Unity 6000.6.4f1, Windows, Android target; итоговый очищенный
+checkpoint `7cdb6b2` (исходный `d6532d7`). Code: UnitFactory,
+AddressableUnitPrefabProvider, UnitPrefabOwnership, UnitLifecycle, RespawnTimer,
+GameLifetimeScope. VContainer создаёт реальные provider/factory; UniTask ждёт
+реальный load и pause-safe countdown. Lease удерживается до физического окончания
+IO даже при логической отмене; clone после cancellation не создаётся.
+
+- [Чистые таймеры 63/63](evidence/tests-W5.5a-editmode.json),
+  [Main lifecycle regression](evidence/tests-W5.6-playmode.json).
+- [10 последовательных настоящих Main restarts](evidence/W5.6-main-restarts.csv):
+  новый state/clock, старые factory instances 0, 6 текущих units/handles.
+- Missing key после двух successful loads: cleanup, видимый error, Retry/Exit;
+  cancellation во время физической загрузки, отсутствие позднего spawn и double-release
+  проверены integration tests. Ранние FAIL/исправления сохранены в evidence.
+- [APK с локальными bundles](evidence/android-build-W5-G5.json),
+  [установка и бой на Android](evidence/W5-G5-device.json).
+
+Result G5: PASS. Пилотный APK не использован вместо финального; его native
+AssetPackManager diagnostic и URP shader notices были оставлены для W8.
+
+## W6 — сенсорное управление и читаемый интерфейс
+
+Environment: тот же Editor; Redmi Note 8 Pro, Android 11/API 30.
+Code: UnitCommander, TacticalCamera, BattleHud, SafeAreaLayout, TutorialView,
+AndroidSystemBars. Release tap отделён от drag/pinch/cancel, UI raycasts блокируют
+команды. Камера имеет границы pan/zoom. HUD читает те же scoped State/Lifecycle.
+
+- [Virtual input, tutorial и регрессия](evidence/tests-W6.5-playmode.json).
+- [Настоящие размеры и bounds](evidence/W6.4-layout-observations.txt),
+  [16:9](evidence/W6.4-16x9.png), [20:9](evidence/W6.4-20x9.png),
+  [4:3](evidence/W6.4-4x3.png). Первые неудачные размеры не удалены из evidence.
+- [Первый запуск обучения](evidence/W6.5-tutorial-1.png), Skip/Help сохраняют
+  правильную паузу, seen preference и Restart покрыты тестами.
+- [Жесты на телефоне подтверждены пользователем](evidence/W6-G6-device.json),
+  [системные отступы и возврат фокуса](evidence/W6-G6-insets-device.json).
+
+Result G6: PASS. Android Insets API вызывается только на Android;
+`com.unity.modules.androidjni` явно включён. Фокусный screenshot не доказывает
+сохранение paused state; это ограничение осталось явно записанным в device report.
+
+## W7 — звук, физическая симметрия и измеренные планы
+
+Code checkpoints после очистки: `6271c1b` MatchAudio, `d7fcea4` зеркальная арена.
+MatchAudio принадлежит сцене: четыре собственных процедурных clips, реальные
+shot/capture/outcome events, mute сохраняется в PlayerPrefs; teardown освобождает
+клипы и подписки. [110/110 PlayMode](evidence/tests-W7.1-playmode.json),
+[реальная Main observation](evidence/W7.1-audio-observation.json),
+[feedback screenshot](evidence/W7.1-feedback.png).
+
+[ADR-006](../adr/006-fair-arena-and-measured-tactics.md) описывает реальные
+асимметрии старой геометрии и исправления без смены UnitStats/первичных GUID.
+Обе тройки проходят к A/B/C из своих баз; новый obstacle зеркален старому,
+NavMesh действительно перебейкован с прежним GUID.
+[112/112 PlayMode](evidence/tests-W7.2-final-playmode.json),
+[5 sustained plans](evidence/W7.2-tactics-sustained-plans.csv),
+[осмотренная арена](evidence/W7.2-arena.png).
+
+Result: implementation PASS, G7 IN_PROGRESS. Пользователь сообщил «чето слышно»
+и обнаружил перекрытие выделения поверхностью узла. Исправление ниже; финальный
+отзыв и подтверждение полной партии ещё не получены. Скриптовые Victory/Defeat показывают
+реальные приказы, бой, захват и respawn, но не заменяют человека и не обещают
+постоянно выигрывающую стратегию. Запрошены две ручные партии и отзыв по звуку/UI.
+
+## W8 — регрессия и кандидат Android
+
+Checkpoint `c0a13b3`, code/assets соответствуют исходному `06cc168`.
+[ADR-007](../adr/007-relay-entry-and-unused-renderer-resources.md): полный прогон
+выявил затор тройки на B. Arrival margin изменён 0,15 → 0,6 м, чтобы первые два
+бойца не перекрывали вход третьему. [Focused fix PASS](evidence/tests-W8-arrival-fix-playmode.json)
+и [112/112 финальная регрессия](evidence/tests-W8-retry-playmode.json) включают
+18 настоящих маршрутов из базы, load/cancel/error/Restart, virtual touch и Audio.
+Сценарий шести simultaneous attackers на одной точке не заявляется проверенным.
+В [5 повторённых планах](evidence/W8-retry-sustained-plans.csv) фланг дал
+естественную Victory 45:15,5 за 58,5 игровых секунд; остальные дали Defeat.
+
+Main не включает post processing. В обоих RendererData удалена только ссылка
+postProcessData, которая заставляла URP создавать неиспользуемые post passes.
+[Game View 1280×720](evidence/W8-renderer.png) осмотрен;
+[63/63 EditMode](evidence/tests-W8-final-editmode.json).
+Вывод об исчезновении Android shader notices требует актуального device log.
+
+Final APK и его embedded content описаны в начале отчёта. Сборка incremental;
+побочные Input System preloadedAssets восстановлены через API.
+
+В первом fresh public clone (`0b2badb`) 63/63 EditMode прошли; PlayMode дал
+107/112. Пять legacy-тестов ждали 600 кадров, которых headless Editor достигал
+раньше нужного времени движения. Исправление `acbd9bf` сохраняет physical/HP/LOS
+assertions, ждёт до 10 игровых секунд: [focused 25/25](evidence/clean-clone-W8-focused-retry.json),
+[full 112/112](evidence/clean-clone-W8-full-retry.json), [ADR-008](../adr/008-game-time-in-navigation-tests.md).
+Clone импортирован с пустой project Library; системный UPM cache использован.
+Первый import изменил derived URP global settings, tests создали CSV; рабочее
+дерево clone после Unity не названо чистым, его status сохранён в отчёте.
+
+По отзыву пользователя в `0ae98c8` изменена одна координата общего Unit.prefab:
+SelectionRing Y −0,98 → −0,7. [Bounds всех ролей](evidence/W8-selection-visibility.txt):
+минимальный зазор над RelayCaptureArea 0,109 м. [Настоящий Game View](evidence/W8-selection-visible.png)
+осмотрен. Технический visual fixture ставил реальные prefabs на узлы при
+замороженной сцене; это проверка видимости, а не игровой победы/захвата.
+После изменения: focused 18 routes, затем полные 63/112 из `0ae98c8`,
+[10 Main restarts](evidence/W8-selection-final-main-restarts.csv),
+[полные партии](evidence/W8-selection-final-main-matches.csv),
+[пять планов](evidence/W8-selection-final-sustained-plans.csv). В повторе split-pressure
+дал естественную Victory 45:31,8 за 90,8 игровых секунд; hold-then-flank —
+Defeat 44,4:45 за 91,5 с. Ранее исходы этих планов отличались: реальные NavMesh
+траектории не являются детерминированной гарантией победы.
+
+Фактическая диагностика Android на предыдущем APK `6091B57B…376F`:
+
+| Серия | Результат и границы | Evidence |
+| --- | --- | --- |
+| Первая | 600 с, только 132/395 foreground samples из-за выключения/блокировки экрана; частичная | [JSON](evidence/W8-android-performance-partial.json), [samples](evidence/W8-android-performance-partial.csv) |
+| Вторая | 601,034 с, 398/398 foreground, 18 029 frames, средний 29,86 FPS; median frame 33,338 мс, P95 49,995 мс; CPU 34,94% одного ядра | [JSON](evidence/W8-android-performance-foreground.json), [samples](evidence/W8-android-performance-foreground.csv) |
+
+Вторая серия преимущественно измеряла экран результата, **не 10 минут активных
+повторных партий**. PSS 237 130 → 217 591 KiB, max 237 130 KiB; это ограниченное
+наблюдение, не доказательство отсутствия утечек при respawn/Restart.
+Mono GC allocations и GPU time недоступны без подключённого Unity Profiler;
+данные Android ART не подставляются вместо Mono. [Экран установленной игры](evidence/W8-android-launch.png)
+осмотрен перед добавлением в Git.
+
+[Исходный baseline APK](evidence/W8-baseline-native-probe.json), без Addressables,
+также выводит один `ClassNotFoundException … AssetPackManager`, otherUnhandledErrors=0.
+[Отфильтрованный diagnostic](evidence/W8-baseline-native-probe-log.txt) показывает
+тот же probe Unity; вывод о его существовании до интеграции — сравнение с baseline,
+а не утверждение об устранении. Финальный native log ещё не собран.
+Native missing-key Exit injection на Android не выполнялась; Editor negative
+Retry/Exit сценарии прошли. Повторный offline helper остановился при чтении размеров
+экрана, WiFi/mobile data восстановлены в finally; offline PASS не записан.
+
+`Tools/measure-android.ps1` подготовлен для 600 с own SurfaceView/CPU/PSS/RSS с
+автоматическим нажатием существующей кнопки результата. PowerShell parsing и
+fail-fast guard при отсутствии устройства проверены; фактическая запись этим
+скриптом пока **BLOCKED_DEVICE**. Счётчик фиксирует обнаруженные restart taps;
+автоматическая нагрузка не заменяет человека. Требуется сохранить raw frames,
+просмотреть реальные result screenshots вне Git и проверить foreground.
+
+## W9 — документы и сохранность истории
+
+Русский [README](../../README.md), [8 ADR](../adr/),
+[фактические licenses/notices](../THIRD_PARTY_NOTICES.md),
+[11 практических упражнений с существующими SHA](STUDY_WALKTHROUGH.md).
+Root LICENSE отсутствует; новая лицензия основного проекта не назначалась.
+Primitives/SFX собственные, third-party licenses скопированы из установленных
+пакетов, Gitleaks — из официального release. AI-участие не скрыто.
+
+По отдельному явному разрешению очищены опубликованные author/committer и
+локальные paths; 79/79 коммитов, даты/сообщения/топология и весь код сохранены.
+[Privacy audit](PRIVACY_AUDIT.md), [проверка публикации](evidence/privacy-history-published.json),
+[Gitleaks всей истории 0 findings](evidence/privacy-gitleaks-clean-history.json).
+Рабочее дерево не заменялось; полный проверенный Git/LFS backup находится вне Git.
+Чужие clones/forks/внешние кеши операция не стирает. Дальнейшие push/APK/release
+требуют отдельного разрешения. Последние evidence/docs-коммиты остаются локальными.
+
+Final G9 audit будет отражать фактические clean clone/device/performance результаты;
+открытые проверки нельзя закрыть одной документационной галочкой.
