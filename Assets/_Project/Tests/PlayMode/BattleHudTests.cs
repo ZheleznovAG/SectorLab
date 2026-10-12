@@ -116,6 +116,42 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator HeaderShowsWorkingIncomeAndItsLossDuringContestAndPause()
+        {
+            Unit tank = lifecycle.Slots[0].Unit, enemy = lifecycle.Slots[4].Unit;
+            Vector3 center = battle.Relays[0].transform.position;
+            Assert.That(tank.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(center), Is.True);
+            battle.AdvanceSimulation(5.1);
+            hud.Refresh();
+            Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+1 очк/с"));
+            Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("приносит очки"));
+            Assert.That(enemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(center + Vector3.right * 0.8f), Is.True);
+            battle.AdvanceSimulation(0.1);
+            hud.Refresh();
+            Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+0 очк/с"));
+            Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("эффект остановлен"));
+            battle.SetPaused(true);
+            hud.Refresh();
+            Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("ПАУЗА"));
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator RepairCardShowsTheHealingEffectWhenAnOwnerOccupiesIt()
+        {
+            Unit tank = lifecycle.Slots[0].Unit;
+            int damaged = tank.Health.Max - 40;
+            tank.Health.TakeDamage(40);
+            Assert.That(tank.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(battle.Relays[2].transform.position), Is.True);
+            battle.AdvanceSimulation(6.1);
+            hud.Refresh();
+            Assert.That(tank.Health.Current, Is.GreaterThan(damaged));
+            Assert.That(Field<Text[]>(hud, "relayLabels")[2].text, Does.Contain("+6 HP/с").And.Contain("ремонтирует"));
+            Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+0 очк/с"));
+            yield return null;
+        }
+
+        [UnityTest]
         public IEnumerator SafeAreaKeepsHudResultButtonsAndArenaInsideSimulatedNotchInsets()
         {
             var safe = hud.GetComponentInParent<SafeAreaLayout>();
@@ -158,6 +194,9 @@ namespace SectorLab.Tests
             Assert.That(commander.Selected, Is.Null);
             Assert.That(Camera.main.rect.yMin, Is.GreaterThan(0));
             Assert.That(Camera.main.rect.yMax, Is.LessThan(1));
+            Vector3[] corners = new Vector3[4];
+            ((RectTransform)hud.transform.Find("Relays")).GetWorldCorners(corners);
+            Assert.That(Camera.main.pixelRect.yMax, Is.LessThanOrEqualTo(corners[0].y), "Arena must end below relay controls.");
         }
     }
 }

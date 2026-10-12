@@ -44,7 +44,7 @@ namespace SectorLab.Editor
             if (existing != null) Object.DestroyImmediate(existing.gameObject); // Only this generated UI subtree.
             var root = Rect("MatchHUD", safe, Vector2.zero, Vector2.one);
             var hud = root.gameObject.AddComponent<BattleHud>();
-            var top = Panel("TopBar", root, new Vector2(0, 1), Vector2.one, 140, true);
+            var top = Panel("TopBar", root, new Vector2(0, 1), Vector2.one, BattleHud.TopBarHeight, true);
             Label("Brand", top, new Vector2(0.015f, 0.52f), new Vector2(0.25f, 0.97f), "SECTORLAB / RELAY SKIRMISH", 24, TextAnchor.MiddleLeft);
             var blue = Label("PlayerScore", top, new Vector2(0.25f, 0.3f), new Vector2(0.47f, 0.95f), "СИНИЕ  0", 48, TextAnchor.MiddleRight);
             blue.color = new Color(0.32f, 0.68f, 1);
@@ -53,8 +53,8 @@ namespace SectorLab.Editor
             var time = Label("Timer", top, new Vector2(0.34f, 0), new Vector2(0.66f, 0.35f), "03:00 • до 45 очков", 26, TextAnchor.MiddleCenter);
             var pause = Button("Pause", top, new Vector2(0.80f, 0.22f), new Vector2(0.985f, 0.85f), "Пауза", 30);
             var help = Button("Help", top, new Vector2(0.015f, 0.04f), new Vector2(0.15f, 0.43f), "Как играть", 22);
-            var objectives = Panel("Relays", root, new Vector2(0, 1), Vector2.one, 85, true);
-            objectives.anchoredPosition = new Vector2(0, -140);
+            var objectives = Panel("Relays", root, new Vector2(0, 1), Vector2.one, BattleHud.RelayBarHeight, true);
+            objectives.anchoredPosition = new Vector2(0, -BattleHud.TopBarHeight);
             var relays = new Button[3]; var relayLabels = new Text[3];
             var units = new Button[3]; var unitLabels = new Text[3];
             for (int i = 0; i < 3; i++)
@@ -62,7 +62,7 @@ namespace SectorLab.Editor
                 relays[i] = Button("Relay" + i, objectives, new Vector2(i / 3f + 0.01f, 0.07f), new Vector2((i + 1) / 3f - 0.01f, 0.93f), "Узел", 27);
                 relayLabels[i] = relays[i].GetComponentInChildren<Text>();
             }
-            var bottom = Panel("Squad", root, Vector2.zero, new Vector2(1, 0), 175, false);
+            var bottom = Panel("Squad", root, Vector2.zero, new Vector2(1, 0), BattleHud.SquadBarHeight, false);
             var selected = Label("Selection", bottom, new Vector2(0.02f, 0.67f), new Vector2(0.98f, 0.98f), "", 25, TextAnchor.MiddleCenter);
             for (int i = 0; i < 3; i++)
             {
@@ -104,6 +104,7 @@ namespace SectorLab.Editor
             restart.GetComponentInChildren<Text>().fontSize = 36;
             panel.transform.SetAsLastSibling();
             ConfigureAudio(battle, root);
+            ApplyCompactHeader(root);
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             Debug.Log("Main HUD now displays match scores/time, objective state, role HP/respawn and selection.");
@@ -118,6 +119,43 @@ namespace SectorLab.Editor
             var hud = Object.FindFirstObjectByType<BattleHud>();
             ConfigureAudio(Object.FindFirstObjectByType<BattleController>(), hud.GetComponent<RectTransform>());
             EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+        }
+
+        [MenuItem("SectorLab/Compact existing Main header")]
+        public static void CompactMainHeader()
+        {
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (EditorApplication.isPlaying || scene.path != "Assets/_Project/Scenes/Main.unity" || scene.isDirty)
+                throw new System.InvalidOperationException("Open saved Main outside Play Mode.");
+            var root = Object.FindFirstObjectByType<BattleHud>().GetComponent<RectTransform>();
+            ApplyCompactHeader(root);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+        }
+
+        private static void ApplyCompactHeader(RectTransform root)
+        {
+            var top = (RectTransform)root.Find("TopBar");
+            top.sizeDelta = new Vector2(0, BattleHud.TopBarHeight);
+            top.Find("Brand").gameObject.SetActive(false);
+            HeaderItem(top, "Help", 0.01f, 0.125f, 24);
+            HeaderItem(top, "Mute", 0.135f, 0.25f, 24);
+            HeaderItem(top, "PlayerScore", 0.26f, 0.42f, 32);
+            HeaderItem(top, "Timer", 0.43f, 0.56f, 34);
+            HeaderItem(top, "EnemyScore", 0.57f, 0.775f, 32);
+            HeaderItem(top, "Pause", 0.79f, 0.99f, 28);
+            var objectives = (RectTransform)root.Find("Relays");
+            objectives.sizeDelta = new Vector2(0, BattleHud.RelayBarHeight);
+            objectives.anchoredPosition = new Vector2(0, -BattleHud.TopBarHeight);
+        }
+
+        private static void HeaderItem(RectTransform top, string name, float left, float right, int fontSize)
+        {
+            var rect = (RectTransform)top.Find(name);
+            Fit(rect, new Vector2(left, 0.07f), new Vector2(right, 0.93f));
+            var text = rect.GetComponentInChildren<Text>();
+            text.alignment = TextAnchor.MiddleCenter;
+            text.fontSize = text.resizeTextMaxSize = fontSize;
         }
 
         private static void ConfigureAudio(BattleController battle, RectTransform root)

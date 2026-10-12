@@ -10,6 +10,10 @@ namespace SectorLab.Presentation
 {
     public sealed class BattleHud : MonoBehaviour
     {
+        public const float TopBarHeight = 84;
+        public const float RelayBarHeight = 72;
+        public const float SquadBarHeight = 175;
+        public const float ArenaPadding = 16;
         [SerializeField] private BattleController battle;
         [SerializeField] private UnitLifecycle lifecycle;
         [SerializeField] private UnitCommander commander;
@@ -22,6 +26,7 @@ namespace SectorLab.Presentation
         private readonly int[] relayKeys = { int.MinValue, int.MinValue, int.MinValue };
         private readonly int[] unitKeys = { int.MinValue, int.MinValue, int.MinValue };
         private int shownPlayer = -1, shownEnemy = -1, shownSeconds = -1, selectedHp = -1;
+        private double shownPlayerRate = -1, shownEnemyRate = -1;
         private Unit shownSelection;
         private float nextRefresh;
         private RectTransform layoutRoot;
@@ -56,13 +61,14 @@ namespace SectorLab.Presentation
             if (height <= 0 || (Mathf.Approximately(height, shownHeight) && area == shownArea)) return;
             shownHeight = height;
             shownArea = area;
-            // Keep the arena between the 225-unit header and the 175-unit squad panel.
+            // Scene setup uses these same panel dimensions.
             worldCamera.rect = ArenaViewport(area, height);
         }
 
         public static Rect ArenaViewport(Rect safeArea, float layoutHeight) =>
-            new Rect(safeArea.x, safeArea.y + safeArea.height * 191 / layoutHeight,
-                safeArea.width, safeArea.height * Mathf.Max(0.1f, 1 - 432 / layoutHeight));
+            new Rect(safeArea.x, safeArea.y + safeArea.height * (SquadBarHeight + ArenaPadding) / layoutHeight,
+                safeArea.width, safeArea.height * Mathf.Max(0.1f,
+                    1 - (TopBarHeight + RelayBarHeight + SquadBarHeight + 2 * ArenaPadding) / layoutHeight));
 
         private UnitSlotState PlayerSlot(int role)
         {
@@ -94,14 +100,30 @@ namespace SectorLab.Presentation
             int blue = (int)Math.Floor(battle.State.PlayerScore + MatchRules.Epsilon);
             int red = (int)Math.Floor(battle.State.EnemyScore + MatchRules.Epsilon);
             int seconds = (int)Math.Ceiling(battle.State.Clock.RemainingSeconds - MatchRules.Epsilon);
-            if (blue != shownPlayer) { shownPlayer = blue; playerScore.text = "СИНИЕ  " + blue; }
-            if (red != shownEnemy) { shownEnemy = red; enemyScore.text = red + "  КРАСНЫЕ"; }
+            bool running = lifecycle.IsReady && battle.State.IsRunning;
+            double blueRate = 0, redRate = 0;
+            for (int i = 0; i < battle.Relays.Count; i++)
+            {
+                RelayPoint relay = battle.Relays[i];
+                if (!running || relay.Config.kind != RelayKind.Score || relay.State.IsContested) continue;
+                if (relay.State.Owner == RelayOwner.Player) blueRate += relay.Config.scorePerSecond;
+                if (relay.State.Owner == RelayOwner.Enemy) redRate += relay.Config.scorePerSecond;
+            }
+            if (blue != shownPlayer || blueRate != shownPlayerRate)
+            {
+                shownPlayer = blue; shownPlayerRate = blueRate;
+                playerScore.text = $"ВЫ  {blue}/{MatchRules.ScoreLimit:0}\n+{blueRate:0.#} очк/с";
+            }
+            if (red != shownEnemy || redRate != shownEnemyRate)
+            {
+                shownEnemy = red; shownEnemyRate = redRate;
+                enemyScore.text = $"ВРАГ  {red}/{MatchRules.ScoreLimit:0}\n+{redRate:0.#} очк/с";
+            }
             if (seconds != shownSeconds)
             {
                 shownSeconds = seconds;
-                timer.text = $"{seconds / 60:00}:{seconds % 60:00}  •  до 45 очков";
+                timer.text = $"{seconds / 60:00}:{seconds % 60:00}";
             }
-            bool running = lifecycle.IsReady && battle.State.IsRunning;
             pauseButton.interactable = lifecycle.IsReady && (tutorial == null || !tutorial.IsShowing);
             string pause = battle.State.Clock.IsPaused ? "Продолжить" : "Пауза";
             if (pauseLabel.text != pause) pauseLabel.text = pause;
@@ -110,13 +132,21 @@ namespace SectorLab.Presentation
                 RelayPoint relay = battle.Relays[i];
                 int progress = (int)Math.Round(Math.Abs(relay.State.Progress) * 100);
                 int side = relay.State.Progress > MatchRules.Epsilon ? 1 : relay.State.Progress < -MatchRules.Epsilon ? 2 : 0;
-                int key = progress + side * 101 + (relay.State.IsContested ? 404 : 0);
+                bool repairOccupied = relay.Config.kind == RelayKind.Repair
+                    && (relay.State.Owner == RelayOwner.Player ? relay.PlayersPresent > 0 : relay.EnemiesPresent > 0);
+                int key = progress + side * 101 + (relay.State.IsContested ? 404 : 0)
+                    + (int)relay.State.Owner * 1000 + (repairOccupied ? 4000 : 0) + (running ? 8000 : 0);
                 if (relayKeys[i] != key)
                 {
                     relayKeys[i] = key;
-                    string owner = side == 1 ? "Синие" : side == 2 ? "Красные" : "Свободен";
-                    string effect = relay.Config.kind == RelayKind.Score ? $"+{relay.Config.scorePerSecond:0}/с" : $"+{relay.Config.healingPerSecond:0} HP/с";
-                    relayLabels[i].text = $"{relay.Config.label}  {effect}\n{owner} {progress}%{(relay.State.IsContested ? " • СПОР" : "")}";
+                    string owner = side == 1 ? "Ваш" : side == 2 ? "Враг" : "Свободен";
+                    string effect = relay.Config.kind == RelayKind.Score ? $"+{relay.Config.scorePerSecond:0.#} очк/с" : $"+{relay.Config.healingPerSecond:0.#} HP/с";
+                    string status = !running ? battle.State.Clock.IsPaused ? "ПАУЗА" : "Бой окончен"
+                        : relay.State.IsContested ? "СПОР · эффект остановлен"
+                        : relay.State.Owner == RelayOwner.Neutral ? progress == 0 ? $"Свободен · захват {relay.Config.captureSeconds:0.#} с" : $"{owner} · захват {progress}%"
+                        : relay.Config.kind == RelayKind.Score ? owner + " · приносит очки"
+                        : repairOccupied ? owner + " · ремонтирует" : owner + " · ждёт бойца";
+                    relayLabels[i].text = $"{relay.Config.label}  {effect}\n{status}";
                     relayButtons[i].GetComponent<Image>().color = relay.State.IsContested ? new Color(0.56f, 0.42f, 0.10f)
                         : side == 1 ? Blue : side == 2 ? Red : Neutral;
                 }
