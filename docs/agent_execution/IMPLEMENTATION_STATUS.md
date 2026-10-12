@@ -4,13 +4,18 @@
 
 ## Где остановились
 
+12.10.2026: W7.1/W7.2 реализованы, кодовый checkpoint `29bce98`. W8 проверяет групповой вход в узлы, renderer, регрессию и APK кандидата 1.0.0. G7 требует человеческую партию; сейчас ADB не видит устройство. README,
+11 практических упражнений и notices обновляются параллельно доступным W8 проверкам. Точный HEAD — `git rev-parse HEAD`. [Аудит приватности](PRIVACY_AUDIT.md)
+очистил текущее дерево и защитил новые коммиты; в опубликованной истории остаются
+личные метаданные автора и пути. Изолированная очищенная копия проверена,
+замена опубликованной истории ожидает отдельного разрешения; push не выполнялся.
+
+## Исходный аудит W0 (11.10.2026, историческое состояние)
+
 Исходный HEAD: `1c8754d8cca20bb342c6770c0985b4f14be27fa3` (`docs: record R5 progress`),
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя игровая задача — **W6.4b / G6 PASS**. Перед W7.1 по запросу пользователя
-выполнен [аудит приватности](PRIVACY_AUDIT.md): текущие отчёты очищены, в опубликованной
-истории остаются личные метаданные автора и пути профиля; решение об истории отдельно.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -85,8 +90,8 @@ diff; другие настройки проекта не затронуты.
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
 | W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик; остаётся человеческий плейтест |
-| W8 / G8 | TODO | Финальная регрессия, локальный content+APK, Android/профилирование |
-| W9 / G9 | TODO | Финальный README, ADR, лицензии, evidence и учебная карта |
+| W8 / G8 | IN_PROGRESS | Регрессия после исправления группового подхода, локальный content+APK; Android сейчас недоступен |
+| W9 / G9 | IN_PROGRESS | README, ADR, лицензии и 11 упражнений подготовлены; финальный evidence/audit после W8 |
 
 ## Реестр требований (baseline и текущие изменения)
 
@@ -99,45 +104,45 @@ diff; другие настройки проекта не затронуты.
 | FR-001 | PARTIAL | Сетевой службы нет; запуск APK офлайн не проверен / W8 |
 | FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
 | FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
-| FR-004 | BASELINE_PASS | Click и virtual Touchscreen выбирают/двигают юнита / W6 |
+| FR-004 | PASS | Mouse/virtual touch и HUD выбирают/двигают реальные units; UI/drag/pinch не выдают случайный приказ / W6 |
 | FR-005 | BASELINE_PASS | Атака/дальность/LOS/погоня проверены текущей регрессией |
 | FR-006 | PASS | Release tap/drag/pinch/cancel/UI tests, bounded camera; пользователь подтвердил swipe/pinch на телефоне W6-G6 |
 | FR-007 | PASS | A/B Score и C Repair с отдельными RelayConfig в Main; 18/18 NavMesh approaches доступны |
 | FR-008 | PASS | RelayState и RelayPoint: 5/10 с, contest, пустой прогресс, смерть, пауза/finish, цвет/проценты проверены |
 | FR-009 | PASS | A/B дают 1 очко/с каждый; пустое владение, contest/neutralize/pause, порог в одном тике проверены |
 | FR-010 | PASS | Health.Heal и C: 6 HP/с обеим сторонам, Max, fractional buffer, смерть/уход/contest/pause/finish проверены |
-| FR-011 | PASS | MatchRules и BattleController: 45 очков/180 с/Draw; начисление от узлов подключается в W2 |
-| FR-012 | PARTIAL | Игровые часы/пауза реализованы и проверены; кнопка и таймер HUD — W6 |
+| FR-011 | PASS | MatchRules/BattleController: 45 очков/180 с/Draw и реальный доход A/B; scripted Main outcomes / W1–W7 |
+| FR-012 | PASS | MatchClock, pause HUD, frozen capture/heal/AI/respawn/attack, первый готовый выстрел ждёт Resume / W5–W7 |
 | FR-013 | PASS | Main: все роли обеих команд, 10 игровых с, full HP, без дублей; pause и blocked base / W5.5 |
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
 | FR-015 | PASS | HUD очков/времени/узлов/HP/respawn/выбора и pause: W6.3, 103 PlayMode; Player и форматы проверяются G6 |
-| FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
+| FR-016 | PASS | Result/Restart останавливают ввод/бой/AI, отменяют pending respawn, не создают поздних units / W3–W7 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
 | FR-018 | PARTIAL | Реальные shot/capture/result SFX, mute/сохранение/cleanup, 110 PlayMode и Main; прослушивание Android после W7.2 |
 | FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
-| FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
+| FR-021 | PASS | VContainer 1.19.0: scene scope Clock/State/Battle/AI/factory/provider/lifecycle, missing registrations обнаруживаются / W4–W5 |
 | FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
 | FR-023 | PASS | Шесть локальных prefabs, реальные loads/releases; bundles/catalog внутри Android APK, бой на телефоне / G5 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
-| FR-025 | PARTIAL | 35 старых коммитов сохранены; fixes W0 раздельно зафиксированы, история v1.0 будет продолжена |
-| FR-026 | TODO | Метрики баланса не реализованы; SHOULD / W7 |
+| FR-025 | PASS | Старые коммиты сохранены, W0–W7 имеют реальные локальные feature/fix/test/docs коммиты; без push/подмены истории |
+| FR-026 | PASS | CSV настоящих Main: время, счёт, outcome, приказы, смерти и захваты обеих команд; без сервера / W7.2 |
 | FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
 | FR-028 | PASS | Настоящий Game View 3 форматов; simulated safe insets и Android Insets API: HUD целиком виден на телефоне, включая возврат фокуса |
-| NFR-001 | BASELINE_PASS | Unity Editor соответствует 6000.6.4f1 |
+| NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
 | NFR-002 | NOT_RUN | Чистый checkout не запускался / W8 |
-| NFR-003 | PARTIAL | Компиляция и текущие тесты проходят; полная v1.0 ещё отсутствует |
-| NFR-004 | BASELINE_PASS | 9+38 тестов текущего прототипа прошли; повторять при новых механиках |
-| NFR-005 | PARTIAL | MatchClock/MatchState и фиксированные тики проверены при 15/30/60/144 FPS; подключить узлы/AI/respawn |
-| NFR-006 | TODO | Async lifecycle ещё предстоит / W5 |
-| NFR-007 | PARTIAL | Дубликатов meta GUID не найдено; новые ссылки проверять по мере работы |
-| NFR-008 | NOT_RUN | Телефон подключён; APK на нём не запускался / W8 |
+| NFR-003 | PARTIAL | Editor компиляция без ошибок; final regression/Android candidate ещё проверяются, native probe не назван устранённым |
+| NFR-004 | PARTIAL | 63 EditMode PASS и W7.2 112 PlayMode PASS; W8 выявил групповой затор, исправление проходит final regression |
+| NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
+| NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
+| NFR-007 | PASS | Repository gate: 150 уникальных GUID, .meta и связи; настоящий Main/prefab loads проходят |
+| NFR-008 | PARTIAL ||
 | NFR-009 | NOT_RUN | FPS/память на Android не измерены; SHOULD / W8 |
 | NFR-010 | PARTIAL | Full-history secret scan: 0; текущие личные пути скрыты, pre-commit privacy gate и noreply включены; в опубликованной истории остаются имя/почта/пути, см. PRIVACY_AUDIT |
-| NFR-011 | PARTIAL | THIRD_PARTY_NOTICES.md и MIT VContainer добавлены; последующие пакеты / W5, W9 |
-| NFR-012 | PARTIAL | Сохраняется существующая структура; реальные интеграции ещё впереди |
-| NFR-013 | PARTIAL | Русский README baseline есть; его v1.0 разделы ещё впереди / W9 |
-| NFR-014 | BASELINE_PASS | История и файлы сохранены; destructive commands/push не применялись |
+| NFR-011 | PASS | Происхождение primitives/SFX и реальные licenses/notices пакетов сохранены; лицензию основного проекта агент не назначал |
+| NFR-012 | PASS | Один composition root, реальные async/ownership; прежние Unit/Movement/Attack/Commander сохранены, без лишней инфраструктуры |
+| NFR-013 | PASS | Русский README: правила, жесты, demo, setup/build/tests, диаграмма, ограничения и ссылки на evidence |
+| NFR-014 | PASS ||
 
 ## Решения и следующий шаг
 
