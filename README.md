@@ -83,6 +83,11 @@ powershell -NoProfile -File Tools/build-android.ps1 -Task local-v1
 `docs/agent_execution/evidence/android-build-local-v1.json`.
 Это локальный APK со штатной debug-подписью Unity; публичный релиз и собственная подпись отдельно не выполнялись.
 
+Последняя локальная сборка: `Builds/Android/SectorLab-W8-selection.apk`, 1.0.0,
+32 302 469 bytes, checkpoint `0ae98c8`. [Build report](docs/agent_execution/evidence/android-build-W8-selection.json)
+содержит SHA-256 и состав встроенного контента. Выделение поднято над поверхностью
+узлов по отзыву пользователя; подтверждение исправления на телефоне ещё открыто.
+
 ## Проверки
 
 **Window → General → Test Runner**: сборки `SectorLab.Tests.EditMode` и
@@ -96,6 +101,18 @@ powershell -NoProfile -File Tools/verify-unity.ps1 -Mode PlayMode -Task local-ch
 powershell -NoProfile -File Tools/check-repository.ps1
 powershell -NoProfile -File Tools/check-gates.ps1 -RequireComplete
 ```
+
+При подключённом Android с открытой игрой:
+
+```powershell
+powershell -NoProfile -File Tools/measure-android.ps1 -Task device-workload -DurationSeconds 600 -AutoRestart -ApkPath Builds/Android/SectorLab-W8-selection.apk
+```
+
+Это SurfaceFlinger FPS, CPU одного процесса и PSS/RSS, с нажатием существующей
+кнопки «Ещё бой» по экрану результата. Скрипт сохраняет JSON, samples и raw frame
+timestamps; Mono GC/GPU time без Unity Profiler недоступны. Имя Task должно быть
+новым. Пока проверены синтаксис и отказ при отсутствии устройства; полный запуск
+скрипта на телефоне ещё не выполнен. Он не заменяет человеческую партию.
 
 Последняя команда намеренно возвращает ошибку, пока gates не завершены.
 Privacy gate требует Gitleaks 8.30.1 в PATH или локальном каталоге инструмента;
@@ -137,14 +154,19 @@ reference до физического окончания IO и затем осв
 Mobile использует простые материалы и жёсткие тени. Стартовые пакеты Unity
 сохранены; версия Editor не обновлялась.
 
-Ранние APK реально запускались на Redmi Note 8 Pro / Android 11; жесты и
-системные отступы проверены. Финальный APK, офлайн-старт, производительность
-и человеческий playtest имеют отдельные статусы в отчёте. В прежних Android логах
-есть нативный AssetPackManager probe и сообщения неиспользуемых URP shaders;
-их анализ не подменяется утверждением об отсутствии всех ошибок.
+63/63 EditMode и 112/112 PlayMode прошли на `0ae98c8`; публичный fresh clone
+также проверен после исправления пяти legacy frame waits. Ранние APK реально
+запускались на Redmi Note 8 Pro / Android 11; жесты и системные отступы проверены.
+Финальный offline/device test и активный 10-минутный workload — BLOCKED_DEVICE
+до повторного подключения телефона. Реальная foreground серия дала 29,86 FPS
+преимущественно на экране результата; её границы записаны в отчёте.
+Native AssetPackManager probe воспроизводится и в исходном APK без Addressables;
+он не назван устранённым. Финальное прослушивание mute/отзыв по игре ещё открыты.
 
 Личные метаданные старой Git-истории удалены из опубликованной main по явному
 разрешению владельца; код, ассеты, сообщения и даты всех 79 коммитов сохранены.
 [Аудит и карта SHA](docs/agent_execution/PRIVACY_AUDIT.md) объясняют соответствие
 старых доказательств новой истории. Новые коммиты защищены privacy gate.
 APK/release не публиковались, лицензия основного проекта не менялась.
+Последние исправления и отчёты сохранены локально; опубликованная `origin/main`
+остаётся на `0b2badb`. Обычный push отдельно не выполнялся.

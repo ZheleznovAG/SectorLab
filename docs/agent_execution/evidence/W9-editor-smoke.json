@@ -1,0 +1,28 @@
+﻿{
+    "sampledAtUtc":  "2026-10-12T04:25:57.2106606Z",
+    "activeScene":  "Assets/_Project/Scenes/Main.unity",
+    "lifecycle":  "Closed",
+    "units":  3,
+    "playerAlive":  1,
+    "enemyAlive":  2,
+    "playerScore":  17.999999999999989,
+    "enemyScore":  45.0,
+    "outcome":  "Defeat",
+    "paused":  false,
+    "limitation":  "Ordinary Editor smoke with real commander API orders; not a human match or Android verification. No warp, score, HP or AI changes.",
+    "sourceHead":  "2f1bfd6bdb0d8227b1b9f8c28fc8f6297b34159e",
+    "consoleGroundTruth":  {
+                               "sampledUtc":  "2026-10-12T04:25:58.5016323Z",
+                               "compilationFailed":  false,
+                               "compiling":  false,
+                               "consoleErrors":  0
+                           },
+    "priorExpectedTestExceptions":  [
+                                        "MatchState was not injected",
+                                        "Enemy tactics requires injected BattleController"
+                                    ],
+    "diagnosticHandling":  "Prior negative-test exceptions matched explicit LogAssert.Expect; inspected before clearing console for ordinary Main smoke",
+    "screenshot":  "W9-editor-smoke.png",
+    "screenshotFileWrittenAtUtc":  "2026-10-12T04:24:59.0801135Z",
+    "screenshotObservation":  "Earlier live frame: 18:32 and remaining 02:24. Telemetry was collected later at natural Defeat 18:45; these are different times."
+}

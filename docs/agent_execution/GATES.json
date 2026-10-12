@@ -1,6 +1,6 @@
 {
   "gates": [
-    { "id": "G0", "status": "PASS", "commit": "7becd8a", "checks": [
+    { "id": "G0", "status": "PASS", "commit": "fdbcb03", "checks": [
       { "name": "Original history and dirty files preserved", "status": "PASS", "evidence": "EVIDENCE_REPORT.md" },
       { "name": "Baseline EditMode", "status": "PASS", "evidence": "evidence/tests-editmode-1c8754d-dirty-20261011.json" },
       { "name": "Baseline PlayMode", "status": "PASS", "evidence": "evidence/tests-playmode-1c8754d-dirty-20261011.json" },
@@ -60,15 +60,16 @@
       { "name": "Public clean clone headless full regression", "status": "PASS", "evidence": "evidence/clean-clone-W8-full-retry.json" },
       { "name": "Final Android APK and embedded local content", "status": "PASS", "evidence": "evidence/android-build-W8-selection.json" },
       { "name": "Baseline optional native startup probe comparison", "status": "PASS", "evidence": "evidence/W8-baseline-native-probe.json" },
+      { "name": "Ordinary final Editor Main smoke has no runtime errors", "status": "PASS", "evidence": "evidence/W9-editor-smoke.json" },
       { "name": "Final APK offline launch and native log", "status": "BLOCKED", "evidence": "evidence/W8-device-acceptance-pending.json" },
       { "name": "Active ten-minute device workload; GC/GPU limits documented", "status": "BLOCKED", "evidence": "evidence/W8-android-performance-foreground.json" }
     ] },
-    { "id": "G9", "status": "IN_PROGRESS", "checks": [
+    { "id": "G9", "status": "PASS", "checks": [
       { "name": "Russian README and actual architecture/limits", "status": "PASS", "evidence": "../../README.md" },
       { "name": "Package licenses and original asset provenance", "status": "PASS", "evidence": "../THIRD_PARTY_NOTICES.md" },
       { "name": "Study exercises point to reachable rewritten commits", "status": "PASS", "evidence": "STUDY_WALKTHROUGH.md" },
       { "name": "Verified authorized privacy history replacement", "status": "PASS", "evidence": "evidence/privacy-history-published.json" },
-      { "name": "Final documentation links and Git audit", "status": "IN_PROGRESS", "evidence": "EVIDENCE_REPORT.md" }
+      { "name": "Final documentation links, unchanged Unity inputs and Git audit", "status": "PASS", "evidence": "evidence/final-audit-W9.json" }
     ] }
   ]
 }
