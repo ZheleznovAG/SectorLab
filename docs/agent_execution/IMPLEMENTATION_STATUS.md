@@ -84,7 +84,7 @@ diff; другие настройки проекта не затронуты.
 | W4 / G4 | PASS | VContainer 1.19.0, настоящий scope Clock/State/Battle/AI; 72/72 PlayMode, missing injection и reload |
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
-| W7 / G7 | TODO | Звук/mute, обратная связь и плейтесты |
+| W7 / G7 | IN_PROGRESS | W7.1: SFX/mute и 110 PlayMode PASS; далее симметрия арены, баланс и человеческий плейтест |
 | W8 / G8 | TODO | Финальная регрессия, локальный content+APK, Android/профилирование |
 | W9 / G9 | TODO | Финальный README, ADR, лицензии, evidence и учебная карта |
 
@@ -113,7 +113,7 @@ diff; другие настройки проекта не затронуты.
 | FR-015 | PASS | HUD очков/времени/узлов/HP/respawn/выбора и pause: W6.3, 103 PlayMode; Player и форматы проверяются G6 |
 | FR-016 | PARTIAL | Result/Restart, остановка ввода/движения/боя проверены; будущие AI/respawn должны соблюдать тот же исход / W3–W5 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
-| FR-018 | TODO | Звук/mute отсутствуют / W7 |
+| FR-018 | PARTIAL | Реальные shot/capture/result SFX, mute/сохранение/cleanup, 110 PlayMode и Main; прослушивание Android после W7.2 |
 | FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
 | FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
 | FR-021 | PASS | VContainer 1.19.0: scope в Main, Clock/State/Battle/AI injection; missing registrations обнаруживаются; factory добавляется в W5 |
@@ -659,3 +659,30 @@ W0.6 / NFR-010: по отдельному запросу пользовател�
 хранятся вне Git в локальном каталоге приложения; thread ID и account usage не
 публикуются. Отдельная Windows scheduled task запускает CLI resume этого чата;
 это не результат игрового теста и не доказательство завершения W7–W9.
+
+W7.1 / FR-018, FR-012: MatchAudio на существующем HUD слушает UnitAttack.Fired,
+Battle.Ticked (смена владельца) и Battle.Finished. Четыре оригинальных коротких
+процедурных тона создаются один раз на сцену; AudioSource и AudioClip принадлежат
+сцене, подписки снимаются и clips уничтожаются при teardown. Никаких внешних
+ассетов/сервисов. Mute прекращает звук, сохраняет preference и переживает Restart.
+В Main добавлены только Mute button и audio component/source (316 YAML-строк);
+HudSceneSetup умеет добавить audio без пересоздания остального UI. Обучение
+объясняет жесты русскими словами вместо Drag/pinch.
+
+Устранён реальный pause edge case: первое готовое оружие раньше могло стрелять
+при Time.timeScale=0. UnitAttack теперь пропускает paused/dead update; тест проверяет
+отсутствие damage/Fired на паузе и настоящий удар после Resume.
+**110/110 PlayMode PASS**, Failed/Skipped/Inconclusive=0
+([JSON](evidence/tests-W7.1-playmode.json)), прежние 4 партии и 10 restarts PASS.
+Audio tests проверяют реальный выстрел/capture/Victory, AudioSource playback,
+кнопку mute, настоящий Restart и отсутствие оставшихся clips/handles/units.
+
+Отдельный Main Play Mode: [наблюдение](evidence/W7.1-audio-observation.json),
+44 shot events, 3 captures, 1 natural Defeat result; lifecycle уже Closed,
+поэтому ready=false честно сохранён. Mute UI callback дважды переключён, исходный
+Audio preference восстановлен. [Результат](evidence/W7.1-audio.png) и
+[новый матч на паузе](evidence/W7.1-feedback.png) просмотрены, true Game View 1280×720.
+Это Editor/API проверка звука, не прослушивание человеком на Android; FR-018 PARTIAL
+до обновлённого APK. [Четыре прежние стратегии](evidence/W7.1-main-matches.csv)
+снова дали Defeat (33,5–51,3 игровых секунд), что требует проверки старой асимметрии
+стартов и тактик в W7.2. G7 IN_PROGRESS; пользовательский полный playtest ещё не заявлен.

@@ -47,7 +47,10 @@
       { "name": "Android navigation insets do not cover HUD", "status": "PASS", "evidence": "evidence/W6-G6-insets-device.json" },
       { "name": "Android Insets API player build", "status": "PASS", "evidence": "evidence/android-build-W6-G6-insets-retry.json" }
     ] },
-    { "id": "G7", "status": "TODO", "checks": [] },
+    { "id": "G7", "status": "IN_PROGRESS", "checks": [
+      { "name": "Actual shot capture result audio and persistent mute", "status": "PASS", "evidence": "evidence/tests-W7.1-playmode.json" },
+      { "name": "Human understandable full match playtest", "status": "TODO", "evidence": "" }
+    ] },
     { "id": "G8", "status": "TODO", "checks": [] },
     { "id": "G9", "status": "TODO", "checks": [] }
   ]

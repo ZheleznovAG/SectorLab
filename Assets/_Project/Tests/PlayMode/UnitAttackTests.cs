@@ -14,6 +14,7 @@ namespace SectorLab.Tests
         [SetUp]
         public void SetUp()
         {
+            Time.timeScale = 1;
             root = new GameObject("TestRoot");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -22,6 +23,7 @@ namespace SectorLab.Tests
         [TearDown]
         public void TearDown()
         {
+            Time.timeScale = 1;
             Object.DestroyImmediate(root);
         }
 
@@ -67,6 +69,24 @@ namespace SectorLab.Tests
             a.Attack.SetTarget(b);
 
             Assert.That(a.Attack.Target, Is.Null);
+        }
+
+        [UnityTest]
+        public IEnumerator PausedFirstShotWaitsForResumeWithoutDamageOrSound()
+        {
+            Unit attacker = CreateUnit(Team.Player, Vector3.zero);
+            Unit enemy = CreateUnit(Team.Enemy, Vector3.right);
+            int fired = 0;
+            attacker.Attack.Fired += _ => fired++;
+            attacker.Attack.SetTarget(enemy);
+            Time.timeScale = 0;
+            yield return null; yield return null;
+            Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max));
+            Assert.That(fired, Is.Zero);
+            Time.timeScale = 1;
+            yield return null;
+            Assert.That(enemy.Health.Current, Is.LessThan(enemy.Health.Max));
+            Assert.That(fired, Is.EqualTo(1));
         }
 
         [UnityTest]
