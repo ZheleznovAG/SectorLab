@@ -1,0 +1,8 @@
+﻿{
+    "sourceHead":  "4a06ae39a128c1abeb50bfa1cf9aca624d3d8fc2",
+    "checkedAtUtc":  "2026-10-12T17:07:23.7690547Z",
+    "scriptSha256":  "BA36F17A0066F6C2284D03C6C84780C8A652449462E9541D02174CBA2FDE7423",
+    "syntax":  "PASS",
+    "status":  "PASS_REFUSED_SYSTEM_FOCUS",
+    "note":  "Actual connected phone had keyguard focus; no input or screenshot was performed by measure-android."
+}

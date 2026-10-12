@@ -1,6 +1,6 @@
 # SectorLab v1.0 — фактический статус реализации
 
-Последнее обновление: 2026-10-12; исходный аудит: 2026-10-11.
+Последнее обновление: 2026-10-13; исходный аудит: 2026-10-11.
 Рабочий каталог: `[LOCAL_USER_HOME]\Projects\SectorLab`.
 
 ## Продолжение после внешнего аудита 12.10.2026
@@ -97,6 +97,21 @@ failed/skipped/inconclusive=0; включает новые UX/audio случаи
 [Снимок обратной связи](evidence/A5-feedback-16x9.png) просмотрен: подпись своего
 захвата A, +1 очк/с, назначение/характеристики выбранного Tank и видимый маркер. Для этого отдельного visual fixture настоящий Tank размещён на A и пройдены
 ticks capture; это не естественная победа или человеческая партия.
+
+A5 зафиксирован в `4a06ae3`. A6 / FR-020/024, NFR-008/009: свежая
+[Android-сборка](evidence/android-build-A5-feedback.json) Succeeded, 0 errors,
+1 Pipeline warning, 136,141 с. APK `Builds/Android/SectorLab-A5-feedback.apk`,
+32 311 981 bytes, SHA-256
+`8257C9B1EC109272A3027CD6146BE9790657D085651B856983225797E3A8BE83`. Все 296 входных hash полных PlayMode tests совпали со входами сборки. После сборки восстановлен прежний пустой `preloadedAssets`; ProjectSettings не
+изменены. [Установка на Android/Android 11](evidence/A6-phone-install.json) с `-r`
+и повторным извлечением APK: hash совпал, данные приложения сохранены, процесс жив. Скриншоты системного экрана не делались. В measurement helper учтены `ResumedActivity` без `m` и полный `dumpsys window`;
+одной resumed Activity недостаточно для разрешения taps/capture. Исправлен также
+Windows PowerShell stderr успешного adb pull. Это изменения проверки, не игры. Прежняя настройка удержания экрана восстановлена в `0` и прочитана
+обратно; это зафиксировано в install evidence. Первый временный launch helper неверно разделил package/activity в массиве аргументов;
+исправлен, установки/хеши не потеряны. G7/G8 IN_PROGRESS: новый APK установлен, но игровые/слуховые и device workload
+проверки нельзя подменять фактом установки. Обычные wakeup,
+`wm dismiss-keyguard`, закрытие шторки и повторный запуск своей Activity не сняли
+блокировку. PIN/пароль не вводились.
 
 ## Где остановились до внешнего аудита
 
@@ -250,7 +265,7 @@ diff; другие настройки проекта не затронуты.
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
 | W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик; остаётся человеческий плейтест |
-| W8 / G8 |||
+| W8 / G8 | IN_PROGRESS ||
 | W9 / G9 | PASS | README/8 ADR/notices/11 упражнений, проверка локальных ссылок/JSON/учебных SHA и неизменности Unity-входов; ограничения G7/G8 явно перечислены |
 
 ## Реестр требований (baseline и текущие изменения)
@@ -261,7 +276,7 @@ diff; другие настройки проекта не затронуты.
 
 | ID | Статус | Фактическая граница / пакет завершения |
 | --- | --- | --- |
-| FR-001 |||
+| FR-001 | IN_PROGRESS ||
 | FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
 | FR-003 | PASS | Явный UnitStats.role; шесть слотов проходят spawn/respawn даже после переименования профилей; неверная role вызывает cleanup / A1 |
 | FR-004 | PASS | Mouse/virtual touch и HUD выбирают/двигают units; выбранный боец получает приказ занять узел даже под союзником; Main и touch regression / A2 |
@@ -275,12 +290,12 @@ diff; другие настройки проекта не затронуты.
 | FR-012 | PASS | MatchClock, pause HUD, frozen capture/heal/AI/respawn/attack, первый готовый выстрел ждёт Resume / W5–W7 |
 | FR-013 | PASS | Main: все роли обеих команд, 10 игровых с, full HP, без дублей; pause, blocked base и переименованные профили / A1 |
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
-| FR-015 | PASS | HUD очков/времени/узлов/HP/respawn/выбора и pause: W6.3, 103 PlayMode; Player и форматы проверяются G6 |
+| FR-015 | PASS | A3–A5: компактный HUD, фактический доход/эффекты, назначения ролей и notice; три формата Game View и full regression |
 | FR-016 | PASS | Result/Restart останавливают ввод/бой/AI, отменяют pending respawn, не создают поздних units / W3–W7 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
-| FR-018 | PASS | Четыре SFX и mute persistence прошли PlayMode; пользователь сообщил «чето слышно».|
+| FR-018 | PASS | A5: семь scene-owned clips; разные оружие/захват/предупреждения, mute/Restart/cleanup в full tests; слуховая проверка нового APK открыта в G7 |
 | FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
-| FR-020 | PASS | APK 1.0.0 из 0ae98c8, SHA-256 654CB514…1237DA, локальные bundles/catalog; Tools/build-android.ps1 воспроизводит процедуру |
+| FR-020 | PASS | Свежий APK 1.0.0 из 4a06ae3, SHA-256 8257C9B1…A8BE83, локальные bundles/catalog; сборка 0 errors, установленный hash совпал / A6 |
 | FR-021 | PASS | VContainer 1.19.0: scene scope Clock/State/Battle/AI/factory/provider/lifecycle, missing registrations обнаруживаются / W4–W5 |
 | FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
 | FR-023 | PASS | Шесть локальных prefabs, реальные loads/releases; bundles/catalog внутри Android APK, бой на телефоне / G5 |
@@ -292,12 +307,12 @@ diff; другие настройки проекта не затронуты.
 | NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
 | NFR-002 | PASS | Публичный clone без Library/Temp/Builds: import и 63/63 EditMode; после исправления frame waits 112/112 headless PlayMode, реальные Main/AA loads/cleanup |
 | NFR-003 | PARTIAL | Editor compilation/регрессия PASS; baseline native probe подтверждён, отсутствие новых ошибок на финальном Android требует завершённого device log |
-| NFR-004 | PASS | A1: 63/63 EditMode и 114/114 PlayMode, failed/skipped/inconclusive=0; source inputHashes сохранены |
+| NFR-004 | PASS | A5: 63/63 EditMode и 124/124 PlayMode, failed/skipped/inconclusive=0; все 296 input hashes совпали со сборкой |
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
 | NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
 | NFR-007 | PASS | Repository gate проверяет уникальность GUID, .meta и связи; настоящий Main/prefab loads проходят |
-| NFR-008 || APK 0ae98c8 ранее установлен на телефоне; сейчас ADB видит только эмулятор, v1 там падает на native SEVL/SIGILL.|
-| NFR-009 || Две ограниченные реальные серии: foreground 601 с ~29,86 FPS; активные повторные партии на новом APK не измерены. Mono GC/GPU time недоступны |
+| NFR-008 | IN_PROGRESS ||
+| NFR-009 | IN_PROGRESS | A5 повторные партии ещё не измерены; прежние 601 с ~29,86 FPS в основном на результате не закрывают это требование. Mono GC/GPU time недоступны |
 | NFR-010 | PASS | Опубликованные refs/main очищены; Gitleaks всей доступной истории 0 findings, metadata noreply, privacy gate активен; частный backup исключён из Git |
 | NFR-011 | PASS | Происхождение primitives/SFX и реальные licenses/notices пакетов сохранены; лицензию основного проекта агент не назначал |
 | NFR-012 | PASS | Один composition root, реальные async/ownership; прежние Unit/Movement/Attack/Commander сохранены, без лишней инфраструктуры |

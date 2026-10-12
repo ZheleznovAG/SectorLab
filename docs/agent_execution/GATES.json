@@ -1,79 +1,360 @@
 {
   "gates": [
-    { "id": "G0", "status": "PASS", "commit": "fdbcb03", "checks": [
-      { "name": "Original history and dirty files preserved", "status": "PASS", "evidence": "EVIDENCE_REPORT.md" },
-      { "name": "Baseline EditMode", "status": "PASS", "evidence": "evidence/tests-editmode-1c8754d-dirty-20261011.json" },
-      { "name": "Baseline PlayMode", "status": "PASS", "evidence": "evidence/tests-playmode-1c8754d-dirty-20261011.json" },
-      { "name": "Baseline Android build", "status": "PASS", "evidence": "evidence/android-build-1c8754d-dirty-20261011.json" }
-    ] },
-    { "id": "G1", "status": "PASS", "checks": [
-      { "name": "Score/time/clock EditMode", "status": "PASS", "evidence": "evidence/tests-W1.3-editmode.json" },
-      { "name": "Pause/outcome/world PlayMode", "status": "PASS", "evidence": "evidence/tests-W1.3-playmode.json" },
-      { "name": "Main pause/result/restart observation", "status": "PASS", "evidence": "evidence/W1-main-observations.txt" },
-      { "name": "Main visible result and score", "status": "PASS", "evidence": "evidence/W1-main-victory.png" }
-    ] },
-    { "id": "G2", "status": "PASS", "checks": [
-      { "name": "Capture and healing pure rules", "status": "PASS", "evidence": "evidence/tests-W2.5-editmode.json" },
-      { "name": "Tap/occupancy/score/repair/pause regression", "status": "PASS", "evidence": "evidence/tests-W2.5-playmode.json" },
-      { "name": "Main reachable A/B/C", "status": "PASS", "evidence": "evidence/W2-scene-check.txt" },
-      { "name": "Main real relay score outcome", "status": "PASS", "evidence": "evidence/W2-score-check.txt" },
-      { "name": "Main repair/contest/pause", "status": "PASS", "evidence": "evidence/W2-heal-check.txt" },
-      { "name": "Main contested repair visual", "status": "PASS", "evidence": "evidence/W2-heal-contested.png" }
-    ] },
-    { "id": "G3", "status": "PASS", "checks": [
-      { "name": "Stable AI priorities", "status": "PASS", "evidence": "evidence/tests-W3.1-editmode.json" },
-      { "name": "Main matches, movement/combat and cleanup", "status": "PASS", "evidence": "evidence/tests-W3.3-playmode.json" },
-      { "name": "Four tactical plans and observed outcomes", "status": "PASS", "evidence": "evidence/W3-main-matches.csv" },
-      { "name": "Main actual AI match screenshot", "status": "PASS", "evidence": "evidence/W3-main-ai.png" }
-    ] },
-    { "id": "G4", "status": "PASS", "checks": [
-      { "name": "Pinned VContainer resolves and compiles", "status": "PASS", "evidence": "evidence/tests-W4.1-editmode.json" },
-      { "name": "Main scoped services, reload and missing registrations", "status": "PASS", "evidence": "evidence/tests-W4.3-playmode.json" },
-      { "name": "Real Main matches after dependency migration", "status": "PASS", "evidence": "evidence/W4.3-main-matches.csv" }
-    ] },
-    { "id": "G5", "status": "PASS", "checks": [
-      { "name": "Addressables package compile", "status": "PASS", "evidence": "evidence/tests-W5.1-editmode.json" },
-      { "name": "Respawn pure countdown and roster", "status": "PASS", "evidence": "evidence/tests-W5.5a-editmode.json" },
-      { "name": "Main async lifecycle, failures and cleanup", "status": "PASS", "evidence": "evidence/tests-W5.6-playmode.json" },
-      { "name": "Ten real Main restarts", "status": "PASS", "evidence": "evidence/W5.6-main-restarts.csv" },
-      { "name": "Android APK with embedded local bundles and catalog", "status": "PASS", "evidence": "evidence/android-build-W5-G5.json" },
-      { "name": "Actual Android install and unit gameplay observation", "status": "PASS", "evidence": "evidence/W5-G5-device.json" }
-    ] },
-    { "id": "G6", "status": "PASS", "checks": [
-      { "name": "Virtual gestures, HUD, safe insets, tutorial and regression", "status": "PASS", "evidence": "evidence/tests-W6.5-playmode.json" },
-      { "name": "True render sizes and HUD/result button bounds", "status": "PASS", "evidence": "evidence/W6.4-layout-observations.txt" },
-      { "name": "First-launch tutorial visual check", "status": "PASS", "evidence": "evidence/W6.5-tutorial-1.png" },
-      { "name": "Updated APK mobile gestures confirmed by user", "status": "PASS", "evidence": "evidence/W6-G6-device.json" },
-      { "name": "Android navigation insets do not cover HUD", "status": "PASS", "evidence": "evidence/W6-G6-insets-device.json" },
-      { "name": "Android Insets API player build", "status": "PASS", "evidence": "evidence/android-build-W6-G6-insets-retry.json" }
-    ] },
-    { "id": "G7", "status": "IN_PROGRESS", "checks": [
-      { "name": "Actual shot capture result audio and persistent mute", "status": "PASS", "evidence": "evidence/tests-W7.1-playmode.json" },
-      { "name": "Mirrored physical spawns and eighteen real relay routes", "status": "PASS", "evidence": "evidence/tests-W7.2-final-playmode.json" },
-      { "name": "Five sustained plans including a natural repair-rotation victory", "status": "PASS", "evidence": "evidence/W7.2-tactics-sustained-plans.csv" },
-      { "name": "Selection marker stays above all relay surfaces", "status": "PASS", "evidence": "evidence/W8-selection-visibility.txt" },
-      { "name": "Human full match and final Android marker/mute feedback", "status": "IN_PROGRESS", "evidence": "evidence/W8-device-acceptance-pending.json" }
-    ] },
-    { "id": "G8", "status": "BLOCKED", "checks": [
-      { "name": "Final selection checkpoint EditMode 63/63", "status": "PASS", "evidence": "evidence/tests-W8-selection-final-editmode.json" },
-      { "name": "Final selection checkpoint PlayMode 112/112", "status": "PASS", "evidence": "evidence/tests-W8-selection-final-playmode.json" },
-      { "name": "Public clean clone headless full regression", "status": "PASS", "evidence": "evidence/clean-clone-W8-full-retry.json" },
-      { "name": "Final Android APK and embedded local content", "status": "PASS", "evidence": "evidence/android-build-W8-selection.json" },
-      { "name": "Baseline optional native startup probe comparison", "status": "PASS", "evidence": "evidence/W8-baseline-native-probe.json" },
-      { "name": "Ordinary final Editor Main smoke has no runtime errors", "status": "PASS", "evidence": "evidence/W9-editor-smoke.json" },
-      { "name": "Resumed current-code EditMode 63/63", "status": "PASS", "evidence": "evidence/tests-W8-emulator-resume-editmode.json" },
-      { "name": "Resumed current-code PlayMode 112/112", "status": "PASS", "evidence": "evidence/tests-W8-emulator-resume-playmode.json" },
-      { "name": "Resumed ordinary Main natural result and zero console errors", "status": "PASS", "evidence": "evidence/W8-emulator-resume-editor.json" },
-      { "name": "Final v1 APK emulator launch: native SEVL SIGILL", "status": "FAIL", "evidence": "evidence/W8-emulator-resume.json" },
-      { "name": "Final APK offline launch and native log", "status": "BLOCKED", "evidence": "evidence/W8-device-acceptance-pending.json" },
-      { "name": "Active ten-minute device workload; GC/GPU limits documented", "status": "BLOCKED", "evidence": "evidence/W8-android-performance-foreground.json" }
-    ] },
-    { "id": "G9", "status": "PASS", "checks": [
-      { "name": "Russian README and actual architecture/limits", "status": "PASS", "evidence": "../../README.md" },
-      { "name": "Package licenses and original asset provenance", "status": "PASS", "evidence": "../THIRD_PARTY_NOTICES.md" },
-      { "name": "Study exercises point to reachable rewritten commits", "status": "PASS", "evidence": "STUDY_WALKTHROUGH.md" },
-      { "name": "Verified authorized privacy history replacement", "status": "PASS", "evidence": "evidence/privacy-history-published.json" },
-      { "name": "Final documentation links, unchanged Unity inputs and Git audit", "status": "PASS", "evidence": "evidence/final-audit-W9.json" }
-    ] }
+    {
+      "id": "G0",
+      "status": "PASS",
+      "commit": "fdbcb03",
+      "checks": [
+        {
+          "name": "Original history and dirty files preserved",
+          "status": "PASS",
+          "evidence": "EVIDENCE_REPORT.md"
+        },
+        {
+          "name": "Baseline EditMode",
+          "status": "PASS",
+          "evidence": "evidence/tests-editmode-1c8754d-dirty-20261011.json"
+        },
+        {
+          "name": "Baseline PlayMode",
+          "status": "PASS",
+          "evidence": "evidence/tests-playmode-1c8754d-dirty-20261011.json"
+        },
+        {
+          "name": "Baseline Android build",
+          "status": "PASS",
+          "evidence": "evidence/android-build-1c8754d-dirty-20261011.json"
+        }
+      ]
+    },
+    {
+      "id": "G1",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Score/time/clock EditMode",
+          "status": "PASS",
+          "evidence": "evidence/tests-W1.3-editmode.json"
+        },
+        {
+          "name": "Pause/outcome/world PlayMode",
+          "status": "PASS",
+          "evidence": "evidence/tests-W1.3-playmode.json"
+        },
+        {
+          "name": "Main pause/result/restart observation",
+          "status": "PASS",
+          "evidence": "evidence/W1-main-observations.txt"
+        },
+        {
+          "name": "Main visible result and score",
+          "status": "PASS",
+          "evidence": "evidence/W1-main-victory.png"
+        }
+      ]
+    },
+    {
+      "id": "G2",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Capture and healing pure rules",
+          "status": "PASS",
+          "evidence": "evidence/tests-W2.5-editmode.json"
+        },
+        {
+          "name": "Tap/occupancy/score/repair/pause regression",
+          "status": "PASS",
+          "evidence": "evidence/tests-W2.5-playmode.json"
+        },
+        {
+          "name": "Main reachable A/B/C",
+          "status": "PASS",
+          "evidence": "evidence/W2-scene-check.txt"
+        },
+        {
+          "name": "Main real relay score outcome",
+          "status": "PASS",
+          "evidence": "evidence/W2-score-check.txt"
+        },
+        {
+          "name": "Main repair/contest/pause",
+          "status": "PASS",
+          "evidence": "evidence/W2-heal-check.txt"
+        },
+        {
+          "name": "Main contested repair visual",
+          "status": "PASS",
+          "evidence": "evidence/W2-heal-contested.png"
+        }
+      ]
+    },
+    {
+      "id": "G3",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Stable AI priorities",
+          "status": "PASS",
+          "evidence": "evidence/tests-W3.1-editmode.json"
+        },
+        {
+          "name": "Main matches, movement/combat and cleanup",
+          "status": "PASS",
+          "evidence": "evidence/tests-W3.3-playmode.json"
+        },
+        {
+          "name": "Four tactical plans and observed outcomes",
+          "status": "PASS",
+          "evidence": "evidence/W3-main-matches.csv"
+        },
+        {
+          "name": "Main actual AI match screenshot",
+          "status": "PASS",
+          "evidence": "evidence/W3-main-ai.png"
+        }
+      ]
+    },
+    {
+      "id": "G4",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Pinned VContainer resolves and compiles",
+          "status": "PASS",
+          "evidence": "evidence/tests-W4.1-editmode.json"
+        },
+        {
+          "name": "Main scoped services, reload and missing registrations",
+          "status": "PASS",
+          "evidence": "evidence/tests-W4.3-playmode.json"
+        },
+        {
+          "name": "Real Main matches after dependency migration",
+          "status": "PASS",
+          "evidence": "evidence/W4.3-main-matches.csv"
+        }
+      ]
+    },
+    {
+      "id": "G5",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Addressables package compile",
+          "status": "PASS",
+          "evidence": "evidence/tests-W5.1-editmode.json"
+        },
+        {
+          "name": "Respawn pure countdown and roster",
+          "status": "PASS",
+          "evidence": "evidence/tests-W5.5a-editmode.json"
+        },
+        {
+          "name": "Main async lifecycle, failures and cleanup",
+          "status": "PASS",
+          "evidence": "evidence/tests-W5.6-playmode.json"
+        },
+        {
+          "name": "Ten real Main restarts",
+          "status": "PASS",
+          "evidence": "evidence/W5.6-main-restarts.csv"
+        },
+        {
+          "name": "Android APK with embedded local bundles and catalog",
+          "status": "PASS",
+          "evidence": "evidence/android-build-W5-G5.json"
+        },
+        {
+          "name": "Actual Android install and unit gameplay observation",
+          "status": "PASS",
+          "evidence": "evidence/W5-G5-device.json"
+        }
+      ]
+    },
+    {
+      "id": "G6",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Virtual gestures, HUD, safe insets, tutorial and regression",
+          "status": "PASS",
+          "evidence": "evidence/tests-W6.5-playmode.json"
+        },
+        {
+          "name": "True render sizes and HUD/result button bounds",
+          "status": "PASS",
+          "evidence": "evidence/W6.4-layout-observations.txt"
+        },
+        {
+          "name": "First-launch tutorial visual check",
+          "status": "PASS",
+          "evidence": "evidence/W6.5-tutorial-1.png"
+        },
+        {
+          "name": "Updated APK mobile gestures confirmed by user",
+          "status": "PASS",
+          "evidence": "evidence/W6-G6-device.json"
+        },
+        {
+          "name": "Android navigation insets do not cover HUD",
+          "status": "PASS",
+          "evidence": "evidence/W6-G6-insets-device.json"
+        },
+        {
+          "name": "Android Insets API player build",
+          "status": "PASS",
+          "evidence": "evidence/android-build-W6-G6-insets-retry.json"
+        }
+      ]
+    },
+    {
+      "id": "G7",
+      "status": "IN_PROGRESS",
+      "checks": [
+        {
+          "name": "Actual shot capture result audio and persistent mute",
+          "status": "PASS",
+          "evidence": "evidence/tests-W7.1-playmode.json"
+        },
+        {
+          "name": "Mirrored physical spawns and eighteen real relay routes",
+          "status": "PASS",
+          "evidence": "evidence/tests-W7.2-final-playmode.json"
+        },
+        {
+          "name": "Five sustained plans including a natural repair-rotation victory",
+          "status": "PASS",
+          "evidence": "evidence/W7.2-tactics-sustained-plans.csv"
+        },
+        {
+          "name": "Selection marker stays above all relay surfaces",
+          "status": "PASS",
+          "evidence": "evidence/W8-selection-visibility.txt"
+        },
+        {
+          "name": "Human full match and final Android marker/mute feedback",
+          "status": "IN_PROGRESS",
+          "evidence": "evidence/W8-device-acceptance-pending.json"
+        }
+      ]
+    },
+    {
+      "id": "G8",
+      "status": "IN_PROGRESS",
+      "checks": [
+        {
+          "name": "Final selection checkpoint EditMode 63/63",
+          "status": "PASS",
+          "evidence": "evidence/tests-W8-selection-final-editmode.json"
+        },
+        {
+          "name": "Final selection checkpoint PlayMode 112/112",
+          "status": "PASS",
+          "evidence": "evidence/tests-W8-selection-final-playmode.json"
+        },
+        {
+          "name": "Public clean clone headless full regression",
+          "status": "PASS",
+          "evidence": "evidence/clean-clone-W8-full-retry.json"
+        },
+        {
+          "name": "Final Android APK and embedded local content",
+          "status": "PASS",
+          "evidence": "evidence/android-build-W8-selection.json"
+        },
+        {
+          "name": "Baseline optional native startup probe comparison",
+          "status": "PASS",
+          "evidence": "evidence/W8-baseline-native-probe.json"
+        },
+        {
+          "name": "Ordinary final Editor Main smoke has no runtime errors",
+          "status": "PASS",
+          "evidence": "evidence/W9-editor-smoke.json"
+        },
+        {
+          "name": "Resumed current-code EditMode 63/63",
+          "status": "PASS",
+          "evidence": "evidence/tests-W8-emulator-resume-editmode.json"
+        },
+        {
+          "name": "Resumed current-code PlayMode 112/112",
+          "status": "PASS",
+          "evidence": "evidence/tests-W8-emulator-resume-playmode.json"
+        },
+        {
+          "name": "Resumed ordinary Main natural result and zero console errors",
+          "status": "PASS",
+          "evidence": "evidence/W8-emulator-resume-editor.json"
+        },
+        {
+          "name": "Final v1 APK emulator launch: native SEVL SIGILL",
+          "status": "FAIL",
+          "evidence": "evidence/W8-emulator-resume.json"
+        },
+        {
+          "name": "Feedback iteration EditMode 63/63",
+          "status": "PASS",
+          "evidence": "evidence/tests-A5-full-editmode.json"
+        },
+        {
+          "name": "Feedback iteration PlayMode 124/124",
+          "status": "PASS",
+          "evidence": "evidence/tests-A5-full-playmode.json"
+        },
+        {
+          "name": "Feedback APK with local content built without errors",
+          "status": "PASS",
+          "evidence": "evidence/android-build-A5-feedback.json"
+        },
+        {
+          "name": "Physical phone install and extracted APK hash",
+          "status": "PASS",
+          "evidence": "evidence/A6-phone-install.json"
+        },
+        {
+          "name": "[REDACTED_PERSONAL_NOTE]",
+          "status": "IN_PROGRESS",
+          "evidence": "evidence/A6-phone-install.json"
+        },
+        {
+          "name": "Visible gameplay and active ten-minute physical workload",
+          "status": "IN_PROGRESS",
+          "evidence": "evidence/A6-phone-install.json"
+        }
+      ]
+    },
+    {
+      "id": "G9",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "Russian README and actual architecture/limits",
+          "status": "PASS",
+          "evidence": "../../README.md"
+        },
+        {
+          "name": "Package licenses and original asset provenance",
+          "status": "PASS",
+          "evidence": "../THIRD_PARTY_NOTICES.md"
+        },
+        {
+          "name": "Study exercises point to reachable rewritten commits",
+          "status": "PASS",
+          "evidence": "STUDY_WALKTHROUGH.md"
+        },
+        {
+          "name": "Verified authorized privacy history replacement",
+          "status": "PASS",
+          "evidence": "evidence/privacy-history-published.json"
+        },
+        {
+          "name": "Final documentation links, unchanged Unity inputs and Git audit",
+          "status": "PASS",
+          "evidence": "evidence/final-audit-W9.json"
+        }
+      ]
+    }
   ]
 }

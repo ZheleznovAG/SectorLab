@@ -1,5 +1,28 @@
 # Доказательства SectorLab v1.0
 
+## Текущее продолжение после аудита, 12–13.10.2026
+
+Игровой код зафиксирован в `4a06ae3`: исправлены роли независимо от имён ассетов,
+приказ через союзника на узле, компактный HUD/доход/эффекты, назначения ролей,
+разные SFX и подписи событий. Коммиты `8cb198a`, `ee23f2b`, `909c48a`,
+`468e6db`, `dc16223`, `4a06ae3` — настоящие локальные изменения, push не выполнялся.
+
+**63/63 EditMode, 124/124 PlayMode PASS**, failed/skipped/inconclusive=0:
+[EditMode](evidence/tests-A5-full-editmode.json),
+[PlayMode](evidence/tests-A5-full-playmode.json). Все 296 input hashes совпадают
+с [сборкой APK](evidence/android-build-A5-feedback.json).
+[Обычная Main](evidence/A5-editor-smoke.json): Ready, 6 units, consoleErrors=0;
+[обратная связь](evidence/A5-feedback-16x9.png) просмотрена в отдельном capture fixture.
+
+APK `Builds/Android/SectorLab-A5-feedback.apk`: **32 311 981 bytes**,
+SHA-256 `8257C9B1EC109272A3027CD6146BE9790657D085651B856983225797E3A8BE83`.
+0 build errors, 1 Pipeline warning. [Установленный APK](evidence/A6-phone-install.json)
+выгружен с физического Android / Android 11 и имеет тот же hash. На момент этого evidence процесс/Activity есть, системный keyguard закрывает
+видимую игру. G7/G8 IN_PROGRESS; **Release ready не заявляется**. Все ранние неудачные проверки
+сохранены и объяснены в [статусе](IMPLEMENTATION_STATUS.md).
+
+## Предыдущий checkpoint до аудита
+
 Текущее проверенное игровое состояние: **`0ae98c8`**, включая исправление
 SelectionRing. Повторная полная регрессия: **63/63 EditMode, 112/112 PlayMode**,
 failed/skipped/inconclusive = 0. [EditMode](evidence/tests-W8-selection-final-editmode.json),
