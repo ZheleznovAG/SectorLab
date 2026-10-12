@@ -5,18 +5,18 @@
 ## Где остановились
 
 12.10.2026: W7.1/W7.2 реализованы. W8 исправил вход тройки в узел и отключил
-неиспользуемые post effects; кодовый checkpoint `06cc168`. Регрессия: 63/63 EditMode и 112/112 PlayMode. APK кандидата 1.0.0 собран из этого
+неиспользуемые post effects; кодовый checkpoint `c0a13b3` (до очистки `06cc168`). Регрессия: 63/63 EditMode и 112/112 PlayMode. APK кандидата 1.0.0 собран из этого
 checkpoint: 32 302 473 bytes, SHA-256
 `6091B57B09BB4242CF48C9FDD518FE491E51CD878469466EDCD2C17BE1F6376F`,
 0 ошибок, 1 предупреждение Pipeline. [Build report](evidence/android-build-W8-v1-candidate.json). Временный Input System preloadedAssets после сборки восстановлен через PlayerSettings API;
 ProjectSettings совпадает с проверенным checkpoint. README, 11 практических упражнений и notices обновлены. Следующее: чистый clone,
 10-минутное измерение Android, offline/перезапуск и финальный evidence report. Точный HEAD — `git rev-parse HEAD`. [Аудит приватности](PRIVACY_AUDIT.md)
-очистил текущее дерево и защитил новые коммиты; в опубликованной истории остаются
-личные метаданные автора и пути. Изолированная очищенная копия проверена,
-12.10 пользователь явно разрешил очистку истории и `force-with-lease` как разовое
-исключение. Свежий кандидат подготавливается из последнего HEAD; публикация пока
-не выполнена. Исходные SHA доказательств сохраняются, соответствие будет записано
-в карте SHA; тесты не будут объявлены повторно выполненными только из-за rewrite.
+очистил опубликованную main по явному разовому разрешению пользователя:
+`0b2badb`, 79/79 коммитов, код/ассеты/даты/сообщения сохранены, Gitleaks всех refs
+с privacy rules — 0 findings. Частный backup Git/LFS сохранён вне репозитория.
+[Карта SHA](evidence/privacy-commit-map.txt) связывает исходные SHA в историческом
+журнале и evidence с доступными очищенными коммитами. Результаты, даты и входные
+хеши доказательств не заменяются. Другие push и публикация APK не разрешены.
 
 ## Исходный аудит W0 (11.10.2026, историческое состояние)
 
@@ -98,7 +98,7 @@ diff; другие настройки проекта не затронуты.
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
 | W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик; остаётся человеческий плейтест |
-| W8 / G8 | IN_PROGRESS | Регрессия после исправления группового подхода, локальный content+APK; Android сейчас недоступен |
+| W8 / G8 | IN_PROGRESS | 63/112 регрессия и APK 1.0.0 PASS; Android установлен, чистый public clone и 10 минут performance выполняются |
 | W9 / G9 | IN_PROGRESS | README, ADR, лицензии и 11 упражнений подготовлены; финальный evidence/audit после W8 |
 
 ## Реестр требований (baseline и текущие изменения)
@@ -113,7 +113,7 @@ diff; другие настройки проекта не затронуты.
 | FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
 | FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
 | FR-004 | PASS | Mouse/virtual touch и HUD выбирают/двигают реальные units; UI/drag/pinch не выдают случайный приказ / W6 |
-| FR-005 | BASELINE_PASS | Атака/дальность/LOS/погоня проверены текущей регрессией |
+| FR-005 | PASS | Атака/дальность/LOS/погоня проверены текущей регрессией 112/112 |
 | FR-006 | PASS | Release tap/drag/pinch/cancel/UI tests, bounded camera; пользователь подтвердил swipe/pinch на телефоне W6-G6 |
 | FR-007 | PASS | A/B Score и C Repair с отдельными RelayConfig в Main; 18/18 NavMesh approaches доступны |
 | FR-008 | PASS | RelayState и RelayPoint: 5/10 с, contest, пустой прогресс, смерть, пауза/finish, цвет/проценты проверены |
@@ -128,25 +128,25 @@ diff; другие настройки проекта не затронуты.
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
 | FR-018 | PARTIAL | Реальные shot/capture/result SFX, mute/сохранение/cleanup, 110 PlayMode и Main; прослушивание Android после W7.2 |
 | FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
-| FR-020 | PARTIAL | APK baseline пересобран; APK v1.0 ещё нет / W8 |
+| FR-020 | PASS | APK 1.0.0 из c0a13b3/исходного 06cc168 собран с локальными bundles/catalog; Tools/build-android.ps1 воспроизводит процедуру |
 | FR-021 | PASS | VContainer 1.19.0: scene scope Clock/State/Battle/AI/factory/provider/lifecycle, missing registrations обнаруживаются / W4–W5 |
 | FR-022 | PASS | UniTask используется для реальных prefab loads, pause wait и lifetime cancellation; Main late-result/restart проверен / W5.6 |
 | FR-023 | PASS | Шесть локальных prefabs, реальные loads/releases; bundles/catalog внутри Android APK, бой на телефоне / G5 |
 | FR-024 | PARTIAL | Реальные логи baseline сохранены; финальные gates впереди / W8–W9 |
-| FR-025 | PASS | Старые коммиты сохранены, W0–W7 имеют реальные локальные feature/fix/test/docs коммиты; без push/подмены истории |
+| FR-025 | PASS | 79 реальных атомарных коммитов сохранены; разовый privacy rewrite с разрешения меняет только личные paths/author metadata, см. карту SHA |
 | FR-026 | PASS | CSV настоящих Main: время, счёт, outcome, приказы, смерти и захваты обеих команд; без сервера / W7.2 |
 | FR-027 | PASS | Missing key после двух успешных loads: cleanup, остановка loading, Retry запускает Main; Exit callback без дублей / W5.6 |
 | FR-028 | PASS | Настоящий Game View 3 форматов; simulated safe insets и Android Insets API: HUD целиком виден на телефоне, включая возврат фокуса |
 | NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
-| NFR-002 | NOT_RUN | Чистый checkout не запускался / W8 |
+| NFR-002 | IN_PROGRESS | Публичный clone без Library/Temp/Builds, clean status и LFS fsck PASS; первое открытие и обе регрессии выполняются |
 | NFR-003 | PARTIAL | Editor компиляция без ошибок; final regression/Android candidate ещё проверяются, native probe не назван устранённым |
 | NFR-004 | PASS | W8: 63/63 EditMode и 112/112 PlayMode после группового исправления, failed/skipped/inconclusive=0; source inputHashes сохранены |
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
 | NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
 | NFR-007 | PASS | Repository gate: 150 уникальных GUID, .meta и связи; настоящий Main/prefab loads проходят |
-| NFR-008 | PARTIAL ||
-| NFR-009 | NOT_RUN | FPS/память на Android не измерены; SHOULD / W8 |
-| NFR-010 | PARTIAL | Full-history secret scan: 0; текущие личные пути скрыты, pre-commit privacy gate и noreply включены; в опубликованной истории остаются имя/почта/пути, см. PRIVACY_AUDIT |
+| NFR-008 | IN_PROGRESS | APK 1.0.0 установлен/запущен на Android / Android 11; human playtest и device regression выполняются |
+| NFR-009 | IN_PROGRESS | 10-минутный сбор SurfaceFlinger FPS, own process CPU и PSS/RSS на Android; Mono GC недоступен без подключённого Unity Profiler |
+| NFR-010 | PASS | Опубликованные refs/main очищены; Gitleaks всей доступной истории 0 findings, metadata noreply, privacy gate активен; частный backup исключён из Git |
 | NFR-011 | PASS | Происхождение primitives/SFX и реальные licenses/notices пакетов сохранены; лицензию основного проекта агент не назначал |
 | NFR-012 | PASS | Один composition root, реальные async/ownership; прежние Unit/Movement/Attack/Commander сохранены, без лишней инфраструктуры |
 | NFR-013 | PASS | Русский README: правила, жесты, demo, setup/build/tests, диаграмма, ограничения и ссылки на evidence |
