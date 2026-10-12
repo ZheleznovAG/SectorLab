@@ -22,6 +22,7 @@ namespace SectorLab.Player
 
         // The editor and some devices report dpi 0; 160 is Android's baseline density.
         private const float FallbackDpi = 160f;
+        private int unitLayerMask;
 
         public Unit Selected { get; private set; }
         public event System.Action<Vector2, Vector2> PanRequested;
@@ -38,6 +39,7 @@ namespace SectorLab.Player
         {
             if (viewCamera == null)
                 viewCamera = Camera.main;
+            unitLayerMask = LayerMask.GetMask("Units");
             SetMarkerVisible(false);
         }
 
@@ -146,10 +148,24 @@ namespace SectorLab.Player
             if (!isActiveAndEnabled || IsOverUi(screenPosition) || !viewCamera.pixelRect.Contains(screenPosition))
                 return;
             Ray ray = viewCamera.ScreenPointToRay(screenPosition);
-            bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask);
+            bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask, QueryTriggerInteraction.Ignore);
 
-            // Small units are hard to hit with a finger, so a near miss still counts.
             Unit unit = hasHit ? hit.collider.GetComponentInParent<Unit>() : null;
+            // A selected unit can join an occupied relay. Its trigger must not lose to
+            // an ally or the finger tolerance; a directly tapped enemy still means attack.
+            if (Selected != null && (unit == null || unit.Team == Team.Player)
+                && Physics.Raycast(ray, out RaycastHit relayHit, maxTapDistance,
+                    tapMask.value & ~unitLayerMask, QueryTriggerInteraction.Collide))
+            {
+                RelayPoint destination = relayHit.collider.GetComponentInParent<RelayPoint>();
+                if (destination != null)
+                {
+                    OrderSelectedToRelay(destination);
+                    return;
+                }
+            }
+
+            // Small units outside an explicit relay order remain easy to select.
             if (unit == null)
                 unit = FindUnitNear(screenPosition);
 

@@ -18,6 +18,7 @@ namespace SectorLab.Tests
         private Unit enemy;
         private UnitCommander commander;
         private Transform marker;
+        private SectorLab.Objectives.RelayConfig tapRelayConfig;
 
         public override void Setup()
         {
@@ -72,6 +73,7 @@ namespace SectorLab.Tests
             // Immediate: synchronous tests share a frame, and a deferred Destroy would leave
             // this test's colliders in the way of the next test's raycasts.
             Object.DestroyImmediate(root);
+            if (tapRelayConfig != null) Object.DestroyImmediate(tapRelayConfig);
             base.TearDown();
         }
 
@@ -128,6 +130,94 @@ namespace SectorLab.Tests
             relay.Simulate(5);
             Assert.That(relay.State.Owner, Is.EqualTo(SectorLab.Objectives.RelayOwner.Player));
             Object.DestroyImmediate(config);
+        }
+
+        [Test]
+        public void TapOnAllyInsideRelayOrdersSelectedUnitInsteadOfChangingSelection()
+        {
+            var relay = CreateTapRelay();
+            SetField(enemy, "team", Team.Player);
+            enemy.transform.position = relay.transform.position + Vector3.up;
+            Physics.SyncTransforms();
+            Assert.That(commander.SelectFriendly(unit), Is.True);
+
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+
+            Assert.That(commander.Selected, Is.SameAs(unit));
+            Assert.That(unit.Movement.IsMoving, Is.True);
+            Assert.That(Vector3.Distance(unit.Movement.Destination, relay.transform.position), Is.LessThan(0.2f));
+            Assert.That(marker.gameObject.activeSelf, Is.True);
+        }
+
+        private SectorLab.Objectives.RelayPoint CreateTapRelay()
+        {
+            var node = new GameObject("OccupiedRelay");
+            node.transform.SetParent(root.transform);
+            node.transform.position = new Vector3(0, 0, -2);
+            tapRelayConfig = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
+            var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
+            relay.Configure(tapRelayConfig);
+            var collider = node.AddComponent<SphereCollider>();
+            collider.radius = tapRelayConfig.radius;
+            collider.isTrigger = true;
+            return relay;
+        }
+
+        [Test]
+        public void AllyInsideRelayCanBeSelectedWhenNoUnitIsSelected()
+        {
+            var relay = CreateTapRelay();
+            SetField(enemy, "team", Team.Player);
+            enemy.transform.position = relay.transform.position + Vector3.up;
+            Physics.SyncTransforms();
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+            Assert.That(commander.Selected, Is.SameAs(enemy));
+            Assert.That(enemy.Movement.IsMoving, Is.False);
+        }
+
+        [Test]
+        public void DirectEnemyTapInsideRelayStillMeansAttack()
+        {
+            var relay = CreateTapRelay();
+            enemy.transform.position = relay.transform.position + Vector3.up;
+            Physics.SyncTransforms();
+            Assert.That(commander.SelectFriendly(unit), Is.True);
+            commander.HandleTap(ScreenPoint(enemy.transform.position));
+            Assert.That(commander.Selected, Is.SameAs(unit));
+            Assert.That(unit.Attack.Target, Is.SameAs(enemy));
+            Assert.That(marker.gameObject.activeSelf, Is.False);
+        }
+
+        [Test]
+        public void SolidCoverStillBlocksARelayOrder()
+        {
+            var relay = CreateTapRelay();
+            TestArena.CreateBlock(root.transform, relay.transform.position + Vector3.up * 4, new Vector3(3, 1, 3));
+            Physics.SyncTransforms();
+            Assert.That(commander.SelectFriendly(unit), Is.True);
+            commander.HandleTap(ScreenPoint(relay.transform.position));
+            Assert.That(commander.Selected, Is.SameAs(unit));
+            Assert.That(unit.Movement.IsMoving, Is.False);
+        }
+
+        [UnityTest]
+        public IEnumerator TouchOnOccupiedRelayIssuesOrderOnlyOnRelease()
+        {
+            var relay = CreateTapRelay();
+            SetField(enemy, "team", Team.Player);
+            enemy.transform.position = relay.transform.position + Vector3.up;
+            Physics.SyncTransforms();
+            Assert.That(commander.SelectFriendly(unit), Is.True);
+            var screen = InputSystem.AddDevice<Touchscreen>();
+            Vector2 tap = ScreenPoint(enemy.transform.position);
+            BeginTouch(1, tap, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(unit.Movement.IsMoving, Is.False);
+            EndTouch(1, tap, queueEventOnly: true, screen: screen);
+            yield return null;
+            Assert.That(commander.Selected, Is.SameAs(unit));
+            Assert.That(unit.Movement.IsMoving, Is.True);
+            Assert.That(marker.gameObject.activeSelf, Is.True);
         }
 
         [Test]
