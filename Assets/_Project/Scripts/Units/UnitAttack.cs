@@ -29,6 +29,7 @@ namespace SectorLab.Units
         public float Range => range;
         public int Damage => damage;
         public float Cooldown => cooldown;
+        public event System.Action<Unit> Fired;
 
         private void Awake()
         {
@@ -110,6 +111,9 @@ namespace SectorLab.Units
 
         private void Update()
         {
+            // A ready first shot must also wait while the match clock is paused.
+            if (!self.IsAlive || Time.timeScale <= 0f)
+                return;
             if (shotLine != null && shotLine.enabled && Time.time >= hideShotLineTime)
                 shotLine.enabled = false;
 
@@ -148,6 +152,7 @@ namespace SectorLab.Units
                 nextAttackTime = Time.time + cooldown;
                 ShowShotLine(Target.transform.position);
                 Target.Health.TakeDamage(damage);
+                Fired?.Invoke(self);
             }
         }
     }

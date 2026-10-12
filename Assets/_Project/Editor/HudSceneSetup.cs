@@ -103,9 +103,36 @@ namespace SectorLab.Editor
             Fit(restart.GetComponent<RectTransform>(), new Vector2(0.25f, 0.30f), new Vector2(0.75f, 0.40f));
             restart.GetComponentInChildren<Text>().fontSize = 36;
             panel.transform.SetAsLastSibling();
+            ConfigureAudio(battle, root);
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             Debug.Log("Main HUD now displays match scores/time, objective state, role HP/respawn and selection.");
+        }
+
+        [MenuItem("SectorLab/Add audio to existing Main HUD")]
+        public static void ConfigureMainAudio()
+        {
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (EditorApplication.isPlaying || scene.path != "Assets/_Project/Scenes/Main.unity")
+                throw new System.InvalidOperationException("Open Main outside Play Mode.");
+            var hud = Object.FindFirstObjectByType<BattleHud>();
+            ConfigureAudio(Object.FindFirstObjectByType<BattleController>(), hud.GetComponent<RectTransform>());
+            EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+        }
+
+        private static void ConfigureAudio(BattleController battle, RectTransform root)
+        {
+            font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            var top = root.Find("TopBar") as RectTransform;
+            var existing = top.Find("Mute");
+            var mute = existing != null ? existing.GetComponent<Button>() :
+                Button("Mute", top, new Vector2(0.16f, 0.04f), new Vector2(0.30f, 0.43f), "Звук: вкл", 22);
+            var audio = root.GetComponent<MatchAudio>();
+            if (audio == null) audio = root.gameObject.AddComponent<MatchAudio>();
+            var data = new SerializedObject(audio);
+            Set(data, "battle", battle); Set(data, "lifecycle", battle.GetComponent<UnitLifecycle>());
+            Set(data, "muteButton", mute); Set(data, "muteLabel", mute.GetComponentInChildren<Text>());
+            data.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void Set(SerializedObject data, string field, Object value) => data.FindProperty(field).objectReferenceValue = value;

@@ -1,0 +1,14 @@
+{
+  "screen": {
+    "width": 1280,
+    "height": 720
+  },
+  "ready": false,
+  "outcome": "Defeat",
+  "shots": 44,
+  "captures": 3,
+  "results": 1,
+  "muted": false,
+  "pause": true,
+  "note": "Actual Main Play Mode; Mute UI callback toggled twice. Not human hearing or Android SFX verification."
+}
