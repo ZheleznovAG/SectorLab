@@ -1,4 +1,5 @@
 {
+    "privacyRedaction": "Machine-local user directories redacted; original test/build results and source hashes unchanged.",
   "sourceHead": "1c8754d8cca20bb342c6770c0985b4f14be27fa3",
   "sourceState": "HEAD plus six existing dirty C# files; see EVIDENCE_REPORT.md",
   "command": "unity command --json --no-banner build --target Android --outputPath Builds/Android/SectorLab-baseline-1c8754d-20261011.apk --confirm true",

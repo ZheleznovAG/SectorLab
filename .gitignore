@@ -124,3 +124,14 @@ InitTestScene*.unity*
 # Local project handoff snapshots (may include .git and machine-local configuration)
 /SectorLab-for-ai-*.zip
 /SectorLab-with-git-*.zip
+
+# Private environment, signing material and local license files.
+.env
+.env.*
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+*.ulf

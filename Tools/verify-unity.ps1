@@ -5,6 +5,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
+. "$PSScriptRoot/evidence-privacy.ps1"
 
 function Invoke-Editor([string[]] $Arguments) {
     $connectionTimer = [Diagnostics.Stopwatch]::StartNew()
@@ -66,7 +67,8 @@ $record = [PSCustomObject]@{
     inputHashes = $inputHashes; response = $status
 }
 $logPath = 'docs/agent_execution/evidence/tests-' + $Task + '-' + $Mode.ToLowerInvariant() + '.json'
-$record | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $logPath -Encoding UTF8
+$record | Add-Member -NotePropertyName privacyRedaction -NotePropertyValue 'Machine-local user directories redacted; test results and source hashes unchanged.'
+Protect-EvidenceText ($record | ConvertTo-Json -Depth 20) | Set-Content -LiteralPath $logPath -Encoding UTF8
 $summary = $status.data.result.summary
 Write-Output ($Task + ' ' + $Mode + ': ' + ($summary | ConvertTo-Json -Compress) + ' -> ' + $logPath)
 if ($summary.total -le 0 -or $summary.failed -ne 0 -or $summary.skipped -ne 0 -or $summary.inconclusive -ne 0) {
