@@ -15,31 +15,42 @@ namespace SectorLab.Presentation
         [SerializeField] private UnitLifecycle lifecycle;
         [SerializeField] private Button muteButton;
         [SerializeField] private Text muteLabel;
+        [SerializeField] private Text noticeLabel;
         private readonly List<Unit> observed = new List<Unit>(6);
         private RelayOwner[] owners;
+        private bool[] contested;
         private AudioSource source;
-        private AudioClip shot, capture, victory, defeat;
-        private float nextShot;
+        private AudioClip tankShot, scoutShot, rangerShot, capture, warning, victory, defeat;
+        private readonly float[] nextShot = new float[3];
+        private float hideNoticeAt;
         public bool Muted { get; private set; }
         public int PlayedShots { get; private set; }
         public int PlayedCaptures { get; private set; }
+        public int PlayedAlerts { get; private set; }
         public int PlayedResults { get; private set; }
+        public string LastSound { get; private set; }
+        public string LastNotice { get; private set; }
 
         private void Awake()
         {
             source = GetComponent<AudioSource>();
             source.playOnAwake = false; source.spatialBlend = 0; source.volume = 0.5f;
-            shot = Tone("SectorLab shot", 180, 80, 0.06f);
-            capture = Tone("SectorLab capture", 540, 900, 0.18f);
+            tankShot = Tone("SectorLab Tank shot", 140, 55, 0.12f);
+            scoutShot = Tone("SectorLab Scout shot", 1100, 750, 0.035f);
+            rangerShot = Tone("SectorLab Ranger shot", 1800, 220, 0.16f);
+            capture = Tone("SectorLab own capture", 540, 1100, 0.28f);
+            warning = Tone("SectorLab relay warning", 650, 180, 0.32f);
             victory = Tone("SectorLab victory", 440, 880, 0.45f);
             defeat = Tone("SectorLab defeat", 440, 180, 0.45f);
             SetMuted(PlayerPrefs.GetInt(MutedPreference, 0) != 0, false);
             muteButton.onClick.AddListener(() => SetMuted(!Muted));
+            if (noticeLabel != null) noticeLabel.transform.parent.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
             owners = new RelayOwner[battle.Relays.Count];
+            contested = new bool[battle.Relays.Count];
             lifecycle.Spawned += Observe;
             battle.Ticked += OnTick;
             battle.Finished += OnFinished;
@@ -63,9 +74,11 @@ namespace SectorLab.Presentation
 
         private void OnShot(Unit unit)
         {
-            if (Muted || Time.unscaledTime < nextShot) return;
-            nextShot = Time.unscaledTime + 0.04f;
-            source.PlayOneShot(shot, 0.3f);
+            int role = (int)unit.Stats.role;
+            if (Muted || Time.unscaledTime < nextShot[role]) return;
+            nextShot[role] = Time.unscaledTime + 0.08f;
+            Play(unit.Stats.role == UnitRole.Tank ? tankShot : unit.Stats.role == UnitRole.Scout ? scoutShot : rangerShot,
+                unit.Team == Team.Player ? 0.3f : 0.18f);
             PlayedShots++;
         }
 
@@ -73,18 +86,64 @@ namespace SectorLab.Presentation
         {
             for (int i = 0; i < battle.Relays.Count; i++)
             {
-                RelayOwner current = battle.Relays[i].State.Owner;
-                if (current == owners[i]) continue;
+                RelayPoint relay = battle.Relays[i];
+                RelayOwner current = relay.State.Owner, previous = owners[i];
+                bool newContest = relay.State.IsContested && !contested[i]
+                    && (previous == RelayOwner.Player || relay.State.Progress > MatchRules.Epsilon);
+                contested[i] = relay.State.IsContested;
                 owners[i] = current;
-                if (current == RelayOwner.Neutral || Muted) continue;
-                source.PlayOneShot(capture, 0.6f); PlayedCaptures++;
+                if (newContest)
+                {
+                    Notify(relay.Config.label + ": СПОР · эффект остановлен");
+                    Alert();
+                }
+                if (current == previous) continue;
+                if (current == RelayOwner.Player)
+                {
+                    string effect = relay.Config.kind == RelayKind.Score ? $"+{relay.Config.scorePerSecond:0.#} очк/с" : $"ремонт +{relay.Config.healingPerSecond:0.#} HP/с";
+                    Notify($"Вы захватили {relay.Config.label} · {effect}");
+                    if (!Muted) { Play(capture, 0.8f); PlayedCaptures++; }
+                }
+                else if (current == RelayOwner.Enemy)
+                {
+                    Notify("Враг захватил " + relay.Config.label);
+                    if (!Muted) { Play(warning, 0.8f); PlayedCaptures++; }
+                }
+                else if (previous == RelayOwner.Player)
+                {
+                    Notify(relay.Config.label + ": контроль потерян");
+                    Alert();
+                }
             }
+        }
+
+        private void Alert() { if (!Muted) { Play(warning, 0.8f); PlayedAlerts++; } }
+
+        private void Play(AudioClip clip, float volume)
+        {
+            source.PlayOneShot(clip, volume);
+            LastSound = clip.name;
+        }
+
+        private void Notify(string message)
+        {
+            LastNotice = message;
+            hideNoticeAt = Time.unscaledTime + 3.5f;
+            if (noticeLabel == null) return;
+            noticeLabel.text = message;
+            noticeLabel.transform.parent.gameObject.SetActive(true);
+        }
+
+        private void Update()
+        {
+            if (noticeLabel != null && noticeLabel.transform.parent.gameObject.activeSelf && Time.unscaledTime >= hideNoticeAt)
+                noticeLabel.transform.parent.gameObject.SetActive(false);
         }
 
         private void OnFinished(BattleOutcome outcome)
         {
             if (Muted) return;
-            source.PlayOneShot(outcome == BattleOutcome.Victory ? victory : defeat, 0.8f);
+            Play(outcome == BattleOutcome.Victory ? victory : defeat, 0.8f);
             PlayedResults++;
         }
 
@@ -105,7 +164,10 @@ namespace SectorLab.Presentation
             if (source != null) source.Stop();
         }
 
-        private void OnDestroy() { Destroy(shot); Destroy(capture); Destroy(victory); Destroy(defeat); }
+        private void OnDestroy()
+        {
+            Destroy(tankShot); Destroy(scoutShot); Destroy(rangerShot); Destroy(capture); Destroy(warning); Destroy(victory); Destroy(defeat);
+        }
 
         private static AudioClip Tone(string name, float startFrequency, float endFrequency, float duration)
         {

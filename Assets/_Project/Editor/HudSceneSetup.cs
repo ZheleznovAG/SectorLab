@@ -165,11 +165,20 @@ namespace SectorLab.Editor
             var existing = top.Find("Mute");
             var mute = existing != null ? existing.GetComponent<Button>() :
                 Button("Mute", top, new Vector2(0.16f, 0.04f), new Vector2(0.30f, 0.43f), "Звук: вкл", 22);
+            var notice = root.Find("MatchNotice") as RectTransform;
+            if (notice == null)
+            {
+                notice = Panel("MatchNotice", root, new Vector2(0.2f, 1), new Vector2(0.8f, 1), 44, true);
+                notice.anchoredPosition = new Vector2(0, -BattleHud.TopBarHeight - BattleHud.RelayBarHeight - BattleHud.ArenaPadding);
+                notice.GetComponent<Image>().raycastTarget = false;
+                Label("Label", notice, new Vector2(0.02f, 0), new Vector2(0.98f, 1), "", 25, TextAnchor.MiddleCenter);
+            }
             var audio = root.GetComponent<MatchAudio>();
             if (audio == null) audio = root.gameObject.AddComponent<MatchAudio>();
             var data = new SerializedObject(audio);
             Set(data, "battle", battle); Set(data, "lifecycle", battle.GetComponent<UnitLifecycle>());
             Set(data, "muteButton", mute); Set(data, "muteLabel", mute.GetComponentInChildren<Text>());
+            Set(data, "noticeLabel", notice.GetComponentInChildren<Text>());
             data.ApplyModifiedPropertiesWithoutUndo();
         }
 

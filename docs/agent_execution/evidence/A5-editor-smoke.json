@@ -1,0 +1,21 @@
+﻿{
+    "status":  "PASS_EDITOR",
+    "observation":  {
+                        "checkedAtUtc":  "2026-10-12T16:49:18.7153972Z",
+                        "scene":  "Assets/_Project/Scenes/Main.unity",
+                        "phase":  "Ready",
+                        "units":  6,
+                        "paused":  false,
+                        "elapsed":  0.5,
+                        "playerScore":  0,
+                        "enemyScore":  0,
+                        "outcome":  "InProgress",
+                        "screenWidth":  1280,
+                        "screenHeight":  720
+                    },
+    "note":  "Fresh ordinary saved Main after async loading reached Ready; no arranged movement or capture",
+    "compiling":  false,
+    "compilationFailed":  false,
+    "sourceHead":  "dc16223fc9d04b00bf532b402dc3e7797873f4d4",
+    "consoleErrors":  0
+}

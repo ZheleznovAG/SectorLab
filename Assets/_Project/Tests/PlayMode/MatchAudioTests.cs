@@ -88,8 +88,68 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator RealRoleWeaponsHaveDifferentSounds()
+        {
+            Unit enemy = lifecycle.Slots[4].Unit;
+            Vector3 center = battle.Relays[0].transform.position;
+            Assert.That(enemy.GetComponent<NavMeshAgent>().Warp(center + Vector3.right * 1.1f), Is.True);
+            string[] fields = { "tankShot", "scoutShot", "rangerShot" };
+            var sounds = new System.Collections.Generic.HashSet<string>();
+            var lengths = new System.Collections.Generic.HashSet<int>();
+            for (int i = 0; i < 3; i++)
+            {
+                Unit unit = lifecycle.Slots[i].Unit;
+                Assert.That(unit.GetComponent<NavMeshAgent>().Warp(center), Is.True);
+                unit.Attack.enabled = true; unit.Attack.SetTarget(enemy);
+                int shots = audio.PlayedShots;
+                yield return null; yield return null;
+                Assert.That(audio.PlayedShots, Is.GreaterThan(shots));
+                AudioClip clip = Field<AudioClip>(audio, fields[i]);
+                Assert.That(audio.LastSound, Is.EqualTo(clip.name));
+                var samples = new float[clip.samples];
+                Assert.That(clip.GetData(samples, 0), Is.True);
+                Assert.That(System.Array.Exists(samples, value => Mathf.Abs(value) > 0.001f), Is.True, "The routed weapon clip must contain audible samples.");
+                sounds.Add(audio.LastSound); lengths.Add(clip.samples);
+                unit.Attack.enabled = false; unit.Attack.ClearTarget();
+                Assert.That(unit.GetComponent<NavMeshAgent>().Warp(Vector3.zero), Is.True);
+            }
+            Assert.That(sounds.Count, Is.EqualTo(3));
+            Assert.That(lengths.Count, Is.EqualTo(3));
+        }
+
+        [UnityTest]
+        public IEnumerator RelaySuccessContestAndEnemyCaptureHaveMatchingNoticeAndSound()
+        {
+            Unit tank = lifecycle.Slots[0].Unit, enemy = lifecycle.Slots[4].Unit;
+            Vector3 tankSpawn = tank.transform.position;
+            Vector3 center = battle.Relays[0].transform.position;
+            Assert.That(tank.GetComponent<NavMeshAgent>().Warp(center), Is.True);
+            battle.AdvanceSimulation(5.1);
+            Assert.That(audio.LastNotice, Does.Contain("Вы захватили A").And.Contain("+1 очк/с"));
+            Assert.That(audio.LastSound, Is.EqualTo(Field<AudioClip>(audio, "capture").name));
+            Text notice = Field<Text>(audio, "noticeLabel");
+            Assert.That(notice.text, Is.EqualTo(audio.LastNotice));
+            Assert.That(notice.transform.parent.gameObject.activeSelf, Is.True);
+            Assert.That(notice.transform.parent.GetComponent<Image>().raycastTarget, Is.False);
+            Assert.That(enemy.GetComponent<NavMeshAgent>().Warp(center + Vector3.right * 0.8f), Is.True);
+            battle.AdvanceSimulation(0.1);
+            Assert.That(audio.LastNotice, Does.Contain("СПОР").And.Contain("эффект остановлен"));
+            Assert.That(audio.LastSound, Is.EqualTo(Field<AudioClip>(audio, "warning").name));
+            Assert.That(audio.PlayedAlerts, Is.EqualTo(1));
+            battle.AdvanceSimulation(0.1);
+            Assert.That(audio.PlayedAlerts, Is.EqualTo(1), "A continuing contest must not repeat the alert every tick.");
+            Assert.That(tank.GetComponent<NavMeshAgent>().Warp(tankSpawn), Is.True);
+            battle.AdvanceSimulation(10.1);
+            Assert.That(audio.LastNotice, Does.Contain("Враг захватил A"));
+            Assert.That(audio.LastSound, Is.EqualTo(Field<AudioClip>(audio, "warning").name));
+            Assert.That(audio.PlayedCaptures, Is.EqualTo(2));
+            yield return null;
+        }
+
+        [UnityTest]
         public IEnumerator MuteButtonStopsSoundAndPreferenceSurvivesActualRestart()
         {
+            Vector3 enemySpawn = lifecycle.Slots[4].Unit.transform.position;
             Field<Button>(audio, "muteButton").onClick.Invoke();
             Assert.That(audio.Muted, Is.True);
             Assert.That(audio.GetComponent<AudioSource>().mute, Is.True);
@@ -97,6 +157,11 @@ namespace SectorLab.Tests
             yield return null; yield return null;
             Assert.That(audio.PlayedShots, Is.Zero);
             Assert.That(audio.GetComponent<AudioSource>().isPlaying, Is.False);
+            lifecycle.Slots[0].Unit.Attack.enabled = false;
+            Assert.That(lifecycle.Slots[4].Unit.GetComponent<NavMeshAgent>().Warp(enemySpawn), Is.True);
+            battle.AdvanceSimulation(5.1);
+            Assert.That(audio.PlayedCaptures, Is.Zero);
+            Assert.That(audio.LastNotice, Does.Contain("Вы захватили A"), "Muting sound must preserve visible feedback.");
             battle.Restart();
             yield return MainLifecycleTests.WaitForReady();
             audio = Object.FindFirstObjectByType<MatchAudio>();

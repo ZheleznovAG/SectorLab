@@ -90,6 +90,32 @@ Scout не захватывает быстрее остальных: подск�
 [0 найденных тестов](evidence/tests-A4-roles-playmode.json); это ошибка фильтра,
 не PASS и не gameplay failure. Затем оба класса проверены отдельно.
 
+A4 зафиксирован в `dc16223`. A5 / FR-018/015: три разных процедурных звука
+оружия, собственный capture и предупреждение о вражеском capture/потере
+контроля/новом споре. Непрерывный спор не повторяет сигнал каждый tick.
+Короткая подпись называет событие и узел; mute не отключает визуальную информацию.
+Notice не перехватывает тапы. Все семь clips принадлежат сцене и освобождаются;
+mute/restart и существующие подписки сохранены. Решение —
+[ADR-010](../adr/010-mobile-feedback.md).
+[Первые 2/4](evidence/tests-A5-audio-playmode.json) и
+[повторные 3/4](evidence/tests-A5-audio-wired-playmode.json) сохранены:
+сначала scene helper выполнился до Refresh новой сборки и не создал notice;
+также тест отводил бойца в центр C, невольно создавая ещё один настоящий capture.
+После подключения notice к сохранённой сцене и отвода в исходные spawn points
+[audio 4/4](evidence/tests-A5-audio-final-playmode.json) PASS.
+Короткий clip проверяется PCM/событием, без хрупкого ожидания isPlaying через два
+кадра; полноценный playback проверяет исходный result test.
+[Полная PlayMode регрессия](evidence/tests-A5-full-playmode.json): **124/124 PASS**,
+failed/skipped/inconclusive=0; включает новые UX/audio случаи, настоящие партии,
+10 restarts, cancellation/failure/cleanup.
+[EditMode](evidence/tests-A5-full-editmode.json): **63/63 PASS**.
+[Обычная Main](evidence/A5-editor-smoke.json): Ready, 6 units, consoleErrors=0.
+[Снимок обратной связи](evidence/A5-feedback-16x9.png) просмотрен: подпись своего
+захвата A, +1 очк/с, назначение/характеристики выбранного Tank и видимый маркер.
+Для этого отдельного visual fixture настоящий Tank размещён на A и пройдены
+ticks capture; это не естественная победа или человеческая партия.
+Узнаваемость новых сигналов человеком на телефоне ещё не подтверждена.
+
 ## Где остановились до внешнего аудита
 
 12.10.2026: игровой checkpoint `0ae98c8`. По отзыву пользователя поднят
