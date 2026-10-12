@@ -114,7 +114,8 @@ namespace SectorLab.Tests
             Assert.That(attacker.Movement.IsMoving, Is.True);
             Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max));
 
-            for (int frame = 0; frame < 600 && enemy.Health.Current == enemy.Health.Max; frame++)
+            float deadline = Time.time + 10f;
+            while (Time.time < deadline && enemy.Health.Current == enemy.Health.Max)
                 yield return null;
 
             Assert.That(attacker.Attack.IsInRange(enemy), Is.True);
@@ -233,7 +234,8 @@ namespace SectorLab.Tests
             Object.DestroyImmediate(wall);
             Physics.SyncTransforms();
             surface.BuildNavMesh();
-            for (int frame = 0; frame < 600 && enemy.Health.Current == enemy.Health.Max; frame++)
+            float deadline = Time.time + 10f;
+            while (Time.time < deadline && enemy.Health.Current == enemy.Health.Max)
                 yield return null;
 
             Assert.That(enemy.Health.Current, Is.LessThan(enemy.Health.Max), "Retrying must resume pursuit when the path opens");
@@ -272,7 +274,8 @@ namespace SectorLab.Tests
             Assert.That(enemy.Health.Current, Is.EqualTo(enemy.Health.Max));
             Assert.That(ranger.Movement.IsMoving, Is.True);
 
-            for (int frame = 0; frame < 600 && enemy.Health.Current == enemy.Health.Max; frame++)
+            float deadline = Time.time + 10f;
+            while (Time.time < deadline && enemy.Health.Current == enemy.Health.Max)
                 yield return null;
 
             Assert.That(block, Is.Not.Null);

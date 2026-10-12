@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="63" result="Passed" total="63" passed="63" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0,1691322">
+  <test-suite type="TestSuite" id="1000" name="SectorLab" fullname="SectorLab" runstate="Runnable" testcasecount="64" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.169132" total="63" passed="63" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1080" name="SectorLab.Tests.EditMode.dll" fullname="[LOCAL_USER_HOME]/AppData/Local/SectorLab/Verification/CleanClone-20261012T023928Z/project/Library/ScriptAssemblies/SectorLab.Tests.EditMode.dll" runstate="Runnable" testcasecount="63" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.147353" total="63" passed="63" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="19568" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1081" name="SectorLab" fullname="SectorLab" runstate="Runnable" testcasecount="63" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.145080" total="63" passed="63" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1082" name="Tests" fullname="SectorLab.Tests" runstate="Runnable" testcasecount="63" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.143076" total="63" passed="63" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="EnemyDecisionTests" fullname="SectorLab.Tests.EnemyDecisionTests" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.049797" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1003" name="CapturePrecedesRepairAndAttack" fullname="SectorLab.Tests.EnemyDecisionTests.CapturePrecedesRepairAndAttack" methodname="CapturePrecedesRepairAndAttack" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="223705178" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.021147" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="ClaimedCostSpreadsUnitsAndUnreachableRelaysAreIgnored" fullname="SectorLab.Tests.EnemyDecisionTests.ClaimedCostSpreadsUnitsAndUnreachableRelaysAreIgnored" methodname="ClaimedCostSpreadsUnitsAndUnreachableRelaysAreIgnored" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="465520191" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000531" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="CriticalUnitRepairsWhenScoringRelaysAreSecure" fullname="SectorLab.Tests.EnemyDecisionTests.CriticalUnitRepairsWhenScoringRelaysAreSecure" methodname="CriticalUnitRepairsWhenScoringRelaysAreSecure" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="335911918" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000454" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="EqualCostsAlwaysUseStableArrayOrder" fullname="SectorLab.Tests.EnemyDecisionTests.EqualCostsAlwaysUseStableArrayOrder" methodname="EqualCostsAlwaysUseStableArrayOrder" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="1207232653" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000486" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="HealthyUnitAttacksInterference" fullname="SectorLab.Tests.EnemyDecisionTests.HealthyUnitAttacksInterference" methodname="HealthyUnitAttacksInterference" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="994782306" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000488" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="SecureTeamCanCaptureRepairBase" fullname="SectorLab.Tests.EnemyDecisionTests.SecureTeamCanCaptureRepairBase" methodname="SecureTeamCanCaptureRepairBase" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="2013424062" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000516" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="ThreatenedScoreRelayHasHighestPriority" fullname="SectorLab.Tests.EnemyDecisionTests.ThreatenedScoreRelayHasHighestPriority" methodname="ThreatenedScoreRelayHasHighestPriority" classname="SectorLab.Tests.EnemyDecisionTests" runstate="Runnable" seed="919784886" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000484" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1009" name="HealingTests" fullname="SectorLab.Tests.HealingTests" classname="SectorLab.Tests.HealingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.007779" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1010" name="HealClampsAndOnlyNotifiesActualChanges" fullname="SectorLab.Tests.HealingTests.HealClampsAndOnlyNotifiesActualChanges" methodname="HealClampsAndOnlyNotifiesActualChanges" classname="SectorLab.Tests.HealingTests" runstate="Runnable" seed="2027933236" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001275" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="HealDoesNotResurrectOrNotifyDeadHealth" fullname="SectorLab.Tests.HealingTests.HealDoesNotResurrectOrNotifyDeadHealth" methodname="HealDoesNotResurrectOrNotifyDeadHealth" classname="SectorLab.Tests.HealingTests" runstate="Runnable" seed="968456599" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001031" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1014" name="NonPositiveHealIsIgnored" fullname="SectorLab.Tests.HealingTests.NonPositiveHealIsIgnored" classname="SectorLab.Tests.HealingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.002416" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1012" name="NonPositiveHealIsIgnored(0)" fullname="SectorLab.Tests.HealingTests.NonPositiveHealIsIgnored(0)" methodname="NonPositiveHealIsIgnored" classname="SectorLab.Tests.HealingTests" runstate="Runnable" seed="776581990" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000543" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="NonPositiveHealIsIgnored(-1)" fullname="SectorLab.Tests.HealingTests.NonPositiveHealIsIgnored(-1)" methodname="NonPositiveHealIsIgnored" classname="SectorLab.Tests.HealingTests" runstate="Runnable" seed="1483101892" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000286" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1015" name="HealthTests" fullname="SectorLab.Tests.HealthTests" classname="SectorLab.Tests.HealthTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.010253" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1016" name="NewHealth_IsFull" fullname="SectorLab.Tests.HealthTests.NewHealth_IsFull" methodname="NewHealth_IsFull" classname="SectorLab.Tests.HealthTests" runstate="Runnable" seed="788035879" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001734" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="NonPositiveMax_Throws" fullname="SectorLab.Tests.HealthTests.NonPositiveMax_Throws" methodname="NonPositiveMax_Throws" classname="SectorLab.Tests.HealthTests" runstate="Runnable" seed="263107233" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.004101" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="Overkill_ClampsToZeroAndDiesOnce" fullname="SectorLab.Tests.HealthTests.Overkill_ClampsToZeroAndDiesOnce" methodname="Overkill_ClampsToZeroAndDiesOnce" classname="SectorLab.Tests.HealthTests" runstate="Runnable" seed="1592962218" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000575" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="TakeDamage_IgnoresZeroAndNegative" fullname="SectorLab.Tests.HealthTests.TakeDamage_IgnoresZeroAndNegative" methodname="TakeDamage_IgnoresZeroAndNegative" classname="SectorLab.Tests.HealthTests" runstate="Runnable" seed="1014118829" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000431" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1018" name="TakeDamage_ReducesCurrentAndNotifies" fullname="SectorLab.Tests.HealthTests.TakeDamage_ReducesCurrentAndNotifies" methodname="TakeDamage_ReducesCurrentAndNotifies" classname="SectorLab.Tests.HealthTests" runstate="Runnable" seed="1337743575" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000431" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1021" name="MatchRulesTests" fullname="SectorLab.Tests.MatchRulesTests" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.011710" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1035" name="InvalidInputIsRejected" fullname="SectorLab.Tests.MatchRulesTests.InvalidInputIsRejected" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.003219" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1032" name="InvalidInputIsRejected(-1)" fullname="SectorLab.Tests.MatchRulesTests.InvalidInputIsRejected(-1)" methodname="InvalidInputIsRejected" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="454925987" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001073" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="InvalidInputIsRejected(double.NaN)" fullname="SectorLab.Tests.MatchRulesTests.InvalidInputIsRejected(double.NaN)" methodname="InvalidInputIsRejected" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="1612581957" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000294" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="InvalidInputIsRejected(double.PositiveInfinity)" fullname="SectorLab.Tests.MatchRulesTests.InvalidInputIsRejected(double.PositiveInfinity)" methodname="InvalidInputIsRejected" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="2089917716" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000224" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1031" name="ScoreAndTimeoutDetermineOutcome" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.006729" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1022" name="ScoreAndTimeoutDetermineOutcome(0,0,0,InProgress)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(0,0,0,InProgress)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="1984888572" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000713" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="ScoreAndTimeoutDetermineOutcome(44,43,179,InProgress)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(44,43,179,InProgress)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="782762524" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000276" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="ScoreAndTimeoutDetermineOutcome(45,44,10,Victory)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(45,44,10,Victory)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="1714223147" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000234" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="ScoreAndTimeoutDetermineOutcome(44,45,10,Defeat)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(44,45,10,Defeat)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="599492994" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1026" name="ScoreAndTimeoutDetermineOutcome(45,45,10,Draw)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(45,45,10,Draw)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="1641447533" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000348" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="ScoreAndTimeoutDetermineOutcome(12,11,180,Victory)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(12,11,180,Victory)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="307839890" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000291" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="ScoreAndTimeoutDetermineOutcome(11,12,180,Defeat)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(11,12,180,Defeat)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="948336357" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000305" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="ScoreAndTimeoutDetermineOutcome(12,12,180,Draw)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(12,12,180,Draw)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="210892926" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000299" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="ScoreAndTimeoutDetermineOutcome(0,0,180,Draw)" fullname="SectorLab.Tests.MatchRulesTests.ScoreAndTimeoutDetermineOutcome(0,0,180,Draw)" methodname="ScoreAndTimeoutDetermineOutcome" classname="SectorLab.Tests.MatchRulesTests" runstate="Runnable" seed="2094459980" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000247" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1036" name="MatchStateTests" fullname="SectorLab.Tests.MatchStateTests" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.018141" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1048" name="EmptyMatchTimesOutAsDraw" fullname="SectorLab.Tests.MatchStateTests.EmptyMatchTimesOutAsDraw" methodname="EmptyMatchTimesOutAsDraw" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1997433876" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001188" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1050" name="InvalidTickDoesNotAdvanceClock" fullname="SectorLab.Tests.MatchStateTests.InvalidTickDoesNotAdvanceClock" methodname="InvalidTickDoesNotAdvanceClock" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1514862889" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001567" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1042" name="PauseFreezesTimeAndScoresUntilResume" fullname="SectorLab.Tests.MatchStateTests.PauseFreezesTimeAndScoresUntilResume" methodname="PauseFreezesTimeAndScoresUntilResume" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="152916418" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000793" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1049" name="ResetRestoresNeutralUnpausedMatch" fullname="SectorLab.Tests.MatchStateTests.ResetRestoresNeutralUnpausedMatch" methodname="ResetRestoresNeutralUnpausedMatch" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1564868901" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000633" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1041" name="ScoreIsIndependentOfFrameRate" fullname="SectorLab.Tests.MatchStateTests.ScoreIsIndependentOfFrameRate" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.005459" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1037" name="ScoreIsIndependentOfFrameRate(15)" fullname="SectorLab.Tests.MatchStateTests.ScoreIsIndependentOfFrameRate(15)" methodname="ScoreIsIndependentOfFrameRate" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1788743451" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000773" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1038" name="ScoreIsIndependentOfFrameRate(30)" fullname="SectorLab.Tests.MatchStateTests.ScoreIsIndependentOfFrameRate(30)" methodname="ScoreIsIndependentOfFrameRate" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1264237811" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000493" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="ScoreIsIndependentOfFrameRate(60)" fullname="SectorLab.Tests.MatchStateTests.ScoreIsIndependentOfFrameRate(60)" methodname="ScoreIsIndependentOfFrameRate" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1390380375" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000733" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1040" name="ScoreIsIndependentOfFrameRate(144)" fullname="SectorLab.Tests.MatchStateTests.ScoreIsIndependentOfFrameRate(144)" methodname="ScoreIsIndependentOfFrameRate" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="821129236" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001522" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1047" name="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect" fullname="SectorLab.Tests.MatchStateTests.ThresholdFinishesOnceAndFurtherTicksHaveNoEffect" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.003453" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1044" name="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect(1,0,Victory)" fullname="SectorLab.Tests.MatchStateTests.ThresholdFinishesOnceAndFurtherTicksHaveNoEffect(1,0,Victory)" methodname="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1985935545" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000643" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1045" name="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect(0,1,Defeat)" fullname="SectorLab.Tests.MatchStateTests.ThresholdFinishesOnceAndFurtherTicksHaveNoEffect(0,1,Defeat)" methodname="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="760753929" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000355" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1046" name="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect(1,1,Draw)" fullname="SectorLab.Tests.MatchStateTests.ThresholdFinishesOnceAndFurtherTicksHaveNoEffect(1,1,Draw)" methodname="ThresholdFinishesOnceAndFurtherTicksHaveNoEffect" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="1350819374" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000428" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1043" name="TimeoutClampsTheLastTickAndUsesOnlyGameTime" fullname="SectorLab.Tests.MatchStateTests.TimeoutClampsTheLastTickAndUsesOnlyGameTime" methodname="TimeoutClampsTheLastTickAndUsesOnlyGameTime" classname="SectorLab.Tests.MatchStateTests" runstate="Runnable" seed="575585034" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000769" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1051" name="RelayStateTests" fullname="SectorLab.Tests.RelayStateTests" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.018424" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1064" name="CaptureAndEffectAreIndependentOfFrameRate" fullname="SectorLab.Tests.RelayStateTests.CaptureAndEffectAreIndependentOfFrameRate" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.005077" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1060" name="CaptureAndEffectAreIndependentOfFrameRate(15)" fullname="SectorLab.Tests.RelayStateTests.CaptureAndEffectAreIndependentOfFrameRate(15)" methodname="CaptureAndEffectAreIndependentOfFrameRate" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="152630741" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001547" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="CaptureAndEffectAreIndependentOfFrameRate(30)" fullname="SectorLab.Tests.RelayStateTests.CaptureAndEffectAreIndependentOfFrameRate(30)" methodname="CaptureAndEffectAreIndependentOfFrameRate" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="521996358" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000385" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1062" name="CaptureAndEffectAreIndependentOfFrameRate(60)" fullname="SectorLab.Tests.RelayStateTests.CaptureAndEffectAreIndependentOfFrameRate(60)" methodname="CaptureAndEffectAreIndependentOfFrameRate" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="1009734543" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000325" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="CaptureAndEffectAreIndependentOfFrameRate(144)" fullname="SectorLab.Tests.RelayStateTests.CaptureAndEffectAreIndependentOfFrameRate(144)" methodname="CaptureAndEffectAreIndependentOfFrameRate" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="155752505" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000409" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1058" name="ContestFreezesProgressAndDisablesOwnedEffect" fullname="SectorLab.Tests.RelayStateTests.ContestFreezesProgressAndDisablesOwnedEffect" methodname="ContestFreezesProgressAndDisablesOwnedEffect" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="640558641" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000553" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="EmptyRelayKeepsPartialProgressAndFullOwnership" fullname="SectorLab.Tests.RelayStateTests.EmptyRelayKeepsPartialProgressAndFullOwnership" methodname="EmptyRelayKeepsPartialProgressAndFullOwnership" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="1095036888" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000586" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1066" name="InvalidInputsDoNotMutateProgress" fullname="SectorLab.Tests.RelayStateTests.InvalidInputsDoNotMutateProgress" methodname="InvalidInputsDoNotMutateProgress" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="1783470096" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001267" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1065" name="LargeTickOnlyIncludesTimeAfterCaptureAndNeverOvershoots" fullname="SectorLab.Tests.RelayStateTests.LargeTickOnlyIncludesTimeAfterCaptureAndNeverOvershoots" methodname="LargeTickOnlyIncludesTimeAfterCaptureAndNeverOvershoots" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="17087657" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000637" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1056" name="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants" fullname="SectorLab.Tests.RelayStateTests.NeutralCaptureTakesFiveSecondsRegardlessOfOccupants" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.004844" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1052" name="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(1,0,Player,1)" fullname="SectorLab.Tests.RelayStateTests.NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(1,0,Player,1)" methodname="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="1249156232" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001142" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1053" name="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(3,0,Player,1)" fullname="SectorLab.Tests.RelayStateTests.NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(3,0,Player,1)" methodname="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="178733736" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000393" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1054" name="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(0,1,Enemy,-1)" fullname="SectorLab.Tests.RelayStateTests.NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(0,1,Enemy,-1)" methodname="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="1018975637" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000350" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1055" name="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(0,3,Enemy,-1)" fullname="SectorLab.Tests.RelayStateTests.NeutralCaptureTakesFiveSecondsRegardlessOfOccupants(0,3,Enemy,-1)" methodname="NeutralCaptureTakesFiveSecondsRegardlessOfOccupants" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="616209521" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000366" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1057" name="OppositeCaptureTakesTenSecondsAndImmediatelyStopsEffect" fullname="SectorLab.Tests.RelayStateTests.OppositeCaptureTakesTenSecondsAndImmediatelyStopsEffect" methodname="OppositeCaptureTakesTenSecondsAndImmediatelyStopsEffect" classname="SectorLab.Tests.RelayStateTests" runstate="Runnable" seed="643696235" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000625" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1067" name="RespawnTimerTests" fullname="SectorLab.Tests.RespawnTimerTests" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.021389" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1074" name="CountdownIsIndependentOfFrameRate" fullname="SectorLab.Tests.RespawnTimerTests.CountdownIsIndependentOfFrameRate" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.009911" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1070" name="CountdownIsIndependentOfFrameRate(15)" fullname="SectorLab.Tests.RespawnTimerTests.CountdownIsIndependentOfFrameRate(15)" methodname="CountdownIsIndependentOfFrameRate" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="514943757" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001483" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1071" name="CountdownIsIndependentOfFrameRate(30)" fullname="SectorLab.Tests.RespawnTimerTests.CountdownIsIndependentOfFrameRate(30)" methodname="CountdownIsIndependentOfFrameRate" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="754351209" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000953" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1072" name="CountdownIsIndependentOfFrameRate(60)" fullname="SectorLab.Tests.RespawnTimerTests.CountdownIsIndependentOfFrameRate(60)" methodname="CountdownIsIndependentOfFrameRate" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="257693524" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.001629" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1073" name="CountdownIsIndependentOfFrameRate(144)" fullname="SectorLab.Tests.RespawnTimerTests.CountdownIsIndependentOfFrameRate(144)" methodname="CountdownIsIndependentOfFrameRate" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="2072505705" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.003232" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1068" name="DeathSchedulesTenSecondsAndDuplicateNotificationDoesNotResetIt" fullname="SectorLab.Tests.RespawnTimerTests.DeathSchedulesTenSecondsAndDuplicateNotificationDoesNotResetIt" methodname="DeathSchedulesTenSecondsAndDuplicateNotificationDoesNotResetIt" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="402737504" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000766" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1078" name="InvalidDeltaIsRejected" fullname="SectorLab.Tests.RespawnTimerTests.InvalidDeltaIsRejected" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.003138" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1075" name="InvalidDeltaIsRejected(-1)" fullname="SectorLab.Tests.RespawnTimerTests.InvalidDeltaIsRejected(-1)" methodname="InvalidDeltaIsRejected" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="768987134" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000628" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1076" name="InvalidDeltaIsRejected(double.NaN)" fullname="SectorLab.Tests.RespawnTimerTests.InvalidDeltaIsRejected(double.NaN)" methodname="InvalidDeltaIsRejected" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="183131668" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000323" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1077" name="InvalidDeltaIsRejected(double.PositiveInfinity)" fullname="SectorLab.Tests.RespawnTimerTests.InvalidDeltaIsRejected(double.PositiveInfinity)" methodname="InvalidDeltaIsRejected" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="1176746095" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000313" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1069" name="PauseFreezesCountdownAndFinishedMatchCannotAdvanceIt" fullname="SectorLab.Tests.RespawnTimerTests.PauseFreezesCountdownAndFinishedMatchCannotAdvanceIt" methodname="PauseFreezesCountdownAndFinishedMatchCannotAdvanceIt" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="1557760496" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.000645" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1079" name="RosterRequiresExactlyOneSlotForEachTeamAndRole" fullname="SectorLab.Tests.RespawnTimerTests.RosterRequiresExactlyOneSlotForEachTeamAndRole" methodname="RosterRequiresExactlyOneSlotForEachTeamAndRole" classname="SectorLab.Tests.RespawnTimerTests" runstate="Runnable" seed="2029427559" result="Passed" start-time="2026-10-12 02:42:22Z" end-time="2026-10-12 02:42:22Z" duration="0.003131" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: [LOCAL_USER_HOME]/AppData/LocalLow/ZheleznovAG/SectorLab\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

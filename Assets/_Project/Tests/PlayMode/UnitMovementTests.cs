@@ -14,6 +14,7 @@ namespace SectorLab.Tests
         [SetUp]
         public void SetUp()
         {
+            Time.timeScale = 1;
             root = new GameObject("TestRoot");
             TestArena.CreateGround(root.transform);
         }
@@ -65,7 +66,9 @@ namespace SectorLab.Tests
             var destination = new Vector3(1.5f, 0f, 1.5f);
             movement.MoveTo(destination);
 
-            for (int frame = 0; frame < 600 && movement.IsMoving; frame++)
+            // Headless runs can render hundreds of frames before an agent has walked.
+            float deadline = Time.time + 10f;
+            while (Time.time < deadline && movement.IsMoving)
                 yield return null;
 
             Assert.That(movement.IsMoving, Is.False);
@@ -131,7 +134,8 @@ namespace SectorLab.Tests
             Assert.That(agent.hasPath, Is.True);
             Assert.That(agent.pathStatus, Is.EqualTo(NavMeshPathStatus.PathPartial));
             Assert.That(agent.remainingDistance, Is.GreaterThan(0.3f), "The partial path must have a segment to walk");
-            for (int frame = 0; frame < 600 && movement.IsMoving; frame++)
+            float deadline = Time.time + 10f;
+            while (Time.time < deadline && movement.IsMoving)
                 yield return null;
 
             Assert.That(movement.IsMoving, Is.False);

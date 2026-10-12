@@ -775,3 +775,12 @@ URP Mobile/PC больше не инициализируют выключенн�
 bundleVersion кандидата 1.0.0, исходная Unity/debug signing сохранены.
 Устранение Android shader notices требует настоящего нового APK/device log,
 не выводится из изменения settings. Сейчас далее APK и clean checkout.
+
+W8 clean clone / NFR-002/004/005: первый публичный clone `0b2badb` без
+Library/Temp/Builds и с LFS fsck импортирован, **63/63 EditMode PASS**.
+Headless PlayMode дал **107/112**, пять старых movement/attack tests ждали
+600 кадров вместо игровых секунд. [Первый отчёт](evidence/clean-clone-W8-attempt1.json)
+и XML сохранены. Ожидания заменены на 10 игровых секунд без изменения assertions
+или runtime; [focused retry 25/25 PASS](evidence/clean-clone-W8-focused-retry.json).
+[ADR-008](../adr/008-game-time-in-navigation-tests.md) объясняет LF/CRLF,
+generated URP settings и границы проверки. Полная регрессия повторяется.
