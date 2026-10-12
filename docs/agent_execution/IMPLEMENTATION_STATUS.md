@@ -8,7 +8,9 @@
 ветка `main`, 35 коммитов; upstream `origin/main`, remote `https://github.com/ZheleznovAG/SectorLab.git`.
 Проверенный кодовый checkpoint после фиксации: `ec1a94494dcb6a08f857d26de11618ebbb0391ac`.
 Текущий docs-checkpoint содержит этот статус; его точный HEAD — `git rev-parse HEAD`.
-Последняя завершённая задача — **W6.4b / G6 PASS**, следующий этап — **W7.1**.
+Последняя игровая задача — **W6.4b / G6 PASS**. Перед W7.1 по запросу пользователя
+выполнен [аудит приватности](PRIVACY_AUDIT.md): текущие отчёты очищены, в опубликованной
+истории остаются личные метаданные автора и пути профиля; решение об истории отдельно.
 В начале сессии индекс пуст. Код дошёл до R4 и части R5: бой 3×3,
 Tank/Scout/Ranger, NavMesh, выбор/движение/атака, здоровье, вспышка урона,
 счётчик живых бойцов, Victory/Defeat и перезагрузка Main.
@@ -131,7 +133,7 @@ diff; другие настройки проекта не затронуты.
 | NFR-007 | PARTIAL | Дубликатов meta GUID не найдено; новые ссылки проверять по мере работы |
 | NFR-008 | NOT_RUN | Телефон подключён; APK на нём не запускался / W8 |
 | NFR-009 | NOT_RUN | FPS/память на Android не измерены; SHOULD / W8 |
-| NFR-010 | PARTIAL | ZIP/кеши/build исключены; финальный аудит истории впереди / W9 |
+| NFR-010 | PARTIAL | Full-history secret scan: 0; текущие личные пути скрыты, pre-commit privacy gate и noreply включены; в опубликованной истории остаются имя/почта/пути, см. PRIVACY_AUDIT |
 | NFR-011 | PARTIAL | THIRD_PARTY_NOTICES.md и MIT VContainer добавлены; последующие пакеты / W5, W9 |
 | NFR-012 | PARTIAL | Сохраняется существующая структура; реальные интеграции ещё впереди |
 | NFR-013 | PARTIAL | Русский README baseline есть; его v1.0 разделы ещё впереди / W9 |
@@ -636,3 +638,24 @@ Input System build preload возвращён к исходному [] и в Edi
 [Наблюдение](evidence/W6-G6-insets-device.json) отделяет эти проверки от неподтверждённых:
 последующие тапы сделаны уже на Defeat overlay, поэтому не засчитываются как приказ. **G6 PASS**, FR-006/028 PASS. G7–G9 ещё впереди; native probe и URP notices остаются
 открытыми в W8, полная приёмка v1.0 не заявляется.
+
+W0.6 / NFR-010: по отдельному запросу пользователя проведён полный аудит приватности.
+[Отчёт](PRIVACY_AUDIT.md), [машинное evidence](evidence/privacy-audit.json): 70 коммитов,
+786 Git blobs, 29 LFS objects, Gitleaks 8.30.1 — 0 секретов. Личные метаданные
+автора и Windows paths найдены; текущие 57 путей в 47 файлах скрыты, JSON results
+семантически сверены. Raw originals сохранены вне Git. NFR-010 остаётся PARTIAL
+из-за опубликованной истории, очистка рабочего дерева не выдаётся за удаление истории.
+
+Новые commit identity: публичный ник + noreply; локальный core.hooksPath=.githooks.
+[Пять настоящих staged-проверок](evidence/privacy-gate-checks.json): блокируются
+личный путь, почта, private-key header и .env; безопасный relative path проходит,
+значения не печатаются. Первый fixture выявил, что default Gitleaks не блокирует
+невалидный PRIVATE KEY header; добавлено явное правило и повторный прогон PASS.
+**63/63 EditMode PASS** через обновлённый wrapper ([JSON](evidence/tests-PrivacyGate-editmode.json)),
+личный projectPath в этом новом отчёте автоматически скрыт. Игровой код не менялся.
+Проверка repository/gates PASS; G7–G9 всё ещё TODO.
+
+Пользователь также поручил возобновление после сброса лимита. Настройка и prompt
+хранятся вне Git в локальном каталоге приложения; thread ID и account usage не
+публикуются. Отдельная Windows scheduled task запускает CLI resume этого чата;
+это не результат игрового теста и не доказательство завершения W7–W9.

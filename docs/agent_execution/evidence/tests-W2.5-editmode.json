@@ -1,4 +1,5 @@
 ﻿{
+    "privacyRedaction": "Machine-local user directories redacted; original test/build results and source hashes unchanged.",
     "task":  "W2.5",
     "mode":  "EditMode",
     "sourceHead":  "b8e5cd722790fe9c40cfd73ed903f0e96d8bf598",

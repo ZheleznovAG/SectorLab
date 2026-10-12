@@ -1,0 +1,40 @@
+{
+  "recordedAtUtc": "2026-10-12T01:20:21.164126+00:00",
+  "fixtureOutsideRepository": true,
+  "checks": [
+    {
+      "case": "local_path",
+      "expectedRejected": true,
+      "actualRejected": true,
+      "valuesNotPrinted": true,
+      "status": "PASS"
+    },
+    {
+      "case": "personal_email",
+      "expectedRejected": true,
+      "actualRejected": true,
+      "valuesNotPrinted": true,
+      "status": "PASS"
+    },
+    {
+      "case": "private_key",
+      "expectedRejected": true,
+      "actualRejected": true,
+      "valuesNotPrinted": true,
+      "status": "PASS"
+    },
+    {
+      "case": "safe_relative_path",
+      "expectedRejected": false,
+      "actualRejected": false,
+      "valuesNotPrinted": true,
+      "status": "PASS"
+    },
+    {
+      "case": "staged_private_file_type",
+      "actualRejected": true,
+      "status": "PASS"
+    }
+  ],
+  "allPassed": true
+}

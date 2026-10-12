@@ -1,0 +1,32 @@
+﻿{
+    "recordedAtUtc":  "2026-10-12T01:22:39.8646954Z",
+    "sourceHead":  "6fa7d41b99fc53073609737d87e8f095ea809efe",
+    "scannedCommits":  70,
+    "uniqueBlobs":  786,
+    "trackedFiles":  470,
+    "lfsObjects":  29,
+    "missingLfsObjects":  0,
+    "gitleaksVersion":  "v8.30.1",
+    "officialArchiveSha256":  "d29144deff3a68aa93ced33dddf84b7fdc26070add4aa0f4513094c8332afc4e",
+    "officialChecksumMatched":  true,
+    "secretScan":  {
+                       "command":  "gitleaks git --redact=100 --no-banner --log-opts=--all --report-format=json [before project PII rules were added]",
+                       "reportedCommitsWithScannableContent":  68,
+                       "findings":  0,
+                       "evidence":  "privacy-gitleaks-history.json"
+                   },
+    "connectedDeviceSerialInHistory":  0,
+    "privateMetadata":  {
+                            "historicalUserPathBlobVersions":  87,
+                            "originalCurrentFileCount":  47,
+                            "originalCurrentPathCount":  57,
+                            "gitPersonalAuthorIdentities":  1,
+                            "remotePublic":  true,
+                            "remoteMainAtAudit":  "404469a5653e0cbd6d2c5df676fa6b323c70aed3",
+                            "currentPaths":  "REDACTED",
+                            "newCommitIdentity":  "Public repository nickname and GitHub noreply",
+                            "publishedHistory":  "NOT_REWRITTEN"
+                        },
+    "status":  "PARTIAL",
+    "reason":  "No secrets found; current files sanitized; historical personal author metadata and paths remain published."
+}

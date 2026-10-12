@@ -1,4 +1,5 @@
 ﻿{
+    "privacyRedaction": "Machine-local user directories redacted; original test/build results and source hashes unchanged.",
     "task":  "W5.3",
     "mode":  "PlayMode",
     "sourceHead":  "97445f292b30306d6b0a1cd1f7774bb6619c192e",

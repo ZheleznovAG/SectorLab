@@ -1,5 +1,6 @@
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
+& "$PSScriptRoot/check-privacy.ps1"
 & git diff --check
 if ($LASTEXITCODE -ne 0) { throw 'Working-tree whitespace errors.' }
 & git diff --cached --check

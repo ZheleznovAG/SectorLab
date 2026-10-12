@@ -4,6 +4,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
+. "$PSScriptRoot/evidence-privacy.ps1"
 
 function Invoke-BuildCommand([string[]] $Arguments) {
     $raw = & unity command --json --no-banner --timeout 30 @Arguments
@@ -55,7 +56,8 @@ if ($result.result -eq 'Succeeded' -and (Test-Path -LiteralPath $apkPath)) {
     finally { $archive.Dispose() }
 }
 $evidencePath = 'docs/agent_execution/evidence/android-build-' + $Task + '.json'
-$record | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $evidencePath -Encoding UTF8
+$record.privacyRedaction = 'Machine-local user directories redacted; build results and source hashes unchanged.'
+Protect-EvidenceText ($record | ConvertTo-Json -Depth 10) | Set-Content -LiteralPath $evidencePath -Encoding UTF8
 Write-Output ($Task + ': result=' + $result.result + ', errors=' + $result.totalErrors + ' -> ' + $evidencePath)
 if ($result.result -ne 'Succeeded' -or $result.totalErrors -ne 0 -or -not $record.apkSha256) { throw 'Android build failed.' }
 if ($record.localContent.Count -eq 0) { throw 'APK contains no local Addressables content.' }
