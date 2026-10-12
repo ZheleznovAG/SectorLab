@@ -1,0 +1,244 @@
+﻿{
+    "sourceHead":  "909c48a08dd3eedd25be7faf59814e7069a961ba",
+    "status":  "PASS_EDITOR",
+    "note":  "Real saved Main during ongoing match; render dimensions and button bounds verified; not a human Android playtest",
+    "views":  [
+                  {
+                      "utc":  "2026-10-12T16:28:55.1976909Z",
+                      "width":  1280,
+                      "height":  720,
+                      "camera":  {
+                                     "left":  0.0,
+                                     "bottom":  127.333336,
+                                     "right":  1280.0,
+                                     "top":  605.3333
+                                 },
+                      "buttons":  [
+                                      {
+                                          "name":  "Pause",
+                                          "left":  1011.20007,
+                                          "bottom":  667.92,
+                                          "right":  1267.20007,
+                                          "top":  716.08
+                                      },
+                                      {
+                                          "name":  "Help",
+                                          "left":  12.7999649,
+                                          "bottom":  667.92,
+                                          "right":  159.999954,
+                                          "top":  716.08
+                                      },
+                                      {
+                                          "name":  "Mute",
+                                          "left":  172.799973,
+                                          "bottom":  667.92,
+                                          "right":  319.999969,
+                                          "top":  716.08
+                                      },
+                                      {
+                                          "name":  "Relay0",
+                                          "left":  12.7999821,
+                                          "bottom":  619.36,
+                                          "right":  413.866638,
+                                          "top":  660.64
+                                      },
+                                      {
+                                          "name":  "Relay1",
+                                          "left":  439.466644,
+                                          "bottom":  619.36,
+                                          "right":  840.5333,
+                                          "top":  660.64
+                                      },
+                                      {
+                                          "name":  "Relay2",
+                                          "left":  866.1334,
+                                          "bottom":  619.36,
+                                          "right":  1267.20007,
+                                          "top":  660.64
+                                      },
+                                      {
+                                          "name":  "Role0",
+                                          "left":  12.7999821,
+                                          "bottom":  5.83331442,
+                                          "right":  413.866638,
+                                          "top":  75.83331
+                                      },
+                                      {
+                                          "name":  "Role1",
+                                          "left":  439.466644,
+                                          "bottom":  5.83331442,
+                                          "right":  840.5333,
+                                          "top":  75.83331
+                                      },
+                                      {
+                                          "name":  "Role2",
+                                          "left":  866.1334,
+                                          "bottom":  5.83331442,
+                                          "right":  1267.20007,
+                                          "top":  75.83331
+                                      }
+                                  ],
+                      "topHeight":  84.0,
+                      "relayHeight":  72.0,
+                      "aspect":  "16x9"
+                  },
+                  {
+                      "utc":  "2026-10-12T16:30:11.5955775Z",
+                      "width":  1600,
+                      "height":  720,
+                      "camera":  {
+                                     "left":  0.0,
+                                     "bottom":  142.362991,
+                                     "right":  1600.0,
+                                     "top":  591.798767
+                                 },
+                      "buttons":  [
+                                      {
+                                          "name":  "Pause",
+                                          "left":  1264.0,
+                                          "bottom":  661.7728,
+                                          "right":  1584.0,
+                                          "top":  715.6173
+                                      },
+                                      {
+                                          "name":  "Help",
+                                          "left":  16.0000973,
+                                          "bottom":  661.7728,
+                                          "right":  200.000031,
+                                          "top":  715.6173
+                                      },
+                                      {
+                                          "name":  "Mute",
+                                          "left":  216.000015,
+                                          "bottom":  661.7728,
+                                          "right":  400.0,
+                                          "top":  715.6173
+                                      },
+                                      {
+                                          "name":  "Relay0",
+                                          "left":  16.0000515,
+                                          "bottom":  607.481,
+                                          "right":  517.3333,
+                                          "top":  653.6335
+                                      },
+                                      {
+                                          "name":  "Relay1",
+                                          "left":  549.3333,
+                                          "bottom":  607.481,
+                                          "right":  1050.66663,
+                                          "top":  653.6335
+                                      },
+                                      {
+                                          "name":  "Relay2",
+                                          "left":  1082.66663,
+                                          "bottom":  607.481,
+                                          "right":  1583.99988,
+                                          "top":  653.6335
+                                      },
+                                      {
+                                          "name":  "Role0",
+                                          "left":  16.0000515,
+                                          "bottom":  6.5218606,
+                                          "right":  517.3333,
+                                          "top":  84.78423
+                                      },
+                                      {
+                                          "name":  "Role1",
+                                          "left":  549.3333,
+                                          "bottom":  6.5218606,
+                                          "right":  1050.66663,
+                                          "top":  84.78423
+                                      },
+                                      {
+                                          "name":  "Role2",
+                                          "left":  1082.66663,
+                                          "bottom":  6.5218606,
+                                          "right":  1583.99988,
+                                          "top":  84.78423
+                                      }
+                                  ],
+                      "topHeight":  84.0,
+                      "relayHeight":  72.0,
+                      "aspect":  "20x9"
+                  },
+                  {
+                      "utc":  "2026-10-12T16:27:35.4321129Z",
+                      "width":  960,
+                      "height":  720,
+                      "camera":  {
+                                     "left":  0.0,
+                                     "bottom":  110.273895,
+                                     "right":  960.0,
+                                     "top":  620.6958
+                                 },
+                      "buttons":  [
+                                      {
+                                          "name":  "Pause",
+                                          "left":  758.4,
+                                          "bottom":  674.897461,
+                                          "right":  950.4,
+                                          "top":  716.6052
+                                      },
+                                      {
+                                          "name":  "Help",
+                                          "left":  9.599997,
+                                          "bottom":  674.897461,
+                                          "right":  119.999977,
+                                          "top":  716.6052
+                                      },
+                                      {
+                                          "name":  "Mute",
+                                          "left":  129.600021,
+                                          "bottom":  674.897461,
+                                          "right":  240.000015,
+                                          "top":  716.6052
+                                      },
+                                      {
+                                          "name":  "Relay0",
+                                          "left":  9.600011,
+                                          "bottom":  632.843262,
+                                          "right":  310.4,
+                                          "top":  668.5928
+                                      },
+                                      {
+                                          "name":  "Relay1",
+                                          "left":  329.600037,
+                                          "bottom":  632.843262,
+                                          "right":  630.4,
+                                          "top":  668.5928
+                                      },
+                                      {
+                                          "name":  "Relay2",
+                                          "left":  649.600037,
+                                          "bottom":  632.843262,
+                                          "right":  950.399963,
+                                          "top":  668.5928
+                                      },
+                                      {
+                                          "name":  "Role0",
+                                          "left":  9.600011,
+                                          "bottom":  5.051815,
+                                          "right":  310.4,
+                                          "top":  65.67359
+                                      },
+                                      {
+                                          "name":  "Role1",
+                                          "left":  329.600037,
+                                          "bottom":  5.051815,
+                                          "right":  630.4,
+                                          "top":  65.67359
+                                      },
+                                      {
+                                          "name":  "Role2",
+                                          "left":  649.600037,
+                                          "bottom":  5.051815,
+                                          "right":  950.399963,
+                                          "top":  65.67359
+                                      }
+                                  ],
+                      "topHeight":  84.0,
+                      "relayHeight":  72.0,
+                      "aspect":  "4x3"
+                  }
+              ]
+}
