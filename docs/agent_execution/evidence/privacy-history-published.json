@@ -1,0 +1,23 @@
+{
+  "status": "PUBLISHED_REMOTE_VERIFIED",
+  "sourceHead": "233a7928a99d7128c11ca28f0e636f2cdd03e5d6",
+  "candidateHead": "0b2badbf4e54d5f099dd990378b27ccb493f0303",
+  "expectedRemoteMain": "6fa7d41b99fc53073609737d87e8f095ea809efe",
+  "remoteUrl": "https://github.com/ZheleznovAG/SectorLab.git",
+  "originalCommits": 79,
+  "rewrittenCommits": 79,
+  "historicalRedactedBlobVersions": 87,
+  "currentTreeIdentical": true,
+  "allCodeAssetsIdentical": true,
+  "datesMessagesTopologyPreserved": true,
+  "gitleaksFindings": 0,
+  "authorCommitterNoreply": true,
+  "backupBundleVerified": true,
+  "lfsObjectsBackedUp": 38,
+  "preparedAtUtc": "2026-10-12T02:34:35.456201+00:00",
+  "publishedHead": "0b2badbf4e54d5f099dd990378b27ccb493f0303",
+  "publishedAtUtc": "2026-10-12T02:36:11.303440+00:00",
+  "leaseProtected": true,
+  "lfsUploadedBeforeRefChange": true,
+  "localRefsTransitionedWithoutChangingFiles": true
+}
