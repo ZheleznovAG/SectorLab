@@ -40,3 +40,4 @@ W9.1,W9,Update README ADR licenses tests,W8.3,"Doc review, no invented PASS",G9,
 W9.2,W9,Produce evidence and study walkthrough,W9.1,Links to real commits and files,G9,TODO,PASS,EVIDENCE_REPORT.md; STUDY_WALKTHROUGH.md; evidence/privacy-commit-map.txt
 W9.3,W9,Final Git and acceptance audit,W9.2,"Status, logs, acceptance report",G9,TODO,PASS,evidence/final-audit-W9.json; G7 and G8 remain open
 W8.2e,W8,Verify final APK in Android emulator,W8.1,Installed APK hash; native crash; Editor regression,G8,TODO,FAIL,ANDROID_EMULATOR.md; evidence/W8-emulator-resume.json; evidence/tests-W8-emulator-resume-playmode.json
+A0,W8,Leave Play Mode before verification refresh,W8.1,Start Main then run full EditMode from Play Mode,G8,TODO,PASS,evidence/tests-A0-from-play-editmode.json; evidence/A0-test-harness-in-play-failure.json
