@@ -22,6 +22,32 @@ TestRunner не смог сохранить сцену из Play Mode и зав�
 [полный EditMode](evidence/tests-A0-from-play-editmode.json): **63/63 PASS**.
 Изменение не сохраняет сцену и не меняет игровые данные.
 
+A0 зафиксирован в `8cb198a`. A1 / FR-003/013/027: роль теперь задаётся в
+`UnitStats.role`, существующие три профиля мигрированы явно. Lifecycle проверяет
+роль и team, HUD и AI не используют имя ассета как идентификатор.
+GUID/характеристики/NavMesh/состав roster сохранены. Решение —
+[ADR-009](../adr/009-explicit-unit-role.md).
+На старом коде [rename regression](evidence/tests-A1-role-before-retry-playmode.json)
+завершилась ожидаемым FAIL. После исправления
+[MainLifecycle 6/6](evidence/tests-A1-role-focused-playmode.json) PASS, включая
+respawn шести переименованных профилей и отказ/cleanup при неправильной role.
+[EditMode 63/63](evidence/tests-A1-role-editmode.json) PASS.
+[Полная PlayMode регрессия](evidence/tests-A1-role-playmode.json): **114/114 PASS**.
+Два DI exceptions в консоли совпали с ожидаемыми `LogAssert.Expect` в
+`MatchScopeTests.UnwiredBattle…/UnwiredEnemy…`; оба теста PASS. Они не означают
+отсутствия GameLifetimeScope в сохранённой Main. Штатный запуск проверяется отдельно
+после очистки этих уже подтверждённых ожидаемых записей.
+[Обычная сохранённая Main](evidence/A1-role-editor-smoke.json): Ready, естественный
+бой и начисление очков, compilationFailed=false, consoleErrors=0.
+
+Ручной отзыв пользователя с физического телефона на исходном APK:
+звук не позволяет понять событие; тап по узлу с союзником выбирает этого союзника
+вместо отправки выбранного бойца; назначения ролей и эффекты узлов не ощущаются.
+Итоговый счёт и mute не подтверждены. Приоритет следующих малых правок:
+приказ занятому узлу → читаемые роли/эффекты и компактный HUD → различимые SFX.
+Это конкретные UX-дефекты/наблюдения; новые способности и баланс без проверки
+не добавляются, человеческая приёмка G7 остаётся открыта.
+
 ## Где остановились до внешнего аудита
 
 12.10.2026: игровой checkpoint `0ae98c8`. По отзыву пользователя поднят
@@ -208,7 +234,7 @@ diff; другие настройки проекта не затронуты.
 | --- | --- | --- |
 | FR-001 | BLOCKED_DEVICE | Контент локальный; offline helper прервался при сборе evidence, повторный запуск ожидает USB-устройство / W8 |
 | FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
-| FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
+| FR-003 | PASS | Явный UnitStats.role; шесть слотов проходят spawn/respawn даже после переименования профилей; неверная role вызывает cleanup / A1 |
 | FR-004 | PASS | Mouse/virtual touch и HUD выбирают/двигают реальные units; UI/drag/pinch не выдают случайный приказ / W6 |
 | FR-005 | PASS | Атака/дальность/LOS/погоня проверены текущей регрессией 112/112 |
 | FR-006 | PASS | Release tap/drag/pinch/cancel/UI tests, bounded camera; пользователь подтвердил swipe/pinch на телефоне W6-G6 |
@@ -218,7 +244,7 @@ diff; другие настройки проекта не затронуты.
 | FR-010 | PASS | Health.Heal и C: 6 HP/с обеим сторонам, Max, fractional buffer, смерть/уход/contest/pause/finish проверены |
 | FR-011 | PASS | MatchRules/BattleController: 45 очков/180 с/Draw и реальный доход A/B; scripted Main outcomes / W1–W7 |
 | FR-012 | PASS | MatchClock, pause HUD, frozen capture/heal/AI/respawn/attack, первый готовый выстрел ждёт Resume / W5–W7 |
-| FR-013 | PASS | Main: все роли обеих команд, 10 игровых с, full HP, без дублей; pause и blocked base / W5.5 |
+| FR-013 | PASS | Main: все роли обеих команд, 10 игровых с, full HP, без дублей; pause, blocked base и переименованные профили / A1 |
 | FR-014 | PASS | EnemyDecisionRules + EnemyTacticsController в Main; 1 решение/игровую с, реальные move/capture/attack и stable assignments проверены |
 | FR-015 | PASS | HUD очков/времени/узлов/HP/respawn/выбора и pause: W6.3, 103 PlayMode; Player и форматы проверяются G6 |
 | FR-016 | PASS | Result/Restart останавливают ввод/бой/AI, отменяют pending respawn, не создают поздних units / W3–W7 |
@@ -237,7 +263,7 @@ diff; другие настройки проекта не затронуты.
 | NFR-001 | PASS | Unity 6000.6.4f1 / 12bfff696524, manifest/lock проверены; Editor не обновлялся |
 | NFR-002 | PASS | Публичный clone без Library/Temp/Builds: import и 63/63 EditMode; после исправления frame waits 112/112 headless PlayMode, реальные Main/AA loads/cleanup |
 | NFR-003 | PARTIAL | Editor compilation/регрессия PASS; baseline native probe подтверждён, отсутствие новых ошибок на финальном Android требует завершённого device log |
-| NFR-004 | PASS | W8: 63/63 EditMode и 112/112 PlayMode после группового исправления, failed/skipped/inconclusive=0; source inputHashes сохранены |
+| NFR-004 | PASS | A1: 63/63 EditMode и 114/114 PlayMode, failed/skipped/inconclusive=0; source inputHashes сохранены |
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
 | NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
 | NFR-007 | PASS | Repository gate проверяет уникальность GUID, .meta и связи; настоящий Main/prefab loads проходят |

@@ -50,7 +50,7 @@ namespace SectorLab.Tests
                     {
                         Unit unit = Unit.All[i];
                         if (unit.Team != Team.Player) continue;
-                        int relayIndex = plans[run] != "split" ? 0 : unit.Stats.name == "Tank" ? 0 : unit.Stats.name == "Scout" ? 1 : 2;
+                        int relayIndex = plans[run] != "split" ? 0 : unit.Stats.role == UnitRole.Tank ? 0 : unit.Stats.role == UnitRole.Scout ? 1 : 2;
                         RelayPoint relay = battle.Relays[relayIndex];
                         Assert.That(relay.TryGetApproachPoint(unit, out Vector3 point), Is.True);
                         Assert.That(unit.Movement.MoveTo(point, relay.GetArrivalDistance(point)), Is.True);
@@ -66,7 +66,7 @@ namespace SectorLab.Tests
                         for (int i = 0; i < Unit.All.Count; i++)
                         {
                             Unit unit = Unit.All[i];
-                            if (unit.Team != Team.Player || unit.Stats.name != "Scout") continue;
+                            if (unit.Team != Team.Player || unit.Stats.role != UnitRole.Scout) continue;
                             RelayPoint relay = battle.Relays[1];
                             if (relay.TryGetApproachPoint(unit, out Vector3 point) && unit.Movement.MoveTo(point, relay.GetArrivalDistance(point)))
                             {
