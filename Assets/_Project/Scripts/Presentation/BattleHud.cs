@@ -161,7 +161,7 @@ namespace SectorLab.Presentation
                 {
                     unitKeys[i] = unitKey;
                     string role = ((UnitRole)i).ToString();
-                    unitLabels[i].text = alive ? $"{role}\n{hp}/{unit.Health.Max} HP"
+                    unitLabels[i].text = alive ? $"{role} · {RolePurpose((UnitRole)i)}\n{hp}/{unit.Health.Max} HP"
                         : slot == null ? role : slot.IsSpawning ? role + "\nВозвращается…"
                         : slot.Respawn.IsWaiting ? role + $"\nВозврат: {Math.Max(0, respawn)} с" : role + "\nОжидание";
                 }
@@ -175,8 +175,15 @@ namespace SectorLab.Presentation
                 shownSelection = selected;
                 selectedHp = currentHp;
                 selection.text = selected == null ? "Выберите бойца на поле или снизу. Тап по узлу — занять, по врагу — атаковать."
-                    : $"{selected.Stats.role} • {currentHp}/{selected.Health.Max} HP • урон {selected.Stats.damage} • дальность {selected.Stats.attackRange:0.#} • скорость {selected.Stats.speed:0.#}";
+                    : $"{selected.Stats.role} · {RoleAdvice(selected.Stats.role)}\n{currentHp}/{selected.Health.Max} HP · удар {selected.Stats.damage} / {selected.Stats.attackCooldown:0.#} с · дальность {selected.Stats.attackRange:0.#} · скорость {selected.Stats.speed:0.#}";
             }
         }
+
+        private static string RolePurpose(UnitRole role) => role == UnitRole.Tank ? "защита"
+            : role == UnitRole.Scout ? "манёвр" : "дальний бой";
+
+        private static string RoleAdvice(UnitRole role) => role == UnitRole.Tank ? "живучий: удерживайте узел"
+            : role == UnitRole.Scout ? "быстрый, но хрупкий: обходите бой"
+            : "стреляет издалека: прикрывайте союзника";
     }
 }
