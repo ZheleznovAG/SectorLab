@@ -86,7 +86,7 @@ diff; другие настройки проекта не затронуты.
 | W4 / G4 | PASS | VContainer 1.19.0, настоящий scope Clock/State/Battle/AI; 72/72 PlayMode, missing injection и reload |
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
-| W7 / G7 | IN_PROGRESS | W7.1: SFX/mute и 110 PlayMode PASS; далее симметрия арены, баланс и человеческий плейтест |
+| W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик; остаётся человеческий плейтест |
 | W8 / G8 | TODO | Финальная регрессия, локальный content+APK, Android/профилирование |
 | W9 / G9 | TODO | Финальный README, ADR, лицензии, evidence и учебная карта |
 
@@ -99,7 +99,7 @@ diff; другие настройки проекта не затронуты.
 | ID | Статус | Фактическая граница / пакет завершения |
 | --- | --- | --- |
 | FR-001 | PARTIAL | Сетевой службы нет; запуск APK офлайн не проверен / W8 |
-| FR-002 | PARTIAL | Main с ареной сверху существует; новая партия ещё не реализована / W2–W3 |
+| FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
 | FR-003 | PASS | Шесть Main slots используют прежние UnitStats/prefabs; обе команды/все роли прошли spawn и respawn / W5.5 |
 | FR-004 | BASELINE_PASS | Click и virtual Touchscreen выбирают/двигают юнита / W6 |
 | FR-005 | BASELINE_PASS | Атака/дальность/LOS/погоня проверены текущей регрессией |
@@ -720,3 +720,22 @@ Audio preference восстановлен. [Результат](evidence/W7.1-au
 иначе на другом checkout можно потерять автоматическую доставку LFS objects.
 Обзор всех четырёх файлов: только стандартные вызовы git lfs, приватных значений нет.
 Это локальная настройка/фиксация hooks; push не выполнялся.
+
+W7.2 / FR-002/003/014/026: исправлена реальная асимметрия старых узлов, баз
+и боковых препятствий. Существующие объекты/префабы/UnitStats сохранены,
+NavMesh перепечена с прежним GUID. [ADR-006](../adr/006-fair-arena-and-measured-tactics.md)
+фиксирует решения и промежуточные FAIL, исходная сетка сохранена вне Git.
+**112/112 PlayMode PASS** ([JSON](evidence/tests-W7.2-final-playmode.json)),
+включая реальные спавны, 18 маршрутов, равные данные ролей, 10 restarts и cleanup.
+Два прежних teardown теперь ждут физического завершения отменённого IO максимум
+5 с и на каждом кадре требуют отсутствие позднего юнита; production ownership
+не ослаблен. Первый и второй прогоны 109/112 и 111/112 сохранены отдельно.
+
+После полной регрессии расширен только измеряющий тест тактик: **1/1 focused PASS**
+([JSON](evidence/tests-W7.2-tactics-playmode.json)). Пять [реальных партий](evidence/W7.2-tactics-sustained-plans.csv)
+содержат Victory ремонтной ротации 45:39 за 81,8 с, 21 приказ, 6/12 смертей;
+остальные четыре дали Defeat. Это измерения, не человеческая игра и не обещание
+победы одного плана. [Снимок](evidence/W7.2-arena.png) просмотрен, фактический
+1280×720; [Main на паузе](evidence/W7.2-arena-observation.txt): Ready, 6 units/handles,
+elapsed 0,3 с. Optional TestFilter wrapper проверен настоящим focused запуском.
+W7.2 implementation PASS; G7 остаётся IN_PROGRESS до человека. Следующий пакет W8.

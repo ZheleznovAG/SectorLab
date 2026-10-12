@@ -49,6 +49,8 @@
     ] },
     { "id": "G7", "status": "IN_PROGRESS", "checks": [
       { "name": "Actual shot capture result audio and persistent mute", "status": "PASS", "evidence": "evidence/tests-W7.1-playmode.json" },
+      { "name": "Mirrored physical spawns and eighteen real relay routes", "status": "PASS", "evidence": "evidence/tests-W7.2-final-playmode.json" },
+      { "name": "Five sustained plans including a natural repair-rotation victory", "status": "PASS", "evidence": "evidence/W7.2-tactics-sustained-plans.csv" },
       { "name": "Human understandable full match playtest", "status": "TODO", "evidence": "" }
     ] },
     { "id": "G8", "status": "TODO", "checks": [] },

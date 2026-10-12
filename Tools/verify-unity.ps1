@@ -1,6 +1,7 @@
 param(
     [ValidateSet('EditMode', 'PlayMode')] [string] $Mode = 'EditMode',
-    [Parameter(Mandatory = $true)] [ValidatePattern('^[A-Za-z0-9._-]+$')] [string] $Task
+    [Parameter(Mandatory = $true)] [ValidatePattern('^[A-Za-z0-9._-]+$')] [string] $Task,
+    [string] $TestFilter = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -47,12 +48,14 @@ do {
 } while ($stableSamples -lt 3 -or $timer.Elapsed.TotalSeconds -lt 3)
 
 $assembly = 'SectorLab.Tests.' + $Mode
+$filterType = if ([string]::IsNullOrWhiteSpace($TestFilter)) { 'assembly' } else { 'testName' }
+$filter = if ($filterType -eq 'assembly') { $assembly } else { $TestFilter }
 $taskContextPath = 'Temp/verification-task.cs'
 # Editor runs in another process; pass the evidence task explicitly before starting its tests.
 ('System.Environment.SetEnvironmentVariable("SECTORLAB_VERIFICATION_TASK", "' + $Task + '");') |
     Set-Content -LiteralPath $taskContextPath -Encoding UTF8
 $null = Invoke-Editor @('eval_file', '--file', $taskContextPath)
-$null = Invoke-Editor @('run_tests', '--mode', $Mode, '--filter_type', 'assembly', '--filter', $assembly, '--async_tests', 'true')
+$null = Invoke-Editor @('run_tests', '--mode', $Mode, '--filter_type', $filterType, '--filter', $filter, '--async_tests', 'true')
 $timer.Restart()
 do {
     Start-Sleep -Seconds 2
@@ -63,7 +66,7 @@ do {
 $record = [PSCustomObject]@{
     task = $Task; mode = $Mode; sourceHead = $sourceHead
     startedAtUtc = $started; completedAtUtc = [DateTime]::UtcNow.ToString('o')
-    command = ('unity command run_tests --mode ' + $Mode + ' --filter_type assembly --filter ' + $assembly + ' --async_tests true')
+    command = ('unity command run_tests --mode ' + $Mode + ' --filter_type ' + $filterType + ' --filter ' + $filter + ' --async_tests true')
     inputHashes = $inputHashes; response = $status
 }
 $logPath = 'docs/agent_execution/evidence/tests-' + $Task + '-' + $Mode.ToLowerInvariant() + '.json'

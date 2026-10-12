@@ -16,24 +16,24 @@ MonoBehaviour:
   - team: 0
     role: 0
     prefabKey: units/Tank
-    position: {x: -3, y: 0, z: -3.4}
+    position: {x: -3, y: 0, z: -3.8}
   - team: 0
     role: 1
     prefabKey: units/Scout
-    position: {x: 0, y: 0, z: -3}
+    position: {x: 0, y: 0, z: -3.8}
   - team: 0
     role: 2
     prefabKey: units/Ranger
-    position: {x: 3, y: 0, z: -3.4}
+    position: {x: 3, y: 0, z: -3.8}
   - team: 1
     role: 0
     prefabKey: units/EnemyTank
-    position: {x: 3, y: -0, z: 3.4}
+    position: {x: 3, y: -0, z: 3.8}
   - team: 1
     role: 1
     prefabKey: units/EnemyScout
-    position: {x: -0, y: -0, z: 3}
+    position: {x: -0, y: -0, z: 3.8}
   - team: 1
     role: 2
     prefabKey: units/EnemyRanger
-    position: {x: -3, y: -0, z: 3.4}
+    position: {x: -3, y: -0, z: 3.8}
