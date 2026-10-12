@@ -74,6 +74,25 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator WorldTapOnOccupiedRelayKeepsTheRoleSelectedByItsCard()
+        {
+            Unit tank = lifecycle.Slots[0].Unit, scout = lifecycle.Slots[1].Unit;
+            var relay = battle.Relays[0];
+            Assert.That(relay.TryGetApproachPoint(scout, out Vector3 point), Is.True);
+            Assert.That(scout.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(point), Is.True);
+            Physics.SyncTransforms();
+            Canvas.ForceUpdateCanvases();
+            yield return null;
+            Field<Button[]>(hud, "unitButtons")[0].onClick.Invoke();
+            Vector2 tap = Camera.main.WorldToScreenPoint(scout.transform.position);
+            Assert.That(commander.IsOverUi(tap), Is.False);
+            commander.HandleTap(tap);
+            Assert.That(commander.Selected, Is.SameAs(tank));
+            Assert.That(tank.Movement.IsMoving, Is.True);
+            Assert.That(Vector3.Distance(tank.Movement.Destination, point), Is.LessThan(0.1f));
+        }
+
+        [UnityTest]
         public IEnumerator PauseButtonFreezesClockAndHudShowsAuthoritativeScoreAndTime()
         {
             battle.State.Tick(1, 3, 2);
