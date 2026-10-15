@@ -57,6 +57,14 @@ G7: пункты 2, 3, 5, 6 подтверждены человеком; 1 и 7 
 [полная PlayMode 126/126](evidence/tests-B1-full-playmode-playmode.json) PASS.
 Проверка пальцем — на следующем APK.
 
+**B3 / баланс.** Урон снижен ~в 2,5 раза (Tank 5, Scout 6, Ranger 9), HP прежние —
+[ADR-011](../adr/011-longer-fights.md). [Тактики](evidence/B3-tactics-sustained-plans.csv):
+3 победы / 2 поражения вместо 0/5; [MainTactics 1/1](evidence/tests-B3-tactics-playmode.json),
+[MainMatch 1/1](evidence/tests-B3-matches-playmode.json) PASS. Полная регрессия после B3
+ещё не запускалась. Осталось: B4 (приоритет обхода NavMesh у бойца с приказом),
+B2 (цветная рамка поля «кто выигрывает» + подпись при смене лидера), полная регрессия,
+новый APK и установка на телефон.
+
 ## Продолжение после внешнего аудита 12.10.2026
 
 Пользователь предоставил аудит снимка `dccfe6c` и поручил продолжить разработку.
