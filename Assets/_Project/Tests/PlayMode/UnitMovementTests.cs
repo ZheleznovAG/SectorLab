@@ -145,6 +145,27 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator OrderedUnitGetsPastAnIdleUnitInANarrowPassage()
+        {
+            TestArena.CreateBlock(root.transform, new Vector3(0f, 0.5f, 1.3f), new Vector3(10f, 1f, 1f));
+            TestArena.CreateBlock(root.transform, new Vector3(0f, 0.5f, -1.3f), new Vector3(10f, 1f, 1f));
+            TestArena.Bake(root);
+            UnitMovement idle = CreateUnit(Vector3.zero);
+            UnitMovement mover = CreateUnit(new Vector3(-4f, 0f, 0f));
+            var destination = new Vector3(4f, 0f, 0f);
+            yield return null;
+            Assert.That(mover.MoveTo(destination), Is.True);
+
+            float deadline = Time.time + 8f;
+            while (Time.time < deadline && mover.IsMoving)
+                yield return null;
+
+            Assert.That(FlatDistance(mover.transform.position, destination), Is.LessThan(0.5f),
+                "A standing ally must not block an ordered unit in a passage");
+            Assert.That(idle.IsMoving, Is.False);
+        }
+
+        [UnityTest]
         public IEnumerator Stop_HaltsMovement()
         {
             TestArena.Bake(root);

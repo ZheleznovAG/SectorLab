@@ -12,6 +12,12 @@ namespace SectorLab.Units
         [Tooltip("How close to the destination counts as arrived.")]
         [SerializeField, Min(0.01f)] private float arriveDistance = 0.1f;
 
+        // Lower value = more important. An agent ignores less important agents in its own
+        // avoidance, so a unit under orders walks on and a standing unit is pushed aside
+        // instead of blocking a passage. The same rule applies to both teams.
+        public const int MovingPriority = 30;
+        public const int IdlePriority = 70;
+
         private NavMeshAgent agent;
 
         public bool IsMoving { get; private set; }
@@ -24,6 +30,7 @@ namespace SectorLab.Units
         private void Awake()
         {
             Agent.speed = speed;
+            Agent.avoidancePriority = IdlePriority;
         }
 
         public void Configure(float newSpeed)
@@ -48,12 +55,14 @@ namespace SectorLab.Units
             }
             Destination = point;
             IsMoving = true;
+            Agent.avoidancePriority = MovingPriority;
             return true;
         }
 
         public void Stop()
         {
             IsMoving = false;
+            Agent.avoidancePriority = IdlePriority;
             if (Agent.isActiveAndEnabled && Agent.isOnNavMesh)
             {
                 Agent.ResetPath();
