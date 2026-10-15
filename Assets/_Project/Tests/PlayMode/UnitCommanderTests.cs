@@ -133,7 +133,25 @@ namespace SectorLab.Tests
         }
 
         [Test]
-        public void TapOnAllyInsideRelayOrdersSelectedUnitInsteadOfChangingSelection()
+        public void TapOnRelayBesideAllyOrdersSelectedUnitInsteadOfChangingSelection()
+        {
+            var relay = CreateTapRelay();
+            SetField(enemy, "team", Team.Player);
+            enemy.transform.position = relay.transform.position + Vector3.up;
+            Physics.SyncTransforms();
+            Assert.That(commander.SelectFriendly(unit), Is.True);
+
+            // Next to the ally, on the relay surface rather than its body.
+            commander.HandleTap(ScreenPoint(relay.transform.position + Vector3.right));
+
+            Assert.That(commander.Selected, Is.SameAs(unit));
+            Assert.That(unit.Movement.IsMoving, Is.True);
+            Assert.That(Vector3.Distance(unit.Movement.Destination, relay.transform.position), Is.LessThan(0.2f));
+            Assert.That(marker.gameObject.activeSelf, Is.True);
+        }
+
+        [Test]
+        public void DirectTapOnAllyInsideRelaySelectsItWhileAnotherUnitIsSelected()
         {
             var relay = CreateTapRelay();
             SetField(enemy, "team", Team.Player);
@@ -143,10 +161,10 @@ namespace SectorLab.Tests
 
             commander.HandleTap(ScreenPoint(enemy.transform.position));
 
-            Assert.That(commander.Selected, Is.SameAs(unit));
-            Assert.That(unit.Movement.IsMoving, Is.True);
-            Assert.That(Vector3.Distance(unit.Movement.Destination, relay.transform.position), Is.LessThan(0.2f));
-            Assert.That(marker.gameObject.activeSelf, Is.True);
+            Assert.That(commander.Selected, Is.SameAs(enemy));
+            Assert.That(unit.Movement.IsMoving, Is.False);
+            Assert.That(enemy.Movement.IsMoving, Is.False);
+            Assert.That(marker.gameObject.activeSelf, Is.False);
         }
 
         private SectorLab.Objectives.RelayPoint CreateTapRelay()
@@ -209,7 +227,7 @@ namespace SectorLab.Tests
             Physics.SyncTransforms();
             Assert.That(commander.SelectFriendly(unit), Is.True);
             var screen = InputSystem.AddDevice<Touchscreen>();
-            Vector2 tap = ScreenPoint(enemy.transform.position);
+            Vector2 tap = ScreenPoint(relay.transform.position + Vector3.right);
             BeginTouch(1, tap, queueEventOnly: true, screen: screen);
             yield return null;
             Assert.That(unit.Movement.IsMoving, Is.False);
