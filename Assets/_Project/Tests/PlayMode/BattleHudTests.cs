@@ -88,12 +88,36 @@ namespace SectorLab.Tests
             Canvas.ForceUpdateCanvases();
             yield return null;
             Field<Button[]>(hud, "unitButtons")[0].onClick.Invoke();
-            Vector2 tap = Camera.main.WorldToScreenPoint(scout.transform.position);
+            // Free relay surface on the far side from the scout, not the scout's body.
+            Vector3 away = relay.transform.position - scout.transform.position;
+            away.y = 0;
+            if (away.sqrMagnitude < 0.01f) away = Vector3.right;
+            Vector3 surface = relay.transform.position + away.normalized * relay.Config.radius * 0.6f;
+            Vector2 tap = Camera.main.WorldToScreenPoint(surface);
             Assert.That(commander.IsOverUi(tap), Is.False);
+            Assert.That(relay.TryGetApproachPoint(tank, out Vector3 tankPoint), Is.True);
             commander.HandleTap(tap);
             Assert.That(commander.Selected, Is.SameAs(tank));
             Assert.That(tank.Movement.IsMoving, Is.True);
-            Assert.That(Vector3.Distance(tank.Movement.Destination, point), Is.LessThan(0.1f));
+            Assert.That(Vector3.Distance(tank.Movement.Destination, tankPoint), Is.LessThan(0.1f));
+        }
+
+        [UnityTest]
+        public IEnumerator DirectWorldTapOnAllyAtRelaySelectsIt()
+        {
+            Unit tank = lifecycle.Slots[0].Unit, scout = lifecycle.Slots[1].Unit;
+            var relay = battle.Relays[0];
+            Assert.That(relay.TryGetApproachPoint(scout, out Vector3 point), Is.True);
+            Assert.That(scout.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(point), Is.True);
+            Physics.SyncTransforms();
+            Canvas.ForceUpdateCanvases();
+            yield return null;
+            Field<Button[]>(hud, "unitButtons")[0].onClick.Invoke();
+            Vector2 tap = Camera.main.WorldToScreenPoint(scout.transform.position);
+            Assert.That(commander.IsOverUi(tap), Is.False);
+            commander.HandleTap(tap);
+            Assert.That(commander.Selected, Is.SameAs(scout));
+            Assert.That(tank.Movement.IsMoving, Is.False);
         }
 
         [UnityTest]

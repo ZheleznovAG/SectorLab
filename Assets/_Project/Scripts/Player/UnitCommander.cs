@@ -151,9 +151,10 @@ namespace SectorLab.Player
             bool hasHit = Physics.Raycast(ray, out RaycastHit hit, maxTapDistance, tapMask, QueryTriggerInteraction.Ignore);
 
             Unit unit = hasHit ? hit.collider.GetComponentInParent<Unit>() : null;
-            // A selected unit can join an occupied relay. Its trigger must not lose to
-            // an ally or the finger tolerance; a directly tapped enemy still means attack.
-            if (Selected != null && (unit == null || unit.Team == Team.Player)
+            // A selected unit can join an occupied relay: a tap on the relay surface beside
+            // an ally must not lose to the finger tolerance. A directly tapped unit keeps its
+            // usual meaning — select an ally, attack an enemy.
+            if (Selected != null && unit == null
                 && Physics.Raycast(ray, out RaycastHit relayHit, maxTapDistance,
                     tapMask.value & ~unitLayerMask, QueryTriggerInteraction.Collide))
             {
