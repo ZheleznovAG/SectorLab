@@ -144,6 +144,37 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator LeadFrameAndNoticeFollowTheForecastWinner()
+        {
+            var audio = Object.FindFirstObjectByType<MatchAudio>();
+            hud.Refresh();
+            Assert.That(hud.LeadFrameVisible, Is.False, "Nobody is ahead at the start");
+
+            Unit tank = lifecycle.Slots[0].Unit;
+            Unit enemyA = lifecycle.Slots[4].Unit, enemyB = lifecycle.Slots[5].Unit;
+            Vector3 a = battle.Relays[0].transform.position, b = battle.Relays[1].transform.position;
+            Assert.That(tank.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(a), Is.True);
+            battle.AdvanceSimulation(5.1);
+            hud.Refresh();
+            Assert.That(hud.ShownForecast, Is.EqualTo(BattleOutcome.Victory));
+            Assert.That(hud.LeadFrameVisible, Is.True);
+            Assert.That(hud.LeadFrameColor.b, Is.GreaterThan(hud.LeadFrameColor.r));
+            battle.AdvanceSimulation(1.1);
+            Assert.That(audio.LastNotice, Does.Contain("вы побеждаете"));
+
+            // Contesting A stops the player's income while the enemy takes B.
+            Assert.That(enemyA.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(a + Vector3.right * 0.8f), Is.True);
+            Assert.That(enemyB.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(b), Is.True);
+            battle.AdvanceSimulation(5.1);
+            hud.Refresh();
+            Assert.That(hud.ShownForecast, Is.EqualTo(BattleOutcome.Defeat));
+            Assert.That(hud.LeadFrameColor.r, Is.GreaterThan(hud.LeadFrameColor.b));
+            battle.AdvanceSimulation(1.1);
+            Assert.That(audio.LastNotice, Does.Contain("побеждает враг"));
+            yield return null;
+        }
+
+        [UnityTest]
         public IEnumerator HeaderShowsWorkingIncomeAndItsLossDuringContestAndPause()
         {
             Unit tank = lifecycle.Slots[0].Unit, enemy = lifecycle.Slots[4].Unit;

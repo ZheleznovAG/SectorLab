@@ -29,6 +29,36 @@ namespace SectorLab.Battle
             return playerScore > enemyScore ? BattleOutcome.Victory : BattleOutcome.Defeat;
         }
 
+        // Who wins if the current income stays as it is: whoever reaches the limit first,
+        // otherwise the higher score at the time limit. Draw means nobody is ahead.
+        public static BattleOutcome Forecast(double playerScore, double enemyScore,
+            double playerRate, double enemyRate, double remainingSeconds)
+        {
+            if (!IsValid(playerScore) || !IsValid(enemyScore) || !IsValid(playerRate)
+                || !IsValid(enemyRate) || !IsValid(remainingSeconds))
+                throw new ArgumentOutOfRangeException("Forecast values must be finite and nonnegative.");
+
+            double playerTime = SecondsToLimit(playerScore, playerRate);
+            double enemyTime = SecondsToLimit(enemyScore, enemyRate);
+            if (Math.Min(playerTime, enemyTime) <= remainingSeconds + Epsilon)
+            {
+                if (Math.Abs(playerTime - enemyTime) < Epsilon)
+                    return BattleOutcome.Draw;
+                return playerTime < enemyTime ? BattleOutcome.Victory : BattleOutcome.Defeat;
+            }
+            double player = playerScore + playerRate * remainingSeconds;
+            double enemy = enemyScore + enemyRate * remainingSeconds;
+            if (Math.Abs(player - enemy) < Epsilon)
+                return BattleOutcome.Draw;
+            return player > enemy ? BattleOutcome.Victory : BattleOutcome.Defeat;
+        }
+
+        private static double SecondsToLimit(double score, double rate)
+        {
+            if (score >= ScoreLimit - Epsilon) return 0;
+            return rate > Epsilon ? (ScoreLimit - score) / rate : double.PositiveInfinity;
+        }
+
         internal static bool IsValid(double value) => value >= 0 && !double.IsInfinity(value) && !double.IsNaN(value);
     }
 }
