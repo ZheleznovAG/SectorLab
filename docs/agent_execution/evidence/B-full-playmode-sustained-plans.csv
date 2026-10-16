@@ -1,0 +1,6 @@
+utc,plan,game_seconds,player_score,enemy_score,outcome,player_orders,player_deaths,enemy_deaths,player_captures,enemy_captures
+2026-10-16T02:18:33.6782926Z,split-pressure,93.2,41.3,45.0,Defeat,15,10,7,2,8
+2026-10-16T02:18:58.2257655Z,hold-then-flank,95.2,38.2,45.0,Defeat,18,10,5,2,7
+2026-10-16T02:19:16.5233166Z,repair-rotation,70.3,16.9,45.0,Defeat,21,3,8,3,5
+2026-10-16T02:19:40.5369356Z,cover-B-intercept-A,93.4,45.0,22.6,Victory,17,9,5,3,7
+2026-10-16T02:20:05.3802192Z,take-B-then-flank-A,96.4,35.2,45.0,Defeat,18,9,7,3,10

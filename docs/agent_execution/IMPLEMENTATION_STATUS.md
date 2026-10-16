@@ -81,7 +81,15 @@ HUD рисует рамку толщиной 10 по краю поля в цве
 [HUD 9/9](evidence/tests-B2-hud-playmode.json) (захват A → синяя рамка и подпись;
 спор A + вражеский B → красная), [звук 4/4](evidence/tests-B2-audio-playmode.json) PASS.
 [Game View в живой партии](evidence/B2-lead-frame-16x9.png) просмотрен: красная рамка при 0:9.
-Осталось: полная регрессия, новый APK, установка и повторная партия.
+
+**Итог B1–B4.** На `5e50114`: [EditMode 68/68](evidence/tests-B-full-editmode-editmode.json),
+[полная PlayMode 128/128](evidence/tests-B-full-playmode-playmode.json) PASS.
+[Android-сборка](evidence/android-build-B-feedback.json) Succeeded, 0 errors, 1 warning:
+`Builds/Android/SectorLab-B-feedback.apk`, 32 314 013 bytes, SHA-256
+`849B4F0708550133FB4407F9294F1F3A3FC804EFEA5A054F4BBB5166869D9896`.
+Сборка снова добавила Input System в `preloadedAssets`; прежний пустой список восстановлен.
+Установка не выполнена: на момент сборки телефон не был подключён (`adb devices` пуст).
+Осталось: установка, повторная партия владельца (проверить B1–B4 пальцем).
 
 ## Продолжение после внешнего аудита 12.10.2026
 
