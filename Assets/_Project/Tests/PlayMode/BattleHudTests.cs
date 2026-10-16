@@ -189,7 +189,7 @@ namespace SectorLab.Tests
             hud.Refresh();
             Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+0 очк/с"));
             Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("эффект остановлен"));
-            Assert.That(battle.Relays[0].GetComponentInChildren<TextMesh>().text, Does.Contain("СПОР").And.Contain("эффект остановлен"));
+            Assert.That(battle.Relays[0].GetComponentInChildren<TextMesh>().text, Is.EqualTo("A\nСПОР"));
             battle.SetPaused(true);
             hud.Refresh();
             Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("ПАУЗА"));
@@ -207,7 +207,7 @@ namespace SectorLab.Tests
             hud.Refresh();
             Assert.That(tank.Health.Current, Is.GreaterThan(damaged));
             Assert.That(Field<Text[]>(hud, "relayLabels")[2].text, Does.Contain("+6 HP/с").And.Contain("ремонтирует"));
-            Assert.That(battle.Relays[2].GetComponentInChildren<TextMesh>().text, Does.Contain("+6 HP/с").And.Contain("ремонт"));
+            Assert.That(battle.Relays[2].GetComponentInChildren<TextMesh>().text, Is.EqualTo("C\nремонт"));
             Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+0 очк/с"));
             yield return null;
         }

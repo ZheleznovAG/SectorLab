@@ -516,6 +516,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 312d168334ac846498b208681d058066, type: 2}
   areaRenderer: {fileID: 566043752}
   statusLabel: {fileID: 266741428}
+  ringMaterial: {fileID: 2100000, guid: dc9fff3e91bb5bc4ca7c358ab7deb3c7, type: 2}
 --- !u!135 &100667469
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1082,7 +1083,7 @@ TextMesh:
   m_GameObject: {fileID: 266741426}
   m_Text: B
   m_OffsetZ: 0
-  m_CharacterSize: 0.07
+  m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
@@ -2321,6 +2322,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 459b88516e02b5f408ab39d6e6209372, type: 2}
   areaRenderer: {fileID: 1843766637}
   statusLabel: {fileID: 1401477665}
+  ringMaterial: {fileID: 2100000, guid: dc9fff3e91bb5bc4ca7c358ab7deb3c7, type: 2}
 --- !u!135 &632502978
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3115,7 +3117,7 @@ TextMesh:
   m_GameObject: {fileID: 847482573}
   m_Text: C
   m_OffsetZ: 0
-  m_CharacterSize: 0.07
+  m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
@@ -4604,7 +4606,7 @@ TextMesh:
   m_GameObject: {fileID: 1401477663}
   m_Text: A
   m_OffsetZ: 0
-  m_CharacterSize: 0.07
+  m_CharacterSize: 0.1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
@@ -6902,6 +6904,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: a71f4aa5b4df51c4d8bc33dbde74e7f5, type: 2}
   areaRenderer: {fileID: 1582250677}
   statusLabel: {fileID: 847482575}
+  ringMaterial: {fileID: 2100000, guid: dc9fff3e91bb5bc4ca7c358ab7deb3c7, type: 2}
 --- !u!135 &2036696837
 SphereCollider:
   m_ObjectHideFlags: 0
