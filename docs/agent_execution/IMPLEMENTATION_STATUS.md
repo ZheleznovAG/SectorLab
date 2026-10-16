@@ -27,6 +27,16 @@ whitespace, отсутствие дублей GUID и `.meta`, JSON пакето
 **Следующий шаг:** установить APK B-feedback и повторить партию.
 После этого решить, нужна ли v1.1 с механическими различиями ролей (например, особая способность Scout).
 
+## CI1 — GitHub Actions + GameCI (16.10.2026, не запускался)
+
+`.github/workflows/tests.yml`: матрица EditMode/PlayMode в `game-ci/unity-test-runner@v4`
+для Unity 6000.6.4f1, кэш `Library`, результаты — артефакт и check run. Пока только
+`workflow_dispatch`: без секретов `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD`
+каждый push давал бы красную проверку. Владельцу: добавить секреты (Settings → Secrets
+→ Actions), запустить вручную, при успехе добавить триггеры `push`/`pull_request` и бейдж
+в README. Наличие образа `unityci/editor` для 6000.6.4f1 и прохождение PlayMode в
+headless Linux не проверены.
+
 ## V1 — узлы читаются краем глаза (16.10.2026)
 
 Продолжение B2 («краем глаза не распознаёшь»). На скриншоте B2 подписи узлов на поле
