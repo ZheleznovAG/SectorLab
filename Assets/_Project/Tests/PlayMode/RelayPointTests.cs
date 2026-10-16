@@ -48,6 +48,45 @@ namespace SectorLab.Tests
         }
 
         [Test]
+        public void CaptureRingFillsWithProgressInTheCapturingSidesColour()
+        {
+            var material = new Material(Shader.Find("Sprites/Default"));
+            typeof(RelayPoint).GetField("ringMaterial", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(point, material);
+            var player = CreateUnit(Team.Player, new Vector3(0.5f, 1, 0));
+            point.Simulate(config.captureSeconds / 2);
+            var ring = point.GetComponentInChildren<LineRenderer>();
+            Assert.That(ring, Is.Not.Null);
+            Assert.That(ring.enabled, Is.True);
+            Assert.That(point.CaptureRingFill, Is.EqualTo(0.5f).Within(0.01f));
+            Assert.That(ring.positionCount, Is.EqualTo(33), "Half of the 64 segments plus the starting point.");
+            Assert.That(point.CaptureRingColor.b, Is.GreaterThan(point.CaptureRingColor.r));
+
+            var enemy = CreateUnit(Team.Enemy, new Vector3(-0.5f, 1, 0));
+            point.Simulate(1);
+            Assert.That(point.CaptureRingColor.r, Is.GreaterThan(0.9f).And.GreaterThan(point.CaptureRingColor.b), "A contest turns the ring yellow.");
+
+            player.gameObject.SetActive(false);
+            point.Simulate(config.captureSeconds);
+            Assert.That(point.State.Progress, Is.LessThan(0));
+            Assert.That(point.CaptureRingColor.r, Is.GreaterThan(point.CaptureRingColor.b));
+            enemy.gameObject.SetActive(false);
+            point.Simulate(0.1);
+            Object.DestroyImmediate(material);
+        }
+
+        [Test]
+        public void NeutralRelayWithoutProgressHidesItsRing()
+        {
+            var material = new Material(Shader.Find("Sprites/Default"));
+            typeof(RelayPoint).GetField("ringMaterial", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(point, material);
+            point.Simulate(1);
+            Assert.That(point.CaptureRingFill, Is.Zero);
+            var ring = point.GetComponentInChildren<LineRenderer>(true);
+            Assert.That(ring == null || !ring.enabled, Is.True);
+            Object.DestroyImmediate(material);
+        }
+
+        [Test]
         public void CaptureRadiusIsHorizontalAndBothSidesContest()
         {
             CreateUnit(Team.Player, new Vector3(1, 1, 0));

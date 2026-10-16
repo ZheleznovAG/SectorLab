@@ -10,6 +10,11 @@ namespace SectorLab.Objectives
         [SerializeField] private RelayConfig config;
         [SerializeField] private Renderer areaRenderer;
         [SerializeField] private TextMesh statusLabel;
+        [Tooltip("Unlit material for the capture ring around the area; no ring without it.")]
+        [SerializeField] private Material ringMaterial;
+        private const int RingSegments = 64;
+        private LineRenderer ring;
+        private readonly Vector3[] ringPoints = new Vector3[RingSegments + 1];
         private MaterialPropertyBlock colors;
         private Camera viewCamera;
         private int visualKey = int.MinValue;
@@ -20,6 +25,9 @@ namespace SectorLab.Objectives
         public RelayState State { get; private set; }
         public int PlayersPresent { get; private set; }
         public int EnemiesPresent { get; private set; }
+        // Share of the ring drawn: capture progress toward the side currently holding it.
+        public float CaptureRingFill { get; private set; }
+        public Color CaptureRingColor { get; private set; }
 
         private void Awake()
         {
@@ -152,16 +160,47 @@ namespace SectorLab.Objectives
                 colors.SetColor("_BaseColor", color);
                 areaRenderer.SetPropertyBlock(colors);
             }
+            Color sideColor = State.IsContested ? new Color(1f, 0.76f, 0.18f)
+                : side == 1 ? new Color(0.35f, 0.68f, 1f) : side == 2 ? new Color(1f, 0.42f, 0.38f) : Color.clear;
+            UpdateRing(percent / 100f, sideColor);
+            // Details live in the HUD cards; the field keeps what a glance can read.
             if (statusLabel != null)
+                statusLabel.text = State.IsContested ? config.label + "\nСПОР"
+                    : State.Owner == RelayOwner.Neutral ? percent == 0 ? config.label : $"{config.label}\n{percent}%"
+                    : repairOccupied ? config.label + "\nремонт" : config.label;
+        }
+
+        private void UpdateRing(float fill, Color color)
+        {
+            CaptureRingFill = fill;
+            CaptureRingColor = color;
+            if (ringMaterial == null) return;
+            if (ring == null)
             {
-                string owner = side == 1 ? "Ваш" : side == 2 ? "Враг" : "Свободен";
-                string effect = config.kind == RelayKind.Score ? $"+{config.scorePerSecond:0.#} очк/с" : $"+{config.healingPerSecond:0.#} HP/с";
-                string status = State.IsContested ? "СПОР · эффект остановлен"
-                    : State.Owner == RelayOwner.Neutral ? percent == 0 ? "Свободен" : $"{owner} · захват {percent}%"
-                    : config.kind == RelayKind.Score ? owner + " · очки"
-                    : repairOccupied ? owner + " · ремонт" : owner + " · ждёт бойца";
-                statusLabel.text = $"{config.label}  {effect}\n{status}";
+                var child = new GameObject("CaptureRing");
+                child.transform.SetParent(transform, false);
+                ring = child.AddComponent<LineRenderer>();
+                ring.sharedMaterial = ringMaterial;
+                ring.useWorldSpace = false;
+                ring.widthMultiplier = 0.16f;
+                ring.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                ring.receiveShadows = false;
             }
+            int segments = Mathf.CeilToInt(RingSegments * Mathf.Clamp01(fill));
+            ring.enabled = segments > 0;
+            if (segments == 0) return;
+            float radius = config.radius + 0.1f;
+            // Starts at the far side (top of the screen) and fills clockwise as seen from above.
+            for (int i = 0; i <= segments; i++)
+            {
+                float angle = 2 * Mathf.PI * fill * i / segments;
+                ringPoints[i] = new Vector3(Mathf.Sin(angle) * radius, 0.07f, Mathf.Cos(angle) * radius);
+            }
+            ring.positionCount = segments + 1;
+            ring.SetPositions(ringPoints);
+            if (colors == null) colors = new MaterialPropertyBlock();
+            colors.SetColor("_BaseColor", color);
+            ring.SetPropertyBlock(colors);
         }
     }
 }
