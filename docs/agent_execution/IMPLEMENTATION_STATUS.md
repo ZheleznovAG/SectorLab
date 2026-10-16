@@ -9,14 +9,14 @@
 
 | | |
 |---|---|
-| Последний проверенный код | `5e50114` (B1–B4): EditMode 68/68, PlayMode 128/128 PASS; затем `MainAllocationTests` 2/2 (P1) |
-| Последний APK | `Builds/Android/SectorLab-B-feedback.apk`, SHA-256 `849B4F07…869D9896`, **ещё не установлен** (телефон не подключён). На телефоне — A5 `8257C9B1…A8BE83` |
+| Последний проверенный код | `d91f4b9` (B1–B4, P1, V1, CI1): EditMode 68/68, PlayMode 132/132 PASS |
+| Последний APK | `Builds/Android/SectorLab-V-ring.apk` (B1–B4 + кольца узлов), SHA-256 `C27B72F3…5F561C7428`, **ещё не установлен** (телефон не подключён). На телефоне — A5 `8257C9B1…A8BE83` |
 | Gates | G0–G6, G9 — PASS; G7, G8 — IN_PROGRESS ([GATES.json](GATES.json)) |
 | Публикация | README переработан под портфолио (15.10). Push и GitHub Release выполняет владелец: auto mode агента запрещает push |
 
 **Открыто (нужен человек):**
 
-1. Установка APK B-feedback и партия: выбор бойца на узле, длительность боёв, толкучка, рамка «кто побеждает», сигналы захвата (G7).
+1. Установка APK V-ring и партия: выбор бойца на узле, длительность боёв, толкучка, рамка «кто побеждает», сигналы захвата (G7).
 2. Видимый геймплей и 600-секундный `Tools/measure-android.ps1` на разблокированном телефоне (G8). Последняя попытка — `BLOCKED_SCREEN`, фокус был у keyguard.
 3. Офлайн-запуск APK, отложенный по выбору владельца.
 
@@ -24,8 +24,19 @@
 Для `Tools/check-repository.ps1` нужен `rg` в PATH; 15.10 его проверки выполнялись вручную:
 whitespace, отсутствие дублей GUID и `.meta`, JSON пакетов — PASS, privacy — PASS.
 
-**Следующий шаг:** установить APK B-feedback и повторить партию.
+**Следующий шаг:** установить APK V-ring и повторить партию.
 После этого решить, нужна ли v1.1 с механическими различиями ролей (например, особая способность Scout).
+
+## Регрессия и APK V-ring (16.10.2026)
+
+На `d91f4b9`: [EditMode 68/68](evidence/tests-V-full-editmode-editmode.json),
+[PlayMode 132/132](evidence/tests-V-full-playmode-playmode.json) PASS.
+[Тактики](evidence/V-full-playmode-sustained-plans.csv): 4 победы / 1 поражение
+(прошлые прогоны на том же балансе: 3/2 и 1/4 — разброс большой, вывод о балансе за человеком).
+[Android-сборка](evidence/android-build-V-ring.json) Succeeded, 0 errors:
+`Builds/Android/SectorLab-V-ring.apk`, 32 314 701 bytes, SHA-256
+`C27B72F394A3582D7FD552D67811B5F4178D841B7B7DA5703FA7DC5F561C7428`.
+`preloadedAssets` после сборки снова возвращён к `[]`. Установка: `adb devices` пуст.
 
 ## CI1 — GitHub Actions + GameCI (16.10.2026, не запускался)
 
