@@ -135,6 +135,26 @@ namespace SectorLab.Battle
             Finished?.Invoke(Outcome);
         }
 
+        // Current income: fully owned, uncontested score relays.
+        public void CurrentRates(out double player, out double enemy)
+        {
+            player = enemy = 0;
+            for (int i = 0; i < relays.Length; i++)
+            {
+                RelayPoint relay = relays[i];
+                if (relay.Config.kind != RelayKind.Score || relay.State.IsContested) continue;
+                if (relay.State.Owner == RelayOwner.Player) player += relay.Config.scorePerSecond;
+                if (relay.State.Owner == RelayOwner.Enemy) enemy += relay.Config.scorePerSecond;
+            }
+        }
+
+        public BattleOutcome Forecast()
+        {
+            if (!State.IsRunning && !State.Clock.IsPaused) return State.Outcome;
+            CurrentRates(out double player, out double enemy);
+            return MatchRules.Forecast(State.PlayerScore, State.EnemyScore, player, enemy, State.Clock.RemainingSeconds);
+        }
+
         public void SetPaused(bool paused)
         {
             State.SetPaused(paused);

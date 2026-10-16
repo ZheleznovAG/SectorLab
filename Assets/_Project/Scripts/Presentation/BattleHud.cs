@@ -28,6 +28,13 @@ namespace SectorLab.Presentation
         private int shownPlayer = -1, shownEnemy = -1, shownSeconds = -1, selectedHp = -1;
         private double shownPlayerRate = -1, shownEnemyRate = -1;
         private Unit shownSelection;
+        // A frame around the field in the forecast winner's colour: readable from the corner of the eye.
+        public const float LeadFrameThickness = 10;
+        private Image[] leadEdges;
+        private BattleOutcome shownForecast = BattleOutcome.InProgress;
+        public BattleOutcome ShownForecast => shownForecast;
+        public bool LeadFrameVisible => leadEdges[0].gameObject.activeSelf;
+        public Color LeadFrameColor => leadEdges[0].color;
         private float nextRefresh;
         private RectTransform layoutRoot;
         private float shownHeight = -1;
@@ -50,6 +57,31 @@ namespace SectorLab.Presentation
                 relayButtons[i].onClick.AddListener(() => commander.OrderSelectedToRelay(battle.Relays[role]));
             }
             pauseButton.onClick.AddListener(() => battle.SetPaused(!battle.State.Clock.IsPaused));
+            CreateLeadFrame();
+        }
+
+        private void CreateLeadFrame()
+        {
+            const float t = LeadFrameThickness;
+            float bottom = SquadBarHeight + ArenaPadding, top = TopBarHeight + RelayBarHeight + ArenaPadding;
+            // bottom, top, left, right edges of the arena viewport
+            Vector2[] min = { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 0), new Vector2(1, 0) };
+            Vector2[] max = { new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1), new Vector2(1, 1) };
+            Vector2[] offsetMin = { new Vector2(0, bottom), new Vector2(0, -top - t), new Vector2(0, bottom), new Vector2(-t, bottom) };
+            Vector2[] offsetMax = { new Vector2(0, bottom + t), new Vector2(0, -top), new Vector2(t, -top), new Vector2(0, -top) };
+            leadEdges = new Image[4];
+            for (int i = 0; i < 4; i++)
+            {
+                var edge = new GameObject("LeadFrame" + i, typeof(RectTransform), typeof(Image));
+                var rect = (RectTransform)edge.transform;
+                rect.SetParent(layoutRoot, false);
+                rect.SetAsFirstSibling(); // Behind panels, notices and the tutorial.
+                rect.anchorMin = min[i]; rect.anchorMax = max[i];
+                rect.offsetMin = offsetMin[i]; rect.offsetMax = offsetMax[i];
+                leadEdges[i] = edge.GetComponent<Image>();
+                leadEdges[i].raycastTarget = false;
+                edge.SetActive(false);
+            }
         }
 
         private void Start() => Refresh(); // All relay Awake methods must finish before reading their states.
@@ -102,12 +134,19 @@ namespace SectorLab.Presentation
             int seconds = (int)Math.Ceiling(battle.State.Clock.RemainingSeconds - MatchRules.Epsilon);
             bool running = lifecycle.IsReady && battle.State.IsRunning;
             double blueRate = 0, redRate = 0;
-            for (int i = 0; i < battle.Relays.Count; i++)
+            if (running) battle.CurrentRates(out blueRate, out redRate);
+            BattleOutcome forecast = lifecycle.IsReady ? battle.Forecast() : BattleOutcome.Draw;
+            if (forecast != shownForecast)
             {
-                RelayPoint relay = battle.Relays[i];
-                if (!running || relay.Config.kind != RelayKind.Score || relay.State.IsContested) continue;
-                if (relay.State.Owner == RelayOwner.Player) blueRate += relay.Config.scorePerSecond;
-                if (relay.State.Owner == RelayOwner.Enemy) redRate += relay.Config.scorePerSecond;
+                shownForecast = forecast;
+                bool visible = forecast == BattleOutcome.Victory || forecast == BattleOutcome.Defeat;
+                Color color = forecast == BattleOutcome.Victory ? Blue : Red;
+                color.a = 0.9f;
+                for (int i = 0; i < leadEdges.Length; i++)
+                {
+                    leadEdges[i].color = color;
+                    leadEdges[i].gameObject.SetActive(visible);
+                }
             }
             if (blue != shownPlayer || blueRate != shownPlayerRate)
             {

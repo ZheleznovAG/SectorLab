@@ -84,6 +84,7 @@ namespace SectorLab.Presentation
 
         private void OnTick(double seconds)
         {
+            AnnounceForecast(seconds);
             for (int i = 0; i < battle.Relays.Count; i++)
             {
                 RelayPoint relay = battle.Relays[i];
@@ -114,6 +115,31 @@ namespace SectorLab.Presentation
                     Notify(relay.Config.label + ": контроль потерян");
                     Alert();
                 }
+            }
+        }
+
+        // A new forecast must hold for a moment, so a brief contest does not flip announcements.
+        public const double ForecastSettleSeconds = 1;
+        private BattleOutcome announcedForecast = BattleOutcome.Draw, pendingForecast = BattleOutcome.Draw;
+        private double pendingSeconds;
+        public int PlayedLeadChanges { get; private set; }
+
+        private void AnnounceForecast(double seconds)
+        {
+            BattleOutcome forecast = battle.Forecast();
+            if (forecast != pendingForecast) { pendingForecast = forecast; pendingSeconds = 0; }
+            pendingSeconds += seconds;
+            if (pendingSeconds < ForecastSettleSeconds - MatchRules.Epsilon || forecast == announcedForecast) return;
+            announcedForecast = forecast;
+            if (forecast == BattleOutcome.Victory)
+            {
+                Notify("Сейчас вы побеждаете");
+                if (!Muted) { Play(capture, 0.8f); PlayedLeadChanges++; }
+            }
+            else if (forecast == BattleOutcome.Defeat)
+            {
+                Notify("Сейчас побеждает враг: отбейте узел");
+                if (!Muted) { Play(warning, 0.8f); PlayedLeadChanges++; }
             }
         }
 
