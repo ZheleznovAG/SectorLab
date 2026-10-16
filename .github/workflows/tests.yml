@@ -1,0 +1,46 @@
+# EditMode + PlayMode tests in a GameCI Unity container.
+# Manual until the repository has the Unity licence secrets: UNITY_LICENSE (contents of the
+# Personal .ulf), UNITY_EMAIL, UNITY_PASSWORD. Then add `push` / `pull_request` triggers.
+# Not yet run: the image for 6000.6.4f1 and the first pass are unverified.
+name: Unity tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [editmode, playmode]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ matrix.mode }}-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-${{ matrix.mode }}-
+
+      - uses: game-ci/unity-test-runner@v4
+        id: tests
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          unityVersion: 6000.6.4f1
+          testMode: ${{ matrix.mode }}
+          artifactsPath: test-results-${{ matrix.mode }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: ${{ matrix.mode }} results
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.mode }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
