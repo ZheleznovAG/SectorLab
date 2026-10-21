@@ -102,5 +102,24 @@ namespace SectorLab.Tests
             Assert.That(client.Relays, Is.Empty);
             Assert.That(client.PlayerScore.Value, Is.Zero);
         }
+
+        [Test]
+        public void MalformedUnitSnapshotsAreRejected()
+        {
+            var states = new UnitState[UnitsSnapshot.MaxUnits];
+            var buffer = new byte[UnitsSnapshot.SizeFor(1)];
+            buffer[0] = 1; buffer[1] = 4; buffer[2] = (byte)Team.Enemy;
+            System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(buffer.AsSpan(11), 80);
+            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(1));
+            Assert.That(states[0].Id, Is.EqualTo(4));
+            Assert.That(states[0].Health, Is.EqualTo(80));
+            Assert.That(UnitsSnapshot.Read(new byte[] { 200 }, states), Is.EqualTo(-1), "count beyond the limit");
+            Assert.That(UnitsSnapshot.Read(buffer.AsSpan(0, 5), states), Is.EqualTo(-1), "truncated");
+            buffer[2] = 9;
+            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(-1), "unknown team");
+            buffer[2] = 0;
+            System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(buffer.AsSpan(3), BitConverter.SingleToInt32Bits(float.PositiveInfinity));
+            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(-1), "non-finite position");
+        }
     }
 }
