@@ -77,7 +77,7 @@ namespace SectorLab.Presentation
             if (Muted || Time.unscaledTime < nextShot[role]) return;
             nextShot[role] = Time.unscaledTime + 0.08f;
             Play(unit.Stats.role == UnitRole.Tank ? tankShot : unit.Stats.role == UnitRole.Scout ? scoutShot : rangerShot,
-                unit.Team == Team.Player ? 0.3f : 0.18f);
+                unit.Team == battle.Perspective.Local ? 0.3f : 0.18f);
             PlayedShots++;
         }
 
@@ -99,24 +99,25 @@ namespace SectorLab.Presentation
         private void OnRelayChanged(RelayConfig config, RelayView previous, RelayView current)
         {
             // A contest matters when it threatens our relay or our capture in progress.
-            if (current.Contested && !previous.Contested && (previous.Owner == RelayOwner.Player || current.Side == 1))
+            TeamPerspective view = battle.Perspective;
+            if (current.Contested && !previous.Contested && (view.IsMine(previous.Owner) || view.Side(current.Side) == 1))
             {
                 Notify(config.label + ": СПОР · эффект остановлен");
                 Alert();
             }
             if (current.Owner == previous.Owner) return;
-            if (current.Owner == RelayOwner.Player)
+            if (view.IsMine(current.Owner))
             {
                 string effect = config.kind == RelayKind.Score ? RelayText.Effect(config) : "ремонт " + RelayText.Effect(config);
                 Notify($"Вы захватили {config.label} · {effect}");
                 if (!Muted) { Play(capture, 0.8f); PlayedCaptures++; }
             }
-            else if (current.Owner == RelayOwner.Enemy)
+            else if (view.IsTheirs(current.Owner))
             {
                 Notify("Враг захватил " + config.label);
                 if (!Muted) { Play(warning, 0.8f); PlayedCaptures++; }
             }
-            else if (previous.Owner == RelayOwner.Player)
+            else if (view.IsMine(previous.Owner))
             {
                 Notify(config.label + ": контроль потерян");
                 Alert();
@@ -131,7 +132,7 @@ namespace SectorLab.Presentation
 
         private void AnnounceForecast(double seconds)
         {
-            BattleOutcome forecast = battle.Model.Forecast.CurrentValue;
+            BattleOutcome forecast = battle.Perspective.Outcome(battle.Model.Forecast.CurrentValue);
             if (forecast != pendingForecast) { pendingForecast = forecast; pendingSeconds = 0; }
             pendingSeconds += seconds;
             if (pendingSeconds < ForecastSettleSeconds - MatchRules.Epsilon || forecast == announcedForecast) return;
@@ -174,7 +175,7 @@ namespace SectorLab.Presentation
         private void OnFinished(BattleOutcome outcome)
         {
             if (Muted) return;
-            Play(outcome == BattleOutcome.Victory ? victory : defeat, 0.8f);
+            Play(battle.Perspective.Outcome(outcome) == BattleOutcome.Victory ? victory : defeat, 0.8f);
             PlayedResults++;
         }
 

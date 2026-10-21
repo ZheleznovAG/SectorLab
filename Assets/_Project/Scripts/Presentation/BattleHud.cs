@@ -28,6 +28,7 @@ namespace SectorLab.Presentation
         private readonly int[] unitKeys = { int.MinValue, int.MinValue, int.MinValue };
         private int selectedHp = -1;
         private bool running;
+        private TeamPerspective perspective = new TeamPerspective(Team.Player);
         private readonly CompositeDisposable subscriptions = new CompositeDisposable();
         private Unit shownSelection;
         // A frame around the field in the forecast winner's colour: readable from the corner of the eye.
@@ -101,20 +102,30 @@ namespace SectorLab.Presentation
 
         private void OnDestroy() => subscriptions.Dispose();
 
+        // Re-reads the local team (a network session may assign it after connecting) and resubscribes.
+        public void Rebind()
+        {
+            subscriptions.Clear();
+            for (int i = 0; i < unitKeys.Length; i++) unitKeys[i] = int.MinValue;
+            Bind(battle.Model);
+            Refresh();
+        }
+
         private void Bind(MatchModel model)
         {
-            model.PlayerScore.Select(MatchModel.WholePoints).DistinctUntilChanged()
-                .CombineLatest(model.PlayerRate, (points, rate) => (points, rate))
+            perspective = battle.Perspective;
+            perspective.MyScore(model).Select(MatchModel.WholePoints).DistinctUntilChanged()
+                .CombineLatest(perspective.MyRate(model), (points, rate) => (points, rate))
                 .Subscribe(v => playerScore.text = $"ВЫ  {v.points}/{MatchRules.ScoreLimit:0}\n+{v.rate:0.#} очк/с")
                 .AddTo(subscriptions);
-            model.EnemyScore.Select(MatchModel.WholePoints).DistinctUntilChanged()
-                .CombineLatest(model.EnemyRate, (points, rate) => (points, rate))
+            perspective.TheirScore(model).Select(MatchModel.WholePoints).DistinctUntilChanged()
+                .CombineLatest(perspective.TheirRate(model), (points, rate) => (points, rate))
                 .Subscribe(v => enemyScore.text = $"ВРАГ  {v.points}/{MatchRules.ScoreLimit:0}\n+{v.rate:0.#} очк/с")
                 .AddTo(subscriptions);
             model.RemainingSeconds.Subscribe(seconds => timer.text = $"{seconds / 60:00}:{seconds % 60:00}").AddTo(subscriptions);
             model.Paused.Subscribe(paused => pauseLabel.text = paused ? "Продолжить" : "Пауза").AddTo(subscriptions);
             model.Running.Subscribe(value => running = value).AddTo(subscriptions);
-            model.Forecast.Subscribe(ShowForecast).AddTo(subscriptions);
+            model.Forecast.Subscribe(forecast => ShowForecast(perspective.Outcome(forecast))).AddTo(subscriptions);
             for (int i = 0; i < model.Relays.Length && i < relayLabels.Length; i++)
             {
                 int index = i;
@@ -142,7 +153,8 @@ namespace SectorLab.Presentation
             // A replaced relay set (scene fixtures) leaves the old pipelines alive until the HUD is destroyed.
             if (index >= battle.Relays.Count) return;
             RelayConfig config = battle.Relays[index].Config;
-            string owner = view.Side == 1 ? "Ваш" : view.Side == 2 ? "Враг" : "Свободен";
+            int side = perspective.Side(view.Side);
+            string owner = side == 1 ? "Ваш" : side == 2 ? "Враг" : "Свободен";
             string status = !isRunning ? paused ? "ПАУЗА" : "Бой окончен"
                 : view.Contested ? "СПОР · эффект остановлен"
                 : view.Owner == RelayOwner.Neutral ? view.Percent == 0 ? $"Свободен · захват {config.captureSeconds:0.#} с" : $"{owner} · захват {view.Percent}%"
@@ -150,7 +162,7 @@ namespace SectorLab.Presentation
                 : view.OwnerPresent ? owner + " · ремонтирует" : owner + " · ждёт бойца";
             relayLabels[index].text = $"{config.label}  {RelayText.Effect(config)}\n{status}";
             relayImages[index].color = view.Contested ? new Color(0.56f, 0.42f, 0.10f)
-                : view.Side == 1 ? Blue : view.Side == 2 ? Red : Neutral;
+                : side == 1 ? Blue : side == 2 ? Red : Neutral;
         }
 
         private void LateUpdate()
@@ -174,7 +186,7 @@ namespace SectorLab.Presentation
             for (int i = 0; i < lifecycle.Slots.Count; i++)
             {
                 UnitSlotState slot = lifecycle.Slots[i];
-                if (slot.Config.team == Team.Player && (int)slot.Config.role == role) return slot;
+                if (slot.Config.team == perspective.Local && (int)slot.Config.role == role) return slot;
             }
             return null;
         }

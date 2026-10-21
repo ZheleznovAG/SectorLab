@@ -1,0 +1,5 @@
+utc,plan,game_seconds,player_score,enemy_score,outcome,ai_decisions,ai_move_orders
+2026-10-21T09:34:35.0978807Z,passive,40.3,0.0,45.0,Defeat,40,17
+2026-10-21T09:34:53.8178837Z,split,61.8,12.8,45.0,Defeat,61,18
+2026-10-21T09:35:09.6749647Z,focus-A,51.5,12.2,45.0,Defeat,51,26
+2026-10-21T09:35:27.7506797Z,hold-A-then-flank-B,57.7,13.2,45.0,Defeat,57,21

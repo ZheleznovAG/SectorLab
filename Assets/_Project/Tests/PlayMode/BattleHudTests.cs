@@ -121,6 +121,26 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator RedDeviceSeesRedScoreAsItsOwnAndRedCapturesAsWins()
+        {
+            typeof(SectorLab.Player.UnitCommander).GetField("team", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(commander, Team.Enemy);
+            hud.Rebind();
+            battle.State.Tick(1, 3, 7);
+            battle.PublishModel();
+            Assert.That(Field<Text>(hud, "playerScore").text, Does.StartWith("ВЫ  7/45"));
+            Assert.That(Field<Text>(hud, "enemyScore").text, Does.StartWith("ВРАГ  3/45"));
+            Assert.That(hud.ShownForecast, Is.EqualTo(BattleOutcome.Victory), "Red leads 7:3 from the red device's side.");
+            Unit red = lifecycle.Slots[4].Unit;
+            Assert.That(red.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(battle.Relays[0].transform.position), Is.True);
+            battle.AdvanceSimulation(5.1);
+            Assert.That(Field<Text[]>(hud, "relayLabels")[0].text, Does.Contain("Ваш"));
+            Assert.That(hud.ShownForecast, Is.EqualTo(BattleOutcome.Victory), "Red's income leads, so the red device is winning.");
+            Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("+1 очк/с"));
+            yield return null;
+        }
+
+        [UnityTest]
         public IEnumerator PauseButtonFreezesClockAndHudShowsAuthoritativeScoreAndTime()
         {
             battle.State.Tick(1, 3, 2);
