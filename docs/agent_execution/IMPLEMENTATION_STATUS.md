@@ -9,10 +9,10 @@
 
 | | |
 |---|---|
-| Последний проверенный код | аудит 21.10 (бой на тике, команды, id): EditMode 68/68, PlayMode 138/138 PASS. APK V-ring собран до этих изменений |
+| Последний проверенный код | `9efad61` (аудит, R3, сетевые кодеки, перспектива): EditMode 75/75, PlayMode 142/142 PASS. APK V-ring собран до этих изменений |
 | Последний APK |На телефоне — A5 `8257C9B1…A8BE83` |
 | Gates | G0–G6, G9 — PASS; G7, G8 — IN_PROGRESS ([GATES.json](GATES.json)) |
-| Публикация | README переработан под портфолио (15.10). Push и GitHub Release выполняет владелец: auto mode агента запрещает push |
+| Публикация | README переработан под портфолио (15.10). 21.10 владелец разрешил push; `main` отправлен до `e60e737` |
 
 1. Установка APK V-ring и партия: выбор бойца на узле, длительность боёв, толкучка, рамка «кто побеждает», сигналы захвата (G7).
 2. Видимый геймплей и 600-секундный `Tools/measure-android.ps1` на разблокированном телефоне (G8). Последняя попытка — `BLOCKED_SCREEN`, фокус был у keyguard.
@@ -46,8 +46,21 @@ whitespace, отсутствие дублей GUID и `.meta`, JSON пакето
   [жизненный цикл 6/6](evidence/tests-R2-MainLifecycleTests-playmode.json);
   полная регрессия: [EditMode 68/68](evidence/tests-R2-full-editmode-editmode.json),
   [PlayMode 138/138](evidence/tests-R2-full-playmode-playmode.json) PASS.
-- R3 не установлен: auto mode запретил агенту подключать сторонние git/NuGet-пакеты.
-  План применения (реактивное состояние матча для HUD/звука) — в ADR-013.
+- `207aee3` build: R3 1.3.1 (ядро и зависимости из NuGet через NuGetForUnity, `Assets/Packages`
+  в git, чтобы чистый клон компилировал R3.Unity; лицензионные NOTICE в allowlist gitleaks).
+- `bd5defb` test: откат подменённых ролей — в `UnityTearDown`. Прерванный `[UnityTest]` не
+  освобождается, его `finally` не выполнялся: Tank сохранился на диск как Scout и сломал 30 тестов.
+- `e60e737` feat: `MatchModel` на R3 — очки, доход, время, пауза, исход, прогноз и вид узлов;
+  `BattleController.PublishModel()` после каждого тика, уведомления только при изменении. Заголовок, рамка и карточки узлов HUD подписаны (`Select`/`DistinctUntilChanged`/`CombineLatest`),
+  звук реагирует на узлы через `Pairwise`. [MatchModel 3/3](evidence/tests-R3b-MatchModelTests-playmode.json),
+  аллокации в бюджете ([2/2](evidence/tests-R3b-MainAllocationTests-playmode.json)),
+  [PlayMode 141/141](evidence/tests-R3-full-playmode5-playmode.json).
+- `22148f5` feat: `UnitCommandCodec` (17 байт) и `MatchSnapshot` (32 байта на 3 узла) —
+  полезная нагрузка для транспорта; чтение отвергает усечённые и некорректные данные.
+- `94f836f` feat: `TeamPerspective` — HUD, звук и итог от `LocalTeam` устройства; `BattleHud.Rebind()`.
+- `9efad61` chore: `FindAnyObjectByType` вместо устаревших в Unity 6.6 вызовов; без CS0618.
+  [EditMode 75/75](evidence/tests-W1-editmode-editmode.json),
+  [PlayMode 142/142](evidence/tests-W1-full-playmode-playmode.json) PASS.
 
 ## Регрессия и APK V-ring (16.10.2026)
 
