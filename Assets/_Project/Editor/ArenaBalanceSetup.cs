@@ -16,7 +16,7 @@ namespace SectorLab.Editor
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (EditorApplication.isPlaying || scene.path != "Assets/_Project/Scenes/Main.unity")
                 throw new System.InvalidOperationException("Open Main outside Play Mode.");
-            var battle = Object.FindFirstObjectByType<BattleController>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
             battle.Relays[0].transform.position = new Vector3(-2.5f, 0, -2);
             battle.Relays[1].transform.position = new Vector3(2.5f, 0, 2);
             battle.Relays[2].transform.position = Vector3.zero;
@@ -40,7 +40,7 @@ namespace SectorLab.Editor
                 slot.position = bases[(int)slot.role] * (slot.team == Team.Player ? 1 : -1);
             }
             EditorUtility.SetDirty(roster);
-            var surface = Object.FindFirstObjectByType<NavMeshSurface>();
+            var surface = Object.FindAnyObjectByType<NavMeshSurface>();
             string path = AssetDatabase.GetAssetPath(surface.navMeshData);
             string guid = AssetDatabase.AssetPathToGUID(path);
             if (string.IsNullOrEmpty(path)) throw new System.InvalidOperationException("Original baked NavMesh asset is missing.");

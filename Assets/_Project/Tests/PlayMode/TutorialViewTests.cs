@@ -29,8 +29,8 @@ namespace SectorLab.Tests
             Time.timeScale = 1;
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return MainLifecycleTests.WaitForReady(false);
-            tutorial = Object.FindFirstObjectByType<TutorialView>();
-            battle = Object.FindFirstObjectByType<BattleController>();
+            tutorial = Object.FindAnyObjectByType<TutorialView>();
+            battle = Object.FindAnyObjectByType<BattleController>();
         }
 
         [UnityTearDown]
@@ -59,7 +59,7 @@ namespace SectorLab.Tests
             double elapsed = battle.State.Clock.ElapsedSeconds;
             battle.AdvanceSimulation(10);
             Assert.That(battle.State.Clock.ElapsedSeconds, Is.EqualTo(elapsed));
-            Assert.That(Object.FindFirstObjectByType<UnitCommander>().enabled, Is.False);
+            Assert.That(Object.FindAnyObjectByType<UnitCommander>().enabled, Is.False);
             var next = Field<Button>(tutorial, "nextButton");
             for (int i = 1; i <= 3; i++)
             {
@@ -79,9 +79,9 @@ namespace SectorLab.Tests
             Assert.That(battle.State.IsRunning, Is.True);
             battle.Restart();
             yield return MainLifecycleTests.WaitForReady(false);
-            tutorial = Object.FindFirstObjectByType<TutorialView>();
+            tutorial = Object.FindAnyObjectByType<TutorialView>();
             Assert.That(tutorial.IsShowing, Is.False);
-            Assert.That(Object.FindFirstObjectByType<BattleController>().State.IsRunning, Is.True);
+            Assert.That(Object.FindAnyObjectByType<BattleController>().State.IsRunning, Is.True);
         }
 
         [UnityTest]
@@ -91,11 +91,11 @@ namespace SectorLab.Tests
             battle.SetPaused(true);
             Field<Button>(tutorial, "helpButton").onClick.Invoke();
             Assert.That(tutorial.IsShowing, Is.True);
-            var commander = Object.FindFirstObjectByType<UnitCommander>();
+            var commander = Object.FindAnyObjectByType<UnitCommander>();
             commander.HandleTap(new Vector2(Screen.width / 2f, Screen.height / 2f));
             Assert.That(commander.Selected, Is.Null);
-            Object.FindFirstObjectByType<BattleHud>().Refresh();
-            Assert.That(Field<Button>(Object.FindFirstObjectByType<BattleHud>(), "pauseButton").interactable, Is.False);
+            Object.FindAnyObjectByType<BattleHud>().Refresh();
+            Assert.That(Field<Button>(Object.FindAnyObjectByType<BattleHud>(), "pauseButton").interactable, Is.False);
             Field<Button>(tutorial, "skipButton").onClick.Invoke();
             Assert.That(battle.State.Clock.IsPaused, Is.True);
             battle.SetPaused(false);

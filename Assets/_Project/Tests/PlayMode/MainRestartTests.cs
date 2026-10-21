@@ -51,8 +51,8 @@ namespace SectorLab.Tests
 
         private static void FreezeFrameSimulation()
         {
-            Object.FindFirstObjectByType<BattleController>().enabled = false;
-            Object.FindFirstObjectByType<EnemyTacticsController>().enabled = false;
+            Object.FindAnyObjectByType<BattleController>().enabled = false;
+            Object.FindAnyObjectByType<EnemyTacticsController>().enabled = false;
             foreach (Unit unit in Unit.All) { unit.Attack.enabled = false; unit.Movement.Stop(); }
         }
 
@@ -84,11 +84,11 @@ namespace SectorLab.Tests
             string report = "utc,restart,old_factory_instances,new_units,owned_handles,clock,player_score,enemy_score\n";
             for (int i = 1; i <= 10; i++)
             {
-                var oldScope = Object.FindFirstObjectByType<GameLifetimeScope>();
+                var oldScope = Object.FindAnyObjectByType<GameLifetimeScope>();
                 var oldFactory = oldScope.Container.Resolve<UnitFactory>();
                 var oldState = oldScope.Container.Resolve<MatchState>();
-                var oldLifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
-                var battle = Object.FindFirstObjectByType<BattleController>();
+                var oldLifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
+                var battle = Object.FindAnyObjectByType<BattleController>();
                 oldLifecycle.Slots[i % 6].Unit.Health.TakeDamage(oldLifecycle.Slots[i % 6].Unit.Health.Max);
                 battle.AdvanceSimulation(3);
                 battle.Relays[0].State.Step(3, 1, 0); // Seed partial progress explicitly for the reset assertion.
@@ -98,9 +98,9 @@ namespace SectorLab.Tests
                 yield return MainLifecycleTests.WaitForReady();
                 yield return null;
                 FreezeFrameSimulation();
-                var scope = Object.FindFirstObjectByType<GameLifetimeScope>();
+                var scope = Object.FindAnyObjectByType<GameLifetimeScope>();
                 var state = scope.Container.Resolve<MatchState>();
-                var current = Object.FindFirstObjectByType<UnitLifecycle>();
+                var current = Object.FindAnyObjectByType<UnitLifecycle>();
                 Assert.That(state, Is.Not.SameAs(oldState));
                 Assert.That(state.Clock, Is.Not.SameAs(oldState.Clock));
                 Assert.That(oldFactory.ActiveInstances, Is.Zero);
@@ -115,7 +115,7 @@ namespace SectorLab.Tests
                     Assert.That(slot.Respawn.IsWaiting, Is.False);
                     Assert.That(slot.IsSpawning, Is.False);
                 }
-                foreach (var relay in Object.FindFirstObjectByType<BattleController>().Relays)
+                foreach (var relay in Object.FindAnyObjectByType<BattleController>().Relays)
                 {
                     Assert.That(relay.State.Owner, Is.EqualTo(SectorLab.Objectives.RelayOwner.Neutral));
                     Assert.That(relay.State.Progress, Is.EqualTo(0).Within(0.05));
@@ -140,7 +140,7 @@ namespace SectorLab.Tests
             using (LifetimeScope.Enqueue(builder => builder.RegisterInstance<IUnitPrefabProvider>(missing)))
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             float deadline = Time.realtimeSinceStartup + 10;
-            var lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
+            var lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
             while (lifecycle.Phase == UnitLifecyclePhase.Idle || lifecycle.Phase == UnitLifecyclePhase.Loading)
             {
                 Assert.That(Time.realtimeSinceStartup, Is.LessThan(deadline));
@@ -157,7 +157,7 @@ namespace SectorLab.Tests
                 Assert.That(slot.IsSpawning, Is.False);
                 Assert.That(slot.Respawn.IsWaiting, Is.False);
             }
-            var view = Object.FindFirstObjectByType<BattleResultView>();
+            var view = Object.FindAnyObjectByType<BattleResultView>();
             Assert.That(view.IsShowingLoadError, Is.True);
             Assert.That(Field<GameObject>(view, "panel").activeInHierarchy, Is.True);
             var retry = Field<Button>(view, "restartButton");
@@ -166,7 +166,7 @@ namespace SectorLab.Tests
             retry.onClick.Invoke();
             yield return MainLifecycleTests.WaitForReady();
             Assert.That(Unit.All.Count, Is.EqualTo(6));
-            Assert.That(Object.FindFirstObjectByType<BattleResultView>().IsShowingLoadError, Is.False);
+            Assert.That(Object.FindAnyObjectByType<BattleResultView>().IsShowingLoadError, Is.False);
         }
 
         [UnityTest]
@@ -178,12 +178,12 @@ namespace SectorLab.Tests
             using (LifetimeScope.Enqueue(builder => builder.RegisterInstance<IUnitPrefabProvider>(delayedProvider)))
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return null;
-            var oldFactory = Object.FindFirstObjectByType<GameLifetimeScope>().Container.Resolve<UnitFactory>();
-            var lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
+            var oldFactory = Object.FindAnyObjectByType<GameLifetimeScope>().Container.Resolve<UnitFactory>();
+            var lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
             Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Loading));
             Assert.That(delayedProvider.Requests, Is.EqualTo(1));
             Assert.That(Unit.All.Count, Is.Zero);
-            Object.FindFirstObjectByType<BattleController>().Restart();
+            Object.FindAnyObjectByType<BattleController>().Restart();
             yield return MainLifecycleTests.WaitForReady();
             Assert.That(delayedProvider.Token.IsCancellationRequested, Is.True);
             Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.EqualTo(7));
@@ -199,7 +199,7 @@ namespace SectorLab.Tests
         [UnityTest]
         public IEnumerator LoadErrorPanelWiresRetryAndExitActionsWithoutAccumulatingListeners()
         {
-            var view = Object.FindFirstObjectByType<BattleResultView>();
+            var view = Object.FindAnyObjectByType<BattleResultView>();
             int retries = 0, exits = 0;
             view.ShowLoadError(() => retries++, () => exits++);
             view.ShowLoadError(() => retries++, () => exits++);

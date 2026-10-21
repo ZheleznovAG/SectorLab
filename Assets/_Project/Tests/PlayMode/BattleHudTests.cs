@@ -29,12 +29,12 @@ namespace SectorLab.Tests
             Time.timeScale = 1;
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return MainLifecycleTests.WaitForReady();
-            battle = Object.FindFirstObjectByType<BattleController>();
-            hud = Object.FindFirstObjectByType<BattleHud>();
-            lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
-            commander = Object.FindFirstObjectByType<UnitCommander>();
+            battle = Object.FindAnyObjectByType<BattleController>();
+            hud = Object.FindAnyObjectByType<BattleHud>();
+            lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
+            commander = Object.FindAnyObjectByType<UnitCommander>();
             battle.enabled = false;
-            Object.FindFirstObjectByType<EnemyTacticsController>().enabled = false;
+            Object.FindAnyObjectByType<EnemyTacticsController>().enabled = false;
             foreach (Unit unit in Unit.All) { unit.Attack.enabled = false; unit.Movement.Stop(); }
         }
 
@@ -167,7 +167,7 @@ namespace SectorLab.Tests
         [UnityTest]
         public IEnumerator LeadFrameAndNoticeFollowTheForecastWinner()
         {
-            var audio = Object.FindFirstObjectByType<MatchAudio>();
+            var audio = Object.FindAnyObjectByType<MatchAudio>();
             hud.Refresh();
             Assert.That(hud.LeadFrameVisible, Is.False, "Nobody is ahead at the start");
 
@@ -243,7 +243,7 @@ namespace SectorLab.Tests
             safe.Apply(area, new Vector2(Screen.width, Screen.height));
             Canvas.ForceUpdateCanvases();
             yield return null;
-            var result = Object.FindFirstObjectByType<BattleResultView>();
+            var result = Object.FindAnyObjectByType<BattleResultView>();
             result.ShowLoadError(() => { }, () => { });
             Canvas.ForceUpdateCanvases();
             Vector3[] corners = new Vector3[4];

@@ -29,11 +29,11 @@ namespace SectorLab.Tests
             {
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
                 yield return MainLifecycleTests.WaitForReady();
-                var battle = Object.FindFirstObjectByType<BattleController>();
-                var ai = Object.FindFirstObjectByType<EnemyTacticsController>();
+                var battle = Object.FindAnyObjectByType<BattleController>();
+                var ai = Object.FindAnyObjectByType<EnemyTacticsController>();
                 Assert.That(battle, Is.Not.Null);
                 Assert.That(ai, Is.Not.Null);
-                var scope = Object.FindFirstObjectByType<GameLifetimeScope>();
+                var scope = Object.FindAnyObjectByType<GameLifetimeScope>();
                 Assert.That(scope, Is.Not.Null);
                 Assert.That(battle.State, Is.Not.SameAs(previousState));
                 if (previousState != null) Assert.That(battle.State.Clock, Is.Not.SameAs(previousState.Clock));

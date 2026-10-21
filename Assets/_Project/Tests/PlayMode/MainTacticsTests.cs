@@ -28,9 +28,9 @@ namespace SectorLab.Tests
             {
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
                 yield return MainLifecycleTests.WaitForReady();
-                var battle = Object.FindFirstObjectByType<BattleController>();
-                var lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
-                var commander = Object.FindFirstObjectByType<UnitCommander>();
+                var battle = Object.FindAnyObjectByType<BattleController>();
+                var lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
+                var commander = Object.FindAnyObjectByType<UnitCommander>();
                 var destinations = new Dictionary<Unit, RelayPoint>();
                 int orders = 0, playerDeaths = 0, enemyDeaths = 0, playerCaptures = 0, enemyCaptures = 0;
                 var previousOwners = new RelayOwner[battle.Relays.Count];

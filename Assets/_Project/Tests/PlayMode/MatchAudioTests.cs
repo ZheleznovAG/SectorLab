@@ -31,11 +31,11 @@ namespace SectorLab.Tests
             Time.timeScale = 1;
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return MainLifecycleTests.WaitForReady();
-            audio = Object.FindFirstObjectByType<MatchAudio>();
-            battle = Object.FindFirstObjectByType<BattleController>();
-            lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
+            audio = Object.FindAnyObjectByType<MatchAudio>();
+            battle = Object.FindAnyObjectByType<BattleController>();
+            lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
             battle.enabled = false;
-            Object.FindFirstObjectByType<EnemyTacticsController>().enabled = false;
+            Object.FindAnyObjectByType<EnemyTacticsController>().enabled = false;
             foreach (Unit unit in Unit.All) { unit.Attack.enabled = false; unit.Movement.Stop(); }
         }
 
@@ -167,7 +167,7 @@ namespace SectorLab.Tests
             Assert.That(audio.LastNotice, Does.Contain("Вы захватили A"), "Muting sound must preserve visible feedback.");
             battle.Restart();
             yield return MainLifecycleTests.WaitForReady();
-            audio = Object.FindFirstObjectByType<MatchAudio>();
+            audio = Object.FindAnyObjectByType<MatchAudio>();
             Assert.That(audio.Muted, Is.True);
             Field<Button>(audio, "muteButton").onClick.Invoke();
             Assert.That(audio.Muted, Is.False);
