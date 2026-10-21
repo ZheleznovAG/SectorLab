@@ -9,7 +9,7 @@
 
 | | |
 |---|---|
-| Последний проверенный код | `9efad61` (аудит, R3, сетевые кодеки, перспектива): EditMode 75/75, PlayMode 142/142 PASS. APK V-ring собран до этих изменений |
+| Последний проверенный код | сетевая игра 21.10: EditMode 76/76, PlayMode 153/153 PASS; два процесса (Editor + Windows) проверены. APK V-ring собран до этих изменений |
 | Последний APK | `Builds/Android/SectorLab-V-ring.apk` (B1–B4 + кольца узлов), SHA-256 `C27B72F3…5F561C7428`, **ещё не установлен** (телефон не подключён). На телефоне — A5 `8257C9B1…A8BE83` |
 | Gates | G0–G6, G9 — PASS; G7, G8 — IN_PROGRESS ([GATES.json](GATES.json)) |
 | Публикация | README переработан под портфолио (15.10). 21.10 владелец разрешил push; `main` отправлен до `e60e737` |
@@ -64,6 +64,32 @@ whitespace, отсутствие дублей GUID и `.meta`, JSON пакето
 - `9efad61` chore: `FindAnyObjectByType` вместо устаревших в Unity 6.6 вызовов; без CS0618.
   [EditMode 75/75](evidence/tests-W1-editmode-editmode.json),
   [PlayMode 142/142](evidence/tests-W1-full-playmode-playmode.json) PASS.
+
+## Сетевая игра по Wi-Fi (21.10.2026)
+
+Схема: авторитетный хост ([ADR-013](../adr/013-network-readiness.md)). Хост играет синими,
+подключившийся — красными; ИИ красных на хосте отключается.
+
+- `2031126` `HostSession`/`ClientSession` поверх `IMessageChannel`; хост подменяет `Issuer`
+  в каждом принятом приказе на команду соединения — поддельный байт не даёт управлять синими.
+- `d1bc6c1` Main как хост или клиент (`NetworkLaunch`, `NetworkMatchBootstrap`): клиент не
+  симулирует, его юниты — прокси по снимкам хоста, приказы уходят хосту.
+- `71a79ef` Unity Transport 6.6.0: приказы — reliable sequenced, снимки — unreliable sequenced;
+  хост ждёт соперника (показывает свой IP), при разрыве ставит паузу; запуск из командной строки
+  `-sectorlab-host` / `-sectorlab-join <ip>`.
+- `582cbee` кнопка «Сеть» в шапке HUD: создать игру, подключиться по IPv4, играть с ИИ;
+  Android-разрешение INTERNET.
+- Сквозная проверка двумя процессами: Editor-хост + Windows-сборка клиента
+  (`-sectorlab-join 127.0.0.1`). [Хост](evidence/E2E-host-blue.png) и
+  [клиент](evidence/E2E-client-red.png) показывают одну партию: у клиента «ВЫ» — счёт красных,
+  B — «Ваш», позиции юнитов и таймер совпадают. Найдено и исправлено: обучение на клиенте ставило
+  локальную паузу (`timeScale = 0`) — клиент теперь `BattleController.BecomeRemoteView()`;
+  Windows-плеер падал на SSAO в PC_Renderer (ресурсы вырезаны URP при сборке) — фича удалена.
+- Регрессия: [EditMode 76/76](evidence/tests-E2E-editmode-editmode.json),
+  [PlayMode 153/153](evidence/tests-E2E-full-playmode3-playmode.json). Тест тактик ждёт по
+  игровому времени (на нагруженной машине 65 с реального времени не хватало).
+- **Не проверено:** два телефона по Wi-Fi, NAT/интернет (нужен relay), повторный матч
+  синхронно на обоих устройствах, таймер респауна на карточках клиента, выстрелы у клиента.
 
 ## Регрессия и APK V-ring (16.10.2026)
 

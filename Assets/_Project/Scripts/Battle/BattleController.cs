@@ -164,8 +164,21 @@ namespace SectorLab.Battle
             return MatchRules.Forecast(State.PlayerScore, State.EnemyScore, player, enemy, State.Clock.RemainingSeconds);
         }
 
+        // False on a network client: the host owns the clock, so local pauses (tutorial, menus)
+        // must neither stop time effects nor disable the commander.
+        public bool IsAuthority { get; private set; } = true;
+
+        public void BecomeRemoteView()
+        {
+            IsAuthority = false;
+            enabled = false;
+            Time.timeScale = runningTimeScale;
+            if (commander != null) commander.enabled = true;
+        }
+
         public void SetPaused(bool paused)
         {
+            if (!IsAuthority) return;
             State.SetPaused(paused);
             ApplyRunState();
             PublishModel();
