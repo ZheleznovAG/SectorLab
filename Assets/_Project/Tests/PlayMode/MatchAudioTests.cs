@@ -72,7 +72,8 @@ namespace SectorLab.Tests
         public IEnumerator RealShotCaptureAndResultPlaySceneOwnedSound()
         {
             ArrangeShot();
-            yield return null; yield return null;
+            yield return null;
+            battle.AdvanceSimulation(BattleController.TickSeconds); // Shots fire on match ticks.
             Assert.That(audio.PlayedShots, Is.GreaterThan(0));
             Unit tank = lifecycle.Slots[0].Unit;
             tank.Attack.enabled = false; tank.Attack.ClearTarget();
@@ -102,7 +103,8 @@ namespace SectorLab.Tests
                 Assert.That(unit.GetComponent<NavMeshAgent>().Warp(center), Is.True);
                 unit.Attack.enabled = true; unit.Attack.SetTarget(enemy);
                 int shots = audio.PlayedShots;
-                yield return null; yield return null;
+                yield return null;
+                battle.AdvanceSimulation(BattleController.TickSeconds);
                 Assert.That(audio.PlayedShots, Is.GreaterThan(shots));
                 AudioClip clip = Field<AudioClip>(audio, fields[i]);
                 Assert.That(audio.LastSound, Is.EqualTo(clip.name));
@@ -154,7 +156,8 @@ namespace SectorLab.Tests
             Assert.That(audio.Muted, Is.True);
             Assert.That(audio.GetComponent<AudioSource>().mute, Is.True);
             ArrangeShot();
-            yield return null; yield return null;
+            yield return null;
+            battle.AdvanceSimulation(BattleController.TickSeconds); // Shots fire on match ticks.
             Assert.That(audio.PlayedShots, Is.Zero);
             Assert.That(audio.GetComponent<AudioSource>().isPlaying, Is.False);
             lifecycle.Slots[0].Unit.Attack.enabled = false;

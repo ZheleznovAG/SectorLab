@@ -33,6 +33,7 @@ namespace SectorLab.Tests
             TestArena.CreateGround(root.transform, 10f);
             TestArena.CreateBlock(root.transform, new Vector3(-3f, 0.5f, 0f), Vector3.one);
             TestArena.Bake(root);
+            CombatTicker.AddTo(root);
 
             GameObject unitObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             unitObject.transform.SetParent(root.transform);
