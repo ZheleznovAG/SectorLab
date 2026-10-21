@@ -58,12 +58,14 @@ namespace SectorLab.Tests
 
             using var remoteModel = new MatchModel();
             using var remote = new ClientSession(remoteModel, clientEnd, NetworkLaunch.RemoteTeam);
-            float until = Time.realtimeSinceStartup + 1.5f;
-            while (Time.realtimeSinceStartup < until) yield return null;
-            hostEnd.Flush();
             var battle = Object.FindAnyObjectByType<BattleController>();
+            // Wait on game time: a busy machine may run far fewer game seconds than real ones.
+            float deadline = Time.realtimeSinceStartup + 10;
+            while (battle.State.Clock.ElapsedSeconds < 1.2 && Time.realtimeSinceStartup < deadline) yield return null;
+            hostEnd.Flush();
             Assert.That(remoteModel.RemainingSeconds.Value, Is.EqualTo(battle.Model.RemainingSeconds.Value));
-            Assert.That(remoteModel.RemainingSeconds.Value, Is.LessThan(180));
+            Assert.That(remoteModel.RemainingSeconds.Value, Is.LessThan(180),
+                $"paused={battle.State.Clock.IsPaused} outcome={battle.Outcome} timeScale={Time.timeScale} enabled={battle.enabled} elapsed={battle.State.Clock.ElapsedSeconds}");
             Assert.That(remote.UnitCount, Is.EqualTo(6));
 
             var lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();

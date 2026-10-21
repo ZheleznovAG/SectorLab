@@ -209,7 +209,9 @@ namespace SectorLab.Presentation
         {
             if (battle.State == null) return;
             bool isRunning = lifecycle.IsReady && running;
-            pauseButton.interactable = lifecycle.IsReady && (tutorial == null || !tutorial.IsShowing);
+            // A network client does not own the clock; its local pause would also stop its orders.
+            pauseButton.interactable = lifecycle.IsReady && (tutorial == null || !tutorial.IsShowing)
+                && SectorLab.Network.NetworkLaunch.Role != SectorLab.Network.SessionRole.Client;
             for (int i = 0; i < 3; i++)
             {
                 relayButtons[i].interactable = isRunning && commander.Selected != null;

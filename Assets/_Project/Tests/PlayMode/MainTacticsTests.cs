@@ -16,7 +16,8 @@ namespace SectorLab.Tests
     // They measure natural matches, not a human playtest or injected score/health.
     public class MainTacticsTests
     {
-        [UnityTest]
+        // Five matches, each bounded at 65 s of real time below; the default 180 s suite timeout is too short.
+        [UnityTest, Timeout(400000)]
         public IEnumerator FiveSustainedPlansFinishWithRealCapturesCombatAndRespawns()
         {
             string report = "utc,plan,game_seconds,player_score,enemy_score,outcome,player_orders,player_deaths,enemy_deaths,player_captures,enemy_captures\n";

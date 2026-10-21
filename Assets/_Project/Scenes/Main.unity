@@ -3558,6 +3558,7 @@ GameObject:
   - component: {fileID: 925051688}
   - component: {fileID: 925051691}
   - component: {fileID: 925051690}
+  - component: {fileID: 925051692}
   m_Layer: 0
   m_Name: MatchHUD
   m_TagString: Untagged
@@ -3762,6 +3763,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &925051692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925051686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ccc09a5fd69b04d8d03e45f7de092e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SectorLab::SectorLab.Network.NetworkMenu
 --- !u!1 &970291260
 GameObject:
   m_ObjectHideFlags: 0
