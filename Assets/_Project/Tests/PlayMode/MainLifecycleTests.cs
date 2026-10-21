@@ -77,9 +77,22 @@ namespace SectorLab.Tests
             unit.Movement.Stop();
         }
 
+        // Shared role assets edited by a test. Restored in teardown: a [UnityTest] aborted by an
+        // unexpected log is never disposed, so its finally block would not run.
+        private readonly System.Collections.Generic.Dictionary<UnitStats, (string name, UnitRole role)> editedStats =
+            new System.Collections.Generic.Dictionary<UnitStats, (string, UnitRole)>();
+
+        private void RememberStats(UnitStats stats)
+        {
+            if (stats != null && !editedStats.ContainsKey(stats)) editedStats.Add(stats, (stats.name, stats.role));
+        }
+
         [UnityTearDown]
         public IEnumerator Unload()
         {
+            foreach (var entry in editedStats)
+                if (entry.Key != null) { entry.Key.name = entry.Value.name; entry.Key.role = entry.Value.role; }
+            editedStats.Clear();
             if (blocker != null) Object.Destroy(blocker);
             Scene main = SceneManager.GetSceneByName("Main");
             if (main.IsValid() && main.isLoaded)
@@ -129,35 +142,27 @@ namespace SectorLab.Tests
         [UnityTest]
         public IEnumerator RenamedRoleAssetsStillRespawnEveryRosterSlot()
         {
-            var names = new System.Collections.Generic.Dictionary<UnitStats, string>();
             foreach (UnitSlotState slot in lifecycle.Slots)
             {
                 UnitStats stats = slot.Unit.Stats;
-                if (names.ContainsKey(stats)) continue;
-                names.Add(stats, stats.name);
-                stats.name = "Renamed profile " + names.Count;
+                if (editedStats.ContainsKey(stats)) continue;
+                RememberStats(stats);
+                stats.name = "Renamed profile " + editedStats.Count;
             }
-            try
+            foreach (UnitSlotState slot in lifecycle.Slots)
             {
-                foreach (UnitSlotState slot in lifecycle.Slots)
-                {
-                    slot.Unit.Health.TakeDamage(slot.Unit.Health.Max);
+                slot.Unit.Health.TakeDamage(slot.Unit.Health.Max);
+                yield return null;
+                battle.AdvanceSimulation(10);
+                float deadline = Time.realtimeSinceStartup + 5;
+                while (slot.Unit == null && lifecycle.IsReady && Time.realtimeSinceStartup < deadline)
                     yield return null;
-                    battle.AdvanceSimulation(10);
-                    float deadline = Time.realtimeSinceStartup + 5;
-                    while (slot.Unit == null && lifecycle.IsReady && Time.realtimeSinceStartup < deadline)
-                        yield return null;
-                    Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Ready), lifecycle.Failure);
-                    Assert.That(slot.Unit, Is.Not.Null, slot.Config.team + "/" + slot.Config.role);
-                    Assert.That(slot.Unit.Stats.role, Is.EqualTo(slot.Config.role));
-                    Assert.That(slot.Unit.Health.Current, Is.EqualTo(slot.Unit.Health.Max));
-                    Assert.That(Unit.All.Count, Is.EqualTo(6));
-                    Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.EqualTo(6));
-                }
-            }
-            finally
-            {
-                foreach (var entry in names) if (entry.Key != null) entry.Key.name = entry.Value;
+                Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Ready), lifecycle.Failure);
+                Assert.That(slot.Unit, Is.Not.Null, slot.Config.team + "/" + slot.Config.role);
+                Assert.That(slot.Unit.Stats.role, Is.EqualTo(slot.Config.role));
+                Assert.That(slot.Unit.Health.Current, Is.EqualTo(slot.Unit.Health.Max));
+                Assert.That(Unit.All.Count, Is.EqualTo(6));
+                Assert.That(AddressableUnitPrefabProvider.OutstandingHandles, Is.EqualTo(6));
             }
         }
 
@@ -167,20 +172,17 @@ namespace SectorLab.Tests
             UnitSlotState slot = lifecycle.Slots[0];
             UnitStats stats = slot.Unit.Stats;
             UnitRole previous = stats.role;
-            try
-            {
-                stats.role = previous == UnitRole.Scout ? UnitRole.Tank : UnitRole.Scout;
-                slot.Unit.Health.TakeDamage(slot.Unit.Health.Max);
-                yield return null;
-                battle.AdvanceSimulation(10);
-                float deadline = Time.realtimeSinceStartup + 5;
-                while (lifecycle.IsReady && Time.realtimeSinceStartup < deadline) yield return null;
-                Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Failed));
-                Assert.That(lifecycle.Failure, Does.Contain("team/role"));
-                Assert.That(battle.State.Clock.IsPaused, Is.True);
-                yield return WaitForReleasedLoads();
-            }
-            finally { if (stats != null) stats.role = previous; }
+            RememberStats(stats);
+            stats.role = previous == UnitRole.Scout ? UnitRole.Tank : UnitRole.Scout;
+            slot.Unit.Health.TakeDamage(slot.Unit.Health.Max);
+            yield return null;
+            battle.AdvanceSimulation(10);
+            float deadline = Time.realtimeSinceStartup + 5;
+            while (lifecycle.IsReady && Time.realtimeSinceStartup < deadline) yield return null;
+            Assert.That(lifecycle.Phase, Is.EqualTo(UnitLifecyclePhase.Failed));
+            Assert.That(lifecycle.Failure, Does.Contain("team/role"));
+            Assert.That(battle.State.Clock.IsPaused, Is.True);
+            yield return WaitForReleasedLoads();
         }
 
         [UnityTest]
