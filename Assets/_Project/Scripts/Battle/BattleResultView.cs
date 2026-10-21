@@ -42,6 +42,17 @@ namespace SectorLab.Battle
             panel.SetActive(true);
         }
 
+        // A blocking notice without buttons, e.g. while a network host waits for its opponent.
+        public void ShowMessage(string message)
+        {
+            title.text = message;
+            restartButton.gameObject.SetActive(false);
+            if (exitButton != null) exitButton.gameObject.SetActive(false);
+            panel.SetActive(true);
+        }
+
+        public bool IsShowingMessage => panel.activeSelf && !restartButton.gameObject.activeSelf;
+
         public void Hide() => panel.SetActive(false);
 
         public void ShowLoadError(UnityAction retry, UnityAction exit)

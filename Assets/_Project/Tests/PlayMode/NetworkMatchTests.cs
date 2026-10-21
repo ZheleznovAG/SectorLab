@@ -136,5 +136,28 @@ namespace SectorLab.Tests
             Assert.That(order.UnitId, Is.EqualTo(red.Id));
             Assert.That(order.RelayIndex, Is.EqualTo(0));
         }
+
+        [UnityTest]
+        public IEnumerator ClientShowsTheHostsResultFromItsOwnSide()
+        {
+            NetworkLaunch.Client(clientEnd);
+            yield return LoadMain();
+            using var hostModel = new MatchModel();
+            hostModel.SetRelayCount(3);
+            hostModel.PlayerScore.Value = 30;
+            hostModel.EnemyScore.Value = 45;
+            hostModel.Outcome.Value = BattleOutcome.Defeat; // blue lost, so red won
+            var message = new byte[1 + MatchSnapshot.SizeFor(3)];
+            message[0] = (byte)MessageType.MatchState;
+            MatchSnapshot.Write(hostModel, message.AsSpan(1));
+            hostEnd.Send(message);
+            hostEnd.Flush();
+            var view = Object.FindAnyObjectByType<BattleResultView>();
+            var title = (Text)typeof(BattleResultView).GetField("title",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
+            Assert.That(title.text, Does.StartWith("Победа"));
+            Assert.That(title.text, Does.Contain("45 : 30"));
+            Assert.That(Object.FindAnyObjectByType<UnitCommander>().enabled, Is.False);
+        }
     }
 }

@@ -12,6 +12,7 @@
     "com.unity.pipeline": "0.8.0-exp.1",
     "com.unity.render-pipelines.universal": "17.6.0",
     "com.unity.test-framework": "1.8.0",
+    "com.unity.transport": "6.6.0",
     "com.unity.ugui": "2.6.0",
     "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.19.0",
     "com.unity.modules.androidjni": "1.0.0",

@@ -1,4 +1,5 @@
 using System;
+using R3;
 using SectorLab.AI;
 using SectorLab.Battle;
 using SectorLab.Player;
@@ -47,6 +48,55 @@ namespace SectorLab.Network
             host = new HostSession(battle.Commands, battle.Model, channel, NetworkLaunch.RemoteTeam);
             battle.Ticked += SendState;
             battle.Finished += SendFinalState;
+            // The clock waits for the opponent; a dropped opponent pauses the match.
+            status = channel as IConnectionStatus;
+            if (status == null) return;
+            status.Connected += OnPeerConnected;
+            status.Disconnected += OnPeerDisconnected;
+            lifecycle.Ready += HoldUntilConnected;
+            if (lifecycle.IsReady) HoldUntilConnected();
+        }
+
+        private IConnectionStatus status;
+        public bool WaitingForPeer { get; private set; }
+
+        private void HoldUntilConnected()
+        {
+            if (status.IsConnected) return;
+            WaitingForPeer = true;
+            battle.SetPaused(true);
+            ShowWaiting();
+        }
+
+        private void ShowWaiting()
+        {
+            var view = FindAnyObjectByType<BattleResultView>();
+            if (view != null) view.ShowMessage("Ожидание соперника…\nIP: " + NetworkLauncher.LocalAddressesText());
+        }
+
+        // The tutorial or the pause button must not start the clock without the opponent.
+        private void Update()
+        {
+            if (WaitingForPeer && battle != null && battle.Outcome == BattleOutcome.InProgress && !battle.State.Clock.IsPaused)
+                battle.SetPaused(true);
+        }
+
+        private void OnPeerConnected()
+        {
+            if (!WaitingForPeer) return;
+            WaitingForPeer = false;
+            var view = FindAnyObjectByType<BattleResultView>();
+            if (view != null && view.IsShowingMessage) view.Hide();
+            if (lifecycle.IsReady && battle.Outcome == BattleOutcome.InProgress) battle.SetPaused(false);
+            host.SendState(Unit.All);
+        }
+
+        private void OnPeerDisconnected()
+        {
+            if (battle.Outcome != BattleOutcome.InProgress) return;
+            WaitingForPeer = true;
+            battle.SetPaused(true);
+            ShowWaiting();
         }
 
         private void SendState(double seconds) => host.SendState(Unit.All);
@@ -63,6 +113,24 @@ namespace SectorLab.Network
             client.UnitsUpdated += ApplyUnits;
             lifecycle.Ready += MakeProxies;
             if (lifecycle.IsReady) MakeProxies();
+            // The host decides the match; the client shows the result it receives.
+            outcomeSubscription = battle.Model.Outcome.Where(outcome => outcome != BattleOutcome.InProgress)
+                .Take(1).Subscribe(ShowClientResult);
+        }
+
+        private IDisposable outcomeSubscription;
+
+        private void ShowClientResult(BattleOutcome outcome)
+        {
+            commander.ClearSelection();
+            commander.enabled = false;
+            var view = FindAnyObjectByType<BattleResultView>();
+            if (view == null) return;
+            bool localIsPlayer = NetworkLaunch.RemoteTeam == Team.Player;
+            MatchModel model = battle.Model;
+            view.Show(battle.Perspective.Outcome(outcome), battle.Restart,
+                localIsPlayer ? model.PlayerScore.Value : model.EnemyScore.Value,
+                localIsPlayer ? model.EnemyScore.Value : model.PlayerScore.Value);
         }
 
         private void MakeProxies()
@@ -115,9 +183,11 @@ namespace SectorLab.Network
         private void OnDestroy()
         {
             if (battle != null) { battle.Ticked -= SendState; battle.Finished -= SendFinalState; }
-            if (lifecycle != null) lifecycle.Ready -= MakeProxies;
+            if (lifecycle != null) { lifecycle.Ready -= MakeProxies; lifecycle.Ready -= HoldUntilConnected; }
+            if (status != null) { status.Connected -= OnPeerConnected; status.Disconnected -= OnPeerDisconnected; }
             if (client != null) { client.UnitsUpdated -= ApplyUnits; client.Dispose(); }
             host?.Dispose();
+            outcomeSubscription?.Dispose();
         }
     }
 }
