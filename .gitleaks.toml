@@ -12,6 +12,9 @@ regex = '''(?i)(?:[a-z]:[\\/]+Users[\\/]+|/Users/|/home/)[\p{L}\p{N}_.-]+'''
 id = "personal-email-address"
 description = "Personal mailbox in project files"
 regex = '''(?i)[a-z0-9._%+-]+@(?:gmail\.com|mail\.ru|yandex\.(?:ru|com)|outlook\.com|hotmail\.com|icloud\.com|proton(?:mail)?\.(?:com|me))'''
+# Vendored NuGet licence notices quote upstream authors' public addresses; they must stay verbatim.
+[[rules.allowlists]]
+paths = ['''^Assets/Packages/[^/]+/THIRD-PARTY-NOTICES\.TXT$''']
 
 [[rules]]
 id = "private-key-header"
