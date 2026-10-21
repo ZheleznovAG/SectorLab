@@ -90,6 +90,11 @@ namespace SectorLab.Tests
             Assert.That(bootstrap.Role, Is.EqualTo(SessionRole.Client));
             Assert.That(battle.enabled, Is.False, "The client never simulates.");
             Assert.That(commander.LocalTeam, Is.EqualTo(Team.Enemy));
+            var tutorial = Object.FindAnyObjectByType<SectorLab.Presentation.TutorialView>();
+            tutorial.Open();
+            Assert.That(Time.timeScale, Is.EqualTo(1), "A client's tutorial must not freeze time effects.");
+            Assert.That(commander.isActiveAndEnabled, Is.True, "Nor stop the client's orders.");
+            tutorial.Dismiss();
 
             using var hostModel = new MatchModel();
             hostModel.SetRelayCount(3);

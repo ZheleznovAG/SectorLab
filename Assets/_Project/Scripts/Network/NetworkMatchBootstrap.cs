@@ -104,7 +104,7 @@ namespace SectorLab.Network
 
         private void StartClient(IMessageChannel channel)
         {
-            battle.enabled = false; // the host owns time, scores, combat and respawns
+            battle.BecomeRemoteView(); // the host owns time, scores, combat and respawns
             client = new ClientSession(battle.Model, channel, NetworkLaunch.RemoteTeam);
             commander.SetLocalTeam(NetworkLaunch.RemoteTeam);
             commander.Bind(new ClientCommandSink(client, battle.Relays));
