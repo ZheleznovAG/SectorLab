@@ -63,26 +63,6 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
-        public IEnumerator CountsLivingUnitsPerSide()
-        {
-            CreateUnit(Team.Player);
-            CreateUnit(Team.Player);
-            Unit enemy = CreateUnit(Team.Enemy);
-            CreateUnit(Team.Enemy);
-            var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
-
-            yield return null;
-            Assert.That(battle.PlayerUnitsAlive, Is.EqualTo(2));
-            Assert.That(battle.EnemyUnitsAlive, Is.EqualTo(2));
-
-            enemy.Health.TakeDamage(enemy.Health.Max);
-            yield return null;
-            yield return null;
-            Assert.That(battle.EnemyUnitsAlive, Is.EqualTo(1));
-        }
-
-        [UnityTest]
         public IEnumerator LastPlayerUnitDies_DoesNotFinishRelayMatch()
         {
             Unit player = CreateUnit(Team.Player);

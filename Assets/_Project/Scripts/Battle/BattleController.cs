@@ -17,8 +17,6 @@ namespace SectorLab.Battle
         public const double TickSeconds = 0.1;
         public MatchState State { get; private set; }
         public BattleOutcome Outcome => State.Outcome;
-        public int PlayerUnitsAlive { get; private set; }
-        public int EnemyUnitsAlive { get; private set; }
         public System.Collections.Generic.IReadOnlyList<RelayPoint> Relays => relays;
 
         public event Action<BattleOutcome> Finished;
@@ -51,7 +49,6 @@ namespace SectorLab.Battle
 
         private void Update()
         {
-            CountLivingUnits();
             if (State == null || !State.IsRunning)
                 return;
             accumulatedSeconds += Time.deltaTime;
@@ -60,27 +57,6 @@ namespace SectorLab.Battle
                 accumulatedSeconds -= TickSeconds;
                 AdvanceSimulation(TickSeconds);
             }
-        }
-
-        private void CountLivingUnits()
-        {
-            int players = 0;
-            int enemies = 0;
-            // Index loop: foreach over an IReadOnlyList boxes its enumerator and allocates every frame.
-            for (int i = 0; i < Unit.All.Count; i++)
-            {
-                Unit unit = Unit.All[i];
-                if (!unit.IsAlive)
-                    continue;
-                if (unit.Team == Team.Player)
-                    players++;
-                else
-                    enemies++;
-            }
-
-            PlayerUnitsAlive = players;
-            EnemyUnitsAlive = enemies;
-
         }
 
         // Editor scenarios and Update use the same bounded ticks, including long frames.

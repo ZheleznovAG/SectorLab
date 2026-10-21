@@ -27,7 +27,7 @@ namespace SectorLab.Battle
             restartButton.gameObject.SetActive(true);
             restartButton.GetComponentInChildren<Text>().text = "Ещё бой";
             if (exitButton != null) exitButton.gameObject.SetActive(false);
-            string result = outcome == BattleOutcome.Victory ? "Victory" : outcome == BattleOutcome.Defeat ? "Defeat" : "Draw";
+            string result = outcome == BattleOutcome.Victory ? "Победа" : outcome == BattleOutcome.Defeat ? "Поражение" : "Ничья";
             title.text = $"{result}\n{playerScore:0} : {enemyScore:0}";
             restartButton.onClick.RemoveAllListeners();
             restartButton.onClick.AddListener(onRestart);
