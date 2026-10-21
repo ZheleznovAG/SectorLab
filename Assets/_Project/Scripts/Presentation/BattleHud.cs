@@ -31,6 +31,7 @@ namespace SectorLab.Presentation
         // A frame around the field in the forecast winner's colour: readable from the corner of the eye.
         public const float LeadFrameThickness = 10;
         private Image[] leadEdges;
+        private Image[] relayImages, unitImages;
         private BattleOutcome shownForecast = BattleOutcome.InProgress;
         public BattleOutcome ShownForecast => shownForecast;
         public bool LeadFrameVisible => leadEdges[0].gameObject.activeSelf;
@@ -50,9 +51,13 @@ namespace SectorLab.Presentation
             layoutRoot = GetComponent<RectTransform>();
             safeLayout = GetComponentInParent<SafeAreaLayout>();
             tutorial = GetComponent<TutorialView>();
+            relayImages = new Image[3];
+            unitImages = new Image[3];
             for (int i = 0; i < 3; i++)
             {
                 int role = i;
+                relayImages[i] = relayButtons[i].GetComponent<Image>();
+                unitImages[i] = unitButtons[i].GetComponent<Image>();
                 unitButtons[i].onClick.AddListener(() => SelectRole(role));
                 relayButtons[i].onClick.AddListener(() => commander.OrderSelectedToRelay(battle.Relays[role]));
             }
@@ -179,14 +184,14 @@ namespace SectorLab.Presentation
                 {
                     relayKeys[i] = key;
                     string owner = side == 1 ? "Ваш" : side == 2 ? "Враг" : "Свободен";
-                    string effect = relay.Config.kind == RelayKind.Score ? $"+{relay.Config.scorePerSecond:0.#} очк/с" : $"+{relay.Config.healingPerSecond:0.#} HP/с";
+                    string effect = RelayText.Effect(relay.Config);
                     string status = !running ? battle.State.Clock.IsPaused ? "ПАУЗА" : "Бой окончен"
                         : relay.State.IsContested ? "СПОР · эффект остановлен"
                         : relay.State.Owner == RelayOwner.Neutral ? progress == 0 ? $"Свободен · захват {relay.Config.captureSeconds:0.#} с" : $"{owner} · захват {progress}%"
                         : relay.Config.kind == RelayKind.Score ? owner + " · приносит очки"
                         : repairOccupied ? owner + " · ремонтирует" : owner + " · ждёт бойца";
                     relayLabels[i].text = $"{relay.Config.label}  {effect}\n{status}";
-                    relayButtons[i].GetComponent<Image>().color = relay.State.IsContested ? new Color(0.56f, 0.42f, 0.10f)
+                    relayImages[i].color = relay.State.IsContested ? new Color(0.56f, 0.42f, 0.10f)
                         : side == 1 ? Blue : side == 2 ? Red : Neutral;
                 }
                 relayButtons[i].interactable = running && commander.Selected != null;
@@ -205,7 +210,7 @@ namespace SectorLab.Presentation
                         : slot.Respawn.IsWaiting ? role + $"\nВозврат: {Math.Max(0, respawn)} с" : role + "\nОжидание";
                 }
                 unitButtons[i].interactable = running && alive;
-                unitButtons[i].GetComponent<Image>().color = alive && commander.Selected == unit ? Blue : Neutral;
+                unitImages[i].color = alive && commander.Selected == unit ? Blue : Neutral;
             }
             Unit selected = commander.Selected;
             int currentHp = selected != null ? selected.Health.Current : -1;

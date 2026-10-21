@@ -80,7 +80,7 @@ namespace SectorLab.AI
             if (a == b) return 0;
             int speed = b.Movement.Speed.CompareTo(a.Movement.Speed);
             if (speed != 0) return speed;
-            int role = string.CompareOrdinal(a.Stats != null ? a.Stats.role.ToString() : "", b.Stats != null ? b.Stats.role.ToString() : "");
+            int role = RoleOrder(a).CompareTo(RoleOrder(b));
             if (role != 0) return role;
             // Registration order is reproducible for equal roles and does not depend on Unity entity IDs.
             for (int i = 0; i < Unit.All.Count; i++)
@@ -90,6 +90,10 @@ namespace SectorLab.AI
             }
             return 0;
         }
+
+        // Alphabetical role names (Ranger, Scout, Tank) were the historical tie-break; keep that order.
+        private static int RoleOrder(Unit unit) => unit.Stats == null ? -1
+            : unit.Stats.role == UnitRole.Ranger ? 0 : unit.Stats.role == UnitRole.Scout ? 1 : 2;
 
         private void Think()
         {

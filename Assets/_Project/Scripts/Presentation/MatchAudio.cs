@@ -101,7 +101,7 @@ namespace SectorLab.Presentation
                 if (current == previous) continue;
                 if (current == RelayOwner.Player)
                 {
-                    string effect = relay.Config.kind == RelayKind.Score ? $"+{relay.Config.scorePerSecond:0.#} очк/с" : $"ремонт +{relay.Config.healingPerSecond:0.#} HP/с";
+                    string effect = relay.Config.kind == RelayKind.Score ? RelayText.Effect(relay.Config) : "ремонт " + RelayText.Effect(relay.Config);
                     Notify($"Вы захватили {relay.Config.label} · {effect}");
                     if (!Muted) { Play(capture, 0.8f); PlayedCaptures++; }
                 }

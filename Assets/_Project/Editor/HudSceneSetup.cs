@@ -34,8 +34,6 @@ namespace SectorLab.Editor
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
             scaler.matchWidthOrHeight = 0.5f;
-            var oldCounter = Object.FindFirstObjectByType<ForceCounterView>();
-            if (oldCounter != null) oldCounter.gameObject.SetActive(false);
             var safe = canvas.transform.Find("SafeArea") as RectTransform;
             if (safe == null) safe = Rect("SafeArea", canvas.transform, Vector2.zero, Vector2.one);
             if (safe.GetComponent<SafeAreaLayout>() == null) safe.gameObject.AddComponent<SafeAreaLayout>();
