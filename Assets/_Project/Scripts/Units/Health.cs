@@ -34,6 +34,16 @@ namespace SectorLab.Units
                 Died?.Invoke();
         }
 
+        // A network client mirrors the host's value. A listed unit is alive, so this never kills:
+        // deaths and respawns are the host's decision and arrive as absence from the snapshot.
+        public void SetReplicated(int current)
+        {
+            int value = Math.Max(1, Math.Min(Max, current));
+            if (value == Current) return;
+            Current = value;
+            Changed?.Invoke();
+        }
+
         // Returns actual healing. Adding only the missing amount also avoids integer overflow.
         public int Heal(int amount)
         {

@@ -29,8 +29,14 @@ namespace SectorLab.Player
 
         public Unit Selected { get; private set; }
         public Team LocalTeam => team;
-        private MatchCommands commands;
-        public void Bind(MatchCommands matchCommands) => commands = matchCommands;
+        private ICommandSink commands;
+        public void Bind(ICommandSink sink) => commands = sink;
+        // A network client plays the side the host assigns.
+        public void SetLocalTeam(Team localTeam)
+        {
+            if (Selected != null && Selected.Team != localTeam) ClearSelection();
+            team = localTeam;
+        }
         public event System.Action<Vector2, Vector2> PanRequested;
         public event System.Action<float> ZoomRequested;
         private Vector2 pressPosition, previousPosition;
@@ -293,9 +299,10 @@ namespace SectorLab.Player
 
         private bool Send(in UnitCommand command)
         {
-            bool accepted = commands != null && commands.Execute(command) == CommandResult.Accepted;
+            Vector3 destination = default;
+            bool accepted = commands != null && commands.Submit(command, out destination);
             if (command.Kind == UnitCommandKind.Attack) return accepted;
-            if (accepted && destinationMarker != null) destinationMarker.position = commands.LastDestination;
+            if (accepted && destinationMarker != null) destinationMarker.position = destination;
             SetMarkerVisible(accepted);
             return accepted;
         }
