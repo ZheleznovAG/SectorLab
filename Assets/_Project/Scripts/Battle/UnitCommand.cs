@@ -32,6 +32,9 @@ namespace SectorLab.Battle
         public static UnitCommand Attack(Team issuer, int unitId, int targetId) =>
             new UnitCommand(UnitCommandKind.Attack, issuer, unitId, -1, targetId, default);
 
+        // The authority stamps the sender's real team; an issuer read from the wire is never trusted.
+        public UnitCommand WithIssuer(Team issuer) => new UnitCommand(Kind, issuer, UnitId, RelayIndex, TargetId, Point);
+
         public override string ToString() => $"{Kind} by {Issuer}: unit {UnitId}, relay {RelayIndex}, target {TargetId}, point {Point}";
     }
 }
