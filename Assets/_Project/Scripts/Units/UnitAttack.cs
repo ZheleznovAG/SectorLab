@@ -4,6 +4,8 @@ namespace SectorLab.Units
 {
     // Walk until the target is within range, then hit it every cooldown until it dies.
     // Range decides melee vs ranged; an optional line flashes on each hit so ranged shots are readable.
+    // Targeting and chasing follow frames (NavMesh); cooldown and damage advance only with the
+    // match tick (Simulate), so the authoritative result does not depend on the frame rate.
     [RequireComponent(typeof(Unit))]
     public class UnitAttack : MonoBehaviour
     {
@@ -21,7 +23,7 @@ namespace SectorLab.Units
         private const float RepathInterval = 0.5f;
 
         private Unit self;
-        private float nextAttackTime;
+        private double cooldownRemaining;
         private float hideShotLineTime;
         private float nextRepathTime;
 
@@ -30,6 +32,8 @@ namespace SectorLab.Units
         public int Damage => damage;
         public float Cooldown => cooldown;
         public event System.Action<Unit> Fired;
+        // True while the current target is in reach with a clear line; Simulate fires only then.
+        public bool CanHitTarget { get; private set; }
 
         private void Awake()
         {
@@ -61,6 +65,7 @@ namespace SectorLab.Units
         public void ClearTarget()
         {
             Target = null;
+            CanHitTarget = false;
             nextRepathTime = 0f;
         }
 
@@ -111,16 +116,17 @@ namespace SectorLab.Units
 
         private void Update()
         {
-            // A ready first shot must also wait while the match clock is paused.
-            if (!self.IsAlive || Time.timeScale <= 0f)
-                return;
             if (shotLine != null && shotLine.enabled && Time.time >= hideShotLineTime)
                 shotLine.enabled = false;
+            // A paused match keeps every unit where it is.
+            if (!self.IsAlive || Time.timeScale <= 0f)
+                return;
 
             // A destroyed target compares equal to null in Unity.
             if (Target == null || !Target.IsAlive)
             {
                 Target = null;
+                CanHitTarget = false;
 
                 // Only idle units pick fights, so a move order isn't hijacked on the way.
                 if (self.Movement.IsMoving)
@@ -133,7 +139,8 @@ namespace SectorLab.Units
                 nextRepathTime = 0f;
             }
 
-            if (!IsInRange(Target) || Physics.Linecast(transform.position, Target.transform.position, obstructionMask, QueryTriggerInteraction.Ignore))
+            CanHitTarget = HasClearShot(Target);
+            if (!CanHitTarget)
             {
                 // Bound retries for failed/partial paths, and re-path for a moving target.
                 Vector3 targetPosition = Target.transform.position;
@@ -146,14 +153,29 @@ namespace SectorLab.Units
             }
 
             self.Movement.Stop();
+        }
 
-            if (Time.time >= nextAttackTime)
+        private bool HasClearShot(Unit target) => IsInRange(target)
+            && !Physics.Linecast(transform.position, target.transform.position, obstructionMask, QueryTriggerInteraction.Ignore);
+
+        // One match tick: the cooldown runs down in game seconds and a ready unit hits its target.
+        public void Simulate(double seconds)
+        {
+            if (seconds <= 0 || !isActiveAndEnabled || !self.IsAlive)
+                return;
+            cooldownRemaining = System.Math.Max(0, cooldownRemaining - seconds);
+            if (cooldownRemaining > 1e-6 || Target == null || !Target.IsAlive)
+                return;
+            // Re-check here: the target may have moved since this frame's Update.
+            if (!HasClearShot(Target))
             {
-                nextAttackTime = Time.time + cooldown;
-                ShowShotLine(Target.transform.position);
-                Target.Health.TakeDamage(damage);
-                Fired?.Invoke(self);
+                CanHitTarget = false;
+                return;
             }
+            cooldownRemaining = cooldown;
+            ShowShotLine(Target.transform.position);
+            Target.Health.TakeDamage(damage);
+            Fired?.Invoke(self);
         }
     }
 }

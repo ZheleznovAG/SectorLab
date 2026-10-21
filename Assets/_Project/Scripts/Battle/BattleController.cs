@@ -75,6 +75,12 @@ namespace SectorLab.Battle
 
         private void SimulateTick(double tick)
         {
+            // Combat first, so a unit killed this tick no longer holds a relay.
+            for (int i = 0; i < Unit.All.Count; i++)
+            {
+                UnitAttack attack = Unit.All[i].Attack;
+                if (attack != null) attack.Simulate(tick);
+            }
             double playerPoints = 0;
             double enemyPoints = 0;
             for (int i = 0; i < relays.Length; i++)

@@ -18,6 +18,7 @@ namespace SectorLab.Tests
             root = new GameObject("TestRoot");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
+            CombatTicker.AddTo(root);
         }
 
         [TearDown]
@@ -69,6 +70,36 @@ namespace SectorLab.Tests
             a.Attack.SetTarget(b);
 
             Assert.That(a.Attack.Target, Is.Null);
+        }
+
+        [Test]
+        public void DamageDependsOnGameTimeNotOnFramePacing()
+        {
+            var battle = root.AddComponent<SectorLab.Battle.BattleController>();
+            battle.Initialize(new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
+            battle.enabled = false;
+            UnitStats stats = Stats(500, 0, 10, 2, 0.5f);
+
+            int Damage(double[] frames)
+            {
+                Unit attacker = CreateUnit(Team.Player, Vector3.zero, stats: stats);
+                Unit target = CreateUnit(Team.Enemy, Vector3.right, maxHealth: 500);
+                attacker.Attack.SetTarget(target);
+                foreach (double frame in frames) battle.AdvanceSimulation(frame);
+                int damage = target.Health.Max - target.Health.Current;
+                Object.DestroyImmediate(attacker.gameObject);
+                Object.DestroyImmediate(target.gameObject);
+                return damage;
+            }
+
+            var steady = new double[120];
+            for (int i = 0; i < steady.Length; i++) steady[i] = 1.0 / 60;          // 2 s at 60 FPS
+            int smooth = Damage(steady);
+            int stutter = Damage(new[] { 0.3, 0.02, 0.48, 0.1, 0.7, 0.4 });        // 2 s in uneven frames
+            // Ticks at 0.1 s; cooldown 0.5 s: hits at 0.1, 0.6, 1.1, 1.6.
+            Assert.That(smooth, Is.EqualTo(40));
+            Assert.That(stutter, Is.EqualTo(smooth));
+            Object.DestroyImmediate(stats);
         }
 
         [UnityTest]

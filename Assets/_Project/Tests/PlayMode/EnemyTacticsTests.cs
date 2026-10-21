@@ -120,7 +120,7 @@ namespace SectorLab.Tests
             battle.AdvanceSimulation(1);
             Assert.That(enemy.Attack.Target, Is.SameAs(player));
             yield return null;
-            yield return null;
+            battle.AdvanceSimulation(BattleController.TickSeconds); // Damage lands on a match tick.
             Assert.That(player.Health.Current, Is.LessThan(player.Health.Max));
             Assert.That(a.State.IsContested, Is.True);
         }
