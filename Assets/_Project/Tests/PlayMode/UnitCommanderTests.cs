@@ -19,6 +19,8 @@ namespace SectorLab.Tests
         private UnitCommander commander;
         private Transform marker;
         private SectorLab.Objectives.RelayConfig tapRelayConfig;
+        private readonly System.Collections.Generic.List<SectorLab.Objectives.RelayPoint> relays = new System.Collections.Generic.List<SectorLab.Objectives.RelayPoint>();
+        private SectorLab.Battle.MatchCommands commands;
 
         public override void Setup()
         {
@@ -65,6 +67,11 @@ namespace SectorLab.Tests
             SetField(commander, "groundMask", (LayerMask)LayerMask.GetMask("Ground"));
             SetField(commander, "destinationMarker", marker);
             commanderObject.SetActive(true);
+            unit.AssignId(0);
+            enemy.AssignId(3);
+            relays.Clear();
+            commands = new SectorLab.Battle.MatchCommands(relays);
+            commander.Bind(commands);
 
             Physics.SyncTransforms();
         }
@@ -117,6 +124,7 @@ namespace SectorLab.Tests
             var config = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
             var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
             relay.Configure(config);
+            relays.Add(relay);
             var collider = node.AddComponent<SphereCollider>();
             collider.radius = config.radius;
             collider.isTrigger = true;
@@ -176,6 +184,7 @@ namespace SectorLab.Tests
             tapRelayConfig = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
             var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
             relay.Configure(tapRelayConfig);
+            relays.Add(relay);
             var collider = node.AddComponent<SphereCollider>();
             collider.radius = tapRelayConfig.radius;
             collider.isTrigger = true;
@@ -248,6 +257,7 @@ namespace SectorLab.Tests
             var config = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
             var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
             relay.Configure(config);
+            relays.Add(relay);
             commander.HandleTap(ScreenPoint(unit.transform.position));
             commander.HandleTap(ScreenPoint(enemy.transform.position));
             Assert.That(commander.OrderSelectedToRelay(relay), Is.False);

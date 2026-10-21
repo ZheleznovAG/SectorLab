@@ -1,3 +1,4 @@
+using SectorLab.Battle;
 using SectorLab.Units;
 using SectorLab.Objectives;
 using UnityEngine;
@@ -19,12 +20,17 @@ namespace SectorLab.Player
         [SerializeField, Min(0f)] private float maxTapDistance = 100f;
         [Tooltip("A tap this close (on screen) to a unit counts as a tap on it. A fingertip covers roughly 7 mm.")]
         [SerializeField, Min(0f)] private float tapToleranceMm = 7f;
+        [Tooltip("The team this device commands. Orders are sent as this team and checked by MatchCommands.")]
+        [SerializeField] private Team team = Team.Player;
 
         // The editor and some devices report dpi 0; 160 is Android's baseline density.
         private const float FallbackDpi = 160f;
         private int unitLayerMask;
 
         public Unit Selected { get; private set; }
+        public Team LocalTeam => team;
+        private MatchCommands commands;
+        public void Bind(MatchCommands matchCommands) => commands = matchCommands;
         public event System.Action<Vector2, Vector2> PanRequested;
         public event System.Action<float> ZoomRequested;
         private Vector2 pressPosition, previousPosition;
@@ -172,7 +178,7 @@ namespace SectorLab.Player
 
             if (unit != null)
             {
-                if (unit.Team == Team.Player)
+                if (unit.Team == team)
                     Select(unit);
                 else if (Selected != null && Selected.Attack != null)
                     AttackWithSelected(unit);
@@ -244,7 +250,7 @@ namespace SectorLab.Player
 
         public bool SelectFriendly(Unit unit)
         {
-            if (!isActiveAndEnabled || unit == null || !unit.IsAlive || unit.Team != Team.Player) return false;
+            if (!isActiveAndEnabled || unit == null || !unit.IsAlive || unit.Team != team) return false;
             Select(unit);
             return true;
         }
@@ -254,14 +260,10 @@ namespace SectorLab.Player
 
         public bool OrderSelectedToRelay(RelayPoint relay)
         {
-            if (!isActiveAndEnabled || Selected == null || !Selected.IsAlive || relay == null)
+            if (!isActiveAndEnabled || Selected == null || !Selected.IsAlive || relay == null || commands == null)
                 return false;
-            if (!relay.TryGetApproachPoint(Selected, out Vector3 point))
-            {
-                SetMarkerVisible(false);
-                return false;
-            }
-            return MoveSelected(point, relay.GetArrivalDistance(point));
+            int index = commands.RelayIndexOf(relay);
+            return Send(UnitCommand.MoveToRelay(team, Selected.Id, index));
         }
 
         private void Select(Unit unit)
@@ -283,22 +285,18 @@ namespace SectorLab.Player
 
         private void AttackWithSelected(Unit enemy)
         {
-            Selected.Attack.SetTarget(enemy);
+            Send(UnitCommand.Attack(team, Selected.Id, enemy.Id));
             SetMarkerVisible(false);
         }
 
-        private bool MoveSelected(Vector3 point, float stoppingDistance = 0f)
-        {
-            bool accepted = Selected.Movement.MoveTo(point, stoppingDistance);
-            // Only an accepted move replaces the previous attack order.
-            if (accepted && Selected.Attack != null)
-                Selected.Attack.ClearTarget();
+        private bool MoveSelected(Vector3 point) => Send(UnitCommand.MoveToPoint(team, Selected.Id, point));
 
-            if (destinationMarker != null)
-            {
-                destinationMarker.position = point;
-                SetMarkerVisible(accepted);
-            }
+        private bool Send(in UnitCommand command)
+        {
+            bool accepted = commands != null && commands.Execute(command) == CommandResult.Accepted;
+            if (command.Kind == UnitCommandKind.Attack) return accepted;
+            if (accepted && destinationMarker != null) destinationMarker.position = commands.LastDestination;
+            SetMarkerVisible(accepted);
             return accepted;
         }
 

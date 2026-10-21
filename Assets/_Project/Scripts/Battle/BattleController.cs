@@ -18,6 +18,9 @@ namespace SectorLab.Battle
         public MatchState State { get; private set; }
         public BattleOutcome Outcome => State.Outcome;
         public System.Collections.Generic.IReadOnlyList<RelayPoint> Relays => relays;
+        private MatchCommands commands;
+        // Player orders enter the simulation here, validated against this match's relays and state.
+        public MatchCommands Commands => commands ??= BindCommands();
 
         public event Action<BattleOutcome> Finished;
         public event Action<double> Ticked;
@@ -43,9 +46,21 @@ namespace SectorLab.Battle
             if (State != null && State.Clock.ElapsedSeconds > 0)
                 throw new InvalidOperationException("Cannot replace a running match.");
             State = state ?? throw new ArgumentNullException(nameof(state));
+            commands = BindCommands();
         }
 
-        public void InitializeRelays(RelayPoint[] points) => relays = points ?? throw new ArgumentNullException(nameof(points));
+        public void InitializeRelays(RelayPoint[] points)
+        {
+            relays = points ?? throw new ArgumentNullException(nameof(points));
+            commands = BindCommands();
+        }
+
+        private MatchCommands BindCommands()
+        {
+            var created = new MatchCommands(relays, State);
+            if (commander != null) commander.Bind(created);
+            return created;
+        }
 
         private void Update()
         {

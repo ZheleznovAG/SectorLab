@@ -1,6 +1,6 @@
 # SectorLab v1.0 — фактический статус реализации
 
-Последнее обновление: 2026-10-16; исходный аудит: 2026-10-11.
+Последнее обновление: 2026-10-21; исходный аудит: 2026-10-11.
 Рабочий каталог: `[LOCAL_USER_HOME]\Projects\SectorLab`.
 
 ## Сводка
@@ -9,7 +9,7 @@
 
 | | |
 |---|---|
-| Последний проверенный код | `d91f4b9` (B1–B4, P1, V1, CI1): EditMode 68/68, PlayMode 132/132 PASS |
+| Последний проверенный код | аудит 21.10 (бой на тике, команды, id): EditMode 68/68, PlayMode 138/138 PASS. APK V-ring собран до этих изменений |
 | Последний APK | `Builds/Android/SectorLab-V-ring.apk` (B1–B4 + кольца узлов), SHA-256 `C27B72F3…5F561C7428`, **ещё не установлен** (телефон не подключён). На телефоне — A5 `8257C9B1…A8BE83` |
 | Gates | G0–G6, G9 — PASS; G7, G8 — IN_PROGRESS ([GATES.json](GATES.json)) |
 | Публикация | README переработан под портфолио (15.10). Push и GitHub Release выполняет владелец: auto mode агента запрещает push |
@@ -26,6 +26,30 @@ whitespace, отсутствие дублей GUID и `.meta`, JSON пакето
 
 **Следующий шаг:** установить APK V-ring и повторить партию.
 После этого решить, нужна ли v1.1 с механическими различиями ролей (например, особая способность Scout).
+
+## Аудит, рефакторинг и подготовка к сети (21.10.2026)
+
+[Отчёт аудита](../audit/2026-10-21-code-review.md): 12 находок, 3 высокой важности —
+все про сетевую модель. [ADR-013](../adr/013-network-readiness.md): авторитетный хост,
+не lockstep.
+
+- `41b2a0c` refactor: удалён отключённый `ForceCounterView` и ежекадровый подсчёт живых
+  в `BattleController`; общий `RelayText`; итог «Победа/Поражение/Ничья» по-русски;
+  порядок ИИ без `ToString()` ролей; кэш `Image` кнопок HUD.
+- `775828d` fix: кулдаун и урон `UnitAttack` — в `Simulate(seconds)` от тика матча,
+  наведение и преследование остались покадровыми. Новый тест: 60 FPS и рваные кадры
+  за 2 игровые секунды дают одинаковый урон. Три теста, ждавших выстрел от кадров,
+  переведены на тик. [Регрессия](evidence/tests-R1-full-playmode-playmode.json) 132/132,
+  [EditMode](evidence/tests-R1-full-editmode-editmode.json) 68/68.
+- feat: приказы игрока — данные `UnitCommand`, проверка в `MatchCommands.Execute`
+  (матч идёт, юнит жив и свой, цель допустима); `Unit.Id` = слот ростера, сохраняется
+  при респауне; `UnitCommander.LocalTeam`. [Команды 6/6](evidence/tests-R2-commands-playmode.json),
+  [командир 27/27](evidence/tests-R2-UnitCommanderTests-playmode.json),
+  [жизненный цикл 6/6](evidence/tests-R2-MainLifecycleTests-playmode.json);
+  полная регрессия: [EditMode 68/68](evidence/tests-R2-full-editmode-editmode.json),
+  [PlayMode 138/138](evidence/tests-R2-full-playmode-playmode.json) PASS.
+- R3 не установлен: auto mode запретил агенту подключать сторонние git/NuGet-пакеты.
+  План применения (реактивное состояние матча для HUD/звука) — в ADR-013.
 
 ## Регрессия и APK V-ring (16.10.2026)
 
