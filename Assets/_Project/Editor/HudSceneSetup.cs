@@ -19,8 +19,8 @@ namespace SectorLab.Editor
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (EditorApplication.isPlaying || scene.path != "Assets/_Project/Scenes/Main.unity")
                 throw new System.InvalidOperationException("Open Main outside Play Mode.");
-            var battle = Object.FindFirstObjectByType<BattleController>();
-            var result = Object.FindFirstObjectByType<BattleResultView>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
+            var result = Object.FindAnyObjectByType<BattleResultView>();
             var canvas = result.GetComponentInParent<Canvas>();
             var backdrop = GameObject.Find("BackdropCamera");
             if (backdrop == null) backdrop = new GameObject("BackdropCamera", typeof(Camera));
@@ -69,7 +69,7 @@ namespace SectorLab.Editor
             }
             var data = new SerializedObject(hud);
             Set(data, "battle", battle); Set(data, "lifecycle", battle.GetComponent<UnitLifecycle>());
-            Set(data, "commander", Object.FindFirstObjectByType<UnitCommander>());
+            Set(data, "commander", Object.FindAnyObjectByType<UnitCommander>());
             Set(data, "worldCamera", Camera.main);
             Set(data, "playerScore", blue); Set(data, "enemyScore", red); Set(data, "timer", time); Set(data, "selection", selected);
             Set(data, "pauseButton", pause); Set(data, "pauseLabel", pause.GetComponentInChildren<Text>());
@@ -114,8 +114,8 @@ namespace SectorLab.Editor
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (EditorApplication.isPlaying || scene.path != "Assets/_Project/Scenes/Main.unity")
                 throw new System.InvalidOperationException("Open Main outside Play Mode.");
-            var hud = Object.FindFirstObjectByType<BattleHud>();
-            ConfigureAudio(Object.FindFirstObjectByType<BattleController>(), hud.GetComponent<RectTransform>());
+            var hud = Object.FindAnyObjectByType<BattleHud>();
+            ConfigureAudio(Object.FindAnyObjectByType<BattleController>(), hud.GetComponent<RectTransform>());
             EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         }
 
@@ -125,7 +125,7 @@ namespace SectorLab.Editor
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             if (EditorApplication.isPlaying || scene.path != "Assets/_Project/Scenes/Main.unity" || scene.isDirty)
                 throw new System.InvalidOperationException("Open saved Main outside Play Mode.");
-            var root = Object.FindFirstObjectByType<BattleHud>().GetComponent<RectTransform>();
+            var root = Object.FindAnyObjectByType<BattleHud>().GetComponent<RectTransform>();
             ApplyCompactHeader(root);
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);

@@ -17,10 +17,10 @@ namespace SectorLab.Tests
         {
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return MainLifecycleTests.WaitForReady();
-            var battle = Object.FindFirstObjectByType<BattleController>();
-            var lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
+            var lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
             battle.enabled = false;
-            Object.FindFirstObjectByType<EnemyTacticsController>().enabled = false;
+            Object.FindAnyObjectByType<EnemyTacticsController>().enabled = false;
             foreach (var slot in lifecycle.Slots)
             {
                 slot.Unit.Attack.enabled = false;

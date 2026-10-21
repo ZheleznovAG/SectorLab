@@ -14,7 +14,7 @@ namespace SectorLab.Editor
         public static void AttachMatchScope()
         {
             if (EditorApplication.isPlaying) throw new System.InvalidOperationException("Stop Play Mode first.");
-            var battle = Object.FindFirstObjectByType<BattleController>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
             if (battle == null || battle.gameObject.scene.path != "Assets/_Project/Scenes/Main.unity")
                 throw new System.InvalidOperationException("Open Main first.");
             var scope = battle.GetComponent<GameLifetimeScope>() ?? battle.gameObject.AddComponent<GameLifetimeScope>();
@@ -30,7 +30,7 @@ namespace SectorLab.Editor
         public static void AttachEnemyAI()
         {
             if (EditorApplication.isPlaying) throw new System.InvalidOperationException("Stop Play Mode first.");
-            var battle = Object.FindFirstObjectByType<BattleController>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
             if (battle == null || battle.gameObject.scene.path != "Assets/_Project/Scenes/Main.unity")
                 throw new System.InvalidOperationException("Open Main first.");
             var ai = battle.GetComponent<SectorLab.AI.EnemyTacticsController>() ?? battle.gameObject.AddComponent<SectorLab.AI.EnemyTacticsController>();
@@ -101,7 +101,7 @@ namespace SectorLab.Editor
                 points[i] = node.AddComponent<RelayPoint>();
                 points[i].Configure(config, renderer, label);
             }
-            var battle = Object.FindFirstObjectByType<BattleController>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
             var serialized = new SerializedObject(battle);
             var relays = serialized.FindProperty("relays");
             relays.arraySize = points.Length;

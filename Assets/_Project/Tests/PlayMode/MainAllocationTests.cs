@@ -55,7 +55,7 @@ namespace SectorLab.Tests
         {
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return MainLifecycleTests.WaitForReady();
-            var battle = UnityEngine.Object.FindFirstObjectByType<BattleController>();
+            var battle = UnityEngine.Object.FindAnyObjectByType<BattleController>();
             Assert.That(battle, Is.Not.Null);
             // Send the squad to A so movement, combat, capture and HUD updates are all exercised.
             for (int i = 0; i < Unit.All.Count; i++)
@@ -81,7 +81,7 @@ namespace SectorLab.Tests
             Assert.That(measured, Is.GreaterThan(MatchFrames / 2), "The match ended before enough frames were measured.");
 
             var disabled = new List<MonoBehaviour>();
-            foreach (var behaviour in UnityEngine.Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            foreach (var behaviour in UnityEngine.Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Exclude))
             {
                 string space = behaviour.GetType().Namespace;
                 if (behaviour.enabled && space != null && space.StartsWith("SectorLab", StringComparison.Ordinal))

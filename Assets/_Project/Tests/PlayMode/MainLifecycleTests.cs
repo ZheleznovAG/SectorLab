@@ -23,7 +23,7 @@ namespace SectorLab.Tests
             do
             {
                 yield return null;
-                current = Object.FindFirstObjectByType<UnitLifecycle>();
+                current = Object.FindAnyObjectByType<UnitLifecycle>();
                 Assert.That(current, Is.Not.Null);
                 Assert.That(current.Phase, Is.Not.EqualTo(UnitLifecyclePhase.Failed), current.Failure);
             } while (!current.IsReady && Time.realtimeSinceStartup < deadline);
@@ -31,7 +31,7 @@ namespace SectorLab.Tests
             if (dismissTutorial)
             {
                 // Close via the production action while preserving the human's first-launch preference.
-                var tutorial = Object.FindFirstObjectByType<SectorLab.Presentation.TutorialView>();
+                var tutorial = Object.FindAnyObjectByType<SectorLab.Presentation.TutorialView>();
                 string key = SectorLab.Presentation.TutorialView.SeenPreference;
                 bool existed = PlayerPrefs.HasKey(key); int previous = PlayerPrefs.GetInt(key);
                 if (tutorial != null && tutorial.IsShowing) tutorial.Dismiss();
@@ -59,14 +59,14 @@ namespace SectorLab.Tests
             Time.timeScale = 1;
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
             yield return WaitForReady();
-            battle = Object.FindFirstObjectByType<BattleController>();
-            lifecycle = Object.FindFirstObjectByType<UnitLifecycle>();
+            battle = Object.FindAnyObjectByType<BattleController>();
+            lifecycle = Object.FindAnyObjectByType<UnitLifecycle>();
             battle.enabled = false; // Drive the production fixed ticks explicitly, without frame timing drift.
-            var hud = Object.FindFirstObjectByType<SectorLab.Presentation.BattleHud>();
+            var hud = Object.FindAnyObjectByType<SectorLab.Presentation.BattleHud>();
             if (hud != null) hud.enabled = false;
             battle.InitializeRelays(System.Array.Empty<SectorLab.Objectives.RelayPoint>());
             // Isolate countdowns from relay scoring; full MainMatchTests keep actual objectives/combat.
-            Object.FindFirstObjectByType<EnemyTacticsController>().enabled = false;
+            Object.FindAnyObjectByType<EnemyTacticsController>().enabled = false;
             lifecycle.Spawned += DisableCombat;
             for (int i = 0; i < Unit.All.Count; i++) DisableCombat(Unit.All[i]);
         }
