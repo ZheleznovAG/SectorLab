@@ -24,6 +24,8 @@ namespace SectorLab.Battle
 
         // Viewer-facing state, published after every change; HUD and audio subscribe to it.
         public MatchModel Model { get; } = new MatchModel();
+        // Which side this device plays; presentation reads "mine/theirs" through it.
+        public TeamPerspective Perspective => new TeamPerspective(commander != null ? commander.LocalTeam : Team.Player);
 
         public event Action<BattleOutcome> Finished;
         public event Action<double> Ticked;
@@ -134,7 +136,11 @@ namespace SectorLab.Battle
             if (commander != null)
                 commander.ClearSelection();
             if (resultView != null)
-                resultView.Show(Outcome, Restart, State.PlayerScore, State.EnemyScore);
+            {
+                bool localIsPlayer = Perspective.Local == Team.Player;
+                resultView.Show(Perspective.Outcome(Outcome), Restart,
+                    localIsPlayer ? State.PlayerScore : State.EnemyScore, localIsPlayer ? State.EnemyScore : State.PlayerScore);
+            }
             Finished?.Invoke(Outcome);
         }
 
