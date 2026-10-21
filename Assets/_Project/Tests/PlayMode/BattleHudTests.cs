@@ -124,6 +124,7 @@ namespace SectorLab.Tests
         public IEnumerator PauseButtonFreezesClockAndHudShowsAuthoritativeScoreAndTime()
         {
             battle.State.Tick(1, 3, 2);
+            battle.PublishModel(); // The HUD shows what the authority publishes.
             hud.Refresh();
             Assert.That(Field<Text>(hud, "playerScore").text, Does.Contain("3"));
             Assert.That(Field<Text>(hud, "enemyScore").text, Does.Contain("2"));

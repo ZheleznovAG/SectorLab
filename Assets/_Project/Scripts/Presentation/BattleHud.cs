@@ -1,9 +1,11 @@
 using System;
+using R3;
 using SectorLab.Battle;
 using SectorLab.Objectives;
 using SectorLab.Player;
 using SectorLab.Units;
 using UnityEngine;
+using Unit = SectorLab.Units.Unit;
 using UnityEngine.UI;
 
 namespace SectorLab.Presentation
@@ -23,10 +25,10 @@ namespace SectorLab.Presentation
         [SerializeField] private Button[] relayButtons, unitButtons;
         [SerializeField] private Button pauseButton;
         [SerializeField] private Text pauseLabel;
-        private readonly int[] relayKeys = { int.MinValue, int.MinValue, int.MinValue };
         private readonly int[] unitKeys = { int.MinValue, int.MinValue, int.MinValue };
-        private int shownPlayer = -1, shownEnemy = -1, shownSeconds = -1, selectedHp = -1;
-        private double shownPlayerRate = -1, shownEnemyRate = -1;
+        private int selectedHp = -1;
+        private bool running;
+        private readonly CompositeDisposable subscriptions = new CompositeDisposable();
         private Unit shownSelection;
         // A frame around the field in the forecast winner's colour: readable from the corner of the eye.
         public const float LeadFrameThickness = 10;
@@ -89,7 +91,67 @@ namespace SectorLab.Presentation
             }
         }
 
-        private void Start() => Refresh(); // All relay Awake methods must finish before reading their states.
+        // Match values arrive from MatchModel; unit cards and selection still follow local objects.
+        private void Start()
+        {
+            battle.PublishModel(); // All relay Awake methods have finished by now.
+            Bind(battle.Model);
+            Refresh();
+        }
+
+        private void OnDestroy() => subscriptions.Dispose();
+
+        private void Bind(MatchModel model)
+        {
+            model.PlayerScore.Select(MatchModel.WholePoints).DistinctUntilChanged()
+                .CombineLatest(model.PlayerRate, (points, rate) => (points, rate))
+                .Subscribe(v => playerScore.text = $"ВЫ  {v.points}/{MatchRules.ScoreLimit:0}\n+{v.rate:0.#} очк/с")
+                .AddTo(subscriptions);
+            model.EnemyScore.Select(MatchModel.WholePoints).DistinctUntilChanged()
+                .CombineLatest(model.EnemyRate, (points, rate) => (points, rate))
+                .Subscribe(v => enemyScore.text = $"ВРАГ  {v.points}/{MatchRules.ScoreLimit:0}\n+{v.rate:0.#} очк/с")
+                .AddTo(subscriptions);
+            model.RemainingSeconds.Subscribe(seconds => timer.text = $"{seconds / 60:00}:{seconds % 60:00}").AddTo(subscriptions);
+            model.Paused.Subscribe(paused => pauseLabel.text = paused ? "Продолжить" : "Пауза").AddTo(subscriptions);
+            model.Running.Subscribe(value => running = value).AddTo(subscriptions);
+            model.Forecast.Subscribe(ShowForecast).AddTo(subscriptions);
+            for (int i = 0; i < model.Relays.Length && i < relayLabels.Length; i++)
+            {
+                int index = i;
+                model.Relays[i].CombineLatest(model.Paused, model.Outcome, (view, paused, outcome) => (view, paused, outcome))
+                    .Subscribe(v => ShowRelay(index, v.view, !v.paused && v.outcome == BattleOutcome.InProgress, v.paused))
+                    .AddTo(subscriptions);
+            }
+        }
+
+        private void ShowForecast(BattleOutcome forecast)
+        {
+            shownForecast = forecast;
+            bool visible = forecast == BattleOutcome.Victory || forecast == BattleOutcome.Defeat;
+            Color color = forecast == BattleOutcome.Victory ? Blue : Red;
+            color.a = 0.9f;
+            for (int i = 0; i < leadEdges.Length; i++)
+            {
+                leadEdges[i].color = color;
+                leadEdges[i].gameObject.SetActive(visible);
+            }
+        }
+
+        private void ShowRelay(int index, RelayView view, bool isRunning, bool paused)
+        {
+            // A replaced relay set (scene fixtures) leaves the old pipelines alive until the HUD is destroyed.
+            if (index >= battle.Relays.Count) return;
+            RelayConfig config = battle.Relays[index].Config;
+            string owner = view.Side == 1 ? "Ваш" : view.Side == 2 ? "Враг" : "Свободен";
+            string status = !isRunning ? paused ? "ПАУЗА" : "Бой окончен"
+                : view.Contested ? "СПОР · эффект остановлен"
+                : view.Owner == RelayOwner.Neutral ? view.Percent == 0 ? $"Свободен · захват {config.captureSeconds:0.#} с" : $"{owner} · захват {view.Percent}%"
+                : config.kind == RelayKind.Score ? owner + " · приносит очки"
+                : view.OwnerPresent ? owner + " · ремонтирует" : owner + " · ждёт бойца";
+            relayLabels[index].text = $"{config.label}  {RelayText.Effect(config)}\n{status}";
+            relayImages[index].color = view.Contested ? new Color(0.56f, 0.42f, 0.10f)
+                : view.Side == 1 ? Blue : view.Side == 2 ? Red : Neutral;
+        }
 
         private void LateUpdate()
         {
@@ -134,67 +196,11 @@ namespace SectorLab.Presentation
         public void Refresh()
         {
             if (battle.State == null) return;
-            int blue = (int)Math.Floor(battle.State.PlayerScore + MatchRules.Epsilon);
-            int red = (int)Math.Floor(battle.State.EnemyScore + MatchRules.Epsilon);
-            int seconds = (int)Math.Ceiling(battle.State.Clock.RemainingSeconds - MatchRules.Epsilon);
-            bool running = lifecycle.IsReady && battle.State.IsRunning;
-            double blueRate = 0, redRate = 0;
-            if (running) battle.CurrentRates(out blueRate, out redRate);
-            BattleOutcome forecast = lifecycle.IsReady ? battle.Forecast() : BattleOutcome.Draw;
-            if (forecast != shownForecast)
-            {
-                shownForecast = forecast;
-                bool visible = forecast == BattleOutcome.Victory || forecast == BattleOutcome.Defeat;
-                Color color = forecast == BattleOutcome.Victory ? Blue : Red;
-                color.a = 0.9f;
-                for (int i = 0; i < leadEdges.Length; i++)
-                {
-                    leadEdges[i].color = color;
-                    leadEdges[i].gameObject.SetActive(visible);
-                }
-            }
-            if (blue != shownPlayer || blueRate != shownPlayerRate)
-            {
-                shownPlayer = blue; shownPlayerRate = blueRate;
-                playerScore.text = $"ВЫ  {blue}/{MatchRules.ScoreLimit:0}\n+{blueRate:0.#} очк/с";
-            }
-            if (red != shownEnemy || redRate != shownEnemyRate)
-            {
-                shownEnemy = red; shownEnemyRate = redRate;
-                enemyScore.text = $"ВРАГ  {red}/{MatchRules.ScoreLimit:0}\n+{redRate:0.#} очк/с";
-            }
-            if (seconds != shownSeconds)
-            {
-                shownSeconds = seconds;
-                timer.text = $"{seconds / 60:00}:{seconds % 60:00}";
-            }
+            bool isRunning = lifecycle.IsReady && running;
             pauseButton.interactable = lifecycle.IsReady && (tutorial == null || !tutorial.IsShowing);
-            string pause = battle.State.Clock.IsPaused ? "Продолжить" : "Пауза";
-            if (pauseLabel.text != pause) pauseLabel.text = pause;
             for (int i = 0; i < 3; i++)
             {
-                RelayPoint relay = battle.Relays[i];
-                int progress = (int)Math.Round(Math.Abs(relay.State.Progress) * 100);
-                int side = relay.State.Progress > MatchRules.Epsilon ? 1 : relay.State.Progress < -MatchRules.Epsilon ? 2 : 0;
-                bool repairOccupied = relay.Config.kind == RelayKind.Repair
-                    && (relay.State.Owner == RelayOwner.Player ? relay.PlayersPresent > 0 : relay.EnemiesPresent > 0);
-                int key = progress + side * 101 + (relay.State.IsContested ? 404 : 0)
-                    + (int)relay.State.Owner * 1000 + (repairOccupied ? 4000 : 0) + (running ? 8000 : 0);
-                if (relayKeys[i] != key)
-                {
-                    relayKeys[i] = key;
-                    string owner = side == 1 ? "Ваш" : side == 2 ? "Враг" : "Свободен";
-                    string effect = RelayText.Effect(relay.Config);
-                    string status = !running ? battle.State.Clock.IsPaused ? "ПАУЗА" : "Бой окончен"
-                        : relay.State.IsContested ? "СПОР · эффект остановлен"
-                        : relay.State.Owner == RelayOwner.Neutral ? progress == 0 ? $"Свободен · захват {relay.Config.captureSeconds:0.#} с" : $"{owner} · захват {progress}%"
-                        : relay.Config.kind == RelayKind.Score ? owner + " · приносит очки"
-                        : repairOccupied ? owner + " · ремонтирует" : owner + " · ждёт бойца";
-                    relayLabels[i].text = $"{relay.Config.label}  {effect}\n{status}";
-                    relayImages[i].color = relay.State.IsContested ? new Color(0.56f, 0.42f, 0.10f)
-                        : side == 1 ? Blue : side == 2 ? Red : Neutral;
-                }
-                relayButtons[i].interactable = running && commander.Selected != null;
+                relayButtons[i].interactable = isRunning && commander.Selected != null;
                 UnitSlotState slot = PlayerSlot(i);
                 Unit unit = slot?.Unit;
                 bool alive = unit != null && unit.IsAlive;
@@ -209,7 +215,7 @@ namespace SectorLab.Presentation
                         : slot == null ? role : slot.IsSpawning ? role + "\nВозвращается…"
                         : slot.Respawn.IsWaiting ? role + $"\nВозврат: {Math.Max(0, respawn)} с" : role + "\nОжидание";
                 }
-                unitButtons[i].interactable = running && alive;
+                unitButtons[i].interactable = isRunning && alive;
                 unitImages[i].color = alive && commander.Selected == unit ? Blue : Neutral;
             }
             Unit selected = commander.Selected;

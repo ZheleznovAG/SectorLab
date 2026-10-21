@@ -22,6 +22,9 @@ namespace SectorLab.Battle
         // Player orders enter the simulation here, validated against this match's relays and state.
         public MatchCommands Commands => commands ??= BindCommands();
 
+        // Viewer-facing state, published after every change; HUD and audio subscribe to it.
+        public MatchModel Model { get; } = new MatchModel();
+
         public event Action<BattleOutcome> Finished;
         public event Action<double> Ticked;
 
@@ -47,12 +50,14 @@ namespace SectorLab.Battle
                 throw new InvalidOperationException("Cannot replace a running match.");
             State = state ?? throw new ArgumentNullException(nameof(state));
             commands = BindCommands();
+            PublishModel();
         }
 
         public void InitializeRelays(RelayPoint[] points)
         {
             relays = points ?? throw new ArgumentNullException(nameof(points));
             commands = BindCommands();
+            PublishModel();
         }
 
         private MatchCommands BindCommands()
@@ -108,6 +113,7 @@ namespace SectorLab.Battle
                 if (relay.State.Owner == RelayOwner.Enemy) enemyPoints += points;
             }
             double advanced = State.Tick(tick, tick > 0 ? playerPoints / tick : 0, tick > 0 ? enemyPoints / tick : 0);
+            PublishModel();
             if (State.IsRunning)
             {
                 Ticked?.Invoke(advanced);
@@ -156,6 +162,28 @@ namespace SectorLab.Battle
         {
             State.SetPaused(paused);
             ApplyRunState();
+            PublishModel();
+        }
+
+        // Writes the authoritative state into the viewer model; unchanged values do not notify.
+        public void PublishModel()
+        {
+            if (State == null) return;
+            // Injection runs before relay Awake; the first tick or a view's Start publishes instead.
+            for (int i = 0; i < relays.Length; i++)
+                if (relays[i] == null || relays[i].Config == null || relays[i].State == null) return;
+            Model.SetRelayCount(relays.Length);
+            for (int i = 0; i < relays.Length; i++) Model.Relays[i].Value = RelayView.From(relays[i]);
+            double player = 0, enemy = 0;
+            if (State.IsRunning) CurrentRates(out player, out enemy);
+            Model.PlayerScore.Value = State.PlayerScore;
+            Model.EnemyScore.Value = State.EnemyScore;
+            Model.PlayerRate.Value = player;
+            Model.EnemyRate.Value = enemy;
+            Model.RemainingSeconds.Value = MatchModel.WholeSeconds(State.Clock.RemainingSeconds);
+            Model.Paused.Value = State.Clock.IsPaused;
+            Model.Forecast.Value = Forecast();
+            Model.Outcome.Value = State.Outcome;
         }
 
         private void ApplyRunState()
@@ -174,6 +202,7 @@ namespace SectorLab.Battle
         private void OnDestroy()
         {
             Time.timeScale = runningTimeScale;
+            Model.Dispose();
         }
     }
 }
