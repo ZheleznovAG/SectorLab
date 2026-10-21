@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 101675101}
   - component: {fileID: 101675102}
   - component: {fileID: 101675103}
+  - component: {fileID: 101675104}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -637,6 +638,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: SectorLab::SectorLab.Units.UnitLifecycle
   unitsRoot: {fileID: 790612921}
   resultView: {fileID: 337262501}
+--- !u!114 &101675104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101675098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b1c9afda44e6f40a09fb2a3a0125f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SectorLab::SectorLab.Network.NetworkMatchBootstrap
 --- !u!1 &170229917
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +783,7 @@ MonoBehaviour:
   destinationMarker: {fileID: 1268576649}
   maxTapDistance: 100
   tapToleranceMm: 7
+  team: 0
 --- !u!1 &174120331
 GameObject:
   m_ObjectHideFlags: 0
