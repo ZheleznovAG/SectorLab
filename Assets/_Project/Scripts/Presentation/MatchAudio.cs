@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using R3;
 using SectorLab.Battle;
 using SectorLab.Objectives;
 using SectorLab.Units;
 using UnityEngine;
+using Unit = SectorLab.Units.Unit;
 using UnityEngine.UI;
 
 namespace SectorLab.Presentation
@@ -17,8 +19,7 @@ namespace SectorLab.Presentation
         [SerializeField] private Text muteLabel;
         [SerializeField] private Text noticeLabel;
         private readonly List<Unit> observed = new List<Unit>(6);
-        private RelayOwner[] owners;
-        private bool[] contested;
+        private readonly CompositeDisposable relaySubscriptions = new CompositeDisposable();
         private AudioSource source;
         private AudioClip tankShot, scoutShot, rangerShot, capture, warning, victory, defeat;
         private readonly float[] nextShot = new float[3];
@@ -49,8 +50,6 @@ namespace SectorLab.Presentation
 
         private void OnEnable()
         {
-            owners = new RelayOwner[battle.Relays.Count];
-            contested = new bool[battle.Relays.Count];
             lifecycle.Spawned += Observe;
             battle.Ticked += OnTick;
             battle.Finished += OnFinished;
@@ -82,39 +81,45 @@ namespace SectorLab.Presentation
             PlayedShots++;
         }
 
-        private void OnTick(double seconds)
+        private void Start()
         {
-            AnnounceForecast(seconds);
-            for (int i = 0; i < battle.Relays.Count; i++)
+            battle.PublishModel(); // Relays have woken up; take the current state as the baseline.
+            for (int i = 0; i < battle.Model.Relays.Length; i++)
             {
-                RelayPoint relay = battle.Relays[i];
-                RelayOwner current = relay.State.Owner, previous = owners[i];
-                bool newContest = relay.State.IsContested && !contested[i]
-                    && (previous == RelayOwner.Player || relay.State.Progress > MatchRules.Epsilon);
-                contested[i] = relay.State.IsContested;
-                owners[i] = current;
-                if (newContest)
-                {
-                    Notify(relay.Config.label + ": СПОР · эффект остановлен");
-                    Alert();
-                }
-                if (current == previous) continue;
-                if (current == RelayOwner.Player)
-                {
-                    string effect = relay.Config.kind == RelayKind.Score ? RelayText.Effect(relay.Config) : "ремонт " + RelayText.Effect(relay.Config);
-                    Notify($"Вы захватили {relay.Config.label} · {effect}");
-                    if (!Muted) { Play(capture, 0.8f); PlayedCaptures++; }
-                }
-                else if (current == RelayOwner.Enemy)
-                {
-                    Notify("Враг захватил " + relay.Config.label);
-                    if (!Muted) { Play(warning, 0.8f); PlayedCaptures++; }
-                }
-                else if (previous == RelayOwner.Player)
-                {
-                    Notify(relay.Config.label + ": контроль потерян");
-                    Alert();
-                }
+                int index = i;
+                battle.Model.Relays[i].Pairwise()
+                    .Where(_ => index < battle.Relays.Count)
+                    .Subscribe(change => OnRelayChanged(battle.Relays[index].Config, change.Previous, change.Current))
+                    .AddTo(relaySubscriptions);
+            }
+        }
+
+        private void OnTick(double seconds) => AnnounceForecast(seconds);
+
+        private void OnRelayChanged(RelayConfig config, RelayView previous, RelayView current)
+        {
+            // A contest matters when it threatens our relay or our capture in progress.
+            if (current.Contested && !previous.Contested && (previous.Owner == RelayOwner.Player || current.Side == 1))
+            {
+                Notify(config.label + ": СПОР · эффект остановлен");
+                Alert();
+            }
+            if (current.Owner == previous.Owner) return;
+            if (current.Owner == RelayOwner.Player)
+            {
+                string effect = config.kind == RelayKind.Score ? RelayText.Effect(config) : "ремонт " + RelayText.Effect(config);
+                Notify($"Вы захватили {config.label} · {effect}");
+                if (!Muted) { Play(capture, 0.8f); PlayedCaptures++; }
+            }
+            else if (current.Owner == RelayOwner.Enemy)
+            {
+                Notify("Враг захватил " + config.label);
+                if (!Muted) { Play(warning, 0.8f); PlayedCaptures++; }
+            }
+            else if (previous.Owner == RelayOwner.Player)
+            {
+                Notify(config.label + ": контроль потерян");
+                Alert();
             }
         }
 
@@ -126,7 +131,7 @@ namespace SectorLab.Presentation
 
         private void AnnounceForecast(double seconds)
         {
-            BattleOutcome forecast = battle.Forecast();
+            BattleOutcome forecast = battle.Model.Forecast.CurrentValue;
             if (forecast != pendingForecast) { pendingForecast = forecast; pendingSeconds = 0; }
             pendingSeconds += seconds;
             if (pendingSeconds < ForecastSettleSeconds - MatchRules.Epsilon || forecast == announcedForecast) return;
@@ -192,6 +197,7 @@ namespace SectorLab.Presentation
 
         private void OnDestroy()
         {
+            relaySubscriptions.Dispose();
             Destroy(tankShot); Destroy(scoutShot); Destroy(rangerShot); Destroy(capture); Destroy(warning); Destroy(victory); Destroy(defeat);
         }
 
