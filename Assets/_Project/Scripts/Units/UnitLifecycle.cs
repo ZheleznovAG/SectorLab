@@ -98,6 +98,7 @@ namespace SectorLab.Units
             if (unit.Team != slot.Config.team || unit.Stats == null || unit.Stats.role != slot.Config.role)
                 throw new InvalidOperationException("Prefab team/role does not match its roster slot.");
             slot.Unit = unit;
+            unit.AssignId(Array.IndexOf(slots, slot));
             var agent = unit.GetComponent<UnityEngine.AI.NavMeshAgent>();
             slot.SpawnRadius = agent.radius * Mathf.Max(unit.transform.lossyScale.x, unit.transform.lossyScale.z);
             slot.Respawn.Complete();

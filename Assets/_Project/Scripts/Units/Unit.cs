@@ -17,6 +17,9 @@ namespace SectorLab.Units
         private UnitAttack attack;
 
         public Team Team => team;
+        // Stable address for orders and network messages: the roster slot, kept across respawns.
+        // -1 until the match lifecycle (or a test fixture) assigns it.
+        public int Id { get; private set; } = -1;
         public UnitStats Stats => stats;
         public Health Health { get; private set; }
         public bool IsAlive => !Health.IsDead;
@@ -30,6 +33,21 @@ namespace SectorLab.Units
         // Units currently enabled in the scene; small enough battles to just loop over.
         private static readonly List<Unit> all = new List<Unit>();
         public static IReadOnlyList<Unit> All => all;
+
+        public static Unit Find(int id)
+        {
+            if (id < 0) return null;
+            for (int i = 0; i < all.Count; i++)
+                if (all[i].Id == id) return all[i];
+            return null;
+        }
+
+        public void AssignId(int id)
+        {
+            if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
+            if (Id >= 0 && Id != id) throw new InvalidOperationException("A unit keeps its id for its whole life.");
+            Id = id;
+        }
 
         private void OnEnable()
         {

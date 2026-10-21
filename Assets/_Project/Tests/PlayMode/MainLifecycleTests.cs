@@ -100,6 +100,8 @@ namespace SectorLab.Tests
             foreach (UnitSlotState slot in lifecycle.Slots)
             {
                 Unit old = slot.Unit;
+                int id = old.Id;
+                Assert.That(id, Is.EqualTo(System.Array.IndexOf((UnitSlotState[])lifecycle.Slots, slot)), "Ids are roster slot indices.");
                 old.Health.TakeDamage(old.Health.Max);
                 old.Health.TakeDamage(old.Health.Max); // A repeated lethal damage cannot schedule a duplicate.
                 yield return null;
@@ -113,6 +115,7 @@ namespace SectorLab.Tests
                 while (slot.Unit == null && Time.realtimeSinceStartup < deadline) yield return null;
                 Assert.That(slot.Unit, Is.Not.Null, $"{slot.Config.team}/{slot.Config.role}: waiting={slot.Respawn.RemainingSeconds}, spawning={slot.IsSpawning}, phase={lifecycle.Phase}, safe={UnitSpawnPositions.TryFind(slot.Config.position, slot.SpawnRadius, out _)}");
                 Assert.That(slot.Unit, Is.Not.SameAs(old));
+                Assert.That(slot.Unit.Id, Is.EqualTo(id), "A respawned unit keeps its slot's id for network messages.");
                 Assert.That(slot.Unit.Team, Is.EqualTo(slot.Config.team));
                 Assert.That(slot.Unit.Stats.role, Is.EqualTo(slot.Config.role));
                 Assert.That(slot.Unit.Health.Current, Is.EqualTo(slot.Unit.Health.Max));
