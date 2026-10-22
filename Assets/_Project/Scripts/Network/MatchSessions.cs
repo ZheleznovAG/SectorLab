@@ -5,8 +5,8 @@ using SectorLab.Units;
 
 namespace SectorLab.Network
 {
-    // A reliable, ordered byte pipe to the other side. Netcode's named messages, a socket or an
-    // in-memory loopback can implement it; sessions never see the transport.
+    // A message pipe to the other side; sessions never see the transport. Orders must arrive
+    // reliably and in order. Snapshots may be dropped (UtpChannel does), so the host repeats them.
     public interface IMessageChannel
     {
         void Send(ReadOnlySpan<byte> message);

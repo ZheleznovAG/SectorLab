@@ -98,7 +98,9 @@ namespace SectorLab.Tests
             Assert.That(bootstrap.WaitingForPeer, Is.True);
             yield return null;
             Assert.That(battle.State.Clock.IsPaused, Is.True, "The clock waits for the opponent, even after the tutorial.");
-            Assert.That(Object.FindAnyObjectByType<BattleResultView>().IsShowingMessage, Is.True);
+            var notice = Object.FindAnyObjectByType<BattleResultView>();
+            Assert.That(notice.IsShowingMessage, Is.True);
+            Assert.That(notice.ActionLabel, Is.EqualTo("Играть с ИИ"), "Waiting must never be a dead end.");
 
             UtpChannel remoteEnd = Track(UtpChannel.Connect("127.0.0.1", port));
             using var remoteModel = new MatchModel();

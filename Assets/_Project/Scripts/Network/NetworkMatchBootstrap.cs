@@ -12,8 +12,11 @@ using Unit = SectorLab.Units.Unit;
 namespace SectorLab.Network
 {
     // Turns Main into a host or a client according to NetworkLaunch; offline it does nothing.
-    // Host: the real match runs here, the remote human replaces the red AI, state goes out every tick.
+    // Host: the real match runs here, the remote human replaces the red AI, state goes out every tick
+    // and, while the clock stands (pause, waiting, result), as a heartbeat: snapshots travel unreliably,
+    // so a single lost "paused" or "finished" packet must not leave the client behind.
     // Client: no simulation; units are proxies placed by the host's snapshots, orders go to the host.
+    // Every blocking notice offers "Играть с ИИ", so a lost connection never strands the player.
     public sealed class NetworkMatchBootstrap : MonoBehaviour
     {
         private BattleController battle;
@@ -22,6 +25,8 @@ namespace SectorLab.Network
         private HostSession host;
         private ClientSession client;
         private bool proxiesReady;
+        private float lastSentAt = float.NegativeInfinity;
+        public const float HeartbeatSeconds = 0.25f;
         private readonly System.Collections.Generic.Dictionary<Unit, (Renderer[] renderers, Collider[] colliders)> proxyParts =
             new System.Collections.Generic.Dictionary<Unit, (Renderer[], Collider[])>(6);
 
@@ -39,8 +44,21 @@ namespace SectorLab.Network
             commander = FindAnyObjectByType<UnitCommander>();
             var ai = FindAnyObjectByType<EnemyTacticsController>();
             if (ai != null) ai.enabled = false; // red is a human now
+            status = channel as IConnectionStatus;
             if (Role == SessionRole.Host) StartHost(channel);
             else StartClient(channel);
+        }
+
+        private void PlayOffline()
+        {
+            NetworkLauncher.Leave();
+            battle.Restart();
+        }
+
+        private void ShowNotice(string message)
+        {
+            var view = FindAnyObjectByType<BattleResultView>();
+            if (view != null) view.ShowMessage(message, "Играть с ИИ", PlayOffline);
         }
 
         private void StartHost(IMessageChannel channel)
@@ -49,7 +67,6 @@ namespace SectorLab.Network
             battle.Ticked += SendState;
             battle.Finished += SendFinalState;
             // The clock waits for the opponent; a dropped opponent pauses the match.
-            status = channel as IConnectionStatus;
             if (status == null) return;
             status.Connected += OnPeerConnected;
             status.Disconnected += OnPeerDisconnected;
@@ -68,17 +85,17 @@ namespace SectorLab.Network
             ShowWaiting();
         }
 
-        private void ShowWaiting()
-        {
-            var view = FindAnyObjectByType<BattleResultView>();
-            if (view != null) view.ShowMessage("Ожидание соперника…\nIP: " + NetworkLauncher.LocalAddressesText());
-        }
+        private void ShowWaiting() => ShowNotice("Ожидание соперника…\nIP: " + NetworkLauncher.LocalAddressesText());
 
-        // The tutorial or the pause button must not start the clock without the opponent.
         private void Update()
         {
-            if (WaitingForPeer && battle != null && battle.Outcome == BattleOutcome.InProgress && !battle.State.Clock.IsPaused)
+            if (host == null) return;
+            // The tutorial or the pause button must not start the clock without the opponent.
+            if (WaitingForPeer && battle.Outcome == BattleOutcome.InProgress && !battle.State.Clock.IsPaused)
                 battle.SetPaused(true);
+            // Ticks stop while the clock stands; keep the client's picture current anyway.
+            bool reachable = status == null || status.IsConnected;
+            if (reachable && Time.unscaledTime - lastSentAt >= HeartbeatSeconds) SendState();
         }
 
         private void OnPeerConnected()
@@ -88,7 +105,7 @@ namespace SectorLab.Network
             var view = FindAnyObjectByType<BattleResultView>();
             if (view != null && view.IsShowingMessage) view.Hide();
             if (lifecycle.IsReady && battle.Outcome == BattleOutcome.InProgress) battle.SetPaused(false);
-            host.SendState(Unit.All);
+            SendState();
         }
 
         private void OnPeerDisconnected()
@@ -99,8 +116,14 @@ namespace SectorLab.Network
             ShowWaiting();
         }
 
-        private void SendState(double seconds) => host.SendState(Unit.All);
-        private void SendFinalState(BattleOutcome outcome) => host.SendState(Unit.All);
+        private void SendState()
+        {
+            host.SendState(Unit.All);
+            lastSentAt = Time.unscaledTime;
+        }
+
+        private void SendState(double seconds) => SendState();
+        private void SendFinalState(BattleOutcome outcome) => SendState();
 
         private void StartClient(IMessageChannel channel)
         {
@@ -113,24 +136,72 @@ namespace SectorLab.Network
             client.UnitsUpdated += ApplyUnits;
             lifecycle.Ready += MakeProxies;
             if (lifecycle.IsReady) MakeProxies();
-            // The host decides the match; the client shows the result it receives.
-            outcomeSubscription = battle.Model.Outcome.Where(outcome => outcome != BattleOutcome.InProgress)
-                .Take(1).Subscribe(ShowClientResult);
+            // The host decides the match and when the next one starts; the client follows.
+            outcomeSubscription = battle.Model.Outcome.Subscribe(OnHostOutcome);
+            if (status == null) return;
+            status.Connected += OnHostConnected;
+            status.Disconnected += OnHostDisconnected;
+            // Loading hides the result panel when it ends, so the notice goes up after it.
+            lifecycle.Ready += ShowConnectionNotice;
+            if (lifecycle.IsReady) ShowConnectionNotice();
         }
 
         private IDisposable outcomeSubscription;
+        private bool showingResult, showingConnectionNotice, hostLost;
+
+        private void ShowConnectionNotice()
+        {
+            if (status.IsConnected || showingResult) return;
+            showingConnectionNotice = true;
+            ShowNotice(hostLost ? "Связь с хостом потеряна." : "Подключение к хосту…");
+        }
+
+        private void OnHostConnected()
+        {
+            hostLost = false;
+            if (!showingConnectionNotice) return;
+            showingConnectionNotice = false;
+            var view = FindAnyObjectByType<BattleResultView>();
+            if (view != null && view.IsShowingMessage) view.Hide();
+        }
+
+        private void OnHostDisconnected()
+        {
+            hostLost = true;
+            commander.ClearSelection();
+            showingResult = false;
+            ShowConnectionNotice();
+        }
+
+        private void OnHostOutcome(BattleOutcome outcome)
+        {
+            if (outcome != BattleOutcome.InProgress) ShowClientResult(outcome);
+            else if (showingResult) HideClientResult(); // the host started the next match
+        }
 
         private void ShowClientResult(BattleOutcome outcome)
         {
+            if (showingResult) return;
+            showingResult = true;
+            showingConnectionNotice = false;
             commander.ClearSelection();
             commander.enabled = false;
             var view = FindAnyObjectByType<BattleResultView>();
             if (view == null) return;
             bool localIsPlayer = NetworkLaunch.RemoteTeam == Team.Player;
             MatchModel model = battle.Model;
-            view.Show(battle.Perspective.Outcome(outcome), battle.Restart,
+            // Only the host restarts; this side waits and follows into the next match by itself.
+            view.Show(battle.Perspective.Outcome(outcome), () => ShowNotice("Новый бой начнёт хост."),
                 localIsPlayer ? model.PlayerScore.Value : model.EnemyScore.Value,
                 localIsPlayer ? model.EnemyScore.Value : model.PlayerScore.Value);
+        }
+
+        private void HideClientResult()
+        {
+            showingResult = false;
+            var view = FindAnyObjectByType<BattleResultView>();
+            if (view != null) view.Hide();
+            commander.enabled = true;
         }
 
         private void MakeProxies()
@@ -183,8 +254,19 @@ namespace SectorLab.Network
         private void OnDestroy()
         {
             if (battle != null) { battle.Ticked -= SendState; battle.Finished -= SendFinalState; }
-            if (lifecycle != null) { lifecycle.Ready -= MakeProxies; lifecycle.Ready -= HoldUntilConnected; }
-            if (status != null) { status.Connected -= OnPeerConnected; status.Disconnected -= OnPeerDisconnected; }
+            if (lifecycle != null)
+            {
+                lifecycle.Ready -= MakeProxies;
+                lifecycle.Ready -= HoldUntilConnected;
+                lifecycle.Ready -= ShowConnectionNotice;
+            }
+            if (status != null)
+            {
+                status.Connected -= OnPeerConnected;
+                status.Disconnected -= OnPeerDisconnected;
+                status.Connected -= OnHostConnected;
+                status.Disconnected -= OnHostDisconnected;
+            }
             if (client != null) { client.UnitsUpdated -= ApplyUnits; client.Dispose(); }
             host?.Dispose();
             outcomeSubscription?.Dispose();
