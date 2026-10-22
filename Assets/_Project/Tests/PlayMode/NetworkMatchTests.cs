@@ -164,7 +164,42 @@ namespace SectorLab.Tests
                 System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
             Assert.That(title.text, Does.StartWith("Победа"));
             Assert.That(title.text, Does.Contain("45 : 30"));
-            Assert.That(Object.FindAnyObjectByType<UnitCommander>().enabled, Is.False);
+            var commander = Object.FindAnyObjectByType<UnitCommander>();
+            Assert.That(commander.enabled, Is.False);
+
+            // Only the host restarts: the client's button explains that and offers a way out.
+            var restart = (Button)typeof(BattleResultView).GetField("restartButton",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
+            restart.onClick.Invoke();
+            Assert.That(view.IsShowingMessage, Is.True);
+            Assert.That(title.text, Does.Contain("хост"));
+            Assert.That(view.ActionLabel, Is.EqualTo("Играть с ИИ"));
+
+            // The host's next match arrives: the client follows into it without reloading.
+            hostModel.Outcome.Value = BattleOutcome.InProgress;
+            hostModel.RemainingSeconds.Value = 180;
+            MatchSnapshot.Write(hostModel, message.AsSpan(1));
+            hostEnd.Send(message);
+            hostEnd.Flush();
+            Assert.That(view.IsVisible, Is.False);
+            Assert.That(commander.enabled, Is.True);
+        }
+
+        [UnityTest]
+        public IEnumerator HostRepeatsStateWhileTheClockStands()
+        {
+            NetworkLaunch.Host(hostEnd);
+            yield return LoadMain();
+            var battle = Object.FindAnyObjectByType<BattleController>();
+            using var remoteModel = new MatchModel();
+            using var remote = new ClientSession(remoteModel, clientEnd, NetworkLaunch.RemoteTeam);
+            battle.SetPaused(true);
+            hostEnd.Flush(); // whatever went out before the pause is lost, as UDP may lose it
+            remoteModel.Paused.Value = false;
+            float deadline = Time.realtimeSinceStartup + NetworkMatchBootstrap.HeartbeatSeconds * 3;
+            while (hostEnd.Pending == 0 && Time.realtimeSinceStartup < deadline) yield return null;
+            hostEnd.Flush();
+            Assert.That(remoteModel.Paused.Value, Is.True, "No ticks run while paused; a heartbeat still carries the state.");
         }
     }
 }

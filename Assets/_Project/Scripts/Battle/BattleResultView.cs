@@ -24,6 +24,7 @@ namespace SectorLab.Battle
         public void Show(BattleOutcome outcome, UnityAction onRestart, double playerScore = 0, double enemyScore = 0)
         {
             IsShowingLoadError = false;
+            IsShowingMessage = false;
             restartButton.gameObject.SetActive(true);
             restartButton.GetComponentInChildren<Text>().text = "Ещё бой";
             if (exitButton != null) exitButton.gameObject.SetActive(false);
@@ -36,28 +37,46 @@ namespace SectorLab.Battle
 
         public void ShowLoading()
         {
+            IsShowingMessage = false;
             title.text = "Подготовка матча…";
             restartButton.gameObject.SetActive(false);
             if (exitButton != null) exitButton.gameObject.SetActive(false);
             panel.SetActive(true);
         }
 
-        // A blocking notice without buttons, e.g. while a network host waits for its opponent.
-        public void ShowMessage(string message)
+        // A blocking notice, e.g. while a network host waits for its opponent. With an action the
+        // panel's button offers a way out, so a lost connection never leaves the player stuck.
+        public void ShowMessage(string message, string actionLabel = null, UnityAction action = null)
         {
+            IsShowingLoadError = false;
             title.text = message;
-            restartButton.gameObject.SetActive(false);
+            bool hasAction = action != null;
+            restartButton.gameObject.SetActive(hasAction);
+            restartButton.onClick.RemoveAllListeners();
+            if (hasAction)
+            {
+                restartButton.GetComponentInChildren<Text>().text = actionLabel;
+                restartButton.onClick.AddListener(action);
+            }
             if (exitButton != null) exitButton.gameObject.SetActive(false);
             panel.SetActive(true);
+            IsShowingMessage = true;
         }
 
-        public bool IsShowingMessage => panel.activeSelf && !restartButton.gameObject.activeSelf;
+        public bool IsShowingMessage { get; private set; }
+        public bool IsVisible => panel.activeSelf;
+        public string ActionLabel => restartButton.gameObject.activeSelf ? restartButton.GetComponentInChildren<Text>().text : null;
 
-        public void Hide() => panel.SetActive(false);
+        public void Hide()
+        {
+            panel.SetActive(false);
+            IsShowingMessage = false;
+        }
 
         public void ShowLoadError(UnityAction retry, UnityAction exit)
         {
             IsShowingLoadError = true;
+            IsShowingMessage = false;
             title.text = "Не удалось подготовить матч.\nПовторите запуск.";
             restartButton.gameObject.SetActive(true);
             restartButton.GetComponentInChildren<Text>().text = "Повторить";

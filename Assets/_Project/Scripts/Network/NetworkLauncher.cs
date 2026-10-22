@@ -80,21 +80,35 @@ namespace SectorLab.Network
             }
         }
 
-        // IPv4 addresses a phone on the same Wi-Fi can join.
+        // IPv4 addresses a phone on the same Wi-Fi can join. The routed address comes first: a UDP
+        // "connect" sends nothing but makes the OS pick the outgoing interface, which also works on
+        // Android, where the host-name lookup often yields only loopback.
         public static string LocalAddressesText()
         {
-            var text = new System.Text.StringBuilder();
+            var found = new System.Collections.Generic.List<string>(4);
+            try
+            {
+                using var probe = new System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork,
+                    System.Net.Sockets.SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
+                probe.Connect("192.0.2.1", 9); // TEST-NET-1: routed by default, never answered
+                if (probe.LocalEndPoint is System.Net.IPEndPoint routed) Add(found, routed.Address);
+            }
+            catch (System.Net.Sockets.SocketException) { }
             try
             {
                 foreach (var address in System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList)
-                {
-                    if (address.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork) continue;
-                    if (text.Length > 0) text.Append(", ");
-                    text.Append(address);
-                }
+                    Add(found, address);
             }
             catch (System.Net.Sockets.SocketException) { }
-            return text.Length > 0 ? text.ToString() : "неизвестен";
+            return found.Count > 0 ? string.Join(", ", found) : "неизвестен";
+        }
+
+        private static void Add(System.Collections.Generic.List<string> found, System.Net.IPAddress address)
+        {
+            if (address.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork
+                || System.Net.IPAddress.IsLoopback(address) || address.Equals(System.Net.IPAddress.Any)) return;
+            string text = address.ToString();
+            if (!found.Contains(text)) found.Add(text);
         }
 
         private static ushort Port(string[] args, int index) =>
