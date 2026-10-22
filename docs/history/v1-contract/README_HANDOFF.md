@@ -1,8 +1,8 @@
 # SectorLab — передача разработки агенту
 
 > Исторический комплект ручного режима R0–R5. С 2026-10-11 текущие полномочия
-> и целевая v1.0 определяются [README_START.md](README_START.md) и [AGENTS.md](AGENTS.md).
-> Подтверждённое состояние: [IMPLEMENTATION_STATUS.md](docs/agent_execution/IMPLEMENTATION_STATUS.md).
+> и целевая v1.0 определяются [README_START.md](README_START.md) и [AGENTS.md](../../../AGENTS.md).
+> Подтверждённое состояние: [IMPLEMENTATION_STATUS.md](../JOURNAL.md).
 
 **Версия документации:** 1.0 · **Дата фиксации контекста:** 10.10.2026
 
@@ -10,9 +10,9 @@
 
 ## С чего начинать
 
-1. Агент читает [`AGENTS.md`](AGENTS.md) — обязательные правила работы.
-2. Затем [`docs/00_CONTEXT_STATUS.md`](docs/00_CONTEXT_STATUS.md) — факты, гипотезы, неизвестное и проверка репозитория.
-3. Затем [`docs/01_VISION.md`](docs/01_VISION.md), [`docs/02_WORKFLOW.md`](docs/02_WORKFLOW.md) и [`docs/03_ROADMAP.md`](docs/03_ROADMAP.md).
+1. Агент читает [`AGENTS.md`](../../../AGENTS.md) — обязательные правила работы.
+2. Затем [`docs/00_CONTEXT_STATUS.md`](../early-docs/00_CONTEXT_STATUS.md) — факты, гипотезы, неизвестное и проверка репозитория.
+3. Затем [`docs/01_VISION.md`](../early-docs/01_VISION.md), [`docs/02_WORKFLOW.md`](../early-docs/02_WORKFLOW.md) и [`docs/03_ROADMAP.md`](../early-docs/03_ROADMAP.md).
 4. Перед изменением исходников агент **проверяет фактическое состояние проекта**, не выводит готовность R0 из существования архива или предыдущей беседы.
 5. Выполняется **одна микроитерация за раз**, с проверкой и отдельным осмысленным коммитом после подтверждения пользователя.
 
@@ -20,17 +20,17 @@
 
 | Документ | Назначение |
 | --- | --- |
-| [`AGENTS.md`](AGENTS.md) | Правила для любого ИИ-агента |
-| [`docs/00_CONTEXT_STATUS.md`](docs/00_CONTEXT_STATUS.md) | Подтверждённый контекст и текущая неизвестность |
-| [`docs/01_VISION.md`](docs/01_VISION.md) | Зачем делаем игру; границы первого прототипа |
-| [`docs/02_WORKFLOW.md`](docs/02_WORKFLOW.md) | Методологии, цикл итерации, распределение обязанностей |
-| [`docs/03_ROADMAP.md`](docs/03_ROADMAP.md) | Крупные этапы и мелкие шаги R0–R5 |
-| [`docs/04_ARCHITECTURE_TECH.md`](docs/04_ARCHITECTURE_TECH.md) | Эволюционная архитектура и введение библиотек |
-| [`docs/05_GIT_QUALITY.md`](docs/05_GIT_QUALITY.md) | Git, проверка качества, правила коммитов |
-| [`docs/06_GAME_DESIGN.md`](docs/06_GAME_DESIGN.md) | Игровые направления и гипотезы |
-| [`docs/07_DECISIONS.md`](docs/07_DECISIONS.md) | Решения, не-решения и открытые вопросы |
-| [`docs/08_LEARNING_LOG.md`](docs/08_LEARNING_LOG.md) | Короткий дневник обучения и результатов |
-| [`docs/templates/`](docs/templates/) | Шаблоны микроитерации, ADR и ревью |
+| [`AGENTS.md`](../../../AGENTS.md) | Правила для любого ИИ-агента |
+| [`docs/00_CONTEXT_STATUS.md`](../early-docs/00_CONTEXT_STATUS.md) | Подтверждённый контекст и текущая неизвестность |
+| [`docs/01_VISION.md`](../early-docs/01_VISION.md) | Зачем делаем игру; границы первого прототипа |
+| [`docs/02_WORKFLOW.md`](../early-docs/02_WORKFLOW.md) | Методологии, цикл итерации, распределение обязанностей |
+| [`docs/03_ROADMAP.md`](../early-docs/03_ROADMAP.md) | Крупные этапы и мелкие шаги R0–R5 |
+| [`docs/04_ARCHITECTURE_TECH.md`](../early-docs/04_ARCHITECTURE_TECH.md) | Эволюционная архитектура и введение библиотек |
+| [`docs/05_GIT_QUALITY.md`](../early-docs/05_GIT_QUALITY.md) | Git, проверка качества, правила коммитов |
+| [`docs/06_GAME_DESIGN.md`](../early-docs/06_GAME_DESIGN.md) | Игровые направления и гипотезы |
+| [`docs/07_DECISIONS.md`](../early-docs/07_DECISIONS.md) | Решения, не-решения и открытые вопросы |
+| [`docs/08_LEARNING_LOG.md`](../early-docs/08_LEARNING_LOG.md) | Короткий дневник обучения и результатов |
+| [`docs/templates/`](../early-docs) | Шаблоны микроитерации, ADR и ревью |
 | [`PROMPT_FOR_AGENT.md`](PROMPT_FOR_AGENT.md) | Готовое первое сообщение новому агенту |
 
 ## Как применять пакет

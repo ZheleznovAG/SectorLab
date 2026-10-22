@@ -35,7 +35,7 @@
 - **Вопрос на понимание:** один, при необходимости.
 - **Коммит:** `type: short description` после подтверждённой проверки.
 
-Шаблон: [`templates/MICRO_TASK.md`](templates/MICRO_TASK.md).
+Шаблон: [`templates/MICRO_TASK.md`](MICRO_TASK.md).
 
 ## Роли
 

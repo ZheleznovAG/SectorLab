@@ -28,7 +28,7 @@ Scout захватывает C, раненые отступают туда и в
 
 Первый измеренный набор: split-pressure 32,1:45 за 87,1 с, hold-then-flank
 18,1:45 за 91,6 с, repair-rotation 27,6:45 за 61,7 с. Все Defeat;
-[CSV](../agent_execution/evidence/W7.2-attempt1-sustained-plans.csv) сохранён.
+[CSV](../evidence/W7.2-attempt1-sustained-plans.csv) сохранён.
 Это основание проверять активное удержание и полноценное отступление,
 а не объявлять баланс успешным по наличию кода. Урон/здоровье/счёт не подменялись.
 
@@ -46,12 +46,12 @@ provider не освобождает reference раньше завершения
 оба прежних объекта/материала сохранены. Это ошибка карты, а не повод ослабить assert.
 До этого изменения активный hold-then-flank дал Victory 45:42 за 109,4 с;
 split-pressure Defeat 20,9:45, repair-rotation Defeat 30,5:45
-([CSV](../agent_execution/evidence/W7.2-attempt2-sustained-plans.csv)).
+([CSV](../evidence/W7.2-attempt2-sustained-plans.csv)).
 Эти результаты относятся к промежуточной карте; окончательный набор требует
 отдельного прогона после зеркалирования бокового блока.
 
 Окончательная карта: **112/112 PlayMode PASS**, без failed/skipped/inconclusive
-([JSON](../agent_execution/evidence/tests-W7.2-final-playmode.json)). Оба teardown
+([JSON](../evidence/tests-W7.2-final-playmode.json)). Оба teardown
 дождались освобождения физических загрузок; никаких поздних юнитов не появилось.
 Все 18 реальных маршрутов пройдены шестью бойцами; зеркальность и общий UnitStats
 проверены. Десять настоящих перезапусков также прошли.
@@ -59,8 +59,8 @@ split-pressure Defeat 20,9:45, repair-rotation Defeat 30,5:45
 На этой карте первая серия из трёх активных планов дала Defeat 37,7:45,
 24:45 и 34,9:45. Следующая расширенная серия из пяти планов включает победу
 repair-rotation **45:39 за 81,8 с**, 21 приказ, 6 своих и 12 вражеских смертей;
-остальные четыре плана проиграли. [Исходный CSV](../agent_execution/evidence/W7.2-tactics-sustained-plans.csv),
-[focused test 1/1 PASS](../agent_execution/evidence/tests-W7.2-tactics-playmode.json).
+остальные четыре плана проиграли. [Исходный CSV](../evidence/W7.2-tactics-sustained-plans.csv),
+[focused test 1/1 PASS](../evidence/tests-W7.2-tactics-playmode.json).
 Новый optional TestFilter в verify-unity сохраняет настоящие результаты
 ограниченного прогона; полная регрессия не выдаётся за focused test.
 
@@ -69,6 +69,6 @@ repair-rotation **45:39 за 81,8 с**, 21 приказ, 6 своих и 12 вр
 нет однозначного автоматического выигрыша. Вариация NavMesh avoidance и кадрового
 момента приказа не считается воспроизводимым точным счётом; это не замена
 человеческой оценке сложности. Правила очков/захвата по-прежнему проверены
-независимо от FPS. [Настоящий Game View](../agent_execution/evidence/W7.2-arena.png)
-и [наблюдение](../agent_execution/evidence/W7.2-arena-observation.txt) фиксируют
+независимо от FPS. [Настоящий Game View](../evidence/W7.2-arena.png)
+и [наблюдение](../evidence/W7.2-arena-observation.txt) фиксируют
 новый Main на паузе: 1280×720, шесть бойцов/handles, elapsed 0,3 с.

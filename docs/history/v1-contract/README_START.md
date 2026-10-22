@@ -3,8 +3,8 @@
 Дата составления: 2026-10-11. Основа: пользовательский архив `SectorLab-for-ai-20261011-191247.zip` (снимок 19:12:48 +07:00).
 
 **Комплект уже внесён в настоящий репозиторий.** Свежий аудит и следующий шаг
-находятся в [IMPLEMENTATION_STATUS.md](docs/agent_execution/IMPLEMENTATION_STATUS.md),
-логи — в [EVIDENCE_REPORT.md](docs/agent_execution/EVIDENCE_REPORT.md).
+находятся в [IMPLEMENTATION_STATUS.md](../JOURNAL.md),
+логи — в [EVIDENCE_REPORT.md](../EVIDENCE_REPORT.md).
 Раздел внедрения ниже описывает первоначальную передачу комплекта.
 
 ## Цель комплекта
