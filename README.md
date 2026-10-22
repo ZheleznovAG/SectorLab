@@ -6,7 +6,18 @@
 
 Учебный портфолио-проект, разработанный с участием AI; не коммерческий опыт.
 
-![Матч: захват узла A, выбранный Tank и подсказки HUD](docs/evidence/A5-feedback-16x9.png)
+> **English.** A small mobile tactics game in Unity 6: three robots a side fight over capture points on one arena,
+> against an AI or a second player over Wi-Fi (authoritative host on Unity Transport). A portfolio project built
+> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 230 automated tests.
+> Docs are in Russian; start with [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md).
+
+![Матч: красные держат A, спор на B, синие захватывают C; рамка показывает, что побеждает враг](docs/evidence/V1-relay-ring-capturing.png)
+
+## Скачать
+
+APK для Android 8.0+ (arm64) — на странице [Releases](https://github.com/ZheleznovAG/SectorLab/releases)
+(последняя — **1.1.0**, pre-release: сетевая игра на телефонах ещё не проверена). Подпись — debug-ключ Unity,
+поэтому Android попросит разрешить установку из неизвестного источника. Что нового — [CHANGELOG](CHANGELOG.md).
 
 ## Коротко
 
