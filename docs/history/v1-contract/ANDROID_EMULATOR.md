@@ -8,13 +8,13 @@
 к началу сессии игра оказалась прототипом **0.1.0**: установленный APK выгружен
 через ADB и совпал по SHA-256 с baseline. Его первоначальный кадр сохранён,
 но повторный запуск baseline также завершился SIGILL.
-[Проверенные результаты](evidence/W8-emulator-resume.json).
+[Проверенные результаты](../../evidence/W8-emulator-resume.json).
 
 Повторная регрессия: **63/63 EditMode, 112/112 PlayMode PASS**, без
 failed/skipped/inconclusive. Обычная Main в Editor завершилась естественным
 Defeat **0:45** за 33,1 игровых секунды, consoleErrors=0;
-[отчёт](evidence/W8-emulator-resume-editor.json),
-[Game View](evidence/W8-emulator-resume-editor.png). Это автоматическая проверка,
+[отчёт](../../evidence/W8-emulator-resume-editor.json),
+[Game View](../../evidence/W8-emulator-resume-editor.png). Это автоматическая проверка,
 не человеческая партия и не успешный запуск Android.
 
 ## Установленная среда
@@ -55,13 +55,13 @@ ARM-трансляции нативного движка; C# не менялся
 | Финальный v1.0 GameActivity, APK `654CB514…1237DA`, forced GLES, single graphics thread, job-worker-count 0 | JobQueue=0 подтверждён журналом; запуск FAIL, тот же SEVL/SIGILL |
 | Возврат baseline 0.1.0, forced GLES | Установка Success; повторный запуск FAIL, SEVL/SIGILL в Unity Main Thre |
 
-[Activity build](evidence/android-build-W8-emulator-activity.json) — отдельный
+[Activity build](../../evidence/android-build-W8-emulator-activity.json) — отдельный
 диагностический APK, не замена телефонного кандидата. Настройки проекта
 восстановлены; Unity и его нативные библиотеки не подменялись. Полная партия,
 offline acceptance и замер производительности v1.0 в этой VM недоступны.
 Телефонная приёмка остаётся `BLOCKED_DEVICE`; G7/G8 не закрыты.
 
-[Неудачная x86_64-сборка](evidence/android-build-W8-emulator-x64.json)
+[Неудачная x86_64-сборка](../../evidence/android-build-W8-emulator-x64.json)
 сохранена как FAIL, не заменяет успешную ARM64-сборку. Настройки ARM64 восстановлены.
 
 ## Окно и повторный запуск

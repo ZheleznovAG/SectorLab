@@ -2,7 +2,7 @@
 
 > Этот документ сохраняет выводы по исходному архиву. Повторный аудит настоящего
 > рабочего каталога, текущие проверки Unity и доступность телефона —
-> [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) и [EVIDENCE_REPORT.md](EVIDENCE_REPORT.md).
+> [IMPLEMENTATION_STATUS.md](../JOURNAL.md) и [EVIDENCE_REPORT.md](../EVIDENCE_REPORT.md).
 
 ## Подтверждено по переданному ZIP
 

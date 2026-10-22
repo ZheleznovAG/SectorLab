@@ -33,7 +33,7 @@
 privacyRedaction; реальные результаты, даты, sourceHead и inputHashes не менялись.
 Семантическое сравнение JSON подтвердило неизменность остальных полей. Исходные
 отчёты и manifest сохранены вне репозитория в локальном временном каталоге.
-[Manifest](evidence/privacy-redaction-manifest.json) содержит только относительные
+[Manifest](../../evidence/privacy-redaction-manifest.json) содержит только относительные
 пути и SHA до/после, без приватных значений.
 
 В локальной Git-конфигурации для следующих коммитов используется публичный
@@ -86,7 +86,7 @@ remote не стирает чужие clones/forks и кеши. Эти огра�
 [официальной инструкции GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository).
 
 Очищенный кандидат подготовлен в отдельном локальном bare clone, исходный репозиторий
-не переписан. [Проверка](evidence/privacy-history-candidate.json): 71/71 коммит сохранён,
+не переписан. [Проверка](../../evidence/privacy-history-candidate.json): 71/71 коммит сохранён,
 HEAD кандидата 762c1e33af79dcfacc85d12f86fdd724cf89d480; текущее дерево побайтно совпадает
 с a992dfc7b13b71d829cb0942b1e19b6409e61ef0 (tree 00f9a79ef221092f2e2131e597c4af5ee1cb709f).
 Gitleaks с новыми privacy rules: 0 findings; все author/committer используют публичный
@@ -111,11 +111,11 @@ GitHub после push подтвердил новый HEAD
 `0b2badbf4e54d5f099dd990378b27ccb493f0303`. Других опубликованных веток и tags
 в `ls-remote` не было. APK и release не публиковались.
 
-[Проверка операции](evidence/privacy-history-published.json): **79/79 коммитов**,
+[Проверка операции](../../evidence/privacy-history-published.json): **79/79 коммитов**,
 87 исторических blob versions с redaction; даты, сообщения, родители и file modes
 сохранены. Вся история Assets/Packages/ProjectSettings побайтно неизменна,
 текущее tree идентично исходному. Все author/committer используют публичный
-ник/noreply. Повторный [Gitleaks всех доступных refs](evidence/privacy-gitleaks-clean-history.json)
+ник/noreply. Повторный [Gitleaks всех доступных refs](../../evidence/privacy-gitleaks-clean-history.json)
 с default secret rules и дополнительными PII rules: **0 findings**.
 
 Оригинальный проверенный Git bundle и 38 локальных LFS objects с manifest сохранены
@@ -124,7 +124,7 @@ GitHub после push подтвердил новый HEAD
 атомарно после сравнения tree; `reset`, `clean`, checkout поверх файлов не использовались.
 Локальные reflogs/недостижимые original objects остаются частной резервной историей.
 
-[Карта SHA](evidence/privacy-commit-map.txt) связывает старую и очищенную историю.
+[Карта SHA](../../evidence/privacy-commit-map.txt) связывает старую и очищенную историю.
 `sourceHead`, результаты, время и inputHashes в ранее полученных evidence не менялись:
 это реальные исходные запуски. Например, проверенный/собранный код `06cc168`
 соответствует `c0a13b3` после очистки. Учебная карта использует новые доступные SHA.

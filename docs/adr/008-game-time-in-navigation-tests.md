@@ -13,9 +13,9 @@ Assertions прибытия, фактического движения вдол�
 игровой код и скорости не изменены. UnitMovement fixture устанавливает timeScale=1.
 Проверки, которым важен порядок нескольких кадров, сохраняют yield по кадрам.
 
-[Первый настоящий FAIL](../agent_execution/evidence/clean-clone-W8-attempt1-playmode.xml)
-сохранён. [Focused retry](../agent_execution/evidence/clean-clone-W8-focused-retry.json):
-25/25 PASS в том же headless clone. [Полный повторный прогон](../agent_execution/evidence/clean-clone-W8-full-retry.json)
+[Первый настоящий FAIL](../evidence/clean-clone-W8-attempt1-playmode.xml)
+сохранён. [Focused retry](../evidence/clean-clone-W8-focused-retry.json):
+25/25 PASS в том же headless clone. [Полный повторный прогон](../evidence/clean-clone-W8-full-retry.json)
 из `acbd9bf`: 112/112 PASS, failed/skipped/inconclusive=0.
 Сборка APK не требует повторения из-за изменения только тестовых ожиданий.
 

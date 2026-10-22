@@ -15,6 +15,10 @@
 | Test Framework | 1.8.0, штатный пакет Unity | [Установленный текст](licenses/com.unity.test-framework-LICENSE.md) | Только тесты/Editor; не игровой framework |
 | Profiling Core | 1.0.3, Unity registry | [Установленный текст](licenses/com.unity.profiling.core-LICENSE.md) | Зависимость Addressables/диагностики |
 | Unity Pipeline | 0.8.0-exp.1, Unity registry | Unity Terms of Service; [установленный текст](licenses/com.unity.pipeline-LICENSE.md) | Editor automation/CLI; не подсистема игрового матча |
+| R3 | [1.3.1](https://github.com/Cysharp/R3/releases/tag/1.3.1): ядро из NuGet в `Assets/Packages/R3.1.3.1`, R3.Unity — UPM git, commit `f6eed2dd4208dc4ae171c601e799e85f82aca25e` | MIT, © Cysharp, Inc.; [текст](licenses/R3-MIT.txt) | `MatchModel`, подписки HUD и звука |
+| NuGetForUnity | [4.5.0](https://github.com/GlitchEnzo/NuGetForUnity/releases/tag/v4.5.0), commit `a7c6b49a0141a5bff9b1983e38137522ef61977d` | MIT, Copyright 2018 Patrick McCarthy; [текст](licenses/NuGetForUnity-MIT.txt) | Только Editor: восстанавливает `Assets/packages.config` |
+| Microsoft.Bcl.AsyncInterfaces 6.0.0, Microsoft.Bcl.TimeProvider 8.0.0, System.ComponentModel.Annotations 5.0.0, System.Runtime.CompilerServices.Unsafe 6.0.0, System.Threading.Channels 8.0.0 | NuGet, зависимости R3, `Assets/Packages/*` | MIT, .NET Foundation; `LICENSE.TXT` и `THIRD-PARTY-NOTICES.TXT` лежат в каталоге каждого пакета | Компиляция R3 |
+| Unity Transport | 6.6.0, Unity registry | Unity Companion License; [установленный текст](licenses/com.unity.transport-LICENSE.md) | `UtpChannel`: UDP, reliable/unreliable pipelines |
 | Gitleaks | [8.30.1](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1) | MIT, Copyright 2019 Zachary Rice; [текст](licenses/Gitleaks-MIT.txt) | Внешний локальный инструмент аудита/pre-commit, не включён в APK или Git как binary |
 
 UPM использует официальный Git URL с фиксированным tag. Фактически разрешённый
