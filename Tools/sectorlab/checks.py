@@ -90,4 +90,27 @@ def repository(skip_privacy: bool = False) -> None:
     missing = [p for p in owned if not p.endswith(".meta") and p + ".meta" not in known]
     if missing:
         raise ToolError("Missing .meta files: " + ", ".join(missing))
-    say(f"PASS repository: whitespace, package JSON, {len(guids)} unique GUIDs, .meta for every project asset.")
+    links = documentation_links()
+    say(f"PASS repository: whitespace, package JSON, {len(guids)} unique GUIDs, .meta for every project asset, "
+        f"{links} documentation links.")
+
+
+_LINK = re.compile(r"\]\(([^)\s#]+)(?:#[^)]*)?\)")
+
+
+def documentation_links() -> int:
+    """Relative links in the living Markdown resolve; docs/history keeps its links as they were."""
+    broken, checked = [], 0
+    for path in repository_files():
+        if not path.endswith(".md") or path.startswith(("docs/history/", "docs/evidence/", "Assets/")):
+            continue
+        text = (ROOT / path).read_text(encoding="utf-8", errors="replace")
+        for target in _LINK.findall(text):
+            if re.match(r"^[a-z][a-z0-9+.-]*:", target, re.I):
+                continue
+            checked += 1
+            if not (ROOT / path).parent.joinpath(target).resolve().exists():
+                broken.append(f"{path} -> {target}")
+    if broken:
+        raise ToolError("Broken documentation links:\n  " + "\n  ".join(broken))
+    return checked
