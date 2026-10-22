@@ -52,7 +52,7 @@ namespace SectorLab.Editor
                 throw new ArgumentException("Invalid evidence task name.", nameof(task));
             if (EditorApplication.isPlaying) throw new InvalidOperationException("Stop Play Mode before building content.");
             AddressableAssetSettings.BuildPlayerContent(out var result);
-            string reportPath = Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/" + task + "-local-content.json");
+            string reportPath = Path.Combine(Application.dataPath, "../docs/evidence/" + task + "-local-content.json");
             var report = new ContentBuildRecord {
                 checkedAtUtc = DateTime.UtcNow.ToString("o"), target = EditorUserBuildSettings.activeBuildTarget.ToString(),
                 error = result.Error, outputPath = result.OutputPath, durationSeconds = result.Duration,

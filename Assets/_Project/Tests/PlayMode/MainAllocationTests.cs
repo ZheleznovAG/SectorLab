@@ -105,7 +105,7 @@ namespace SectorLab.Tests
                 var csv = new StringBuilder("phase,frame,gc_bytes\n");
                 for (int i = 0; i < measured; i++) csv.Append("match,").Append(i).Append(',').Append(match[i]).Append('\n');
                 for (int i = 0; i < BaselineFrames; i++) csv.Append("scripts_off,").Append(i).Append(',').Append(baseline[i]).Append('\n');
-                string path = System.IO.Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/" + task + "-gc-frames.csv");
+                string path = System.IO.Path.Combine(Application.dataPath, "../docs/evidence/" + task + "-gc-frames.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
             }
 #endif

@@ -24,7 +24,7 @@ namespace SectorLab.Tests
             string[] plans = { "split-pressure", "hold-then-flank", "repair-rotation", "cover-B-intercept-A", "take-B-then-flank-A" };
             string task = System.Environment.GetEnvironmentVariable("SECTORLAB_VERIFICATION_TASK");
             if (string.IsNullOrEmpty(task)) task = "manual-" + System.DateTime.UtcNow.ToString("yyyyMMdd-HHmmss");
-            string reportPath = System.IO.Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/" + task + "-sustained-plans.csv");
+            string reportPath = System.IO.Path.Combine(Application.dataPath, "../docs/evidence/" + task + "-sustained-plans.csv");
             foreach (string plan in plans)
             {
                 yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
