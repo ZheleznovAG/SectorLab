@@ -23,7 +23,7 @@ namespace SectorLab.Tests
 #if UNITY_EDITOR
             string task = System.Environment.GetEnvironmentVariable("SECTORLAB_VERIFICATION_TASK");
             if (string.IsNullOrEmpty(task)) task = "manual-" + System.DateTime.UtcNow.ToString("yyyyMMdd-HHmmss");
-            string reportPath = System.IO.Path.Combine(Application.dataPath, "../docs/agent_execution/evidence/" + task + "-main-matches.csv");
+            string reportPath = System.IO.Path.Combine(Application.dataPath, "../docs/evidence/" + task + "-main-matches.csv");
 #endif
             for (int run = 0; run < plans.Length; run++)
             {

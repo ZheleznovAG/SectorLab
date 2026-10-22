@@ -126,7 +126,7 @@ namespace SectorLab.Tests
 #if UNITY_EDITOR
                 string task = System.Environment.GetEnvironmentVariable("SECTORLAB_VERIFICATION_TASK") ?? "manual";
                 System.IO.File.WriteAllText(System.IO.Path.Combine(Application.dataPath,
-                    "../docs/agent_execution/evidence/" + task + "-main-restarts.csv"), report);
+                    "../docs/evidence/" + task + "-main-restarts.csv"), report);
 #endif
             }
         }
