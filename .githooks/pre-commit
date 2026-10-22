@@ -1,2 +1,9 @@
 #!/bin/sh
-exec powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File Tools/check-privacy.ps1 -Staged
+# Privacy scan of staged changes (Tools/sectorlab/checks.py). Python 3 on any OS.
+for python in python3 python py; do
+    if command -v "$python" >/dev/null 2>&1 && "$python" -c "import sys; sys.exit(sys.version_info < (3, 9))" 2>/dev/null; then
+        exec "$python" Tools/sl.py privacy --staged
+    fi
+done
+echo "pre-commit: Python 3.9+ not found; install it to run the privacy scan." >&2
+exit 1

@@ -135,3 +135,7 @@ InitTestScene*.unity*
 *.pem
 *.key
 *.ulf
+
+# Python tooling caches (Tools/sl.py)
+__pycache__/
+*.pyc
