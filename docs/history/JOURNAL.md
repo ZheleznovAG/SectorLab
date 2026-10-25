@@ -12,20 +12,15 @@
 | | |
 |---|---|
 | Последний проверенный код | сетевая игра 21.10: EditMode 76/76, PlayMode 153/153 PASS; два процесса (Editor + Windows) проверены. APK V-ring собран до этих изменений |
-| Последний APK | `Builds/Android/SectorLab-N-network.apk` (всё до сетевой игры включительно), 34 446 072 bytes, SHA-256 `0BD9490E…5B70B5AA4582EC59E3E1`, INTERNET в манифесте.|
+| Последний APK | `Builds/Android/SectorLab-N-network.apk` (всё до сетевой игры включительно), 34 446 072 bytes, SHA-256 `0BD9490E…5B70B5AA4582EC59E3E1`, INTERNET в манифесте |
 | Gates | G0–G6, G9 — PASS; G7, G8 — IN_PROGRESS ([GATES.json](v1-contract/GATES.json)) |
 | Публикация | README переработан под портфолио (15.10). 21.10 владелец разрешил push; `main` отправлен до `e60e737` |
-
-1. Установка APK N-network и партия: выбор бойца на узле, длительность боёв, толкучка, рамка «кто побеждает», сигналы захвата (G7).
-2. Видимый геймплей и 600-секундный `Tools/measure-android.ps1` на разблокированном телефоне (G8). Последняя попытка — `BLOCKED_SCREEN`, фокус был у keyguard.
-3.
 
 **Известные ограничения:** запуск в эмуляторе — FAIL (SIGILL/SEVL, [ANDROID_EMULATOR.md](v1-contract/ANDROID_EMULATOR.md)).
 Для `Tools/check-repository.ps1` нужен `rg` в PATH; 15.10 его проверки выполнялись вручную:
 whitespace, отсутствие дублей GUID и `.meta`, JSON пакетов — PASS, privacy — PASS.
 
-**Следующий шаг:** установить APK N-network; партия с ИИ, затем сетевая (телефон против ПК-хоста или двух телефонов в одной Wi-Fi).
-После этого решить, нужна ли v1.1 с механическими различиями ролей (например, особая способность Scout).
+Следующие задачи — в [текущем статусе](../STATUS.md).
 
 ## Аудит, рефакторинг и подготовка к сети (21.10.2026)
 
@@ -85,7 +80,11 @@ whitespace, отсутствие дублей GUID и `.meta`, JSON пакето
   локальную паузу (`timeScale = 0`) — клиент теперь `BattleController.BecomeRemoteView()`;
   Windows-плеер падал на SSAO в PC_Renderer (ресурсы вырезаны URP при сборке) — фича удалена.
 - Регрессия: [EditMode 76/76](../evidence/tests-E2E-editmode-editmode.json),
-  [PlayMode 153/153](../evidence/tests-E2E-full-playmode3-playmode.json).
+  [PlayMode 153/153](../evidence/tests-E2E-full-playmode3-playmode.json). Тест тактик ждёт по
+  игровому времени (на нагруженной машине 65 с реального времени не хватало).
+- APK [N-network](../evidence/android-build-N-network.json) Succeeded, 0 errors, SHA-256
+  `0BD9490EAAB449E42993CA56EE7705EC856E317FD5893B70B5AA4582EC59E3E1`; `preloadedAssets` возвращён к `[]`.
+- Ограничения клиента: нет таймера респауна и выстрелов. Для игры через интернет нужен relay.
 
 ## Регрессия и APK V-ring (16.10.2026)
 
@@ -96,7 +95,7 @@ whitespace, отсутствие дублей GUID и `.meta`, JSON пакето
 [Android-сборка](../evidence/android-build-V-ring.json) Succeeded, 0 errors:
 `Builds/Android/SectorLab-V-ring.apk`, 32 314 701 bytes, SHA-256
 `C27B72F394A3582D7FD552D67811B5F4178D841B7B7DA5703FA7DC5F561C7428`.
-`preloadedAssets` после сборки снова возвращён к `[]`. Установка: `adb devices` пуст.
+`preloadedAssets` после сборки снова возвращён к `[]`.
 
 ## CI1 — GitHub Actions + GameCI (16.10.2026, не запускался)
 
@@ -124,25 +123,14 @@ A — полное красное, B — жёлтый спор.
 ## P1 — замер GC-аллокаций (16.10.2026)
 
 Проверка пункта roadmap «Profiler при измеримой необходимости» перед подключением
-zero-alloc-библиотек из радара StackSignal ([ADR-012](../adr/012-measured-allocations.md)). Медиана добавки партии к Editor-фону — 0 Б/кадр, среднее ~550 Б/кадр (редкие смены
+zero-alloc-библиотек из радара StackSignal ([ADR-012](../adr/012-measured-allocations.md)).
+Медиана добавки партии к Editor-фону — 0 Б/кадр, среднее ~550 Б/кадр (редкие смены
 подписей). ZString/пулы не подключаются. Новый `MainAllocationTests` (бюджет 512 Б/кадр
 и контроль чувствительности с подброшенными 2 КБ/кадр):
-[2/2 PASS](../evidence/tests-P1-gc-budget2-playmode.json), [кадры](../evidence/P1-gc-budget2-gc-frames.csv). Атрибуция по типам компонентов была разовой диагностикой, в коде не оставлена.
+[2/2 PASS](../evidence/tests-P1-gc-budget2-playmode.json), [кадры](../evidence/P1-gc-budget2-gc-frames.csv).
+Атрибуция по типам компонентов была разовой диагностикой, в коде не оставлена.
 
-## Отзыв владельца после партии на APK A5 (15.10.2026)
-
-Перед партией установленный APK сверен: SHA-256 извлечённого `base.apk` = `8257C9B1…A8BE83`
-(сборка A5), после `4a06ae3` входы Assets/Packages/ProjectSettings не менялись. Владелец сыграл полную партию на Android:
-
-1. Приказ занятому узлу работает, но бойца, стоящего на узле, больше не выбрать тапом по нему — **B1**.
-2. Назначения ролей прочитаны и поняты. 3. Состояние узлов видно по надписям.
-4. Выстрелы и звук поражения отчётливо слышны (сигналы захвата отдельно не отмечены).
-5. Результат и «Ещё бой» работают. 6. Mute сохраняется после перезапуска.
-7. Раздражает: бойцы толкаются и мешают пройти — **B4**; бойцы гибнут слишком быстро — **B3**
-   (по данным Scout/Ranger под огнём двоих живут ≈1,5 с); не понятно, выигрываешь ли:
-   глаза на поле, текст HUD краем глаза не считывается — **B2**.
-
-G7: пункты 2, 3, 5, 6 подтверждены человеком; 1 и 7 требуют правок.
+## Улучшения управления, баланса и обратной связи (15.10.2026)
 
 **B1 / FR-004/006.** Правило A2 «узел важнее союзника» распространялось и на прямое
 попадание лучом в тело союзника, поэтому при любом выбранном бойце союзника на узле
@@ -156,7 +144,6 @@ G7: пункты 2, 3, 5, 6 подтверждены человеком; 1 и 7 
 [HUD 8/8](../evidence/tests-B1-hud-playmode-playmode.json),
 [EditMode 63/63](../evidence/tests-B1-full-editmode-editmode.json),
 [полная PlayMode 126/126](../evidence/tests-B1-full-playmode-playmode.json) PASS.
-Проверка пальцем — на следующем APK.
 
 **B3 / баланс.** Урон снижен ~в 2,5 раза (Tank 5, Scout 6, Ranger 9), HP прежние —
 [ADR-011](../adr/011-longer-fights.md). [Тактики](../evidence/B3-tactics-sustained-plans.csv):
@@ -187,12 +174,15 @@ HUD рисует рамку толщиной 10 по краю поля в цве
 [полная PlayMode 128/128](../evidence/tests-B-full-playmode-playmode.json) PASS.
 [Android-сборка](../evidence/android-build-B-feedback.json) Succeeded, 0 errors, 1 warning:
 `Builds/Android/SectorLab-B-feedback.apk`, 32 314 013 bytes, SHA-256
-`849B4F0708550133FB4407F9294F1F3A3FC804EFEA5A054F4BBB5166869D9896`. Сборка снова добавила Input System в `preloadedAssets`; прежний пустой список восстановлен. Осталось: установка, повторная партия владельца (проверить B1–B4 пальцем).
+`849B4F0708550133FB4407F9294F1F3A3FC804EFEA5A054F4BBB5166869D9896`.
+Сборка снова добавила Input System в `preloadedAssets`; прежний пустой список восстановлен.
 
 ## Продолжение после внешнего аудита 12.10.2026
 
-Пользователь предоставил аудит снимка `dccfe6c` и поручил продолжить разработку. На старте `main` и рабочее дерево чисты; архив не разворачивается поверх проекта. Подключён физический Android / Android 11. Установленный APK выгружен
-и сверён: SHA-256 совпадает с `SectorLab-W8-selection.apk` (`654CB514…1237DA`). Приложение запущено; получен ручной отзыв об управлении, ролях и звуке (ниже).
+Пользователь предоставил аудит снимка `dccfe6c` и поручил продолжить разработку.
+На старте `main` и рабочее дерево чисты; архив не разворачивается поверх проекта.
+Установленный APK выгружен и сверён: SHA-256 совпадает с
+`SectorLab-W8-selection.apk` (`654CB514…1237DA`).
 
 A0 / FR-024, NFR-003/004: первый запуск нового regression из оставленного Play Mode
 оказался некорректным. Перекомпиляция сбросила несериализованное runtime state;
@@ -222,7 +212,8 @@ respawn шести переименованных профилей и отказ
 Ручной отзыв пользователя с физического телефона на исходном APK:
 звук не позволяет понять событие; тап по узлу с союзником выбирает этого союзника
 вместо отправки выбранного бойца; назначения ролей и эффекты узлов не ощущаются. Итоговый счёт и mute не подтверждены. Приоритет следующих малых правок:
-приказ занятому узлу → читаемые роли/эффекты и компактный HUD → различимые SFX.
+приказ занятому узлу → читаемые роли/эффекты и компактный HUD → различимые SFX. Это конкретные UX-дефекты/наблюдения; новые способности и баланс без проверки
+не добавляются.
 
 A1 зафиксирован в `ee23f2b`. A2 / FR-004/006/007: сообщение пользователя о
 переключении на союзника у узла воспроизведено
@@ -288,16 +279,16 @@ A5 зафиксирован в `4a06ae3`. A6 / FR-020/024, NFR-008/009: свеж
 [Android-сборка](../evidence/android-build-A5-feedback.json) Succeeded, 0 errors,
 1 Pipeline warning, 136,141 с. APK `Builds/Android/SectorLab-A5-feedback.apk`,
 32 311 981 bytes, SHA-256
-`8257C9B1EC109272A3027CD6146BE9790657D085651B856983225797E3A8BE83`. Все 296 входных hash полных PlayMode tests совпали со входами сборки. После сборки восстановлен прежний пустой `preloadedAssets`; ProjectSettings не
-изменены. [Установка на Android/Android 11](../evidence/A6-phone-install.json) с `-r`
-и повторным извлечением APK: hash совпал, данные приложения сохранены, процесс жив. Скриншоты системного экрана не делались. В measurement helper учтены `ResumedActivity` без `m` и полный `dumpsys window`;
+`8257C9B1EC109272A3027CD6146BE9790657D085651B856983225797E3A8BE83`.
+Все 296 входных hash полных PlayMode tests совпали со входами сборки.
+После сборки восстановлен прежний пустой `preloadedAssets`; ProjectSettings не
+изменены. [Установка APK](../evidence/A6-phone-install.json) с `-r`
+и повторным извлечением APK: hash совпал, данные приложения сохранены, процесс жив.
+В measurement helper учтены `ResumedActivity` без `m` и полный `dumpsys window`;
 одной resumed Activity недостаточно для разрешения taps/capture. Исправлен также
-Windows PowerShell stderr успешного adb pull. Это изменения проверки, не игры. Прежняя настройка удержания экрана восстановлена в `0` и прочитана
-обратно; это зафиксировано в install evidence. Первый временный launch helper неверно разделил package/activity в массиве аргументов;
-исправлен, установки/хеши не потеряны. G7/G8 IN_PROGRESS: новый APK установлен, но игровые/слуховые и device workload
-проверки нельзя подменять фактом установки. Обычные wakeup,
-`wm dismiss-keyguard`, закрытие шторки и повторный запуск своей Activity не сняли
-блокировку. PIN/пароль не вводились.
+Windows PowerShell stderr успешного adb pull. Это изменения проверки, не игры.
+PowerShell parser PASS. Исправлен launch helper, неверно разделявший package/activity
+в массиве аргументов; установки и хеши сохранены.
 
 ## Где остановились до внешнего аудита
 
@@ -308,7 +299,8 @@ Game View. Исправление входит в APK `Builds/Android/SectorLab-
 `654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA`.
 [Build report](../evidence/android-build-W8-selection.json): 0 ошибок,
 1 предупреждение Pipeline. Input System preloadedAssets после сборки восстановлен
-через PlayerSettings API; дополнительных изменений ProjectSettings нет. Полный повторный прогон именно `0ae98c8`: **63/63 EditMode и 112/112 PlayMode PASS**,
+через PlayerSettings API; дополнительных изменений ProjectSettings нет.
+Полный повторный прогон именно `0ae98c8`: **63/63 EditMode и 112/112 PlayMode PASS**,
 [JSON](../evidence/tests-W8-selection-final-playmode.json), failed/skipped/inconclusive=0.
 
 Публичный clone без project Library/Temp/Builds импортирован: **63/63 EditMode
@@ -319,11 +311,7 @@ Game View. Исправление входит в APK `Builds/Android/SectorLab-
 на экране результата. Это ограниченные измерения, **не PASS 10 минут активных партий**. Native AssetPackManager probe воспроизводится также в исходном baseline APK
 без Addressables; он не назван устранённым.
 
-ADB сейчас не видит телефон; проверенный эмулятор описан ниже. Предыдущий offline helper прервался
-при чтении размеров экрана; готового offline evidence нет, PASS не выставлен. WiFi/mobile data были восстановлены в finally. При следующем подключении нужно
-также вернуть `stay_on_while_plugged_in=0` после замера: временное значение 3
-сохраняет экран включённым при зарядке; исходное значение записано вне Git. README, ADR, notices и 11 упражнений подготовлены. Следующее: повторный offline
-test, 600 с повторных партий на новом APK, подтверждение пользователя и обновление приёмки. Пользователь поручил продолжать без телефона. Доступная W9-передача завершена:
+README, ADR, notices и 11 упражнений подготовлены. W9-передача завершена:
 README/checklist/gates согласованы, [audit](../evidence/final-audit-W9.json) проверяет
 локальные Markdown-ссылки, JSON и доступность учебных SHA. Коммит `2f1bfd6`
 сохранил финальную регрессию, APK evidence, ограниченные метрики и native baseline.
@@ -364,10 +352,12 @@ W8.2e / FR-020, FR-024, NFR-003/004/008/009: пользователь поруч
 [Подробности и доказательства](v1-contract/ANDROID_EMULATOR.md).
 
 Повторные **63/63 EditMode и 112/112 PlayMode PASS**, включая реальные Main
-matches/10 restarts/тактики; sourceHead `5362099`, входные SHA сохранены. Обычная сохранённая Main в Editor: естественный Defeat 0:45 за 33,1 игровых
-секунды, 1280×720, consoleErrors=0; [отчёт](../evidence/W8-emulator-resume-editor.json). Выбор ADB-устройства и коррекция окна сохранены; parser PASS, фактическое
-`fits=true`. Замер FPS отклонён после вылета приложения, готовых метрик нет. Следующий milestone —
-приёмка на подключённом телефоне и отзыв пользователя по полному матчу. Финальный [локальный аудит](../evidence/W8-emulator-resume-local-audit.json):
+matches/10 restarts/тактики; sourceHead `5362099`, входные SHA сохранены.
+Обычная сохранённая Main в Editor: естественный Defeat 0:45 за 33,1 игровых
+секунды, 1280×720, consoleErrors=0; [отчёт](../evidence/W8-emulator-resume-editor.json).
+Выбор ADB-устройства и коррекция окна сохранены; parser PASS, фактическое
+`fits=true`. Замер FPS отклонён после вылета приложения, готовых метрик нет.
+Финальный [локальный аудит](../evidence/W8-emulator-resume-local-audit.json):
 592 входных SHA тестов совпадают с текущими файлами, локальные ссылки/JSON,
 privacy/whitespace/LFS проверены. Исходники Unity не изменены.
 
@@ -417,8 +407,6 @@ Manifest/lock не менялись; VContainer, UniTask и Addressables отс�
 | EditMode | PASS: 9/9, Failed/Skipped/Inconclusive = 0 | [JSON](../evidence/tests-editmode-1c8754d-dirty-20261011.json) |
 | PlayMode | PASS: 38/38, Failed/Skipped/Inconclusive = 0 | [JSON](../evidence/tests-playmode-1c8754d-dirty-20261011.json) |
 | Android build | PASS: `Succeeded`, 0 ошибок, 1 предупреждение; 31,327 с | [BuildReport summary](../evidence/android-build-1c8754d-dirty-20261011.json) |
-| Устройство | ADB обнаружил `Android`; установка/запуск этого APK НЕ выполнялись | `adb devices -l` |
-| Ручной Play Mode/баланс || Нужен отдельный плейтест |
 | Clean checkout / Android performance | NOT_RUN | Следующие milestones |
 | Git whitespace | PASS: `git diff --check` без ошибок | Проверяется также перед каждым коммитом |
 
@@ -443,15 +431,15 @@ diff; другие настройки проекта не затронуты.
 
 | Пакет | Статус сейчас | Что требуется дальше |
 | --- | --- | --- |
-| W0 / G0 | PASS: аудит/backup/регрессия/build и сохранение исходных правок выполнены ||
+| W0 / G0 | PASS: аудит/backup/регрессия/build и сохранение исходных правок выполнены | Следующий пакет W1 |
 | W1 / G1 | PASS | 45 очков/180 с/Draw, часы, pause/resume, остановка боя, result/restart; 29 EditMode + 43 PlayMode и Main Game View |
 | W2 / G2 | PASS | A/B/C, capture/neutralize/contest, команды, score и repair; 46 EditMode + 61 PlayMode и Main |
 | W3 / G3 | PASS | AI и четыре настоящие партии Main; 53 EditMode + 67 PlayMode, проигрыш и выигрыш зафиксированы |
 | W4 / G4 | PASS | VContainer 1.19.0, настоящий scope Clock/State/Battle/AI; 72/72 PlayMode, missing injection и reload |
 | W5 / G5 | PASS | Addressables/UniTask, шесть юнитов, respawn/cancel/failure, 10 restarts и локальный content в APK |
 | W6 / G6 | PASS | Virtual touch, true Game View 3 форматов, HUD/tutorial; телефон: swipe/pinch и исправленные Android insets |
-| W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик; остаётся человеческий плейтест |
-| W8 / G8 | IN_PROGRESS ||
+| W7 / G7 | IN_PROGRESS | SFX/mute, зеркальная арена, 112 PlayMode PASS и пять активных тактик |
+| W8 / G8 | IN_PROGRESS | A5: 63 EditMode/124 PlayMode, свежий APK установлен и hash сверён |
 | W9 / G9 | PASS | README/8 ADR/notices/11 упражнений, проверка локальных ссылок/JSON/учебных SHA и неизменности Unity-входов; ограничения G7/G8 явно перечислены |
 
 ## Реестр требований (baseline и текущие изменения)
@@ -462,7 +450,7 @@ diff; другие настройки проекта не затронуты.
 
 | ID | Статус | Фактическая граница / пакет завершения |
 | --- | --- | --- |
-| FR-001 | IN_PROGRESS ||
+| FR-001 | IN_PROGRESS | Контент локальный в A5 APK |
 | FR-002 | PASS | Зеркальная Main, реальные равные базы, четыре препятствия; 18 маршрутов всех бойцов пройдены / W7.2 |
 | FR-003 | PASS | Явный UnitStats.role; шесть слотов проходят spawn/respawn даже после переименования профилей; неверная role вызывает cleanup / A1 |
 | FR-004 | PASS | Mouse/virtual touch и HUD выбирают/двигают units; выбранный боец получает приказ занять узел даже под союзником; Main и touch regression / A2 |
@@ -479,7 +467,7 @@ diff; другие настройки проекта не затронуты.
 | FR-015 | PASS | A3–A5: компактный HUD, фактический доход/эффекты, назначения ролей и notice; три формата Game View и full regression |
 | FR-016 | PASS | Result/Restart останавливают ввод/бой/AI, отменяют pending respawn, не создают поздних units / W3–W7 |
 | FR-017 | PASS | 10 настоящих Main Restart: новые state/clock, 6 units/handles, старые factory instances 0, score/progress/countdown reset / W5.6 |
-| FR-018 | PASS | A5: семь scene-owned clips; разные оружие/захват/предупреждения, mute/Restart/cleanup в full tests; слуховая проверка нового APK открыта в G7 |
+| FR-018 | PASS | A5: семь scene-owned clips; разные оружие/захват/предупреждения, mute/Restart/cleanup в full tests |
 | FR-019 | PASS | Три подсказки на первом запуске с Pause/Skip и повторным Help; W6.5 107 PlayMode и реальные снимки |
 | FR-020 | PASS | Свежий APK 1.0.0 из 4a06ae3, SHA-256 8257C9B1…A8BE83, локальные bundles/catalog; сборка 0 errors, установленный hash совпал / A6 |
 | FR-021 | PASS | VContainer 1.19.0: scene scope Clock/State/Battle/AI/factory/provider/lifecycle, missing registrations обнаруживаются / W4–W5 |
@@ -497,7 +485,7 @@ diff; другие настройки проекта не затронуты.
 | NFR-005 | PASS | Fixed simulation/clock/score/capture/heal/respawn проверены с дробными тиками, FPS и Pause; точные NavMesh trajectories не обещаны |
 | NFR-006 | PASS | Scene-owned cancellation, late load release, missing key/error/restart/finished wait, отсутствие позднего spawn / W5–W7 |
 | NFR-007 | PASS | Repository gate проверяет уникальность GUID, .meta и связи; настоящий Main/prefab loads проходят |
-| NFR-008 | IN_PROGRESS ||
+| NFR-008 | IN_PROGRESS | A5 установлен, извлечённый hash совпал |
 | NFR-009 | IN_PROGRESS | A5 повторные партии ещё не измерены; прежние 601 с ~29,86 FPS в основном на результате не закрывают это требование. Mono GC/GPU time недоступны |
 | NFR-010 | PASS | Опубликованные refs/main очищены; Gitleaks всей доступной истории 0 findings, metadata noreply, privacy gate активен; частный backup исключён из Git |
 | NFR-011 | PASS | Происхождение primitives/SFX и реальные licenses/notices пакетов сохранены; лицензию основного проекта агент не назначал |
@@ -871,12 +859,16 @@ ZIP manifest подтверждает localunits/monoscripts bundles, catalog/se
 не заменяет уже существующий APK. Полный BuildReport остаётся в игнорируемом Temp.
 
 Unity временно добавил существующий InputSystem_Actions.inputactions
-GUID `052faaac586de48259a63d0c4782560b` в preloadedAssets при Player build. После Editor/test reload пакет вернул список к исходному пустому состоянию. Исходник установленного Input System (ProjectWideActionsBuildProvider /
+GUID `052faaac586de48259a63d0c4782560b` в preloadedAssets при Player build.
+После Editor/test reload пакет вернул список к исходному пустому состоянию.
+Исходник установленного Input System (ProjectWideActionsBuildProvider /
 BuildProviderHelpers.PostProcessSinglePreloadedAsset) подтверждает временную
 preload/cleanup модель. Временная запись попала в d6532d7; теперь возвращена
-к штатному исходному значению. Иных изменений PlayerSettings нет. APK успешно установлен через `adb install -r`, активен на Android:
+к штатному исходному значению. Иных изменений PlayerSettings нет.
+APK успешно установлен через `adb install -r`:
 [наблюдение](../evidence/W5-G5-device.json), [сцена](../evidence/W5-G5-device-main.png),
-[второй кадр](../evidence/W5-G5-device-observation2.png), [лог](../evidence/W5-G5-device-log.txt). G5 PASS подтверждает цепочку DI → UniTask → локальные Addressables в Editor/Player.
+[второй кадр](../evidence/W5-G5-device-observation2.png), [лог](../evidence/W5-G5-device-log.txt).
+G5 PASS подтверждает цепочку DI → UniTask → локальные Addressables в Editor/Player.
 
 Стартовый лог Player **не чистый**: Java ClassNotFoundException для
 com.google.android.play.core.assetpacks.AssetPackManager, затем бой продолжился;
@@ -928,10 +920,10 @@ HP/respawn трёх ролей и характеристики выбранно�
 реальные кнопки, HP/respawn, score/time/pause, UI blocking и смерть selection;
 Main партии и 10 restart также прошли. Первоначальный прогон дал 91/103:
 Hud.Awake читал Relay.State до Relay.Awake. Первое обновление перенесено в Start;
-[ошибочный прогон](../evidence/tests-W6.3-attempt1-playmode.json) сохранён. Отдельный Main Play Mode: [HUD](../evidence/W6.3-hud.png), [наблюдение](../evidence/W6.3-hud-observation.json),
+[ошибочный прогон](../evidence/tests-W6.3-attempt1-playmode.json) сохранён.
+Отдельный Main Play Mode: [HUD](../evidence/W6.3-hud.png), [наблюдение](../evidence/W6.3-hud-observation.json),
 Ready, pause=True, выбран Tank. PNG 1280×720 — масштабированный кадр Game View
-861×471; это ещё не доказательство трёх форматов FR-028. Safe area/форматы — W6.4. ADB снова видит Android; пользователь разрешил запуск/перезапуск игры
-для тестов. Новые мобильные проверки будут использовать обновлённый APK.
+861×471; это ещё не доказательство трёх форматов FR-028. Safe area/форматы — W6.4.
 
 W6.3 зафиксирован в `cabf1ee`. W6.4 / FR-028: один SafeAreaLayout применяет
 Screen.safeArea к родителю HUD/result; камера использует тот же нормализованный

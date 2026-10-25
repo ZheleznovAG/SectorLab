@@ -37,5 +37,6 @@ UTP напрямую (`com.unity.transport` 6.6.0). Снимки идут нен
 
 ## Проверка
 
-`UtpChannelTests` — реальный UDP на localhost: обмен, один игрок, хост `Main` ждёт соперника. `NetworkMatchTests` и `NetworkSessionTests` — через loopback. E2E 21.10: Editor-хост и Windows-клиент
+`UtpChannelTests` — реальный UDP на localhost: обмен, один игрок, хост `Main` ждёт соперника.
+`NetworkMatchTests` и `NetworkSessionTests` — через loopback. E2E 21.10: Editor-хост и Windows-клиент
 на одном ПК ([скриншоты](../evidence/E2E-host-blue.png)).

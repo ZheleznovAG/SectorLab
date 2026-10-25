@@ -17,8 +17,8 @@
 APK `Builds/Android/SectorLab-A5-feedback.apk`: **32 311 981 bytes**,
 SHA-256 `8257C9B1EC109272A3027CD6146BE9790657D085651B856983225797E3A8BE83`.
 0 build errors, 1 Pipeline warning. [Установленный APK](../evidence/A6-phone-install.json)
-выгружен с физического Android / Android 11 и имеет тот же hash. На момент этого evidence процесс/Activity есть, системный keyguard закрывает
-видимую игру. G7/G8 IN_PROGRESS; **Release ready не заявляется**. Все ранние неудачные проверки
+выгружен и имеет тот же hash.
+G7/G8 IN_PROGRESS; **Release ready не заявляется**. Все ранние неудачные проверки
 сохранены и объяснены в [статусе](JOURNAL.md).
 
 ## Предыдущий checkpoint до аудита
@@ -35,7 +35,7 @@ failed/skipped/inconclusive = 0. [EditMode](../evidence/tests-W8-selection-final
 APK `Builds/Android/SectorLab-W8-selection.apk`: **1.0.0**, 32 302 469 bytes,
 SHA-256 `654CB514B441F9B8C18B61C93AEED701771D6DE5A3F8E7CCB6ED0FD1081237DA`.
 [Сборка](../evidence/android-build-W8-selection.json): Succeeded, 0 errors,
-1 Pipeline warning, 40,752 с; локальные AA bundles/catalog включены в APK. APK установлен на Android / Android 11.
+1 Pipeline warning, 40,752 с; локальные AA bundles/catalog включены в APK.
 
 Возобновление после прерванной сессии: **63/63 EditMode, 112/112 PlayMode PASS**
 на неизменных Unity-входах стартового `5362099`;
@@ -68,8 +68,6 @@ CLI через локальный Pipeline 0.8.0-exp.1. Исходный HEAD:
 | Android | `build --target Android --outputPath Builds/Android/SectorLab-baseline-1c8754d-20261011.apk --confirm true`, затем `build_status` | PASS: Succeeded, 0 errors, 1 warning | [Краткий BuildReport](../evidence/android-build-1c8754d-dirty-20261011.json) |
 | Git / LFS / meta | `git diff --check`, `git lfs version/status/ls-files`, поиск GUID в Assets meta | PASS: whitespace clean, LFS 3.7.1, PNG clean, duplicate GUID=0 | Аудит; повторная проверка перед коммитами |
 | Backup / ZIP | Копирование 33 файлов с SHA-256; сравнение с последним ZIP без извлечения | PASS: исходные код/тесты/docs совпадают; инструкции/ТЗ новее ZIP | Локальные `backup-manifest.csv`, `working-tree.patch` |
-| Android device | `adb devices -l` || Текущая ADB-проверка |
-| Человек / баланс / performance / clean checkout | Не выполнялись | NOT_RUN | Нет |
 
 Первые CLI/ADB-проверки в песочнице были недоступны.
 
@@ -107,8 +105,8 @@ SHA-256 файлов на диске во время запуска тестов
 | G4 | PASS | VContainer scene scope, настоящая injection, missing registration/reload tests — W4 |
 | G5 | PASS | UnitFactory/UniTask/Addressables, late cancel/error/respawn/10 restarts и локальный контент APK — W5 |
 | G6 | PASS | Touch/camera/UI blocking/HUD/safe area/tutorial; пользователь подтвердил жесты и Insets API проверен на телефоне — W6 |
-| G7 | IN_PROGRESS ||
-| G8 | BLOCKED ||
+| G7 | IN_PROGRESS | SFX/mute/зеркальная карта/5 тактик проверены |
+| G8 | BLOCKED | Полная регрессия 0ae98c8, clean clone и APK PASS |
 | G9 | PASS | README/8 ADR/notices/11 упражнений; links/JSON/reachable SHA/Unity inputs проверены; ограничения G7/G8 явно перечислены |
 
 Не приравнивать обнаружение устройства к Device verified, сборку baseline к
@@ -191,7 +189,8 @@ AssetPackManager diagnostic и URP shader notices были оставлены д
 
 ## W6 — сенсорное управление и читаемый интерфейс
 
-Environment: тот же Editor; Android, Android 11/API 30. Code: UnitCommander, TacticalCamera, BattleHud, SafeAreaLayout, TutorialView,
+Environment: тот же Editor; Android API 30.
+Code: UnitCommander, TacticalCamera, BattleHud, SafeAreaLayout, TutorialView,
 AndroidSystemBars. Release tap отделён от drag/pinch/cancel, UI raycasts блокируют
 команды. Камера имеет границы pan/zoom. HUD читает те же scoped State/Lifecycle.
 
