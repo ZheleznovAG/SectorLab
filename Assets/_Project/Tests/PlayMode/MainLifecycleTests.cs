@@ -126,7 +126,7 @@ namespace SectorLab.Tests
                 battle.AdvanceSimulation(0.1);
                 float deadline = Time.realtimeSinceStartup + 5;
                 while (slot.Unit == null && Time.realtimeSinceStartup < deadline) yield return null;
-                Assert.That(slot.Unit, Is.Not.Null, $"{slot.Config.team}/{slot.Config.role}: waiting={slot.Respawn.RemainingSeconds}, spawning={slot.IsSpawning}, phase={lifecycle.Phase}, safe={UnitSpawnPositions.TryFind(slot.Config.position, slot.SpawnRadius, out _)}");
+                Assert.That(slot.Unit, Is.Not.Null, $"{slot.Config.team}/{slot.Config.role}: waiting={slot.Respawn.RemainingSeconds}, spawning={slot.IsSpawning}, phase={lifecycle.Phase}, safe={UnitSpawnPositions.TryFind(battle.Units, slot.Config.position, slot.SpawnRadius, out _)}");
                 Assert.That(slot.Unit, Is.Not.SameAs(old));
                 Assert.That(slot.Unit.Id, Is.EqualTo(id), "A respawned unit keeps its slot's id for network messages.");
                 Assert.That(slot.Unit.Team, Is.EqualTo(slot.Config.team));

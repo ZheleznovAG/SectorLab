@@ -31,33 +31,45 @@ namespace SectorLab.Units
 
         public event Action<Unit> Died;
 
-        // Units currently enabled in the scene; small enough battles to just loop over.
+        public UnitRegistry Registry { get; private set; }
+        public void BindRegistry(UnitRegistry registry)
+        {
+            if (registry == null) throw new ArgumentNullException(nameof(registry));
+            if (Registry != null && Registry != registry)
+                throw new InvalidOperationException("A unit belongs to one match for its lifetime.");
+            registry.ValidateId(this, Id);
+            Registry = registry;
+            if (isActiveAndEnabled) Registry.Add(this);
+        }
+
+#if UNITY_EDITOR
+        // Editor leak diagnostics only. Runtime gameplay never reads this aggregate.
         private static readonly List<Unit> all = new List<Unit>();
         public static IReadOnlyList<Unit> All => all;
-
-        public static Unit Find(int id)
-        {
-            if (id < 0) return null;
-            for (int i = 0; i < all.Count; i++)
-                if (all[i].Id == id) return all[i];
-            return null;
-        }
+#endif
 
         public void AssignId(int id)
         {
             if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
             if (Id >= 0 && Id != id) throw new InvalidOperationException("A unit keeps its id for its whole life.");
+            Registry?.ValidateId(this, id);
             Id = id;
         }
 
         private void OnEnable()
         {
+            Registry?.Add(this);
+#if UNITY_EDITOR
             all.Add(this);
+#endif
         }
 
         private void OnDisable()
         {
+            Registry?.Remove(this);
+#if UNITY_EDITOR
             all.Remove(this);
+#endif
         }
 
         private void Awake()
@@ -84,7 +96,7 @@ namespace SectorLab.Units
 
         public bool IsHostileTo(Unit other)
         {
-            return other != null && other.team != team;
+            return other != null && Registry != null && other.Registry == Registry && other.team != team;
         }
 
         private void OnDied()

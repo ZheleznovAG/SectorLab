@@ -12,11 +12,14 @@ namespace SectorLab.Tests
     public class BattleControllerTests
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
         private RelayConfig config;
 
         [SetUp]
         public void SetUp()
         {
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("TestRoot");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -38,6 +41,8 @@ namespace SectorLab.Tests
             Unit unit = go.AddComponent<Unit>();
             typeof(Unit).GetField("team", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(unit, team);
             go.SetActive(true);
+            unit.BindRegistry(registry);
+            if (unit.Id < 0) unit.AssignId(nextUnitId++);
             return unit;
         }
 
@@ -47,7 +52,7 @@ namespace SectorLab.Tests
             CreateUnit(Team.Player);
             Unit enemy = CreateUnit(Team.Enemy);
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             BattleOutcome? finishedWith = null;
             battle.Finished += outcome => finishedWith = outcome;
 
@@ -68,7 +73,7 @@ namespace SectorLab.Tests
             Unit player = CreateUnit(Team.Player);
             CreateUnit(Team.Enemy);
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
 
             player.Health.TakeDamage(player.Health.Max);
             yield return null;
@@ -86,11 +91,11 @@ namespace SectorLab.Tests
             unit.gameObject.AddComponent<UnitAttack>();
             var commander = root.AddComponent<SectorLab.Player.UnitCommander>();
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             typeof(BattleController).GetField("commander", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(battle, commander);
             int finished = 0;
             battle.Finished += _ => finished++;
-            var state = new MatchState(new MatchClock());
+            var state = new MatchState(new MatchClock(), registry);
             state.Tick(44, playerRate > 0 ? 1 : 0, enemyRate > 0 ? 1 : 0);
             battle.Initialize(state);
             config = ScriptableObject.CreateInstance<RelayConfig>();
@@ -121,6 +126,7 @@ namespace SectorLab.Tests
             node.transform.position = unit.transform.position;
             var relay = node.AddComponent<RelayPoint>();
             relay.Configure(config);
+            relay.BindUnits(registry);
             relay.Simulate(5);
             return relay;
         }
@@ -130,7 +136,7 @@ namespace SectorLab.Tests
         {
             Unit unit = CreateUnit(Team.Player);
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             unit.Movement.MoveTo(new Vector3(3f, 0f, 0f));
             yield return null;
             battle.SetPaused(true);
@@ -151,7 +157,7 @@ namespace SectorLab.Tests
         public void TimeoutDrawAndSceneCleanupRestoreTimeScale()
         {
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             battle.AdvanceSimulation(180);
             Assert.That(battle.Outcome, Is.EqualTo(BattleOutcome.Draw));
             Object.DestroyImmediate(battle);

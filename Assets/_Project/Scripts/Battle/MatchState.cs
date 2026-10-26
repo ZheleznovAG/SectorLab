@@ -6,12 +6,19 @@ namespace SectorLab.Battle
     public sealed class MatchState
     {
         public MatchClock Clock { get; }
+        public SectorLab.Units.UnitRegistry Units { get; }
         public double PlayerScore { get; private set; }
         public double EnemyScore { get; private set; }
         public BattleOutcome Outcome { get; private set; } = BattleOutcome.InProgress;
         public bool IsRunning => Outcome == BattleOutcome.InProgress && !Clock.IsPaused;
 
-        public MatchState(MatchClock clock) => Clock = clock ?? throw new ArgumentNullException(nameof(clock));
+        [VContainer.Inject]
+        public MatchState(MatchClock clock) : this(clock, new SectorLab.Units.UnitRegistry()) { }
+        public MatchState(MatchClock clock, SectorLab.Units.UnitRegistry units)
+        {
+            Clock = clock ?? throw new ArgumentNullException(nameof(clock));
+            Units = units ?? throw new ArgumentNullException(nameof(units));
+        }
 
         public double Tick(double seconds, double playerScorePerSecond, double enemyScorePerSecond)
         {

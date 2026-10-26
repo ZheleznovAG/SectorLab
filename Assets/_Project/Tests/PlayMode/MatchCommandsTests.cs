@@ -12,6 +12,8 @@ namespace SectorLab.Tests
     public class MatchCommandsTests
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
         private RelayConfig config;
         private readonly List<RelayPoint> relays = new List<RelayPoint>();
         private MatchState state;
@@ -21,6 +23,7 @@ namespace SectorLab.Tests
         [SetUp]
         public void SetUp()
         {
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("CommandsTest");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -30,9 +33,10 @@ namespace SectorLab.Tests
             node.transform.position = new Vector3(3, 0, 0);
             var relay = node.AddComponent<RelayPoint>();
             relay.Configure(config);
+            relay.BindUnits(registry);
             relays.Clear();
             relays.Add(relay);
-            state = new MatchState(new MatchClock());
+            state = new MatchState(new MatchClock(), registry);
             commands = new MatchCommands(relays, state);
             player = CreateUnit(Team.Player, new Vector3(-3, 0, 0), 0);
             ally = CreateUnit(Team.Player, new Vector3(-3, 0, 2), 1);
@@ -58,6 +62,8 @@ namespace SectorLab.Tests
             go.AddComponent<UnitAttack>();
             go.SetActive(true);
             unit.AssignId(id);
+            unit.BindRegistry(registry);
+            if (unit.Id < 0) unit.AssignId(nextUnitId++);
             return unit;
         }
 
@@ -114,9 +120,22 @@ namespace SectorLab.Tests
         }
 
         [Test]
+        public void HoldPreservesTheAttackWhileStopClearsItAndBothValidateOwnership()
+        {
+            commands.Execute(UnitCommand.Attack(Team.Player, player.Id, enemy.Id));
+            Assert.That(commands.Execute(UnitCommand.HoldPosition(Team.Enemy, player.Id)), Is.EqualTo(CommandResult.NotOwner));
+            Assert.That(commands.Execute(UnitCommand.HoldPosition(Team.Player, player.Id)), Is.EqualTo(CommandResult.Accepted));
+            Assert.That(player.Attack.Target, Is.SameAs(enemy));
+            Assert.That(commands.Execute(UnitCommand.Stop(Team.Player, player.Id)), Is.EqualTo(CommandResult.Accepted));
+            Assert.That(player.Attack.Target, Is.Null);
+            state.SetPaused(true);
+            Assert.That(commands.Execute(UnitCommand.Stop(Team.Player, player.Id)), Is.EqualTo(CommandResult.MatchNotRunning));
+        }
+
+        [Test]
         public void DeadUnitsTakeNoOrdersAndIdsStayWithTheirUnit()
         {
-            Assert.That(Unit.Find(ally.Id), Is.SameAs(ally));
+            Assert.That(registry.Find(ally.Id), Is.SameAs(ally));
             Assert.Throws<System.InvalidOperationException>(() => ally.AssignId(5));
             player.Health.TakeDamage(player.Health.Max);
             Assert.That(commands.Execute(UnitCommand.MoveToRelay(Team.Player, player.Id, 0)), Is.Not.EqualTo(CommandResult.Accepted));

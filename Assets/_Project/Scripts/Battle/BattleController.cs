@@ -16,6 +16,7 @@ namespace SectorLab.Battle
 
         public const double TickSeconds = 0.1;
         public MatchState State { get; private set; }
+        public UnitRegistry Units => State.Units;
         public BattleOutcome Outcome => State.Outcome;
         public System.Collections.Generic.IReadOnlyList<RelayPoint> Relays => relays;
         private MatchCommands commands;
@@ -77,8 +78,10 @@ namespace SectorLab.Battle
 
         private MatchCommands BindCommands()
         {
+            if (State == null) return null;
+            foreach (RelayPoint relay in relays) if (relay != null) relay.BindUnits(Units);
             var created = new MatchCommands(relays, State);
-            if (commander != null) { commander.Bind(created); commander.BindModel(Model); }
+            if (commander != null) { commander.Bind(created); commander.BindModel(Model); commander.BindUnits(Units); }
             return created;
         }
 
@@ -112,9 +115,9 @@ namespace SectorLab.Battle
         {
             Model.SimulationTick++;
             // Combat first, so a unit killed this tick no longer holds a relay.
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < Units.All.Count; i++)
             {
-                UnitAttack attack = Unit.All[i].Attack;
+                UnitAttack attack = Units.All[i].Attack;
                 if (attack != null) attack.Simulate(tick);
             }
             double playerPoints = 0;
@@ -137,9 +140,9 @@ namespace SectorLab.Battle
             }
 
             ApplyRunState();
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < Units.All.Count; i++)
             {
-                Unit unit = Unit.All[i];
+                Unit unit = Units.All[i];
                 unit.Movement.Stop();
                 if (unit.Attack != null)
                 {

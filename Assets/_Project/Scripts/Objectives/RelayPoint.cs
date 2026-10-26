@@ -22,6 +22,8 @@ namespace SectorLab.Objectives
         private readonly System.Collections.Generic.Dictionary<Unit, double> healingFractions = new System.Collections.Generic.Dictionary<Unit, double>(6);
         private readonly System.Collections.Generic.List<Unit> staleHealing = new System.Collections.Generic.List<Unit>(6);
 
+        private UnitRegistry units;
+        public void BindUnits(UnitRegistry value) => units = value ?? throw new System.ArgumentNullException(nameof(value));
         public RelayConfig Config => config;
         public RelayState State { get; private set; }
         public int PlayersPresent { get; private set; }
@@ -52,7 +54,7 @@ namespace SectorLab.Objectives
 
         public bool Contains(Unit unit)
         {
-            if (unit == null || !unit.IsAlive || !unit.isActiveAndEnabled)
+            if (unit == null || unit.Registry != units || !unit.IsAlive || !unit.isActiveAndEnabled)
                 return false;
             Vector3 offset = unit.transform.position - transform.position;
             offset.y = 0;
@@ -61,11 +63,12 @@ namespace SectorLab.Objectives
 
         public void Simulate(double seconds)
         {
+            if (units == null) throw new System.InvalidOperationException("Relay requires its match unit registry.");
             PlayersPresent = 0;
             EnemiesPresent = 0;
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < units.All.Count; i++)
             {
-                Unit unit = Unit.All[i];
+                Unit unit = units.All[i];
                 if (!Contains(unit)) continue;
                 if (unit.Team == Team.Player) PlayersPresent++;
                 else EnemiesPresent++;
@@ -91,9 +94,9 @@ namespace SectorLab.Objectives
                     staleHealing.Add(entry.Key);
             for (int i = 0; i < staleHealing.Count; i++) healingFractions.Remove(staleHealing[i]);
             if (State.EffectiveSeconds <= 0) return;
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < units.All.Count; i++)
             {
-                Unit unit = Unit.All[i];
+                Unit unit = units.All[i];
                 if (!Contains(unit) || !Owns(unit) || unit.Health.Current == unit.Health.Max) continue;
                 healingFractions.TryGetValue(unit, out double fraction);
                 fraction += State.EffectiveSeconds * config.healingPerSecond;

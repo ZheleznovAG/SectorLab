@@ -13,6 +13,8 @@ namespace SectorLab.Tests
     public class EnemyTacticsTests
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
         private BattleController battle;
         private EnemyTacticsController ai;
         private RelayPoint a;
@@ -22,6 +24,7 @@ namespace SectorLab.Tests
         [SetUp]
         public void Setup()
         {
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("AiTest");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -29,7 +32,7 @@ namespace SectorLab.Tests
             a = CreateRelay(new Vector3(-3, 0, 0));
             b = CreateRelay(new Vector3(3, 0, 0));
             battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             battle.InitializeRelays(new[] { a, b });
             battle.enabled = false;
             ai = root.AddComponent<EnemyTacticsController>();
@@ -50,6 +53,7 @@ namespace SectorLab.Tests
             node.transform.position = position;
             var relay = node.AddComponent<RelayPoint>();
             relay.Configure(config);
+            relay.BindUnits(registry);
             return relay;
         }
 
@@ -63,6 +67,8 @@ namespace SectorLab.Tests
             typeof(Unit).GetField("team", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(unit, team);
             go.AddComponent<UnitAttack>();
             go.SetActive(true);
+            unit.BindRegistry(registry);
+            if (unit.Id < 0) unit.AssignId(nextUnitId++);
             return unit;
         }
 
@@ -70,7 +76,15 @@ namespace SectorLab.Tests
         public void DecisionsUseGameSecondsAndUnchangedPathsAreNotSpam()
         {
             CreateUnit(Team.Enemy, new Vector3(0, 0, 3));
+            int accepted = 0;
+            battle.Commands.Executed += command =>
+            {
+                Assert.That(command.Issuer, Is.EqualTo(Team.Enemy));
+                Assert.That(registry.Find(command.UnitId), Is.Not.Null);
+                accepted++;
+            };
             battle.AdvanceSimulation(10);
+            Assert.That(accepted, Is.EqualTo(1), "The unchanged AI path enters the shared command boundary once.");
             Assert.That(ai.DecisionCount, Is.EqualTo(10));
             Assert.That(ai.MoveOrdersIssued, Is.EqualTo(1));
             battle.SetPaused(true);

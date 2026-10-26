@@ -12,6 +12,8 @@ namespace SectorLab.Tests
     public class RelayScoringTests
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
         private RelayConfig config;
         private BattleController battle;
         private RelayPoint a;
@@ -20,6 +22,7 @@ namespace SectorLab.Tests
         [SetUp]
         public void Setup()
         {
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("ScoringTest");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -27,7 +30,7 @@ namespace SectorLab.Tests
             a = CreateRelay(new Vector3(-3, 0, 0));
             b = CreateRelay(new Vector3(3, 0, 0));
             battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             battle.InitializeRelays(new[] { a, b });
         }
 
@@ -45,6 +48,7 @@ namespace SectorLab.Tests
             node.transform.position = position;
             var relay = node.AddComponent<RelayPoint>();
             relay.Configure(config);
+            relay.BindUnits(registry);
             return relay;
         }
 
@@ -57,6 +61,8 @@ namespace SectorLab.Tests
             var unit = go.AddComponent<Unit>();
             typeof(Unit).GetField("team", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(unit, team);
             go.SetActive(true);
+            unit.BindRegistry(registry);
+            if (unit.Id < 0) unit.AssignId(nextUnitId++);
             return unit;
         }
 

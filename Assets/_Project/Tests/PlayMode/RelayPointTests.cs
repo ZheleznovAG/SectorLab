@@ -12,12 +12,15 @@ namespace SectorLab.Tests
     public class RelayPointTests
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
         private RelayPoint point;
         private RelayConfig config;
 
         [SetUp]
         public void Setup()
         {
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("RelayTest");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -26,6 +29,7 @@ namespace SectorLab.Tests
             node.transform.SetParent(root.transform);
             point = node.AddComponent<RelayPoint>();
             point.Configure(config);
+            point.BindUnits(registry);
         }
 
         [TearDown]
@@ -44,6 +48,8 @@ namespace SectorLab.Tests
             var unit = go.AddComponent<Unit>();
             typeof(Unit).GetField("team", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(unit, team);
             go.SetActive(true);
+            unit.BindRegistry(registry);
+            if (unit.Id < 0) unit.AssignId(nextUnitId++);
             return unit;
         }
 
@@ -118,7 +124,7 @@ namespace SectorLab.Tests
         {
             CreateUnit(Team.Player, Vector3.zero);
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             battle.InitializeRelays(new[] { point });
             battle.SetPaused(true);
             battle.AdvanceSimulation(10);
@@ -166,7 +172,7 @@ namespace SectorLab.Tests
             Unit player = CreateUnit(Team.Player, Vector3.zero);
             player.Health.TakeDamage(40);
             var battle = root.AddComponent<BattleController>();
-            battle.Initialize(new MatchState(new MatchClock()));
+            battle.Initialize(new MatchState(new MatchClock(), registry));
             battle.InitializeRelays(new[] { point });
             battle.AdvanceSimulation(5);
             battle.AdvanceSimulation(1);

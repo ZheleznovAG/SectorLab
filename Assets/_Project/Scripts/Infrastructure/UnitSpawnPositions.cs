@@ -13,7 +13,7 @@ namespace SectorLab.Infrastructure
             new Vector3(-1.1f,0,1.1f), new Vector3(1.1f,0,1.1f)
         };
 
-        public static bool TryFind(Vector3 preferred, float radius, out Vector3 position)
+        public static bool TryFind(UnitRegistry units, Vector3 preferred, float radius, out Vector3 position)
         {
             for (int i = 0; i < offsets.Length; i++)
             {
@@ -24,9 +24,9 @@ namespace SectorLab.Infrastructure
                 if (Physics.CheckCapsule(hit.position + Vector3.up * (radius + 0.05f),
                     hit.position + Vector3.up * 1.5f, radius, 1, QueryTriggerInteraction.Ignore)) continue;
                 bool occupied = false;
-                for (int j = 0; j < Unit.All.Count; j++)
+                for (int j = 0; j < units.All.Count; j++)
                 {
-                    Unit unit = Unit.All[j];
+                    Unit unit = units.All[j];
                     if (!unit.IsAlive) continue;
                     var agent = unit.GetComponent<NavMeshAgent>();
                     float otherRadius = agent != null ? agent.radius * Mathf.Max(unit.transform.lossyScale.x, unit.transform.lossyScale.z) : 0.7f;

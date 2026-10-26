@@ -129,6 +129,25 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator AQueuedAttackCannotRetargetARespawnedSlot()
+        {
+            Unit red = lifecycle.Slots[3].Unit, blue = lifecycle.Slots[0].Unit;
+            client.Send(UnitCommand.Attack(Team.Enemy, red.Id, blue.Id));
+            blue.Health.TakeDamage(blue.Health.Max);
+            battle.AdvanceSimulation(RespawnTimer.DelaySeconds + 0.1);
+            float deadline = Time.realtimeSinceStartup + 5;
+            while (lifecycle.Slots[0].Unit == null && Time.realtimeSinceStartup < deadline) yield return null;
+            Assert.That(lifecycle.Slots[0].Unit, Is.Not.Null);
+            clientEnd.Flush();
+            Assert.That(host.Accepted, Is.Zero);
+            Assert.That(red.Attack.Target, Is.Null);
+            host.SendState(); hostEnd.Flush();
+            client.Send(UnitCommand.Attack(Team.Enemy, red.Id, 0)); clientEnd.Flush();
+            Assert.That(host.Accepted, Is.EqualTo(1));
+            Assert.That(red.Attack.Target, Is.SameAs(lifecycle.Slots[0].Unit));
+        }
+
+        [UnityTest]
         public IEnumerator RemoteRedOrderCapturesARelayAndTheClientSeesIt()
         {
             Unit red = lifecycle.Slots[3].Unit;

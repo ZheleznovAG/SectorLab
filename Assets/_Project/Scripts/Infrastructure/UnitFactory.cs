@@ -45,9 +45,10 @@ namespace SectorLab.Infrastructure
                     throw new InvalidOperationException("Unit prefab requires Unit and NavMeshAgent.");
                 var prefabAgent = lease.Prefab.GetComponent<NavMeshAgent>();
                 float radius = prefabAgent.radius * Mathf.Max(lease.Prefab.transform.localScale.x, lease.Prefab.transform.localScale.z);
-                if (!UnitSpawnPositions.TryFind(position, radius, out Vector3 spawn)) throw new UnitSpawnBlockedException();
+                if (!UnitSpawnPositions.TryFind(state.Units, position, radius, out Vector3 spawn)) throw new UnitSpawnBlockedException();
                 instance = UnityEngine.Object.Instantiate(lease.Prefab, spawn + Vector3.up * prefabAgent.baseOffset, Quaternion.identity, parent);
                 var unit = instance.GetComponent<Unit>();
+                unit.BindRegistry(state.Units);
                 var ownership = instance.AddComponent<UnitPrefabOwnership>();
                 ownership.Initialize(unit, lease, OnDestroyed);
                 instances.Add(unit, ownership);

@@ -10,11 +10,14 @@ namespace SectorLab.Tests
     public class UnitAttackTests
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
 
         [SetUp]
         public void SetUp()
         {
             Time.timeScale = 1;
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("TestRoot");
             TestArena.CreateGround(root.transform);
             TestArena.Bake(root);
@@ -53,6 +56,8 @@ namespace SectorLab.Tests
             UnitAttack attack = go.AddComponent<UnitAttack>();
             SetField(attack, "autoAcquireRange", autoAcquireRange);
             go.SetActive(true);
+            unit.BindRegistry(registry);
+            if (unit.Id < 0) unit.AssignId(nextUnitId++);
             return unit;
         }
 
@@ -76,7 +81,7 @@ namespace SectorLab.Tests
         public void DamageDependsOnGameTimeNotOnFramePacing()
         {
             var battle = root.AddComponent<SectorLab.Battle.BattleController>();
-            battle.Initialize(new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock()));
+            battle.Initialize(new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock(), registry));
             battle.enabled = false;
             UnitStats stats = Stats(500, 0, 10, 2, 0.5f);
 

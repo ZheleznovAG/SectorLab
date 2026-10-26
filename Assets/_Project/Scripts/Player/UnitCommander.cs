@@ -31,8 +31,12 @@ namespace SectorLab.Player
         public Team LocalTeam => team;
         private ICommandSink commands;
         private MatchModel model;
+        private UnitRegistry registry;
+        private IReadOnlyList<Unit> Units => registry?.All ?? System.Array.Empty<Unit>();
+        public void BindUnits(UnitRegistry value) => registry = value;
         public void BindModel(MatchModel value) => model = value;
         private bool IsAvailable(Unit unit) => unit != null && unit.IsAlive
+            && (registry == null || unit.Registry == registry)
             && (model == null || unit.Id < 0 || model.IsSynchronized && model.TryGetUnit(unit.Id, out var view)
                 && view.Alive && unit.Generation == view.Generation);
         public void ValidateSelection() { if (Selected != null && !IsAvailable(Selected)) ClearSelection(); }
@@ -221,9 +225,9 @@ namespace SectorLab.Player
             Unit nearest = null;
             float nearestSqr = tolerancePixels * tolerancePixels;
             // Index loop: foreach over an IReadOnlyList boxes its enumerator and allocates every frame.
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < Units.Count; i++)
             {
-                Unit candidate = Unit.All[i];
+                Unit candidate = Units[i];
                 if (!IsAvailable(candidate))
                     continue;
 

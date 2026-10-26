@@ -13,11 +13,13 @@ namespace SectorLab.Battle
     {
         private readonly IReadOnlyList<RelayPoint> relays;
         private readonly MatchState state;
+        private readonly UnitRegistry units;
 
-        public MatchCommands(IReadOnlyList<RelayPoint> relays, MatchState state = null)
+        public MatchCommands(IReadOnlyList<RelayPoint> relays, MatchState state = null, UnitRegistry units = null)
         {
             this.relays = relays ?? throw new ArgumentNullException(nameof(relays));
             this.state = state;
+            this.units = state?.Units ?? units ?? throw new ArgumentNullException(nameof(units));
         }
 
         // Fired after an accepted command: a log, a replay or a network relay can listen here.
@@ -42,7 +44,7 @@ namespace SectorLab.Battle
         public CommandResult Execute(in UnitCommand command)
         {
             if (state != null && !state.IsRunning) return CommandResult.MatchNotRunning;
-            Unit unit = Unit.Find(command.UnitId);
+            Unit unit = units.Find(command.UnitId);
             if (unit == null) return CommandResult.UnknownUnit;
             if (unit.Team != command.Issuer) return CommandResult.NotOwner;
             if (!unit.IsAlive) return CommandResult.UnitDead;
@@ -52,10 +54,19 @@ namespace SectorLab.Battle
                 UnitCommandKind.MoveToPoint => Move(unit, command.Point, 0),
                 UnitCommandKind.MoveToRelay => MoveToRelay(unit, command.RelayIndex),
                 UnitCommandKind.Attack => Attack(unit, command.TargetId),
+                UnitCommandKind.HoldPosition => Stop(unit, false),
+                UnitCommandKind.Stop => Stop(unit, true),
                 _ => CommandResult.InvalidTarget
             };
             if (result == CommandResult.Accepted) Executed?.Invoke(command);
             return result;
+        }
+
+        private static CommandResult Stop(Unit unit, bool clearTarget)
+        {
+            unit.Movement.Stop();
+            if (clearTarget) unit.Attack?.ClearTarget();
+            return CommandResult.Accepted;
         }
 
         private CommandResult MoveToRelay(Unit unit, int index)
@@ -75,9 +86,9 @@ namespace SectorLab.Battle
             return CommandResult.Accepted;
         }
 
-        private static CommandResult Attack(Unit unit, int targetId)
+        private CommandResult Attack(Unit unit, int targetId)
         {
-            Unit target = Unit.Find(targetId);
+            Unit target = units.Find(targetId);
             if (unit.Attack == null || target == null || !target.IsAlive || !unit.IsHostileTo(target))
                 return CommandResult.InvalidTarget;
             unit.Attack.SetTarget(target);

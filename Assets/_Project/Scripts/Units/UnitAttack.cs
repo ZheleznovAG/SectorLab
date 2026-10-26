@@ -92,15 +92,15 @@ namespace SectorLab.Units
 
         private Unit FindNearestHostile(float maxDistance)
         {
-            if (maxDistance <= 0f)
+            if (maxDistance <= 0f || self.Registry == null)
                 return null;
 
             Unit nearest = null;
             float nearestSqr = maxDistance * maxDistance;
             // Index loop: foreach over an IReadOnlyList boxes its enumerator and allocates every frame.
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < self.Registry.All.Count; i++)
             {
-                Unit other = Unit.All[i];
+                Unit other = self.Registry.All[i];
                 if (!self.IsHostileTo(other) || !other.IsAlive)
                     continue;
 

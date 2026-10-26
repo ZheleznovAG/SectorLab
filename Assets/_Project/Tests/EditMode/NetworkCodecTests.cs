@@ -20,7 +20,9 @@ namespace SectorLab.Tests
             {
                 UnitCommand.MoveToPoint(Team.Enemy, 4, new Vector3(1.5f, 0, -2.25f)),
                 UnitCommand.MoveToRelay(Team.Player, 2, 1),
-                UnitCommand.Attack(Team.Player, 0, 5)
+                UnitCommand.Attack(Team.Player, 0, 5),
+                UnitCommand.HoldPosition(Team.Enemy, 3),
+                UnitCommand.Stop(Team.Player, 0)
             };
             foreach (UnitCommand sent in commands)
             {

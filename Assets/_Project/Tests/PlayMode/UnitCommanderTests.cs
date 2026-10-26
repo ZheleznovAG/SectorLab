@@ -13,6 +13,8 @@ namespace SectorLab.Tests
     public class UnitCommanderTests : InputTestFixture
     {
         private GameObject root;
+        private UnitRegistry registry;
+        private int nextUnitId;
         private Camera camera;
         private Unit unit;
         private Unit enemy;
@@ -25,6 +27,7 @@ namespace SectorLab.Tests
         public override void Setup()
         {
             base.Setup();
+            registry = new UnitRegistry(); nextUnitId = 0;
             root = new GameObject("TestRoot");
 
             var cameraObject = new GameObject("TestCamera");
@@ -67,10 +70,12 @@ namespace SectorLab.Tests
             SetField(commander, "groundMask", (LayerMask)LayerMask.GetMask("Ground"));
             SetField(commander, "destinationMarker", marker);
             commanderObject.SetActive(true);
+            unit.BindRegistry(registry); enemy.BindRegistry(registry);
+            commander.BindUnits(registry);
             unit.AssignId(0);
             enemy.AssignId(3);
             relays.Clear();
-            commands = new SectorLab.Battle.MatchCommands(relays);
+            commands = new SectorLab.Battle.MatchCommands(relays, units: registry);
             commander.Bind(commands);
 
             Physics.SyncTransforms();
@@ -124,6 +129,7 @@ namespace SectorLab.Tests
             var config = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
             var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
             relay.Configure(config);
+            relay.BindUnits(registry);
             relays.Add(relay);
             var collider = node.AddComponent<SphereCollider>();
             collider.radius = config.radius;
@@ -257,6 +263,7 @@ namespace SectorLab.Tests
             var config = ScriptableObject.CreateInstance<SectorLab.Objectives.RelayConfig>();
             var relay = node.AddComponent<SectorLab.Objectives.RelayPoint>();
             relay.Configure(config);
+            relay.BindUnits(registry);
             relays.Add(relay);
             commander.HandleTap(ScreenPoint(unit.transform.position));
             commander.HandleTap(ScreenPoint(enemy.transform.position));

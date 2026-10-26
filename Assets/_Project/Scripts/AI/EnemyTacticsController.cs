@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SectorLab.AI
 {
-    // One decision per game second. Orders use the same movement/attack components as the player.
+    // One decision per game second. Decisions submit the same validated match commands as the player.
     public sealed class EnemyTacticsController : MonoBehaviour
     {
         private BattleController battle;
@@ -82,13 +82,8 @@ namespace SectorLab.AI
             if (speed != 0) return speed;
             int role = RoleOrder(a).CompareTo(RoleOrder(b));
             if (role != 0) return role;
-            // Registration order is reproducible for equal roles and does not depend on Unity entity IDs.
-            for (int i = 0; i < Unit.All.Count; i++)
-            {
-                if (Unit.All[i] == a) return -1;
-                if (Unit.All[i] == b) return 1;
-            }
-            return 0;
+            // Roster ids are stable across respawns and independent of other matches.
+            return a.Id.CompareTo(b.Id);
         }
 
         // Alphabetical role names (Ranger, Scout, Tank) were the historical tie-break; keep that order.
@@ -99,8 +94,8 @@ namespace SectorLab.AI
         {
             DecisionCount++;
             actors.Clear();
-            for (int i = 0; i < Unit.All.Count; i++)
-                if (Unit.All[i].Team == Team.Enemy && Unit.All[i].IsAlive) actors.Add(Unit.All[i]);
+            for (int i = 0; i < battle.Units.All.Count; i++)
+                if (battle.Units.All[i].Team == Team.Enemy && battle.Units.All[i].IsAlive) actors.Add(battle.Units.All[i]);
             actors.Sort(CompareActors);
             staleAssignments.Clear();
             foreach (var entry in assignments)
@@ -140,31 +135,32 @@ namespace SectorLab.AI
                 }
                 if (target.Contains(unit))
                 {
-                    unit.Movement.Stop();
-                    if (goal.Kind == EnemyGoalKind.Repair) unit.Attack?.ClearTarget();
+                    battle.Commands.Execute(goal.Kind == EnemyGoalKind.Repair
+                        ? UnitCommand.Stop(Team.Enemy, unit.Id) : UnitCommand.HoldPosition(Team.Enemy, unit.Id));
                     continue;
                 }
                 // Keep an accepted unchanged path; do not send SetDestination every decision/frame.
-                unit.Attack?.ClearTarget();
                 if (unit.Movement.IsMoving && (unit.Movement.Destination - approaches[index]).sqrMagnitude < 0.01f) continue;
-                if (unit.Movement.MoveTo(approaches[index], target.GetArrivalDistance(approaches[index]))) MoveOrdersIssued++;
+                if (battle.Commands.Execute(UnitCommand.MoveToRelay(Team.Enemy, unit.Id, index)) == CommandResult.Accepted)
+                    MoveOrdersIssued++;
             }
         }
 
-        private static void Attack(Unit unit, Unit target)
+        private void Attack(Unit unit, Unit target)
         {
-            if (target != null && unit.Attack != null && unit.Attack.Target != target) unit.Attack.SetTarget(target);
+            if (target != null && unit.Attack != null && unit.Attack.Target != target)
+                battle.Commands.Execute(UnitCommand.Attack(Team.Enemy, unit.Id, target.Id));
         }
 
-        private static Unit FindInterference(Unit actor, RelayPoint relay)
+        private Unit FindInterference(Unit actor, RelayPoint relay)
         {
             if (actor.Attack == null) return null;
             float maxDistance = actor.Attack.Range + 0.5f;
             Unit nearest = null;
             float nearestDistance = maxDistance * maxDistance;
-            for (int i = 0; i < Unit.All.Count; i++)
+            for (int i = 0; i < battle.Units.All.Count; i++)
             {
-                Unit unit = Unit.All[i];
+                Unit unit = battle.Units.All[i];
                 if (!unit.IsAlive || unit.Team != Team.Player || relay != null && !relay.Contains(unit)) continue;
                 Vector3 offset = unit.transform.position - actor.transform.position;
                 offset.y = 0;

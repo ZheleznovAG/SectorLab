@@ -3,7 +3,7 @@ using SectorLab.Units;
 
 namespace SectorLab.Battle
 {
-    public enum UnitCommandKind { MoveToPoint, MoveToRelay, Attack }
+    public enum UnitCommandKind { MoveToPoint, MoveToRelay, Attack, HoldPosition, Stop }
 
     public enum CommandResult { Accepted, MatchNotRunning, UnknownUnit, NotOwner, UnitDead, InvalidTarget, Unreachable }
 
@@ -31,6 +31,12 @@ namespace SectorLab.Battle
 
         public static UnitCommand Attack(Team issuer, int unitId, int targetId) =>
             new UnitCommand(UnitCommandKind.Attack, issuer, unitId, -1, targetId, default);
+
+        public static UnitCommand HoldPosition(Team issuer, int unitId) =>
+            new UnitCommand(UnitCommandKind.HoldPosition, issuer, unitId, -1, -1, default);
+
+        public static UnitCommand Stop(Team issuer, int unitId) =>
+            new UnitCommand(UnitCommandKind.Stop, issuer, unitId, -1, -1, default);
 
         // The authority stamps the sender's real team; an issuer read from the wire is never trusted.
         public UnitCommand WithIssuer(Team issuer) => new UnitCommand(Kind, issuer, UnitId, RelayIndex, TargetId, Point);

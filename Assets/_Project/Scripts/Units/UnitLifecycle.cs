@@ -155,7 +155,7 @@ namespace SectorLab.Units
             {
                 UnitSlotState slot = slots[i];
                 if (!slot.Respawn.Advance(seconds) || slot.IsSpawning) continue;
-                if (!UnitSpawnPositions.TryFind(slot.Config.position, slot.SpawnRadius, out _)) continue;
+                if (!UnitSpawnPositions.TryFind(battle.Units, slot.Config.position, slot.SpawnRadius, out _)) continue;
                 RespawnAsync(slot).Forget(Debug.LogException);
             }
             Publish();

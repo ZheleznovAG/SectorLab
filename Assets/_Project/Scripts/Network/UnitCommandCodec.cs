@@ -30,7 +30,7 @@ namespace SectorLab.Network
             command = default;
             if (buffer.Length < Size) return false;
             byte kind = buffer[0], issuer = buffer[1];
-            if (kind > (byte)UnitCommandKind.Attack || issuer > (byte)Team.Enemy) return false;
+            if (kind > (byte)UnitCommandKind.Stop || issuer > (byte)Team.Enemy) return false;
             int unitId = (sbyte)buffer[2], relay = (sbyte)buffer[3], target = (sbyte)buffer[4];
             var point = new Vector3(ReadFloat(buffer.Slice(5)), ReadFloat(buffer.Slice(9)), ReadFloat(buffer.Slice(13)));
             if (!IsFinite(point.x) || !IsFinite(point.y) || !IsFinite(point.z)) return false;
@@ -38,7 +38,9 @@ namespace SectorLab.Network
             {
                 UnitCommandKind.MoveToPoint => UnitCommand.MoveToPoint((Team)issuer, unitId, point),
                 UnitCommandKind.MoveToRelay => UnitCommand.MoveToRelay((Team)issuer, unitId, relay),
-                _ => UnitCommand.Attack((Team)issuer, unitId, target)
+                UnitCommandKind.Attack => UnitCommand.Attack((Team)issuer, unitId, target),
+                UnitCommandKind.HoldPosition => UnitCommand.HoldPosition((Team)issuer, unitId),
+                _ => UnitCommand.Stop((Team)issuer, unitId)
             };
             return true;
         }
