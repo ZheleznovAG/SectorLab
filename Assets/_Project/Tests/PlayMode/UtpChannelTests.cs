@@ -87,6 +87,28 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator ConnectionCannotReleaseAnOpenTutorial()
+        {
+            ushort port = NextPort();
+            NetworkLauncher.StartHost(port);
+            yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
+            yield return MainLifecycleTests.WaitForReady();
+            var bootstrap = Object.FindAnyObjectByType<NetworkMatchBootstrap>();
+            var battle = Object.FindAnyObjectByType<BattleController>();
+            var tutorial = Object.FindAnyObjectByType<SectorLab.Presentation.TutorialView>();
+            tutorial.Open();
+            UtpChannel remoteEnd = Track(UtpChannel.Connect("127.0.0.1", port));
+            using var remoteModel = new MatchModel();
+            using var remote = new ClientSession(remoteModel, remoteEnd, NetworkLaunch.RemoteTeam);
+            yield return Pump(() => !bootstrap.WaitingForPeer && remote.UnitCount == 6, remoteEnd);
+            Assert.That(bootstrap.WaitingForPeer, Is.False);
+            Assert.That(tutorial.IsShowing, Is.True);
+            Assert.That(battle.State.Clock.IsPaused, Is.True);
+            Assert.That(battle.IsPausedBy(PauseReason.WaitingForPeer), Is.False);
+            Assert.That(battle.IsPausedBy(PauseReason.Tutorial), Is.True);
+        }
+
+        [UnityTest]
         public IEnumerator MainHostWaitsForTheOpponentThenPlaysOverUdp()
         {
             ushort port = NextPort();

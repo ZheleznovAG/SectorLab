@@ -73,7 +73,7 @@ namespace SectorLab.Units
         {
             if (Phase != UnitLifecyclePhase.Idle) return;
             Phase = UnitLifecyclePhase.Loading;
-            battle.SetPaused(true);
+            battle.SetPaused(PauseReason.Loading, true);
             resultView?.ShowLoading();
             try
             {
@@ -89,7 +89,7 @@ namespace SectorLab.Units
                 lifetime.Token.ThrowIfCancellationRequested();
                 Phase = UnitLifecyclePhase.Ready;
                 resultView?.Hide();
-                battle.SetPaused(false);
+                battle.SetPaused(PauseReason.Loading, false);
                 Ready?.Invoke();
             }
             catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { }
@@ -189,7 +189,7 @@ namespace SectorLab.Units
                 slots[i].Respawn.Complete();
             }
             factory.Dispose();
-            battle.SetPaused(true);
+            battle.SetPaused(PauseReason.Loading, true);
             resultView?.ShowLoadError(battle.Restart, ExitGame);
             LoadingFailed?.Invoke(Failure);
             Debug.LogWarning("Unit lifecycle failed: " + Failure);

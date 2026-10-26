@@ -11,8 +11,8 @@
 | Что это | Мобильная тактика 3×3 за узлы на Unity 6 ([миссия](MISSION.md), [правила](GAME_DESIGN.md)) |
 | Версия игры | v1.0 закончена: матч, ИИ, роли, возрождение, HUD, жесты, обучение, звук, перезапуск. Сверх v1.0: игра по сети вдвоём по Wi-Fi |
 | Ветка | `main`, коммиты маленькие и проверенные; push в `origin` разрешён владельцем с 21.10.2026 |
-| Тесты | EditMode **76/76**, PlayMode **157/157** PASS (26.10, прогон `client-view-full`, [EditMode](evidence/tests-client-view-full-editmode.json), [PlayMode](evidence/tests-client-view-full-playmode.json)) |
-| Аудит | [Архитектура и реализация, 26.10](audit/2026-10-26-architecture-audit.md): 11 находок; A1, A2, A8 исправлены, A3 частично; [план реализации](IMPLEMENTATION_PLAN.md) |
+| Тесты | EditMode **76/76**, PlayMode **160/160** PASS (26.10, прогон `pause-reasons-final`, [EditMode](evidence/tests-pause-reasons-final-editmode.json), [PlayMode](evidence/tests-pause-reasons-final-playmode.json)) |
+| Аудит | [Архитектура и реализация, 26.10](audit/2026-10-26-architecture-audit.md): 11 находок; A1, A2, A7, A8 исправлены, A3 частично; [план реализации](IMPLEMENTATION_PLAN.md) |
 | Последний APK | **1.1.0** (code 2): `Builds/Android/SectorLab-v1.1.0.apk` из `672b2a8`, 34 450 380 байт, SHA-256 `13EB6EA83621DA87F00EA08499F826EBE387439DCE6D020798D29A0BC5FC9701` ([отчёт](evidence/android-build-v1.1.0.json)). Опубликован как pre-release [v1.1.0](https://github.com/ZheleznovAG/SectorLab/releases/tag/v1.1.0) |
 | Инструменты | `python Tools/sl.py …` — тесты, сборка, проверки, установка на телефон ([DEVELOPMENT](DEVELOPMENT.md)) |
 
@@ -28,8 +28,9 @@
 | Сеть: хост + клиент, приказы, снимки, перспектива «ВЫ/ВРАГ» | да (loopback и UDP localhost) | да, Editor + Windows-сборка, 21.10 ([скриншоты](evidence/E2E-host-blue.png), [клиент](evidence/E2E-client-red.png)) |
 | Сеть: пауза/итог при потере пакетов, выход из ожидания, новый матч на клиенте (22.10) | да | **нет** |
 
-CI (GitHub Actions + GameCI) настроен только на ручной запуск. Автоматического запуска на PR
-в конфигурации нет; наличие секретов и история запусков в аудите 26.10 не проверялись.
+Быстрые проверки CI запускаются на push/PR: Python 3.9 и 3.14 на Windows/Linux, гигиена и Gitleaks.
+[Первый запуск](https://github.com/ZheleznovAG/SectorLab/actions/runs/40295350670) прошёл.
+Unity/GameCI пока запускается вручную; секреты лицензирования отсутствуют (проверено 26.10).
 
 Эмулятор Android не годится для проверки: ARM64-сборка Unity падает в нём с SIGILL ещё до сцены
 ([разбор](history/v1-contract/ANDROID_EMULATOR.md)). Проверка — только на телефоне.
@@ -42,7 +43,10 @@ CI (GitHub Actions + GameCI) настроен только на ручной з�
 Исправлены A1/A2 и звук итога из A3: узлы рисуются по RelayView, карточки читают UnitView,
 погибший прокси теряет выделение и может вернуться без локального респауна.
 Три регрессии сначала упали на старом коде; после исправления полный прогон — 76/157 PASS.
-[ADR-016](adr/016-shared-match-presentation.md). Далее — причины паузы и полный сетевой снимок.
+[ADR-016](adr/016-shared-match-presentation.md). A7 исправлена: причины паузы снимаются независимо;
+подключение соперника не закрывает обучение, закрытие обучения не снимает паузу меню.
+Полный прогон `pause-reasons-final`: 76/160 PASS, [ADR-017](adr/017-owned-pause-reasons.md).
+Далее — полный сетевой снимок и защита команд между матчами.
 
 Проведён [подробный аудит](audit/2026-10-26-architecture-audit.md): технологии, паттерны,
 границы модулей, сеть, владение ресурсами, тесты, инструменты и соответствие документации коду.

@@ -34,6 +34,8 @@ namespace SectorLab.Battle
 
         private double accumulatedSeconds;
         private float runningTimeScale;
+        private PauseReason pauses;
+        public bool IsPausedBy(PauseReason reason) => (pauses & reason) != 0;
 
         private void Awake()
         {
@@ -46,6 +48,7 @@ namespace SectorLab.Battle
             for (int i = 0; i < relays.Length && i < Model.Relays.Length; i++)
                 if (relays[i] != null) relays[i].Show(Model.Relays[i].Value);
             if (commander != null) commander.ValidateSelection();
+            if (!IsAuthority) ApplyRunState();
         }
 
         private void Start()
@@ -174,8 +177,7 @@ namespace SectorLab.Battle
             return MatchRules.Forecast(State.PlayerScore, State.EnemyScore, player, enemy, State.Clock.RemainingSeconds);
         }
 
-        // False on a network client: the host owns the clock, so local pauses (tutorial, menus)
-        // must neither stop time effects nor disable the commander.
+        // A client only blocks its own input; the host's clock and local effects keep running.
         public bool IsAuthority { get; private set; } = true;
 
         public void BecomeRemoteView()
@@ -183,13 +185,19 @@ namespace SectorLab.Battle
             IsAuthority = false;
             enabled = false;
             Time.timeScale = runningTimeScale;
-            if (commander != null) commander.enabled = true;
+            ApplyRunState();
         }
 
-        public void SetPaused(bool paused)
+        public void SetPaused(bool paused) => SetPaused(PauseReason.User, paused);
+
+        public void SetPaused(PauseReason reason, bool paused)
         {
-            if (!IsAuthority) return;
-            State.SetPaused(paused);
+            int bits = (int)reason;
+            if (bits <= 0 || (bits & (bits - 1)) != 0 || bits > (int)PauseReason.WaitingForPeer)
+                throw new ArgumentOutOfRangeException(nameof(reason), "Set exactly one owned pause reason.");
+            pauses = paused ? pauses | reason : pauses & ~reason;
+            if (State == null) return;
+            if (IsAuthority) State.SetPaused(pauses != PauseReason.None);
             ApplyRunState();
             PublishModel();
         }
@@ -219,6 +227,12 @@ namespace SectorLab.Battle
 
         private void ApplyRunState()
         {
+            if (!IsAuthority)
+            {
+                if (commander != null) commander.enabled = pauses == PauseReason.None
+                    && !Model.Paused.Value && Model.Outcome.Value == BattleOutcome.InProgress;
+                return;
+            }
             Time.timeScale = State.IsRunning ? runningTimeScale : 0;
             if (commander != null)
                 commander.enabled = State.IsRunning;

@@ -81,7 +81,7 @@ namespace SectorLab.Network
         {
             if (status.IsConnected) return;
             WaitingForPeer = true;
-            battle.SetPaused(true);
+            battle.SetPaused(PauseReason.WaitingForPeer, true);
             ShowWaiting();
         }
 
@@ -90,9 +90,6 @@ namespace SectorLab.Network
         private void Update()
         {
             if (host == null) return;
-            // The tutorial or the pause button must not start the clock without the opponent.
-            if (WaitingForPeer && battle.Outcome == BattleOutcome.InProgress && !battle.State.Clock.IsPaused)
-                battle.SetPaused(true);
             // Ticks stop while the clock stands; keep the client's picture current anyway.
             bool reachable = status == null || status.IsConnected;
             if (reachable && Time.unscaledTime - lastSentAt >= HeartbeatSeconds) SendState();
@@ -104,7 +101,7 @@ namespace SectorLab.Network
             WaitingForPeer = false;
             var view = FindAnyObjectByType<BattleResultView>();
             if (view != null && view.IsShowingMessage) view.Hide();
-            if (lifecycle.IsReady && battle.Outcome == BattleOutcome.InProgress) battle.SetPaused(false);
+            battle.SetPaused(PauseReason.WaitingForPeer, false);
             SendState();
         }
 
@@ -112,7 +109,7 @@ namespace SectorLab.Network
         {
             if (battle.Outcome != BattleOutcome.InProgress) return;
             WaitingForPeer = true;
-            battle.SetPaused(true);
+            battle.SetPaused(PauseReason.WaitingForPeer, true);
             ShowWaiting();
         }
 

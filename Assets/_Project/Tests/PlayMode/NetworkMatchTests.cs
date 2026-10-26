@@ -93,8 +93,9 @@ namespace SectorLab.Tests
             var tutorial = Object.FindAnyObjectByType<SectorLab.Presentation.TutorialView>();
             tutorial.Open();
             Assert.That(Time.timeScale, Is.EqualTo(1), "A client's tutorial must not freeze time effects.");
-            Assert.That(commander.isActiveAndEnabled, Is.True, "Nor stop the client's orders.");
+            Assert.That(commander.isActiveAndEnabled, Is.False, "The modal blocks local orders without owning host time.");
             tutorial.Dismiss();
+            Assert.That(commander.isActiveAndEnabled, Is.False, "No host state has arrived yet.");
 
             using var hostModel = new MatchModel();
             hostModel.SetRelayCount(3);
@@ -119,6 +120,7 @@ namespace SectorLab.Tests
             BinaryPrimitives.WriteUInt16LittleEndian(units.AsSpan(12), 33);
             hostEnd.Send(units);
             hostEnd.Flush();
+            Assert.That(commander.isActiveAndEnabled, Is.True, "The host has published a running match.");
 
             var hudScore = (Text)typeof(SectorLab.Presentation.BattleHud).GetField("playerScore",
                 System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)

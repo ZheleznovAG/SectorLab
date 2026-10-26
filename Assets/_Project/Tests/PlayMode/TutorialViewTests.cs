@@ -104,5 +104,28 @@ namespace SectorLab.Tests
             Assert.That(battle.State.IsRunning, Is.True);
             yield return null;
         }
+
+        [UnityTest]
+        public IEnumerator ClosingTutorialKeepsTheNetworkMenuPaused()
+        {
+            var menu = Object.FindAnyObjectByType<SectorLab.Network.NetworkMenu>();
+            menu.SetOpen(true);
+            tutorial.Dismiss();
+            Assert.That(battle.State.Clock.IsPaused, Is.True, "The menu still owns its pause.");
+            menu.SetOpen(false);
+            Assert.That(battle.State.IsRunning, Is.True);
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator UserResumeCannotReleaseAnOpenTutorial()
+        {
+            battle.SetPaused(true);
+            battle.SetPaused(false);
+            Assert.That(battle.State.Clock.IsPaused, Is.True, "Resuming the user's pause leaves the tutorial's reason active.");
+            tutorial.Dismiss();
+            Assert.That(battle.State.IsRunning, Is.True);
+            yield return null;
+        }
     }
 }

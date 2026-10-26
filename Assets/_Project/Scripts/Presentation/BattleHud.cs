@@ -64,7 +64,7 @@ namespace SectorLab.Presentation
                 unitButtons[i].onClick.AddListener(() => SelectRole(role));
                 relayButtons[i].onClick.AddListener(() => commander.OrderSelectedToRelay(battle.Relays[role]));
             }
-            pauseButton.onClick.AddListener(() => battle.SetPaused(!battle.State.Clock.IsPaused));
+            pauseButton.onClick.AddListener(() => battle.SetPaused(!battle.IsPausedBy(PauseReason.User)));
             CreateLeadFrame();
         }
 

@@ -124,26 +124,16 @@ namespace SectorLab.Network
             return field;
         }
 
-        private bool pausedByMenu;
-
-        // Like the tutorial, the menu stops a local match; a client never owns the clock.
+        // The menu owns only its pause reason; clients block input without changing host time.
         public void SetOpen(bool open)
         {
             if (open == panel.activeSelf) { if (open) ShowRole(); return; }
             panel.SetActive(open);
-            bool ownsClock = NetworkLaunch.Role != SessionRole.Client && battle != null && battle.State != null
-                && battle.Outcome == BattleOutcome.InProgress;
-            if (open)
-            {
-                ShowRole();
-                if (ownsClock && !battle.State.Clock.IsPaused) { battle.SetPaused(true); pausedByMenu = true; }
-            }
-            else if (pausedByMenu)
-            {
-                pausedByMenu = false;
-                if (ownsClock) battle.SetPaused(false);
-            }
+            if (open) ShowRole();
+            if (battle != null) battle.SetPaused(PauseReason.Menu, open);
         }
+
+        private void OnDisable() { if (battle != null) battle.SetPaused(PauseReason.Menu, false); }
 
         private void ShowRole()
         {
