@@ -12,6 +12,7 @@ namespace SectorLab.Network
         private readonly Renderer[][] renderers;
         private readonly Collider[][] colliders;
         private readonly MatchModel model;
+        private readonly ClientMotion motion = new ClientMotion();
 
         public ClientUnitView(UnitLifecycle lifecycle, MatchModel model)
         {
@@ -32,19 +33,28 @@ namespace SectorLab.Network
 
         public void Apply()
         {
+            motion.Push(model, Time.unscaledTimeAsDouble);
             for (int i = 0; i < units.Length; i++)
             {
                 Unit unit = units[i];
                 if (unit == null) continue;
-                bool alive = model.IsSynchronized && model.TryGetUnit(unit.Id, out UnitView state) && state.Alive;
-                // Definite assignment is separate from the short-circuited availability check.
-                model.TryGetUnit(unit.Id, out state);
+                bool found = model.TryGetUnit(unit.Id, out UnitView state);
+                bool alive = model.IsSynchronized && found && state.Alive;
                 unit.Health.SetReplicated(alive ? state.Health : 0);
                 unit.Generation = state.Generation;
-                if (alive) unit.transform.position = new Vector3(state.X, unit.transform.position.y, state.Z);
-                foreach (Renderer renderer in renderers[i]) if (renderer != null) renderer.enabled = alive;
+                foreach (Renderer renderer in renderers[i])
+                    if (renderer != null && (!alive || !(renderer is LineRenderer))) renderer.enabled = alive;
                 foreach (Collider collider in colliders[i]) if (collider != null) collider.enabled = alive;
             }
+            Render();
+        }
+
+        public void Render()
+        {
+            double now = Time.unscaledTimeAsDouble;
+            foreach (Unit unit in units)
+                if (unit != null && motion.TryPosition(unit.Id, now, out Vector2 point))
+                    unit.transform.position = new Vector3(point.x, unit.transform.position.y, point.y);
         }
     }
 }

@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using R3;
 using SectorLab.Battle;
 using SectorLab.Objectives;
 using SectorLab.Units;
 using UnityEngine;
-using Unit = SectorLab.Units.Unit;
 using UnityEngine.UI;
 
 namespace SectorLab.Presentation
@@ -18,8 +16,12 @@ namespace SectorLab.Presentation
         [SerializeField] private Button muteButton;
         [SerializeField] private Text muteLabel;
         [SerializeField] private Text noticeLabel;
-        private readonly List<Unit> observed = new List<Unit>(6);
-        private readonly CompositeDisposable relaySubscriptions = new CompositeDisposable();
+        private readonly UnitView[] previousUnits = new UnitView[16];
+        private readonly bool[] seenUnits = new bool[16];
+        private RelayView[] previousRelays = System.Array.Empty<RelayView>();
+        private ulong observedMatch;
+        private double observedSeconds;
+        private bool baseline;
         private System.IDisposable outcomeSubscription;
         private AudioSource source;
         private AudioClip tankShot, scoutShot, rangerShot, capture, warning, victory, defeat;
@@ -51,54 +53,66 @@ namespace SectorLab.Presentation
 
         private void OnEnable()
         {
-            lifecycle.Spawned += Observe;
-            battle.Ticked += OnTick;
+            baseline = false;
+            battle.Model.Updated += OnModel;
             outcomeSubscription = battle.Model.Outcome.Subscribe(outcome =>
             {
                 if (outcome != BattleOutcome.InProgress) OnFinished(outcome);
             });
-            for (int i = 0; i < Unit.All.Count; i++) Observe(Unit.All[i]);
         }
 
-        private void Observe(Unit unit)
+        private void Start() => battle.PublishModel();
+
+        private void OnModel()
         {
-            if (observed.Contains(unit)) return;
-            observed.Add(unit);
-            unit.Attack.Fired += OnShot;
-            unit.Died += OnDied;
+            MatchModel model = battle.Model;
+            if (!model.IsSynchronized || observedMatch != model.MatchId)
+            {
+                baseline = false; observedMatch = model.MatchId;
+                System.Array.Clear(seenUnits, 0, seenUnits.Length);
+                System.Array.Clear(nextShot, 0, nextShot.Length);
+                announcedForecast = pendingForecast = BattleOutcome.Draw;
+                pendingSeconds = 0;
+                if (!model.IsSynchronized) return;
+            }
+            if (previousRelays.Length != model.Relays.Length)
+            {
+                previousRelays = new RelayView[model.Relays.Length];
+                baseline = false;
+            }
+            for (int i = 0; i < model.Relays.Length; i++)
+            {
+                RelayView current = model.Relays[i].Value;
+                if (baseline && i < battle.Relays.Count)
+                    OnRelayChanged(battle.Relays[i].Config, previousRelays[i], current);
+                previousRelays[i] = current;
+            }
+            foreach (UnitView current in model.Units)
+            {
+                int id = current.Id;
+                if (id < 0 || id >= previousUnits.Length) continue;
+                UnitView previous = previousUnits[id];
+                if (baseline && seenUnits[id] && current.Alive && previous.Alive
+                    && current.Generation == previous.Generation && current.Shots > previous.Shots)
+                    OnShot(current.Role, current.Team);
+                previousUnits[id] = current; seenUnits[id] = true;
+            }
+            double delta = model.GameSeconds - observedSeconds;
+            if (baseline && delta > 0 && !model.Paused.Value && model.Outcome.Value == BattleOutcome.InProgress)
+                AnnounceForecast(delta);
+            observedSeconds = model.GameSeconds;
+            baseline = true;
         }
 
-        private void OnDied(Unit unit)
+        private void OnShot(UnitRole role, Team team)
         {
-            unit.Attack.Fired -= OnShot;
-            unit.Died -= OnDied;
-            observed.Remove(unit);
-        }
-
-        private void OnShot(Unit unit)
-        {
-            int role = (int)unit.Stats.role;
-            if (Muted || Time.unscaledTime < nextShot[role]) return;
-            nextShot[role] = Time.unscaledTime + 0.08f;
-            Play(unit.Stats.role == UnitRole.Tank ? tankShot : unit.Stats.role == UnitRole.Scout ? scoutShot : rangerShot,
-                unit.Team == battle.Perspective.Local ? 0.3f : 0.18f);
+            int index = (int)role;
+            if (Muted || Time.unscaledTime < nextShot[index]) return;
+            nextShot[index] = Time.unscaledTime + 0.08f;
+            Play(role == UnitRole.Tank ? tankShot : role == UnitRole.Scout ? scoutShot : rangerShot,
+                team == battle.Perspective.Local ? 0.3f : 0.18f);
             PlayedShots++;
         }
-
-        private void Start()
-        {
-            battle.PublishModel(); // Relays have woken up; take the current state as the baseline.
-            for (int i = 0; i < battle.Model.Relays.Length; i++)
-            {
-                int index = i;
-                battle.Model.Relays[i].Pairwise()
-                    .Where(_ => index < battle.Relays.Count)
-                    .Subscribe(change => OnRelayChanged(battle.Relays[index].Config, change.Previous, change.Current))
-                    .AddTo(relaySubscriptions);
-            }
-        }
-
-        private void OnTick(double seconds) => AnnounceForecast(seconds);
 
         private void OnRelayChanged(RelayConfig config, RelayView previous, RelayView current)
         {
@@ -195,18 +209,14 @@ namespace SectorLab.Presentation
 
         private void OnDisable()
         {
-            lifecycle.Spawned -= Observe; battle.Ticked -= OnTick;
+            battle.Model.Updated -= OnModel;
             outcomeSubscription?.Dispose();
             outcomeSubscription = null;
-            for (int i = observed.Count - 1; i >= 0; i--)
-                if (observed[i] != null) { observed[i].Attack.Fired -= OnShot; observed[i].Died -= OnDied; }
-            observed.Clear();
             if (source != null) source.Stop();
         }
 
         private void OnDestroy()
         {
-            relaySubscriptions.Dispose();
             Destroy(tankShot); Destroy(scoutShot); Destroy(rangerShot); Destroy(capture); Destroy(warning); Destroy(victory); Destroy(defeat);
         }
 

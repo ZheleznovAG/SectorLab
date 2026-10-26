@@ -109,6 +109,8 @@ namespace SectorLab.Network
             }
         }
 
+        private void LateUpdate() => proxies?.Render();
+
         private void OnPeerReady()
         {
             WaitingForPeer = false; timedOut = false;

@@ -103,6 +103,66 @@ namespace SectorLab.Tests
             Assert.That(commander.SelectFriendly(red), Is.True, "The same proxy can represent a respawn without local lifecycle events.");
         }
 
+        private void SetShotCounter(Unit unit, uint generation, uint shots)
+        {
+            UnitView view = NetworkTestPeer.View(unit, true, -1, generation);
+            model.SetUnit(unit.Id, new UnitView(view.Id, view.Team, view.Role, view.Life, view.Health,
+                view.MaxHealth, 0, generation, shots, view.X, view.Z));
+        }
+
+        [UnityTest]
+        public IEnumerator RemoteShotsUseCountersWithoutReplayAfterDuplicationOrRespawn()
+        {
+            var audio = Object.FindAnyObjectByType<MatchAudio>();
+            audio.SetMuted(false, false);
+            Unit red = lifecycle.Slots[3].Unit;
+            model.SetUnitCount(lifecycle.Slots.Count);
+            for (int i = 0; i < lifecycle.Slots.Count; i++)
+                model.SetUnit(i, NetworkTestPeer.View(lifecycle.Slots[i].Unit, i == 3));
+            SetShotCounter(red, 1, 20);
+            SendMatch();
+            Assert.That(audio.PlayedShots, Is.Zero, "Joining does not replay earlier shots.");
+            SetShotCounter(red, 1, 21);
+            SendMatch(); SendMatch();
+            Assert.That(audio.PlayedShots, Is.EqualTo(1));
+            yield return new WaitForSecondsRealtime(0.09f);
+            SetShotCounter(red, 1, 25);
+            SendMatch();
+            Assert.That(audio.PlayedShots, Is.EqualTo(2), "A missing burst becomes at most one current sound.");
+            yield return new WaitForSecondsRealtime(0.09f);
+            SetShotCounter(red, 2, 7);
+            SendMatch();
+            Assert.That(audio.PlayedShots, Is.EqualTo(2), "A new incarnation starts a new baseline.");
+            SetShotCounter(red, 2, 8);
+            SendMatch();
+            Assert.That(audio.PlayedShots, Is.EqualTo(3));
+            audio.SetMuted(true, false);
+            SetShotCounter(red, 2, 9); SendMatch();
+            yield return new WaitForSecondsRealtime(0.09f);
+            audio.SetMuted(false, false); SendMatch();
+            Assert.That(audio.PlayedShots, Is.EqualTo(3), "Unmuting does not replay a muted shot.");
+        }
+
+        [Test]
+        public void RemoteForecastSettlesInHostGameTimeAndIgnoresPauseHeartbeats()
+        {
+            var audio = Object.FindAnyObjectByType<MatchAudio>();
+            audio.SetMuted(false, false);
+            SendMatch();
+            model.Forecast.Value = BattleOutcome.Defeat; // red leads
+            model.GameSeconds = 0.5; SendMatch();
+            model.GameSeconds = 1.1; SendMatch();
+            Assert.That(audio.PlayedLeadChanges, Is.EqualTo(1));
+            model.Forecast.Value = BattleOutcome.Victory;
+            model.GameSeconds = 1.2; SendMatch();
+            model.Paused.Value = true;
+            for (int i = 0; i < 20; i++) SendMatch();
+            Assert.That(audio.PlayedLeadChanges, Is.EqualTo(1));
+            model.Paused.Value = false;
+            model.GameSeconds = 2.2; SendMatch();
+            Assert.That(audio.PlayedLeadChanges, Is.EqualTo(2));
+        }
+
         [Test]
         public void RepeatedResultPlaysExactlyOnceAndNextMatchCanPlayAgain()
         {

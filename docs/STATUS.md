@@ -11,8 +11,8 @@
 | Что это | Мобильная тактика 3×3 за узлы на Unity 6 ([миссия](MISSION.md), [правила](GAME_DESIGN.md)) |
 | Версия игры | v1.0 закончена: матч, ИИ, роли, возрождение, HUD, жесты, обучение, звук, перезапуск. Сверх v1.0: игра по сети вдвоём по Wi-Fi |
 | Ветка | `main`, коммиты маленькие и проверенные; push в `origin` разрешён владельцем с 21.10.2026 |
-| Тесты | EditMode **83/83**, PlayMode **162/162** PASS (26.10, прогон `protocol-full`, [EditMode](evidence/tests-protocol-full-editmode.json), [PlayMode](evidence/tests-protocol-full-playmode.json)) |
-| Аудит | [Архитектура и реализация, 26.10](audit/2026-10-26-architecture-audit.md): 11 находок; A1, A2, A4–A8, A11 исправлены, A3 частично; [план реализации](IMPLEMENTATION_PLAN.md) |
+| Тесты | EditMode **86/86**, PlayMode **164/164** PASS (26.10, прогон `model-audio-motion-full`, [EditMode](evidence/tests-model-audio-motion-full-editmode.json), [PlayMode](evidence/tests-model-audio-motion-full-playmode.json)) |
+| Аудит | [Архитектура и реализация, 26.10](audit/2026-10-26-architecture-audit.md): 11 находок; A1–A8, A11 исправлены; [план реализации](IMPLEMENTATION_PLAN.md) |
 | Последний APK | **1.1.0** (code 2): `Builds/Android/SectorLab-v1.1.0.apk` из `672b2a8`, 34 450 380 байт, SHA-256 `13EB6EA83621DA87F00EA08499F826EBE387439DCE6D020798D29A0BC5FC9701` ([отчёт](evidence/android-build-v1.1.0.json)). Опубликован как pre-release [v1.1.0](https://github.com/ZheleznovAG/SectorLab/releases/tag/v1.1.0) |
 | Инструменты | `python Tools/sl.py …` — тесты, сборка, проверки, установка на телефон ([DEVELOPMENT](DEVELOPMENT.md)) |
 
@@ -49,7 +49,10 @@ Unity/GameCI пока запускается вручную; секреты ли
 Протокол v2 завершён: полный снимок, согласование конфигурации, поколения матча/бойца,
 атомарное чтение и результат отправки. Полный прогон `protocol-full`: 83/162 PASS,
 [ADR-018](adr/018-complete-versioned-network-frames.md). Клиентские прокси выделены в ClientUnitView.
-Далее — звук по общей модели, интерполяция и реестр матча/команды ИИ.
+Звук полностью переведён на общую модель; клиентское движение сглаживается за 100 мс,
+смерть/новое поколение/пауза не интерполируются. Полный прогон `model-audio-motion-full`:
+86/164 PASS, [ADR-019](adr/019-model-driven-audio-and-client-motion.md).
+Далее — реестр матча и команды ИИ, затем итоговая приёмка и сборка.
 
 Проведён [подробный аудит](audit/2026-10-26-architecture-audit.md): технологии, паттерны,
 границы модулей, сеть, владение ресурсами, тесты, инструменты и соответствие документации коду.
