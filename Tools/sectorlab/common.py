@@ -87,7 +87,9 @@ def write_evidence(name: str, record: dict) -> Path:
     EVIDENCE.mkdir(parents=True, exist_ok=True)
     path = EVIDENCE / name
     text = json.dumps(record, ensure_ascii=False, indent=2)
-    path.write_text(redact(text) + "\n", encoding="utf-8", newline="\n")
+    # Path.write_text only gained newline in 3.10; tooling also supports Python 3.9.
+    with path.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(redact(text) + "\n")
     return path
 
 
