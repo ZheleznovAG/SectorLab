@@ -11,8 +11,10 @@ namespace SectorLab.Network
         public const Team RemoteTeam = Team.Enemy;
         public static SessionRole Role { get; private set; } = SessionRole.Offline;
         public static IMessageChannel Channel { get; private set; }
+        private static ulong hostMatch;
+        public static ulong NextHostMatch() => checked(++hostMatch);
 
-        public static void Host(IMessageChannel channel) { Role = SessionRole.Host; Channel = channel; }
+        public static void Host(IMessageChannel channel) { Role = SessionRole.Host; Channel = channel; hostMatch = 0; }
         public static void Client(IMessageChannel channel) { Role = SessionRole.Client; Channel = channel; }
         public static void Offline() { Role = SessionRole.Offline; Channel = null; }
     }

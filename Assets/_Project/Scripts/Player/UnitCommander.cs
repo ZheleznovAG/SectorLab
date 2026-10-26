@@ -33,7 +33,8 @@ namespace SectorLab.Player
         private MatchModel model;
         public void BindModel(MatchModel value) => model = value;
         private bool IsAvailable(Unit unit) => unit != null && unit.IsAlive
-            && (model == null || unit.Id < 0 || model.TryGetUnit(unit.Id, out var view) && view.Alive);
+            && (model == null || unit.Id < 0 || model.IsSynchronized && model.TryGetUnit(unit.Id, out var view)
+                && view.Alive && unit.Generation == view.Generation);
         public void ValidateSelection() { if (Selected != null && !IsAvailable(Selected)) ClearSelection(); }
         public void Bind(ICommandSink sink) => commands = sink;
         // A network client plays the side the host assigns.

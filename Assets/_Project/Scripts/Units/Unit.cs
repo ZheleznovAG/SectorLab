@@ -20,6 +20,7 @@ namespace SectorLab.Units
         // Stable address for orders and network messages: the roster slot, kept across respawns.
         // -1 until the match lifecycle (or a test fixture) assigns it.
         public int Id { get; private set; } = -1;
+        public uint Generation { get; internal set; }
         public UnitStats Stats => stats;
         public Health Health { get; private set; }
         public bool IsAlive => !Health.IsDead;

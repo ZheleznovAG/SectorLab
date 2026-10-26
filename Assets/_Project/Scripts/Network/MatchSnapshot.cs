@@ -44,11 +44,11 @@ namespace SectorLab.Network
         }
 
         // Applies a received snapshot to a client's model. Malformed input leaves the model untouched.
-        public static bool TryApply(ReadOnlySpan<byte> buffer, MatchModel model)
+        public static bool TryApply(ReadOnlySpan<byte> buffer, MatchModel model, bool commit = true)
         {
             if (buffer.Length < HeaderSize || buffer[0] != Version) return false;
             int relays = buffer[1];
-            if (relays > MaxRelays || buffer.Length < SizeFor(relays)) return false;
+            if (relays > MaxRelays || buffer.Length != SizeFor(relays)) return false;
             if (buffer[2] > 1 || buffer[3] > (byte)BattleOutcome.Draw || buffer[4] > (byte)BattleOutcome.Draw) return false;
             Span<RelayView> views = stackalloc RelayView[MaxRelays];
             for (int i = 0; i < relays; i++)
@@ -56,12 +56,13 @@ namespace SectorLab.Network
                 int offset = HeaderSize + ValuesSize + i * RelaySize;
                 byte bits = buffer[offset];
                 int owner = bits & 3, side = bits >> 2 & 3, percent = buffer[offset + 1];
-                if (owner > (int)RelayOwner.Enemy || side > 2 || percent > 100 || (bits & 0xC0) != 0) return false;
+                if (owner > (int)RelayOwner.Enemy || side > 2 || percent > 100 || (bits & 0xC0) != 0 || buffer[offset + 2] != 0) return false;
                 views[i] = new RelayView((RelayOwner)owner, percent, side, (bits & 16) != 0, (bits & 32) != 0);
             }
             float player = UnitCommandCodec.ReadFloat(buffer.Slice(5)), enemy = UnitCommandCodec.ReadFloat(buffer.Slice(9));
             float playerRate = UnitCommandCodec.ReadFloat(buffer.Slice(13)), enemyRate = UnitCommandCodec.ReadFloat(buffer.Slice(17));
             if (!Valid(player) || !Valid(enemy) || !Valid(playerRate) || !Valid(enemyRate)) return false;
+            if (model == null) return true; // Validation pass for a complete frame, before any observable changes.
 
             model.SetRelayCount(relays);
             for (int i = 0; i < relays; i++) model.Relays[i].Value = views[i];
@@ -73,7 +74,7 @@ namespace SectorLab.Network
             model.Paused.Value = buffer[2] == 1;
             model.Forecast.Value = (BattleOutcome)buffer[4];
             model.Outcome.Value = (BattleOutcome)buffer[3];
-            model.Commit();
+            if (commit) model.Commit();
             return true;
         }
 

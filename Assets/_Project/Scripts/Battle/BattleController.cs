@@ -110,6 +110,7 @@ namespace SectorLab.Battle
 
         private void SimulateTick(double tick)
         {
+            Model.SimulationTick++;
             // Combat first, so a unit killed this tick no longer holds a relay.
             for (int i = 0; i < Unit.All.Count; i++)
             {
@@ -218,6 +219,7 @@ namespace SectorLab.Battle
             Model.PlayerRate.Value = player;
             Model.EnemyRate.Value = enemy;
             Model.RemainingSeconds.Value = MatchModel.WholeSeconds(State.Clock.RemainingSeconds);
+            Model.GameSeconds = State.Clock.ElapsedSeconds;
             Model.Paused.Value = State.Clock.IsPaused;
             Model.Forecast.Value = Forecast();
             if (lifecycle != null) lifecycle.PublishUnits(Model);
@@ -230,7 +232,7 @@ namespace SectorLab.Battle
             if (!IsAuthority)
             {
                 if (commander != null) commander.enabled = pauses == PauseReason.None
-                    && !Model.Paused.Value && Model.Outcome.Value == BattleOutcome.InProgress;
+                    && Model.IsSynchronized && !Model.Paused.Value && Model.Outcome.Value == BattleOutcome.InProgress;
                 return;
             }
             Time.timeScale = State.IsRunning ? runningTimeScale : 0;

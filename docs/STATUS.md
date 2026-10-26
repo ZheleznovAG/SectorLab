@@ -11,8 +11,8 @@
 | Что это | Мобильная тактика 3×3 за узлы на Unity 6 ([миссия](MISSION.md), [правила](GAME_DESIGN.md)) |
 | Версия игры | v1.0 закончена: матч, ИИ, роли, возрождение, HUD, жесты, обучение, звук, перезапуск. Сверх v1.0: игра по сети вдвоём по Wi-Fi |
 | Ветка | `main`, коммиты маленькие и проверенные; push в `origin` разрешён владельцем с 21.10.2026 |
-| Тесты | EditMode **76/76**, PlayMode **160/160** PASS (26.10, прогон `pause-reasons-final`, [EditMode](evidence/tests-pause-reasons-final-editmode.json), [PlayMode](evidence/tests-pause-reasons-final-playmode.json)) |
-| Аудит | [Архитектура и реализация, 26.10](audit/2026-10-26-architecture-audit.md): 11 находок; A1, A2, A7, A8 исправлены, A3 частично; [план реализации](IMPLEMENTATION_PLAN.md) |
+| Тесты | EditMode **83/83**, PlayMode **162/162** PASS (26.10, прогон `protocol-full`, [EditMode](evidence/tests-protocol-full-editmode.json), [PlayMode](evidence/tests-protocol-full-playmode.json)) |
+| Аудит | [Архитектура и реализация, 26.10](audit/2026-10-26-architecture-audit.md): 11 находок; A1, A2, A4–A8, A11 исправлены, A3 частично; [план реализации](IMPLEMENTATION_PLAN.md) |
 | Последний APK | **1.1.0** (code 2): `Builds/Android/SectorLab-v1.1.0.apk` из `672b2a8`, 34 450 380 байт, SHA-256 `13EB6EA83621DA87F00EA08499F826EBE387439DCE6D020798D29A0BC5FC9701` ([отчёт](evidence/android-build-v1.1.0.json)). Опубликован как pre-release [v1.1.0](https://github.com/ZheleznovAG/SectorLab/releases/tag/v1.1.0) |
 | Инструменты | `python Tools/sl.py …` — тесты, сборка, проверки, установка на телефон ([DEVELOPMENT](DEVELOPMENT.md)) |
 
@@ -46,7 +46,10 @@ Unity/GameCI пока запускается вручную; секреты ли
 [ADR-016](adr/016-shared-match-presentation.md). A7 исправлена: причины паузы снимаются независимо;
 подключение соперника не закрывает обучение, закрытие обучения не снимает паузу меню.
 Полный прогон `pause-reasons-final`: 76/160 PASS, [ADR-017](adr/017-owned-pause-reasons.md).
-Далее — полный сетевой снимок и защита команд между матчами.
+Протокол v2 завершён: полный снимок, согласование конфигурации, поколения матча/бойца,
+атомарное чтение и результат отправки. Полный прогон `protocol-full`: 83/162 PASS,
+[ADR-018](adr/018-complete-versioned-network-frames.md). Клиентские прокси выделены в ClientUnitView.
+Далее — звук по общей модели, интерполяция и реестр матча/команды ИИ.
 
 Проведён [подробный аудит](audit/2026-10-26-architecture-audit.md): технологии, паттерны,
 границы модулей, сеть, владение ресурсами, тесты, инструменты и соответствие документации коду.

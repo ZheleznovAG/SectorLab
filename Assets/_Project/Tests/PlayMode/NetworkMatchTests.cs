@@ -57,7 +57,8 @@ namespace SectorLab.Tests
             Assert.That(Object.FindAnyObjectByType<EnemyTacticsController>().enabled, Is.False, "A human replaces the red AI.");
 
             using var remoteModel = new MatchModel();
-            using var remote = new ClientSession(remoteModel, clientEnd, NetworkLaunch.RemoteTeam);
+            using var remote = new ClientSession(remoteModel, clientEnd, NetworkLaunch.RemoteTeam, Object.FindAnyObjectByType<NetworkMatchBootstrap>().Configuration);
+            NetworkTestPeer.Connect(Object.FindAnyObjectByType<NetworkMatchBootstrap>().Host, hostEnd, clientEnd);
             var battle = Object.FindAnyObjectByType<BattleController>();
             // Wait on game time: a busy machine may run far fewer game seconds than real ones.
             float deadline = Time.realtimeSinceStartup + 10;
@@ -104,22 +105,14 @@ namespace SectorLab.Tests
             hostModel.EnemyRate.Value = 1;
             hostModel.RemainingSeconds.Value = 75;
             hostModel.Relays[1].Value = new RelayView(RelayOwner.Enemy, 100, 2, false, true);
-            var message = new byte[1 + MatchSnapshot.SizeFor(3)];
-            message[0] = (byte)MessageType.MatchState;
-            MatchSnapshot.Write(hostModel, message.AsSpan(1));
-            hostEnd.Send(message);
-
+            NetworkTestPeer.Begin(hostModel, hostEnd, clientEnd);
             Unit red = lifecycle.Slots[4].Unit, blue = lifecycle.Slots[0].Unit;
-            var units = new byte[1 + UnitsSnapshot.SizeFor(1)];
-            units[0] = (byte)MessageType.Units;
-            units[1] = 1;
-            units[2] = (byte)red.Id;
-            units[3] = (byte)Team.Enemy;
-            BinaryPrimitives.WriteInt32LittleEndian(units.AsSpan(4), BitConverter.SingleToInt32Bits(1.25f));
-            BinaryPrimitives.WriteInt32LittleEndian(units.AsSpan(8), BitConverter.SingleToInt32Bits(-0.5f));
-            BinaryPrimitives.WriteUInt16LittleEndian(units.AsSpan(12), 33);
-            hostEnd.Send(units);
-            hostEnd.Flush();
+            hostModel.SetUnitCount(lifecycle.Slots.Count);
+            for (int i = 0; i < lifecycle.Slots.Count; i++)
+                hostModel.SetUnit(i, NetworkTestPeer.View(lifecycle.Slots[i].Unit, i == 4, 33));
+            hostModel.SetUnit(4, new UnitView(red.Id, Team.Enemy, red.Stats.role, UnitLife.Alive,
+                33, red.Health.Max, 0, 1, 0, 1.25f, -0.5f));
+            NetworkTestPeer.Send(hostModel, hostEnd);
             Assert.That(commander.isActiveAndEnabled, Is.True, "The host has published a running match.");
 
             var hudScore = (Text)typeof(SectorLab.Presentation.BattleHud).GetField("playerScore",
@@ -140,7 +133,7 @@ namespace SectorLab.Tests
             clientEnd.Flush();
             Assert.That(sent, Has.Count.EqualTo(1));
             Assert.That(sent[0][0], Is.EqualTo((byte)MessageType.Command));
-            Assert.That(UnitCommandCodec.TryRead(sent[0].AsSpan(1), out UnitCommand order), Is.True);
+            Assert.That(MatchProtocol.TryCommand(sent[0], out UnitCommand order, out _, out _, out _), Is.True);
             Assert.That(order.Kind, Is.EqualTo(UnitCommandKind.MoveToRelay));
             Assert.That(order.UnitId, Is.EqualTo(red.Id));
             Assert.That(order.RelayIndex, Is.EqualTo(0));
@@ -156,11 +149,8 @@ namespace SectorLab.Tests
             hostModel.PlayerScore.Value = 30;
             hostModel.EnemyScore.Value = 45;
             hostModel.Outcome.Value = BattleOutcome.Defeat; // blue lost, so red won
-            var message = new byte[1 + MatchSnapshot.SizeFor(3)];
-            message[0] = (byte)MessageType.MatchState;
-            MatchSnapshot.Write(hostModel, message.AsSpan(1));
-            hostEnd.Send(message);
-            hostEnd.Flush();
+            NetworkTestPeer.Begin(hostModel, hostEnd, clientEnd);
+            NetworkTestPeer.Send(hostModel, hostEnd);
             var view = Object.FindAnyObjectByType<BattleResultView>();
             var title = (Text)typeof(BattleResultView).GetField("title",
                 System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
@@ -180,9 +170,9 @@ namespace SectorLab.Tests
             // The host's next match arrives: the client follows into it without reloading.
             hostModel.Outcome.Value = BattleOutcome.InProgress;
             hostModel.RemainingSeconds.Value = 180;
-            MatchSnapshot.Write(hostModel, message.AsSpan(1));
-            hostEnd.Send(message);
-            hostEnd.Flush();
+            hostModel.MatchId++;
+            NetworkTestPeer.Begin(hostModel, hostEnd, clientEnd);
+            NetworkTestPeer.Send(hostModel, hostEnd);
             Assert.That(view.IsVisible, Is.False);
             Assert.That(commander.enabled, Is.True);
         }
@@ -194,7 +184,8 @@ namespace SectorLab.Tests
             yield return LoadMain();
             var battle = Object.FindAnyObjectByType<BattleController>();
             using var remoteModel = new MatchModel();
-            using var remote = new ClientSession(remoteModel, clientEnd, NetworkLaunch.RemoteTeam);
+            using var remote = new ClientSession(remoteModel, clientEnd, NetworkLaunch.RemoteTeam, Object.FindAnyObjectByType<NetworkMatchBootstrap>().Configuration);
+            NetworkTestPeer.Connect(Object.FindAnyObjectByType<NetworkMatchBootstrap>().Host, hostEnd, clientEnd);
             battle.SetPaused(true);
             hostEnd.Flush(); // whatever went out before the pause is lost, as UDP may lose it
             remoteModel.Paused.Value = false;

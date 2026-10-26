@@ -83,16 +83,23 @@ namespace SectorLab.Network
             }
         }
 
-        public void Send(ReadOnlySpan<byte> message)
+        public SendResult Send(ReadOnlySpan<byte> message)
         {
-            if (!IsConnected || message.Length == 0) { DroppedSends++; return; }
-            NetworkPipeline pipe = message[0] == (byte)MessageType.Command ? reliable : latestOnly;
-            if (driver.BeginSend(pipe, connection, out var writer) != 0) { DroppedSends++; return; }
+            if (message.Length == 0 || message.Length > receiveBuffer.Length) return Dropped(SendResult.InvalidMessage);
+            if (!IsConnected) return Dropped(SendResult.Disconnected);
+            NetworkPipeline pipe = message[0] == (byte)MessageType.MatchState ? latestOnly : reliable;
+            int started = driver.BeginSend(pipe, connection, out var writer);
+            if (started != 0) return Dropped(Status(started));
             Span<byte> copy = stackalloc byte[message.Length];
             message.CopyTo(copy);
-            if (!writer.WriteBytes(copy)) { driver.AbortSend(writer); DroppedSends++; return; }
-            driver.EndSend(writer);
+            if (!writer.WriteBytes(copy)) { driver.AbortSend(writer); return Dropped(SendResult.InvalidMessage); }
+            int ended = driver.EndSend(writer);
+            return ended >= 0 ? SendResult.Queued : Dropped(Status(ended));
         }
+
+        private SendResult Dropped(SendResult result) { DroppedSends++; return result; }
+        private static SendResult Status(int code) => code == (int)Unity.Networking.Transport.Error.StatusCode.NetworkSendQueueFull
+            ? SendResult.QueueFull : SendResult.Failed;
 
         public void Dispose()
         {

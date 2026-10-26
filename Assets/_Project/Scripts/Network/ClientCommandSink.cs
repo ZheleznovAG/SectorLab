@@ -32,8 +32,7 @@ namespace SectorLab.Network
                 if (command.RelayIndex < 0 || command.RelayIndex >= relays.Count) return false;
                 destination = relays[command.RelayIndex].transform.position;
             }
-            session.Send(command);
-            return true;
+            return session.Send(command) == SendResult.Queued;
         }
     }
 }

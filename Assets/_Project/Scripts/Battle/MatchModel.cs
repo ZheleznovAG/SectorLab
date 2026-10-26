@@ -39,6 +39,11 @@ namespace SectorLab.Battle
     // Properties notify only when a value actually changes.
     public sealed class MatchModel : IDisposable
     {
+        public ulong MatchId { get; set; }
+        public uint SnapshotSequence { get; set; }
+        public uint SimulationTick { get; set; }
+        public double GameSeconds { get; set; }
+        public bool IsSynchronized { get; set; } = true;
         private UnitView[] units = Array.Empty<UnitView>();
         public ReadOnlySpan<UnitView> Units => units;
         public event Action Updated;

@@ -106,20 +106,20 @@ namespace SectorLab.Tests
         [Test]
         public void MalformedUnitSnapshotsAreRejected()
         {
-            var states = new UnitState[UnitsSnapshot.MaxUnits];
+            var states = new UnitView[UnitsSnapshot.MaxUnits];
             var buffer = new byte[UnitsSnapshot.SizeFor(1)];
-            buffer[0] = 1; buffer[1] = 4; buffer[2] = (byte)Team.Enemy;
-            System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(buffer.AsSpan(11), 80);
+            var sent = new UnitView(4, Team.Enemy, UnitRole.Scout, UnitLife.Alive, 80, 100, 0, 1, 0, 1, 2);
+            UnitsSnapshot.Write(new[] { sent }, buffer);
             Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(1));
-            Assert.That(states[0].Id, Is.EqualTo(4));
-            Assert.That(states[0].Health, Is.EqualTo(80));
-            Assert.That(UnitsSnapshot.Read(new byte[] { 200 }, states), Is.EqualTo(-1), "count beyond the limit");
-            Assert.That(UnitsSnapshot.Read(buffer.AsSpan(0, 5), states), Is.EqualTo(-1), "truncated");
+            Assert.That(states[0], Is.EqualTo(sent));
+            Assert.That(UnitsSnapshot.Read(new byte[] { 200 }, states), Is.EqualTo(-1));
+            Assert.That(UnitsSnapshot.Read(buffer.AsSpan(0, 5), states), Is.EqualTo(-1));
             buffer[2] = 9;
-            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(-1), "unknown team");
+            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(-1));
             buffer[2] = 0;
-            System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(buffer.AsSpan(3), BitConverter.SingleToInt32Bits(float.PositiveInfinity));
-            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(-1), "non-finite position");
+            System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(buffer.AsSpan(21), BitConverter.SingleToInt32Bits(float.PositiveInfinity));
+            Assert.That(UnitsSnapshot.Read(buffer, states), Is.EqualTo(-1));
+            Assert.That(states[0], Is.EqualTo(sent), "Malformed data leaves the destination untouched.");
         }
     }
 }

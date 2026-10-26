@@ -30,6 +30,7 @@ namespace SectorLab.Units
         public Unit Target { get; private set; }
         public float Range => range;
         public int Damage => damage;
+        public uint ShotsFired { get; private set; }
         public float Cooldown => cooldown;
         public event System.Action<Unit> Fired;
         // True while the current target is in reach with a clear line; Simulate fires only then.
@@ -174,6 +175,7 @@ namespace SectorLab.Units
             }
             cooldownRemaining = cooldown;
             ShowShotLine(Target.transform.position);
+            ShotsFired++;
             Target.Health.TakeDamage(damage);
             Fired?.Invoke(self);
         }

@@ -102,6 +102,7 @@ namespace SectorLab.Units
                 throw new InvalidOperationException("Prefab team/role does not match its roster slot.");
             slot.Unit = unit;
             slot.Generation++;
+            unit.Generation = slot.Generation;
             slot.MaxHealth = unit.Health.Max;
             unit.AssignId(Array.IndexOf(slots, slot));
             var agent = unit.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -128,7 +129,7 @@ namespace SectorLab.Units
                 Vector3 position = alive ? unit.transform.position : slot.Config.position;
                 model.SetUnit(i, new UnitView(i, slot.Config.team, slot.Config.role, life,
                     alive ? unit.Health.Current : 0, slot.MaxHealth, (float)slot.Respawn.RemainingSeconds,
-                    slot.Generation, 0, position.x, position.z));
+                    slot.Generation, alive && unit.Attack != null ? unit.Attack.ShotsFired : 0, position.x, position.z));
             }
         }
 

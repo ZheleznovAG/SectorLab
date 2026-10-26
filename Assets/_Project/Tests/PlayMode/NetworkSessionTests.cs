@@ -36,9 +36,11 @@ namespace SectorLab.Tests
             Object.FindAnyObjectByType<EnemyTacticsController>().enabled = false; // the remote human plays red
             foreach (Unit unit in Unit.All) { unit.Attack.enabled = false; unit.Movement.Stop(); }
             LoopbackChannel.CreatePair(out hostEnd, out clientEnd);
-            host = new HostSession(battle.Commands, battle.Model, hostEnd, Team.Enemy);
+            host = new HostSession(battle.Commands, battle.Model, hostEnd, Team.Enemy, 1, 123);
             clientModel = new MatchModel();
-            client = new ClientSession(clientModel, clientEnd, Team.Enemy);
+            client = new ClientSession(clientModel, clientEnd, Team.Enemy, 123);
+            battle.PublishModel();
+            NetworkTestPeer.Connect(host, hostEnd, clientEnd);
         }
 
         [UnityTearDown]
@@ -58,7 +60,7 @@ namespace SectorLab.Tests
 
         private bool ClientSees(Unit unit)
         {
-            foreach (UnitState state in client.Units)
+            foreach (UnitView state in client.Units)
             {
                 if (state.Id != unit.Id) continue;
                 Assert.That(state.Team, Is.EqualTo(unit.Team));
@@ -85,10 +87,45 @@ namespace SectorLab.Tests
         {
             clientEnd.Send(new byte[] { 1, 0, 0 });
             clientEnd.Send(new byte[] { 2, 9, 9, 9 }); // a state message, which only the host may send
-            clientEnd.Send(Array.Empty<byte>());
+            clientEnd.Send(new byte[] { 0 });
             clientEnd.Flush();
             Assert.That(host.Rejected, Is.EqualTo(3));
             Assert.That(host.Accepted, Is.Zero);
+        }
+
+        [Test]
+        public void QueuedOrdersFromThePreviousMatchCannotEnterTheNewSession()
+        {
+            Unit red = lifecycle.Slots[3].Unit;
+            client.Send(UnitCommand.MoveToRelay(Team.Enemy, red.Id, 1));
+            host.Dispose();
+            host = new HostSession(battle.Commands, battle.Model, hostEnd, Team.Enemy, 2, 123);
+            NetworkTestPeer.Connect(host, hostEnd, clientEnd);
+            Assert.That(host.Accepted, Is.Zero);
+            Assert.That(host.Rejected, Is.EqualTo(1));
+            Assert.That(red.Movement.IsMoving, Is.False);
+            client.Send(UnitCommand.MoveToRelay(Team.Enemy, red.Id, 1));
+            clientEnd.Flush();
+            Assert.That(host.Accepted, Is.EqualTo(1));
+        }
+
+        [UnityTest]
+        public IEnumerator AQueuedOrderCannotControlTheNextIncarnationOfItsActor()
+        {
+            Unit red = lifecycle.Slots[3].Unit;
+            client.Send(UnitCommand.MoveToRelay(Team.Enemy, red.Id, 1));
+            red.Health.TakeDamage(red.Health.Max);
+            battle.AdvanceSimulation(RespawnTimer.DelaySeconds + 0.1);
+            float deadline = Time.realtimeSinceStartup + 5;
+            while (lifecycle.Slots[3].Unit == null && Time.realtimeSinceStartup < deadline) yield return null;
+            Assert.That(lifecycle.Slots[3].Unit, Is.Not.Null);
+            clientEnd.Flush();
+            Assert.That(host.Accepted, Is.Zero);
+            Assert.That(host.Rejected, Is.EqualTo(1));
+            Assert.That(lifecycle.Slots[3].Unit.Movement.IsMoving, Is.False);
+            host.SendState(); hostEnd.Flush();
+            client.Send(UnitCommand.MoveToRelay(Team.Enemy, 3, 1)); clientEnd.Flush();
+            Assert.That(host.Accepted, Is.EqualTo(1));
         }
 
         [UnityTest]
@@ -104,7 +141,7 @@ namespace SectorLab.Tests
             while (battle.Relays[1].State.Owner != RelayOwner.Enemy && Time.realtimeSinceStartup < deadline)
             {
                 battle.AdvanceSimulation(Time.deltaTime);
-                host.SendState(Unit.All);
+                host.SendState();
                 hostEnd.Flush();
                 yield return null;
             }

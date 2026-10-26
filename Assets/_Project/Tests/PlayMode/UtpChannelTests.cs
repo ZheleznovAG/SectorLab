@@ -99,7 +99,7 @@ namespace SectorLab.Tests
             tutorial.Open();
             UtpChannel remoteEnd = Track(UtpChannel.Connect("127.0.0.1", port));
             using var remoteModel = new MatchModel();
-            using var remote = new ClientSession(remoteModel, remoteEnd, NetworkLaunch.RemoteTeam);
+            using var remote = new ClientSession(remoteModel, remoteEnd, NetworkLaunch.RemoteTeam, bootstrap.Configuration);
             yield return Pump(() => !bootstrap.WaitingForPeer && remote.UnitCount == 6, remoteEnd);
             Assert.That(bootstrap.WaitingForPeer, Is.False);
             Assert.That(tutorial.IsShowing, Is.True);
@@ -126,7 +126,7 @@ namespace SectorLab.Tests
 
             UtpChannel remoteEnd = Track(UtpChannel.Connect("127.0.0.1", port));
             using var remoteModel = new MatchModel();
-            using var remote = new ClientSession(remoteModel, remoteEnd, NetworkLaunch.RemoteTeam);
+            using var remote = new ClientSession(remoteModel, remoteEnd, NetworkLaunch.RemoteTeam, bootstrap.Configuration);
             yield return Pump(() => !bootstrap.WaitingForPeer && remote.UnitCount == 6, remoteEnd);
             Assert.That(bootstrap.WaitingForPeer, Is.False);
             Assert.That(battle.State.Clock.IsPaused, Is.False);

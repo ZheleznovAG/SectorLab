@@ -18,7 +18,7 @@ namespace SectorLab.Tests
 {
     public class ClientPresentationTests
     {
-        private LoopbackChannel hostEnd;
+        private LoopbackChannel hostEnd, clientEnd;
         private MatchModel model;
         private BattleController battle;
         private UnitLifecycle lifecycle;
@@ -28,7 +28,7 @@ namespace SectorLab.Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            LoopbackChannel.CreatePair(out hostEnd, out var clientEnd);
+            LoopbackChannel.CreatePair(out hostEnd, out clientEnd);
             NetworkLaunch.Client(clientEnd);
             Time.timeScale = 1;
             yield return SceneManager.LoadSceneAsync("Main");
@@ -39,6 +39,7 @@ namespace SectorLab.Tests
             hud = Object.FindAnyObjectByType<BattleHud>();
             model = new MatchModel();
             model.SetRelayCount(3);
+            NetworkTestPeer.Begin(model, hostEnd, clientEnd);
         }
 
         [UnityTearDown]
@@ -58,33 +59,17 @@ namespace SectorLab.Tests
         private static T Field<T>(object target, string name) => (T)target.GetType()
             .GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(target);
 
-        private void SendMatch()
-        {
-            var bytes = new byte[1 + MatchSnapshot.SizeFor(3)];
-            bytes[0] = (byte)MessageType.MatchState;
-            MatchSnapshot.Write(model, bytes.AsSpan(1));
-            hostEnd.Send(bytes);
-            hostEnd.Flush();
-        }
+        private void SendMatch() => NetworkTestPeer.Send(model, hostEnd);
 
         private void SendUnits(params Unit[] units)
         {
-            var bytes = new byte[1 + UnitsSnapshot.SizeFor(units.Length)];
-            bytes[0] = (byte)MessageType.Units;
-            bytes[1] = (byte)units.Length;
-            // The sender is an independent host. Local proxies may already have zero health.
-            for (int i = 0; i < units.Length; i++)
+            model.SetUnitCount(lifecycle.Slots.Count);
+            for (int i = 0; i < lifecycle.Slots.Count; i++)
             {
-                Unit unit = units[i];
-                int offset = 2 + 12 * i;
-                bytes[offset] = (byte)unit.Id;
-                bytes[offset + 1] = (byte)unit.Team;
-                System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(bytes.AsSpan(offset + 2), BitConverter.SingleToInt32Bits(unit.transform.position.x));
-                System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(bytes.AsSpan(offset + 6), BitConverter.SingleToInt32Bits(unit.transform.position.z));
-                System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(bytes.AsSpan(offset + 10), (ushort)unit.Health.Max);
+                Unit unit = lifecycle.Slots[i].Unit;
+                model.SetUnit(i, NetworkTestPeer.View(unit, Array.IndexOf(units, unit) >= 0));
             }
-            hostEnd.Send(bytes);
-            hostEnd.Flush();
+            SendMatch();
             hud.Refresh();
         }
 
@@ -128,6 +113,8 @@ namespace SectorLab.Tests
             Assert.That(audio.PlayedResults, Is.EqualTo(1));
             Assert.That(audio.LastSound, Does.Contain("victory"), "Red's perspective.");
             model.Outcome.Value = BattleOutcome.InProgress;
+            model.MatchId++;
+            NetworkTestPeer.Begin(model, hostEnd, clientEnd);
             SendMatch();
             model.Outcome.Value = BattleOutcome.Victory;
             SendMatch(); SendMatch();

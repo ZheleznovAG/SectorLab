@@ -161,6 +161,8 @@ namespace SectorLab.Presentation
             LastSound = clip.name;
         }
 
+        public void ShowNetworkNotice(string message) => Notify(message);
+
         private void Notify(string message)
         {
             LastNotice = message;
