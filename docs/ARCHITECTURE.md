@@ -16,7 +16,7 @@ flowchart TB
         UnitLifecycle --> UnitFactory --> AddressableUnitPrefabProvider
         MatchCommands
     end
-    subgraph View["Представление — подписка на MatchModel (R3)"]
+    subgraph View["Представление — MatchModel (R3) и локальные компоненты"]
         BattleHud & MatchAudio & BattleResultView & TacticalCamera & TutorialView
     end
     subgraph Input["Ввод"]
@@ -39,11 +39,14 @@ flowchart TB
 - **Симуляция.** `BattleController` копит `deltaTime` и делает фиксированные тики 0,1 с. В каждом тике
   сначала бой (`UnitAttack.Simulate`: перезарядка и урон), затем узлы (`RelayPoint.Simulate`: захват
   и ремонт), затем счёт и время (`MatchState.Tick`), затем `PublishModel()` и событие `Ticked`
-  (респаун, ИИ, сеть). Наведение и NavMesh-движение покадровые, но всё, что решает исход, считается в тике.
+  (респаун, ИИ, сеть). Наведение, поиск цели и NavMesh-движение покадровые и тоже влияют
+  на исход. Фиксированный шаг таймеров не гарантирует одинаковый матч при разном FPS.
 - **Модель для зрителя.** `Battle/MatchModel` — `ReactiveProperty` R3: очки, доход, время, пауза, исход,
-  прогноз, вид узлов (`RelayView`). Уведомляет только при изменении. HUD и звук подписаны на неё и не
-  опрашивают симуляцию. На сетевом клиенте ту же модель заполняют снимки хоста, поэтому представление
-  не знает, где идёт матч.
+  прогноз, вид узлов (`RelayView`). Уведомляет только при изменении. Заголовок, прогноз и карточки узлов
+  HUD подписаны на неё; на клиенте её заполняют снимки хоста. Миграция представления частичная:
+  карточки бойцов опрашивают локальный `UnitLifecycle` раз в 0,1 с, графика `RelayPoint` читает свой
+  `RelayState`, звук итога/прогноза/выстрела зависит от локальных событий. Это вызывает расхождения
+  клиента, описанные в [аудите 26.10](audit/2026-10-26-architecture-audit.md).
 - **Приказы — данные.** `UnitCommander` превращает тапы в `UnitCommand` и отдаёт в `ICommandSink`.
   Локально это `MatchCommands`: проверяет, что матч идёт, юнит жив и принадлежит отправителю, а цель
   допустима, и только потом двигает или атакует. На клиенте это `ClientCommandSink`, который отправляет
@@ -62,6 +65,8 @@ flowchart TB
   и не даёт позднего спавна ([ADR-005](adr/005-async-prefab-ownership.md)). Ошибка загрузки показывает
   «Повторить / Выйти».
 - `Unit.Id` = индекс слота ростера и сохраняется при респауне. Это адрес юнита в приказах и снимках.
+  Поколения матча в протоколе пока нет. `Unit.All` и `Time.timeScale` глобальны: один scope не
+  обеспечивает изоляцию нескольких одновременных матчей в одном процессе.
 - Роли и узлы — ScriptableObject: `Units/UnitStats` (`Data/Units/*.asset`), `Objectives/RelayConfig`
   (`Data/Relays/*.asset`).
 
@@ -92,7 +97,9 @@ sequenceDiagram
   (в памяти, для тестов) и `UtpChannel` (Unity Transport, UDP, один удалённый игрок). `NetworkPump`
   (DontDestroyOnLoad) двигает пакеты раньше игровых скриптов и переживает перезапуск сцены.
 - Кодеки (`UnitCommandCodec`, `MatchSnapshot`, `UnitsSnapshot`) не доверяют байтам: усечённые данные,
-  неизвестные enum и не-конечные float отвергаются.
+  неизвестные enum и не-конечные float отвергаются. `UnitsSnapshot.Read` пока может частично изменить
+  буфер до обнаружения ошибки. Два типа снимков делят один sequenced pipeline; результат отправки
+  не передаётся вызывающему коду. Эти ограничения и план исправлений — в аудите 26.10.
 
 ## Где что лежит
 
@@ -106,7 +113,7 @@ sequenceDiagram
 | `Assets/Packages`, `Assets/packages.config` | NuGet-пакеты R3 (NuGetForUnity), в git, чтобы чистый клон компилировался |
 | `Packages/manifest.json` | UPM: VContainer, UniTask, R3.Unity, NuGetForUnity по git-тегам; остальное — Unity registry |
 | `Tools/sl.py`, `Tools/sectorlab/` | Инструменты разработчика ([DEVELOPMENT](DEVELOPMENT.md)) |
-| `.github/workflows/tests.yml` | GameCI, запуск вручную; не запускался |
+| `.github/workflows/tests.yml` | GameCI, только ручной триггер; автоматической проверки PR в конфигурации нет |
 
 ## С чего читать код
 
