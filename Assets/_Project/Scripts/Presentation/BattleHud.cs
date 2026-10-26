@@ -92,7 +92,7 @@ namespace SectorLab.Presentation
             }
         }
 
-        // Match values arrive from MatchModel; unit cards and selection still follow local objects.
+        // Cards read the same model in local and remote matches; scene units only locate selection.
         private void Start()
         {
             battle.PublishModel(); // All relay Awake methods have finished by now.
@@ -217,17 +217,18 @@ namespace SectorLab.Presentation
                 relayButtons[i].interactable = isRunning && commander.Selected != null;
                 UnitSlotState slot = PlayerSlot(i);
                 Unit unit = slot?.Unit;
-                bool alive = unit != null && unit.IsAlive;
-                int hp = alive ? unit.Health.Current : -1;
-                int respawn = slot != null && slot.Respawn.IsWaiting ? (int)Math.Ceiling(slot.Respawn.RemainingSeconds - MatchRules.Epsilon) : -1;
-                int unitKey = alive ? hp : slot == null ? -200 : slot.IsSpawning ? -100 : -2 - Math.Max(0, respawn);
+                bool known = battle.Model.TryGetRole(perspective.Local, (UnitRole)i, out UnitView view);
+                bool alive = known && view.Alive;
+                int hp = alive ? view.Health : -1;
+                int respawn = known && view.Life == UnitLife.Respawning ? (int)Math.Ceiling(view.RespawnSeconds - MatchRules.Epsilon) : -1;
+                int unitKey = HashCode.Combine(known, view.Life, hp, view.MaxHealth, respawn);
                 if (unitKeys[i] != unitKey)
                 {
                     unitKeys[i] = unitKey;
                     string role = ((UnitRole)i).ToString();
-                    unitLabels[i].text = alive ? $"{role} · {RolePurpose((UnitRole)i)}\n{hp}/{unit.Health.Max} HP"
-                        : slot == null ? role : slot.IsSpawning ? role + "\nВозвращается…"
-                        : slot.Respawn.IsWaiting ? role + $"\nВозврат: {Math.Max(0, respawn)} с" : role + "\nОжидание";
+                    unitLabels[i].text = alive ? $"{role} · {RolePurpose((UnitRole)i)}\n{hp}/{view.MaxHealth} HP"
+                        : !known ? role : view.Life == UnitLife.Spawning ? role + "\nВозвращается…"
+                        : view.Life == UnitLife.Respawning ? role + $"\nВозврат: {Math.Max(0, respawn)} с" : role + "\nОжидание";
                 }
                 unitButtons[i].interactable = isRunning && alive;
                 unitImages[i].color = alive && commander.Selected == unit ? Blue : Neutral;

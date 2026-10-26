@@ -30,6 +30,11 @@ namespace SectorLab.Player
         public Unit Selected { get; private set; }
         public Team LocalTeam => team;
         private ICommandSink commands;
+        private MatchModel model;
+        public void BindModel(MatchModel value) => model = value;
+        private bool IsAvailable(Unit unit) => unit != null && unit.IsAlive
+            && (model == null || unit.Id < 0 || model.TryGetUnit(unit.Id, out var view) && view.Alive);
+        public void ValidateSelection() { if (Selected != null && !IsAvailable(Selected)) ClearSelection(); }
         public void Bind(ICommandSink sink) => commands = sink;
         // A network client plays the side the host assigns.
         public void SetLocalTeam(Team localTeam)
@@ -57,6 +62,7 @@ namespace SectorLab.Player
 
         private void Update()
         {
+            ValidateSelection();
             ReadGestures();
 
             // The marker only makes sense while the selected unit is still on its way.
@@ -217,7 +223,7 @@ namespace SectorLab.Player
             for (int i = 0; i < Unit.All.Count; i++)
             {
                 Unit candidate = Unit.All[i];
-                if (!candidate.IsAlive)
+                if (!IsAvailable(candidate))
                     continue;
 
                 Vector3 onScreen = viewCamera.WorldToScreenPoint(candidate.transform.position);
@@ -256,7 +262,7 @@ namespace SectorLab.Player
 
         public bool SelectFriendly(Unit unit)
         {
-            if (!isActiveAndEnabled || unit == null || !unit.IsAlive || unit.Team != team) return false;
+            if (!isActiveAndEnabled || !IsAvailable(unit) || unit.Team != team) return false;
             Select(unit);
             return true;
         }
@@ -266,7 +272,7 @@ namespace SectorLab.Player
 
         public bool OrderSelectedToRelay(RelayPoint relay)
         {
-            if (!isActiveAndEnabled || Selected == null || !Selected.IsAlive || relay == null || commands == null)
+            if (!isActiveAndEnabled || !IsAvailable(Selected) || relay == null || commands == null)
                 return false;
             int index = commands.RelayIndexOf(relay);
             return Send(UnitCommand.MoveToRelay(team, Selected.Id, index));
@@ -274,6 +280,7 @@ namespace SectorLab.Player
 
         private void Select(Unit unit)
         {
+            if (!IsAvailable(unit)) return;
             if (Selected == unit)
                 return;
 

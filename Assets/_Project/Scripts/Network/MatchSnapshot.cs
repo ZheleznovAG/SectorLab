@@ -73,6 +73,7 @@ namespace SectorLab.Network
             model.Paused.Value = buffer[2] == 1;
             model.Forecast.Value = (BattleOutcome)buffer[4];
             model.Outcome.Value = (BattleOutcome)buffer[3];
+            model.Commit();
             return true;
         }
 

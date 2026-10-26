@@ -19,6 +19,8 @@ namespace SectorLab.Battle
         public BattleOutcome Outcome => State.Outcome;
         public System.Collections.Generic.IReadOnlyList<RelayPoint> Relays => relays;
         private MatchCommands commands;
+        private UnitLifecycle lifecycle;
+        public void BindLifecycle(UnitLifecycle value) => lifecycle = value;
         // Player orders enter the simulation here, validated against this match's relays and state.
         public MatchCommands Commands => commands ??= BindCommands();
 
@@ -36,6 +38,14 @@ namespace SectorLab.Battle
         private void Awake()
         {
             runningTimeScale = Time.timeScale > 0 ? Time.timeScale : 1;
+            Model.Updated += PresentModel;
+        }
+
+        private void PresentModel()
+        {
+            for (int i = 0; i < relays.Length && i < Model.Relays.Length; i++)
+                if (relays[i] != null) relays[i].Show(Model.Relays[i].Value);
+            if (commander != null) commander.ValidateSelection();
         }
 
         private void Start()
@@ -65,7 +75,7 @@ namespace SectorLab.Battle
         private MatchCommands BindCommands()
         {
             var created = new MatchCommands(relays, State);
-            if (commander != null) commander.Bind(created);
+            if (commander != null) { commander.Bind(created); commander.BindModel(Model); }
             return created;
         }
 
@@ -187,7 +197,7 @@ namespace SectorLab.Battle
         // Writes the authoritative state into the viewer model; unchanged values do not notify.
         public void PublishModel()
         {
-            if (State == null) return;
+            if (State == null || !IsAuthority) return;
             // Injection runs before relay Awake; the first tick or a view's Start publishes instead.
             for (int i = 0; i < relays.Length; i++)
                 if (relays[i] == null || relays[i].Config == null || relays[i].State == null) return;
@@ -202,7 +212,9 @@ namespace SectorLab.Battle
             Model.RemainingSeconds.Value = MatchModel.WholeSeconds(State.Clock.RemainingSeconds);
             Model.Paused.Value = State.Clock.IsPaused;
             Model.Forecast.Value = Forecast();
+            if (lifecycle != null) lifecycle.PublishUnits(Model);
             Model.Outcome.Value = State.Outcome;
+            Model.Commit();
         }
 
         private void ApplyRunState()

@@ -224,6 +224,8 @@ namespace SectorLab.Network
         {
             if (!proxiesReady) return;
             ReadOnlySpan<UnitState> states = client.Units;
+            battle.Model.SetUnitCount(lifecycle.Slots.Count);
+            int index = 0;
             foreach (UnitSlotState slot in lifecycle.Slots)
             {
                 Unit unit = slot.Unit;
@@ -239,8 +241,13 @@ namespace SectorLab.Network
                     break;
                 }
                 // Dead or waiting to respawn on the host. Deactivation would drop it from Unit.All.
+                if (!present) unit.Health.SetReplicated(0);
+                battle.Model.SetUnit(index++, new UnitView(unit.Id, unit.Team, unit.Stats.role,
+                    present ? UnitLife.Alive : UnitLife.Respawning, unit.Health.Current, unit.Health.Max,
+                    0, slot.Generation, 0, unit.transform.position.x, unit.transform.position.z));
                 if (proxyParts.TryGetValue(unit, out var parts)) SetVisible(parts.renderers, parts.colliders, present);
             }
+            battle.Model.Commit();
         }
 
         private static void SetVisible(Renderer[] renderers, Collider[] colliders, bool visible)

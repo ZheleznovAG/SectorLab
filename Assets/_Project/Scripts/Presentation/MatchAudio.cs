@@ -20,6 +20,7 @@ namespace SectorLab.Presentation
         [SerializeField] private Text noticeLabel;
         private readonly List<Unit> observed = new List<Unit>(6);
         private readonly CompositeDisposable relaySubscriptions = new CompositeDisposable();
+        private System.IDisposable outcomeSubscription;
         private AudioSource source;
         private AudioClip tankShot, scoutShot, rangerShot, capture, warning, victory, defeat;
         private readonly float[] nextShot = new float[3];
@@ -52,7 +53,10 @@ namespace SectorLab.Presentation
         {
             lifecycle.Spawned += Observe;
             battle.Ticked += OnTick;
-            battle.Finished += OnFinished;
+            outcomeSubscription = battle.Model.Outcome.Subscribe(outcome =>
+            {
+                if (outcome != BattleOutcome.InProgress) OnFinished(outcome);
+            });
             for (int i = 0; i < Unit.All.Count; i++) Observe(Unit.All[i]);
         }
 
@@ -189,7 +193,9 @@ namespace SectorLab.Presentation
 
         private void OnDisable()
         {
-            lifecycle.Spawned -= Observe; battle.Ticked -= OnTick; battle.Finished -= OnFinished;
+            lifecycle.Spawned -= Observe; battle.Ticked -= OnTick;
+            outcomeSubscription?.Dispose();
+            outcomeSubscription = null;
             for (int i = observed.Count - 1; i >= 0; i--)
                 if (observed[i] != null) { observed[i].Attack.Fired -= OnShot; observed[i].Died -= OnDied; }
             observed.Clear();

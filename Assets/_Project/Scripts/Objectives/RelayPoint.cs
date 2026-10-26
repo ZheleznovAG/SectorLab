@@ -1,4 +1,5 @@
 using SectorLab.Units;
+using SectorLab.Battle;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -141,18 +142,22 @@ namespace SectorLab.Objectives
 
         private void UpdateVisual()
         {
+            if (State != null) Show(RelayView.From(this));
+        }
+
+        // Rendering consumes viewer data; it never advances or overwrites capture rules.
+        public void Show(RelayView view)
+        {
             if (config == null) return;
-            int percent = (int)System.Math.Round(System.Math.Abs(State.Progress) * 100);
-            int side = State.Progress > 0 ? 1 : State.Progress < 0 ? 2 : 0;
-            bool repairOccupied = config.kind == RelayKind.Repair
-                && (State.Owner == RelayOwner.Player ? PlayersPresent > 0 : EnemiesPresent > 0);
-            int key = percent + side * 101 + (State.IsContested ? 404 : 0)
-                + (int)State.Owner * 1000 + (repairOccupied ? 4000 : 0);
+            int percent = view.Percent, side = view.Side;
+            bool repairOccupied = config.kind == RelayKind.Repair && view.OwnerPresent;
+            int key = percent + side * 101 + (view.Contested ? 404 : 0)
+                + (int)view.Owner * 1000 + (repairOccupied ? 4000 : 0);
             if (key == visualKey) return;
             visualKey = key;
-            Color color = State.IsContested ? new Color(1f, 0.76f, 0.18f)
-                : State.Owner == RelayOwner.Player ? new Color(0.18f, 0.55f, 1f)
-                : State.Owner == RelayOwner.Enemy ? new Color(0.94f, 0.3f, 0.27f)
+            Color color = view.Contested ? new Color(1f, 0.76f, 0.18f)
+                : view.Owner == RelayOwner.Player ? new Color(0.18f, 0.55f, 1f)
+                : view.Owner == RelayOwner.Enemy ? new Color(0.94f, 0.3f, 0.27f)
                 : new Color(0.45f, 0.49f, 0.58f);
             if (areaRenderer != null)
             {
@@ -160,13 +165,13 @@ namespace SectorLab.Objectives
                 colors.SetColor("_BaseColor", color);
                 areaRenderer.SetPropertyBlock(colors);
             }
-            Color sideColor = State.IsContested ? new Color(1f, 0.76f, 0.18f)
+            Color sideColor = view.Contested ? new Color(1f, 0.76f, 0.18f)
                 : side == 1 ? new Color(0.35f, 0.68f, 1f) : side == 2 ? new Color(1f, 0.42f, 0.38f) : Color.clear;
             UpdateRing(percent / 100f, sideColor);
             // Details live in the HUD cards; the field keeps what a glance can read.
             if (statusLabel != null)
-                statusLabel.text = State.IsContested ? config.label + "\nСПОР"
-                    : State.Owner == RelayOwner.Neutral ? percent == 0 ? config.label : $"{config.label}\n{percent}%"
+                statusLabel.text = view.Contested ? config.label + "\nСПОР"
+                    : view.Owner == RelayOwner.Neutral ? percent == 0 ? config.label : $"{config.label}\n{percent}%"
                     : repairOccupied ? config.label + "\nремонт" : config.label;
         }
 

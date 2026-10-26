@@ -1,6 +1,7 @@
 using System;
 using R3;
 using SectorLab.Objectives;
+using SectorLab.Units;
 
 namespace SectorLab.Battle
 {
@@ -38,6 +39,31 @@ namespace SectorLab.Battle
     // Properties notify only when a value actually changes.
     public sealed class MatchModel : IDisposable
     {
+        private UnitView[] units = Array.Empty<UnitView>();
+        public ReadOnlySpan<UnitView> Units => units;
+        public event Action Updated;
+
+        public void SetUnitCount(int count)
+        {
+            if (units.Length != count) units = new UnitView[count];
+        }
+        public void SetUnit(int index, in UnitView view) => units[index] = view;
+        public bool TryGetUnit(int id, out UnitView view)
+        {
+            for (int i = 0; i < units.Length; i++)
+                if (units[i].Id == id) { view = units[i]; return true; }
+            view = default;
+            return false;
+        }
+        public bool TryGetRole(Team team, UnitRole role, out UnitView view)
+        {
+            for (int i = 0; i < units.Length; i++)
+                if (units[i].Team == team && units[i].Role == role) { view = units[i]; return true; }
+            view = default;
+            return false;
+        }
+        // Publish once after all fields of a local update or validated snapshot are applied.
+        public void Commit() => Updated?.Invoke();
         public readonly ReactiveProperty<double> PlayerScore = new ReactiveProperty<double>(0);
         public readonly ReactiveProperty<double> EnemyScore = new ReactiveProperty<double>(0);
         // Income actually earned right now: zero while paused, loading or contested.
@@ -66,6 +92,7 @@ namespace SectorLab.Battle
 
         public void Dispose()
         {
+            Updated = null;
             PlayerScore.Dispose(); EnemyScore.Dispose(); PlayerRate.Dispose(); EnemyRate.Dispose();
             RemainingSeconds.Dispose(); Paused.Dispose(); Outcome.Dispose(); Forecast.Dispose();
             foreach (var relay in Relays) relay.Dispose();

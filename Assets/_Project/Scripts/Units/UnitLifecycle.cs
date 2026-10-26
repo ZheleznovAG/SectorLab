@@ -17,6 +17,8 @@ namespace SectorLab.Units
         public RespawnTimer Respawn { get; } = new RespawnTimer();
         public bool IsSpawning { get; internal set; }
         public float SpawnRadius { get; internal set; }
+        public uint Generation { get; internal set; }
+        public int MaxHealth { get; internal set; }
         public UnitSlotState(UnitSpawnSlot config) => Config = config;
     }
 
@@ -44,6 +46,7 @@ namespace SectorLab.Units
             if (initialized) throw new InvalidOperationException("Unit lifecycle cannot be injected twice.");
             roster.Validate();
             battle = controller;
+            battle.BindLifecycle(this);
             factory = unitFactory;
             slots = new UnitSlotState[roster.slots.Length];
             for (int i = 0; i < slots.Length; i++) slots[i] = new UnitSlotState(roster.slots[i]);
@@ -98,23 +101,48 @@ namespace SectorLab.Units
             if (unit.Team != slot.Config.team || unit.Stats == null || unit.Stats.role != slot.Config.role)
                 throw new InvalidOperationException("Prefab team/role does not match its roster slot.");
             slot.Unit = unit;
+            slot.Generation++;
+            slot.MaxHealth = unit.Health.Max;
             unit.AssignId(Array.IndexOf(slots, slot));
             var agent = unit.GetComponent<UnityEngine.AI.NavMeshAgent>();
             slot.SpawnRadius = agent.radius * Mathf.Max(unit.transform.lossyScale.x, unit.transform.lossyScale.z);
             slot.Respawn.Complete();
             unit.Died += OnDied;
+            unit.Health.Changed += Publish;
             Spawned?.Invoke(unit);
+            Publish();
+        }
+
+        private void Publish() => battle.PublishModel();
+
+        public void PublishUnits(MatchModel model)
+        {
+            model.SetUnitCount(slots.Length);
+            for (int i = 0; i < slots.Length; i++)
+            {
+                UnitSlotState slot = slots[i];
+                Unit unit = slot.Unit;
+                bool alive = unit != null && unit.IsAlive;
+                UnitLife life = alive ? UnitLife.Alive : slot.IsSpawning ? UnitLife.Spawning
+                    : slot.Respawn.IsWaiting ? UnitLife.Respawning : UnitLife.Loading;
+                Vector3 position = alive ? unit.transform.position : slot.Config.position;
+                model.SetUnit(i, new UnitView(i, slot.Config.team, slot.Config.role, life,
+                    alive ? unit.Health.Current : 0, slot.MaxHealth, (float)slot.Respawn.RemainingSeconds,
+                    slot.Generation, 0, position.x, position.z));
+            }
         }
 
         private void OnDied(Unit unit)
         {
             unit.Died -= OnDied;
+            unit.Health.Changed -= Publish;
             for (int i = 0; i < slots.Length; i++)
             {
                 UnitSlotState slot = slots[i];
                 if (slot.Unit != unit) continue;
                 slot.Unit = null;
                 if (Phase == UnitLifecyclePhase.Ready) slot.Respawn.Schedule();
+                Publish();
                 return;
             }
         }
@@ -129,6 +157,7 @@ namespace SectorLab.Units
                 if (!UnitSpawnPositions.TryFind(slot.Config.position, slot.SpawnRadius, out _)) continue;
                 RespawnAsync(slot).Forget(Debug.LogException);
             }
+            Publish();
         }
 
         private async UniTask RespawnAsync(UnitSlotState slot)
@@ -187,7 +216,11 @@ namespace SectorLab.Units
         private void UnsubscribeUnits()
         {
             for (int i = 0; i < slots.Length; i++)
-                if (slots[i].Unit != null) slots[i].Unit.Died -= OnDied;
+                if (slots[i].Unit != null)
+                {
+                    slots[i].Unit.Died -= OnDied;
+                    slots[i].Unit.Health.Changed -= Publish;
+                }
         }
 
         private void OnDisable()

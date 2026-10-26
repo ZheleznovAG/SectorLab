@@ -34,11 +34,10 @@ namespace SectorLab.Units
                 Died?.Invoke();
         }
 
-        // A network client mirrors the host's value. A listed unit is alive, so this never kills:
-        // deaths and respawns are the host's decision and arrive as absence from the snapshot.
+        // A proxy mirrors health, including zero, without starting local death/respawn logic.
         public void SetReplicated(int current)
         {
-            int value = Math.Max(1, Math.Min(Max, current));
+            int value = Math.Max(0, Math.Min(Max, current));
             if (value == Current) return;
             Current = value;
             Changed?.Invoke();
