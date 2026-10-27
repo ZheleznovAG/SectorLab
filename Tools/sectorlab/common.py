@@ -88,8 +88,11 @@ def write_evidence(name: str, record: dict) -> Path:
     path = EVIDENCE / name
     text = json.dumps(record, ensure_ascii=False, indent=2)
     # Path.write_text only gained newline in 3.10; tooling also supports Python 3.9.
-    with path.open("w", encoding="utf-8", newline="\n") as stream:
-        stream.write(redact(text) + "\n")
+    try:
+        with path.open("x", encoding="utf-8", newline="\n") as stream:
+            stream.write(redact(text) + "\n")
+    except FileExistsError as error:
+        raise ToolError(f"Evidence already exists: {name}. Use a new task name.") from error
     return path
 
 

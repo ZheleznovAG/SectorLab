@@ -90,8 +90,10 @@ def main(argv: list[str]) -> int:
             from sectorlab.doctor import doctor
             doctor()
         elif args.command == "test":
-            from sectorlab.unity import run_tests
+            from sectorlab.unity import ensure_test_evidence_available, run_tests
             modes = ["EditMode", "PlayMode"] if args.mode == "both" else [args.mode]
+            for mode in modes:
+                ensure_test_evidence_available(mode, args.task)
             for mode in modes:
                 run_tests(mode, args.task, args.filter, args.timeout_minutes)
         elif args.command == "check":
