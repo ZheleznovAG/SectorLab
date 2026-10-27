@@ -61,6 +61,40 @@ namespace SectorLab.Tests
         }
 
         [UnityTest]
+        public IEnumerator FailedRoleSwitchRebuildsAnOfflineMatchAndPreservesItsErrorNotice()
+        {
+            LoopbackChannel.CreatePair(out _, out var client);
+            NetworkLaunch.Client(client);
+            yield return LoadMain();
+            var menu = Object.FindAnyObjectByType<NetworkMenu>();
+            menu.SetOpen(true);
+            // Exercise the same failure path as a busy port, without depending on local socket occupancy.
+            var relaunch = typeof(NetworkMenu).GetMethod("Relaunch",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            relaunch.Invoke(menu, new object[] {
+                (System.Action)(() => throw new System.InvalidOperationException("Port busy"))
+            });
+            yield return WaitForReload(menu);
+            menu = Object.FindAnyObjectByType<NetworkMenu>();
+            var battle = Object.FindAnyObjectByType<SectorLab.Battle.BattleController>();
+            Assert.That(NetworkLaunch.Role, Is.EqualTo(SessionRole.Offline));
+            Assert.That(NetworkLaunch.Channel, Is.Null);
+            Assert.That(Object.FindAnyObjectByType<NetworkMatchBootstrap>().Role, Is.EqualTo(SessionRole.Offline));
+            Assert.That(battle.IsAuthority && battle.enabled, Is.True);
+            Assert.That(Object.FindAnyObjectByType<SectorLab.AI.EnemyTacticsController>().enabled, Is.True);
+            Assert.That(menu.IsOpen, Is.True);
+            Assert.That(menu.Status, Does.Contain("Port busy"));
+            Assert.That(NetworkLaunch.TakeNotice(), Is.Null, "The notice is consumed once by the fresh menu.");
+            menu.SetOpen(false);
+            double elapsed = battle.State.Clock.ElapsedSeconds;
+            float deadline = Time.realtimeSinceStartup + 3;
+            while (battle.State.Clock.ElapsedSeconds <= elapsed && Time.realtimeSinceStartup < deadline) yield return null;
+            Assert.That(battle.State.Clock.ElapsedSeconds, Is.GreaterThan(elapsed));
+            Assert.That(battle.Commands.Execute(SectorLab.Battle.UnitCommand.MoveToRelay(
+                SectorLab.Units.Team.Player, 0, 0)), Is.EqualTo(SectorLab.Battle.CommandResult.Accepted));
+        }
+
+        [UnityTest]
         public IEnumerator HostAndOfflineButtonsRestartMainInThatRole()
         {
             yield return LoadMain();

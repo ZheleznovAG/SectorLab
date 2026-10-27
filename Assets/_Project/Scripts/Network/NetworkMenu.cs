@@ -42,6 +42,14 @@ namespace SectorLab.Network
             ShowRole();
         }
 
+        private void Start()
+        {
+            string notice = NetworkLaunch.TakeNotice();
+            if (notice == null) return;
+            SetOpen(true);
+            status.text = notice;
+        }
+
         private static Button Clone(RectTransform template, Transform parent, string name, string caption)
         {
             var copy = Instantiate(template.gameObject, parent, false);
@@ -174,8 +182,7 @@ namespace SectorLab.Network
             catch (Exception error) when (error is InvalidOperationException || error is ArgumentException)
             {
                 NetworkLauncher.Leave();
-                status.text = "Не удалось: " + error.Message;
-                return;
+                NetworkLaunch.Offline("Не удалось: " + error.Message + "\nМожно продолжить игру с ИИ.");
             }
             battle.Restart(); // a fresh Main starts in the chosen role
         }
