@@ -7,6 +7,8 @@
     python Tools/sl.py check                           repository hygiene + privacy scan
     python Tools/sl.py privacy [--staged]              secrets / personal data (pre-commit hook)
     python Tools/sl.py build-android --task T          APK into Builds/Android/SectorLab-T.apk
+    python Tools/sl.py build-windows --task T --qa     Windows player with local QA commands
+    python Tools/sl.py verify-network --task T --build-task B  two Windows QA players over UDP
     python Tools/sl.py install-android [--apk P]       install on the connected phone, verify hash
     python Tools/sl.py measure-android --task T        FPS/CPU/memory of the running game
 
@@ -53,6 +55,15 @@ def main(argv: list[str]) -> int:
     build.add_argument("--task", required=True, type=task_name)
     build.add_argument("--timeout-minutes", type=float, default=30)
 
+    windows = commands.add_parser("build-windows", help="build Windows and its local Addressables content")
+    windows.add_argument("--task", required=True, type=task_name)
+    windows.add_argument("--qa", action="store_true", help="Development build with local Pipeline commands")
+    windows.add_argument("--timeout-minutes", type=float, default=30)
+
+    network = commands.add_parser("verify-network", help="acceptance with two Windows QA players over UDP")
+    network.add_argument("--task", required=True, type=task_name)
+    network.add_argument("--build-task", required=True, type=task_name)
+
     install = commands.add_parser("install-android", help="install an APK on the connected device")
     install.add_argument("--apk", type=Path, help="default: the newest APK in Builds/Android")
     install.add_argument("--adb")
@@ -86,6 +97,12 @@ def main(argv: list[str]) -> int:
         elif args.command == "build-android":
             from sectorlab.unity import build_android
             build_android(args.task, args.timeout_minutes)
+        elif args.command == "build-windows":
+            from sectorlab.unity import build_windows
+            build_windows(args.task, args.qa, args.timeout_minutes)
+        elif args.command == "verify-network":
+            from sectorlab.network_acceptance import verify
+            verify(args.task, args.build_task)
         elif args.command == "install-android":
             from sectorlab.android import install as install_apk
             install_apk(args.apk or latest_apk(), args.adb, args.serial, launch=not args.no_launch)

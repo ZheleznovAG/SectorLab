@@ -1,0 +1,20 @@
+{
+  "checkedAtUtc": "2026-10-27T01:30:21.516266+00:00",
+  "apkPath": "Builds/Android/SectorLab-v1.2.0.apk",
+  "apkSha256": "0E833FB5FFB2AD95E1E7990CF9C7EBFBAF74BAC5067E005B32536820FC2E264B",
+  "tool": "Android SDK aapt2 36.0.0 dump badging",
+  "badging": [
+    "package: name='com.zheleznovag.sectorlab' versionCode='3' versionName='1.2.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "minSdkVersion:'26'",
+    "targetSdkVersion:'36'",
+    "native-code: 'arm64-v8a'"
+  ],
+  "buildWarnings": [
+    "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds.",
+    " Still waiting for package manifests to be fetched remotely.\r",
+    " Still waiting for package manifests to be fetched remotely.\r"
+  ],
+  "expectedVersion": "1.2.0",
+  "expectedVersionCode": 3,
+  "passed": true
+}

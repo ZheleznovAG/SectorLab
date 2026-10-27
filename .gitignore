@@ -102,6 +102,12 @@ InitTestScene*.unity*
 /[Aa]ssets/AddressableAssetsData/*/*.bin*
 # The generated target directory contains only ignored content-state files.
 /[Aa]ssets/AddressableAssetsData/Android.meta
+/[Aa]ssets/AddressableAssetsData/Windows.meta
+# Transient assets generated only for instrumented development builds.
+/Assets/Settings/Pipeline.meta
+/Assets/Settings/Pipeline/Resources.meta
+/Assets/Settings/Pipeline/Resources/RuntimePipelineConfig.asset*
+/Assets/Settings/Pipeline/Resources/RuntimePipelineBuildInfo.asset*
 # Preserved Editor crash backups, separate from the authoritative saved scenes.
 /[Aa]ssets/_Recovery/
 /[Aa]ssets/_Recovery.meta

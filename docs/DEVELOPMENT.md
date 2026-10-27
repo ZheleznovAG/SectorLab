@@ -38,7 +38,9 @@ unity open .                                                          # перв
 | `python Tools/sl.py test --task T` | EditMode и PlayMode в открытом Editor; `--mode EditMode\|PlayMode\|both`, `--filter <полное имя теста или фикстуры>` |
 | `python Tools/sl.py check` | Пробелы (`git diff --check`), JSON пакетов, дубли GUID, `.meta` у каждого файла, ссылки в документации, приватность |
 | `python Tools/sl.py privacy [--staged]` | Gitleaks по публикуемым файлам: секреты, личные пути и почта; запрещённые типы файлов; автор — noreply |
-| `python Tools/sl.py build-android --task T` ||
+| `python Tools/sl.py build-android --task T` | APK с локальными Addressables и отчётом о сборке |
+| `python Tools/sl.py build-windows --task T [--qa]` | Windows-плеер с локальными Addressables; `--qa` включает Development и команды локального Pipeline |
+| `python Tools/sl.py verify-network --task T --build-task B` | Два Windows QA-плеера из сборки B: UDP, приказы, смерть/респаун, узлы, итог, новый матч, обрыв |
 | `python Tools/sl.py install-android [--apk P]` | Установить (по умолчанию — свежий APK), сверить SHA-256 на устройстве, запустить |
 | `python Tools/sl.py measure-android --task T` | FPS по кадрам SurfaceFlinger, CPU, память запущенной игры; `--auto-restart` нажимает «Ещё бой» |
 
@@ -55,8 +57,10 @@ unity open .                                                          # перв
 - В Editor: **Window → General → Test Runner**.
 - Тесты, пишущие CSV (`MainMatchTests`, `MainRestartTests`, `MainTacticsTests`, `MainAllocationTests`), берут
   имя файла из переменной `SECTORLAB_VERIFICATION_TASK`. `sl.py` ставит её в Editor перед запуском.
-- CI: `.github/workflows/tests.yml` (GameCI), запуск вручную. Нужны секреты `UNITY_LICENSE`, `UNITY_EMAIL`,
-  `UNITY_PASSWORD`; ни разу не запускался.
+- CI: `.github/workflows/checks.yml` запускает тесты Python 3.9/3.14 на Windows/Linux и гигиену
+  с Gitleaks на push/PR. [Первый прогон прошёл](https://github.com/ZheleznovAG/SectorLab/actions/runs/40295350670).
+  `.github/workflows/tests.yml` (Unity/GameCI) запускается вручную; нужны секреты `UNITY_LICENSE`,
+  `UNITY_EMAIL`, `UNITY_PASSWORD`. Текущий статус — в STATUS.
 
 ## Сборка и телефон
 
@@ -70,9 +74,21 @@ unity open .                                                          # перв
 
 Пакет `com.zheleznovag.sectorlab`, подпись — debug-ключ Unity. Эмулятор Android ARM64-сборку не запускает (SIGILL).
 
-**Windows-плеер** (например, второй участник сетевой игры на том же ПК): перед сборкой выполнить меню
-**SectorLab → Build local unit content** (или `AddressableUnitSetup.BuildContent`), иначе в плеере не будет
-бандлов юнитов. Затем запустить `SectorLab.exe -sectorlab-join 127.0.0.1`.
+**Windows-плеер:** `python Tools/sl.py build-windows --task <имя>`. Инструмент переключает платформу,
+собирает локальный контент и сохраняет хеши файлов в `windows-build-<имя>.json`.
+Результат — `Builds/Windows/<имя>/SectorLab.exe`; запуск клиента: `-sectorlab-join 127.0.0.1`.
+Для автоматической приёмки добавить `--qa`: получится Development-плеер с локальным Pipeline,
+доступный через `unity command --runtime SectorLab`. Настройки Pipeline восстанавливаются после
+сборки; обычная Windows-сборка и APK не требуют диагностического сервера.
+
+**Приёмка сети:** `python Tools/sl.py verify-network --task <имя> --build-task <имя-QA-сборки>`.
+Требует Windows. Проверяет хеши всей сборки, запускает две копии в фоне, соединяет их по UDP
+на `127.0.0.1:17777` и пишет `network-<имя>.json`. Сценарий использует настоящие команды и
+жизненный цикл; урон, размещение и продвижение игровых тиков задаются автоматикой на хосте.
+Это автоматическая проверка двух процессов на ПК. Логи и копии остаются в `Temp/network-acceptance/`.
+Каждый прогон получает новое имя, процессы завершаются и при неудаче. Настройка обучения сохраняется.
+Runtime CLI принимает каталог плеера в `--runtime-path`; для asmdef SectorLab сценарий явно
+добавляет ссылки компилятору Pipeline. Долгая сборка Addressables выполняется как detached job.
 
 ## Unity Editor из терминала
 

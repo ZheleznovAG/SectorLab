@@ -1,0 +1,13 @@
+{
+  "task": "v1.2.0-udp",
+  "sourceHead": "4b057239e5e586610705f9e392710da4b65d80cc",
+  "startedAtUtc": "2026-10-26T17:17:31.998370+00:00",
+  "buildReport": "docs/evidence/windows-build-v1.2.0-qa2.json",
+  "buildReportSha256": "98571B40730D280D45AC8FE7B194DA9D6B20CA190130F1252EC6D0568F970278",
+  "transport": "Unity Transport UDP over 127.0.0.1, two Windows processes",
+  "scenario": "Production commands and lifecycle, with host-controlled damage, placement and game ticks",
+  "steps": [],
+  "passed": false,
+  "error": "[LOCAL_USER_HOME]\\AppData\\Local\\Unity\\bin\\unity.EXE command --json --no-banner... exited with 6\n{\n  \"success\": false,\n  \"command\": \"unity command eval_file\",\n  \"data\": null,\n  \"errors\": [\n    {\n      \"code\": \"COMMAND_FAILED\",\n      \"message\": \"No Pipeline runtime instance found at: [LOCAL_USER_HOME]\\\\Projects\\\\SectorLab\\\\Temp\\\\network-acceptance\\\\v1.2.0-udp\\\\host\\\\.unity-pipeline-runtime-port. Make sure the path contains a .unity-pipeline-runtime-port file from a running Unity Player build.\"\n    }\n  ],\n  \"warnings\": []\n}\n",
+  "completedAtUtc": "2026-10-26T17:17:49.756561+00:00"
+}
