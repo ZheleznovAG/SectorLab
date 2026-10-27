@@ -155,14 +155,20 @@ namespace SectorLab.Presentation
             RelayConfig config = battle.Relays[index].Config;
             int side = perspective.Side(view.Side);
             string owner = side == 1 ? "Ваш" : side == 2 ? "Враг" : "Свободен";
-            string status = !isRunning ? paused ? "ПАУЗА" : "Бой окончен"
-                : view.Contested ? "СПОР · эффект остановлен"
-                : view.Owner == RelayOwner.Neutral ? view.Percent == 0 ? $"Свободен · захват {config.captureSeconds:0.#} с" : $"{owner} · захват {view.Percent}%"
-                : config.kind == RelayKind.Score ? owner + " · приносит очки"
-                : view.OwnerPresent ? owner + " · ремонтирует" : owner + " · ждёт бойца";
+            string status = RelayStatus(config, view, owner, isRunning, paused);
             relayLabels[index].text = $"{config.label}  {RelayText.Effect(config)}\n{status}";
             relayImages[index].color = view.Contested ? new Color(0.56f, 0.42f, 0.10f)
                 : side == 1 ? Blue : side == 2 ? Red : Neutral;
+        }
+
+        private static string RelayStatus(RelayConfig config, RelayView view, string owner, bool running, bool paused)
+        {
+            if (!running) return paused ? "ПАУЗА" : "Бой окончен";
+            if (view.Contested) return "СПОР · эффект остановлен";
+            if (view.Owner == RelayOwner.Neutral)
+                return view.Percent == 0 ? $"Свободен · захват {config.captureSeconds:0.#} с" : $"{owner} · захват {view.Percent}%";
+            if (config.kind == RelayKind.Score) return owner + " · приносит очки";
+            return owner + (view.OwnerPresent ? " · ремонтирует" : " · ждёт бойца");
         }
 
         private void LateUpdate()

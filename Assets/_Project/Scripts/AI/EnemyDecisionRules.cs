@@ -54,10 +54,13 @@ namespace SectorLab.AI
             {
                 RelayOption relay = relays[i];
                 if (!relay.Reachable) continue;
-                bool eligible = kind == EnemyGoalKind.Defend ? relay.Kind == RelayKind.Score && relay.Threatened
-                    : kind == EnemyGoalKind.Capture ? relay.Kind == RelayKind.Score && relay.Owner != RelayOwner.Enemy
-                    : kind == EnemyGoalKind.Repair ? relay.Kind == RelayKind.Repair && relay.Owner == RelayOwner.Enemy
-                    : relay.Kind == RelayKind.Score && relay.Owner == RelayOwner.Enemy;
+                bool eligible = kind switch
+                {
+                    EnemyGoalKind.Defend => relay.Kind == RelayKind.Score && relay.Threatened,
+                    EnemyGoalKind.Capture => relay.Kind == RelayKind.Score && relay.Owner != RelayOwner.Enemy,
+                    EnemyGoalKind.Repair => relay.Kind == RelayKind.Repair && relay.Owner == RelayOwner.Enemy,
+                    _ => relay.Kind == RelayKind.Score && relay.Owner == RelayOwner.Enemy
+                };
                 if (eligible && relay.Cost < cost) { best = i; cost = relay.Cost; }
             }
             return best;

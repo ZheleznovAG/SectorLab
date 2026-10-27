@@ -8,7 +8,7 @@ namespace SectorLab.Battle
 {
     // The authority's entry point for player orders. Every order is validated here — running match,
     // known living unit, issuer owns it, valid target — before it touches movement or combat.
-    // Locally the commander calls Execute directly; a host would call it for each received command.
+    // Locally the commander calls Execute directly; HostSession calls it for each received order.
     public sealed class MatchCommands : ICommandSink
     {
         private readonly IReadOnlyList<RelayPoint> relays;
