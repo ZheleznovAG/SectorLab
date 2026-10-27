@@ -22,13 +22,25 @@ namespace SectorLab.Tests
     public class NetworkMatchTests
     {
         private LoopbackChannel hostEnd, clientEnd;
+        private bool hadTutorialPreference;
+        private int tutorialPreference;
 
         [SetUp]
-        public void CreateChannel() => LoopbackChannel.CreatePair(out hostEnd, out clientEnd);
+        public void CreateChannel()
+        {
+            string key = SectorLab.Presentation.TutorialView.SeenPreference;
+            hadTutorialPreference = PlayerPrefs.HasKey(key);
+            tutorialPreference = PlayerPrefs.GetInt(key);
+            LoopbackChannel.CreatePair(out hostEnd, out clientEnd);
+        }
 
         [UnityTearDown]
         public IEnumerator Cleanup()
         {
+            string key = SectorLab.Presentation.TutorialView.SeenPreference;
+            if (hadTutorialPreference) PlayerPrefs.SetInt(key, tutorialPreference);
+            else PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
             NetworkLaunch.Offline();
             Time.timeScale = 1;
             Scene main = SceneManager.GetSceneByName("Main");
