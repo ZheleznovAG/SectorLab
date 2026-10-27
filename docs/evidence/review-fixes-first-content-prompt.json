@@ -1,0 +1,22 @@
+{
+  "checkedAtUtc": "2026-10-27T10:19:13.713259+00:00",
+  "result": {
+    "output": null,
+    "diagnostics": [],
+    "success": true,
+    "command": "eval",
+    "result": {
+      "recreatedInitialInformed": false,
+      "recreatedInitialGenerateLayout": false,
+      "generateLayoutAfter": true,
+      "informedAfter": false,
+      "completedWithoutDialogResponse": true
+    },
+    "executionTimeMs": 8290,
+    "message": null,
+    "error": null,
+    "errorDetails": null,
+    "executedAt": "2026-10-27T10:19:11.9147065Z"
+  },
+  "probe": "Recreated GenerateBuildLayout=false and informed=false locally; restored original values afterwards."
+}

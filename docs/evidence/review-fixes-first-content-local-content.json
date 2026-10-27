@@ -1,0 +1,35 @@
+{
+    "checkedAtUtc": "2026-10-27T10:19:11.8601575Z",
+    "target": "Android",
+    "error": "",
+    "outputPath": "Library/com.unity.addressables/aa/Android/settings.json",
+    "durationSeconds": 7.7803619,
+    "succeeded": true,
+    "files": [
+        {
+            "path": "aa/catalog.bin",
+            "sha256": "F7F4E21FD338C65D0FBB56431D4F6915B41F50107F7B9D07804CD22B14970125",
+            "bytes": 2940
+        },
+        {
+            "path": "aa/catalog.hash",
+            "sha256": "8FACBC4911006C21EC08341A79C6214D98171CC3218AA6EA8D10B14FC8B81F1C",
+            "bytes": 32
+        },
+        {
+            "path": "aa/settings.json",
+            "sha256": "5A3FE20C317D1DE9CF3ECC4D76729EA521597707E5102DE6B4F48BF4D31749ED",
+            "bytes": 852
+        },
+        {
+            "path": "aa/Android/0c4162be82264d6cddfd16e267eacd4f_monoscripts_7c0d201ca9466c894c388d5e02421fd6.bundle",
+            "sha256": "E3290D9C0E901181FD68AABAD1B49F68B943AC5082C93E96A6021E8C6A096E61",
+            "bytes": 1849
+        },
+        {
+            "path": "aa/Android/localunits_assets_all_686412ae5c8c3252d7bc62dc97fb8b25.bundle",
+            "sha256": "CF6C234E155561323CD7AC996356A1A6E79806BDF3B9B85A0C103B55FBFA0A7B",
+            "bytes": 139095
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "checkedAtUtc": "2026-10-27T10:05:32.6670772Z",
+    "target": "StandaloneWindows64",
+    "error": "",
+    "outputPath": "Library/com.unity.addressables/aa/Windows/settings.json",
+    "durationSeconds": 21.6131074,
+    "succeeded": true,
+    "files": [
+        {
+            "path": "aa/catalog.bin",
+            "sha256": "8F307DE6F889DCF7F4F7996AE358061082A0CF1E79A5CFDCE4CC02EAADFD2BAC",
+            "bytes": 3155
+        },
+        {
+            "path": "aa/catalog.hash",
+            "sha256": "6A6096456CEB5F6F0D78B0357606A0A7A2EAEB61220EDEA50FC0DE81F0358E8D",
+            "bytes": 32
+        },
+        {
+            "path": "aa/settings.json",
+            "sha256": "CAFB52FA5C6E17B27369B4CD8F2918C342EDA7FADA5401B7CADD4BE649D477CD",
+            "bytes": 864
+        },
+        {
+            "path": "aa/StandaloneWindows64/0c4162be82264d6cddfd16e267eacd4f_monoscripts_7c0d201ca9466c894c388d5e02421fd6.bundle",
+            "sha256": "E0D8EAF1974446D4CA5063EC117765BC4B95C6599462217F3923849C88B3729D",
+            "bytes": 1849
+        },
+        {
+            "path": "aa/StandaloneWindows64/localunits_assets_all_9cd1961d232b20d87159b7e1683a81f2.bundle",
+            "sha256": "CBFEC81EEB613310FFDA0FB6C9C79882BC1BE23FEAC9803FE7995E6BD8B9359A",
+            "bytes": 86695
+        }
+    ]
+}

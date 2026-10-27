@@ -34,7 +34,7 @@ unity open .                                                          # перв
 
 | Команда | Что делает |
 |---|---|
-| `python Tools/sl.py doctor` ||
+| `python Tools/sl.py doctor` | Editor, инструменты, adb и доступность телефона |
 | `python Tools/sl.py test --task T` | EditMode и PlayMode в открытом Editor; `--mode EditMode\|PlayMode\|both`, `--filter <полное имя теста или фикстуры>` |
 | `python Tools/sl.py check` | Пробелы (`git diff --check`), JSON пакетов, дубли GUID, `.meta` у каждого файла, ссылки в документации, приватность |
 | `python Tools/sl.py privacy [--staged]` | Gitleaks по публикуемым файлам: секреты, личные пути и почта; запрещённые типы файлов; автор — noreply |
@@ -49,6 +49,9 @@ unity open .                                                          # перв
 `android-build-T.json`, `T.json`/`T.csv`. В отчётах есть `sourceHead`, SHA-256 всех входов (`Assets`,
 `Packages`, `ProjectSettings`) и полный ответ Unity. Личные пути заменены на `[LOCAL_USER_HOME]`.
 Отчёты важных прогонов коммитятся.
+Повторное использование имени с существующим отчётом или CSV останавливает проверку до
+запуска Unity. Для `--mode both` заранее проверяются оба режима. Старые доказательства не заменяются;
+при исправлении неудачного прогона выбирай новое имя.
 
 ## Тесты
 
@@ -60,15 +63,22 @@ unity open .                                                          # перв
   имя файла из переменной `SECTORLAB_VERIFICATION_TASK`. `sl.py` ставит её в Editor перед запуском.
 - CI: `.github/workflows/checks.yml` запускает тесты Python 3.9/3.14 на Windows/Linux и гигиену
   с Gitleaks на push/PR. [Первый прогон прошёл](https://github.com/ZheleznovAG/SectorLab/actions/runs/40295350670).
-  `.github/workflows/tests.yml` (Unity/GameCI) запускается вручную; нужны секреты `UNITY_LICENSE`,
-  `UNITY_EMAIL`, `UNITY_PASSWORD`. Текущий статус — в STATUS.
+  `.github/workflows/tests.yml` (Unity/GameCI) настроен на push в main, PR и ручной запуск;
+  запускает только сборки `SectorLab.Tests.EditMode`/`PlayMode`. Нужны секреты `UNITY_LICENSE`,
+  `UNITY_EMAIL`, `UNITY_PASSWORD`; preflight явно падает при их отсутствии. Fork PR не получает
+  секреты, `pull_request_target` не используется. Успешный локальный прогон не заменяет облачный;
+  текущий статус — в STATUS.
+- Python-регрессии tooling: `python -B -m unittest discover -s Tools/tests -v`.
 
 ## Сборка и телефон
 
-1. `python Tools/sl.py build-android --task <имя>`. Сборка перезаписывает `preloadedAssets` в
-   `ProjectSettings/ProjectSettings.asset` (Input System); `sl.py` предупредит. Если в diff только это —
-   `git checkout -- ProjectSettings/ProjectSettings.asset`. Служебные изменения в `Mobile_RPAsset`,
-   `UniversalRenderPipelineGlobalSettings`, `GraphicsSettings` — нормальны.
+1. `python Tools/sl.py build-android --task <имя>`. Инструмент сначала переключает платформу на
+   Android, ждёт окончания импорта, явно собирает Addressables и сверяет размеры/SHA-256
+   каталога, settings и всех бандлов внутри APK с manifest сборки контента. Каталог без бандлов
+   или контент другой платформы означает ошибку проверки, даже если Unity вернул Succeeded.
+   Сборка может изменить `preloadedAssets` в `ProjectSettings/ProjectSettings.asset` (Input System).
+   Просмотри `git diff ProjectSettings` и верни только служебные изменения; сохраняй намеренные
+   правки версии и настроек. Не восстанавливай весь файл поверх незакоммиченных изменений.
 2. Телефон: режим разработчика, отладка по USB, подтвердить ключ ПК. `python Tools/sl.py doctor` покажет устройство.
 3. `python Tools/sl.py install-android` — ставит самый свежий APK и сверяет хеш установленного `base.apk`.
 4. Сеть: телефоны и ПК в одной Wi-Fi; брандмауэр ПК должен пропускать UDP 7777 для Unity/игры.
@@ -76,17 +86,23 @@ unity open .                                                          # перв
 Пакет `com.zheleznovag.sectorlab`, подпись — debug-ключ Unity. Эмулятор Android ARM64-сборку не запускает (SIGILL).
 
 **Windows-плеер:** `python Tools/sl.py build-windows --task <имя>`. Инструмент переключает платформу,
-собирает локальный контент и сохраняет хеши файлов в `windows-build-<имя>.json`.
+собирает локальный контент, проверяет его байты в Player и сохраняет хеши файлов в `windows-build-<имя>.json`.
 Результат — `Builds/Windows/<имя>/SectorLab.exe`; запуск клиента: `-sectorlab-join 127.0.0.1`.
 Для автоматической приёмки добавить `--qa`: получится Development-плеер с локальным Pipeline,
 доступный через `unity command --runtime SectorLab`. Настройки Pipeline восстанавливаются после
 сборки; обычная Windows-сборка и APK не требуют диагностического сервера.
+Оба wrapper включают `ProjectConfigData.GenerateBuildLayout` перед первым content build:
+диагностический layout остаётся в Library, модального вопроса Addressables не возникает.
+Это локальная настройка Editor, которая не включает runtime Pipeline. Подробности —
+[ADR-021](adr/021-explicit-platform-content-and-artifact-validation.md).
 
 **Приёмка сети:** `python Tools/sl.py verify-network --task <имя> --build-task <имя-QA-сборки>`.
 Требует Windows. Проверяет хеши всей сборки, запускает две копии в фоне, соединяет их по UDP
 на `127.0.0.1:17777` и пишет `network-<имя>.json`. Сценарий использует настоящие команды и
 жизненный цикл; урон, размещение и продвижение игровых тиков задаются автоматикой на хосте.
 Это автоматическая проверка двух процессов на ПК. Логи и копии остаются в `Temp/network-acceptance/`.
+Сценарий также наблюдает реальную клиентскую линию выстрела и сверяет её конец с положением
+цели на хосте; короткая линия отслеживается при публикации модели, а не редким опросом.
 Каждый прогон получает новое имя, процессы завершаются и при неудаче. Настройка обучения сохраняется.
 Runtime CLI принимает каталог плеера в `--runtime-path`; для asmdef SectorLab сценарий явно
 добавляет ссылки компилятору Pipeline. Долгая сборка Addressables выполняется как detached job.
