@@ -173,14 +173,28 @@ namespace SectorLab.Network
     }
 
     // Delivery is explicit so tests can keep messages in flight across scene/session changes.
-    public sealed class LoopbackChannel : IMessageChannel
+    public sealed class LoopbackChannel : IMessageChannel, IConnectionStatus
     {
         private readonly Queue<byte[]> outgoing = new Queue<byte[]>();
         private LoopbackChannel peer;
+        private bool connected = true;
         public event Action<ArraySegment<byte>> Received;
+        public event Action Connected, Disconnected;
         public int Pending => outgoing.Count;
         public int Capacity { get; set; } = int.MaxValue;
-        public bool IsConnected { get; set; } = true;
+
+        // Tests flip this to play a peer arriving or leaving, with the same events as UtpChannel.
+        public bool IsConnected
+        {
+            get => connected;
+            set
+            {
+                if (connected == value) return;
+                connected = value;
+                if (value) Connected?.Invoke();
+                else Disconnected?.Invoke();
+            }
+        }
 
         public static void CreatePair(out LoopbackChannel host, out LoopbackChannel client)
         {

@@ -119,6 +119,9 @@ namespace SectorLab.Tests
             Assert.That(client.Send(order), Is.EqualTo(SendResult.Disconnected));
             Assert.That(sink.Submit(order, out _), Is.False);
             receiver.IsConnected = true;
+            Assert.That(sink.Submit(order, out _), Is.False, "A lost connection invalidates the frame.");
+            host.SnapshotSequence++;
+            sender.Send(Packet(host)); sender.Flush();
             Assert.That(sink.Submit(order, out _), Is.True);
             Assert.That(receiver.Pending, Is.EqualTo(1));
         }

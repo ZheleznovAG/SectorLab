@@ -52,11 +52,11 @@ namespace SectorLab.Tests
             }
         }
 
-        private static IEnumerator LoadMain()
+        private static IEnumerator LoadMain(bool dismissTutorial = true)
         {
             Time.timeScale = 1;
             yield return SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
-            yield return MainLifecycleTests.WaitForReady();
+            yield return MainLifecycleTests.WaitForReady(dismissTutorial);
         }
 
         [UnityTest]
@@ -187,6 +187,75 @@ namespace SectorLab.Tests
             NetworkTestPeer.Send(hostModel, hostEnd);
             Assert.That(view.IsVisible, Is.False);
             Assert.That(commander.enabled, Is.True);
+        }
+
+        private static Text Title(BattleResultView view) => (Text)typeof(BattleResultView).GetField("title",
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(view);
+
+        // Plays the handshake timeout without waiting 20 real seconds.
+        private static void ExpireHandshake(NetworkMatchBootstrap bootstrap) =>
+            typeof(NetworkMatchBootstrap).GetField("startedAt",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .SetValue(bootstrap, Time.unscaledTime - NetworkMatchBootstrap.HandshakeTimeoutSeconds - 1);
+
+        [UnityTest]
+        public IEnumerator HostWaitingForAnOpponentKeepsItsAddressUntilAPeerFailsToAgree()
+        {
+            hostEnd.IsConnected = false;
+            NetworkLaunch.Host(hostEnd);
+            yield return LoadMain();
+            var bootstrap = Object.FindAnyObjectByType<NetworkMatchBootstrap>();
+            var view = Object.FindAnyObjectByType<BattleResultView>();
+            Assert.That(Title(view).text, Does.StartWith("Ожидание соперника").And.Contain("IP:"));
+
+            ExpireHandshake(bootstrap);
+            yield return null; yield return null;
+            Assert.That(Title(view).text, Does.StartWith("Ожидание соперника").And.Contain("IP:"),
+                "Nobody has connected: the host is waiting, not failing.");
+
+            hostEnd.IsConnected = true; // a peer arrives; its own 20 seconds start now
+            yield return null;
+            Assert.That(Title(view).text, Does.StartWith("Ожидание соперника"));
+            ExpireHandshake(bootstrap);
+            yield return null; yield return null;
+            Assert.That(Title(view).text, Does.Contain("не согласован").And.Contain("IP:"));
+            Assert.That(view.ActionLabel, Is.EqualTo("Играть с ИИ"));
+            Assert.That(bootstrap.WaitingForPeer, Is.True);
+        }
+
+        [UnityTest]
+        public IEnumerator ClientThatLostItsHostKeepsSayingSo()
+        {
+            NetworkLaunch.Client(clientEnd);
+            yield return LoadMain();
+            using var hostModel = new MatchModel();
+            hostModel.SetRelayCount(3);
+            NetworkTestPeer.Begin(hostModel, hostEnd, clientEnd);
+            NetworkTestPeer.Send(hostModel, hostEnd);
+            var bootstrap = Object.FindAnyObjectByType<NetworkMatchBootstrap>();
+            var view = Object.FindAnyObjectByType<BattleResultView>();
+            Assert.That(bootstrap.Client.IsSynchronized, Is.True);
+
+            clientEnd.IsConnected = false;
+            Assert.That(Title(view).text, Does.Contain("Связь с хостом потеряна"));
+            ExpireHandshake(bootstrap);
+            yield return null; yield return null;
+            Assert.That(Title(view).text, Does.Contain("Связь с хостом потеряна"),
+                "A lost host is not a version mismatch.");
+            Assert.That(view.ActionLabel, Is.EqualTo("Играть с ИИ"));
+        }
+
+        [UnityTest]
+        public IEnumerator ClientDoesNotOpenTheTutorialOverTheHostsRunningMatch()
+        {
+            PlayerPrefs.DeleteKey(SectorLab.Presentation.TutorialView.SeenPreference);
+            NetworkLaunch.Client(clientEnd);
+            yield return LoadMain(dismissTutorial: false);
+            var tutorial = Object.FindAnyObjectByType<SectorLab.Presentation.TutorialView>();
+            Assert.That(tutorial.IsShowing, Is.False, "The client cannot pause the host's clock.");
+            tutorial.Open();
+            Assert.That(tutorial.IsShowing, Is.True, "The help button still opens it.");
+            tutorial.Dismiss();
         }
 
         [UnityTest]

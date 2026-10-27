@@ -42,7 +42,13 @@ namespace SectorLab.Presentation
             outcomeSubscription?.Dispose();
             if (battle != null) battle.SetPaused(PauseReason.Tutorial, false);
         }
-        private void OnReady() { if (PlayerPrefs.GetInt(SeenPreference, 0) == 0) Open(); }
+        // A client cannot pause the host, so it is not dropped into a running fight behind a modal;
+        // the help button still opens the same steps.
+        private void OnReady()
+        {
+            if (PlayerPrefs.GetInt(SeenPreference, 0) == 0
+                && SectorLab.Network.NetworkLaunch.Role != SectorLab.Network.SessionRole.Client) Open();
+        }
         private void OnFinished(BattleOutcome outcome)
         {
             if (outcome == BattleOutcome.InProgress) return;

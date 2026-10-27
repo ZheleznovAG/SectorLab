@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SectorLab.Network
 {
-    // Optional connection state for channels that can be offline (a loopback is always connected).
+    // Optional connection state for channels that can be offline.
     public interface IConnectionStatus
     {
         bool IsConnected { get; }

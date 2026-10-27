@@ -47,7 +47,11 @@ namespace SectorLab.Network
             {
                 WaitingForPeer = true;
                 battle.SetPaused(PauseReason.WaitingForPeer, true);
-                if (status != null) status.Disconnected += OnPeerDisconnected;
+                if (status != null)
+                {
+                    status.Connected += OnPeerConnected;
+                    status.Disconnected += OnPeerDisconnected;
+                }
             }
             else
             {
@@ -101,12 +105,26 @@ namespace SectorLab.Network
         {
             if (host != null && (status == null || status.IsConnected)
                 && Time.unscaledTime - lastSentAt >= HeartbeatSeconds) SendState();
-            bool pending = host != null ? !host.Ready : client != null && !client.IsSynchronized;
-            if (pending && !timedOut && Time.unscaledTime - startedAt >= HandshakeTimeoutSeconds)
+            if (HandshakePending() && !timedOut && Time.unscaledTime - startedAt >= HandshakeTimeoutSeconds)
             {
                 timedOut = true;
-                ShowNotice(client?.Failure ?? "Не удалось согласовать матч. Проверьте сеть и одинаковую версию игры.");
+                ShowNotice(client != null ? client.Failure ?? "Не удалось согласовать матч. Проверьте сеть и одинаковую версию игры."
+                    : "Соперник подключился, но матч не согласован. Нужна одинаковая версия игры.\nIP: "
+                        + NetworkLauncher.LocalAddressesText());
             }
+        }
+
+        // Only a connected peer can fail to agree: a host with nobody connected is still waiting,
+        // and a client that lost its host already says so.
+        private bool HandshakePending()
+        {
+            if (host != null) return !host.Ready && (status == null || status.IsConnected);
+            return client != null && !client.IsSynchronized && !hostLost;
+        }
+
+        private void OnPeerConnected()
+        {
+            startedAt = Time.unscaledTime; timedOut = false;
         }
 
         private void LateUpdate() => proxies?.Render();
@@ -203,6 +221,7 @@ namespace SectorLab.Network
             if (lifecycle != null) lifecycle.Ready -= StartSession;
             if (status != null)
             {
+                status.Connected -= OnPeerConnected;
                 status.Disconnected -= OnPeerDisconnected;
                 status.Disconnected -= OnHostDisconnected;
             }
