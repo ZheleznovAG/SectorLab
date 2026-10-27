@@ -8,7 +8,7 @@
 
 > **English.** A small mobile tactics game in Unity 6: three robots a side fight over capture points on one arena,
 > against an AI or a second player over Wi-Fi (authoritative host on Unity Transport). A portfolio project built
-> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 260 automated tests.
+> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 263 automated tests.
 > Docs are in Russian; start with [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md).
 
 [![Геймплей SectorLab: захват узлов и бой против ИИ](docs/media/gameplay-v1.2.0.gif)](https://media.githubusercontent.com/media/ZheleznovAG/SectorLab/main/docs/media/gameplay-v1.2.0.mp4)
@@ -37,7 +37,7 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 | Движок | Unity 6000.6.4f1, URP 17.6, Input System 1.20, AI Navigation 2.0 |
 | Технологии | VContainer 1.19 (composition root матча), UniTask 2.5 (загрузка и возрождение с отменой), Addressables 2.11 (локальные префабы с явным владением), R3 1.3 (реактивная модель матча), Unity Transport 6.6 (UDP, авторитетный хост) |
 | Код | 103 собственных C# файла: 59 игровых, 42 тестовых и 2 Editor-инструмента |
-| Тесты | 88 EditMode + 172 PlayMode, все PASS; приёмка сети — 16 проверок двух процессов (27.10.2026); процент покрытия кода не измерен |
+| Тесты | 88 EditMode + 175 PlayMode, все PASS; приёмка сети — 16 проверок двух процессов (27.10.2026); процент покрытия кода не измерен |
 | Решения | 24 ADR в [`docs/adr/`](docs/adr/) |
 
 ## Игра

@@ -30,6 +30,10 @@
 | R-06, P2 | Перед content build устанавливается публичное `ProjectConfigData.GenerateBuildLayout=true`, layout хранится в Library. Wrapper ждёт стабильного endpoint после domain reload, автоматически повторяются только чтения статуса. | Windows и Android content build проходят штатным wrapper. Дополнительно в диагностике воссозданы layout=false/seen=false: build завершился без ответа на диалог, layout стал true, seen остался false; начальные локальные флаги восстановлены. [Результат](../evidence/review-fixes-first-content-prompt.json), [manifest](../evidence/review-fixes-first-content-local-content.json). Внутренний seen-флаг не используется production-кодом. |
 | A-01, компромисс P2 | Сначала готовятся все выстрелы тика, потом применяется урон. Смерть в этом же тике не отменяет готовый выстрел. Реестр больше не даёт приоритет первому стрелку. | Две последовательности регистрации: оба бойца погибают и каждый стреляет ровно один раз. Полный набор, включая пять тактических матчей, проходит. |
 
+**Обновление после фиксации:** по решению владельца облачный Unity CI не подключается; GameCI
+оставлен только ручным `workflow_dispatch`, push/PR выполняют быстрые проверки
+([ADR-024](../adr/024-local-unity-validation.md)). Строка R-03 выше описывает состояние на момент отчёта.
+
 ## Изменения и совместимость
 
 - [ADR-021](../adr/021-explicit-platform-content-and-artifact-validation.md): явный платформенный

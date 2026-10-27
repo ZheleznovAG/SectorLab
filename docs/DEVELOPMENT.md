@@ -83,7 +83,8 @@ unity open .                                                          # перв
 3. `python Tools/sl.py install-android` — ставит самый свежий APK и сверяет хеш установленного `base.apk`.
 4. Сеть: телефоны и ПК в одной Wi-Fi; брандмауэр ПК должен пропускать UDP 7777 для Unity/игры.
 
-Пакет `com.zheleznovag.sectorlab`, подпись — debug-ключ Unity. Эмулятор Android ARM64-сборку не запускает (SIGILL).
+Пакет `com.zheleznovag.sectorlab`, подпись — debug-ключ Unity. Target SDK задан явно (**36**), а не
+«наивысший установленный»: результат сборки не зависит от SDK конкретной машины. Эмулятор Android ARM64-сборку не запускает (SIGILL).
 
 **Windows-плеер:** `python Tools/sl.py build-windows --task <имя>`. Инструмент переключает платформу,
 собирает локальный контент, проверяет его байты в Player и сохраняет хеши файлов в `windows-build-<имя>.json`.
