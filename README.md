@@ -8,7 +8,7 @@
 
 > **English.** A small mobile tactics game in Unity 6: three robots a side fight over capture points on one arena,
 > against an AI or a second player over Wi-Fi (authoritative host on Unity Transport). A portfolio project built
-> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 230 automated tests.
+> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 254 automated tests.
 > Docs are in Russian; start with [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md).
 
 ![Матч: красные держат A, спор на B, синие захватывают C; рамка показывает, что побеждает враг](docs/evidence/V1-relay-ring-capturing.png)
@@ -19,6 +19,10 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 (последняя — **1.1.0**, pre-release). Подпись — debug-ключ Unity,
 поэтому Android попросит разрешить установку из неизвестного источника. Что нового — [CHANGELOG](CHANGELOG.md).
 
+В рабочем репозитории собрана **1.2.0** (code 3): `Builds/Android/SectorLab-v1.2.0.apk`.
+[Результат сборки](docs/evidence/android-build-v1.2.0.json) и
+[приёмка сети двумя процессами](docs/evidence/network-v1.2.0-udp5.json) сохранены.
+
 ## Коротко
 
 | | |
@@ -26,9 +30,9 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 | Платформа | Android (landscape), Editor, Windows-плеер для сетевой игры |
 | Движок | Unity 6000.6.4f1, URP 17.6, Input System 1.20, AI Navigation 2.0 |
 | Технологии | VContainer 1.19 (composition root матча), UniTask 2.5 (загрузка и возрождение с отменой), Addressables 2.11 (локальные префабы с явным владением), R3 1.3 (реактивная модель матча), Unity Transport 6.6 (UDP, авторитетный хост) |
-| Код | ~4,5 тыс. строк игры в `Assets/_Project/Scripts/`, ~5,2 тыс. строк тестов |
-| Тесты | 76 EditMode + 154 PlayMode, все PASS (22.10.2026) |
-| Решения | 15 ADR в [`docs/adr/`](docs/adr/) |
+| Код | ~5 тыс. строк игры в `Assets/_Project/Scripts/`, ~5,9 тыс. строк тестов |
+| Тесты | 86 EditMode + 168 PlayMode, все PASS; приёмка сети — 15 проверок двух процессов (27.10.2026) |
+| Решения | 20 ADR в [`docs/adr/`](docs/adr/) |
 
 ## Игра
 
@@ -54,6 +58,7 @@ flowchart LR
     Battle -->|PublishModel| Model[MatchModel / R3]
     Model --> View[HUD, звук, итог]
     Commander[UnitCommander] -->|UnitCommand| Commands[MatchCommands: проверка]
+    AI[EnemyTacticsController] -->|UnitCommand| Commands
     Host[HostSession] -->|приказ клиента| Commands
     Model -->|снимки по UDP| Client[ClientSession → MatchModel клиента]
 ```
