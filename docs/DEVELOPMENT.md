@@ -41,6 +41,7 @@ unity open .                                                          # перв
 | `python Tools/sl.py build-android --task T` | APK с локальными Addressables и отчётом о сборке |
 | `python Tools/sl.py build-windows --task T [--qa]` | Windows-плеер с локальными Addressables; `--qa` включает Development и команды локального Pipeline |
 | `python Tools/sl.py verify-network --task T --build-task B` | Два Windows QA-плеера из сборки B: UDP, приказы, смерть/респаун, узлы, итог, новый матч, обрыв |
+| `python Tools/sl.py record-demo --task T --build-task B` | Записать матч и игровой звук из Windows QA-плеера; нужен FFmpeg |
 | `python Tools/sl.py install-android [--apk P]` | Установить (по умолчанию — свежий APK), сверить SHA-256 на устройстве, запустить |
 | `python Tools/sl.py measure-android --task T` | FPS по кадрам SurfaceFlinger, CPU, память запущенной игры; `--auto-restart` нажимает «Ещё бой» |
 
@@ -89,6 +90,17 @@ unity open .                                                          # перв
 Каждый прогон получает новое имя, процессы завершаются и при неудаче. Настройка обучения сохраняется.
 Runtime CLI принимает каталог плеера в `--runtime-path`; для asmdef SectorLab сценарий явно
 добавляет ссылки компилятору Pipeline. Долгая сборка Addressables выполняется как detached job.
+
+**Видео для README:** `python Tools/sl.py record-demo --task <имя> --build-task <имя-QA-сборки>`.
+Требует Windows и FFmpeg с libx264 в PATH. Скрипт запускает отдельную копию QA-плеера,
+загружает `Tools/scenarios/RecordGameplay.cs` через Pipeline и подаёт обычные приказы
+`UnitCommander` против штатного ИИ. Камера и HUD рендерятся напрямую в текстуру 1280×720,
+звук берётся из Unity `AudioRenderer`; рабочий стол и системный звук не захватываются.
+Кадры сохраняются с шагом 1/30 с игрового времени; это демонстрация, а не замер FPS.
+Запись заканчивается через 4 с после итога или через 190 с (`--max-seconds` можно уменьшить).
+MP4 и промежуточные данные — в `Temp/media/<имя>/`, отчёт — `docs/evidence/media-<имя>.json`.
+Для публикации копировать итоговый MP4 в `docs/media/` и сделать GIF из выбранного отрывка
+через FFmpeg `palettegen`/`paletteuse`; бинарные материалы хранятся в Git LFS.
 
 ## Unity Editor из терминала
 

@@ -1,0 +1,32 @@
+{
+  "task": "gameplay-v1.2.0",
+  "sourceHead": "2d5caf96be1106f41e1f99be6a3bb67b80794d85",
+  "startedAtUtc": "2026-10-27T02:54:48.450970+00:00",
+  "completedAtUtc": "2026-10-27T02:56:11.030592+00:00",
+  "buildReport": "docs/evidence/windows-build-v1.2.0-qa2.json",
+  "buildReportSha256": "98571B40730D280D45AC8FE7B194DA9D6B20CA190130F1252EC6D0568F970278",
+  "recorderSha256": "E701DA948CDF0824A07B53E74DFEEDD27014E401088FFF989475E6F406A2BC04",
+  "capture": "Unity rendered frames and AudioRenderer game audio",
+  "controls": "Automated real UnitCommander orders; normal AI, navigation, damage, capture and respawn",
+  "recording": {
+    "frames": 2818,
+    "fps": 30,
+    "width": 1280,
+    "height": 720,
+    "sampleRate": 48000,
+    "channels": 2,
+    "orders": 15,
+    "playerDeaths": 7,
+    "enemyDeaths": 6,
+    "gameSeconds": 88.39999999999925,
+    "playerScore": 45.0,
+    "enemyScore": 7.699999999999998,
+    "resultAt": 89.93333333333334,
+    "outcome": "Victory",
+    "error": "",
+    "completed": true
+  },
+  "video": "Temp/media/gameplay-v1.2.0/gameplay.mp4",
+  "videoBytes": 3128770,
+  "videoSha256": "5B4FDCD87D93D5AC8DDA0F0DF0484CC82295CC80B0FF86A6893979D6D43AAE31"
+}

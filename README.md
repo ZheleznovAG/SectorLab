@@ -11,7 +11,10 @@
 > with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 254 automated tests.
 > Docs are in Russian; start with [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md).
 
-![Матч: красные держат A, спор на B, синие захватывают C; рамка показывает, что побеждает враг](docs/evidence/V1-relay-ring-capturing.png)
+[![Геймплей SectorLab: захват узлов и бой против ИИ](docs/media/gameplay-v1.2.0.gif)](https://media.githubusercontent.com/media/ZheleznovAG/SectorLab/main/docs/media/gameplay-v1.2.0.mp4)
+
+[Смотреть полный матч со звуком — MP4, 1:34, 720p/30 FPS](https://media.githubusercontent.com/media/ZheleznovAG/SectorLab/main/docs/media/gameplay-v1.2.0.mp4).
+Выше — GIF на 14 секунд. Записан Windows-плеер 1.2.0; приказы в матче против ИИ автоматизированы.
 
 ## Скачать
 

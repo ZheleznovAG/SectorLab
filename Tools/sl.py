@@ -9,6 +9,7 @@
     python Tools/sl.py build-android --task T          APK into Builds/Android/SectorLab-T.apk
     python Tools/sl.py build-windows --task T --qa     Windows player with local QA commands
     python Tools/sl.py verify-network --task T --build-task B  two Windows QA players over UDP
+    python Tools/sl.py record-demo --task T --build-task B     record gameplay and game audio
     python Tools/sl.py install-android [--apk P]       install on the connected phone, verify hash
     python Tools/sl.py measure-android --task T        FPS/CPU/memory of the running game
 
@@ -64,6 +65,11 @@ def main(argv: list[str]) -> int:
     network.add_argument("--task", required=True, type=task_name)
     network.add_argument("--build-task", required=True, type=task_name)
 
+    demo = commands.add_parser("record-demo", help="record a real match and game audio from a Windows QA player")
+    demo.add_argument("--task", required=True, type=task_name)
+    demo.add_argument("--build-task", required=True, type=task_name)
+    demo.add_argument("--max-seconds", type=int, default=190)
+
     install = commands.add_parser("install-android", help="install an APK on the connected device")
     install.add_argument("--apk", type=Path, help="default: the newest APK in Builds/Android")
     install.add_argument("--adb")
@@ -103,6 +109,9 @@ def main(argv: list[str]) -> int:
         elif args.command == "verify-network":
             from sectorlab.network_acceptance import verify
             verify(args.task, args.build_task)
+        elif args.command == "record-demo":
+            from sectorlab.media import record_demo
+            record_demo(args.task, args.build_task, args.max_seconds)
         elif args.command == "install-android":
             from sectorlab.android import install as install_apk
             install_apk(args.apk or latest_apk(), args.adb, args.serial, launch=not args.no_launch)
