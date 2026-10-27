@@ -38,7 +38,7 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 | Технологии | VContainer 1.19 (composition root матча), UniTask 2.5 (загрузка и возрождение с отменой), Addressables 2.11 (локальные префабы с явным владением), R3 1.3 (реактивная модель матча), Unity Transport 6.6 (UDP, авторитетный хост) |
 | Код | 103 собственных C# файла: 59 игровых, 42 тестовых и 2 Editor-инструмента |
 | Тесты | 88 EditMode + 172 PlayMode, все PASS; приёмка сети — 16 проверок двух процессов (27.10.2026); процент покрытия кода не измерен |
-| Решения | 23 ADR в [`docs/adr/`](docs/adr/) |
+| Решения | 24 ADR в [`docs/adr/`](docs/adr/) |
 
 ## Игра
 
@@ -115,11 +115,11 @@ python Tools/sl.py check                            # гигиена репоз�
 [88 EditMode](docs/evidence/tests-review-fixes-full-editmode.json),
 [172 PlayMode](docs/evidence/tests-review-fixes-full-playmode.json) и 16 двухпроцессных UDP-проверок.
 
-В GitHub действуют отдельные [быстрые проверки](https://github.com/ZheleznovAG/SectorLab/actions/workflows/checks.yml)
-и [Unity workflow](https://github.com/ZheleznovAG/SectorLab/actions/workflows/tests.yml) на push/PR.
-Быстрые проверки проходят на Windows/Linux с Python 3.9/3.14. Облачные Unity-тесты ещё не запущены:
-workflow останавливается на отсутствии секретов лицензирования. Обязательный Unity PR-gate не настроен.
-Следующие шаги CI и условия выбора облачного сервиса — [docs/CI_READINESS.md](docs/CI_READINESS.md).
+В GitHub на push/PR выполняются [быстрые проверки](https://github.com/ZheleznovAG/SectorLab/actions/workflows/checks.yml):
+Python 3.9/3.14 на Windows/Linux, гигиена и Gitleaks. Unity-тесты и сборки выполняются локально
+через `Tools/sl.py` в установленном Editor. Подключение облачных сервисов Unity для этого не требуется.
+GameCI сохранён как необязательный ручной workflow; автоматически на push/PR он не запускается.
+Порядок проверок и ограничения автоматизации — [docs/CI_READINESS.md](docs/CI_READINESS.md).
 
 Актуальное состояние, что подтверждено и что дальше — **[docs/STATUS.md](docs/STATUS.md)**.
 Для агентов — [AGENTS.md](AGENTS.md).

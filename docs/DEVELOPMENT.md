@@ -63,13 +63,11 @@ unity open .                                                          # перв
   имя файла из переменной `SECTORLAB_VERIFICATION_TASK`. `sl.py` ставит её в Editor перед запуском.
 - CI: `.github/workflows/checks.yml` запускает тесты Python 3.9/3.14 на Windows/Linux и гигиену
   с Gitleaks на push/PR. [Первый прогон прошёл](https://github.com/ZheleznovAG/SectorLab/actions/runs/40295350670).
-  `.github/workflows/tests.yml` (Unity/GameCI) настроен на push в main, PR и ручной запуск;
-  запускает только сборки `SectorLab.Tests.EditMode`/`PlayMode`. Нужны секреты `UNITY_LICENSE`,
-  `UNITY_EMAIL`, `UNITY_PASSWORD`; preflight явно падает при их отсутствии. Fork PR не получает
-  секреты, `pull_request_target` не используется. Успешный локальный прогон не заменяет облачный;
-  текущий статус — в STATUS.
-  Поддерживаемость активации Personal и пилот Unity Build Automation — отдельная проверка;
-  план, источники и критерий обязательного PR-gate — [CI_READINESS](CI_READINESS.md).
+  Unity-тесты выполняются локально через `sl.py test`; `.github/workflows/tests.yml` (GameCI)
+  оставлен только для необязательного ручного запуска. Только этот эксперимент требует секретов
+  `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD`; при их отсутствии он явно завершается ошибкой.
+  На push/PR GameCI не запускается. Организация Unity Cloud и подключение новых сервисов Unity
+  в рабочий процесс не входят по решению владельца. Порядок — [CI_READINESS](CI_READINESS.md).
 - Python-регрессии tooling: `python -B -m unittest discover -s Tools/tests -v`.
 
 ## Сборка и телефон

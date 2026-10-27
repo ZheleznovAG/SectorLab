@@ -130,7 +130,7 @@ sequenceDiagram
 | `Assets/Packages`, `Assets/packages.config` | NuGet-пакеты R3 (NuGetForUnity), в git, чтобы чистый клон компилировался |
 | `Packages/manifest.json` | UPM: VContainer, UniTask, R3.Unity, NuGetForUnity по git-тегам; остальное — Unity registry |
 | `Tools/sl.py`, `Tools/sectorlab/` | Инструменты разработчика ([DEVELOPMENT](DEVELOPMENT.md)) |
-| `.github/workflows/checks.yml`, `tests.yml` | Python Windows/Linux, гигиена и Unity/GameCI на push/PR; Unity требует секретов лицензирования |
+| `.github/workflows/checks.yml`, `tests.yml` | Python Windows/Linux и гигиена на push/PR; Unity локально, GameCI — необязательный ручной эксперимент |
 
 ## С чего читать код
 

@@ -1,12 +1,8 @@
-# EditMode + PlayMode tests in a GameCI Unity container.
-# License preflight fails explicitly when credentials are absent; a green hygiene run never
-# substitutes for Unity validation. Do not use pull_request_target to expose secrets to fork code.
+# Optional manual GameCI experiment. Normal development runs Unity tests locally.
+# No cloud license secrets are required by push/PR checks. A manual run still needs valid licensing.
 name: Unity tests
 
 on:
-  push:
-    branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:

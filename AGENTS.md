@@ -29,7 +29,7 @@
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Модули, поток данных, сеть, где что лежит, с чего читать код |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Окружение, `Tools/sl.py`, тесты, сборка, телефон, git-правила, подводные камни Unity |
 | [CHANGELOG.md](CHANGELOG.md) | Версии APK и что в них вошло; при новой версии поднять `bundleVersion` и `versionCode` |
-| [docs/adr/](docs/adr/) | Архитектурные решения (ADR-001…023) — почему сделано так |
+| [docs/adr/](docs/adr/) | Архитектурные решения (ADR-001…024) — почему сделано так |
 | [docs/audit/](docs/audit/) | Аудиты кода и проекта с находками и статусами |
 | [docs/evidence/](docs/evidence/) | Машинные доказательства: JSON прогонов тестов и сборок, CSV, скриншоты |
 | [docs/history/](docs/history/README.md) | Архив: контракт v1.0, журнал по шагам, ранние документы. Не руководство к действию |
