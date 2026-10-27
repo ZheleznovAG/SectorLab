@@ -1,0 +1,17 @@
+{
+  "aaptExit": 0,
+  "metadata": [
+    "package: name='com.zheleznovag.sectorlab' versionCode='3' versionName='1.2.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "targetSdkVersion:'36'",
+    "uses-permission: name='android.permission.INTERNET'",
+    "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'",
+    "uses-permission: name='com.zheleznovag.sectorlab.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'",
+    "native-code: 'arm64-v8a'"
+  ],
+  "localContentPaths": [
+    "assets/aa/AddressablesLink/link.xml",
+    "assets/aa/catalog.bin",
+    "assets/aa/catalog.hash",
+    "assets/aa/settings.json"
+  ]
+}

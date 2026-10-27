@@ -1,0 +1,36 @@
+{
+  "checkedAtUtc": "2026-10-27T08:45:17.504778+00:00",
+  "component": "com.unity.addressables",
+  "version": "2.11.2",
+  "source": "Packages/com.unity.addressables/Editor/Build/DataBuilders/BuildScriptBase.cs",
+  "sourceSha256": "E2C8A81BC86C00F06115244EC72D9DA3A8EB72D2F48254B241411AD6AB7FC789",
+  "code": [
+    {
+      "line": 394,
+      "text": "        protected virtual void NotifyUserAboutBuildReport()"
+    },
+    {
+      "line": 396,
+      "text": "            bool buildReportSettingCheck = ProjectConfigData.UserHasBeenInformedAboutBuildReportSettingPreBuild;"
+    },
+    {
+      "line": 397,
+      "text": "            if (!buildReportSettingCheck && !Application.isBatchMode && !ProjectConfigData.GenerateBuildLayout)"
+    },
+    {
+      "line": 399,
+      "text": "                bool turnOnBuildLayout = EditorUtility.DisplayDialog(\"Addressables Build Report\","
+    },
+    {
+      "line": 402,
+      "text": "                    \"Yes\", \"No\");"
+    },
+    {
+      "line": 405,
+      "text": "                ProjectConfigData.UserHasBeenInformedAboutBuildReportSettingPreBuild = true;"
+    }
+  ],
+  "observation": "First content build opened a modal Addressables Build Report question. build_status remained building while editor_status timed out. The No button was identified by Win32 class Button, text No, control ID 2, and clicked only in the isolated Editor. Build resumed.",
+  "buildTask": "review-20261027",
+  "initialActiveTarget": "StandaloneWindows64"
+}

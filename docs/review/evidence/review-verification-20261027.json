@@ -1,0 +1,92 @@
+{
+  "checkedAtUtc": "2026-10-27T09:12:42.203725+00:00",
+  "sourceHead": "c6cf1228ad63aa11b10ae1ffd4cb46cf6f689ff6",
+  "checks": [
+    {
+      "command": "python Tools/sl.py check",
+      "exitCode": 0,
+      "output": "PASS privacy: no secrets, personal paths/emails or private file types; author email is noreply.\nPASS repository: whitespace, package JSON, 268 unique GUIDs, .meta for every project asset, 249 documentation links.\n"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "git diff --cached --check",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "validReportLocalLinks": 55,
+  "trackedChanges": [],
+  "stagedChanges": [],
+  "artifacts": [
+    {
+      "path": "docs/review/evidence/addressables-first-build-prompt-20261027.json",
+      "bytes": 1521,
+      "sha256": "5B6EE034267D0BCE8869F3808B21A59BE4403112FD2BC63F776B9A73075C507D"
+    },
+    {
+      "path": "docs/review/evidence/android-apk-metadata-20261027.json",
+      "bytes": 705,
+      "sha256": "1DF8AE19E96723476BAC61EC98572D1EC6009AA6AD0693354D56DD65E4454B95"
+    },
+    {
+      "path": "docs/review/evidence/android-build-review-20261027-explicit.json",
+      "bytes": 89771,
+      "sha256": "37A8814496990F62BBF9EFC20EEE183429E796A9E01922C6A0CED9C08BB93153"
+    },
+    {
+      "path": "docs/review/evidence/android-build-review-20261027.json",
+      "bytes": 89293,
+      "sha256": "A83ABBC6AE0F7918F53C0D618E7388278AD95F6EFD2F08D56349D4D49D85A540"
+    },
+    {
+      "path": "docs/review/evidence/android-packaging-20261027.json",
+      "bytes": 4340,
+      "sha256": "BF54B36C2CBB2CD3D3CC837A6C21D80F6D37CAB9BB6163F16706F0E9C04E099C"
+    },
+    {
+      "path": "docs/review/evidence/network-review-20261027.json",
+      "bytes": 58505,
+      "sha256": "0263127311E22E402BCE59CDC20D9455FA10BF5CE21F3395F2CCADDBD28C9DAA"
+    },
+    {
+      "path": "docs/review/evidence/nuget-advisories-20261027.json",
+      "bytes": 779,
+      "sha256": "5F5AB789D15CA013097E3AA2DFD725B3373CF4EDD1C6A801376F0774C8E343C8"
+    },
+    {
+      "path": "docs/review/evidence/review-20261027-qa-windows-local-content.json",
+      "bytes": 251,
+      "sha256": "ADE5A223967FC63C2016DBBD5D8E442252BA6AF6172B1A1B3C741D78BD71A3BB"
+    },
+    {
+      "path": "docs/review/evidence/review-android-explicit-local-content.json",
+      "bytes": 231,
+      "sha256": "3F7F0EC43793054B477D63FEC1753607DECEF60736DDB898BA758FDE0B8ED43B"
+    },
+    {
+      "path": "docs/review/evidence/runtime-probes-20261027.json",
+      "bytes": 1293,
+      "sha256": "D06CDE6E73609A1731492EB242EB27DFFB461C42A3B867086956B67CCD3A45CE"
+    },
+    {
+      "path": "docs/review/evidence/tests-review-20261027-editmode.json",
+      "bytes": 110847,
+      "sha256": "5566C89C07344D87EEB33BE8E9307E1229DC4734AE5445F5AC58A1E2EB360506"
+    },
+    {
+      "path": "docs/review/evidence/tests-review-20261027-playmode.json",
+      "bytes": 132550,
+      "sha256": "9CB83E5A92B3C5D38CBB305D7BB9167EAB2D5ACB74C8BF95F5BDDEF2A8B54F66"
+    },
+    {
+      "path": "docs/review/evidence/windows-build-review-20261027-qa.json",
+      "bytes": 157340,
+      "sha256": "76EE340351172DA5C265FFBAD90405457FDD165805B708D513D6DB26CCDF539B"
+    }
+  ],
+  "reportSha256": "5601AEC20E7495303C4A79964C72A20E359FFE1A6FC82B81996D0DCF48036278"
+}

@@ -1,0 +1,24 @@
+{
+  "checkedAtUtc": "2026-10-27T08:18:02.005341+00:00",
+  "packages": [
+    "microsoft.bcl.asyncinterfaces",
+    "microsoft.bcl.timeprovider",
+    "r3",
+    "system.componentmodel.annotations",
+    "system.runtime.compilerservices.unsafe",
+    "system.threading.channels"
+  ],
+  "index": "https://api.nuget.org/v3/vulnerabilities/index.json",
+  "records": [
+    {
+      "source": "https://api.nuget.org/v3-vulnerabilities/2026.10.26.23.37.37/vulnerability.base.json",
+      "updated": "2026-10-26T23:37:37.6351372Z",
+      "matches": {}
+    },
+    {
+      "source": "https://api.nuget.org/v3-vulnerabilities/2026.10.26.23.37.37/2026.10.27.05.37.38/vulnerability.update.json",
+      "updated": "2026-10-27T05:37:39.0197771Z",
+      "matches": {}
+    }
+  ]
+}

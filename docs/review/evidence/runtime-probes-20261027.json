@@ -1,0 +1,57 @@
+{
+  "sourceHead": "c6cf1228ad63aa11b10ae1ffd4cb46cf6f689ff6",
+  "records": [
+    {
+      "name": "client-shot-presentation",
+      "result": {
+        "synchronized": true,
+        "audioShotDelta": 1,
+        "replicatedShots": 1,
+        "attackEnabled": false,
+        "lineCount": 1,
+        "visibleLines": 0
+      }
+    },
+    {
+      "name": "failed-role-switch",
+      "result": {
+        "globalRole": "Offline",
+        "sceneRole": "Client",
+        "authority": false,
+        "simulationEnabled": false,
+        "aiEnabled": false,
+        "channelCleared": true,
+        "notice": "Не удалось: review-simulated-bind-failure"
+      }
+    },
+    {
+      "name": "fresh-prefab-lethal-duels-blue-first-and-red-first",
+      "result": [
+        {
+          "order": [
+            0,
+            3
+          ],
+          "beforeBlue": 5,
+          "beforeRed": 5,
+          "blueHp": 5,
+          "redHp": 0,
+          "blueShots": 1,
+          "redShots": 0
+        },
+        {
+          "order": [
+            3,
+            0
+          ],
+          "beforeBlue": 5,
+          "beforeRed": 5,
+          "blueHp": 0,
+          "redHp": 5,
+          "blueShots": 0,
+          "redShots": 1
+        }
+      ]
+    }
+  ]
+}

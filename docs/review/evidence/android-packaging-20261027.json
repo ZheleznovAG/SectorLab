@@ -1,0 +1,97 @@
+{
+  "checkedAtUtc": "2026-10-27T09:04:15.735554+00:00",
+  "sourceHead": "c6cf1228ad63aa11b10ae1ffd4cb46cf6f689ff6",
+  "method": "ZIP inventory plus separate ContentCatalogData.LoadFromFile(resolveInternalIds=false), CreateCustomLocator and dependency reads for both APKs, using installed official Addressables 2.11.2.",
+  "artifacts": [
+    {
+      "artifact": "SectorLab-v1.2.0.apk",
+      "sha256": "0E833FB5FFB2AD95E1E7990CF9C7EBFBAF74BAC5067E005B32536820FC2E264B",
+      "bytes": 34332635,
+      "catalogSha256": "EA61C6B84E63AF24FF15EBD4F1DD515877C411B9A231C164D906E79BFB43071C",
+      "catalogSettingsBuildTarget": "Android",
+      "addressablesEntries": [
+        {
+          "path": "assets/aa/AddressablesLink/link.xml",
+          "bytes": 2445
+        },
+        {
+          "path": "assets/aa/catalog.bin",
+          "bytes": 2963
+        },
+        {
+          "path": "assets/aa/catalog.hash",
+          "bytes": 32
+        },
+        {
+          "path": "assets/aa/settings.json",
+          "bytes": 852
+        }
+      ],
+      "bundleFiles": [],
+      "expectedBundleReferences": [
+        "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/StandaloneWindows64/0c4162be82264d6cddfd16e267eacd4f_monoscripts_7c0d201ca9466c894c388d5e02421fd6.bundle",
+        "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/StandaloneWindows64/localunits_assets_all_686412ae5c8c3252d7bc62dc97fb8b25.bundle"
+      ],
+      "missingBundleZipEntries": [
+        "assets/aa/StandaloneWindows64/0c4162be82264d6cddfd16e267eacd4f_monoscripts_7c0d201ca9466c894c388d5e02421fd6.bundle",
+        "assets/aa/StandaloneWindows64/localunits_assets_all_686412ae5c8c3252d7bc62dc97fb8b25.bundle"
+      ]
+    },
+    {
+      "artifact": "SectorLab-review-20261027.apk",
+      "sha256": "27365591C9A907708043450F83F8B2F18DFEEB6C0B9BB1F55F01687B3BDBD28D",
+      "bytes": 34332439,
+      "catalogSha256": "77B7E677FB3BEF35F1C6CF8283AB1C5D08A423EC4A14284EC6D304FF7A6275F5",
+      "catalogSettingsBuildTarget": "Android",
+      "addressablesEntries": [
+        {
+          "path": "assets/aa/AddressablesLink/link.xml",
+          "bytes": 2445
+        },
+        {
+          "path": "assets/aa/catalog.bin",
+          "bytes": 2963
+        },
+        {
+          "path": "assets/aa/catalog.hash",
+          "bytes": 32
+        },
+        {
+          "path": "assets/aa/settings.json",
+          "bytes": 852
+        }
+      ],
+      "bundleFiles": [],
+      "expectedBundleReferences": [
+        "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/StandaloneWindows64/161c6cad8d2d02eb63792b6e733f4f6c_monoscripts_719e543d4dd5b1f6ec930a8bf7794fb8.bundle",
+        "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/StandaloneWindows64/localunits_assets_all_a2c0d221da9b037a715b0f2622f35c6e.bundle"
+      ],
+      "missingBundleZipEntries": [
+        "assets/aa/StandaloneWindows64/161c6cad8d2d02eb63792b6e733f4f6c_monoscripts_719e543d4dd5b1f6ec930a8bf7794fb8.bundle",
+        "assets/aa/StandaloneWindows64/localunits_assets_all_a2c0d221da9b037a715b0f2622f35c6e.bundle"
+      ]
+    }
+  ],
+  "deviceRun": false,
+  "explicitPreparationValidation": {
+    "artifact": "SectorLab-review-20261027-explicit.apk",
+    "sha256": "113F10EF18DCC1B5D98F863794A4375190458E79BCD18067D9C13C3C7A14B39C",
+    "bytes": 34474044,
+    "bundleReferences": [
+      "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/Android/161c6cad8d2d02eb63792b6e733f4f6c_monoscripts_719e543d4dd5b1f6ec930a8bf7794fb8.bundle",
+      "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/Android/localunits_assets_all_a2c0d221da9b037a715b0f2622f35c6e.bundle"
+    ],
+    "missingBundleZipEntries": [],
+    "bundleFiles": [
+      "assets/aa/Android/161c6cad8d2d02eb63792b6e733f4f6c_monoscripts_719e543d4dd5b1f6ec930a8bf7794fb8.bundle",
+      "assets/aa/Android/localunits_assets_all_a2c0d221da9b037a715b0f2622f35c6e.bundle"
+    ],
+    "settingsBuildTarget": "Android",
+    "headerChecks": {
+      "assets/aa/Android/161c6cad8d2d02eb63792b6e733f4f6c_monoscripts_719e543d4dd5b1f6ec930a8bf7794fb8.bundle": true,
+      "assets/aa/Android/localunits_assets_all_a2c0d221da9b037a715b0f2622f35c6e.bundle": true
+    },
+    "sourceFilesChanged": false,
+    "deviceRun": false
+  }
+}
