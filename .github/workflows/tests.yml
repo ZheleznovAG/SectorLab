@@ -1,15 +1,21 @@
 # EditMode + PlayMode tests in a GameCI Unity container.
-# Manual until the repository has the Unity licence secrets: UNITY_LICENSE (contents of the
-# Personal .ulf), UNITY_EMAIL, UNITY_PASSWORD. Then add `push` / `pull_request` triggers.
-# Not yet run: the image for 6000.6.4f1 and the first pass are unverified.
+# License preflight fails explicitly when credentials are absent; a green hygiene run never
+# substitutes for Unity validation. Do not use pull_request_target to expose secrets to fork code.
 name: Unity tests
 
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
   checks: write
+
+concurrency:
+  group: unity-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -18,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [editmode, playmode]
+        mode: [EditMode, PlayMode]
     steps:
       - name: Check Unity license configuration
         shell: bash
@@ -39,6 +45,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+          persist-credentials: false
 
       - uses: actions/cache@v4
         with:
@@ -55,6 +62,8 @@ jobs:
         with:
           unityVersion: 6000.6.4f1
           testMode: ${{ matrix.mode }}
+          customParameters: -assemblyNames SectorLab.Tests.${{ matrix.mode }}
+          coverageEnabled: false
           artifactsPath: test-results-${{ matrix.mode }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: ${{ matrix.mode }} results
