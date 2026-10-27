@@ -68,6 +68,8 @@ unity open .                                                          # перв
   `UNITY_EMAIL`, `UNITY_PASSWORD`; preflight явно падает при их отсутствии. Fork PR не получает
   секреты, `pull_request_target` не используется. Успешный локальный прогон не заменяет облачный;
   текущий статус — в STATUS.
+  Поддерживаемость активации Personal и пилот Unity Build Automation — отдельная проверка;
+  план, источники и критерий обязательного PR-gate — [CI_READINESS](CI_READINESS.md).
 - Python-регрессии tooling: `python -B -m unittest discover -s Tools/tests -v`.
 
 ## Сборка и телефон

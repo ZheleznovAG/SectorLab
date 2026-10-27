@@ -8,7 +8,7 @@
 
 > **English.** A small mobile tactics game in Unity 6: three robots a side fight over capture points on one arena,
 > against an AI or a second player over Wi-Fi (authoritative host on Unity Transport). A portfolio project built
-> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 254 automated tests.
+> with AI assistance, showing VContainer, UniTask, Addressables and R3 in real gameplay code, with 260 automated tests.
 > Docs are in Russian; start with [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md).
 
 [![Геймплей SectorLab: захват узлов и бой против ИИ](docs/media/gameplay-v1.2.0.gif)](https://media.githubusercontent.com/media/ZheleznovAG/SectorLab/main/docs/media/gameplay-v1.2.0.mp4)
@@ -22,9 +22,12 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 (последняя — **1.1.0**, pre-release). Подпись — debug-ключ Unity,
 поэтому Android попросит разрешить установку из неизвестного источника. Что нового — [CHANGELOG](CHANGELOG.md).
 
-В рабочем репозитории собрана **1.2.0** (code 3): `Builds/Android/SectorLab-v1.2.0.apk`.
-[Результат сборки](docs/evidence/android-build-v1.2.0.json) и
-[приёмка сети двумя процессами](docs/evidence/network-v1.2.0-udp5.json) сохранены.
+Локально собран кандидат **1.3.0** (code 4): `Builds/Android/SectorLab-v1.3.0.apk`.
+[Сборка](docs/evidence/android-build-v1.3.0.json) и
+[проверка каталога и Android-бандлов](docs/evidence/review-fixes-android-artifact.json) подтверждены;
+запуск этой версии на физическом телефоне ещё не проверен. APK не входит в исходники Git.
+[Приёмка сети двумя Windows-процессами](docs/evidence/network-review-fixes-v130.json) — 16/16 PASS.
+Старый локальный APK 1.2.0 неполон: каталог без бандлов, см. [результаты ревью](docs/review/REMEDIATION_2026-10-27.md).
 
 ## Коротко
 
@@ -33,9 +36,9 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 | Платформа | Android (landscape), Editor, Windows-плеер для сетевой игры |
 | Движок | Unity 6000.6.4f1, URP 17.6, Input System 1.20, AI Navigation 2.0 |
 | Технологии | VContainer 1.19 (composition root матча), UniTask 2.5 (загрузка и возрождение с отменой), Addressables 2.11 (локальные префабы с явным владением), R3 1.3 (реактивная модель матча), Unity Transport 6.6 (UDP, авторитетный хост) |
-| Код | ~5 тыс. строк игры в `Assets/_Project/Scripts/`, ~5,9 тыс. строк тестов |
-| Тесты | 86 EditMode + 168 PlayMode, все PASS; приёмка сети — 15 проверок двух процессов (27.10.2026) |
-| Решения | 20 ADR в [`docs/adr/`](docs/adr/) |
+| Код | 103 собственных C# файла: 59 игровых, 42 тестовых и 2 Editor-инструмента |
+| Тесты | 88 EditMode + 172 PlayMode, все PASS; приёмка сети — 16 проверок двух процессов (27.10.2026); процент покрытия кода не измерен |
+| Решения | 23 ADR в [`docs/adr/`](docs/adr/) |
 
 ## Игра
 
@@ -67,7 +70,9 @@ flowchart LR
 ```
 
 - **Чистые правила отдельно от `MonoBehaviour`**: время, счёт, захват, исходы, ИИ — обычные классы с EditMode-тестами.
-- **Всё от фиксированного тика.** Результат не зависит от FPS; поэтому хост может считать партию за двоих.
+- **Симуляция по тику 0,1 с.** Таймеры боя, узлов и счёта идут по тику матча; готовые выстрелы
+  применяются после общей подготовки. NavMesh, движение и поиск цели обновляются покадрово,
+  поэтому FPS может влиять на исход. В сети результат определяет авторитетный хост.
 - **Приказы — данные** с проверкой «матч идёт, юнит жив и твой, цель допустима» — одинаково для тапа
   и для приказа по сети.
 - **Представление подписано на реактивную модель** и не знает, считается ли матч здесь или на хосте.
@@ -104,7 +109,17 @@ python Tools/sl.py check                            # гигиена репоз�
 
 Версия 1.0 закончена: игровой цикл, ИИ, возрождение, HUD, жесты, обучение, звук, перезапуск.
 В версии 1.1.0 добавлена сетевая игра и улучшены управление, длительность боёв и обратная связь.
-Проверки: 76 EditMode и 154 PlayMode теста; сетевая партия в Editor и Windows-плеере на одном ПК.
+Кандидат 1.3.0 исправляет упаковку Android-контента и ошибки смены сетевой роли, показывает
+авторитетные линии выстрелов на клиенте и допускает взаимный готовый огонь. Протокол v3:
+для сетевой игры обоим участникам нужна одна версия. Проверки текущей реализации —
+[88 EditMode](docs/evidence/tests-review-fixes-full-editmode.json),
+[172 PlayMode](docs/evidence/tests-review-fixes-full-playmode.json) и 16 двухпроцессных UDP-проверок.
+
+В GitHub действуют отдельные [быстрые проверки](https://github.com/ZheleznovAG/SectorLab/actions/workflows/checks.yml)
+и [Unity workflow](https://github.com/ZheleznovAG/SectorLab/actions/workflows/tests.yml) на push/PR.
+Быстрые проверки проходят на Windows/Linux с Python 3.9/3.14. Облачные Unity-тесты ещё не запущены:
+workflow останавливается на отсутствии секретов лицензирования. Обязательный Unity PR-gate не настроен.
+Следующие шаги CI и условия выбора облачного сервиса — [docs/CI_READINESS.md](docs/CI_READINESS.md).
 
 Актуальное состояние, что подтверждено и что дальше — **[docs/STATUS.md](docs/STATUS.md)**.
 Для агентов — [AGENTS.md](AGENTS.md).
