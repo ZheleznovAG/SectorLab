@@ -116,15 +116,19 @@ def install(apk: Path, adb: str | None, serial: str | None, launch: bool) -> Non
         say("Launched SectorLab.")
 
 
+def measurement_paths(task: str) -> tuple[Path, Path, Path]:
+    """JSON, per-sample CSV and frame CSV. Built by name: a dotted task such as v1.3.1 has no suffix."""
+    return EVIDENCE / f"{task}.json", EVIDENCE / f"{task}.csv", EVIDENCE / f"{task}-frames.csv"
+
+
 def measure(task: str, duration: int, adb: str | None, serial: str | None, apk: str | None,
             auto_restart: bool) -> None:
-    prefix = EVIDENCE / task
-    if prefix.with_suffix(".json").exists():
+    report, samples_csv, frames_csv = measurement_paths(task)
+    if any(path.exists() for path in (report, samples_csv, frames_csv)):
         raise ToolError("Use a new task name to keep earlier measurements.")
     device = Device(find_adb(adb), serial)
     if not device.game_in_foreground():
         raise ToolError("Open SectorLab on the selected device (unlocked, in front) before measuring.")
-    model = device.shell("getprop ro.product.model").strip()
     android = device.shell("getprop ro.build.version.release").strip()
     kind = "emulator" if device.shell("getprop ro.kernel.qemu").strip() == "1" else "physical-device"
     clock_ticks = int(device.shell("getconf CLK_TCK").strip() or 0)
@@ -199,7 +203,7 @@ def measure(task: str, duration: int, adb: str | None, serial: str | None, apk: 
     record = {
         "task": task, "sourceHead": source_head, "startedAtUtc": started, "completedAtUtc": utc_now(),
         "referencedApkSha256": sha256_file(Path(apk)) if apk else None,
-        "durationSeconds": time.monotonic() - begin, "model": model, "androidVersion": android,
+        "durationSeconds": time.monotonic() - begin, "androidVersion": android,
         "deviceKind": kind, "package": PACKAGE, "samples": len(rows),
         "foregroundSamples": sum(1 for r in rows if r["foreground"]), "uniquePresentedFrames": len(stamps),
         "fpsMean": 1000.0 / (sum(intervals) / len(intervals)) if intervals else None,
@@ -216,12 +220,12 @@ def measure(task: str, duration: int, adb: str | None, serial: str | None, apk: 
                       "detected result-button taps; screenshots stay outside Git. An automated workload is not a "
                       "human playtest. GPU time unavailable. Emulator figures do not stand for a physical phone.",
     }
-    path = write_evidence(task + ".json", record)
-    with open(prefix.with_suffix(".csv"), "w", newline="", encoding="utf-8") as stream:
+    path = write_evidence(report.name, record)
+    with open(samples_csv, "x", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]) if rows else ["elapsedSeconds"])
         writer.writeheader()
         writer.writerows(rows)
-    with open(EVIDENCE / f"{task}-frames.csv", "w", newline="", encoding="utf-8") as stream:
+    with open(frames_csv, "x", newline="", encoding="utf-8") as stream:
         stream.write("actualPresentNanoseconds\n" + "".join(f"{s}\n" for s in stamps))
     fps = record["fpsMean"]
     say(f"{task}: {record['durationSeconds']:.1f}s, mean FPS={fps:.2f}" if fps else f"{task}: no frames")

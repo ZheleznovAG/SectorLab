@@ -7,6 +7,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from sectorlab import android
 from sectorlab import common
 from sectorlab import unity
 import sl
@@ -52,6 +53,23 @@ class EvidenceTests(unittest.TestCase):
                 with patch("sys.stderr"):
                     self.assertEqual(sl.main(["test", "--task", "run", "--mode", "both"]), 1)
                 run.assert_not_called()
+
+    def test_dotted_measurement_task_keeps_its_full_name(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with patch.object(android, "EVIDENCE", Path(directory)):
+                names = [path.name for path in android.measurement_paths("v1.3.1-phone")]
+        self.assertEqual(names, ["v1.3.1-phone.json", "v1.3.1-phone.csv", "v1.3.1-phone-frames.csv"])
+
+    def test_existing_measurement_csv_prevents_a_new_measurement(self):
+        with tempfile.TemporaryDirectory() as directory:
+            evidence = Path(directory)
+            path = evidence / "v1.3.1-phone.csv"
+            path.write_bytes(b"previous samples")
+            with patch.object(android, "EVIDENCE", evidence), patch.object(android, "find_adb") as adb:
+                with self.assertRaises(common.ToolError):
+                    android.measure("v1.3.1-phone", 30, None, None, None, False)
+                adb.assert_not_called()
+            self.assertEqual(path.read_bytes(), b"previous samples")
 
 
 if __name__ == "__main__":
