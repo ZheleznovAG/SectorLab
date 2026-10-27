@@ -22,11 +22,10 @@ APK для Android 8.0+ (arm64) — на странице [Releases](https://git
 (последняя — **1.1.0**, pre-release). Подпись — debug-ключ Unity,
 поэтому Android попросит разрешить установку из неизвестного источника. Что нового — [CHANGELOG](CHANGELOG.md).
 
-Локально собран кандидат **1.3.0** (code 4): `Builds/Android/SectorLab-v1.3.0.apk`.
-[Сборка](docs/evidence/android-build-v1.3.0.json) и
-[проверка каталога и Android-бандлов](docs/evidence/review-fixes-android-artifact.json) подтверждены;
+Локально собран кандидат **1.3.1** (code 5): `Builds/Android/SectorLab-v1.3.1.apk`.
+[Сборка и сверка Android-бандлов](docs/evidence/android-build-v1.3.1.json) подтверждены;
 запуск этой версии на физическом телефоне ещё не проверен. APK не входит в исходники Git.
-[Приёмка сети двумя Windows-процессами](docs/evidence/network-review-fixes-v130.json) — 16/16 PASS.
+[Приёмка сети двумя Windows-процессами](docs/evidence/network-v1.3.1.json) — 16/16 PASS.
 Старый локальный APK 1.2.0 неполон: каталог без бандлов, см. [результаты ревью](docs/review/REMEDIATION_2026-10-27.md).
 
 ## Коротко
@@ -110,10 +109,11 @@ python Tools/sl.py check                            # гигиена репоз�
 Версия 1.0 закончена: игровой цикл, ИИ, возрождение, HUD, жесты, обучение, звук, перезапуск.
 В версии 1.1.0 добавлена сетевая игра и улучшены управление, длительность боёв и обратная связь.
 Кандидат 1.3.0 исправляет упаковку Android-контента и ошибки смены сетевой роли, показывает
-авторитетные линии выстрелов на клиенте и допускает взаимный готовый огонь. Протокол v3:
+авторитетные линии выстрелов на клиенте и допускает взаимный готовый огонь. Кандидат 1.3.1
+добавляет исправления [аудита 27.10](docs/audit/2026-10-27-complex-audit.md). Протокол v3:
 для сетевой игры обоим участникам нужна одна версия. Проверки текущей реализации —
-[88 EditMode](docs/evidence/tests-review-fixes-full-editmode.json),
-[172 PlayMode](docs/evidence/tests-review-fixes-full-playmode.json) и 16 двухпроцессных UDP-проверок.
+[88 EditMode](docs/evidence/tests-audit-2026-10-27-full-editmode.json),
+[175 PlayMode](docs/evidence/tests-audit-2026-10-27-full-playmode.json) и 16 двухпроцессных UDP-проверок.
 
 В GitHub на push/PR выполняются [быстрые проверки](https://github.com/ZheleznovAG/SectorLab/actions/workflows/checks.yml):
 Python 3.9/3.14 на Windows/Linux, гигиена и Gitleaks. Unity-тесты и сборки выполняются локально

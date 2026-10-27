@@ -1,0 +1,3912 @@
+{
+  "task": "v1.3.1-qa",
+  "sourceHead": "d459e4315d6a2dae6f4ccd6adecf0b4d031172be",
+  "startedAtUtc": "2026-10-27T15:04:52.577871+00:00",
+  "completedAtUtc": "2026-10-27T15:05:39.232714+00:00",
+  "target": "StandaloneWindows64",
+  "qa": true,
+  "executable": "Builds/Windows/v1.3.1-qa/SectorLab.exe",
+  "inputHashes": [
+    {
+      "path": "Assets/AddressableAssetsData.meta",
+      "sha256": "3981320E03874DAFC337F6C73DCC8EC0D646DA7AD1245808C23929C28E10A170"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AddressableAssetSettings.asset",
+      "sha256": "740D540B4EB84CBAC97D2006032BB31DFEF581627F79868265A452E53C0A6730"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AddressableAssetSettings.asset.meta",
+      "sha256": "46461449495A63D80300818361A85EA8E88C586CBE07C03916FC5CD602CE1FE4"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroupTemplates.meta",
+      "sha256": "6E5FDF6B807F16A53367342F6E024FC264BEA2044E927C0C43D45C1DC683F57A"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroupTemplates/Packed Assets.asset",
+      "sha256": "0DD6305FB0B3396B73311CE7840C94255C28BBC106B6BC2798F833413BBB4FFA"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroupTemplates/Packed Assets.asset.meta",
+      "sha256": "7373511617C2404DE8356A2ABDE50159A71D3A9FAC2181B2284D4FF9B5B0CCB2"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups.meta",
+      "sha256": "8DD6DFB899F6B987E5C58083AA73394353CFA3BC19E51311BB7E1C80CB86B82E"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset",
+      "sha256": "B3703E15194C8426A3993447330CEFF2EEEAA4C109E1ADEB9615D0EF92C5D0DE"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset.meta",
+      "sha256": "A25AFD1527C03680EA89B073BD62E800BB453DD3579FAB95403985D6EA47F690"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Local Units.asset",
+      "sha256": "E2F75B93C17C756B23FFF0323CB4AB67021E5313540EDEFE1AB22EA869F2782E"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Local Units.asset.meta",
+      "sha256": "537CC178DFC88B06F49BD0DDCB9152B6488833AC538ACAF6CC0F389A51816B9F"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas.meta",
+      "sha256": "DDA79FFF7040E8BCBF15A9927F7A023579CDB4769A00FA6A60CD9B9C2522880B"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset",
+      "sha256": "157133F648DC49CAF93E60ECE2FE7F9BDF0623744565915936B9F665B3C2A0C6"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset.meta",
+      "sha256": "28B35691B5DD3413AB978F59992B454536DF220C09425DEE3EC61EBF1DEE1E1F"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_ContentUpdateGroupSchema.asset",
+      "sha256": "A4F98C2634A092473946AFFEBB1A549F6616CDB5F445F9A54D77D5FE4994E336"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_ContentUpdateGroupSchema.asset.meta",
+      "sha256": "98246A9190EB05DD112DC0B8D6302B3C31C6AF9F809BFCC4A82910EC44DBF032"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_BundledAssetGroupSchema.asset",
+      "sha256": "EDCA47E0B302A49F145FA614A57F37268AEE6A57CF031A69ABF2F3CF4647F041"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_BundledAssetGroupSchema.asset.meta",
+      "sha256": "D0243C8D67D0D95C23C568BF29E90693385851A7EA440D41E9A2138C0647EE44"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_ContentUpdateGroupSchema.asset",
+      "sha256": "32CEFF77087A90E858DF622F7B0C650F4CA78D8CFA079D4A534CD6AE88308391"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/AssetGroups/Schemas/Local Units_ContentUpdateGroupSchema.asset.meta",
+      "sha256": "530E7465A4AEA01FD6071FD44CFD41DF4A5F4F53A27AF50E3391AED8A3C9956B"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders.meta",
+      "sha256": "1F88776B685005EA5CDC3B97D200D0E95E1FD5755FEB7B0FFB77CDE5FC379053"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders/BuildScriptFastMode.asset",
+      "sha256": "EC8FA6F7F04687B1EA742863CA9312CC48C78708D3BD04F5A80EE1C4289FA550"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders/BuildScriptFastMode.asset.meta",
+      "sha256": "92373C001973410D9F50573B219444AE394B4FFAFCF97E2FF93C760AED5755DE"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset",
+      "sha256": "CA98B03B4BD46044981893AF422AAD5EC947F6B4923D5E7D732074AC0CF2D58C"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedMode.asset.meta",
+      "sha256": "6739B0E17CD839A105B615A2CA757AB01733349CCC2E6F0FE4B0A38D215C5799"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedPlayMode.asset",
+      "sha256": "40AEC021CFEF83513030F6622569C31B4DC2EED74B6024C9EA8762EE981FD3BD"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DataBuilders/BuildScriptPackedPlayMode.asset.meta",
+      "sha256": "97A74A8F351C3D5B33D8718743DCD6A60F5727F27FAEC2AD6FBD3C31C068B60C"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DefaultObject.asset",
+      "sha256": "A217605E7AECADD93A4D9086CC5FEB559CAF3D591D6A5E50E473F63991301249"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/DefaultObject.asset.meta",
+      "sha256": "1A2B2388548BA875739B9D30F8351519BFD0FED6227DE8075BDFEE4C59EEF2CF"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/ProfileDataSourceSettings.asset",
+      "sha256": "F8DE3D32F69BDD89CD640986E03089048C2254D92B7067F6D649E084D360FDFB"
+    },
+    {
+      "path": "Assets/AddressableAssetsData/ProfileDataSourceSettings.asset.meta",
+      "sha256": "5AE6BA0250E2F5ECA95AD02C790FBFA60CE3EC3AA2C52DE260349D1F9FB339CF"
+    },
+    {
+      "path": "Assets/InputSystem_Actions.inputactions",
+      "sha256": "1C6CBB519D65ECFE19A29231735B7F54741A20AC1A8AD4F46A18E1BFB28A3C39"
+    },
+    {
+      "path": "Assets/InputSystem_Actions.inputactions.meta",
+      "sha256": "3B4E424A80F5B4FA76B6ABD774884A24285EAA61F22FF9BB20E5AD505FD8B569"
+    },
+    {
+      "path": "Assets/NuGet.config",
+      "sha256": "0A3CAE6CC872BC672478EC649B96FD72EFA91A700B063CA3C914AA6CB0F1F757"
+    },
+    {
+      "path": "Assets/NuGet.config.meta",
+      "sha256": "A247C4EC1C53343158A5D4C25545A89A3CF782E0F7B2A739FDC4709252BD2EE9"
+    },
+    {
+      "path": "Assets/Packages.meta",
+      "sha256": "B514F3F3D709423A6D6FA9A513F458CE1DAE417406D8819AFBA053756F836BB0"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0.meta",
+      "sha256": "046B099CAE9DB8156C2F5E5689068AE421DAF0617C9E9359FAC6D5D71DA2BB37"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/.signature.p7s",
+      "sha256": "1BE128D1337424FCD896CD7CE872698C714BC998FFA6793EACF50BCF4D6E92F2"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/Icon.png",
+      "sha256": "3356B59B6D9C24DB3A22398C0FB3430724052FE75AE5E8430EE8EDE2FB713356"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/Icon.png.meta",
+      "sha256": "0D3DDBDCE9FA7275AC7E6C0A0B08871830ABC149AA2B6AC9E4919A218F050D26"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/LICENSE.TXT",
+      "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/LICENSE.TXT.meta",
+      "sha256": "5E67071CA3DF464A2DA437EC3C6B815CEBF73BCD0AC2294B0AAF3602E7913D23"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/Microsoft.Bcl.AsyncInterfaces.nuspec",
+      "sha256": "3A965C424D56F1CEE169D88CC9C04F2C04F01BD65F20147B26AC093D761BEEC9"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/Microsoft.Bcl.AsyncInterfaces.nuspec.meta",
+      "sha256": "E0F6D96937D1EB29F9B57BBF36A36813F98C57797E51062406EB3F87B433213B"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/THIRD-PARTY-NOTICES.TXT",
+      "sha256": "A6344BFB229BC08D1071CEC400EEA216E307439F961C5943EC1B56D2245ACB95"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/THIRD-PARTY-NOTICES.TXT.meta",
+      "sha256": "5E707135F6801732BADB5708652B162AAC68295039C873D12C669A7D446DA13C"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/lib.meta",
+      "sha256": "78CBA31CA8CBB7359D7E89070346043683114F833539174EBDE563B4A5FADC25"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/lib/netstandard2.1.meta",
+      "sha256": "6D31B57B0E64DCB12B7D4EBCC03DD248E2EB799624019B76909891554570D80B"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
+      "sha256": "5705D245072D3EB78400547B32147DBB6E2C8B02BA8BDA76729798F5EFDEAECB"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll.meta",
+      "sha256": "DDBD049377F3D64D2D9B10A3B1A72436385E4F0F7C0B8D201F6FDE4248320D12"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.xml",
+      "sha256": "C3D4F84E8FC4C5C55D6BAD0FA1F798B750854640D27D55D3542F0AC72E1F5BC7"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.xml.meta",
+      "sha256": "19CF6A46A1671E6D8898EE59F375C0547F9821536DF817C22E9C369CE9680E36"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/useSharedDesignerContext.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.AsyncInterfaces.6.0.0/useSharedDesignerContext.txt.meta",
+      "sha256": "F135FCEA8C9E59C4DEBE0078171724FF7D9C86FA6D5E8391F06D2445F933840D"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0.meta",
+      "sha256": "447B3B779F97D6B21B20547D488F2C83B6FE1CF34C20AC8E03EC893BC4F78307"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/.signature.p7s",
+      "sha256": "6B9984E1DCD14DC6BD29017D3E448D2B38B938387DBAD58549F7DC501F581C25"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/Icon.png",
+      "sha256": "3356B59B6D9C24DB3A22398C0FB3430724052FE75AE5E8430EE8EDE2FB713356"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/Icon.png.meta",
+      "sha256": "9331AE40258EDCDD850E4F96EC4B554B59165F6E8A45CAAF72610B34AC1F42A8"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/LICENSE.TXT",
+      "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/LICENSE.TXT.meta",
+      "sha256": "42D3D0A7E57C6B14CECF6D7BCB983ECB306AB353F31ABC0BE725F239F793F4D4"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/Microsoft.Bcl.TimeProvider.nuspec",
+      "sha256": "AD5E215B67577763536C58C90B9E4412B069B6542625A3BA4D084CF8E3F31CED"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/Microsoft.Bcl.TimeProvider.nuspec.meta",
+      "sha256": "37721CB57186FFD4B6DD9ADD2B2A941E51638B99A14474EE3CD02D9B8169B2CE"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/PACKAGE.md",
+      "sha256": "2EC7D91784B37C0AEAEE2F7D65D0CFA34AD85CFF4ED72C5E927F94B586E0B166"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/PACKAGE.md.meta",
+      "sha256": "C1D678BD17D6A742339B2D3F61C012FA2E65F9C92AC9E1B19A625FD723082DD6"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/THIRD-PARTY-NOTICES.TXT",
+      "sha256": "19C19DCAC9F3EE6302CFBC6745BB8E79F08EFC4C933EB8DC5509BF14B88347EC"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/THIRD-PARTY-NOTICES.TXT.meta",
+      "sha256": "588932307850469355C8FF538B103331F836021C73561BC632D6AC8A87E008E2"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive.meta",
+      "sha256": "E28CAC1D6C0E9C98F0FFE64DF96918F4BC46F3E8E80CC39F3C1EBF522D8D988C"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net461.meta",
+      "sha256": "C6E5E7A6D12596ACEA2A973A4BC980693EFE2D09ACBA6E69D7B60BEBDB934D6E"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net461/Microsoft.Bcl.TimeProvider.targets",
+      "sha256": "D15BF22D47E23C279586EFA85EB132A7F9BFDB3F688F75D4A2528BBF662F393F"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net461/Microsoft.Bcl.TimeProvider.targets.meta",
+      "sha256": "371EC752779C93EF7D5FF27851A9057167319BE000B275F0CB45FD43C7F1CABD"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net462.meta",
+      "sha256": "2977637BBAA8965B0FE7901062D2657BCB0A26FF548857688F1C7F6C83A6BA03"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net462/_._",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net462/_._.meta",
+      "sha256": "6FA9B6C35E9B4C727A6FD4FF6B908091FDF5B3FEAF71795CBBA50C16DDA4AA5F"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net6.0.meta",
+      "sha256": "954DC0C7CD06981E5D12910CAD0A0F8A4389C9ED924BDFC65025FD4F4FE96E74"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net6.0/_._",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/net6.0/_._.meta",
+      "sha256": "F8F411444230CFBC32A4A482566FEF3113E6F997C16E37862BE8C7D604820B51"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/netcoreapp2.0.meta",
+      "sha256": "4534C8158050340EA6A2368B1AB7DA3E0507B478EFFC22B0C97E6E3931F773BF"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/netcoreapp2.0/Microsoft.Bcl.TimeProvider.targets",
+      "sha256": "E551C21697E9158480776594B0D445322954CC7754A181289BAEA69385CDB3D9"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/buildTransitive/netcoreapp2.0/Microsoft.Bcl.TimeProvider.targets.meta",
+      "sha256": "BD8DF04FC579AA8776AF0B83C37F3ADBDC65E0187894BE9EB7308D2E760C1F68"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/lib.meta",
+      "sha256": "CD4FA5B10FA030ADB29A2F4D245F8D1E50BAA7543E9B238D3F97B6CEE40791F8"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/lib/netstandard2.0.meta",
+      "sha256": "B6BD7D6185A506A90E29C7927C45049357B3F4B87ABC80650C49561E8B2F448E"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/lib/netstandard2.0/Microsoft.Bcl.TimeProvider.dll",
+      "sha256": "D9941B9603506C46E2AAF8B44166C93646B55EBEA0D365792B405C2562753442"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/lib/netstandard2.0/Microsoft.Bcl.TimeProvider.dll.meta",
+      "sha256": "999573699E2305800B30C9E40BEA06FFD84D57BCFB34F458692190EB9F581712"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/lib/netstandard2.0/Microsoft.Bcl.TimeProvider.xml",
+      "sha256": "20444AB6647AA13C1B747A93093D5DFD2BD73533CA6A4C6A3D7321017E33F073"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/lib/netstandard2.0/Microsoft.Bcl.TimeProvider.xml.meta",
+      "sha256": "664C4230CD5DB7115CF3DDF367F48747D47E23DD0EDDE6F04F68FAC642DC7E45"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/useSharedDesignerContext.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/Microsoft.Bcl.TimeProvider.8.0.0/useSharedDesignerContext.txt.meta",
+      "sha256": "FA605C6C442EEE6400909B664F36E8017451460D8DF5827F38D457CD2F91240C"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1.meta",
+      "sha256": "ADA01AEF47CA4A22AD2336B462B79E58FBAEDFE57D0918F3EC1C24B5FE472C50"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/.signature.p7s",
+      "sha256": "06AAA732FD861A2FBA87FB4D72738B3F8F6136E6E9BD8F107A0BC728A2E691AC"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/Icon.png",
+      "sha256": "C1CC0D07828B8DBA364F5E29B2F3D1AC6AA0C0DED4D1A97E028981609355B2C8"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/Icon.png.meta",
+      "sha256": "87B2E5F328D801B766BAECE0855157D02CFB76F5BFA4FDE5D1ABD91AF9DF3607"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/R3.nuspec",
+      "sha256": "84D26E6CA082AFE2E419CF40B287F047A6DAAB33D6130E00CD584CD3079B6AAF"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/R3.nuspec.meta",
+      "sha256": "2CF3F5FFDAA3ABD4CAA7130EC0635C495F7B1E70A686415027AC5418CF60373A"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/README.md",
+      "sha256": "9D220B264CF4FCFCECB003F6284E00D75AFCB80CDCBDE9AB90BDD9F8B8505145"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/README.md.meta",
+      "sha256": "D068501A1C2ABEE8F469698976D54AC83BC96B723FC15A2EBF51810D30E192F2"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/lib.meta",
+      "sha256": "473575374B53D2FB8F1772024EBF056C7B0DAF29C7783B9624CE9F848297BED8"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/lib/netstandard2.1.meta",
+      "sha256": "8A3CAE881CFA89391AAD7D47D651F237148E171B0AD7A3851F7EBCB99EFA1635"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/lib/netstandard2.1/R3.dll",
+      "sha256": "4AC9EC66B56F4CBD139E4C7F99A6E0DF6E4BB4C2707635880DF8DD04ACE291EB"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/lib/netstandard2.1/R3.dll.meta",
+      "sha256": "E91FF351B2CBC55EB129D43ABF4D5DC6C81459216FD0D81C5FB978E326EB8224"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/lib/netstandard2.1/R3.xml",
+      "sha256": "DF691D062703B96A830615E0A9710DC47BF0AFF448AC53DDB256E355D94F23AA"
+    },
+    {
+      "path": "Assets/Packages/R3.1.3.1/lib/netstandard2.1/R3.xml.meta",
+      "sha256": "EB05FE117C949899AC9DD8B7EA666DF6CDEE6B5EAF2FF609433B3E732979AB92"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0.meta",
+      "sha256": "68219B547EF293C88E89F8FD8CC538236B38C3652B2747010E324D988A3E0ACB"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/.signature.p7s",
+      "sha256": "86AB7386AA6B8ADE66F7A941AA89E13E67360A4A578E1DF3809B2C47915B7395"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/Icon.png",
+      "sha256": "3356B59B6D9C24DB3A22398C0FB3430724052FE75AE5E8430EE8EDE2FB713356"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/Icon.png.meta",
+      "sha256": "1D903AA8DC650A686BDAF82C49F5992FE29300766EBAF6F5D2AB9BD2E2C1130D"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/LICENSE.TXT",
+      "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/LICENSE.TXT.meta",
+      "sha256": "AB9A1B34D34031C899480EDD74BE67423323A3EBD292BDE884CD2EA39359AF7E"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/System.ComponentModel.Annotations.nuspec",
+      "sha256": "81B52AA34460E41F850B163546FA6E72E007499E2B8ED7396C217944B2EC778F"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/System.ComponentModel.Annotations.nuspec.meta",
+      "sha256": "8527BF3F59FC276ABFE03EEC32F4525A8272DC67B0BBF05ECEB5B73FB13F9846"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/THIRD-PARTY-NOTICES.TXT",
+      "sha256": "78E22D4D24A710D2A09426C09060F3448204778ED506B1DA55447A6089B54FAE"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/THIRD-PARTY-NOTICES.TXT.meta",
+      "sha256": "ABF787146EBEDC9A2AEEFEC995CC51D2A7ACAF94AF587B8C05BB08DF0B7E37C1"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/lib.meta",
+      "sha256": "4064AA5473488459461FB717F3157B866A5CDB3C7C043AD058756BF8C5A54EF4"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/lib/netstandard2.1.meta",
+      "sha256": "4F989FDB1E4D658FB1310198BF8F5E6B011C3517D52E83489A00D3E2D2C63DBD"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/lib/netstandard2.1/System.ComponentModel.Annotations.dll",
+      "sha256": "C46069E29AD23FEE7F5D2CED736FFEA27B0177F82341296D9AF6325ACF821C69"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/lib/netstandard2.1/System.ComponentModel.Annotations.dll.meta",
+      "sha256": "96A868C63E6F6312B343A4F4FFE2D4301348C7EDAAA766DB6FA9944EFA0920BE"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/lib/netstandard2.1/System.ComponentModel.Annotations.xml",
+      "sha256": "4D5F8259C7B3AAEA9AE819D71B7C9E4C2AD5A68077BDEF51D54233E50CA32607"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/lib/netstandard2.1/System.ComponentModel.Annotations.xml.meta",
+      "sha256": "2C647555FF8246035C3A85D2B81A4EF0B408F55B351B36FC55D38EB2919CCA89"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/useSharedDesignerContext.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/useSharedDesignerContext.txt.meta",
+      "sha256": "B2ACC544455D1C186ABC136D1B49A44993D75D4E10B95F59E080406EAFD83B66"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/version.txt",
+      "sha256": "1BDD7A1CFFD6C4B5D2E0BDFEF605D744CDC6BBF31996128148A93FCC999BF806"
+    },
+    {
+      "path": "Assets/Packages/System.ComponentModel.Annotations.5.0.0/version.txt.meta",
+      "sha256": "3F7153D9EB2353C0A1C0A9650F9D8E7EA709CB22F32DDF13F072E8609BC93E14"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0.meta",
+      "sha256": "01CCBA54D690D716B8CC1EDAA6E08D9C5DDA3B964C7C6AE79575266D132FA3D5"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/.signature.p7s",
+      "sha256": "656115A2DDB0446951F12837043CF09296C9DF27E73CF66E2A6AC9467101589C"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/Icon.png",
+      "sha256": "3356B59B6D9C24DB3A22398C0FB3430724052FE75AE5E8430EE8EDE2FB713356"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/Icon.png.meta",
+      "sha256": "9244C988D9AB9EAE8EF959FC8DCB53121A86EF33EBC113CEC433617B73220865"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/LICENSE.TXT",
+      "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/LICENSE.TXT.meta",
+      "sha256": "55496BA52E77867905E82AC17192CEA7D8F81B2304565C1E4197CF1812BE93CF"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/System.Runtime.CompilerServices.Unsafe.nuspec",
+      "sha256": "EDACCFD50EEBADF418188DB5A19CB7B24C887FBBC638F2E4D402FF94BBCC14DC"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/System.Runtime.CompilerServices.Unsafe.nuspec.meta",
+      "sha256": "1F4A39F5E94552B89ABF13A82FF7031A11BBFAAE2C539DDB1BEE2929366C3A9C"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/THIRD-PARTY-NOTICES.TXT",
+      "sha256": "A6344BFB229BC08D1071CEC400EEA216E307439F961C5943EC1B56D2245ACB95"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/THIRD-PARTY-NOTICES.TXT.meta",
+      "sha256": "3754D3EDB0D09B1743B4A6C81A13C56765980A52A2C0DF75B7F577E6F1842537"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive.meta",
+      "sha256": "7E17E55598A36582A51D381904589C779AC44D7B1F7CDD9A893773FF38B1B3C2"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive/netcoreapp2.0.meta",
+      "sha256": "E9892009B28C064ED000461AC0FB8956FAC98DD6028A547BEBDC834FFD511740"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.targets",
+      "sha256": "F5B87CCE4D2D05DB8D9E6A8BF7789FE8C8CC3BEA24B87D09944EC4ADA8EFB478"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.targets.meta",
+      "sha256": "E1201EBA726AA75CDCBB4D036E313F24097A045342CBBB4304B9C98294A98BEE"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive/netcoreapp3.1.meta",
+      "sha256": "1C3489A0E12434F08450300C6A5C90D8B76C43D26EDC35388BF869E4CF9A3692"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive/netcoreapp3.1/_._",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/buildTransitive/netcoreapp3.1/_._.meta",
+      "sha256": "90DFE9FC46267539448339280F2C18361A52ECC2320B8D8A42BEC33FD87E0F8B"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib.meta",
+      "sha256": "F385AA8CF5BD03CB53C9A617FCCB102811A478AA204ACCD614AEC85B1FF4B7F4"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0.meta",
+      "sha256": "7FA6116597E7F9A4D7E600D6936F8CD02978DC3F9099F7B4EEB202F21405A055"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+      "sha256": "01748200F2400C742AA689F1F5101BD6298EFDFD92C00C18F4FA473847235BA9"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll.meta",
+      "sha256": "838B2F8C33AD24F2D3CACA9A4467329BEC8509E1793DB14CB23D00B433876925"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+      "sha256": "39C2D4A63A186D423E9C866F4D3E9A6ACBA0103398F20BAF8B92A38744894215"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml.meta",
+      "sha256": "F0021F23252F9685DD577F680F960D9B175D4EACB2406583CA15BBB89129C791"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/useSharedDesignerContext.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/System.Runtime.CompilerServices.Unsafe.6.0.0/useSharedDesignerContext.txt.meta",
+      "sha256": "74158F3359AA9DB060CB70EFA0AA8F1BCC6CD4ADE5A14AABBDA49D8D0382DAFD"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0.meta",
+      "sha256": "14670B354CF266D9B5CACA992C4BBC85E8D8271FD90F8169B88854A49C0B9D8F"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/.signature.p7s",
+      "sha256": "8AE459DC168FB6D5ED9F5DC18F1EFBC2118F8EDBC18020E73B3F411FCE9C5512"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/Icon.png",
+      "sha256": "3356B59B6D9C24DB3A22398C0FB3430724052FE75AE5E8430EE8EDE2FB713356"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/Icon.png.meta",
+      "sha256": "CE67441B825FBE201016DB1AAEFDEE3DF39CEFC6536659D3E53393858B58EDC1"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/LICENSE.TXT",
+      "sha256": "D7A68596AB69B06F51CA278A6545148E4269A9381C26D597C13DF5D88E08CF5B"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/LICENSE.TXT.meta",
+      "sha256": "B734A396321F59E82265E1EB60440D31402576B622EE0F62D895D319DD0EDD3A"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/PACKAGE.md",
+      "sha256": "319F4B0F177625C7BD756201965693D95963907DC8F164783254B58424D62A17"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/PACKAGE.md.meta",
+      "sha256": "D79AD863197A848392C05E73F945D4B1A02D8F19D36F603C622BA575D6E52232"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/System.Threading.Channels.nuspec",
+      "sha256": "16E761E220F42A0B8C2EE470CD270356CC547FDCEB29A598714BB521DCE366E9"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/System.Threading.Channels.nuspec.meta",
+      "sha256": "6BB3C2C005E687DED4844EFDB8F31A9ED7BFCCEB68B83BD845A38991CA322D2D"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/THIRD-PARTY-NOTICES.TXT",
+      "sha256": "19C19DCAC9F3EE6302CFBC6745BB8E79F08EFC4C933EB8DC5509BF14B88347EC"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/THIRD-PARTY-NOTICES.TXT.meta",
+      "sha256": "0838B0918CDDBA03E5DCE7ACA9B4E612A9848A3A8F2878F19DBDD2874928AFB0"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive.meta",
+      "sha256": "11A239DA70410A01C6A02CB07E2787C1BDBB5CDB2DCF20404E2D01ACA928B523"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net461.meta",
+      "sha256": "EF409A62B08B8B6355EFDE863F0AF07F7998CFD731BDA1F175A838C4F60FCD54"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net461/System.Threading.Channels.targets",
+      "sha256": "7D8F69249149207B756C2B2D084A53F9EA5B06026F38665A6630BF8E9760DBAD"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net461/System.Threading.Channels.targets.meta",
+      "sha256": "A17120446C5F6E384CB70CBB80549156FF064C07ACDB077177E7BE32DC8E2E92"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net462.meta",
+      "sha256": "3ECCA70F1A69014C850007190563522D5914F0BCB8387D24BEADE8AB4ED3744E"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net462/_._",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net462/_._.meta",
+      "sha256": "FAA4411A6DEAB5F35E55F7F3847CA0A15EEDD90826FCB6754D7C183EB5195F83"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net6.0.meta",
+      "sha256": "59EF392BDDB28476B12C6572FE1A496FA34BDCB4ED54E4B7CB82C58F1939F5E3"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net6.0/_._",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/net6.0/_._.meta",
+      "sha256": "EF5668493C47390EBE7ED6CDD305A04DE8ABD0BC3EF6D9B9AB92C543C2BCE2D9"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/netcoreapp2.0.meta",
+      "sha256": "81D981961B78827E9A13E86707F130CA838F1F094B70AE7CBBD941ADB89AC41C"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/netcoreapp2.0/System.Threading.Channels.targets",
+      "sha256": "4C4E4FD63BF0C51F6AF04BE8B352A8062FAA6F01CE7F6C833C002F9566459E34"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/buildTransitive/netcoreapp2.0/System.Threading.Channels.targets.meta",
+      "sha256": "68AE1A5B7E149F440048C0EA4CA72CCD4E8AAB09559FC4A66BA91A68744B700A"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/lib.meta",
+      "sha256": "68BEB6CBC946FC016E39AC076AD1159F5656EB5C2C48C76CE8D3A2236097DC67"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/lib/netstandard2.1.meta",
+      "sha256": "EAED39DA17130F842D03353A3DB604387155AD4C42DC9250583C5888A5B6D12A"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/lib/netstandard2.1/System.Threading.Channels.dll",
+      "sha256": "31C7E3704C0477C53D9306362DC6ABE741088EFB7A7B4E46CDED0169CF7BB0B2"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/lib/netstandard2.1/System.Threading.Channels.dll.meta",
+      "sha256": "332B1C49F1D0B3677D0EDF1950F62878A3DB186950CFDC71790D096315AEC55E"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/lib/netstandard2.1/System.Threading.Channels.xml",
+      "sha256": "7B1A700AF7CF439B2924FD063766A88AEA9C51507CDAC57222E83ABBE1F654AE"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/lib/netstandard2.1/System.Threading.Channels.xml.meta",
+      "sha256": "2AC9C46CA390454ABA892B8C103A72A0CA3763E56BD0F1F4D49B7647BA027291"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/useSharedDesignerContext.txt",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "Assets/Packages/System.Threading.Channels.8.0.0/useSharedDesignerContext.txt.meta",
+      "sha256": "1475066B3E4E7B4242771B9CA272E8F3A2409A103FD4072102891F058D01DECF"
+    },
+    {
+      "path": "Assets/Settings.meta",
+      "sha256": "73C8E19843240273FACB0AF6BDBF430D719E397ADED705629594060CE25CE7AD"
+    },
+    {
+      "path": "Assets/Settings/Build Profiles.meta",
+      "sha256": "2C6C8A4D896187000BE7CDE2A0164BA4C63179D6C0DC414C8F93C9B555FE26C3"
+    },
+    {
+      "path": "Assets/Settings/Build Profiles/Android.asset",
+      "sha256": "BA8FB871A2DE6CB96E762FDE4D0A8A932BA484055C09A5BE0CA61924E462EB31"
+    },
+    {
+      "path": "Assets/Settings/Build Profiles/Android.asset.meta",
+      "sha256": "0800D9A8B5380D0B0225B47C491562142A9E72F349DF164CD3266C4D99774968"
+    },
+    {
+      "path": "Assets/Settings/DefaultVolumeProfile.asset",
+      "sha256": "463776C51AE49D4FEF980E8FD268081B2F505610D79315003FAAE1ACFF8F4115"
+    },
+    {
+      "path": "Assets/Settings/DefaultVolumeProfile.asset.meta",
+      "sha256": "EFBCB026CEE6B8E32FDF27018C06B0515296A6CCBB43969E792FEA270310700A"
+    },
+    {
+      "path": "Assets/Settings/Mobile_RPAsset.asset",
+      "sha256": "F25A70904075D9E75EA88F2351D56F959C51961EAFFAE61AC3179A1DAB9FF9FA"
+    },
+    {
+      "path": "Assets/Settings/Mobile_RPAsset.asset.meta",
+      "sha256": "53EA46647712C615FD1A3F2E0DDDFA8559EEEDC649E9A1DBF93FF913DE28544C"
+    },
+    {
+      "path": "Assets/Settings/Mobile_Renderer.asset",
+      "sha256": "1EF2F58145967A627A23AEB1F3044D28F3FBAA42A711B27E8A84F5DD49B8888C"
+    },
+    {
+      "path": "Assets/Settings/Mobile_Renderer.asset.meta",
+      "sha256": "A148EE2B4987B05B8FF7AE5F9BF84916184F77AEFDDC821DCEB551F5A69F8179"
+    },
+    {
+      "path": "Assets/Settings/PC_RPAsset.asset",
+      "sha256": "406D1071746B1E622FCB916CA99396180F5D59B933C16E1B25A0E8DF0CAC9FE1"
+    },
+    {
+      "path": "Assets/Settings/PC_RPAsset.asset.meta",
+      "sha256": "BB469B9B6F318E9E9BED29C3B2E73E79371C04743C6F95DD6603941F1CD3E53E"
+    },
+    {
+      "path": "Assets/Settings/PC_Renderer.asset",
+      "sha256": "66B5A18DC973208F3BA50A9588E89B7B6E471DE1E7EEB9F296BD90C4EABEBEC6"
+    },
+    {
+      "path": "Assets/Settings/PC_Renderer.asset.meta",
+      "sha256": "B5DF8DDB2708C6ED4C133A5FF9EE95A75CC20E4EE3ED6181366A61AEDBAF31EC"
+    },
+    {
+      "path": "Assets/Settings/SampleSceneProfile.asset",
+      "sha256": "A8677D4BAC051D24CAA11CD622E39F968155EE277BFCE132274F1DE225692FE9"
+    },
+    {
+      "path": "Assets/Settings/SampleSceneProfile.asset.meta",
+      "sha256": "2E23ABC214069F0ADBF2B2207F1DB54BE7876629EC2A3681D0F4AA5B61622EF0"
+    },
+    {
+      "path": "Assets/Settings/UniversalRenderPipelineGlobalSettings.asset",
+      "sha256": "71B89DC8C4A589E8BBA40275EF8AD4FB924DEB7D6A7BB49239C5EA463F799545"
+    },
+    {
+      "path": "Assets/Settings/UniversalRenderPipelineGlobalSettings.asset.meta",
+      "sha256": "F61661D8BC8DBE531DAF09F6211EF978C7BA145C9207C8E76524396AE0722D7C"
+    },
+    {
+      "path": "Assets/_Project.meta",
+      "sha256": "56CE494453DEBAD41EB5CD012C077B1E4A925E2EB1F67CB9DA3306D99F9AF228"
+    },
+    {
+      "path": "Assets/_Project/Data.meta",
+      "sha256": "34FFE23DB3D71C82AAA84293559D213C3E42FDD0581FAE4600AD6738FAF1D591"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays.meta",
+      "sha256": "4DFFD959B060797A57624475C0F40DCFC04A12D57FDE28431C23F8C05F1D4188"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays/A.asset",
+      "sha256": "EC5CE761AE1DBA792EA902FD5EECCA29FEFC69393CC037181EF3159F40B2899B"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays/A.asset.meta",
+      "sha256": "B0A39936F757B92974A3229274F59E1F14B5038E4F1B4B1D1950C560FBD4D2A6"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays/B.asset",
+      "sha256": "7C267A80B8AFA88DB9DB3C6C7C88E456AE7F64ABD1C1B5C1E200164B5EFB2CF3"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays/B.asset.meta",
+      "sha256": "334223EB2EE44E97AF789E30EE67638418AA597C90392067E7519B87B744E932"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays/C.asset",
+      "sha256": "AC7EF62034F73CD2C9EEAB469B8F6C83002C39C975072ECDE5EE18B7C35E5AF5"
+    },
+    {
+      "path": "Assets/_Project/Data/Relays/C.asset.meta",
+      "sha256": "C51FCDE46AE6E04EC796B0B20BE116E5A61A004C10E5E1CE0AA25AA240AD8C26"
+    },
+    {
+      "path": "Assets/_Project/Data/UnitRoster.asset",
+      "sha256": "9DC54D10F890F791D73B595E9E714E303A8E46852D19C51736298C493DAD0B23"
+    },
+    {
+      "path": "Assets/_Project/Data/UnitRoster.asset.meta",
+      "sha256": "85DFDD86B00B9BB052D39CAF949F5704EF427BDB661EFBE7E64003E8404C9B0F"
+    },
+    {
+      "path": "Assets/_Project/Data/Units.meta",
+      "sha256": "77B23DFA4DB00B48EDDF9117EF4C8DC40618C8651374895100E6A279AF78F489"
+    },
+    {
+      "path": "Assets/_Project/Data/Units/Ranger.asset",
+      "sha256": "7EA597F439B11B1F957F859B15C7A7C6F1B134B136FAB1717B3F5B96F49BC3AD"
+    },
+    {
+      "path": "Assets/_Project/Data/Units/Ranger.asset.meta",
+      "sha256": "8791E02C36FD1F8D3D7B63E7BCCCF0EB5738578FCA76FA7487C52AD8211CF48E"
+    },
+    {
+      "path": "Assets/_Project/Data/Units/Scout.asset",
+      "sha256": "93351E8AD8D5BB2550E2210B5DDA8B27E4E527D1721A7EE49A36893EE0B6DB6F"
+    },
+    {
+      "path": "Assets/_Project/Data/Units/Scout.asset.meta",
+      "sha256": "B370C5E7A12C83C5B0BB172775EFB7987EA1FC8C9DDD5AB2EC79CDBE38F5BD1F"
+    },
+    {
+      "path": "Assets/_Project/Data/Units/Tank.asset",
+      "sha256": "DB42386D772F429937DB05D89509BDED4890770F1C43F2F65411509AA9A956E4"
+    },
+    {
+      "path": "Assets/_Project/Data/Units/Tank.asset.meta",
+      "sha256": "89BF3A94B47B4615BEB801F8F1F6D179242C042022D94E4666CC36294BDFF4B2"
+    },
+    {
+      "path": "Assets/_Project/Editor.meta",
+      "sha256": "96BBBF4F31A5318FDD4D823EDC5F885F0C6894B684C1523379CE3836C8A3C32A"
+    },
+    {
+      "path": "Assets/_Project/Editor/AddressableUnitSetup.cs",
+      "sha256": "E1CE441A4838491D42B66B90E09886D694ECD8B5D57386688434D4090FA51481"
+    },
+    {
+      "path": "Assets/_Project/Editor/AddressableUnitSetup.cs.meta",
+      "sha256": "42B6AFEDB33CAAE83741846C0A8BB68467FFDD9B1BC6BFFB573B518C454C27FC"
+    },
+    {
+      "path": "Assets/_Project/Editor/GameViewVerification.cs",
+      "sha256": "B8214E5878BA0DE0AFD859A5FA629F4248E402D35A12EAEE850DBB2F1337FEA4"
+    },
+    {
+      "path": "Assets/_Project/Editor/GameViewVerification.cs.meta",
+      "sha256": "6114DAE5A5AF3185B33521E54E89CEE83C16395B2F34CCB4F2A57ED0A455B615"
+    },
+    {
+      "path": "Assets/_Project/Materials.meta",
+      "sha256": "9310CF510F2B8C77C53EAD714BC53B51AEC9442545F5E7930B94553AC5EF0B2F"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Ground.mat",
+      "sha256": "B0222AC0FD2EED80DB5A80FE00485BC28AA076EAD7C258858BA83EC4DAEABF2A"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Ground.mat.meta",
+      "sha256": "626518F7C5F1B4F0AD97E0A15907995401D970DB343FEC4FD552E489F7493D90"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_HealthBack.mat",
+      "sha256": "5EF6936DE4087810EE4C2BA828CA119AFDC7764FDF39C8E7FD4E3512776A0DCC"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_HealthBack.mat.meta",
+      "sha256": "146CE786C7588DEA1224840C61CCB50E1FAEAAB274FA482F6E5E63E9B037FD96"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_HealthFill.mat",
+      "sha256": "EA83A7522F3C3BE4A6A3C5980061ABF06143121303043B830FC87C877647B0CF"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_HealthFill.mat.meta",
+      "sha256": "58A954DB48346F8F710E5E7784F31EE431FCD184AE294B5C998E95ED61744059"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Marker.mat",
+      "sha256": "F9A7C7B511DD356FD7C3D9508451FC2F22ED0537773D2A7CB6CE0E04047D63C3"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Marker.mat.meta",
+      "sha256": "537C756F8366A395B96C7C7463FC11DA078F03C171F2E6879CEFDAB28B7D5F2A"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Obstacle.mat",
+      "sha256": "500E3CBAC7D2273BE9FB526C7C5A5A053235328308E9A7F3054D566450A0E47A"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Obstacle.mat.meta",
+      "sha256": "521FDF2C3ADCD2A865112366252736A6F7D4111958B5B4E1ECE9B82F6DAB9AF2"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_UnitEnemy.mat",
+      "sha256": "5902B8B42328D0757E6AE17DB55CBD4A2CD3EB865A7C5C18D6191F7433B98F16"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_UnitEnemy.mat.meta",
+      "sha256": "920B3E290B095EAF52CC55915F537FE04F3E92888CFC85A90B81FA1180186B27"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_UnitPlayer.mat",
+      "sha256": "622B9C23E0EA5F4D1A04D7EF630CFB0284083D545C9ED33A6E0523179EFB5A35"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_UnitPlayer.mat.meta",
+      "sha256": "D4409CA7FD3979D031A46B849049AB783254D46433EC93F03C4074B8BF3C7D30"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Wall.mat",
+      "sha256": "CACA0E60462B674F8EE064C952E4245DD264281FAAE415A397E27F0385C5F5D7"
+    },
+    {
+      "path": "Assets/_Project/Materials/M_Wall.mat.meta",
+      "sha256": "D6E9710EFF03C33D7DAB9F2EB9272EEE9220CA6F6035E21CD246E817C50D5948"
+    },
+    {
+      "path": "Assets/_Project/Prefabs.meta",
+      "sha256": "BBE4E85361B7FF56B5341E6E305A85E115F4BCBF612F91B0E5DD8152D9C6B369"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Enemy.prefab",
+      "sha256": "A7795283CBFE70FC812AD9A767620599F28C582430697286E61EF50BA756BE6E"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Enemy.prefab.meta",
+      "sha256": "B9DD7E5D65BD8F0AD380890548491DD8193C639E5778637F93A55C5BCF5F0ABE"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/EnemyRanger.prefab",
+      "sha256": "157C1F68CBD52708EEC779DB9C5943A8A36DD2011DAF7F4F100F270CDF39D2B7"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/EnemyRanger.prefab.meta",
+      "sha256": "6ADBAD072C18E939FE0EC7B1C116082D32DA37B10FACAA739E8F81107CBA7E37"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/EnemyScout.prefab",
+      "sha256": "610024305E0811E7F45AB9FB71F0E86C34E1EE665829035FB4E9B3D32036BE5F"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/EnemyScout.prefab.meta",
+      "sha256": "536BFFE61CD64C9F4253DDD762E66C70F7EB1C6AB3BC35F04253C336DE18F57F"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/EnemyTank.prefab",
+      "sha256": "7FF40AB6A129FD554E0A9BC039F66B420A3D26342C9D364918FABE4F43020D04"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/EnemyTank.prefab.meta",
+      "sha256": "1745DA90D300C7515DF5EA55561B395336BB08CB8B8032EAC9B820CD350EB5B5"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Ranger.prefab",
+      "sha256": "8C93CAF9946051817CC841767388DDBB07D25F4822D2C0EDD1E08E6B9779C1CF"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Ranger.prefab.meta",
+      "sha256": "09986E8EB12B979382E60BDA9CA54A17772BBEA81690041C33370BA9500FEDE1"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Scout.prefab",
+      "sha256": "9DF7B978C8C18884D865913CCB90032893FC7C8831CD6BC4067D00F3AC5F4F29"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Scout.prefab.meta",
+      "sha256": "1F866EC84156BD80E0CB16F24EA031A3BB2E09433E24CF0248CDDF3F96D8F541"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Tank.prefab",
+      "sha256": "8F72CFA339BE702CDCE5ED8C0EEEBBD6EC32B35E1973EBA257D2D401545D88EB"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Tank.prefab.meta",
+      "sha256": "40FC9B14A11627B19FDD76C22EFFB7CE1715B1613F843AA7E86A81DBB546A32F"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Unit.prefab",
+      "sha256": "7CE6A8F924420A11993125AC91C0828F692A5DD3B575976E95CD648859C8E98B"
+    },
+    {
+      "path": "Assets/_Project/Prefabs/Unit.prefab.meta",
+      "sha256": "C0CEDC98BE85F0119C56A5262A960C830A798E7357A68D68E1B9740D5705B067"
+    },
+    {
+      "path": "Assets/_Project/Scenes.meta",
+      "sha256": "1B69414FD6D7D7A5DB7F0DAC76F2D47D1C880C7DEB20E167B4C9671CD32FEAA0"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Main.meta",
+      "sha256": "4AF600EAF166EF42150D8FEC360E2BBF7AE3AA1DDBD3BEF9EA6E78FD4DAFBAB5"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Main.unity",
+      "sha256": "6347209BA37426381016B1DCFD3B59FC835C1457ABBA5D9AE71FF643046E0E09"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Main.unity.meta",
+      "sha256": "384E21A54F20477DDFD95E95F3A8961C68A433B52514C17F07E322C5EB1FF6B5"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Main/NavMesh-Arena.asset",
+      "sha256": "38E3C3CB8EB5E25CE58250EC49CD818E1344AC07F70F3BF5189FA22B2C66E96C"
+    },
+    {
+      "path": "Assets/_Project/Scenes/Main/NavMesh-Arena.asset.meta",
+      "sha256": "4E47F91B9DDB578182A2B027A862150C884D0955DE7A2543726AEBAA462EE398"
+    },
+    {
+      "path": "Assets/_Project/Scripts.meta",
+      "sha256": "3FEF609BE4E6DD54F390F6CFF3830F2F694B472F548638523F26EFE2807F5C9E"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI.meta",
+      "sha256": "9D184BBBED3D0AE17E2EEAAE5A4D25420BFCB12D7BE0F58334C0E6DF84111331"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyDecisionRules.cs",
+      "sha256": "A86201F1FB1FBF81445AF634996518CAB0AC662E1CEA84CDE7E3B01B0BEA0DAD"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyDecisionRules.cs.meta",
+      "sha256": "84B08772ED5431945D6F088E955EBAAC553DD41D90C776F0D73436A9A20D2183"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyTacticsController.cs",
+      "sha256": "4ED8B88E028A15BF533E19E73EB0AAC91282895D38BFF13EFF29F54A290F9AA4"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyTacticsController.cs.meta",
+      "sha256": "D0B9F67BE796BDA4A4DD0F1763D15177D7DB10188B387A9727E79AED7B16782E"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle.meta",
+      "sha256": "007CEFBC0CD8EE3CEA817534D36DF4F4BEB751DF0D888F751F4CE4ADF193C46C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/BattleController.cs",
+      "sha256": "A13E8B58B2874B66E836555A089B35B9EFCF5142986BE56412130FF80882C8D3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/BattleController.cs.meta",
+      "sha256": "E2BF823EC1C7F9DA19A63FCCBCFCA275FA73B2B1472630454F835E207C4E95A3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/BattleResultView.cs",
+      "sha256": "308C0759F8C68E29B5682146BDB1C9F851E0B2D414B73584C78E30C047838057"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/BattleResultView.cs.meta",
+      "sha256": "C46D030AD4647C2F65F1A4ABF9FC72B18F49970383B0AE8EB63BFA3AC1947836"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/BattleRules.cs",
+      "sha256": "2A2862F6FE7BF2F0DB5EF99A325D0C3DD618977C9C195F85BF53897D3F73B370"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/BattleRules.cs.meta",
+      "sha256": "154F210311866A04C33895F3790675D6264C793263C4548EC274E0B2C3928070"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/GameLifetimeScope.cs",
+      "sha256": "4123FF5FCD807F87D2BC522A6A4B90BC45875B79844755C850D73D11F5D2C4EC"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/GameLifetimeScope.cs.meta",
+      "sha256": "2CC232195AA3C2D21A872FFDE92553C569D7028FA078992306EB6EAE8C789685"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/ICommandSink.cs",
+      "sha256": "DC17569A33CBABCFFF02456863746E1ADD7AE64C1E97512CBAC4E359F1A407E5"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/ICommandSink.cs.meta",
+      "sha256": "5CE35D527C5CC51F2C5A8D00ABCAA2CB6E1407010C1325123E6AFC9EED07A0E8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchClock.cs",
+      "sha256": "14F2AD6E468AA12599AA623DB2118241AB7F435733CAD7C0EADD413B48C23083"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchClock.cs.meta",
+      "sha256": "1474B0C2D3D476CA52368F1DB90E4FD2615481D5560E54F570F0DCB4E3DD940A"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchCommands.cs",
+      "sha256": "0ACE3D0313989CF569F0BB3E278B7828FF736FCAD67D43FA7E182226AB29C3F9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchCommands.cs.meta",
+      "sha256": "ABD291845F0E03527976C4E9817358E3A178696AAC0B84E8BE4E4DE65FE40C56"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchModel.cs",
+      "sha256": "7D5411CA643AE879B8E7A9C6BEBA57717A4612B4B2E9D55548D30CD95564BE64"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchModel.cs.meta",
+      "sha256": "AC9B50E86E0510B3512CC3CCFA1076215CDB4733E8B12DEFFC3CFEA932A27004"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchRules.cs",
+      "sha256": "18C27ABB6145DD07962991F140A3D3CFD53F7CA1F79C5F48F6F89482771D1A65"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchRules.cs.meta",
+      "sha256": "34AEF11C20EAA8CA2B660F03E0D56993F0979581C8B8F2CB97631E04B14FFEDB"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchState.cs",
+      "sha256": "9E6D12A7F0747FC897876FC09D019E38C8D22810B8CB46B5D1A5C4682F5A9ACB"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/MatchState.cs.meta",
+      "sha256": "4C9E164526CB236FBB9231DB55645EB164025928201B2E147884C7BBE5BE701C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/PauseReason.cs",
+      "sha256": "12C6AB4E8D096E79D7A2A3958735BD4DF18E4A3D1AAF109503B254B84A499704"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/PauseReason.cs.meta",
+      "sha256": "CA6C9DD1D4BE4DE2334CAD557DCF4D70BB9A8D28D1EA8CB758AFE075203D379D"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/TeamPerspective.cs",
+      "sha256": "7C26A4A23B5A0EEC0119DFE7A6FC4596D1B17D65B33DA97F18A289E723C30F2D"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/TeamPerspective.cs.meta",
+      "sha256": "34BB8F7FC867BEB2795EC50414FA17FC3331C12E9AA62296438A0BE3D252279C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/UnitCommand.cs",
+      "sha256": "35F21CDD8084E336A51DA62C905B094928AD748F4AA9E1629B510C7CBD7B1FD8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/UnitCommand.cs.meta",
+      "sha256": "C393C9F307C0B9DF22488025A3098B39ED5D0C54DCB5CEBF06CAC63A5D8F3AE3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/UnitView.cs",
+      "sha256": "F7004A711E1DB2EAFC5F0D511B8E9C5FAF3CFA7D6EC0994A6AB436E8D54E9EAC"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Battle/UnitView.cs.meta",
+      "sha256": "1A0AFB2172FC3F5F037CFD4B45EBBC529E7DB118973BB5163360FB1738B7AE7D"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure.meta",
+      "sha256": "5B7A90C19696E03E0A6C9772432E98831326FCFE0CE488B6F7C6151B95235730"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/AddressableUnitPrefabProvider.cs",
+      "sha256": "5D4D021EE9E0A4A1ECF79F99ED52B17EF46D1C8EDF3A319690B66203E1FB9569"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/AddressableUnitPrefabProvider.cs.meta",
+      "sha256": "70C4C1AD8344790EBB2CD4AEFAB5A894B3A20EB2E8939E995DD504BE1878D3B6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/IUnitPrefabProvider.cs",
+      "sha256": "8D02D610A3FDBC82E0742C5C10D2E113E6B7D51F0908C6C4DFCB84380833D004"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/IUnitPrefabProvider.cs.meta",
+      "sha256": "667606CC4C39BE39E05D4444941BD5BA2AB68221A25A2D0784329BF687CAAB4C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/UnitFactory.cs",
+      "sha256": "318A8487A23431CC17A7FB87BFF66B32A51F84C33C1B53D9E2B5EDB3ADC3077D"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/UnitFactory.cs.meta",
+      "sha256": "D8AF074F34CC65C58DDE38AAF3E0F788A5547C1FC170E9CF2051785461275939"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/UnitPrefabOwnership.cs",
+      "sha256": "FB4FFB01125E66B52D1C1DD04B30583D565C8FFACCF7D3D7B3E9D9A7CDE5B29D"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/UnitPrefabOwnership.cs.meta",
+      "sha256": "B2C4C84990970CAEA9F5D970E879125CA8947AF6F9F42EBDEA89C00A58C19338"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/UnitSpawnPositions.cs",
+      "sha256": "D90F0F20171C1154B8C4977B62BBDDCDE9D9FA902E44E407FB97A48C832996B1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Infrastructure/UnitSpawnPositions.cs.meta",
+      "sha256": "30B9B7EDF92FB34CDB18A42377DA9208E172F1C4349075FF29BA45C0C0D6BED9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network.meta",
+      "sha256": "6D1A074A72DE1625DB2AC0B229E715520797E4E69EB69947BF8DA6BD47A416D6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/ClientCommandSink.cs",
+      "sha256": "B09D4056A992F0BC89B18C4B6B67B7153AC559EB8BA7B4F5066E00CF6E02F499"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/ClientCommandSink.cs.meta",
+      "sha256": "0A5F8F92D8D8026CDB8A9901791678505F9E8F259FE61FD030F51B72CE40C869"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/ClientMotion.cs",
+      "sha256": "365607198334D551F3C8321775C545038B258DE863A5DA282BF847F533E5AE7F"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/ClientMotion.cs.meta",
+      "sha256": "BBB1D11536C1DE02E8E02109C5A09C1687E80F73B0631121B15AB3E4986720CA"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/ClientUnitView.cs",
+      "sha256": "F39590E6AB7442FD826D1B85FC1EB16CE39E7320A572A0BC4AF1D9CE9A00C8A4"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/ClientUnitView.cs.meta",
+      "sha256": "41D93C303304D72444B0305DEA68FA9BD9822EEEFFE4B7C15B9D37C709582793"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/FrameSnapshot.cs",
+      "sha256": "B65AAF708339C0FC28CCFB8F9743A5B9F57A063D1534F286721653FEC386A19F"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/FrameSnapshot.cs.meta",
+      "sha256": "275BBEC23D098EECD465AC9170C25568877CF1E73B878D4BE84F0A8382331E8C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchConfiguration.cs",
+      "sha256": "0B8ED715D5C9B1CEFE53E1611CC750D8449069EE3350FCF18E8B38BC12B8A920"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchConfiguration.cs.meta",
+      "sha256": "874B8316C1A3AF7832C5C822CBAA225C84697CF6AF900D28B124AA39A05D3ACD"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchProtocol.cs",
+      "sha256": "F375F6730B430AEED7597859FAAB24C786930487869DBD840FA2A4073B0D59E9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchProtocol.cs.meta",
+      "sha256": "F0B770286166A202E15549822322C58FB33304A855094699C4AC6A5C04C6E49C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchSessions.cs",
+      "sha256": "42D17FCF4735A401D5D2F30C3298010EB69A4F8A3623384B32477F9F4F13D377"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchSessions.cs.meta",
+      "sha256": "D8C448FBBE31915AF7CBF40CE594473D7A6D0EB36D481FA684FB636EE66A8391"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchSnapshot.cs",
+      "sha256": "B0728442072AE83616BF57409BA8EB70A2DCB247C584AB36C330D3E10E06C697"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/MatchSnapshot.cs.meta",
+      "sha256": "DDF4A4424F5545D0A5817EEF02940683EEB8956AC50C56AFB1A60E7EBBD99444"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkLaunch.cs",
+      "sha256": "61FD89212A687B7D632AE122E8AAA3076AD232986166A784AC686732AE463DD7"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkLaunch.cs.meta",
+      "sha256": "87A6A9BCF4EC22C0773BBD0221343E9B9F4EC58E5BC8613597999750B1852381"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkLauncher.cs",
+      "sha256": "13877B009F7183F8844CD4476C9CCC787E8820F57A91EEA15CB161A81D52DABA"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkLauncher.cs.meta",
+      "sha256": "69EF60136A3CF19C178D4584B900BBC592006C444B0ECEA74B2C74A575453AA8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkMatchBootstrap.cs",
+      "sha256": "9FA0BB0CC266738D53CD7493736858EB9AC0721C6527088BF4ECE83BC025C683"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkMatchBootstrap.cs.meta",
+      "sha256": "D22453FDFC70379CA7C0085D8C512309A3B0F2E25E4041E299F3BCD170474E7F"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkMenu.cs",
+      "sha256": "73AAD3A147543D17F593A7B9717728B4BA42C7BEEFEF5AD7DB3FFF6989DF10F2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/NetworkMenu.cs.meta",
+      "sha256": "CEA67E4782B7FB2E3E42124057EF35E6DAB04A5716D9C2C598A0709FF7F2122C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/UnitCommandCodec.cs",
+      "sha256": "ADEA52B7C01F74953CAEA14DA036A66D31C76CD7BC48F4CAD93BC1F03B423B61"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/UnitCommandCodec.cs.meta",
+      "sha256": "85DF5C51D4617C2BE4A56F0B1E973AE2BE02021F092725727638ED86486BE3CA"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/UnitsSnapshot.cs",
+      "sha256": "1BC491ED854D1912C9814D181B445C660E28CC2EA4536D8733456B5CEB2B08D6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/UnitsSnapshot.cs.meta",
+      "sha256": "E300F71E2BE0FB1137D239AAE8C66BAE397AE3E88D58CB4C3A04BA87464CBBD8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/UtpChannel.cs",
+      "sha256": "ED9823249B46555D80B27A773925651FC2C994BDC0356EF21C9608F7B567E173"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Network/UtpChannel.cs.meta",
+      "sha256": "D9A6681B8A80FF4954F14E8DBD5B021393BA35528035648386122B9129F6CF74"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives.meta",
+      "sha256": "41E50313E06B0274D1BC7F1105DDC08A9FEF70EB76D8B053A459A8280D767F15"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayConfig.cs",
+      "sha256": "B690A1C115934C6480B83E5762B17C83CEC723FEC3F2D1BAA339064CE198273C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayConfig.cs.meta",
+      "sha256": "CA12B1857689F8886E10DE463A7CA00AF55DB701E11197D07A15856DACDC0E16"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayPoint.cs",
+      "sha256": "5338479EE1CC0C94F56E92C01FB5A8A3CDF6F186CEAC361FCD3F4CEF9706C51C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayPoint.cs.meta",
+      "sha256": "D373B2DD478E905941A61EC88C53F25CDDBC0525AD47F8345D04A781B5A37D38"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayState.cs",
+      "sha256": "114943AA0C3BDB4DAED3A1101D9B9CB31E22FBC0D8906FEC61E6CEBEB42A94CB"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayState.cs.meta",
+      "sha256": "40E0478010C9BCF09CBDB02B3655AC593D9881D70DCA3148AADE318B9F559DBA"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayText.cs",
+      "sha256": "0DEBDBB659BCB5C7B554201BE75CD82D6C137541DB7041D3C8437FAF02D86671"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Objectives/RelayText.cs.meta",
+      "sha256": "B311841F76C55FFDBB84CD512D225C298138098208412B2D24AFD15CE68512E0"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player.meta",
+      "sha256": "0B80BDBA06B341D49466360CC4EFA337493EB49C4D72B9F4308070BFCA5D6A43"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/UnitCommander.cs",
+      "sha256": "B231CBAC0D591F0F0ED6B0322973BC76D13092F9607A12D69F4A8F915C331342"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/UnitCommander.cs.meta",
+      "sha256": "DD905D34F0353B8AF7D9033BAA78CF98174587F13573A8C66F92D0A627BC0760"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation.meta",
+      "sha256": "5A70C0214EA8CB95D38587C0ADD68A9BB1A5493A02C7FA706E6F1C2A3C4C36B2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/AndroidSystemBars.cs",
+      "sha256": "019C727212ADA5A3AFD43CA2B5CAA42586F588202A6F0BE74F308C99F55E052F"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/AndroidSystemBars.cs.meta",
+      "sha256": "A3CDF4A6525B9D021DCECD96A5B0FF48135B659CF10A994DD91B836454348AAD"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/BattleHud.cs",
+      "sha256": "F696441A3E794BB7820F4A341951373C0C87812C4F772CBEC860BCFC789CE1AC"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/BattleHud.cs.meta",
+      "sha256": "36CD73347014733A14493866CCFEDC389CA5B653EC4170810E0F16EF7CF8F293"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/MatchAudio.cs",
+      "sha256": "D4F55CB34F08252D9E59046B45E163EA719924AE55AB4769E0BDFF2B184BF1CF"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/MatchAudio.cs.meta",
+      "sha256": "41280F4FCCE5CA1C2A37AB002017397DC7258AC06CE86A2469C161AF7A5372EC"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/SafeAreaLayout.cs",
+      "sha256": "062E92B0BACF4604398AC2C5195D9382BAC6D4F1DEDE72CC1DE74D7C7207588A"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/SafeAreaLayout.cs.meta",
+      "sha256": "7B07F8F355662F379DE1691B85785A2E2A5CED944A092AEBD2A094D02B752BAC"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/TacticalCamera.cs",
+      "sha256": "38B241B043826A64CA7A3C0A8104A94E303E806CBAFD3C691E22350E010FD679"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/TacticalCamera.cs.meta",
+      "sha256": "4F2C1EF4FDE1D3F5F3CD86032502D7DFE8528785EDB3586E9302FD0F4B04AD63"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/TutorialView.cs",
+      "sha256": "51242405B79984AC2BA0C61AFDA9D96DCDADFFA4D06988FDBB90016189D463F0"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/TutorialView.cs.meta",
+      "sha256": "E50CD36A8FEC6368FBFC9494BBEAF96DB945E7BE8DE1E7FC76803727BF996CC6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/SectorLab.asmdef",
+      "sha256": "8188FA8F7911192F7622BC45FDD6BBE36FD0663133C63E1FDA53041906A8D81C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/SectorLab.asmdef.meta",
+      "sha256": "A6A23F2E355A4BF14598A2177F991815205EB9BE11B10B9B1650813139B4ECD9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units.meta",
+      "sha256": "4509496A7AD3660B6A5467F1899E0AB6B48D83CADE9A093714D3B4AE8ACF4768"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/DamageFlash.cs",
+      "sha256": "5918A6837C827C8423FDF2FFBBE7EB33CEBBB2369BA2D4E17CBA7FDA069B9A06"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/DamageFlash.cs.meta",
+      "sha256": "6F17EBC162C72FD7E79530DA1241F2B830937DB5EEBDE431116A8D82ABC21893"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/Health.cs",
+      "sha256": "72A85AB8A497D24C4594E62175849CD822AB594F30012129E59C860EE43D60EF"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/Health.cs.meta",
+      "sha256": "9CD2C533655BC93A0EBE028C1EAFAA4676A156B44E9B9B8AEDA50F013133CC2A"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/HealthBar.cs",
+      "sha256": "56E9B5FE4DA1660BEBE29C25E4AE5D1C68512207EAC3D0D39EAD4AEAB2C37E42"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/HealthBar.cs.meta",
+      "sha256": "C5E291E1FFD472B23B2ED12AF8DB154B975759BF25ADA8B6564B1461645782AA"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/RespawnTimer.cs",
+      "sha256": "185D22DD689A02947FF49B61A0DD5E68342E15BBA774F5D3DC240F5EA6B50FB1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/RespawnTimer.cs.meta",
+      "sha256": "157F69946A995ACD81D46CD653BC280824CD8FA2FAF33046D32928CCE28C0A43"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/Team.cs",
+      "sha256": "D2208AED99A676248D746D4E81959F92BDCD1EC4CAAE1B20F285E506189FA56D"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/Team.cs.meta",
+      "sha256": "EA421A1D388484908C7C6E3EDBF70E8064B982ADBB5DB26CC1C62BABE3C444A7"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/Unit.cs",
+      "sha256": "C6749D46C82B48723DB7458A8EA7F08361CA179DD6E781715431E18CF2D9594C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/Unit.cs.meta",
+      "sha256": "5304BA46BFE135AF8D8D6CAB704E3E8AEB8BE7746F1308A54F51A1E91139BB03"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitAttack.cs",
+      "sha256": "CAF0A47745F87C0B999E794125DD252D25358EE9B398ECD43F85F8D51B832A20"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitAttack.cs.meta",
+      "sha256": "06D18F08DC6D94A783B99A7DF04334F678839FCEEFCBA9D32528C337C990A721"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitLifecycle.cs",
+      "sha256": "13123A5D131C879D27EC03AF45508A5C029A32810487DB46EC6C8B0E22584A1A"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitLifecycle.cs.meta",
+      "sha256": "B2C15455E6B2C2D3A7FBA5CD6F6E7F6E25957E5B85DD230559771CEC51AC596C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitMovement.cs",
+      "sha256": "DB964C01F1BA637520EAF8355C707ED2EDD9DDD3ED97ED027CD14D1E67A6A57C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitMovement.cs.meta",
+      "sha256": "35378CD84C8E080EAD2E0FB1ED13A4BD934B1DDEC1359A4E5593DAE06371E825"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitRegistry.cs",
+      "sha256": "A57E64E25001E59C2FB21460B10DEF3B9FAADBD5FC7B7CB09308FA8153B6AD46"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitRegistry.cs.meta",
+      "sha256": "997343999799BB6C8CEC3160AED6B68D45342BD4AA0E6D3E9F0A967CDC88088F"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitRoster.cs",
+      "sha256": "987D5CFBB1E5273E9F5599AAF0240115BEAFF253E47F1A5599717435B27B37B5"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitRoster.cs.meta",
+      "sha256": "1D2D4F9A412042D415E74895870DFBF14AA1F969C8246D27A18E903A8A0B813F"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitStats.cs",
+      "sha256": "92ED64CEDCFA6C67F902836410C98E140154F53CDC36BE02780889DD318A255C"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Units/UnitStats.cs.meta",
+      "sha256": "64522FDB63BA94C8C90EAEFEBDBB68721024F7AA26E907B5B63003ABE0193C60"
+    },
+    {
+      "path": "Assets/_Project/Tests.meta",
+      "sha256": "98D6A0B561A0AB752D0760CDB428325DBF53781CD19DC5B5A1FF9FAD4A93A84D"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode.meta",
+      "sha256": "F0C18BB46235502F82B5D8D1FAFE4FD4CC9D3FD53F6F717282055E89F8A64754"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/ClientMotionTests.cs",
+      "sha256": "DDC48E8714971D816B932691C17A02D6404AB21D503EEF2F8A14FCF05DDDDBC1"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/ClientMotionTests.cs.meta",
+      "sha256": "797E50BA79085EB6CA25317EB99B0B1AD8EA70AA3B725F3604E0300361DD28CC"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/EnemyDecisionTests.cs",
+      "sha256": "9EBB408B1A00CEA7313A924AF31B623D55043E82614BD889B3B6C95C4A886BCD"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/EnemyDecisionTests.cs.meta",
+      "sha256": "1F193187F8B7F02BE2184657E524781D37774F6D10116BF8EE36D7FC74F43908"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/HealingTests.cs",
+      "sha256": "4D27771E5EB1EF09AA888CC9ABA4611EBAD17979BE85444CE489BBFE3717095C"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/HealingTests.cs.meta",
+      "sha256": "1529616B28ACAE69517D15FCFD5D576C8A4FF7A1C83AA687E622D1B39CCC9B6B"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/HealthTests.cs",
+      "sha256": "21894EE38D425C048B2EEC25B8A2EA1C0A89294BA3B46031A47DA6212728BA33"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/HealthTests.cs.meta",
+      "sha256": "4506644C02AA4E4588D9C0E980B53F776062CB6A0B7F176B4BF4D7FDF76181F6"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/MatchForecastTests.cs",
+      "sha256": "4D13F19FB3E2EC46D17B172572F5AC2639CFBF6C779B26E79C1068C7A9ACA440"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/MatchForecastTests.cs.meta",
+      "sha256": "16CC9CFAA8203C1612F774CA2FBB91DE6417F1FF1602B10D97BA1D77B46B13BF"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/MatchRulesTests.cs",
+      "sha256": "299178989F3C539676BFFCC4FEAA29F4B0309F64E83BF61D78C43096E764825B"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/MatchRulesTests.cs.meta",
+      "sha256": "99FE2092055790306056FAB64269D71FAE1866BD5C9E2F5A459889CC0F822938"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/MatchStateTests.cs",
+      "sha256": "DA9D22B9A91252852AD23BD18F50D77DE6C9DFF1E525A9DA9C72E63C927B9184"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/MatchStateTests.cs.meta",
+      "sha256": "A692F3EB49D1937FFF106FAD66846D1B681339CD078151BA4124453853753A18"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/NetworkCodecTests.cs",
+      "sha256": "ECECB7F00FF444D97B4BE113F297A15037A433232B4A5480262AE4415FE19452"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/NetworkCodecTests.cs.meta",
+      "sha256": "92A73A8CBA6A65DB16831CEB431438E2E568CBB17731BB9ED567A2DF25DC37B4"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/NetworkFrameTests.cs",
+      "sha256": "65CD678934FA68A5822036A5894F4C0361DC56DAA4E5D039811F962B636478C3"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/NetworkFrameTests.cs.meta",
+      "sha256": "A0B22E38841C62831DCBA86C8182D634358F2D564CFD230F187BCA36E3112AC6"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/RelayStateTests.cs",
+      "sha256": "50EE8C32E7C4508628B16A2B48DD48D0A44A3AB38134E9104E627D4D2A30D95C"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/RelayStateTests.cs.meta",
+      "sha256": "45EA6763F20BF2788ADB88AC4FA116E04376501F259A610F2700556D2CF373A4"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/RespawnTimerTests.cs",
+      "sha256": "4F53704C4F3D7564FF01FBE307049F16DC1BA8AB055AB9BD3ECA342739CAF7DF"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/RespawnTimerTests.cs.meta",
+      "sha256": "8F54F4E9ED95CDFB8E347AB4E43AB959FAD6B154BF6ACCBB838A9D98A01F1C21"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/SectorLab.Tests.EditMode.asmdef",
+      "sha256": "6B2B9715077B7CE1CB218F4515177ACC4A21B071CE3CED1DDA1A4B10A9A851EB"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/SectorLab.Tests.EditMode.asmdef.meta",
+      "sha256": "90C9C7A712CD52DEF27ABC780E7954F774F9A9405F2911397E27C60344C3740D"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/TeamPerspectiveTests.cs",
+      "sha256": "686043109C30C83C450D19B3F5429D29C06B8919CFDE0AF5978FC123258A2FAE"
+    },
+    {
+      "path": "Assets/_Project/Tests/EditMode/TeamPerspectiveTests.cs.meta",
+      "sha256": "64DE7E057BCADB71578820F195E6441BDC44BD77F5EDA4996F159A9311AFCDF6"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode.meta",
+      "sha256": "C9E67118A274E25EE023FF362E254802CB1F64286F6B9A9227B6123DABA75E0B"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/BattleControllerTests.cs",
+      "sha256": "94A9357B75E4C54D5446FF66B84EB2E80B4D6B591294063B38AC8DDFE232D393"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/BattleControllerTests.cs.meta",
+      "sha256": "682315762F7F97A9DDAB1632C6C35C001F05C66C122C229E71AF4A2ECAB3FFEE"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/BattleHudTests.cs",
+      "sha256": "DFFF7B6A951730558C4FA80EED60DD6DC54879C817CCD0AABE023C6E50E4D5AC"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/BattleHudTests.cs.meta",
+      "sha256": "6BF8E9691E8EB959FAC5FEE872E7D952312C2E886CB31E21094F5F5AC4126789"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/ClientPresentationTests.cs",
+      "sha256": "600DF7EC923DBE944844E2D6847A47DC40C49AC59F823D762AAC15F59AF9D464"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/ClientPresentationTests.cs.meta",
+      "sha256": "F08700EE5D54FC6E4446B38B369E8066CBBDA99E19439A9042B1ABF035D7FEE0"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/CombatTicker.cs",
+      "sha256": "95A6DC4837FB794995EA380C2553134B8C7708B362FD52177C7F3B765CB73BCC"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/CombatTicker.cs.meta",
+      "sha256": "ECCCFBE86FB5B15FEFD07C20A53F075C0C3A2265D98B8512B39B7BEA3169F75D"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/EnemyTacticsTests.cs",
+      "sha256": "5667961BE4573267B79FA5ACAFA57962B6F27BA792396973D53565EC6C65AFE9"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/EnemyTacticsTests.cs.meta",
+      "sha256": "D497A848719644C29215EE9DA5B079FC3274D47EC513F1E6FB9A3531CEE68DA9"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainAllocationTests.cs",
+      "sha256": "78EB76D4F96BEAC81F46C9A169524587455D204B04BE814363CFEC44BCAD33BD"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainAllocationTests.cs.meta",
+      "sha256": "F5B51A4E9E92BDB049918E0B30254B88DFA8DD3213B0C06F093682FEF3D66D18"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainArenaTests.cs",
+      "sha256": "7903D4FD50EC0C6AEF366018B7734D0FC7CC2521056CBB743CDA373C0649D808"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainArenaTests.cs.meta",
+      "sha256": "18AE03AB0362DEB5728F58064BD6C60C231275DF295BDDB0922E6A47CADD131A"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainLifecycleTests.cs",
+      "sha256": "07334CB5B5D0BC8DE3BD0FC4FE491C34674F3CF440807E9A5AD632C4CDF8F5C6"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainLifecycleTests.cs.meta",
+      "sha256": "6F1833ED45CA4E5737B8341A94FE17D6DFBA65F739CB78008CBEFBF4E24CC577"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainMatchTests.cs",
+      "sha256": "40A10A53D4F485654356ECB6B2C9DB096EF2B0D59C17F1B2EC38BC2E7703327F"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainMatchTests.cs.meta",
+      "sha256": "D8F6F915894509E26F063E9390C2EB60C57E848E3D20070DDB62294C1C596442"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainRestartTests.cs",
+      "sha256": "4F59CC78F3C623AC3D34CB0875616BF3FC2080318D73AEFCCC99AF64BEAECCAC"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainRestartTests.cs.meta",
+      "sha256": "CE90796C56B7F9C8C3D7D6EB8DCA239C98C762381E0C55FB0F278C162AF751CC"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainTacticsTests.cs",
+      "sha256": "749FA879336D4315888D157C785AD6967A8483920BAA6102907B996250A5889E"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MainTacticsTests.cs.meta",
+      "sha256": "48D23CF8E5970B19403A79661ECC46122FAAF0E7869B0D1578EEF3EB4F991F22"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchAudioTests.cs",
+      "sha256": "A6577FF95C754BC9FBEB7751427FBBC174AE286F0086C483F9D05ED91183A200"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchAudioTests.cs.meta",
+      "sha256": "EF7C843CB7558CA761B290BAF2DA51B80EC95A517B4D7C1027E3DC3E03440255"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchCommandsTests.cs",
+      "sha256": "527BED05E64401CD5446FCB9233245BD968F11CDDC16240A31B37E3AD486DBB8"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchCommandsTests.cs.meta",
+      "sha256": "A783D57FBF5981161510F2B3BB88351AB178BE26EBA0F4CA5DA3C28D1EE231B6"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchModelTests.cs",
+      "sha256": "AE57C32D18459BE706E58260065426937C091ACA59B970D6E8C242863334B83F"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchModelTests.cs.meta",
+      "sha256": "FD66DB7144F485C1A4F79E96F9142ED5E0C565407612DA89AAE4EA546505C5C7"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchScopeTests.cs",
+      "sha256": "7CEDFA831D81990965CAF33BB93BDE8762FB59D885D09A4BE8B07EC48145C12F"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/MatchScopeTests.cs.meta",
+      "sha256": "0CF3034046FD9A0003C48D9A4B71D07FEB8AC9D0D1E7F0CD18398E6B0CE81B9D"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkMatchTests.cs",
+      "sha256": "6DDC7CC5DC5021F2E077DF803B93D6E086A9A127C3D9AC8E2DCBF21AC7E1D58C"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkMatchTests.cs.meta",
+      "sha256": "07E386826AFCE2DA09D62EC3A427BDE3B01EB0D10D55B71F4D8099CE0004D05E"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkMenuTests.cs",
+      "sha256": "CC429399B08E9DAB9FB1AEA03B306F260BA3C6A8FD03050E4A108DA7EB7F7990"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkMenuTests.cs.meta",
+      "sha256": "1E5674760EC312FF5E28931468E885C9202E2002B6EC4BAC8E2163F9D8D1D403"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkSessionTests.cs",
+      "sha256": "9CEAE1EB267007EA5DFF288688FCE53E8E336940C31601B0F6B964AE1CE681F7"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkSessionTests.cs.meta",
+      "sha256": "8F755C5FED86963BFF756338E2C27CC1809B3772DE5105D7D813DEA6163F4E13"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkTestPeer.cs",
+      "sha256": "2CAEA092EC2C8EE088FCFC34C5AF3F927F5D3BCD142DAD48D696C6A51E8844C9"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/NetworkTestPeer.cs.meta",
+      "sha256": "DFD38DC16FE65C355886124765FDE6AC37A8287551FA8241992C5BF17D434960"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/RelayPointTests.cs",
+      "sha256": "DF31DDDBC4EB5EEADCAA06D7AC6411DDAEF666A185F1466C90E737BAA60D3C9E"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/RelayPointTests.cs.meta",
+      "sha256": "00AD45F24F0589E3DAD8913F2B7C7E6D2097D3700A63562F250960FEFFAAB1AC"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/RelayScoringTests.cs",
+      "sha256": "ECA65E5A65444E23C3BDADB1C345D720CD827994209D467EB5090FE53979DCF3"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/RelayScoringTests.cs.meta",
+      "sha256": "D61B4422BE943149EE1D4E439164C33E0608C703A0381B7797685D5F8FA8DB5D"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/SectorLab.Tests.PlayMode.asmdef",
+      "sha256": "942BD9661D8B8ECA09BFA4641DA463A71D169491551A18DA79A32BA7018E8269"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/SectorLab.Tests.PlayMode.asmdef.meta",
+      "sha256": "6D8B3D332D9B3A65F5AE35D3BB44141CA544391404E807CE55714E1E0B89ACF4"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TacticalCameraTests.cs",
+      "sha256": "67AA5CA82561BB1F17A6C7FBA3C05E2E067B98A3F44C63A83F23136435980EE1"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TacticalCameraTests.cs.meta",
+      "sha256": "8B8F1690EC3AF1F17D9CCA05BEFDC1F09170BD44CD523F5D77B2A885CB89F043"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TestArena.cs",
+      "sha256": "5B7887A004B516F25555FB9A6B218879C0957B204FA0CBA6A54DD2C59594E44E"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TestArena.cs.meta",
+      "sha256": "40F7AD7975C64411EC8B090E48D1D5F5ECF776B353ACB509C0672322227D31CE"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TutorialViewTests.cs",
+      "sha256": "AE9BA915F61FEF37984BB921835D2F62780DBB3CCDF118B754E097EE06624EB7"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/TutorialViewTests.cs.meta",
+      "sha256": "677149914FD8086AB39F37035D0A1AAE3C6931259789BC1AC082E79ADF45A66B"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitAttackTests.cs",
+      "sha256": "7A8076CE98488342F31B2002C8EF6A2048DA11C2A50FB50DA28F4AB03D21367B"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitAttackTests.cs.meta",
+      "sha256": "D8D4303A6624E30D27EE06BC427BE964FBE51F77A604A5CA92FEBE9DAA96FD01"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitCommanderTests.cs",
+      "sha256": "6772D78E3EF74B24E61075805BCA0DB12A0A34731BA8BF72A4D153BE2BCD0265"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitCommanderTests.cs.meta",
+      "sha256": "35BB7065D767223C474BAEFA59B1AA92DF560CE5EF73DEE629C483E6A098D731"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitFactoryTests.cs",
+      "sha256": "F1EF6362A0613EB3150D3CE1047807F96CB12F1A6021FE5F4590F655291F686A"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitFactoryTests.cs.meta",
+      "sha256": "8ADB2C0B4093FFA8FF310A91801A274608B06C799CFD8390153C76DAE720C458"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitMovementTests.cs",
+      "sha256": "C3455C7172DE3332ACE1F24C2B9BC6068E7CE4A6C22E4245A6469EF7F9081126"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitMovementTests.cs.meta",
+      "sha256": "887F665CB8C32344623F386F546D179A49AFD7F27C72FF16F88A2AF13B1EEF54"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitRegistryTests.cs",
+      "sha256": "2302F1B50326A6AF4367F23EEF221AE3C885C7C9A5EFEA57731BEE212A734DB3"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UnitRegistryTests.cs.meta",
+      "sha256": "CF131459FBFA2B458FF0A3360CC26B0D8358B64A472DE400B512C17FC437E15A"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UtpChannelTests.cs",
+      "sha256": "C13E58F9F7F2452543372E030DA035B4EEF5A17AB70F980C5BB3DEBF64EC05A9"
+    },
+    {
+      "path": "Assets/_Project/Tests/PlayMode/UtpChannelTests.cs.meta",
+      "sha256": "83DC638F8F35A79F98586F09AA508BF056C435ED93E7580EDAC53C4DDA5BBAC2"
+    },
+    {
+      "path": "Assets/packages.config",
+      "sha256": "0B2744BBD5AC03E9C2C71EF6F347B033C3D0DC1E6E17A8405CB5A3EC9391DBBC"
+    },
+    {
+      "path": "Assets/packages.config.meta",
+      "sha256": "DEAB4524D835CCCAFADC78AC19D8880AE41FBD448CA9567EEB77BD174CA5EA45"
+    },
+    {
+      "path": "Packages/manifest.json",
+      "sha256": "5D46644BEC4D7BC01F6E3C88481ECC2BC14954FEC765DE8D4D45BA3D6AA2BE54"
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "sha256": "BF316B31F57F68A17D64F0B0B67C453BF5B5C3AD2FEC070434F49BECC145CE47"
+    },
+    {
+      "path": "ProjectSettings/AudioManager.asset",
+      "sha256": "AEEDEB3243F07B61DBBE854AA08B5EF6F0B5274DD9852AD9F6129DDE3E105A31"
+    },
+    {
+      "path": "ProjectSettings/ClusterInputManager.asset",
+      "sha256": "40E65DD214BF254955D2C8829CA8CE2130FD3510485560CE012E9A1DDD93E623"
+    },
+    {
+      "path": "ProjectSettings/DynamicsManager.asset",
+      "sha256": "BF017B547BB77CE3443DD5287DDF2516A74FD167F4F2EE5D798340694F51776D"
+    },
+    {
+      "path": "ProjectSettings/EditorBuildSettings.asset",
+      "sha256": "AFF7174F6ADEC301F42CF001EE81EDB3E8C8918243AA6615AE8F7BA1BDDE5FE1"
+    },
+    {
+      "path": "ProjectSettings/EditorSettings.asset",
+      "sha256": "183B4AEE63306B05EC64EE1A066E6AFD467004C0D755E4E37B693718EB838D51"
+    },
+    {
+      "path": "ProjectSettings/GraphicsSettings.asset",
+      "sha256": "D1288ED712C51A6803DE0B43556CA13A1B418835DE68E806846A8FC0C608E03A"
+    },
+    {
+      "path": "ProjectSettings/InputManager.asset",
+      "sha256": "7A1BB836A1008D26D0860D143E9D9DF7CA41731D30A72901B518063819C62DF2"
+    },
+    {
+      "path": "ProjectSettings/MemorySettings.asset",
+      "sha256": "1E8379A461B10AE09F3F696911088C16875D63E87ED5F2D95DF9E1892703F9FD"
+    },
+    {
+      "path": "ProjectSettings/MultiplayerManager.asset",
+      "sha256": "ABA89FD1A1DDAD182727AD82727E536D27372E90328A8196DA2A4560398983DD"
+    },
+    {
+      "path": "ProjectSettings/NavMeshAreas.asset",
+      "sha256": "80106CFA7E6181A1928B142C075F3E510D527441E3D79BC83590E4AC91E7CD66"
+    },
+    {
+      "path": "ProjectSettings/PackageManagerSettings.asset",
+      "sha256": "F281D96E785DF430D30CE0A515F4FE5C625EF44467125879F4B9F4CB087E1578"
+    },
+    {
+      "path": "ProjectSettings/Packages/com.unity.pipeline/RuntimePipelineConfig.json",
+      "sha256": "00A6110465C4473AFF1DBC8378E27BDAA39428376B046053DA8CB9729ECDC8A2"
+    },
+    {
+      "path": "ProjectSettings/Physics2DSettings.asset",
+      "sha256": "D57A0FE55659C33879E8B70BC01C5EA9CDF082069DAB649905C6C5138531E6EB"
+    },
+    {
+      "path": "ProjectSettings/PhysicsCoreProjectSettings2D.asset",
+      "sha256": "BEDC5339A832C60DC3F11B84ABC4F4384DBFA20B0CD9AD6C444B907E751FC35E"
+    },
+    {
+      "path": "ProjectSettings/PresetManager.asset",
+      "sha256": "29C125923FE6E29F90190D4FCE1C82D660E7051546E2C9D02908D18C9CF2436C"
+    },
+    {
+      "path": "ProjectSettings/ProjectAuditorSettings.asset",
+      "sha256": "9E68444B9BDA981E2927A98DF9EDF69EA88362F0C6B7F3C81B39B9D515D2A416"
+    },
+    {
+      "path": "ProjectSettings/ProjectSettings.asset",
+      "sha256": "38ACA5BE50C62522E1AC2D9FC19B9D70DF32861C1D43518D9295AC3633D09068"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "sha256": "338824F489D7EF647583E723283307AE92B3BB241D2FE874AC759DBF2F091701"
+    },
+    {
+      "path": "ProjectSettings/QualitySettings.asset",
+      "sha256": "3F6B02B9C47143EF4D27CC3C8D7604C4AA4CE14765BFA2CECB4AB0810926DDAD"
+    },
+    {
+      "path": "ProjectSettings/SceneTemplateSettings.json",
+      "sha256": "BB9098B3BFCDE78D93E264B96F7B77B5430E64E8C57A7AAD7F5A5D9C3945E16A"
+    },
+    {
+      "path": "ProjectSettings/ScriptableBuildPipeline.json",
+      "sha256": "9EF5816157356C9B43513E33FAF4C1E889D4D36D5ACDCE1A31A8DB629D8DB545"
+    },
+    {
+      "path": "ProjectSettings/ShaderGraphSettings.asset",
+      "sha256": "CDBA1E5D65BCF6E3269D76ED3E60B6C21F98322002996642C9D74F1EB89F6B91"
+    },
+    {
+      "path": "ProjectSettings/Switch2PlayerSettings.asset",
+      "sha256": "61BE6F69426706B633A8F8340A11405ED8F9F8EC1D88B240540D6FD30AB7C26A"
+    },
+    {
+      "path": "ProjectSettings/TagManager.asset",
+      "sha256": "8CDC6F24A9F70382CF1F2D6AABB0BA80B0A2CD2179D9D7B4B1EFE22AB9DC364D"
+    },
+    {
+      "path": "ProjectSettings/TimeManager.asset",
+      "sha256": "1A83E54ADBBDA7C9F4851103A0C6AB7F6448A3343D4EA5B7620452FA08416ECD"
+    },
+    {
+      "path": "ProjectSettings/URPProjectSettings.asset",
+      "sha256": "C317FE22B9488785C0611F0642429922E5D324430D929BFFB41648130F30C218"
+    },
+    {
+      "path": "ProjectSettings/UnityConnectSettings.asset",
+      "sha256": "7F2112B8C6EA0885DCC72B312C9726FFCD909F2E89D1EEAD61889274A4E5D1C0"
+    },
+    {
+      "path": "ProjectSettings/VFXManager.asset",
+      "sha256": "F066C6483919961332415EE64204F74FE52F38C02E82892EB02B7A5B2E381F0E"
+    },
+    {
+      "path": "ProjectSettings/VersionControlSettings.asset",
+      "sha256": "E7BDA45BF7A394745FEE1316E6C71FA676004D591AD1F3AA247FD3E4CEB86071"
+    },
+    {
+      "path": "ProjectSettings/XRSettings.asset",
+      "sha256": "EDD2BEB4A2E388312B4B7DA241AA51070434005D82C59363F1237DD2E567585F"
+    }
+  ],
+  "status": "completed",
+  "result": "Succeeded",
+  "buildId": "build_6ea8007dd8c6",
+  "buildTimeMs": 41364,
+  "totalErrors": 0,
+  "totalWarnings": 3,
+  "files": [
+    {
+      "path": "D3D12/D3D12Core.dll",
+      "bytes": 4725304,
+      "sha256": "625BD40005B1C3708695D5256ECF230D278E6B8EDBA5A88AF70F3D91324F3052"
+    },
+    {
+      "path": "D3D12/d3d12SDKLayers.dll",
+      "bytes": 4930104,
+      "sha256": "C0730CC70D3250D3DE19C04C17845BA9E70EECAF502D684D1409195EBC5B5959"
+    },
+    {
+      "path": "dstorage.dll",
+      "bytes": 206904,
+      "sha256": "CAE65787F61514BEC6F012F44546E68B19E39D8854A9AB52AF813370D44B272A"
+    },
+    {
+      "path": "dstoragecore.dll",
+      "bytes": 1482784,
+      "sha256": "CF85B19A92A8276F8BACA0DB9BBCD60735BAD50768DEB303D310E84D5F4FDD11"
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "bytes": 7834536,
+      "sha256": "C6C6C6F8C6403BACD94F0B4DED2C9CFF44E6C758811399DF89FBFB3924A058EB"
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+      "bytes": 611248,
+      "sha256": "C3424BE8E131CF7869438A801DE898A5B276271F9CF7E223EC0A9E342553BC32"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+      "bytes": 29066,
+      "sha256": "E91782A27FA39FC6C1D6EE8B08529F5D35052310D0006034B878EB04B8F2AF30"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+      "bytes": 2622,
+      "sha256": "49C6160F9D54AF4270A3B4E997FC4A8301F79B9E2070118FA46DDBCBBC44F9A2"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/web.config",
+      "bytes": 11635,
+      "sha256": "CF2B54339E069B9E42F7D6795EECBF562C50C1011F4CA8F65F578FE52D97FF92"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+      "bytes": 33598,
+      "sha256": "E60AEC2C5115D65B3ACB3C55EA21576DBD770F579166C017125571E46AE560ED"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+      "bytes": 2622,
+      "sha256": "CE1DB1AD8A9512073164E3ECCDC193F7EDA036E1A9733CAEC4635DE21B2865C8"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/web.config",
+      "bytes": 18802,
+      "sha256": "E38BB8CC68FE5B4EDECDFD288D094B9E8CED7629039B2A347682ABA0D8BD7492"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+      "bytes": 34056,
+      "sha256": "EE950004B576FB28DC85F4B0435ED04BF96612DE2E8B53BE84D07AFE85A0DE6C"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+      "bytes": 2622,
+      "sha256": "CE1DB1AD8A9512073164E3ECCDC193F7EDA036E1A9733CAEC4635DE21B2865C8"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/web.config",
+      "bytes": 18811,
+      "sha256": "C4CBDDD4FD9347B58CC5A72B36DC4BA1AD2BB699E65869D05CD3FB9865F0D824"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/browscap.ini",
+      "bytes": 311984,
+      "sha256": "4DDD50F31FB968F30BEDEFC253A46DC3F2890192D05CDAA9E0A64A056EEE807E"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/config",
+      "bytes": 3815,
+      "sha256": "5776169973A26A387B8B3E5C0F2301A7AB9A6DD7C7D3EFA22A96ABC47FBF8662"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+      "bytes": 25817,
+      "sha256": "0C56E34C69124510FA8C19E7B4C2CA6C1C4FF460AE19F798DD0CA035809E396D"
+    },
+    {
+      "path": "SectorLab.exe",
+      "bytes": 667136,
+      "sha256": "437691663C5FB21231524F4886E60A10B1841F13E42FBBC93EE39FBD827930CD"
+    },
+    {
+      "path": "SectorLab_BackUpThisFolder_ButDontShipItWithYourGame/x86_64/lib_burst_generated.txt",
+      "bytes": 307599,
+      "sha256": "33470415567016BDC72F7173C254DD8DAC3EB37D81E9FA29C8AEB835767E75F4"
+    },
+    {
+      "path": "SectorLab_Data/app.info",
+      "bytes": 21,
+      "sha256": "535F62E93F2A44297A072F067F698B35FED64E321BE7168E999752916C8F9C4A"
+    },
+    {
+      "path": "SectorLab_Data/boot.config",
+      "bytes": 355,
+      "sha256": "180E1316BB81AF0A461E23B1498A4DC97CDD90247077D122BC5A37F5D8D2BDAE"
+    },
+    {
+      "path": "SectorLab_Data/globalgamemanagers",
+      "bytes": 106004,
+      "sha256": "4D9EE2F14CA7FC140A271805C50DFA528BDA79967D9CB4F73F65BF2DAD8C6151"
+    },
+    {
+      "path": "SectorLab_Data/globalgamemanagers.assets",
+      "bytes": 634792,
+      "sha256": "DDC51BE579E2E95D6DD6C09B67A64E357C83F7CEF5614183BFE15FDE6C5789D6"
+    },
+    {
+      "path": "SectorLab_Data/globalgamemanagers.assets.resS",
+      "bytes": 2816736,
+      "sha256": "FA17CBFFCBA886C81D7E30FBB839BCB97932CEDB8B38686AB06CC2C1E8CB4C99"
+    },
+    {
+      "path": "SectorLab_Data/level0",
+      "bytes": 41480,
+      "sha256": "63830C56CA65F9294ACDA692B67251C026548A11DCF6C37AF32BB55EC481376C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Microsoft.Bcl.AsyncInterfaces.dll",
+      "bytes": 19104,
+      "sha256": "136D5965CF4768E8420B547A8BDDEA882921F426C371833D558A858A2F0C235A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Microsoft.Bcl.TimeProvider.dll",
+      "bytes": 32416,
+      "sha256": "D9941B9603506C46E2AAF8B44166C93646B55EBEA0D365792B405C2562753442"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Mono.Security.dll",
+      "bytes": 241152,
+      "sha256": "A7128A85C5CE748CFCC64BE97B7FAB4119F4636C917A0303BFA2582F86282ED8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/mscorlib.dll",
+      "bytes": 4632064,
+      "sha256": "ACBFA8295DA5B5E5A2C68C7B2DBC9CD7A5829C0AE031AF22BE4F6A49FD626F8F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/netstandard.dll",
+      "bytes": 90112,
+      "sha256": "6AE62E082DC494A2433984177F60CA4DB5FAE69B1F360A8B33754172B310B8C5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Newtonsoft.Json.dll",
+      "bytes": 691712,
+      "sha256": "A56146202232958F46BD6A28B5A7DA166AEA123EE0D646735A46E5C341DFBF1F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Newtonsoft.Json.pdb",
+      "bytes": 2174464,
+      "sha256": "17CBAB4D4207187ED94173C0D59D7A39FABED7C9035B73634C1F02188DD60168"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.dll",
+      "bytes": 601600,
+      "sha256": "4AC9EC66B56F4CBD139E4C7F99A6E0DF6E4BB4C2707635880DF8DD04ACE291EB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.Unity.dll",
+      "bytes": 52224,
+      "sha256": "97A63B1F5B500487D2096F1DCBB06EF319AF2BB9FA36A693AF0CF382C0D0461A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.Unity.pdb",
+      "bytes": 34840,
+      "sha256": "C5B71A44219C21A46E081054DEF6AA6129A6512145691BC4B23FACB11C069F64"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.Unity.TextMeshPro.dll",
+      "bytes": 7168,
+      "sha256": "7B86282212BAAAF13B92B34FD82591502DCC8D5FDBCA553E57A8F8100996FA91"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.Unity.TextMeshPro.pdb",
+      "bytes": 16640,
+      "sha256": "B5E0B63905A9E847D247278B711FA57229DD237B1C877ED4475B18B51567C57D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.Unity.XRInteractionToolkit.dll",
+      "bytes": 3072,
+      "sha256": "47E9E9CFBCEFED030E76EAECA0A7E3A4A222F5A11A8A31451550341FA15DD9CE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/R3.Unity.XRInteractionToolkit.pdb",
+      "bytes": 16176,
+      "sha256": "F87956D8CD7DD7249C29252362E0F20AAAAD7DACF9A65BCBFFBC65F5259439AF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/SectorLab.dll",
+      "bytes": 129536,
+      "sha256": "E887B03083C43DB517D3BA84EDF4DC74B94B6CC69589B19EDA04ABF02D710047"
+    },
+    {
+      "path": "SectorLab_Data/Managed/SectorLab.pdb",
+      "bytes": 61104,
+      "sha256": "9501C1FF7B737F81E64541A274199B4D35A428066CE3DBD1633A52EB609FFB8B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Buffers.dll",
+      "bytes": 4608,
+      "sha256": "762F8FDBE975E05B76BE5FE996C53CE7C75E4A2830F2F50B02A5948EF6BA0AEB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Collections.Immutable.dll",
+      "bytes": 252680,
+      "sha256": "5B1B1C83BA3D135C2FDFE425842FBE9C7432878B7E468623ACB554C69B4C130F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.ComponentModel.Annotations.dll",
+      "bytes": 6144,
+      "sha256": "77357A44BE285C75F40780B6C8482EFFBD9EE537D27F5B8128A812954CBC2F6F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.ComponentModel.Composition.dll",
+      "bytes": 257024,
+      "sha256": "D949BD6214C26B38A190E66FE976038E3845AEA6C6980D3EB58E78B75EDF98A5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.ComponentModel.DataAnnotations.dll",
+      "bytes": 84992,
+      "sha256": "E1CE13367F3377DEFF3FE95F9B4645D989103FB9F579E7D980B08F08A8708471"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Configuration.dll",
+      "bytes": 124928,
+      "sha256": "7170A8FA3363A8EBD59E8B9931509F595DF009F11E1885707A3C3BC0A3FF5648"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Core.dll",
+      "bytes": 1113088,
+      "sha256": "15081EAC9F71FD7817A7D42A963651C89C666A4C21499F2076FB3AB7AACD9B9A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Data.DataSetExtensions.dll",
+      "bytes": 29696,
+      "sha256": "DA75CEEBBEF879968AAA721090DF162E7A6FE1C7BA32F4BB5D05523385C53E8C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Data.dll",
+      "bytes": 2125312,
+      "sha256": "557BD378CAA400C4DE52BD73225A948F1A1E41586C52E307AAA042F77B33D648"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.dll",
+      "bytes": 2641920,
+      "sha256": "0C49D192FC91F2EADE9C12C3960D8B90161560507D96EBCC9D878A2390A2CAC6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Drawing.dll",
+      "bytes": 489984,
+      "sha256": "1657E6EB247364CD232FC6C80DF1AB6804732B6644639F18C80E48AF1174FD63"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.EnterpriseServices.dll",
+      "bytes": 44544,
+      "sha256": "7FCC7078F244AB3A5E8549A8ACD2905B71AA8A31DDA917AB60817C5B13924D64"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.IO.Compression.dll",
+      "bytes": 114688,
+      "sha256": "35242DDC40F673D10767E3AB3381718864170CFFBC710501374E911DF700FDA0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "bytes": 18432,
+      "sha256": "E7F2784C57088326F8DE52A79426102A2250C2F31922030E9FED0CB64740E242"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Memory.dll",
+      "bytes": 4608,
+      "sha256": "C4F030A2CBA7DA7CDCF493257C24560E203D355904AEE490D645A935842F834A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Net.Http.dll",
+      "bytes": 122880,
+      "sha256": "A6227DE2834BC7019A10E69A7CA0BB0908D5092B8BC279ED428B27ECF583A681"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Numerics.dll",
+      "bytes": 119296,
+      "sha256": "711616207139CFBF471F4F344A32ADE842077314F03C19A0846A98ECACE3FC5D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Reflection.Metadata.dll",
+      "bytes": 487584,
+      "sha256": "AFCFD6C166FE0D59F45CC6363082806F6A7EA8CEED9DC6C75EEC9FD79CCB5717"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll",
+      "bytes": 19256,
+      "sha256": "FD67ABC4C4AF10AFFBCD42FD68A2A7BC361B26714AFE6965D4D0D139459D8297"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Runtime.Serialization.dll",
+      "bytes": 934400,
+      "sha256": "AA96283B3009B39C4ED8DFCDE146B0E0BCAFA09F9BE24A959D0C16DD6F54AE8A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Security.dll",
+      "bytes": 320000,
+      "sha256": "21C2CC73F1CECC8B5BFC42171A22412DFD8E04AC42978DE90C00ECB507583D62"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.ServiceModel.Internals.dll",
+      "bytes": 215040,
+      "sha256": "C90168F6F28B2355C6C11D38EE39FA18F44EA839C877CCCE8934BEE50E7FB479"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Text.Encoding.CodePages.dll",
+      "bytes": 5120,
+      "sha256": "5982A26BDD3D682332E71001EB39FAE5C29FC571CC0A4F6BE3CFE37C43C6F7E0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Threading.Channels.dll",
+      "bytes": 75952,
+      "sha256": "31C7E3704C0477C53D9306362DC6ABE741088EFB7A7B4E46CDED0169CF7BB0B2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Threading.Tasks.Extensions.dll",
+      "bytes": 5120,
+      "sha256": "96150ABDCA5DF4446B376560E069D59B3550212DEDA8CBDD316272F6B834F597"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Transactions.dll",
+      "bytes": 35328,
+      "sha256": "E5FF61CC9163810AA4C1FD9A00E929070E6733ECA6D6669B7ECE5169EC3739EF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Xml.dll",
+      "bytes": 3160064,
+      "sha256": "EE620F038A3A2589A118F0E7A030FE398B082015FBF83AC1474FB55B521D0BD7"
+    },
+    {
+      "path": "SectorLab_Data/Managed/System.Xml.Linq.dll",
+      "bytes": 136704,
+      "sha256": "638F8C5F44AAB1FD5755FDF2873683F3CA0F0FB0A3AAECFDBF1D2C2280C5983E"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.Addressables.dll",
+      "bytes": 11264,
+      "sha256": "BA7A8A483FE11ABB869903D05B6FC4974E4B5F2CE8A06095A31398B3C3BB7677"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.Addressables.pdb",
+      "bytes": 18452,
+      "sha256": "670388572B2DF8DD9D14FC39C91EC4D822C85B6B6588614AA3FA97805E0350D8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.dll",
+      "bytes": 522240,
+      "sha256": "BC736FFE52782EC6281A906ED7E67175F263510A352735F917E9A45A0AB582E2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.DOTween.dll",
+      "bytes": 3072,
+      "sha256": "72BCBCFD0B377015FCC5AFF4C47710E9274F944B142FBD346626D68678301546"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.DOTween.pdb",
+      "bytes": 16156,
+      "sha256": "0D85A4FC9665B6D3769DB30FB098C5205529317D11F3DC99A7E4B1A9A5ABBAEE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.Linq.dll",
+      "bytes": 677888,
+      "sha256": "1E477EF14DE9495294F199AC40C0A1EE5C6B2B867C943E6299D4DD2BCB21E9FB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.Linq.pdb",
+      "bytes": 192332,
+      "sha256": "559C13DCFD79172F585DE3AEDFF3BD7CE0BF297A8117DCB53A87FD0CB6632444"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.pdb",
+      "bytes": 192160,
+      "sha256": "8B5EE213A32A099D9EAA219D3A8AFEBA17097AB52AE76B890BFA24D343684945"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.TextMeshPro.dll",
+      "bytes": 11776,
+      "sha256": "6622B99591CC58C7571852BCC2FDCFC8136C3DE435CA7AF0D82D784B1E5627D2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UniTask.TextMeshPro.pdb",
+      "bytes": 18384,
+      "sha256": "716C80C36B1EC92EE1D7D04F3692451B586DE9E12863143B0C1B9892491D0114"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Addressables.dll",
+      "bytes": 110080,
+      "sha256": "2DA642B2F532A2F9735519D607A00EA883AC215881410991F9FFD5E4910F8D1A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Addressables.pdb",
+      "bytes": 53588,
+      "sha256": "3C282AE295D6A02445E4BFF5EA8A1B81DC6F331E46E33402FD704153B00DBED6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.AI.Navigation.dll",
+      "bytes": 23552,
+      "sha256": "FB69CDC4D75654154170A0686646A84DCBF2D64B2F4F1AE7DA9911D702ADDF3F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.AI.Navigation.pdb",
+      "bytes": 23288,
+      "sha256": "7317C0EA9A766BB4A681B6A40B9C1515F145B804B8B23DECB6D95413C7B4E7A6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Burst.dll",
+      "bytes": 5120,
+      "sha256": "7C84662B2C53E1A06537316066D4E716AC0E8446E54EEFE9281779624E751FB9"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Burst.pdb",
+      "bytes": 16100,
+      "sha256": "00CEE0532CA0DC92D605514A92E19D33DFD11318141B7261C7066DED174F542A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.dll",
+      "bytes": 442880,
+      "sha256": "568EC8D42CA35C4B7A9083EE386FB03BABD356B5FD96D45422859878921B4748"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+      "bytes": 5120,
+      "sha256": "FF50383F807F9692E4913B97E47D86FEFCB8FAA33D6D48CD3E3FD6FC7FFB448D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.pdb",
+      "bytes": 231700,
+      "sha256": "698381E0CC878F6DD9DD9110B3F25391936CB1D2287F10819E7081451722C982"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.InternalJobNestedPrivate.dll",
+      "bytes": 4608,
+      "sha256": "676ACF19CEA35466A5DD1683D849BB3D4E12EE9610E1812A5ECDB970CD48ED7F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.InternalJobNestedPrivate.pdb",
+      "bytes": 16360,
+      "sha256": "CE0B1C86BC91D7CBE5E8790BC5B3CE6379B12C43BF7410ABD8EBF21F0DE8E6C3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.PrivateJobNested.dll",
+      "bytes": 4096,
+      "sha256": "B5BBBDE9C2F19C982A5FDC22E8270CE48A1DE817480B322B6BC3BCEC9DE1FC49"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.PrivateJobNested.pdb",
+      "bytes": 16348,
+      "sha256": "513563084558605E8CC0996F79948FB07F5DD2F4BC4FF898FEC993C224B896D6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.ProtectedJobNested.dll",
+      "bytes": 4096,
+      "sha256": "E0095307DDED3F217C4DFF799B3DB8BCEE692B55895C2F97BAB3A5D06645D7A2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.ProtectedJobNested.pdb",
+      "bytes": 16352,
+      "sha256": "EF10D9D11A21FBF96059BB28D3A7CB36051B19E8132007DE441DCAF2F37DE0A8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.PublicJobPrivateGeneric.dll",
+      "bytes": 4608,
+      "sha256": "596480404FF8B3D49D70D2362A603583B4D1A7D09B7BF68BA7A2CE065B133BDB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Collections.Tests.CoreCLR.PublicJobPrivateGeneric.pdb",
+      "bytes": 16472,
+      "sha256": "2E00F22F051AE7AB8D01003662017B1B2471AE6934D2B257852778D6E0E32272"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InputSystem.dll",
+      "bytes": 1127424,
+      "sha256": "9CCC294C45CD0785326A5887B7128DE67E6CA5F7B6A345F71E44251CC15ABAC9"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InputSystem.ForUI.dll",
+      "bytes": 15360,
+      "sha256": "AFFF9693485B93DC4BEFAC8E9E26149EDBBD937F0518EC610F5BD70B9C218216"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InputSystem.ForUI.pdb",
+      "bytes": 19676,
+      "sha256": "5108F8F258F56EED0AFD927ACD83BA8A82E34990CDA449857C97AF11E4810AD4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InputSystem.pdb",
+      "bytes": 427292,
+      "sha256": "FFBF8CBBFAE4F930AA584E62E43176DAE1ECAEC60692EE64ECFA7953557A155F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+      "bytes": 4096,
+      "sha256": "CF986BF1952960B0547E5263023C7DB3209D49CB66D72AFF844B4943BD73A3D8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InternalAPIEngineBridge.004.pdb",
+      "bytes": 16372,
+      "sha256": "58EEAA85CE7AB6789A39821AB44199D66797F76F2B532FEDE52AB54D58768D09"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InternalAPIEngineBridge.ObjectDispatcher.Runtime.dll",
+      "bytes": 5632,
+      "sha256": "A2983D73528A64A6AE9239818CD5A0E27677A8DDF430E2A9B5B91827E835F158"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InternalAPIEngineBridge.ObjectDispatcher.Runtime.pdb",
+      "bytes": 16724,
+      "sha256": "E66672803B679F2FFCED4EB74C9003FC75700D39404B285D95FD8EF4EC7D3A1A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.dll",
+      "bytes": 3584,
+      "sha256": "93635286FB75F1D71DFDCA603865A5528F330908A139BAAFFA3E51F00F8838CF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.pdb",
+      "bytes": 16212,
+      "sha256": "533DF29CDD7409371A09F9B08951D5AAC15BEE611FB75C823360FF1AC38F4AE3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Mathematics.dll",
+      "bytes": 5632,
+      "sha256": "488A8AFF15CBCBD5EE411D210408A079F1CE4AF86CAD727F92377BAB6206CE17"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Mathematics.pdb",
+      "bytes": 16112,
+      "sha256": "77A0EA41AEB84B2E96FB32B82732FDBA23C27092F802F3049A2BDEABEFEC81DC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Networking.Transport.dll",
+      "bytes": 215040,
+      "sha256": "2960B4488C9FB18D67CE744AD6A63CD31A1AFFED7F82D820CF6899E1C70555AC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Networking.Transport.NetcodeInterop.dll",
+      "bytes": 11776,
+      "sha256": "0E0ED14656CB0B87C88487AFB560139267E454C472A632C1D3D210E28EBFDD2E"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Networking.Transport.NetcodeInterop.pdb",
+      "bytes": 18660,
+      "sha256": "CE1422CD9274D72302A69434C356E05FE23C43033CDFEF12D7CF863CDE25D5CF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Networking.Transport.pdb",
+      "bytes": 104696,
+      "sha256": "A880D499853B163E42E3913B390692175477BB81B9EFD04FA1BF394370BE19C2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.PathTracing.Runtime.dll",
+      "bytes": 159744,
+      "sha256": "46B2CB74EFB15E015A7018F046C92E2397BB5EBF6F260EE96BEC6810D6272971"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.PathTracing.Runtime.pdb",
+      "bytes": 65788,
+      "sha256": "547A5B7AF55B8F91ED36F425EB2A49DD9E565E306C3A3BD14EF955C173EF3BB0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Pipeline.Attributes.dll",
+      "bytes": 6144,
+      "sha256": "5C399A094828AE37839E4627D9179B6163F5E8F8A7B24F550F1AF7EEC403B81D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Pipeline.Attributes.pdb",
+      "bytes": 17060,
+      "sha256": "2EE15112B6D0FEC802120E65603A74842240EC3B6350D7736DBA238BEC299AAB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Pipeline.dll",
+      "bytes": 329216,
+      "sha256": "8D7511692B75772A5DDF7B0C442DB1135E0F244699FC76ECEA22C2053E32AFCA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Pipeline.IlInterpreter.dll",
+      "bytes": 350720,
+      "sha256": "064D6DBFCFE42E22DFB548E5808406DDE2C8505875BA1A5F9626B0AEA9E0F147"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Pipeline.IlInterpreter.pdb",
+      "bytes": 149728,
+      "sha256": "B2239B21074B1F083E6F351DC19B55CBAE8F4CC92D0E31D4A480370692599591"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Pipeline.pdb",
+      "bytes": 108592,
+      "sha256": "4330F1B06607E76E7D8566697AB8C52F8B665DB40398008882B95CE33C385DDD"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Profiling.Core.dll",
+      "bytes": 10240,
+      "sha256": "7403580CD178568380B7555EB6A6ED31043711D92CE2D02C300D5B6486A46917"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Profiling.Core.pdb",
+      "bytes": 18912,
+      "sha256": "B9AA2B259291A04EF5B4315EF1645A8C1CC4B43C99CB2C40C62D5B82318AAA68"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+      "bytes": 7680,
+      "sha256": "B124FD6EA1B5B34B976E803A060CA7206303A2468C600C3E58B5AED64A4D5D8E"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.pdb",
+      "bytes": 16444,
+      "sha256": "42C24AFCA392E4C9DB7B1F6993DCF0190194C386DC37AD589F93CB8706823CC0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll",
+      "bytes": 1083904,
+      "sha256": "CA7B29C26C993FDB0D25F64870988592021E1DE21B4C2FDF25B3A55C92415D10"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Core.Runtime.pdb",
+      "bytes": 320392,
+      "sha256": "6AB27AB0020F369BA20A71018CC1665FCD3AFA119CADAA635A73B26FB1C43E18"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.dll",
+      "bytes": 11264,
+      "sha256": "84EBE3F6E6A78E2695775A32822CF84084D5C01798632783D9E518177CAE6CD7"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.pdb",
+      "bytes": 18632,
+      "sha256": "38F141D75E476C72475C8A09D80A3CA2AE9D5D22FCDD1AD536C732EE1CC82B45"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll",
+      "bytes": 3584,
+      "sha256": "4E46C6DEB6697D7915348E2EBFA76F9D2D1173183CCC6B171DA7E8AF28A00BC4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.pdb",
+      "bytes": 16140,
+      "sha256": "025C5310BF669A14CAFC306DD15E64BBFE9B1D3A497F374A8A0FA7BB7C3678AA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.dll",
+      "bytes": 296960,
+      "sha256": "FC668BD8D5CDF9F9D7041E0E0745277109E355BF6AEBA7B8B4920B167FBE23DF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.pdb",
+      "bytes": 114996,
+      "sha256": "CC3B618625B579862163D980B8F2F7E075AC21CC849EC2B339464BA4A8BBBDB5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+      "bytes": 3584,
+      "sha256": "F842F4343E243F5A3025A09B4A4492C86DD8681C4C0C4DD470E63EFB22D79B90"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.pdb",
+      "bytes": 16140,
+      "sha256": "58C311DB3826545D43E317D3BD7C5EEDA66329CF95D07AF53269FE41C27433CA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.dll",
+      "bytes": 217600,
+      "sha256": "A8B58E587BE691F575533A2A32B960C7B61088F63A30716AF3F19CD89FD3F276"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.pdb",
+      "bytes": 107352,
+      "sha256": "CAEC8AE7FB5360A0DAD56B2DA5BC9C01CB2B7052DD31353B3C7FCFC37550A83D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.dll",
+      "bytes": 4096,
+      "sha256": "687CC46F9AEB1A232E5129893B8641DC3F1B6DE3BB14425504AC616AD47B0B97"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.pdb",
+      "bytes": 16224,
+      "sha256": "ABD2FBCD3D80E164374AE03D7DB411BC4489DD3C8B1D06AF5BCF7216409A56AA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll",
+      "bytes": 740864,
+      "sha256": "B7912A7F89A276799D03F2A98970AF2370FF3CBFDB32E965E7470B62F7F78D22"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.Runtime.pdb",
+      "bytes": 248320,
+      "sha256": "9EE5EA3AC1AAC3A45EB13C06E877DD1EA3077C9A080E6906CD1AD57EE44E1BFB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll",
+      "bytes": 3584,
+      "sha256": "D15A456483770A38D514FEFCCC18AF93E63CD0C95DADE09506CD2A8D8C7247CA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.RenderPipelines.Universal.Shaders.pdb",
+      "bytes": 16128,
+      "sha256": "A1696A4917D6A74D6FD41988EA3DD89EEC6294980602AF5130B62EC913741CD3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.ResourceManager.dll",
+      "bytes": 138752,
+      "sha256": "3D3AE5EB863E8E2168A280401F20A66983B45C351EBE6BD71FC94273C1F49E4B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.ResourceManager.pdb",
+      "bytes": 70360,
+      "sha256": "46758951BAAE24607789CA3BC85CC01E3E29736E27EB70D5E7A86653235F486D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.ScriptableBuildPipeline.dll",
+      "bytes": 7680,
+      "sha256": "F5B5CF347945AA37555AF0E04C558C53FFFB2F8DBB496E1D6B60C0684E986645"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.ScriptableBuildPipeline.pdb",
+      "bytes": 17660,
+      "sha256": "1494A873924BDE48F5E2A82EAA82A460F9C46A2854016718D325FB153EA8B1D8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Scripting.dll",
+      "bytes": 70576,
+      "sha256": "EAB8C130B20418C479B8E4A1AE3E67A6830DC2DD342F7C71D5BF9B6887AB8F77"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.Scripting.pdb",
+      "bytes": 29032,
+      "sha256": "0894F44C0CD7BD5020748BA99652D7C9CD279396E3571B3D28C16F856542CE8B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.SurfaceCache.Runtime.dll",
+      "bytes": 36352,
+      "sha256": "F53FEEE775433A2F6A8E9AD46FE048FCA00DD4EDFC1101B8AA4C173B2411D9B9"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.SurfaceCache.Runtime.pdb",
+      "bytes": 25796,
+      "sha256": "7DF726ED8E63858EDF27C86C55E51AFDC5D9FD47D6D2AA2BF4DA9C1FC37B51FA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.TextMeshPro.dll",
+      "bytes": 443904,
+      "sha256": "27C7B8805A2BF0C615A1DA155DFAF66DEEFDE83F7B5CCB945F6FF8A62FB68A1D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.TextMeshPro.pdb",
+      "bytes": 183184,
+      "sha256": "2AA0621CD1FB127E2389D07F914271C25754785CF6A87D815B11497618E613B3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.UnifiedRayTracing.Runtime.dll",
+      "bytes": 103936,
+      "sha256": "1B86047C394F483683F2B09A183CF6BDCCE826D1E21C62DAEE6017F720099485"
+    },
+    {
+      "path": "SectorLab_Data/Managed/Unity.UnifiedRayTracing.Runtime.pdb",
+      "bytes": 49744,
+      "sha256": "6E58930D66EF50D423312EB327CDB007A09F8CF6D03200BEF514D08B2CFEEEEE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "bytes": 49584,
+      "sha256": "F54A3DDED18E2C983E0713DE916C0A9980CA65BBD9D54A8112604B934569ABFA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AccessibilityModule.pdb",
+      "bytes": 20772,
+      "sha256": "4662D6B807066CEB7BF70577B1CD881DF75F0BC97D36800D773DA9B8D5439930"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+      "bytes": 122288,
+      "sha256": "8BD622628BCA291FE7E8D3C9D8F935D640BDD3175C71B10580BF2A83F8809FC5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AdaptivePerformanceModule.pdb",
+      "bytes": 48720,
+      "sha256": "DE197CEAA79462623464E94BB5846F09A6C3124845905F5624473F2B6298D8E9"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AIModule.dll",
+      "bytes": 87472,
+      "sha256": "DB24EDC1061519480EFD2971B6295D2E913DA47FF197538702896228EEFF09F1"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AIModule.pdb",
+      "bytes": 23060,
+      "sha256": "B91A2E937348CEFBCD2BD3D952CC6FFC66752F758DE5DDA9A64A8114B540973C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AMDModule.dll",
+      "bytes": 21936,
+      "sha256": "1CC27A091509EC2DDE2F15837E7D5AA4F97CF53B47369B17282F0A72C1A87D69"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AMDModule.pdb",
+      "bytes": 12376,
+      "sha256": "89EDBB7515146DF0554DA785016593EA9E0D678F7F71A9E9658935510D9FB339"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "bytes": 121256,
+      "sha256": "B0E40399B711DED2EC085795709A3ED8B0133D3D36FD909294A55D1444CC90D8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AndroidJNIModule.pdb",
+      "bytes": 40944,
+      "sha256": "AA40A3DFC15292898B4BF0ED2F7E605AA87F372AE51708BC208CD3F9E2EDBBAA"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AnimationModule.dll",
+      "bytes": 218032,
+      "sha256": "A36368A40D35B43D16C0440A9B30009D94E279FA7CF7707920AC2738635C06C2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AnimationModule.pdb",
+      "bytes": 49452,
+      "sha256": "9CAB7F0E7C12D6F2143C8FDE08B96025A8A884612EBBD3FF26DF53235CE40F86"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ARModule.dll",
+      "bytes": 27560,
+      "sha256": "B5FD540DCA3B7B095E758B7630B66C222B3A5880FB16D105BE3EF323D1E9BBD0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ARModule.pdb",
+      "bytes": 10812,
+      "sha256": "543C001C2EF585B5D0869230FB51F8BB9DF5EDECAA7434BF2979E39C3C64EB66"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "bytes": 42928,
+      "sha256": "6AF94EE1D9FDEBACEDDA5B1810686E65F7C9E9D9FB5E8A4BDF12D151EBADD5B5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AssetBundleModule.pdb",
+      "bytes": 13948,
+      "sha256": "1EEC67FF273F704700ABC614E33752CB91625A5E7AFEBD32D2A6E2BEDC1E3E5A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AudioModule.dll",
+      "bytes": 142256,
+      "sha256": "46A115B015150C0A1814520EE75008D6EABF76E0CFC9E36E5B2F4A24B30B90B5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.AudioModule.pdb",
+      "bytes": 31032,
+      "sha256": "32D25C020DB6B1A136A5A9113AEC3A322539A064822754C2A2F6DB5589390C63"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.BurstModule.dll",
+      "bytes": 337840,
+      "sha256": "F8D558DB311FC1A8119740FD4264238B81C4505799C2D542EE08E034D6F543EC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.BurstModule.pdb",
+      "bytes": 170492,
+      "sha256": "C255C8A6BC522ACC28B5395D1CC7CC584111ADCAF04A29F81B75B18EA7E465FD"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ClothModule.dll",
+      "bytes": 38312,
+      "sha256": "06FC942E7A6709B1B8452005FC49899CF81040A890F0A1BE6106217645B36D6B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ClothModule.pdb",
+      "bytes": 11392,
+      "sha256": "7FBBC68172127B81D074238B2527B3BD2B0B7606FCD85A3C4747874B20ECAFAC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "bytes": 30128,
+      "sha256": "769A7E816A9FF1C989737FB3BB6AF7CA5A309685EB716DC6372E8047E3B3CAC5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ClusterInputModule.pdb",
+      "bytes": 10260,
+      "sha256": "D80A3DA96A30033F83A29C8B5B6FA06994F924F838E75121F12295E2DA2814AF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "bytes": 28592,
+      "sha256": "57E938DFF1D60AF6625BD1AD73055549420657193597BE7DA00683E23A1F1942"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ClusterRendererModule.pdb",
+      "bytes": 10728,
+      "sha256": "AA8F167EAF5163EF964C810DDDF8519E38363DFBA71B9CF3B6530AB65DAAD22F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "bytes": 56232,
+      "sha256": "6F5F8DBA48E1C4728D93671BA3E6649C7B4366FA28A6FF0E70800B4F25A5691F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ContentLoadModule.pdb",
+      "bytes": 18096,
+      "sha256": "9565F466BECDB411D30BB0AA21C1671E7CCE862CBB8879BCFA91EB73FB3D6AD2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.CoreModule.dll",
+      "bytes": 2030504,
+      "sha256": "24DEFAAE52DE7224E83DF8FE492926AE7A6E7DF6D2E898C4CCA26D8740EC538A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.CoreModule.pdb",
+      "bytes": 499932,
+      "sha256": "0A28D9AF808EDBDFC05D37CDB5E1A9E2796615B03BA16E0C6749A4CD68B4316A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "bytes": 28592,
+      "sha256": "2B9778E61EA86C85F9B7196F70A812BAB6A128BD2148D234EF85D70D23BA93D8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.CrashReportingModule.pdb",
+      "bytes": 10892,
+      "sha256": "7DEAD507E42ECDC3475F7D8F22EE9FBD26B8D428CA20BA0202A0D5DEDFE25803"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.DirectorModule.dll",
+      "bytes": 42920,
+      "sha256": "0F0B93A09362F4A0EFCBBA8632BED850EF80424BB9C8E4A295499852ABD971A8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.DirectorModule.pdb",
+      "bytes": 13808,
+      "sha256": "70B9646CAC7987A27EACE102418D6153F643CF5BC8E2383C830DF7BC039EFEEF"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.dll",
+      "bytes": 225704,
+      "sha256": "155538F434F371FFF3689EDF9A7EA101B1D37761866E06C99FB8B4AB71CA6308"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "bytes": 33704,
+      "sha256": "280E20722049065F0B59B004A2F378B21A125C834EE904EB6F5ADDE0226E6578"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.DSPGraphModule.pdb",
+      "bytes": 10472,
+      "sha256": "7A1EEE9235DB74B460F96DCD24345BA80128082AB9597A0EC9118B4EDCD80B4E"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "bytes": 46504,
+      "sha256": "7D958815A29FF499516E011F8BEF1F98EF6914CD596B4737B48D8B64042D6B21"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GameCenterModule.pdb",
+      "bytes": 16572,
+      "sha256": "E150529857D51C5C70113E8F10E6C3C42D418C50E5A7D220ABD50F5F57D30773"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GIModule.dll",
+      "bytes": 26032,
+      "sha256": "BC83B4FF9C73B079912DE97C0FEAC3C29241BC9BE7310A0187F42B8D3F84D2A8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GIModule.pdb",
+      "bytes": 10132,
+      "sha256": "2E531763E4A336ECF172455F6EDD22F6148DB7E9718ED57C51BD8778DE6B89C4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+      "bytes": 14248,
+      "sha256": "6624EE77A9C5CE3D8FD29ECC272693F3F6FC76AC89F6FE7A6A7D1E4DBCEF1505"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.pdb",
+      "bytes": 10164,
+      "sha256": "33401FEEA15F5161F0D2414F98F38A8E49E64DA5007F26A5B15DAAAC4C5FECBC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GridModule.dll",
+      "bytes": 32680,
+      "sha256": "A5A7B36457A5E14D82A69224569AE2FC3CE1EDD622DF7140A6EF53AD171403B1"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.GridModule.pdb",
+      "bytes": 10912,
+      "sha256": "4ED73C7DB017E84ACCC2C6E069000B72E53F93F9705BBFC3DC9FE9612B30EA21"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+      "bytes": 113576,
+      "sha256": "463D26DCED820372904253A099F7BCFF660625C5CD1FBF40B0F9138796643CA0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.HierarchyCoreModule.pdb",
+      "bytes": 35260,
+      "sha256": "22CB23D1445240037FDB53A95DC6DAF85A8453C25506B1281EF5B99DC0DC697A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.HierarchyModule.dll",
+      "bytes": 114600,
+      "sha256": "B2088A1AC454A867ED26C4E8BDA4C3624D3B8D736F3B8B73D85854147DE57153"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.HierarchyModule.pdb",
+      "bytes": 46224,
+      "sha256": "F9DABAEC0DA968E26879EDCDEC5BA79DD6559496683B37491998111AC2724842"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "bytes": 26032,
+      "sha256": "8EE384D6DEB658FB07DDAA4611E1699829CE26FDDF0B6DEC0821FC29480C4CFE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.HotReloadModule.pdb",
+      "bytes": 10132,
+      "sha256": "452D6A4E28958BF5FB328B9F5FBD7E74D53A9828183D92BD6739EED056DA30DE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.IdentifiersModule.dll",
+      "bytes": 16808,
+      "sha256": "F56311659AAF4866C5BE7F1924F447C2BD7C903BF156267FA28CEE2CA6637516"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.IdentifiersModule.pdb",
+      "bytes": 10564,
+      "sha256": "2BA73D9055B349FC25249456AA91836AB3B3DCA079FFD34519DA6EF913D77A60"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "bytes": 34224,
+      "sha256": "8211AB35B1D921771894D0DEDA488AFEEDFCAF8D9B2A1F43147F4C1F13307CD2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ImageConversionModule.pdb",
+      "bytes": 11344,
+      "sha256": "90742392DC32171B97840F6A590D3953788DA76401FDC1F9A02F990662933C4D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "bytes": 190896,
+      "sha256": "C1C258FE66F5F6B73BCF41C92F8E34B09E717DCA4E318CA71E77C00577BE3E09"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.IMGUIModule.pdb",
+      "bytes": 64516,
+      "sha256": "103E8E959E9B23D932F1E819B6C7E1D21D02BBB9BC4DD18534E8111FB3ADFC6D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InputForUIModule.dll",
+      "bytes": 56744,
+      "sha256": "06BB6A41469C99C26E7DFE48363FEDB0F947431069929A4E8AA720AFD5670A83"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InputForUIModule.pdb",
+      "bytes": 24260,
+      "sha256": "29567295F6B53B0631B0970D2701E18D56B370C9080667113C9DB2AAF20E4F48"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "bytes": 42920,
+      "sha256": "3A6BD1D692D1685B8D6786270CCE74006572419C92CC8290E8B8DE88EEB6B840"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InputLegacyModule.pdb",
+      "bytes": 14284,
+      "sha256": "073C8CA82F18D409DA6792CC4886C5EF0D6A53EE6A6FA2C061C0500AEB222A75"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InputModule.dll",
+      "bytes": 32688,
+      "sha256": "A696D2CCB9FFD1C14DD434C8C0AC92C21B96039EEEFF903ABEF7AF53F63F611B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InputModule.pdb",
+      "bytes": 13440,
+      "sha256": "C7385BC1E7BFCBCCB510C641D02E31ABD10E00DD69B6EE218E1456888B55D109"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InsightsModule.dll",
+      "bytes": 15792,
+      "sha256": "BC6B7B8D87256D7FE2F86FCA313A90DB8127026974A3E6EFFB7D73DD9590937D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.InsightsModule.pdb",
+      "bytes": 10924,
+      "sha256": "B9A68305C58B22F845B769A9373AB83BE94F595A0C5081249A2EA844978D6EEC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "bytes": 29104,
+      "sha256": "201AFA19BED5FDD91DF7703CC8EBF29EF73F75C835F7C6E55F2FDA0D0918F062"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.JSONSerializeModule.pdb",
+      "bytes": 10620,
+      "sha256": "14A2BDDE235FAC6858158837CCAEF439FCB70BAB219FC4C82FF4C8E9DF3D7FA0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "bytes": 29104,
+      "sha256": "71A063E4EA135A55B5D4208BDB07F902FA1E28B310CF712A8BD3B51E147BE54A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.LocalizationModule.pdb",
+      "bytes": 10560,
+      "sha256": "8683ABCE6DE0A7990E74AA761F63476C73464F6D190296876CDCE25667C98D50"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ManagedKernelModule.dll",
+      "bytes": 14256,
+      "sha256": "A46892D5579A984A22F6023E7E7E9579A4B9D908D4209AB3B500392FBD53AD66"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ManagedKernelModule.pdb",
+      "bytes": 10164,
+      "sha256": "0AC957C444446462CD9E2C8A9C84A763CA99C45F81AC257F831AEAFC1581235D"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.MarshallingModule.dll",
+      "bytes": 100776,
+      "sha256": "981515A9E4DD3ADECEA1827B7AC13E83D2279D2A1B6C1BF19B6868427DA32016"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.MarshallingModule.pdb",
+      "bytes": 17104,
+      "sha256": "6565912C951E80916BA6E8092C1DEFA3A90D4D7C2A8760AFF35C4114A449F261"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.MathematicsModule.dll",
+      "bytes": 740776,
+      "sha256": "86D52435BFB0618645ADCA7F7DABEA72ADBB70BED42C95418683F2EE1EA2A6D3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.MathematicsModule.pdb",
+      "bytes": 324472,
+      "sha256": "12A78FB1CE4FBB2184E1AAB8A6C9CF3D632C3F0AD7D721647EDB836F565B5FCD"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.MultiplayerModule.dll",
+      "bytes": 18352,
+      "sha256": "84B93F424E3E57E3B9C462DE4E3F18E170F52CB4D8A9C473677E3F730A43EA32"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.MultiplayerModule.pdb",
+      "bytes": 11320,
+      "sha256": "740970BE7D412749FAC5164F0DEFA9E33F2A6E53852B001E565B8E7AB5BF62C5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.NVIDIAModule.dll",
+      "bytes": 41392,
+      "sha256": "F260CCDA4704298FD880BBED03434D8217E3E01B5A1DBAC61461C6D10F7AF960"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.NVIDIAModule.pdb",
+      "bytes": 15572,
+      "sha256": "80D25B71B89D11B8391EEC13184F29311B8F3E441403269F6D508AAF367FA878"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "bytes": 169392,
+      "sha256": "B28212076519A373F12AC9FCA3B189478EEC204FE024BA7787407623AF29F7F8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ParticleSystemModule.pdb",
+      "bytes": 36116,
+      "sha256": "5D6F0A97BF2A1B37B56CFFF379B0D31F1C5C8B107E1024E79C9691B2DA19521C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.pdb",
+      "bytes": 13180,
+      "sha256": "96C83B88F0B62082A04E104B149289ADB2336A38C64D93AC2A24393270C95C5F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "bytes": 27056,
+      "sha256": "DAAFF10ECE78493DD5AC8011D207A8E7A5EEC55EC5D97FBDB7508A1FA0F67C5F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PerformanceReportingModule.pdb",
+      "bytes": 10380,
+      "sha256": "61131AAB625D913F5FD27385350B4A72A5635E36B7659CCC0D19156F393B291B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "bytes": 222632,
+      "sha256": "CACACD7301203963D6BBD4827DD33AFD972425D15893395C111E9DC42F3E6549"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.Physics2DModule.pdb",
+      "bytes": 43444,
+      "sha256": "7B42437BDAF838336F5F149AE4D86031A20EB244DEC70364B70B08EBC204F2BB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+      "bytes": 14256,
+      "sha256": "2C7260A0B5B5D7730640BA66B76A9B10CAEF6AD03F0C59C6FA138A05CF12D791"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.pdb",
+      "bytes": 10156,
+      "sha256": "4E25B258FBEE437F5F7A868F81A8E6399EB1A98B00C116C663A558BA0854D695"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PhysicsCore2DModule.dll",
+      "bytes": 482736,
+      "sha256": "E49F7A9E0F522476BBBEEA241771ED8328218350C93FE8C600B2B30EA956795E"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PhysicsCore2DModule.pdb",
+      "bytes": 115088,
+      "sha256": "9F3017389EC947456BFAC6C1A7D4AF0B2C03B3EE5349C81348FE2B45BACE2B66"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "bytes": 181680,
+      "sha256": "10DB05B28444963775C350CDABD9A5BEBFA68772A9AFD82802DF293A26E99173"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PhysicsModule.pdb",
+      "bytes": 39968,
+      "sha256": "81EC815E1D98666984CAD4F5ACEF4A77108CF3C701B6EA19CECB9BCFBDEC6EC2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "bytes": 124840,
+      "sha256": "D645398FC8D0A9A34B1C0D2B4C4DC0A17F2D97E2CD04984811950ADE48AD4F42"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.PropertiesModule.pdb",
+      "bytes": 51876,
+      "sha256": "2E9E5492BF363E9760DD55D6EED60A9C4D070116677FFCD20181DC2AC9F436DB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+      "bytes": 27560,
+      "sha256": "29464052F7083A5C63C95E904D80199A62AF8E2F1988235085A0FD4716260FFE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.RenderAs2DModule.pdb",
+      "bytes": 10192,
+      "sha256": "4FC24E29E43937E721105B287665DD21D29519094D78347CFE16703DC3E3263E"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "bytes": 26032,
+      "sha256": "62DD3CE42F3812108D052E7B045402151444794E37CFEF3FD6485B32EAE54738"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.pdb",
+      "bytes": 10200,
+      "sha256": "3A485580046E9186255483D0DB1E8FFACC1380A1C6B970A327F664F8BA053FE2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "bytes": 28080,
+      "sha256": "C808D345CF17E4ABF1F2A43F91BE7A0F631DCCD5C6F1B39A78866FFF8DBCBCF9"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ScreenCaptureModule.pdb",
+      "bytes": 10664,
+      "sha256": "29FD4EDC070DD846CBFB24E512F0671C3C4E388248E0F53520F9296762EC78E6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ScriptingModule.dll",
+      "bytes": 65960,
+      "sha256": "4FB2B9A7BCF2E68220E5AE2BD4BE403AA7F44113F69371CBED580DF01B8D4EBB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ScriptingModule.pdb",
+      "bytes": 24592,
+      "sha256": "6B4B6AA5651B97722E269570AAC9F6671B16292B076EF1B81CF2FBBCFC058562"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+      "bytes": 26032,
+      "sha256": "8036091B541A9B2B793865C1DB2DCDFCEE639D4D565269D9882B45E68C96FEB0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.pdb",
+      "bytes": 10264,
+      "sha256": "995DCCCC0E5232FF1EFCD3B1E016C17E0F84C17FBDB0464B6CF99C3C99BDADB5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "bytes": 30632,
+      "sha256": "18851D399E8B11A339CBE44644353FAD065A31B446B426D30C58420D40A968AC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SpriteMaskModule.pdb",
+      "bytes": 10480,
+      "sha256": "A674EA975524FD7BFF040F3C3DA56B0EE96D5B5D1121FA35D37C4FAAA2F3D4F6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "bytes": 34224,
+      "sha256": "EFD076CC2ABFA4B8718F0B36F49A7697BCDAD83183ADFADC0039535B17BA5EE7"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SpriteShapeModule.pdb",
+      "bytes": 11528,
+      "sha256": "8FB1A97BAA0055DE4B71578F0CCE3AEBF8D52D08D53CCC56366ABEE39C7F49EB"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.StreamingModule.dll",
+      "bytes": 28080,
+      "sha256": "C56C2B804875251095269147C2DACE8CEF7008D32583E5D3A712F506B5EAC00A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.StreamingModule.pdb",
+      "bytes": 10220,
+      "sha256": "D23BEC900045E42D054634BF7AAC749A2B2D1732DFA8123762F09BCCD9217929"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "bytes": 31144,
+      "sha256": "85B935A870BE0F5D83570D394D5D6E7CF8621F7242A3E64C6617745FE55E05A2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SubstanceModule.pdb",
+      "bytes": 12088,
+      "sha256": "AF790A4640EB6B892ECA091559D2E918D6BF94258EF83E57C65E8DE4FDAE4CF6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "bytes": 42928,
+      "sha256": "DE26EA65AF74A9FC8CC72BBAE94758AE9A897A454FCDB9B714503C81B3E37230"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.SubsystemsModule.pdb",
+      "bytes": 16104,
+      "sha256": "892510E5431F02DE96EFE3F0965E75A9F11A7E702D498AB17DABB8BC16B9B649"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TerrainModule.dll",
+      "bytes": 132520,
+      "sha256": "896863435BAA5F20C1CEF30D663CCDBFFA59C377AC0719647B769B569526AE43"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TerrainModule.pdb",
+      "bytes": 29136,
+      "sha256": "09265ECB2582C0F349C961B715088B05265A0C0A032E0CD5CEDD209726E354E4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "bytes": 27560,
+      "sha256": "A856E700E6060CE833AA2CC1A27152FDC60088EDD55FF4E59D6474B0E3FE1617"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TerrainPhysicsModule.pdb",
+      "bytes": 10580,
+      "sha256": "0BACBE1ADFDDB58F89832B5BA14D1DE124D3BA487AC4DB4FAE9DE9A09209F460"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TetgenModule.dll",
+      "bytes": 26032,
+      "sha256": "132A300E2A61B599E6167D2A64BAE9F10A788EA11390715A4A84EDB62207DAD1"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TetgenModule.pdb",
+      "bytes": 10132,
+      "sha256": "51FF3EB5DF0E4347EF023306ED3D63E475A1BD8BA5A4489385D1A0CEBB952013"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "bytes": 86440,
+      "sha256": "73050536BA3F89725C061D4F185CFF63B78A3CA67D228A024C555FBD7C081D9C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TextCoreFontEngineModule.pdb",
+      "bytes": 26484,
+      "sha256": "4C1845DE714767FDAF96E4AA487E8AED720EFBE1C81576AEFC927FD92C10D906"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "bytes": 314288,
+      "sha256": "2BACD10476FE9309D0BFED2238C51E78CBD3DBD0F711FCD2DBA0C9E05700583C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TextCoreTextEngineModule.pdb",
+      "bytes": 116576,
+      "sha256": "B0087339D4BFF3082092ECBA48BB7AFDC51079B38DDDCDE123ED6F921B66AB51"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "bytes": 39344,
+      "sha256": "6FD52AC7A8DF9CEA0DB6AF1334125536B5096B56A8596D977BE3D22BCA7E3469"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TextRenderingModule.pdb",
+      "bytes": 14660,
+      "sha256": "A085442F71ADE2EA01F383A71DBC9DB2E09087978DD9FBDD76F7C986997E4612"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TilemapModule.dll",
+      "bytes": 75696,
+      "sha256": "6D9B6A7805FE7A058E02A77B70E4D647EFED19D3E47C3C5849A5E91B2C5EB9B4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TilemapModule.pdb",
+      "bytes": 22984,
+      "sha256": "C3DEBE94477CBDBF3B75D8AF71C833A8AAEBAED519BB2DA4C7D2814BDCC42D31"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TimelineFoundationModule.dll",
+      "bytes": 167336,
+      "sha256": "1F5E343CB99C8462583E24EA4D330F969B107480F3C9779FAC517775B2997A10"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TimelineFoundationModule.pdb",
+      "bytes": 81040,
+      "sha256": "FCDB3A4EB096CE8E090F18211A9C6C2ECF86992FB32B1EEB34B0CAB176EC771A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TLSModule.dll",
+      "bytes": 34224,
+      "sha256": "9268FF389B478513D2FE33BF151B384AFCE05B9B103C580C7D349FC965BDB540"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.TLSModule.pdb",
+      "bytes": 10320,
+      "sha256": "361479AF14D7EAED95639CCCE4F0B3F695DFD363A51722A8BF1989EE1B7CBAD5"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.U2DRuntimeModule.dll",
+      "bytes": 73640,
+      "sha256": "D6F683E726E7B593CA6A6DB41C2DC3D2277053F5AC4C2B2F7413C3DE75FC7BA0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.U2DRuntimeModule.pdb",
+      "bytes": 34080,
+      "sha256": "7C5ADDB79B7B2F7723E516F1E07B962B7DEFEBCA519B25223AC18FA8FD55C123"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UI.dll",
+      "bytes": 269824,
+      "sha256": "791F16C6F1BAD5C5FD0AD03A8C053F5018AD99E6656D297EB5B62BED976D0735"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UI.pdb",
+      "bytes": 138636,
+      "sha256": "1F1FE77062299046F00F2149DAE78F43B63DDCA0AB88D7577C525EB661B2BE9A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "bytes": 2538920,
+      "sha256": "6E29FDE4455008DFAFAF674C319EF405A2DB4941CAD1E98E9FD1B13C27F38483"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UIElementsModule.pdb",
+      "bytes": 1007352,
+      "sha256": "59FD6F8E96607EAE76C60F475A3A68B894175FC7878BDA5E59FBA309C56CDEF6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UIModule.dll",
+      "bytes": 57264,
+      "sha256": "A692CC463CA6D1D344F07FA974101645BAF2DEBF89FDCDC0B5F862F52EF54C05"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UIModule.pdb",
+      "bytes": 15704,
+      "sha256": "0DDDE9E1D9E819E64617682765DA13705D5CDB04BA1B38D141E4465E609674DE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UmbraModule.dll",
+      "bytes": 26024,
+      "sha256": "1BDD7072CAACC3941BD607B69846E3F5A2B5C9544659E61EE5EB9E33EDAE9931"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UmbraModule.pdb",
+      "bytes": 10132,
+      "sha256": "6C2AFD57466888DB6DBFF0747D1853B7D3EF7F9A1A6F7424BA14977793152CD7"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "bytes": 36784,
+      "sha256": "07CD6C147B1451E294E94DD60B38123B39EC8DB0B3CED4E320FBA642D404C4A4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.pdb",
+      "bytes": 13908,
+      "sha256": "866C2AD008051C8EE26E3191DCAC53F113CAE34949099B2A4A42862D32A6A4E7"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "bytes": 61864,
+      "sha256": "F6CC3A0927BC6FC21FA8263BFE28AABEC865E3F772EEB470692914BFC5261F9F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityAnalyticsModule.pdb",
+      "bytes": 18588,
+      "sha256": "752397F2E93BBE17CDBC844696956C20F858C44111EAF6205ABDFBEDA848923A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "bytes": 29608,
+      "sha256": "83C1210A4E1FBA33BFEDDDC693C201884CF3EE430F24907EB15E38E441CC1B98"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityConnectModule.pdb",
+      "bytes": 10700,
+      "sha256": "117E341606A43ACA7BC31D10621F4C36518AC44A805FAAFA42893695A4D34A13"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityConsentModule.dll",
+      "bytes": 16296,
+      "sha256": "3990D499845C358BE7F3A5C6A5A7B8111FCFBC6E1F1E3C1200FCB38181235741"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityConsentModule.pdb",
+      "bytes": 10704,
+      "sha256": "1C890F9DB38A2034A17C977A3379A62DBCEDA6F05D1F69DFD7B7538776210F62"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "bytes": 28080,
+      "sha256": "9A0C28EC5DF1B6462A381E292BFA5230609E24967A6DEF4B7D6F159243D8AC92"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityCurlModule.pdb",
+      "bytes": 10528,
+      "sha256": "A779431C5AC6D51ECDFCD283CAA3F70104F4B477F483AA9F61D484E2A0866055"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "bytes": 30640,
+      "sha256": "5EFE97E5190DFBD3F2FB8BAF1C23DF35BDB8EAF943942F2E43A9422F3B747873"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.pdb",
+      "bytes": 11420,
+      "sha256": "5EF70A342E65796C3C4FAB00574EC480B3D60F99F4185FF91323D95D524BA664"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "bytes": 30640,
+      "sha256": "3E00481684E8CD0308781FE4FF09F036F7A374E0985AA60F3E91C91D90BCC342"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestAudioModule.pdb",
+      "bytes": 11472,
+      "sha256": "7CEBDE4338750DEDD16C208B74470D17F64237FA4CE8048609856D2B62E449F1"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "bytes": 81328,
+      "sha256": "3158B56C68E9A1B5796143F64B0BB415912C11DEB582A59E41892411C82F93C2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestModule.pdb",
+      "bytes": 27880,
+      "sha256": "702C7833E3E1E94B7C3894F877DC58B5DF3965E601BF8B42727F0B7D2BCEF046"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "bytes": 29616,
+      "sha256": "E1477C701D8A1F582C08B7E80710F87F774F68C37A841F25066D04FF399480C6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestTextureModule.pdb",
+      "bytes": 11476,
+      "sha256": "0D1599149CBFE6D3FEEC59DD6DFD68481161E0E5FD34AF120A2461F273B3115C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "bytes": 35240,
+      "sha256": "CAE1B902014ADAB5D0FACBE7B11CA9AD87A99C12DBD6B1D9935E04ED2BA4DF7C"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.UnityWebRequestWWWModule.pdb",
+      "bytes": 13112,
+      "sha256": "D0982ECDF82F8E888E0DB7D875B4A8B3ED22AD484A07EC578F813384947E3362"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+      "bytes": 229800,
+      "sha256": "A0336951C1F39A36C6D3BC06A21176AB52312408C08871A2E4A6DB94C77F1FA0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VectorGraphicsModule.pdb",
+      "bytes": 103996,
+      "sha256": "544837AE21350D11EDC29F61A5AEEC4B4EFA60CB3C78AE96A9218079D0821848"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "bytes": 33192,
+      "sha256": "5192E8934FC64FD10A554A21E9D16CB8F95BEEE5BFB5AAB18A9B82195C8C7CFE"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VehiclesModule.pdb",
+      "bytes": 11200,
+      "sha256": "1FC72C62D2C1C3404B64F23599864834484735CDFA2E936765A180C452F5EB35"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VFXModule.dll",
+      "bytes": 82352,
+      "sha256": "EDEDCC1DF72D51B2562C630A9E21C7BAD8F24D27279ECADDC4A3A87BA33DAE8A"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VFXModule.pdb",
+      "bytes": 18680,
+      "sha256": "8568FF9D0C6A6FD0371E171676177526778CF0A195549B0CE79EE2C5D504C3A2"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VideoModule.dll",
+      "bytes": 48560,
+      "sha256": "20F07B93CE2A0396AD5E6502E340F123756521A2915AB991E96B4B1F92F3B6CD"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VideoModule.pdb",
+      "bytes": 14416,
+      "sha256": "9727E50CC4839E9878EEE4C25B5711CA1853B77D93001B35661AA7A4CF8E46F8"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "bytes": 43944,
+      "sha256": "0E8AD5B40185D0E4EF127C48F99ED8180A8D01B2289128FC1164CC37CA45DED3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.VirtualTexturingModule.pdb",
+      "bytes": 13288,
+      "sha256": "204DEE6F781866DDA0B22D898D90D35E7C41905A9E6BAF61A3C8B3BB53B1D2D9"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.WindModule.dll",
+      "bytes": 28592,
+      "sha256": "996FC75096D15D8432415F8838A0725B9E77BF2ABCCB9FEAE435602626FDBF6F"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.WindModule.pdb",
+      "bytes": 10276,
+      "sha256": "82DE1E66F086E5F9C968E3F8D1B25910A5FFC9309D1C4F53F5DED56313CDFAB4"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.XRModule.dll",
+      "bytes": 96176,
+      "sha256": "D8632D3EAD913AB46BACB2E20ED75B971E7DB6C0F0AEC32F7BE55F57CC90C4D3"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityEngine.XRModule.pdb",
+      "bytes": 23548,
+      "sha256": "8A10A2B4B0749F5C39260329BF32DEAB3C2D708505AEE92E0C3A7E886A2FF0AC"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityPipeline.Microsoft.CodeAnalysis.CSharp.dll",
+      "bytes": 5758464,
+      "sha256": "6CA7115FB0256A4D415A73FE7E264D23C89D6D4019AC463FE519BC9097FBDF9B"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityPipeline.Microsoft.CodeAnalysis.dll",
+      "bytes": 2589696,
+      "sha256": "83836ADDF8D51DF5D6D8CFF3C43C1663655BDD85EB539B44A56DCD96FF2297A0"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityPipeline.System.Collections.Immutable.dll",
+      "bytes": 243712,
+      "sha256": "FB05543596E537D7A4383C7330B181CF31151E985578C57A8B5EEF00C6C8A460"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityPipeline.System.Reflection.Metadata.dll",
+      "bytes": 517120,
+      "sha256": "3DE473FBC3E3E01EEF020CB82CB6A3EB288959E24E65175182A818C9D09DBE01"
+    },
+    {
+      "path": "SectorLab_Data/Managed/UnityPipeline.System.Runtime.CompilerServices.Unsafe.dll",
+      "bytes": 6656,
+      "sha256": "6F2BECAFBD15867D52BFAD08F77A23D26C818E55473D6347AEF41130572F14F7"
+    },
+    {
+      "path": "SectorLab_Data/Managed/VContainer.dll",
+      "bytes": 82944,
+      "sha256": "B8C0F50104028330C8965893B3EBE77050EB2B7DC7EB93B9E2986D90452E5BE6"
+    },
+    {
+      "path": "SectorLab_Data/Managed/VContainer.pdb",
+      "bytes": 52408,
+      "sha256": "F35F2410F9A697479CB529C95EE703A55F3C165A0FB57100EBCB2ACA65A5E9C1"
+    },
+    {
+      "path": "SectorLab_Data/Plugins/x86_64/lib_burst_generated.dll",
+      "bytes": 1192448,
+      "sha256": "8A93C442485D62F7E718468B31D602D91B7BC5B50EDF17E7602D8E2F5A572076"
+    },
+    {
+      "path": "SectorLab_Data/Plugins/x86_64/lib_burst_generated.pdb",
+      "bytes": 6160384,
+      "sha256": "B3DA78CE0B340CD3DD87CE09E950FE13082AD1FF0D754A5F83F6943DCAB39D03"
+    },
+    {
+      "path": "SectorLab_Data/Resources/unity default resources",
+      "bytes": 5919584,
+      "sha256": "696B9AFAEE02B5D45978634F1450EF18423C19177933B997FD8EE364D70CDD61"
+    },
+    {
+      "path": "SectorLab_Data/Resources/unity_builtin_extra",
+      "bytes": 527988,
+      "sha256": "47B9B780FF746DF18EECC365A9983915B93E8355AA6DAF3E491AC47963BA3F5B"
+    },
+    {
+      "path": "SectorLab_Data/resources.assets",
+      "bytes": 7664,
+      "sha256": "11B445F7A44C0CA1BD3835C1EB1D370609BB1E1EC5442A57969EA81548DDAFBF"
+    },
+    {
+      "path": "SectorLab_Data/RuntimeInitializeOnLoads.json",
+      "bytes": 5958,
+      "sha256": "D46A9D974AC12A1EF362BAFC3FCA0FF9258C8564ED78B75CDC01E2A582747BDC"
+    },
+    {
+      "path": "SectorLab_Data/ScriptingAssemblies.json",
+      "bytes": 5647,
+      "sha256": "60F673A07192A51247A7753556AEF037DD3717388D1288B873DFB78D35F5257B"
+    },
+    {
+      "path": "SectorLab_Data/sharedassets0.assets",
+      "bytes": 172432,
+      "sha256": "3DC6C5E37467B8ABA84205DF6FCCDD8F0A67C53AAB1FB2C02014FE196D1E8531"
+    },
+    {
+      "path": "SectorLab_Data/sharedassets0.assets.resS",
+      "bytes": 524288,
+      "sha256": "393EFE6399536384AA91BDFC4E64F244B4D3E1FBB6A4FF145C483FFEE64CCB36"
+    },
+    {
+      "path": "SectorLab_Data/StreamingAssets/aa/AddressablesLink/link.xml",
+      "bytes": 2445,
+      "sha256": "8F494F39C9EA68E6571E55A11F6B0A2C30CA41C1BD0F82EFA8A144F48611E94A"
+    },
+    {
+      "path": "SectorLab_Data/StreamingAssets/aa/catalog.bin",
+      "bytes": 3155,
+      "sha256": "8F307DE6F889DCF7F4F7996AE358061082A0CF1E79A5CFDCE4CC02EAADFD2BAC"
+    },
+    {
+      "path": "SectorLab_Data/StreamingAssets/aa/catalog.hash",
+      "bytes": 32,
+      "sha256": "6A6096456CEB5F6F0D78B0357606A0A7A2EAEB61220EDEA50FC0DE81F0358E8D"
+    },
+    {
+      "path": "SectorLab_Data/StreamingAssets/aa/settings.json",
+      "bytes": 864,
+      "sha256": "CAFB52FA5C6E17B27369B4CD8F2918C342EDA7FADA5401B7CADD4BE649D477CD"
+    },
+    {
+      "path": "SectorLab_Data/StreamingAssets/aa/StandaloneWindows64/0c4162be82264d6cddfd16e267eacd4f_monoscripts_7c0d201ca9466c894c388d5e02421fd6.bundle",
+      "bytes": 1849,
+      "sha256": "E0D8EAF1974446D4CA5063EC117765BC4B95C6599462217F3923849C88B3729D"
+    },
+    {
+      "path": "SectorLab_Data/StreamingAssets/aa/StandaloneWindows64/localunits_assets_all_9cd1961d232b20d87159b7e1683a81f2.bundle",
+      "bytes": 86695,
+      "sha256": "CBFEC81EEB613310FFDA0FB6C9C79882BC1BE23FEAC9803FE7995E6BD8B9359A"
+    },
+    {
+      "path": "UnityCrashHandler64.exe",
+      "bytes": 1843112,
+      "sha256": "9ECD5061F0D127DF28538431D48CFF877151052A780A0A4E7875D88529468181"
+    },
+    {
+      "path": "UnityPlayer.dll",
+      "bytes": 91416488,
+      "sha256": "D0083D70D069C76D124BB00FEB29C637DDEED7D9745CFFC956CB58CC2E4C3F8D"
+    },
+    {
+      "path": "WinPixEventRuntime.dll",
+      "bytes": 58368,
+      "sha256": "81ADCFD8253C3489BE720DA7E30F16004DC9A1F02A8B418C6C3AEF4993032E6D"
+    }
+  ],
+  "verifiedContent": [
+    {
+      "path": "aa/catalog.bin",
+      "sha256": "8F307DE6F889DCF7F4F7996AE358061082A0CF1E79A5CFDCE4CC02EAADFD2BAC",
+      "bytes": 3155
+    },
+    {
+      "path": "aa/catalog.hash",
+      "sha256": "6A6096456CEB5F6F0D78B0357606A0A7A2EAEB61220EDEA50FC0DE81F0358E8D",
+      "bytes": 32
+    },
+    {
+      "path": "aa/settings.json",
+      "sha256": "CAFB52FA5C6E17B27369B4CD8F2918C342EDA7FADA5401B7CADD4BE649D477CD",
+      "bytes": 864
+    },
+    {
+      "path": "aa/StandaloneWindows64/0c4162be82264d6cddfd16e267eacd4f_monoscripts_7c0d201ca9466c894c388d5e02421fd6.bundle",
+      "sha256": "E0D8EAF1974446D4CA5063EC117765BC4B95C6599462217F3923849C88B3729D",
+      "bytes": 1849
+    },
+    {
+      "path": "aa/StandaloneWindows64/localunits_assets_all_9cd1961d232b20d87159b7e1683a81f2.bundle",
+      "sha256": "CBFEC81EEB613310FFDA0FB6C9C79882BC1BE23FEAC9803FE7995E6BD8B9359A",
+      "bytes": 86695
+    }
+  ]
+}
