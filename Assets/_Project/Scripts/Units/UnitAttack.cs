@@ -5,7 +5,7 @@ namespace SectorLab.Units
     // Walk until the target is within range, then hit it every cooldown until it dies.
     // Range decides melee vs ranged; an optional line flashes on each hit so ranged shots are readable.
     // Targeting and chasing follow frames (NavMesh); cooldown and damage advance only with the
-    // match tick (Simulate), so the authoritative result does not depend on the frame rate.
+    // match tick. Frame pacing still influences navigation and the moment of acquiring a target.
     [RequireComponent(typeof(Unit))]
     public class UnitAttack : MonoBehaviour
     {
@@ -31,6 +31,9 @@ namespace SectorLab.Units
         public float Range => range;
         public int Damage => damage;
         public uint ShotsFired { get; private set; }
+        public Vector3 LastShotEnd { get; private set; }
+        public LineRenderer ShotLine => shotLine;
+        public float ShotLineDuration => shotLineDuration;
         public float Cooldown => cooldown;
         public event System.Action<Unit> Fired;
         // True while the current target is in reach with a clear line; Simulate fires only then.
@@ -159,25 +162,49 @@ namespace SectorLab.Units
         private bool HasClearShot(Unit target) => IsInRange(target)
             && !Physics.Linecast(transform.position, target.transform.position, obstructionMask, QueryTriggerInteraction.Ignore);
 
-        // One match tick: the cooldown runs down in game seconds and a ready unit hits its target.
+        // A standalone adapter for small fixtures. A match prepares every shot before applying damage.
         public void Simulate(double seconds)
         {
+            if (TryPrepareShot(seconds, out PreparedShot shot)) shot.Apply();
+        }
+
+        internal bool TryPrepareShot(double seconds, out PreparedShot shot)
+        {
+            shot = default;
             if (seconds <= 0 || !isActiveAndEnabled || !self.IsAlive)
-                return;
+                return false;
             cooldownRemaining = System.Math.Max(0, cooldownRemaining - seconds);
             if (cooldownRemaining > 1e-6 || Target == null || !Target.IsAlive)
-                return;
+                return false;
             // Re-check here: the target may have moved since this frame's Update.
             if (!HasClearShot(Target))
             {
                 CanHitTarget = false;
-                return;
+                return false;
             }
             cooldownRemaining = cooldown;
-            ShowShotLine(Target.transform.position);
+            LastShotEnd = Target.transform.position;
+            ShowShotLine(LastShotEnd);
             ShotsFired++;
-            Target.Health.TakeDamage(damage);
-            Fired?.Invoke(self);
+            shot = new PreparedShot(this, Target.Health, damage);
+            return true;
+        }
+
+        // Health remains valid during the whole tick, even when an earlier shot kills its attacker.
+        internal readonly struct PreparedShot
+        {
+            private readonly UnitAttack attack;
+            private readonly Health target;
+            private readonly int damage;
+
+            public PreparedShot(UnitAttack attack, Health target, int damage)
+            { this.attack = attack; this.target = target; this.damage = damage; }
+
+            public void Apply()
+            {
+                target.TakeDamage(damage);
+                attack.Fired?.Invoke(attack.self);
+            }
         }
     }
 }

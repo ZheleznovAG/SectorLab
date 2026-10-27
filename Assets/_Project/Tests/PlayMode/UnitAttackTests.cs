@@ -77,6 +77,36 @@ namespace SectorLab.Tests
             Assert.That(a.Attack.Target, Is.Null);
         }
 
+        [TestCase(false)]
+        [TestCase(true)]
+        public void ReadyLethalShotsTradeIndependentlyOfRegistrationOrder(bool redFirst)
+        {
+            var battle = root.AddComponent<SectorLab.Battle.BattleController>();
+            battle.Initialize(new SectorLab.Battle.MatchState(new SectorLab.Battle.MatchClock(), registry));
+            battle.enabled = false;
+            Unit blue, red;
+            if (redFirst)
+            {
+                red = CreateUnit(Team.Enemy, Vector3.right, maxHealth: 20);
+                blue = CreateUnit(Team.Player, Vector3.zero, maxHealth: 20);
+            }
+            else
+            {
+                blue = CreateUnit(Team.Player, Vector3.zero, maxHealth: 20);
+                red = CreateUnit(Team.Enemy, Vector3.right, maxHealth: 20);
+            }
+            blue.Attack.SetTarget(red);
+            red.Attack.SetTarget(blue);
+            int fired = 0;
+            blue.Attack.Fired += _ => fired++;
+            red.Attack.Fired += _ => fired++;
+            battle.AdvanceSimulation(0.1);
+            Assert.That(blue.Health.IsDead && red.Health.IsDead, Is.True, "Both were alive and ready at tick start.");
+            Assert.That(blue.Attack.ShotsFired, Is.EqualTo(1));
+            Assert.That(red.Attack.ShotsFired, Is.EqualTo(1));
+            Assert.That(fired, Is.EqualTo(2));
+        }
+
         [Test]
         public void DamageDependsOnGameTimeNotOnFramePacing()
         {

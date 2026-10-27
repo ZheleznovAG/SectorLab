@@ -34,6 +34,7 @@ namespace SectorLab.Battle
         public event Action<double> Ticked;
 
         private double accumulatedSeconds;
+        private readonly System.Collections.Generic.List<UnitAttack.PreparedShot> shots = new System.Collections.Generic.List<UnitAttack.PreparedShot>(6);
         private float runningTimeScale;
         private PauseReason pauses;
         public bool IsPausedBy(PauseReason reason) => (pauses & reason) != 0;
@@ -115,11 +116,15 @@ namespace SectorLab.Battle
         {
             Model.SimulationTick++;
             // Combat first, so a unit killed this tick no longer holds a relay.
+            shots.Clear();
             for (int i = 0; i < Units.All.Count; i++)
             {
                 UnitAttack attack = Units.All[i].Attack;
-                if (attack != null) attack.Simulate(tick);
+                if (attack != null && attack.TryPrepareShot(tick, out var shot)) shots.Add(shot);
             }
+            // Every unit alive at tick start gets its ready shot, independently of registry order.
+            for (int i = 0; i < shots.Count; i++) shots[i].Apply();
+            shots.Clear();
             double playerPoints = 0;
             double enemyPoints = 0;
             for (int i = 0; i < relays.Length; i++)
