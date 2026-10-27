@@ -1,0 +1,486 @@
+{
+  "task": "v1.3.1-phone",
+  "sourceHead": "089a4f7233de7fe48693bb4f3b18b46f48229f73",
+  "startedAtUtc": "2026-10-27T15:42:34.304688+00:00",
+  "completedAtUtc": "2026-10-27T15:52:34.493152+00:00",
+  "referencedApkSha256": "DAF6CF754AA7B3636AAB270322F6EB9FF12B59F0AF23D48FFDC6F6E146E15317",
+  "durationSeconds": 600.2003215000004,
+  "model": "[REDACTED: device model withheld at the owner's request]",
+  "androidVersion": "11",
+  "deviceKind": "physical-device",
+  "package": "com.zheleznovag.sectorlab",
+  "samples": 386,
+  "foregroundSamples": 386,
+  "uniquePresentedFrames": 18072,
+  "fpsMean": 29.976708927424173,
+  "frameIntervalMsMedian": 33.338154,
+  "frameIntervalMsP95": 50.017462,
+  "gapsOverOneSecond": 0,
+  "cpuOneCorePercentMean": 36.34293137369002,
+  "memory": [
+    {
+      "elapsedSeconds": 2.9000002541579306e-06,
+      "pssKiB": 301017,
+      "rssKiB": 448693
+    },
+    {
+      "elapsedSeconds": 10.79439629999979,
+      "pssKiB": 293945,
+      "rssKiB": 441983
+    },
+    {
+      "elapsedSeconds": 21.297364499998366,
+      "pssKiB": 294214,
+      "rssKiB": 442247
+    },
+    {
+      "elapsedSeconds": 31.800334499999735,
+      "pssKiB": 295704,
+      "rssKiB": 443739
+    },
+    {
+      "elapsedSeconds": 42.30323149999822,
+      "pssKiB": 293650,
+      "rssKiB": 441685
+    },
+    {
+      "elapsedSeconds": 53.46773989999929,
+      "pssKiB": 296208,
+      "rssKiB": 444243
+    },
+    {
+      "elapsedSeconds": 63.97051989999818,
+      "pssKiB": 294660,
+      "rssKiB": 442695
+    },
+    {
+      "elapsedSeconds": 74.47353010000006,
+      "pssKiB": 293814,
+      "rssKiB": 441849
+    },
+    {
+      "elapsedSeconds": 86.69158930000049,
+      "pssKiB": 293882,
+      "rssKiB": 441917
+    },
+    {
+      "elapsedSeconds": 97.19477479999841,
+      "pssKiB": 294266,
+      "rssKiB": 442337
+    },
+    {
+      "elapsedSeconds": 107.69712620000064,
+      "pssKiB": 294644,
+      "rssKiB": 442749
+    },
+    {
+      "elapsedSeconds": 118.19925470000089,
+      "pssKiB": 294650,
+      "rssKiB": 442753
+    },
+    {
+      "elapsedSeconds": 128.9102142999982,
+      "pssKiB": 295092,
+      "rssKiB": 443109
+    },
+    {
+      "elapsedSeconds": 139.41213509999943,
+      "pssKiB": 295945,
+      "rssKiB": 443963
+    },
+    {
+      "elapsedSeconds": 149.91552589999992,
+      "pssKiB": 295099,
+      "rssKiB": 443117
+    },
+    {
+      "elapsedSeconds": 160.42056180000145,
+      "pssKiB": 295641,
+      "rssKiB": 443659
+    },
+    {
+      "elapsedSeconds": 171.3997907999983,
+      "pssKiB": 296001,
+      "rssKiB": 444019
+    },
+    {
+      "elapsedSeconds": 181.90318299999853,
+      "pssKiB": 294851,
+      "rssKiB": 442869
+    },
+    {
+      "elapsedSeconds": 192.53532690000065,
+      "pssKiB": 295143,
+      "rssKiB": 443161
+    },
+    {
+      "elapsedSeconds": 203.03839900000094,
+      "pssKiB": 297249,
+      "rssKiB": 445267
+    },
+    {
+      "elapsedSeconds": 213.54138220000095,
+      "pssKiB": 295151,
+      "rssKiB": 443169
+    },
+    {
+      "elapsedSeconds": 224.0442531999979,
+      "pssKiB": 294847,
+      "rssKiB": 442865
+    },
+    {
+      "elapsedSeconds": 234.27857750000112,
+      "pssKiB": 296025,
+      "rssKiB": 444043
+    },
+    {
+      "elapsedSeconds": 244.781406099999,
+      "pssKiB": 294875,
+      "rssKiB": 442893
+    },
+    {
+      "elapsedSeconds": 255.37779740000042,
+      "pssKiB": 295167,
+      "rssKiB": 443185
+    },
+    {
+      "elapsedSeconds": 265.88054080000074,
+      "pssKiB": 295717,
+      "rssKiB": 443735
+    },
+    {
+      "elapsedSeconds": 276.5519518000001,
+      "pssKiB": 295457,
+      "rssKiB": 443727
+    },
+    {
+      "elapsedSeconds": 287.0540648999995,
+      "pssKiB": 295751,
+      "rssKiB": 444019
+    },
+    {
+      "elapsedSeconds": 297.55660010000065,
+      "pssKiB": 294661,
+      "rssKiB": 442865
+    },
+    {
+      "elapsedSeconds": 308.0592942000003,
+      "pssKiB": 297083,
+      "rssKiB": 445263
+    },
+    {
+      "elapsedSeconds": 318.80430010000055,
+      "pssKiB": 294987,
+      "rssKiB": 443081
+    },
+    {
+      "elapsedSeconds": 329.30711990000054,
+      "pssKiB": 295525,
+      "rssKiB": 443623
+    },
+    {
+      "elapsedSeconds": 339.80907769999976,
+      "pssKiB": 295525,
+      "rssKiB": 443623
+    },
+    {
+      "elapsedSeconds": 350.31159579999803,
+      "pssKiB": 295525,
+      "rssKiB": 443623
+    },
+    {
+      "elapsedSeconds": 360.66484769999806,
+      "pssKiB": 297406,
+      "rssKiB": 445463
+    },
+    {
+      "elapsedSeconds": 371.1677453000011,
+      "pssKiB": 296837,
+      "rssKiB": 444895
+    },
+    {
+      "elapsedSeconds": 381.66997849999825,
+      "pssKiB": 295007,
+      "rssKiB": 443065
+    },
+    {
+      "elapsedSeconds": 392.1732622999989,
+      "pssKiB": 296145,
+      "rssKiB": 444203
+    },
+    {
+      "elapsedSeconds": 402.4990427999983,
+      "pssKiB": 295011,
+      "rssKiB": 443069
+    },
+    {
+      "elapsedSeconds": 413.00182589999895,
+      "pssKiB": 294995,
+      "rssKiB": 443053
+    },
+    {
+      "elapsedSeconds": 423.58767649999936,
+      "pssKiB": 295833,
+      "rssKiB": 443891
+    },
+    {
+      "elapsedSeconds": 434.0899127999983,
+      "pssKiB": 296124,
+      "rssKiB": 444183
+    },
+    {
+      "elapsedSeconds": 444.3956337999989,
+      "pssKiB": 295868,
+      "rssKiB": 443927
+    },
+    {
+      "elapsedSeconds": 454.8989318999993,
+      "pssKiB": 297664,
+      "rssKiB": 445723
+    },
+    {
+      "elapsedSeconds": 465.40169160000005,
+      "pssKiB": 297408,
+      "rssKiB": 445467
+    },
+    {
+      "elapsedSeconds": 475.9043047000014,
+      "pssKiB": 297664,
+      "rssKiB": 445723
+    },
+    {
+      "elapsedSeconds": 486.49054089999845,
+      "pssKiB": 296574,
+      "rssKiB": 444633
+    },
+    {
+      "elapsedSeconds": 496.99289339999814,
+      "pssKiB": 295906,
+      "rssKiB": 443927
+    },
+    {
+      "elapsedSeconds": 507.5384550999988,
+      "pssKiB": 295060,
+      "rssKiB": 443081
+    },
+    {
+      "elapsedSeconds": 518.0413561999994,
+      "pssKiB": 295060,
+      "rssKiB": 443081
+    },
+    {
+      "elapsedSeconds": 528.8081464999996,
+      "pssKiB": 295096,
+      "rssKiB": 443117
+    },
+    {
+      "elapsedSeconds": 539.3102494000013,
+      "pssKiB": 295866,
+      "rssKiB": 443887
+    },
+    {
+      "elapsedSeconds": 549.8133686000001,
+      "pssKiB": 296850,
+      "rssKiB": 444871
+    },
+    {
+      "elapsedSeconds": 560.315803999998,
+      "pssKiB": 295866,
+      "rssKiB": 443887
+    },
+    {
+      "elapsedSeconds": 571.6499580999989,
+      "pssKiB": 296230,
+      "rssKiB": 444251
+    },
+    {
+      "elapsedSeconds": 582.1525930999996,
+      "pssKiB": 296526,
+      "rssKiB": 444547
+    },
+    {
+      "elapsedSeconds": 592.6554126999981,
+      "pssKiB": 296218,
+      "rssKiB": 444239
+    }
+  ],
+  "detectedResultRestarts": [
+    {
+      "elapsedSeconds": 42.30323149999822,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 83.47613490000003,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 125.70279930000106,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 167.92257959999915,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 231.5468336999984,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 273.3829760000008,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 315.56088929999896,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 357.8134495000013,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 399.6774555000011,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 441.5920076000002,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 483.4064408000013,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 525.5432761999982,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    },
+    {
+      "elapsedSeconds": 567.8181751000011,
+      "action": "Tapped the result screen's restart button seen in a foreground screenshot"
+    }
+  ],
+  "adbFailures": 0,
+  "autoRestartEnabled": true,
+  "workloadViews": [
+    {
+      "elapsedSeconds": 2.9000002541579306e-06,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 21.297364499998366,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 42.30323149999822,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 62.469872900001064,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 83.47613490000003,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 104.69648740000048,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 125.70279930000106,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 146.9147912999979,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 167.92257959999915,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 189.40494949999993,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 210.54053999999815,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 231.5468336999984,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 252.28368860000046,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 273.3829760000008,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 294.5563125000008,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 315.56088929999896,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 336.80874480000057,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 357.8134495000013,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 378.66932069999893,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 399.6774555000011,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 420.50311259999944,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 441.5920076000002,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 462.40072130000044,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 483.4064408000013,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 504.4949665999993,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 525.5432761999982,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 546.8123178999995,
+      "resultButtonVisible": false
+    },
+    {
+      "elapsedSeconds": 567.8181751000011,
+      "resultButtonVisible": true
+    },
+    {
+      "elapsedSeconds": 588.1540055000005,
+      "resultButtonVisible": false
+    }
+  ],
+  "scriptSha256": "F2AA0B8AB3B0E979DC1814B76700B776D3C350B497F865F65AEA0C7007366B25",
+  "measurement": "Actual-present timestamps of the Unity SurfaceView; /proc/PID/stat; dumpsys meminfo.",
+  "gcAllocations": "NOT_AVAILABLE: no Unity Profiler attached to a release APK.",
+  "limitation": "The APK hash does not prove what is installed (use `sl.py install-android`). Restarts count detected result-button taps; screenshots stay outside Git. An automated workload is not a human playtest. GPU time unavailable. Emulator figures do not stand for a physical phone.",
+  "postProcessing": "27.10.2026: device model redacted; the per-sample CSV was renamed from v1.3.csv to v1.3.1-phone.csv (a dotted task name broke Path.with_suffix in the script that ran, see scriptSha256). Measured values unchanged."
+}
