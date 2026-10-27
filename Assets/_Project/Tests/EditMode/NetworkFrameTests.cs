@@ -124,6 +124,42 @@ namespace SectorLab.Tests
         }
 
         [Test]
+        public void ShotEndpointRoundTripsAndNonFiniteLateEndpointLeavesTheFrameUntouched()
+        {
+            using var host = Model();
+            host.SetUnit(0, new UnitView(0, Team.Player, UnitRole.Ranger, UnitLife.Alive, 80, 80,
+                0, 1, 7, 1, 2, -3.5f, 4.25f));
+            using var client = new MatchModel();
+            byte[] packet = Packet(host);
+            Assert.That(FrameSnapshot.TryApply(packet.AsSpan(1), client), Is.True);
+            Assert.That(client.Units[0], Is.EqualTo(host.Units[0]));
+            host.SnapshotSequence++;
+            packet = Packet(host);
+            int lastRow = 1 + FrameSnapshot.HeaderSize + MatchSnapshot.SizeFor(3) + 1 + UnitsSnapshot.RecordSize;
+            BinaryPrimitives.WriteInt32LittleEndian(packet.AsSpan(lastRow + 32), BitConverter.SingleToInt32Bits(float.NaN));
+            int commits = 0;
+            client.Updated += () => commits++;
+            Assert.That(FrameSnapshot.TryApply(packet.AsSpan(1), client), Is.False);
+            Assert.That(client.SnapshotSequence, Is.EqualTo(1));
+            Assert.That(client.Units[0].ShotX, Is.EqualTo(-3.5f));
+            Assert.That(commits, Is.Zero);
+        }
+
+        [Test]
+        public void ProtocolTwoFramesAndHandshakesAreRejected()
+        {
+            using var host = Model();
+            using var client = new MatchModel();
+            byte[] packet = Packet(host);
+            packet[1] = 2;
+            Assert.That(FrameSnapshot.TryApply(packet.AsSpan(1), client), Is.False);
+            byte[] control = new byte[MatchProtocol.ControlSize];
+            MatchProtocol.WriteControl(MessageType.Begin, 1, 123, control);
+            control[1] = 2;
+            Assert.That(MatchProtocol.TryControl(control, out _, out _), Is.False);
+        }
+
+        [Test]
         public void UnitReaderPreservesAllDestinationRecordsOnALateFailure()
         {
             using var host = Model();

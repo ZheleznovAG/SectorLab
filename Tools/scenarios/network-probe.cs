@@ -20,7 +20,7 @@ for (int i = 0; i < m.Units.Length; i++)
     }
     units.Add(new { id = u.Id, team = u.Team.ToString(), life = u.Life.ToString(), hp = u.Health,
         maxHp = u.MaxHealth, generation = u.Generation, shots = u.Shots, respawn = u.RespawnSeconds,
-        x = u.X, z = u.Z, visible, collider, proxyHp = proxy == null ? -1 : proxy.Health.Current,
+        x = u.X, z = u.Z, shotX = u.ShotX, shotZ = u.ShotZ, visible, collider, proxyHp = proxy == null ? -1 : proxy.Health.Current,
         moving = proxy != null && proxy.Movement.IsMoving });
 }
 var relays = new System.Collections.Generic.List<object>();
@@ -44,4 +44,5 @@ return new { ready = l.IsReady, version = UnityEngine.Application.version,
     accepted = n.Host == null ? -1 : n.Host.Accepted, rejected = n.Host == null ? -1 : n.Host.Rejected,
     peerReady = n.Host != null && n.Host.Ready, n.WaitingForPeer,
     failure = n.Client == null ? null : n.Client.Failure, units, relays, labels,
+    observedShotEnd = System.AppDomain.CurrentDomain.GetData("SectorLab.QA.ObservedShotEnd"),
     action = v == null ? null : v.ActionLabel };

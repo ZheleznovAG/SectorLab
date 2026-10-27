@@ -103,11 +103,49 @@ namespace SectorLab.Tests
             Assert.That(commander.SelectFriendly(red), Is.True, "The same proxy can represent a respawn without local lifecycle events.");
         }
 
-        private void SetShotCounter(Unit unit, uint generation, uint shots)
+        private void SetShotCounter(Unit unit, uint generation, uint shots, float shotX = 0, float shotZ = 0)
         {
             UnitView view = NetworkTestPeer.View(unit, true, -1, generation);
             model.SetUnit(unit.Id, new UnitView(view.Id, view.Team, view.Role, view.Life, view.Health,
-                view.MaxHealth, 0, generation, shots, view.X, view.Z));
+                view.MaxHealth, 0, generation, shots, view.X, view.Z, shotX, shotZ));
+        }
+
+        [UnityTest]
+        public IEnumerator RemoteShotLinesExpireAndDoNotReplayAfterDuplicateRespawnOrNextMatch()
+        {
+            Unit ranger = lifecycle.Slots[5].Unit;
+            LineRenderer line = ranger.Attack.ShotLine;
+            Assert.That(line, Is.Not.Null);
+            model.SetUnitCount(lifecycle.Slots.Count);
+            for (int i = 0; i < lifecycle.Slots.Count; i++)
+                model.SetUnit(i, NetworkTestPeer.View(lifecycle.Slots[i].Unit));
+            SetShotCounter(ranger, 1, 20, 1, 2);
+            SendMatch();
+            Assert.That(line.enabled, Is.False, "Joining never replays old shots.");
+            SetShotCounter(ranger, 1, 21, -2.5f, 1.75f);
+            SendMatch();
+            Assert.That(line.enabled, Is.True);
+            Assert.That(line.GetPosition(1).x, Is.EqualTo(-2.5f));
+            Assert.That(line.GetPosition(1).z, Is.EqualTo(1.75f));
+            Assert.That(ranger.Attack.enabled, Is.False, "Rendering never starts client combat.");
+            yield return new WaitForSecondsRealtime(ranger.Attack.ShotLineDuration + 0.04f);
+            Assert.That(line.enabled, Is.False);
+            SendMatch();
+            Assert.That(line.enabled, Is.False, "A duplicate counter does not restart the line.");
+            SetShotCounter(ranger, 2, 9, 3, 4);
+            SendMatch();
+            Assert.That(line.enabled, Is.False, "A new incarnation establishes a baseline.");
+            SetShotCounter(ranger, 2, 10, 3, 4);
+            SendMatch();
+            Assert.That(line.enabled, Is.True);
+            model.SetUnit(5, NetworkTestPeer.View(ranger, false, generation: 2));
+            SendMatch();
+            Assert.That(line.enabled, Is.False, "Death clears a still visible line.");
+            model.MatchId++;
+            NetworkTestPeer.Begin(model, hostEnd, clientEnd);
+            SetShotCounter(ranger, 1, 100);
+            SendMatch();
+            Assert.That(line.enabled, Is.False, "The next match never replays previous counters.");
         }
 
         [UnityTest]

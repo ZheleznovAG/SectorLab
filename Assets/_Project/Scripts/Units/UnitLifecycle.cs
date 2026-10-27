@@ -124,12 +124,16 @@ namespace SectorLab.Units
                 UnitSlotState slot = slots[i];
                 Unit unit = slot.Unit;
                 bool alive = unit != null && unit.IsAlive;
-                UnitLife life = alive ? UnitLife.Alive : slot.IsSpawning ? UnitLife.Spawning
-                    : slot.Respawn.IsWaiting ? UnitLife.Respawning : UnitLife.Loading;
+                UnitLife life = UnitLife.Loading;
+                if (alive) life = UnitLife.Alive;
+                else if (slot.IsSpawning) life = UnitLife.Spawning;
+                else if (slot.Respawn.IsWaiting) life = UnitLife.Respawning;
                 Vector3 position = alive ? unit.transform.position : slot.Config.position;
+                UnitAttack attack = alive ? unit.Attack : null;
+                Vector3 shot = attack != null ? attack.LastShotEnd : default;
                 model.SetUnit(i, new UnitView(i, slot.Config.team, slot.Config.role, life,
                     alive ? unit.Health.Current : 0, slot.MaxHealth, (float)slot.Respawn.RemainingSeconds,
-                    slot.Generation, alive && unit.Attack != null ? unit.Attack.ShotsFired : 0, position.x, position.z));
+                    slot.Generation, attack != null ? attack.ShotsFired : 0, position.x, position.z, shot.x, shot.z));
             }
         }
 

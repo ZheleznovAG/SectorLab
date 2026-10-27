@@ -9,7 +9,7 @@ namespace SectorLab.Network
     public static class UnitsSnapshot
     {
         public const int MaxUnits = 16;
-        public const int RecordSize = 28;
+        public const int RecordSize = 36;
         public static int SizeFor(int count) => 1 + count * RecordSize;
 
         public static int Write(ReadOnlySpan<UnitView> units, Span<byte> buffer)
@@ -31,6 +31,8 @@ namespace SectorLab.Network
                 BinaryPrimitives.WriteUInt32LittleEndian(row.Slice(16), unit.Shots);
                 UnitCommandCodec.WriteFloat(row.Slice(20), unit.X);
                 UnitCommandCodec.WriteFloat(row.Slice(24), unit.Z);
+                UnitCommandCodec.WriteFloat(row.Slice(28), unit.ShotX);
+                UnitCommandCodec.WriteFloat(row.Slice(32), unit.ShotZ);
             }
             return size;
         }
@@ -52,13 +54,15 @@ namespace SectorLab.Network
                 uint generation = BinaryPrimitives.ReadUInt32LittleEndian(row.Slice(12));
                 uint shots = BinaryPrimitives.ReadUInt32LittleEndian(row.Slice(16));
                 float x = UnitCommandCodec.ReadFloat(row.Slice(20)), z = UnitCommandCodec.ReadFloat(row.Slice(24));
+                float shotX = UnitCommandCodec.ReadFloat(row.Slice(28)), shotZ = UnitCommandCodec.ReadFloat(row.Slice(32));
                 if (id >= MaxUnits || (ids & (1u << id)) != 0 || team > (int)Team.Enemy
                     || role > (int)UnitRole.Ranger || life > (int)UnitLife.Spawning
                     || !float.IsFinite(x) || !float.IsFinite(z) || !float.IsFinite(respawn) || respawn < 0
+                    || !float.IsFinite(shotX) || !float.IsFinite(shotZ)
                     || health > max || (life == (int)UnitLife.Alive ? health == 0 || generation == 0 : health != 0)) return -1;
                 ids |= 1u << id;
                 parsed[i] = new UnitView(id, (Team)team, (UnitRole)role, (UnitLife)life,
-                    health, max, respawn, generation, shots, x, z);
+                    health, max, respawn, generation, shots, x, z, shotX, shotZ);
             }
             parsed.Slice(0, count).CopyTo(states);
             return count;

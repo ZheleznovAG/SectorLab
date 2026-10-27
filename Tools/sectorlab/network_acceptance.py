@@ -146,6 +146,44 @@ return compiled.Assembly.GetType("NetworkAcceptanceProbe").GetMethod("Run").Invo
                         "return c.SelectFriendly(b.Units.Find(4)) && c.OrderSelectedToRelay(b.Relays[0]);")
         h = await_state("host", lambda s: s.get("accepted", 0) >= 1)
         check("client command reaches authoritative host", sent and h["units"][4]["moving"], host=h)
+
+        # Observe during Commit, after ClientUnitView applies it; polling alone can miss a 100 ms line.
+        evaluate("client", _BATTLE + """
+System.AppDomain.CurrentDomain.SetData("SectorLab.QA.ObservedShotEnd", null);
+b.Model.Updated += () => {
+    var actor = b.Units.Find(5);
+    var line = actor == null || actor.Attack == null ? null : actor.Attack.ShotLine;
+    if (line != null && line.enabled && line.positionCount == 2) {
+        var end = line.GetPosition(1);
+        System.AppDomain.CurrentDomain.SetData("SectorLab.QA.ObservedShotEnd", new float[] { end.x, end.z });
+    }
+};
+return true;
+""")
+        evaluate("host", _BATTLE + """
+var flags = new bool[6];
+for (int i=0;i<6;i++) {
+    var actor=b.Units.Find(i); flags[i]=actor.Attack.enabled;
+    actor.Movement.Stop(); actor.Attack.enabled=false;
+}
+System.AppDomain.CurrentDomain.SetData("SectorLab.QA.AttackFlags", flags);
+var shooter=b.Units.Find(5); var target=b.Units.Find(0);
+shooter.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(new UnityEngine.Vector3(-2, 0, -3.8f));
+target.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(new UnityEngine.Vector3(-3, 0, -3.8f));
+shooter.Attack.enabled=true; b.SetPaused(false);
+b.Commands.Execute(SectorLab.Battle.UnitCommand.Attack(SectorLab.Units.Team.Enemy, 5, 0));
+b.AdvanceSimulation(0.1); b.SetPaused(true); return true;
+""")
+        c = await_state("client", lambda s: s.get("observedShotEnd") is not None)
+        check("client draws the authoritative shot endpoint",
+              abs(c["observedShotEnd"][0] + 3) < 0.05 and abs(c["observedShotEnd"][1] + 3.8) < 0.05, client=c)
+        evaluate("host", _BATTLE + """
+var flags=(bool[])System.AppDomain.CurrentDomain.GetData("SectorLab.QA.AttackFlags");
+b.SetPaused(false);
+b.Commands.Execute(SectorLab.Battle.UnitCommand.Stop(SectorLab.Units.Team.Enemy, 5));
+for (int i=0;i<6;i++) b.Units.Find(i).Attack.enabled=flags[i];
+return true;
+""")
         # Freeze after damage so the client must show a missing slot and clear its selection.
         evaluate("host", _BATTLE + "b.Units.Find(4).Health.TakeDamage(10000); b.SetPaused(true); return true;")
         h, c = pair("death and respawn timer replicate")

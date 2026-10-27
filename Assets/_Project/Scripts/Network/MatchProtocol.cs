@@ -6,7 +6,7 @@ namespace SectorLab.Network
 {
     public static class MatchProtocol
     {
-        public const byte Version = 2;
+        public const byte Version = 3;
         public const int ControlSize = 18;
         public const int CommandHeaderSize = 18;
         public const int CommandSize = CommandHeaderSize + UnitCommandCodec.Size;
