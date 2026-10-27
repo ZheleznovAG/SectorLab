@@ -69,7 +69,7 @@ jobs:
           checkName: ${{ matrix.mode }} results
 
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.tests.outcome != 'skipped'
         with:
           name: test-results-${{ matrix.mode }}
-          path: ${{ steps.tests.outputs.artifactsPath }}
+          path: test-results-${{ matrix.mode }}

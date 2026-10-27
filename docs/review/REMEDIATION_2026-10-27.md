@@ -131,6 +131,15 @@ versionCode **4**, ABI **arm64-v8a**, target SDK **36**. APK содержит о
 Старые `sourceHead`, даты, хеши сборок и результаты проверок не заменяются новыми значениями.
 APK/ZIP/кеши и локальные лицензии в коммиты не включены.
 
+Коммит `fc0b9f0` с итоговыми материалами отправлен в `origin/main`. Его
+[Repository checks](https://github.com/ZheleznovAG/SectorLab/actions/runs/40492565876) прошли:
+гигиена и Python 3.9/3.14 на Windows/Linux, пять jobs. Облачный
+[Unity run](https://github.com/ZheleznovAG/SectorLab/actions/runs/40492565898) остановился на license preflight:
+нет `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD`. Тесты в облаке не запускались.
+Этот запуск также выявил вторичную ошибку upload-artifact с пустым output path после skipped tests;
+следующая небольшая CI-правка пропускает upload для skipped tests и использует явный каталог результатов.
+Она не меняет игровые входы и не скрывает отсутствие лицензии.
+
 ## Официальные источники проверки workflow
 
 Проверено **27.10.2026**: [inputs GameCI test runner v4](https://github.com/game-ci/unity-test-runner/blob/v4/action.yml),
